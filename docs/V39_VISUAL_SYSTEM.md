@@ -1,6 +1,6 @@
 # MONIEZI v39 Visual System
 
-Version: 39.0.4
+Version: 39.0.5
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 

@@ -1,8 +1,19 @@
-# MONIEZI v39.0.4
+# MONIEZI v39.0.5
 
 Controlled visual-redesign branch for MONIEZI v39.
 
 This package starts from the complete v38.0.36 application and preserves its functionality while the v39 visual system is migrated into production screens one pass at a time. v38 remains the stable rollback/reference baseline.
+
+## v39.0.5 Android/PWA identification
+
+This build preserves the approved v39.0.4 welcome screen and changes only the installed-app identification layer so v39 is easy to distinguish beside an older MONIEZI installation.
+
+- PWA name: `MONIEZI v39`.
+- PWA short name: `MONIEZI v39`.
+- Manifest ID remains exactly `/moniezi-v39/`; it was not changed.
+- v39 data isolation remains unchanged: `moniezi-app-v39`, `moniezi-receipts-v39`, and the `v39` local-storage namespace.
+- Shared device ID for licensing remains unchanged.
+- Service-worker cache version bumped to v39.0.5 so the new manifest/app label is fetched cleanly.
 
 ## v39.0.4 approved welcome-screen implementation
 
