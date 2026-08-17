@@ -1,10 +1,10 @@
-# MONIEZI v39.0.6
+# MONIEZI v39.0.7
 
 Controlled visual-redesign branch for MONIEZI v39.
 
 This package preserves the approved v39.0.4 welcome-screen direction and the v39.0.5 Android/PWA identification update, while redesigning the early-use install and demo experience to match the newer MONIEZI visual language.
 
-## v39.0.6 install and demo experience redesign
+## v39.0.7 install and demo experience redesign
 
 - Redesigned the **Install MONIEZI** prompt into a lighter, more polished onboarding invitation.
 - Redesigned the **MONIEZI is installed** confirmation into a clearer success-state overlay.

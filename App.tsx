@@ -20,6 +20,7 @@ import {
   Receipt, 
   Wallet, 
   BarChart3, 
+  Wifi, 
   Sun, 
   Moon, 
   LayoutGrid, 
@@ -7418,68 +7419,66 @@ html, body, #root {
         const iosInstallContext = getIosInstallContext();
         const isIosInstallBanner = showIosInstallCta && iosInstallContext.isIosDevice && !deferredInstallPrompt;
         const bannerCopy = isIosInstallBanner
-          ? 'Add MONIEZI to your Home screen for faster access and a more app-like experience.'
-          : 'Add MONIEZI to your Home screen for faster access and a more app-like experience.';
+          ? 'Add MONIEZI to your Home screen and use it like a regular app.'
+          : 'Add MONIEZI to your Home screen and use it like a regular app.';
 
         return (
-          <div className="fixed inset-0 z-[95] flex items-center justify-center overflow-y-auto bg-slate-950/70 px-4 py-8 backdrop-blur-md animate-in fade-in duration-200 modal-overlay">
-            <div className="w-full max-w-md">
-              <div className="overflow-hidden rounded-[28px] border border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f7faff_100%)] shadow-[0_28px_80px_rgba(15,23,42,0.22)] ring-1 ring-white/70">
-                <div className="pointer-events-none absolute inset-0" />
-                <div className="relative px-6 py-7 sm:px-7 sm:py-8">
-                  <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-[28px] border border-blue-100 bg-[radial-gradient(circle_at_30%_30%,#ffffff_0%,#eef4ff_55%,#e3ecff_100%)] shadow-[0_16px_34px_rgba(59,130,246,0.16)]">
-                    {isIosInstallBanner
-                      ? <Share2 size={34} className="text-blue-500" />
-                      : <Download size={34} className="text-blue-500" />}
-                  </div>
-
-                  <div className="text-center text-[38px] font-bold leading-tight tracking-[-0.04em] text-slate-950 font-brand">
-                    Install MONIEZI
-                  </div>
-                  <p className="mx-auto mt-3 max-w-[32ch] text-center text-[16px] leading-7 text-slate-600">
-                    {bannerCopy}
-                  </p>
-
-                  <div className="mt-6 space-y-3">
-                    {[
-                      {
-                        icon: <Smartphone size={18} className="text-blue-500" strokeWidth={2} />,
-                        title: 'Quick access',
-                        body: 'Open MONIEZI from your Home screen with one tap.',
-                      },
-                      {
-                        icon: <Shield size={18} className="text-blue-500" strokeWidth={1.8} />,
-                        title: 'Secure & private',
-                        body: 'Works like any other trusted app on your device.',
-                      },
-                      {
-                        icon: <Download size={18} className="text-blue-500" strokeWidth={2} />,
-                        title: 'Works offline',
-                        body: 'Access your data anytime, even without internet.',
-                      },
-                    ].map((item) => (
-                      <div key={item.title} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-[0_8px_20px_rgba(15,23,42,0.05)]">
-                        <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-50">{item.icon}</div>
-                        <div>
-                          <div className="text-[15px] font-bold text-slate-900">{item.title}</div>
-                          <div className="mt-0.5 text-[13px] leading-5 text-slate-600">{item.body}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={isIosInstallBanner ? openIosInstallHelp : triggerDeferredInstallPrompt}
-                    className="mt-6 w-full rounded-2xl bg-blue-600 px-5 py-4 text-center text-[17px] font-bold text-white shadow-[0_14px_28px_rgba(37,99,235,0.30)] transition-colors hover:bg-blue-500"
-                  >
-                    {isIosInstallBanner ? 'Show me how' : 'Install MONIEZI'}
-                  </button>
+          <div className="fixed inset-0 z-[95] flex items-center justify-center overflow-y-auto bg-slate-950/72 px-4 py-8 backdrop-blur-md animate-in fade-in duration-200 modal-overlay">
+            <div className="w-full max-w-[360px]">
+              <div className="overflow-hidden rounded-[34px] border border-slate-200/95 bg-[linear-gradient(180deg,#ffffff_0%,#f7f9fe_100%)] px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.26)] ring-1 ring-white/75 sm:px-6 sm:py-7">
+                <div className="mx-auto mb-5 flex h-[88px] w-[88px] items-center justify-center rounded-[28px] border border-[#e3ecff] bg-[radial-gradient(circle_at_32%_28%,#ffffff_0%,#eef4ff_58%,#e6eeff_100%)] shadow-[0_16px_34px_rgba(37,99,235,0.12)]">
+                  {isIosInstallBanner
+                    ? <Share2 size={34} className="text-[#2563EB]" strokeWidth={2.2} />
+                    : <Download size={34} className="text-[#2563EB]" strokeWidth={2.2} />}
                 </div>
+
+                <h2 className="text-center text-[28px] font-bold leading-[1.08] tracking-[-0.04em] text-[#0B1739] font-brand sm:text-[30px]">
+                  Install MONIEZI
+                </h2>
+                <p className="mx-auto mt-3 max-w-[28ch] text-center text-[14px] leading-[1.55] font-medium text-[#64748B] sm:text-[15px]">
+                  {bannerCopy}
+                </p>
+
+                <div className="mt-5 space-y-3">
+                  {[
+                    {
+                      icon: <Smartphone size={18} className="text-[#4F73FF]" strokeWidth={2.1} />,
+                      title: 'Quick access',
+                      body: 'Open MONIEZI from your Home screen with one tap.',
+                    },
+                    {
+                      icon: <Shield size={18} className="text-[#4F73FF]" strokeWidth={1.95} />,
+                      title: 'Secure & private',
+                      body: 'Works like any other trusted app on your device.',
+                    },
+                    {
+                      icon: <Wifi size={18} className="text-[#4F73FF]" strokeWidth={2.0} />,
+                      title: 'Works offline',
+                      body: 'Access your data anytime, even without internet.',
+                    },
+                  ].map((item) => (
+                    <div key={item.title} className="flex items-start gap-3 rounded-[18px] border border-[#E6EBF5] bg-white px-4 py-3.5 shadow-[0_8px_18px_rgba(15,23,42,0.04)]">
+                      <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#F3F7FF]">{item.icon}</div>
+                      <div className="min-w-0">
+                        <div className="text-[14px] font-bold leading-5 text-[#0B1739]">{item.title}</div>
+                        <div className="mt-1 text-[13px] leading-[1.45] font-medium text-[#64748B]">{item.body}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={isIosInstallBanner ? openIosInstallHelp : triggerDeferredInstallPrompt}
+                  className="mt-6 w-full rounded-[18px] bg-[#2563EB] px-5 py-[15px] text-center text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
+                >
+                  {isIosInstallBanner ? 'Show me how' : 'Install MONIEZI'}
+                </button>
               </div>
             </div>
           </div>
         );
       })()}
+
 
       {showIosInstallHelp && !isRunningStandalone && (() => {
         const isLight = theme !== 'dark';
@@ -7949,21 +7948,21 @@ html, body, #root {
 
       {justInstalled && !isRunningStandalone && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/72 backdrop-blur-md p-4 modal-overlay">
-          <div className="w-full max-w-sm overflow-hidden rounded-[28px] border border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-6 shadow-[0_28px_80px_rgba(15,23,42,0.24)] ring-1 ring-white/70 sm:p-7">
-            <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-[radial-gradient(circle,#e8fff2_0%,#d6f8e4_55%,#c7efd8_100%)] shadow-[0_16px_36px_rgba(22,163,74,0.18)]">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#16a34a] text-white shadow-[0_10px_24px_rgba(22,163,74,0.28)]">
-                <CheckCircle size={30} strokeWidth={2.4} />
+          <div className="w-full max-w-[340px] overflow-hidden rounded-[34px] border border-slate-200/95 bg-[linear-gradient(180deg,#ffffff_0%,#f7f9fe_100%)] px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.26)] ring-1 ring-white/75 sm:px-6 sm:py-7">
+            <div className="mx-auto mb-5 flex h-[104px] w-[104px] items-center justify-center rounded-full bg-[radial-gradient(circle,#E9FFF0_0%,#DDF8E6_58%,#D5F0DF_100%)] shadow-[0_16px_36px_rgba(22,163,74,0.16)]">
+              <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-[#16A34A] text-white shadow-[0_12px_24px_rgba(22,163,74,0.26)]">
+                <CheckCircle size={32} strokeWidth={2.5} />
               </div>
             </div>
-            <h3 className="text-center text-[36px] font-bold tracking-[-0.04em] text-slate-950 font-brand">MONIEZI is installed</h3>
-            <p className="mx-auto mt-3 max-w-[22ch] text-center text-[16px] leading-7 text-slate-600">
+            <h3 className="text-center text-[26px] font-bold leading-[1.18] tracking-[-0.04em] text-[#0B1739] font-brand sm:text-[28px]">MONIEZI is installed</h3>
+            <p className="mx-auto mt-3 max-w-[20ch] text-center text-[14px] leading-[1.6] font-medium text-[#64748B] sm:text-[15px]">
               Open MONIEZI from your Home screen to get started.
             </p>
             <button
               onClick={() => {
                 try { window.close(); } catch { /* browser may refuse */ }
               }}
-              className="mt-7 w-full rounded-2xl bg-blue-600 py-4 text-[17px] font-bold text-white shadow-[0_14px_28px_rgba(37,99,235,0.28)] transition-colors hover:bg-blue-500"
+              className="mt-6 w-full rounded-[18px] bg-[#2563EB] py-[15px] text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
             >
               Got it
             </button>
@@ -7971,21 +7970,6 @@ html, body, #root {
         </div>
       )}
 
-      {showResetConfirm && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4 animate-in fade-in duration-200 modal-overlay">
-            <div className="bg-white dark:bg-slate-900 w-full max-w-sm rounded-xl p-6 shadow-2xl border border-red-500/20">
-                <div className="flex items-center gap-4 mb-4 text-red-600 dark:text-red-500">
-                   <div className="bg-red-100 dark:bg-red-500/10 p-3 rounded-full"><AlertTriangle size={24} strokeWidth={2} /></div>
-                   <h3 className="text-lg sm:text-xl font-bold">System Reset</h3>
-                </div>
-                <p className="text-slate-600 dark:text-slate-300 mb-6 font-medium leading-relaxed">Are you sure you want to delete <span className="text-slate-900 dark:text-white font-bold">all transactions and invoices</span>? This action cannot be undone.</p>
-                <div className="flex gap-3">
-                   <button onClick={() => setShowResetConfirm(false)} className="flex-1 py-3 font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">Cancel</button>
-                   <button onClick={performReset} className="flex-1 py-3 font-bold text-white bg-red-600 hover:bg-red-700 rounded-lg shadow-lg shadow-red-500/20 transition-colors">Yes, Delete All</button>
-                </div>
-            </div>
-        </div>
-      )}
 
       {/* NEW: Delete Invoice Confirmation Modal */}
       {invoiceToDelete && (
@@ -8104,73 +8088,133 @@ html, body, #root {
           through: dark glass panel, one bright amber action, and a quiet link
           for the alternative. The orange is the button, not the whole card. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
-        <div className="relative mb-6 overflow-hidden rounded-[28px] border border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f7faff_100%)] shadow-[0_20px_48px_rgba(15,23,42,0.10)] ring-1 ring-white/80">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.10),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(139,92,246,0.06),transparent_26%)]" />
+        <div className="mb-6 rounded-[30px] border border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-4 shadow-[0_20px_46px_rgba(15,23,42,0.10)] ring-1 ring-white/80 sm:p-5">
+          <div className="rounded-[24px] border border-[#E7EEFB] bg-[linear-gradient(180deg,#F8FBFF_0%,#F3F7FF_100%)] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] sm:p-5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#E6EBF7] bg-white px-3 py-2 text-[12px] font-bold uppercase tracking-[0.18em] text-[#3365E3] shadow-sm">
+              <PlayCircle size={14} strokeWidth={2} />
+              {hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}
+            </div>
 
-          <div className="relative px-5 py-5 sm:px-6 sm:py-6">
-            <div className="rounded-[24px] border border-blue-100 bg-[linear-gradient(180deg,#f3f7ff_0%,#eef4ff_100%)] p-4 shadow-[0_12px_24px_rgba(59,130,246,0.10)] sm:p-5">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/85 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-blue-600 shadow-sm">
-                <PlayCircle size={14} strokeWidth={2} />
-                {hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}
-              </div>
-              <div className="overflow-hidden rounded-[22px] border border-white/80 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_12px_30px_rgba(59,130,246,0.10)]">
-                <div className="bg-[radial-gradient(circle_at_20%_20%,rgba(96,165,250,0.20),transparent_30%),linear-gradient(180deg,#f5f8ff_0%,#eef3ff_100%)] px-4 py-4 sm:px-5 sm:py-5">
-                  <div className="rounded-[20px] border border-blue-100/80 bg-[linear-gradient(180deg,#ffffff_0%,#f4f7ff_100%)] p-3 shadow-[0_8px_18px_rgba(59,130,246,0.08)]">
-                    <div className="flex items-center justify-between gap-3">
-                      <div>
-                        <div className="text-[13px] font-bold text-slate-900">{hasTriedSampleData ? 'Start with your own business' : 'Load the demo'}</div>
-                        <div className="mt-1 max-w-[32ch] text-[12px] leading-5 text-slate-500">
-                          {hasTriedSampleData
-                            ? 'The demo is cleared. Add your own jobs, expenses, mileage, invoices, or anything you did today.'
-                            : 'Explore a complete demo business you can look around, then clear out and replace with your own data.'}
-                        </div>
-                      </div>
-                      <div className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 sm:flex">
-                        {hasTriedSampleData ? <Plus size={26} className="text-blue-500" strokeWidth={2.3} /> : <Monitor size={26} className="text-blue-500" strokeWidth={1.9} />}
+            <div className="mt-4 overflow-hidden rounded-[24px] border border-[#E7EEFB] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
+              <div className="bg-[linear-gradient(180deg,#F3F7FF_0%,#EDF3FF_100%)] px-4 pt-4 pb-3 sm:px-5 sm:pt-5">
+                <div className="relative overflow-hidden rounded-[22px] border border-[#E0E9FF] bg-[radial-gradient(circle_at_18%_18%,rgba(118,159,255,0.24),transparent_26%),radial-gradient(circle_at_82%_24%,rgba(180,206,255,0.34),transparent_24%),linear-gradient(180deg,#F5F8FF_0%,#EEF3FF_100%)] px-4 py-4 sm:px-5 sm:py-5">
+                  {!hasTriedSampleData && (
+                    <div className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/90 bg-white/92 px-3 py-1 text-[10px] font-bold text-[#5B80F8] shadow-sm">
+                      <PlayCircle size={12} strokeWidth={2} /> Explore before you start
+                    </div>
+                  )}
+                  <div className="relative mx-auto mt-5 flex h-[150px] max-w-[290px] items-end justify-center sm:h-[170px] sm:max-w-[320px]">
+                    <div className="absolute bottom-0 left-1/2 h-3 w-[220px] -translate-x-1/2 rounded-full bg-[#DCE7FF] blur-xl opacity-90" />
+                    <div className="absolute left-1 bottom-[18px] flex flex-col items-center">
+                      <div className="h-[42px] w-[42px] rounded-full border border-[#D9E6FF] bg-white shadow-[0_10px_18px_rgba(15,23,42,0.08)]" />
+                      <div className="-mt-[30px] ml-[8px] h-[22px] w-[10px] rounded-r-full border-r-[5px] border-[#D9E6FF]" />
+                    </div>
+                    <div className="absolute right-0 bottom-[18px] flex items-end gap-[2px]">
+                      <div className="h-[18px] w-[34px] rounded-full bg-[#E6F4FF] shadow-[0_8px_16px_rgba(15,23,42,0.05)]" />
+                      <div className="relative flex h-[42px] w-[28px] items-end justify-center">
+                        <div className="absolute bottom-[8px] h-[22px] w-[16px] rounded-t-full bg-[#9CD7A7]" />
+                        <div className="absolute bottom-[8px] left-[1px] h-[26px] w-[12px] rounded-t-full bg-[#B8E2C0] rotate-[-10deg]" />
+                        <div className="absolute bottom-0 h-[14px] w-[18px] rounded-t-[6px] bg-[#98B6FF]" />
                       </div>
                     </div>
-
-                    {!hasTriedSampleData && (
-                      <div className="mt-4 grid grid-cols-3 gap-2.5 sm:gap-3">
-                        {[
-                          { value: sampleDataCounts.transactions, label: 'Records', icon: <Receipt size={16} className="text-blue-500" strokeWidth={1.8} /> },
-                          { value: sampleDataCounts.invoices, label: 'Invoices', icon: <FileText size={16} className="text-blue-500" strokeWidth={1.8} /> },
-                          { value: sampleDataCounts.clients, label: 'Clients', icon: <Users size={16} className="text-blue-500" strokeWidth={1.8} /> },
-                        ].map((stat) => (
-                          <div key={stat.label} className="rounded-2xl border border-slate-200 bg-white px-2 py-3 text-center shadow-[0_6px_14px_rgba(15,23,42,0.04)]">
-                            <div className="mb-2 flex justify-center">{stat.icon}</div>
-                            <div className="text-[30px] font-bold leading-none tracking-[-0.04em] text-slate-950 font-brand">{stat.value}</div>
-                            <div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{stat.label}</div>
+                    <div className="relative z-10 w-[235px] sm:w-[265px]">
+                      <div className="rounded-[18px] border border-[#CFE0FF] bg-white shadow-[0_16px_32px_rgba(53,101,227,0.14)]">
+                        <div className="flex items-center gap-1.5 rounded-t-[18px] border-b border-[#E7EEFB] bg-[#F7FAFF] px-3 py-2">
+                          <span className="h-2 w-2 rounded-full bg-[#C7D7FF]" />
+                          <span className="h-2 w-2 rounded-full bg-[#D8E4FF]" />
+                          <span className="h-2 w-2 rounded-full bg-[#E5EEFF]" />
+                        </div>
+                        <div className="grid grid-cols-[1.4fr,0.95fr] gap-3 p-3">
+                          <div className="space-y-2">
+                            <div className="h-16 rounded-[12px] bg-[linear-gradient(180deg,#EDF3FF_0%,#F7FAFF_100%)] p-2">
+                              <div className="flex h-full items-end gap-1.5">
+                                {[36, 58, 46, 68, 54, 72].map((h, idx) => (
+                                  <div key={idx} className="w-3 rounded-t-full bg-[#7BA3FF]" style={{ height: h + '%' }} />
+                                ))}
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-2">
+                              <div className="rounded-[10px] bg-[#F6F9FF] p-2">
+                                <div className="mb-1 h-2.5 w-12 rounded-full bg-[#D9E6FF]" />
+                                <div className="h-4 w-16 rounded-full bg-[#7BA3FF]/85" />
+                              </div>
+                              <div className="rounded-[10px] bg-[#F6F9FF] p-2">
+                                <div className="mb-1 h-2.5 w-10 rounded-full bg-[#D9E6FF]" />
+                                <div className="h-4 w-12 rounded-full bg-[#8FD0A8]/90" />
+                              </div>
+                            </div>
                           </div>
-                        ))}
+                          <div className="space-y-2">
+                            <div className="flex h-16 items-center justify-center rounded-[12px] bg-[#F6F9FF]">
+                              <div className="relative h-11 w-11 rounded-full bg-[conic-gradient(#7BA3FF_0_220deg,#DDE8FF_220deg_360deg)]">
+                                <div className="absolute inset-[8px] rounded-full bg-white" />
+                              </div>
+                            </div>
+                            <div className="space-y-2 rounded-[10px] bg-[#F6F9FF] p-2.5">
+                              {[1,2,3].map((line) => (
+                                <div key={line} className="flex items-center gap-2">
+                                  <span className="h-2 w-2 rounded-full bg-[#7BA3FF]" />
+                                  <span className="h-2.5 flex-1 rounded-full bg-[#D9E6FF]" />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    )}
+                      <div className="mx-auto h-[10px] w-[170px] rounded-b-[14px] bg-[#C6D7FF] shadow-[0_8px_14px_rgba(83,126,236,0.20)]" />
+                    </div>
                   </div>
                 </div>
+              </div>
 
-                <div className="px-4 pb-4 pt-1 sm:px-5 sm:pb-5">
-                  <button
-                    onClick={hasTriedSampleData ? () => handleOpenUnifiedAdd() : handleLoadSampleData}
-                    className="w-full rounded-2xl bg-blue-600 px-5 py-4 text-center text-[16px] font-bold text-white shadow-[0_14px_28px_rgba(37,99,235,0.28)] transition-colors hover:bg-blue-500"
-                  >
-                    <span className="inline-flex items-center justify-center gap-2">
-                      {hasTriedSampleData ? 'Record my first entry' : 'Load the demo'}
-                      <ArrowRight size={18} strokeWidth={2.1} />
-                    </span>
-                  </button>
+              <div className="px-4 py-4 sm:px-5 sm:py-5">
+                <h3 className="text-center text-[18px] font-bold leading-tight tracking-[-0.03em] text-[#0B1739] font-brand sm:text-[19px]">
+                  {hasTriedSampleData ? 'Start with your own business' : 'Load the demo'}
+                </h3>
+                <p className="mx-auto mt-2 max-w-[31ch] text-center text-[14px] leading-[1.55] font-medium text-[#64748B]">
+                  {hasTriedSampleData
+                    ? 'The demo is cleared. Record your first real entry and start building your own records.'
+                    : 'Explore a complete demo business you can look around, then clear out and start your own. Nothing to undo.'}
+                </p>
 
-                  <button
-                    onClick={hasTriedSampleData ? handleLoadSampleData : () => handleOpenUnifiedAdd()}
-                    className="mt-3 w-full py-1 text-center text-[14px] font-semibold text-blue-600 underline underline-offset-4 transition-colors hover:text-blue-700"
-                  >
-                    {hasTriedSampleData ? 'Show the demo again' : 'Skip — record my first entry'}
-                  </button>
-                </div>
+                {!hasTriedSampleData && (
+                  <div className="mt-4 grid grid-cols-3 gap-3">
+                    {[
+                      { value: sampleDataCounts.transactions, label: 'RECORDS', icon: <Receipt size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
+                      { value: sampleDataCounts.invoices, label: 'INVOICES', icon: <FileText size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
+                      { value: sampleDataCounts.clients, label: 'CLIENTS', icon: <Users size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
+                    ].map((stat) => (
+                      <div key={stat.label} className="rounded-[18px] border border-[#E6EBF5] bg-white px-3 py-3 text-center shadow-[0_8px_18px_rgba(15,23,42,0.04)]">
+                        <div className="mb-2 flex justify-center">{stat.icon}</div>
+                        <div className="text-[34px] font-bold leading-none tracking-[-0.05em] text-[#0B1739] font-brand">{stat.value}</div>
+                        <div className="mt-1 text-[10px] font-bold tracking-[0.14em] text-[#6B7280]">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <button
+                  onClick={hasTriedSampleData ? () => handleOpenUnifiedAdd() : handleLoadSampleData}
+                  className="mt-5 w-full rounded-[18px] bg-[#2563EB] px-5 py-[15px] text-center text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
+                >
+                  <span className="inline-flex items-center justify-center gap-2">
+                    {hasTriedSampleData ? 'Record my first entry' : 'Load the demo'}
+                    <ArrowRight size={18} strokeWidth={2.15} />
+                  </span>
+                </button>
+
+                <button
+                  onClick={hasTriedSampleData ? handleLoadSampleData : () => handleOpenUnifiedAdd()}
+                  className="mt-4 w-full text-center text-[14px] font-semibold text-[#2563EB] underline underline-offset-4 transition-colors hover:text-[#1D4ED8]"
+                >
+                  {hasTriedSampleData ? 'Show the demo again' : 'Skip — record my first entry'}
+                </button>
               </div>
             </div>
           </div>
         </div>
       )}
+
 
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
