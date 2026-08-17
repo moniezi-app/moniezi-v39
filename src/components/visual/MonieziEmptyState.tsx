@@ -1,0 +1,38 @@
+import React from 'react';
+
+interface MonieziEmptyStateProps {
+  visual: React.ReactNode;
+  title: string;
+  body?: string;
+  primaryAction?: React.ReactNode;
+  secondaryAction?: React.ReactNode;
+  eyebrow?: string;
+  className?: string;
+}
+
+/**
+ * v39 empty-state composition: one visual, one message, one primary action.
+ * Data-rich screens should stop using this component once real records exist.
+ */
+export const MonieziEmptyState: React.FC<MonieziEmptyStateProps> = ({
+  visual,
+  title,
+  body,
+  primaryAction,
+  secondaryAction,
+  eyebrow,
+  className = '',
+}) => (
+  <section className={`v39-empty-state ${className}`.trim()}>
+    <div className="v39-empty-state__visual">{visual}</div>
+    <div className="v39-empty-state__copy">
+      {eyebrow ? <div className="v39-empty-state__eyebrow">{eyebrow}</div> : null}
+      <h2 className="v39-empty-state__title">{title}</h2>
+      {body ? <p className="v39-empty-state__body">{body}</p> : null}
+    </div>
+    {primaryAction ? <div className="v39-empty-state__primary">{primaryAction}</div> : null}
+    {secondaryAction ? <div className="v39-empty-state__secondary">{secondaryAction}</div> : null}
+  </section>
+);
+
+export default MonieziEmptyState;
