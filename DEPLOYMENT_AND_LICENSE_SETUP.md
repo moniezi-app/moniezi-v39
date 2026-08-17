@@ -1,60 +1,53 @@
 # MONIEZI v39 Deployment and License Setup
 
-MONIEZI v39 is the parallel development track for the visual redesign. The app remains a Vite PWA deployed with GitHub Pages and validates licenses through the existing Cloudflare Worker/KV service.
+MONIEZI v39 is the parallel visual-redesign track. It remains a Vite PWA deployed with GitHub Pages and validates licenses through the same existing Cloudflare Worker used by the stable MONIEZI application.
 
-## 1. Create the v39 development repository
+## 1. GitHub repository setup
 
-1. Create a separate repository, recommended name: `moniezi-v39`.
-2. Copy this source package into that repository.
-3. Enable GitHub Pages with **GitHub Actions** as the source.
-4. Configure the same public GitHub Actions variables used by the stable app:
-   - `VITE_LICENSE_API_BASE`
-   - `VITE_PURCHASE_URL`
-   - `VITE_TERMS_URL`
-   - `VITE_PRIVACY_URL`
-   - `VITE_SUPPORT_EMAIL`
-5. Push the source and run `Deploy Vite app to GitHub Pages`.
+1. Repository: `moniezi-v39`.
+2. Default branch: `main`.
+3. GitHub Pages → Build and deployment → Source: **GitHub Actions**.
+4. GitHub Actions needs only one repository variable to mirror the stable v38 setup:
 
-The PWA manifest ID is `/moniezi-v39/` and the v39 service-worker cache is separate from v38.
+   - Name: `VITE_LICENSE_API_BASE`
+   - Value: `https://moniezi-license-v37.moniezi-vg.workers.dev`
 
-## 2. Parallel v38 / v39 storage
+5. No GitHub repository secrets are required for the MONIEZI front-end deployment.
+6. Push to `main` or run the Pages workflow manually.
 
-The two builds may be served from different project paths on the same `*.github.io` origin. Browser storage is origin-scoped, so v39 uses explicit v39 namespaces:
+The workflow also contains the same Worker URL as a safe public fallback, so a missing repository variable does not produce an unconfigured license build. The repository variable remains the preferred explicit configuration because it mirrors the working v38 repository.
 
-- Core app state: v39
+## 2. Existing license Worker
+
+v39 must continue to validate against the existing Worker:
+
+`https://moniezi-license-v37.moniezi-vg.workers.dev`
+
+Do not create or point v39 at a new license Worker merely because v39 uses a separate GitHub repository. The v39 application is a new front-end/PWA track; the existing licensing backend remains shared during parallel testing.
+
+The Worker source is included for reference. Production Worker secrets remain in Cloudflare/Wrangler and are not GitHub repository variables or front-end build secrets.
+
+## 3. Parallel v38 / v39 storage
+
+The two builds may be served from different project paths on the same `*.github.io` origin. v39 keeps its own application/browser-storage namespaces so it can be tested without overwriting v38 business data.
+
+- Core app state: v39-specific
 - App IndexedDB: `moniezi-app-v39`
 - Receipt IndexedDB: `moniezi-receipts-v39`
 - Theme, KPI period, demo state, and insight-dismissal state: v39-specific
 - PWA manifest/service-worker cache: v39-specific
 
-v39 intentionally does **not** auto-import v38 business data. If you want v38 data in v39, export a MONIEZI backup from v38 and restore it into v39.
+v39 intentionally does **not** auto-import v38 business data. Use MONIEZI backup/restore when test data should be moved between versions.
 
-The physical-device ID is intentionally shared with v38 during parallel testing. This lets the same license validate on the same phone without creating an unnecessary additional device binding. The stored v39 license state itself remains separate.
+The physical-device ID remains shared with v38 during parallel testing so the same license can validate on the same device without creating an unnecessary additional device binding. The stored v39 license state itself remains separate.
 
-## 3. License Worker
+## 4. Verification after deployment
 
-You normally do **not** need a second Cloudflare license Worker for the v39 development repository. Point v39 at the existing Worker using `VITE_LICENSE_API_BASE`.
+After the workflow succeeds:
 
-The Worker source is included for completeness, but `license-worker/wrangler.jsonc` intentionally keeps `APP_URL` pointed at the stable v38 customer app during parallel development. **Do not redeploy the production license Worker from the v39 repository merely to test the visual redesign.** Change the customer `APP_URL` only when v39 is approved for production cutover.
-
-Worker secrets remain in Cloudflare/Wrangler and must never be committed:
-
-- `LICENSE_HASH_SALT`
-- `STRIPE_WEBHOOK_SECRET`
-- `ADMIN_KEY`
-- optional `OWNER_KEY`
-- optional `RESEND_API_KEY`
-
-## 4. Test the v39 baseline before redesign work
-
-Before changing the visual system, verify:
-
-1. v38 still opens with its existing data.
-2. v39 opens independently and does not display v38 business records.
-3. v39 activation validates correctly on the test device.
-4. Demo load/remove/reload works in v39.
-5. A v39 backup/export and restore works.
-6. v39 can be installed separately from the v38 PWA.
-7. Offline relaunch works after the first successful online load.
-
-Once these checks pass, v39 is ready for the illustration/empty-state/Home visual redesign passes.
+1. Open the v39 GitHub Pages URL online.
+2. Confirm the activation screen loads.
+3. Enter a known valid MONIEZI license key and confirm validation succeeds.
+4. Confirm v38 still opens with its existing data.
+5. Confirm v39 remains independent from v38 business data.
+6. Confirm v39 can relaunch offline after one successful online load.

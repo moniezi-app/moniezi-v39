@@ -1753,7 +1753,7 @@ export default function App() {
   }, []);
 
   // Production licensing configuration. The app never accepts an unverified customer key.
-  const LICENSE_API_BASE = String((import.meta as any).env?.VITE_LICENSE_API_BASE || "").trim();
+  const LICENSE_API_BASE = String((import.meta as any).env?.VITE_LICENSE_API_BASE || "https://moniezi-license-v37.moniezi-vg.workers.dev").trim();
   const PURCHASE_URL = String((import.meta as any).env?.VITE_PURCHASE_URL || "").trim();
   const TERMS_URL = String((import.meta as any).env?.VITE_TERMS_URL || "").trim();
   const PRIVACY_URL = String((import.meta as any).env?.VITE_PRIVACY_URL || "").trim();

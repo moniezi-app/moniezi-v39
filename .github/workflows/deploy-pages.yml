@@ -1,6 +1,6 @@
-# package marker: moniezi-v39.0.1
+# package marker: moniezi-v39.0.3
 name: Deploy Vite app to GitHub Pages
-# package-revision: v39.0.1
+# package-revision: v39.0.3
 
 on:
   push:
@@ -56,11 +56,9 @@ jobs:
 
       - name: Build
         env:
-          VITE_LICENSE_API_BASE: ${{ vars.VITE_LICENSE_API_BASE }}
-          VITE_PURCHASE_URL: ${{ vars.VITE_PURCHASE_URL }}
-          VITE_TERMS_URL: ${{ vars.VITE_TERMS_URL }}
-          VITE_PRIVACY_URL: ${{ vars.VITE_PRIVACY_URL }}
-          VITE_SUPPORT_EMAIL: ${{ vars.VITE_SUPPORT_EMAIL }}
+          # v38-compatible public build setting. If the repository variable is not
+          # present yet, use the existing production license Worker as a safe default.
+          VITE_LICENSE_API_BASE: ${{ vars.VITE_LICENSE_API_BASE || 'https://moniezi-license-v37.moniezi-vg.workers.dev' }}
         run: npm run build
 
       - name: Upload Pages artifact
