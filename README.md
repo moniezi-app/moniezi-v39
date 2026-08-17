@@ -1,18 +1,19 @@
-# MONIEZI v39.0.8
+# MONIEZI v39.0.9
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-This package preserves the approved v39 welcome-screen direction, the v39 Android/PWA identification update, and the proof-matched onboarding work, while bringing the Invoices and Estimates true-empty states into the production visual system.
+This package preserves the approved v39 welcome-screen direction, the v39 Android/PWA identification update, and the proof-matched onboarding work, while correcting the Invoices and Estimates true-empty states so they use the approved illustrations rather than substitute drawings.
 
-## v39.0.8 invoices and estimates empty-state redesign
+## v39.0.9 approved invoice and estimate illustration correction
 
-This build implements the approved proof for the Invoices and Estimates true-empty states.
+This build corrects the visual implementation of the Invoices and Estimates true-empty states.
 
-- Redesigned the **Invoices** true-empty state with a light illustrated scene, benefit rows, primary CTA, and learn-more link styling.
-- Redesigned the **Estimates** true-empty state with its own distinct illustration, benefit rows, primary CTA, and learn-more link styling.
-- Kept filtered-zero states compact so large illustrations appear only when there are truly no invoices or no estimates.
+- Replaced the substitute generated SVG empty-state scenes with the approved invoice and estimate illustrations.
+- Added dedicated optimized production illustration assets for the Invoice and Estimate true-empty states.
+- Kept the approved light illustration appearance across both app themes instead of letting dark mode recolor the artwork.
+- Preserved the existing empty-state copy, benefit rows, primary CTA buttons, and secondary learn-more links.
+- Kept filtered-zero states compact so the large illustrations appear only when there are truly no invoices or no estimates.
 - Preserved invoice and estimate creation/editing, filtering, statuses, client linkage, PDF export, and all related business logic.
-- Kept the rest of the v39 onboarding and welcome experience unchanged.
 
 ## v39 baseline rules
 

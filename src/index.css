@@ -1167,7 +1167,7 @@ html {
 
 
 /* ================================================================
-   MONIEZI v39.0.8 — invoice and estimate proof-matched empty states
+   MONIEZI v39.0.9 — invoice and estimate proof-matched empty states
    ================================================================ */
 :root {
   --v39-visual-ink: #4b5b79;
@@ -1222,8 +1222,14 @@ html {
   position: relative;
   display: grid;
   place-items: center;
-  width: min(100%, 330px);
+  width: min(100%, 390px);
   color: var(--v39-visual-ink);
+}
+
+.v39-approved-illustration {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .v39-empty-state {

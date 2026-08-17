@@ -9,8 +9,8 @@ interface MonieziVisualStageProps {
 
 /**
  * Shared illustration stage for the polished v39 record empty states.
- * The stage itself stays very light and unobtrusive so the line illustration
- * reads like part of the screen rather than a heavy card inside a card.
+ * It now behaves as a clean layout wrapper so approved illustration assets
+ * render exactly as designed without generated background substitutions.
  */
 export const MonieziVisualStage: React.FC<MonieziVisualStageProps> = ({
   children,
@@ -24,7 +24,6 @@ export const MonieziVisualStage: React.FC<MonieziVisualStageProps> = ({
     aria-label={ariaLabel}
     aria-hidden={ariaLabel ? undefined : true}
   >
-    <div className="v39-visual-stage__blob" />
     <div className="v39-visual-stage__content">{children}</div>
   </div>
 );
