@@ -9097,13 +9097,41 @@ html, body, #root {
                   <div className="v39-record-empty-shell">
                     <MonieziEmptyState
                       visual={
-                        <MonieziVisualStage ariaLabel="An invoice moving from creation to paid status">
+                        <MonieziVisualStage ariaLabel="An invoice sheet with billing details, a paper airplane, and a confirmation path">
                           <InvoiceVisualScene />
                         </MonieziVisualStage>
                       }
-                      eyebrow="Invoices"
-                      title="Send your first invoice"
-                      body="Create an invoice, export it as a PDF, and keep payment status visible in one place."
+                      title="No invoices yet"
+                      body={<>Create your first invoice in minutes and get paid faster. Professional, simple, and on brand.</>}
+                      supportingContent={
+                        <div className="v39-feature-list">
+                          {[
+                            {
+                              icon: <Clock3 size={18} strokeWidth={1.9} />,
+                              title: 'Get paid faster',
+                              body: 'Send professional invoices in seconds',
+                            },
+                            {
+                              icon: <CreditCard size={18} strokeWidth={1.9} />,
+                              title: 'Track with confidence',
+                              body: 'See when invoices are viewed and paid',
+                            },
+                            {
+                              icon: <Shield size={18} strokeWidth={1.9} />,
+                              title: 'Stay organized',
+                              body: 'Keep all your billing in one place',
+                            },
+                          ].map((item) => (
+                            <div key={item.title} className="v39-feature-row">
+                              <div className="v39-feature-row__icon">{item.icon}</div>
+                              <div>
+                                <p className="v39-feature-row__title">{item.title}</p>
+                                <p className="v39-feature-row__body">{item.body}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      }
                       primaryAction={
                         <button
                           type="button"
@@ -9111,7 +9139,17 @@ html, body, #root {
                           className="v39-primary-action"
                         >
                           <Plus size={19} strokeWidth={1.8} />
-                          Create Invoice
+                          Create your first invoice
+                        </button>
+                      }
+                      secondaryAction={
+                        <button
+                          type="button"
+                          onClick={() => handleOpenFAB('billing', 'invoice')}
+                          className="v39-secondary-link"
+                        >
+                          Learn how invoicing works
+                          <ArrowRight size={16} strokeWidth={2.1} />
                         </button>
                       }
                     />
@@ -9194,13 +9232,41 @@ html, body, #root {
                       <div className="v39-record-empty-shell">
                         <MonieziEmptyState
                           visual={
-                            <MonieziVisualStage ariaLabel="An estimate prepared for a client and ready for approval">
+                            <MonieziVisualStage ariaLabel="An estimate sheet, approval bubble, and a seated client-review scene">
                               <EstimateVisualScene />
                             </MonieziVisualStage>
                           }
-                          eyebrow="Estimates"
-                          title="Price the next job clearly"
-                          body="Build a clean estimate, export it as a PDF, and keep the client decision connected to the work."
+                          title="No estimates yet"
+                          body={<>Create estimates that win trust and close more deals. Fast, flexible, and easy to send.</>}
+                          supportingContent={
+                            <div className="v39-feature-list">
+                              {[
+                                {
+                                  icon: <Briefcase size={18} strokeWidth={1.9} />,
+                                  title: 'Win more work',
+                                  body: 'Present clear, professional estimates',
+                                },
+                                {
+                                  icon: <Percent size={18} strokeWidth={1.9} />,
+                                  title: 'Flexible & accurate',
+                                  body: 'Add discounts, taxes, and line items easily',
+                                },
+                                {
+                                  icon: <Plane size={18} strokeWidth={1.9} />,
+                                  title: 'Convert with ease',
+                                  body: 'Turn estimates into invoices in one tap',
+                                },
+                              ].map((item) => (
+                                <div key={item.title} className="v39-feature-row">
+                                  <div className="v39-feature-row__icon">{item.icon}</div>
+                                  <div>
+                                    <p className="v39-feature-row__title">{item.title}</p>
+                                    <p className="v39-feature-row__body">{item.body}</p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          }
                           primaryAction={
                             <button
                               type="button"
@@ -9208,7 +9274,17 @@ html, body, #root {
                               className="v39-primary-action v39-primary-action--estimate"
                             >
                               <Plus size={19} strokeWidth={1.8} />
-                              Create Estimate
+                              Create your first estimate
+                            </button>
+                          }
+                          secondaryAction={
+                            <button
+                              type="button"
+                              onClick={() => handleOpenFAB('billing', 'estimate')}
+                              className="v39-secondary-link"
+                            >
+                              Learn how estimates work
+                              <ArrowRight size={16} strokeWidth={2.1} />
                             </button>
                           }
                         />

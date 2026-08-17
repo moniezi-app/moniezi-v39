@@ -1,16 +1,18 @@
-# MONIEZI v39.0.7
+# MONIEZI v39.0.8
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-This package preserves the approved v39.0.4 welcome-screen direction and the v39.0.5 Android/PWA identification update, while redesigning the early-use install and demo experience to match the newer MONIEZI visual language.
+This package preserves the approved v39 welcome-screen direction, the v39 Android/PWA identification update, and the proof-matched onboarding work, while bringing the Invoices and Estimates true-empty states into the production visual system.
 
-## v39.0.7 install and demo experience redesign
+## v39.0.8 invoices and estimates empty-state redesign
 
-- Redesigned the **Install MONIEZI** prompt into a lighter, more polished onboarding invitation.
-- Redesigned the **MONIEZI is installed** confirmation into a clearer success-state overlay.
-- Redesigned the **Load the demo** / **Record my first entry** card on the Dashboard first-run state.
-- Replaced the earlier dark, boxy onboarding cards with lighter branded surfaces, clearer hierarchy, and stronger CTA treatment.
-- Preserved all install detection logic, demo loading/clearing behavior, skip behavior, and core MONIEZI functionality.
+This build implements the approved proof for the Invoices and Estimates true-empty states.
+
+- Redesigned the **Invoices** true-empty state with a light illustrated scene, benefit rows, primary CTA, and learn-more link styling.
+- Redesigned the **Estimates** true-empty state with its own distinct illustration, benefit rows, primary CTA, and learn-more link styling.
+- Kept filtered-zero states compact so large illustrations appear only when there are truly no invoices or no estimates.
+- Preserved invoice and estimate creation/editing, filtering, statuses, client linkage, PDF export, and all related business logic.
+- Kept the rest of the v39 onboarding and welcome experience unchanged.
 
 ## v39 baseline rules
 
@@ -21,16 +23,7 @@ This package preserves the approved v39.0.4 welcome-screen direction and the v39
 - v39 does **not** automatically import v38 or legacy business data. Use MONIEZI backup/restore explicitly when test data should be moved between versions.
 - The device identity remains shared with v38 during parallel testing so validating the same license on the same physical device does not unnecessarily consume another device slot. The v39 license record itself is stored separately.
 - The PWA manifest ID and service-worker cache are v39-specific so v38 and v39 can be installed/tested independently.
-- Android/PWA display name remains **MONIEZI v39** for easier side-by-side testing against the older MONIEZI installation.
 
 ## Documentation
 
 This clean source intentionally does not carry individual per-build `*_RELEASE_NOTE.md` files. Deployment and license configuration are documented in `DEPLOYMENT_AND_LICENSE_SETUP.md`.
-
-
-## Image optimization
-
-- Converted the large welcome character artwork from PNG to high-quality WebP.
-- Reduced that asset from about 676 KB to about 67 KB without changing its displayed dimensions.
-- Existing demo receipt images remain WebP because they are already compact (about 28–47 KB each).
-- App/PWA icons remain PNG for manifest and launcher compatibility.

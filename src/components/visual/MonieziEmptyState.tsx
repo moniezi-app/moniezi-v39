@@ -3,16 +3,17 @@ import React from 'react';
 interface MonieziEmptyStateProps {
   visual: React.ReactNode;
   title: string;
-  body?: string;
+  body?: React.ReactNode;
   primaryAction?: React.ReactNode;
   secondaryAction?: React.ReactNode;
   eyebrow?: string;
+  supportingContent?: React.ReactNode;
   className?: string;
 }
 
 /**
- * v39 empty-state composition: one visual, one message, one primary action.
- * Data-rich screens should stop using this component once real records exist.
+ * v39 empty-state composition: one visual, one message, supporting value points,
+ * one primary action, and an optional secondary link-style action.
  */
 export const MonieziEmptyState: React.FC<MonieziEmptyStateProps> = ({
   visual,
@@ -21,6 +22,7 @@ export const MonieziEmptyState: React.FC<MonieziEmptyStateProps> = ({
   primaryAction,
   secondaryAction,
   eyebrow,
+  supportingContent,
   className = '',
 }) => (
   <section className={`v39-empty-state ${className}`.trim()}>
@@ -28,8 +30,9 @@ export const MonieziEmptyState: React.FC<MonieziEmptyStateProps> = ({
     <div className="v39-empty-state__copy">
       {eyebrow ? <div className="v39-empty-state__eyebrow">{eyebrow}</div> : null}
       <h2 className="v39-empty-state__title">{title}</h2>
-      {body ? <p className="v39-empty-state__body">{body}</p> : null}
+      {body ? <div className="v39-empty-state__body">{body}</div> : null}
     </div>
+    {supportingContent ? <div className="v39-empty-state__supporting">{supportingContent}</div> : null}
     {primaryAction ? <div className="v39-empty-state__primary">{primaryAction}</div> : null}
     {secondaryAction ? <div className="v39-empty-state__secondary">{secondaryAction}</div> : null}
   </section>

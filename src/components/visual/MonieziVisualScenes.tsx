@@ -1,172 +1,98 @@
 import React from 'react';
 
-const sceneStroke = 'var(--v39-visual-ink)';
+const ink = 'var(--v39-visual-ink)';
+const blue = 'var(--v39-visual-blue)';
+const paper = 'var(--v39-visual-paper)';
+const plant = 'var(--v39-visual-teal)';
 
-const SceneGrid: React.FC = () => (
-  <g opacity="0.18" stroke={sceneStroke} strokeWidth="1">
-    <path d="M18 42H302" strokeDasharray="2 12" />
-    <path d="M18 110H302" strokeDasharray="2 12" />
-    <path d="M18 178H302" strokeDasharray="2 12" />
-    <path d="M60 18V202" strokeDasharray="2 12" />
-    <path d="M160 18V202" strokeDasharray="2 12" />
-    <path d="M260 18V202" strokeDasharray="2 12" />
-  </g>
-);
-
-/**
- * Original v39 welcome scene.
- * A local business ledger sits in the center while invoice, receipt and
- * profit signals orbit it. The scene deliberately avoids stock characters.
- */
 export const WelcomeVisualScene: React.FC = () => (
   <svg viewBox="0 0 320 220" fill="none" aria-hidden="true">
-    <SceneGrid />
-
-    <g transform="translate(89 35)">
-      <rect
-        x="0"
-        y="0"
-        width="142"
-        height="154"
-        rx="20"
-        fill="var(--v39-visual-paper)"
-        stroke={sceneStroke}
-        strokeWidth="1.5"
-      />
-      <rect
-        x="14"
-        y="14"
-        width="114"
-        height="28"
-        rx="10"
-        fill="var(--v39-visual-blue)"
-        fillOpacity="0.16"
-        stroke="var(--v39-visual-blue)"
-        strokeWidth="1.5"
-      />
-      <circle cx="31" cy="28" r="6" fill="var(--v39-visual-blue)" fillOpacity="0.78" />
-      <path d="M45 24H111M45 31H87" stroke={sceneStroke} strokeWidth="1.5" strokeLinecap="round" opacity="0.62" />
-
-      <rect x="14" y="55" width="114" height="34" rx="10" fill="var(--v39-visual-cyan)" fillOpacity="0.10" />
-      <path d="M26 69H68M26 77H54" stroke={sceneStroke} strokeWidth="1.5" strokeLinecap="round" opacity="0.56" />
-      <path d="M91 76l8-8 7 6 10-12" stroke="var(--v39-visual-green)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="116" cy="62" r="3.5" fill="var(--v39-visual-green)" />
-
-      <rect x="14" y="101" width="52" height="39" rx="10" fill="var(--v39-visual-violet)" fillOpacity="0.11" />
-      <path d="M27 113H53M27 121H46M27 129H38" stroke={sceneStroke} strokeWidth="1.4" strokeLinecap="round" opacity="0.58" />
-
-      <rect x="76" y="101" width="52" height="39" rx="10" fill="var(--v39-visual-green)" fillOpacity="0.11" />
-      <path d="M89 129V121M101 129V114M113 129V108" stroke="var(--v39-visual-green)" strokeWidth="4" strokeLinecap="round" />
+    <rect x="70" y="28" width="180" height="132" rx="22" fill="var(--v39-visual-paper)" stroke={ink} strokeWidth="1.5" />
+    <rect x="87" y="44" width="146" height="24" rx="10" fill="var(--v39-visual-blue)" fillOpacity="0.1" stroke={blue} strokeWidth="1.4" />
+    <rect x="87" y="80" width="146" height="30" rx="12" fill="var(--v39-visual-teal)" fillOpacity="0.08" />
+    <rect x="87" y="120" width="58" height="28" rx="12" fill="var(--v39-visual-green)" fillOpacity="0.08" />
+    <rect x="159" y="120" width="74" height="28" rx="12" fill="var(--v39-visual-violet)" fillOpacity="0.08" />
+    <path d="M102 56h88M102 92h52M102 100h39M173 135h46" stroke={ink} strokeWidth="1.45" strokeLinecap="round" opacity="0.56" />
+    <path d="M187 95l9-9 8 6 11-13" stroke="var(--v39-visual-green)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <g transform="translate(25 74)">
+      <rect width="70" height="56" rx="14" fill={paper} stroke="var(--v39-visual-cyan)" strokeWidth="1.5" />
+      <path d="M17 17h36M17 25h28M17 38h13" stroke={ink} strokeWidth="1.4" strokeLinecap="round" opacity="0.6" />
+      <rect x="47" y="33" width="10" height="10" fill="var(--v39-visual-cyan)" fillOpacity="0.22" stroke="var(--v39-visual-cyan)" strokeWidth="1.3" />
     </g>
-
-    <g transform="translate(28 62)">
-      <rect width="72" height="58" rx="15" fill="var(--v39-visual-paper)" stroke="var(--v39-visual-cyan)" strokeWidth="1.5" />
-      <path d="M18 15H54M18 23H45M18 36H33" stroke={sceneStroke} strokeWidth="1.5" strokeLinecap="round" opacity="0.66" />
-      <path d="M48 34h9v9h-9z" fill="var(--v39-visual-cyan)" fillOpacity="0.26" stroke="var(--v39-visual-cyan)" strokeWidth="1.4" />
+    <g transform="translate(232 55)">
+      <rect width="58" height="60" rx="16" fill={paper} stroke="var(--v39-visual-violet)" strokeWidth="1.5" />
+      <path d="M18 18h21v26l-4-3-4 3-4-3-4 3-5-3V18z" fill="var(--v39-visual-violet)" fillOpacity="0.12" stroke={ink} strokeWidth="1.3" strokeLinejoin="round" />
+      <path d="M24 27h9M24 34h12" stroke={ink} strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
     </g>
-
-    <g transform="translate(224 48)">
-      <rect width="68" height="68" rx="18" fill="var(--v39-visual-paper)" stroke="var(--v39-visual-violet)" strokeWidth="1.5" />
-      <path d="M21 18h25v33l-5-4-5 4-5-4-5 4-5-4V18z" fill="var(--v39-visual-violet)" fillOpacity="0.11" stroke={sceneStroke} strokeWidth="1.4" strokeLinejoin="round" />
-      <path d="M28 27h12M28 34h14M28 41h8" stroke={sceneStroke} strokeWidth="1.35" strokeLinecap="round" opacity="0.65" />
+    <g transform="translate(39 149)">
+      <rect width="68" height="42" rx="14" fill={paper} stroke="var(--v39-visual-green)" strokeWidth="1.5" />
+      <circle cx="19" cy="21" r="8" fill="var(--v39-visual-green)" fillOpacity="0.16" stroke="var(--v39-visual-green)" strokeWidth="1.3" />
+      <path d="M19 16v10M16 18.5h4.4a2.2 2.2 0 010 4.4H17" stroke="var(--v39-visual-green)" strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M35 18h16M35 25h10" stroke={ink} strokeWidth="1.3" strokeLinecap="round" opacity="0.56" />
     </g>
-
-    <g transform="translate(38 146)">
-      <rect width="68" height="46" rx="14" fill="var(--v39-visual-paper)" stroke="var(--v39-visual-green)" strokeWidth="1.5" />
-      <circle cx="20" cy="23" r="9" fill="var(--v39-visual-green)" fillOpacity="0.16" stroke="var(--v39-visual-green)" strokeWidth="1.4" />
-      <path d="M20 17v12M16.5 20h5.2a2.7 2.7 0 010 5.4H18" stroke="var(--v39-visual-green)" strokeWidth="1.45" strokeLinecap="round" />
-      <path d="M38 18h17M38 26h12" stroke={sceneStroke} strokeWidth="1.4" strokeLinecap="round" opacity="0.58" />
-    </g>
-
-    <path d="M99 89C110 89 111 89 118 89" stroke="var(--v39-visual-cyan)" strokeWidth="1.5" strokeDasharray="3 5" />
-    <path d="M231 82C241 82 245 82 252 82" stroke="var(--v39-visual-violet)" strokeWidth="1.5" strokeDasharray="3 5" />
-    <path d="M103 169C111 169 116 165 122 158" stroke="var(--v39-visual-green)" strokeWidth="1.5" strokeDasharray="3 5" />
   </svg>
 );
 
-/**
- * Invoice scene: a document moves toward a paid confirmation. It uses the
- * blue/cyan/green family and reads at small mobile sizes without text labels.
- */
 export const InvoiceVisualScene: React.FC = () => (
-  <svg viewBox="0 0 320 220" fill="none" aria-hidden="true">
-    <SceneGrid />
-
-    <g transform="translate(49 27)">
-      <rect width="146" height="164" rx="18" fill="var(--v39-visual-paper)" stroke={sceneStroke} strokeWidth="1.5" />
-      <path d="M24 27H91M24 39H72" stroke={sceneStroke} strokeWidth="1.7" strokeLinecap="round" />
-      <rect x="101" y="20" width="25" height="25" rx="7" fill="var(--v39-visual-blue)" fillOpacity="0.16" stroke="var(--v39-visual-blue)" strokeWidth="1.4" />
-      <path d="M108 28h11M108 34h11M108 40h7" stroke="var(--v39-visual-blue)" strokeWidth="1.25" strokeLinecap="round" />
-
-      <path d="M24 66H122" stroke={sceneStroke} strokeWidth="1.4" opacity="0.22" />
-      <path d="M24 83H80M104 83H122M24 101H70M100 101H122" stroke={sceneStroke} strokeWidth="1.5" strokeLinecap="round" opacity="0.58" />
-
-      <rect x="24" y="121" width="98" height="24" rx="8" fill="var(--v39-visual-cyan)" fillOpacity="0.10" />
-      <path d="M34 133H67" stroke={sceneStroke} strokeWidth="1.4" strokeLinecap="round" opacity="0.55" />
-      <path d="M88 133h24" stroke="var(--v39-visual-blue)" strokeWidth="2" strokeLinecap="round" />
+  <svg viewBox="0 0 320 200" fill="none" aria-hidden="true">
+    <path d="M69 164H262" stroke={ink} strokeWidth="1.5" strokeLinecap="round" opacity="0.45" />
+    <g transform="translate(27 110)">
+      <path d="M14 38V12" stroke={ink} strokeWidth="1.4" strokeLinecap="round" opacity="0.5" />
+      <path d="M14 12c8 0 12 5 12 11-6 1-10 0-12-2-2 2-6 3-12 2 0-6 4-11 12-11z" fill={blue} fillOpacity="0.72" />
+      <path d="M11 0c6 0 9 4 9 8-5 1-8 0-9-1-2 1-5 2-9 1 0-4 3-8 9-8z" fill={plant} fillOpacity="0.74" transform="translate(3 8)" />
+      <rect x="0" y="38" width="28" height="3.5" rx="1.75" fill={ink} opacity="0.45" />
     </g>
-
-    <path d="M202 76c22 0 31 8 38 22" stroke="var(--v39-visual-blue)" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 6" />
-    <path d="M236 91l5 8 8-4" stroke="var(--v39-visual-blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-
-    <g transform="translate(213 104)">
-      <circle cx="35" cy="35" r="35" fill="var(--v39-visual-green)" fillOpacity="0.13" stroke="var(--v39-visual-green)" strokeWidth="1.6" />
-      <circle cx="35" cy="35" r="23" fill="var(--v39-visual-paper)" stroke="var(--v39-visual-green)" strokeWidth="1.4" />
-      <path d="M24 35l7 7 15-17" stroke="var(--v39-visual-green)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <g transform="translate(84 24)">
+      <rect width="132" height="116" rx="14" fill={paper} stroke={ink} strokeWidth="1.5" />
+      <rect x="0" y="0" width="132" height="18" rx="14" fill="transparent" />
+      <circle cx="108" cy="9" r="1.6" fill={ink} opacity="0.36" />
+      <circle cx="114" cy="9" r="1.6" fill={ink} opacity="0.36" />
+      <circle cx="120" cy="9" r="1.6" fill={ink} opacity="0.36" />
+      <path d="M16 36h44" stroke={ink} strokeWidth="1.8" strokeLinecap="round" />
+      <rect x="18" y="55" width="28" height="34" rx="7" fill={blue} fillOpacity="0.12" />
+      <path d="M31 62v20M25 68h11a4 4 0 010 8h-7" stroke={blue} strokeWidth="2.8" strokeLinecap="round" />
+      <path d="M58 58h42M58 66h36M58 78h48M58 86h30" stroke={blue} strokeWidth="1.7" strokeLinecap="round" opacity="0.25" />
+      <path d="M16 101h88" stroke={ink} strokeWidth="1.5" strokeLinecap="round" opacity="0.15" />
     </g>
-
-    <g transform="translate(209 40)">
-      <rect width="72" height="35" rx="12" fill="var(--v39-visual-paper)" stroke="var(--v39-visual-blue)" strokeWidth="1.4" />
-      <circle cx="18" cy="17.5" r="8" fill="var(--v39-visual-blue)" fillOpacity="0.15" />
-      <path d="M18 12v11M15 15h4.4a2.3 2.3 0 010 4.6H16" stroke="var(--v39-visual-blue)" strokeWidth="1.35" strokeLinecap="round" />
-      <path d="M34 14h25M34 21h17" stroke={sceneStroke} strokeWidth="1.3" strokeLinecap="round" opacity="0.55" />
-    </g>
+    <path d="M223 76c18 2 27 9 32 21" stroke={ink} strokeWidth="1.5" strokeDasharray="4 5" strokeLinecap="round" opacity="0.46" />
+    <path d="M252 91l4 6 6-4" stroke={ink} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+    <path d="M248 75l17 6-14 11" stroke={ink} strokeWidth="1.5" strokeLinejoin="round" opacity="0.62" />
+    <circle cx="279" cy="53" r="2.5" fill={blue} fillOpacity="0.12" />
+    <circle cx="49" cy="84" r="2.2" fill={blue} fillOpacity="0.12" />
   </svg>
 );
 
-/**
- * Estimate scene: a quote sheet, pricing blocks and an approval path.
- * Violet is dominant so Estimates remain visually distinct from Invoices.
- */
 export const EstimateVisualScene: React.FC = () => (
-  <svg viewBox="0 0 320 220" fill="none" aria-hidden="true">
-    <SceneGrid />
-
-    <g transform="translate(63 30) rotate(-3 73 80)">
-      <rect width="146" height="160" rx="18" fill="var(--v39-visual-paper)" stroke={sceneStroke} strokeWidth="1.5" />
-      <rect x="22" y="22" width="68" height="10" rx="5" fill="var(--v39-visual-violet)" fillOpacity="0.20" />
-      <path d="M22 46H120M22 58H85" stroke={sceneStroke} strokeWidth="1.5" strokeLinecap="round" opacity="0.58" />
-
-      <rect x="22" y="77" width="102" height="20" rx="7" fill="var(--v39-visual-violet)" fillOpacity="0.09" />
-      <path d="M31 87H70M101 87H115" stroke={sceneStroke} strokeWidth="1.35" strokeLinecap="round" opacity="0.62" />
-
-      <rect x="22" y="105" width="102" height="20" rx="7" fill="var(--v39-visual-amber)" fillOpacity="0.10" />
-      <path d="M31 115H62M100 115H115" stroke={sceneStroke} strokeWidth="1.35" strokeLinecap="round" opacity="0.62" />
-
-      <path d="M76 139H123" stroke="var(--v39-visual-violet)" strokeWidth="2.4" strokeLinecap="round" />
-      <circle cx="29" cy="139" r="7" fill="var(--v39-visual-violet)" fillOpacity="0.15" stroke="var(--v39-visual-violet)" strokeWidth="1.4" />
-      <path d="M26 139h6M29 136v6" stroke="var(--v39-visual-violet)" strokeWidth="1.4" strokeLinecap="round" />
+  <svg viewBox="0 0 320 200" fill="none" aria-hidden="true">
+    <path d="M42 164H286" stroke={ink} strokeWidth="1.5" strokeLinecap="round" opacity="0.45" />
+    <g transform="translate(24 112)">
+      <path d="M12 34V14" stroke={ink} strokeWidth="1.35" strokeLinecap="round" opacity="0.52" />
+      <path d="M12 14c7 0 11 4 11 9-5 1-9 0-11-2-2 2-6 3-11 2 0-5 4-9 11-9z" fill={blue} fillOpacity="0.68" />
+      <path d="M9 0c5 0 8 3 8 7-4 1-7 0-8-1-2 1-5 2-8 1 0-4 3-7 8-7z" fill={plant} fillOpacity="0.74" transform="translate(3 9)" />
+      <rect x="0" y="34" width="24" height="3.5" rx="1.75" fill={ink} opacity="0.45" />
     </g>
-
-    <g transform="translate(205 46)">
-      <rect width="72" height="62" rx="17" fill="var(--v39-visual-paper)" stroke="var(--v39-visual-amber)" strokeWidth="1.5" />
-      <path d="M21 18h30M21 28h22" stroke={sceneStroke} strokeWidth="1.45" strokeLinecap="round" opacity="0.58" />
-      <path d="M20 44h9l5-7 7 10 5-5h7" stroke="var(--v39-visual-amber)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    <g transform="translate(77 37)">
+      <rect width="145" height="100" rx="14" fill={paper} stroke={ink} strokeWidth="1.5" />
+      <circle cx="8" cy="9" r="1.6" fill={ink} opacity="0.36" />
+      <circle cx="14" cy="9" r="1.6" fill={ink} opacity="0.36" />
+      <circle cx="20" cy="9" r="1.6" fill={ink} opacity="0.36" />
+      <path d="M18 34h48" stroke={ink} strokeWidth="1.8" strokeLinecap="round" />
+      <rect x="18" y="46" width="40" height="28" rx="6" fill={blue} fillOpacity="0.12" />
+      <circle cx="31" cy="58" r="5.3" fill={blue} fillOpacity="0.22" />
+      <path d="M28 72l8-9 10 9 7-6 7 6" stroke={blue} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M72 48h44M72 58h50M72 68h42" stroke={blue} strokeWidth="1.7" strokeLinecap="round" opacity="0.25" />
+      <path d="M95 82h24" stroke={ink} strokeWidth="2" strokeLinecap="round" opacity="0.9" />
     </g>
-
-    <path d="M207 129c23 0 31 7 39 20" stroke="var(--v39-visual-violet)" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 6" />
-    <path d="M241 142l6 7 8-5" stroke="var(--v39-visual-violet)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-
-    <g transform="translate(214 151)">
-      <rect width="66" height="38" rx="13" fill="var(--v39-visual-violet)" fillOpacity="0.13" stroke="var(--v39-visual-violet)" strokeWidth="1.5" />
-      <path d="M18 19l7 7 14-15" stroke="var(--v39-visual-violet)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M45 15h9M45 22h7" stroke={sceneStroke} strokeWidth="1.3" strokeLinecap="round" opacity="0.54" />
+    <g transform="translate(245 60)">
+      <path d="M22 0c10 0 18 7 18 18s-8 18-18 18c-3 0-6-.7-9-2l-10 4 3-10c-3-3-4-6-4-10C2 7 10 0 22 0z" fill={paper} stroke={ink} strokeWidth="1.4" />
+      <path d="M15 18l5 5 10-11" stroke={blue} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
     </g>
-
-    <g transform="translate(35 126)">
-      <circle cx="21" cy="21" r="20" fill="var(--v39-visual-paper)" stroke="var(--v39-visual-violet)" strokeWidth="1.5" />
-      <path d="M14 28l4-11 13-6-6 13-11 4z" fill="var(--v39-visual-violet)" fillOpacity="0.14" stroke="var(--v39-visual-violet)" strokeWidth="1.3" strokeLinejoin="round" />
-      <circle cx="22.5" cy="20.5" r="2.3" fill="var(--v39-visual-violet)" />
+    <g transform="translate(225 103)">
+      <path d="M36 53V18c0-8-6-14-14-14s-14 6-14 14v35" stroke={ink} strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
+      <circle cx="22" cy="8" r="7" fill="transparent" stroke={ink} strokeWidth="1.4" />
+      <path d="M22 15v15M12 33c5-3 16-3 21 0M11 43c4-3 18-3 23 0" stroke={ink} strokeWidth="1.4" strokeLinecap="round" opacity="0.78" />
+      <rect x="0" y="18" width="42" height="24" rx="4" fill={blue} fillOpacity="0.78" />
+      <path d="M4 42h40" stroke={ink} strokeWidth="1.3" strokeLinecap="round" opacity="0.5" />
     </g>
   </svg>
 );
