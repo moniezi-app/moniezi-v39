@@ -1,19 +1,19 @@
-# MONIEZI v39.0.3
+# MONIEZI v39.0.4
 
 Controlled visual-redesign branch for MONIEZI v39.
 
 This package starts from the complete v38.0.36 application and preserves its functionality while the v39 visual system is migrated into production screens one pass at a time. v38 remains the stable rollback/reference baseline.
 
-## v39.0.3 deployment alignment
+## v39.0.4 approved welcome-screen implementation
 
-This build keeps the v39.0.2 visual identity pass and corrects the new-repository deployment configuration to match the working v38 licensing setup.
+This build preserves the v39 licensing/deployment setup and implements the approved light-mode welcome and activation screen with the selected two-character illustration style.
 
 - Uses the existing MONIEZI license Worker: `https://moniezi-license-v37.moniezi-vg.workers.dev`.
 - GitHub Pages workflow uses only `VITE_LICENSE_API_BASE` as the repository variable for the front-end build.
 - The same public Worker URL is included as a safe fallback if that repository variable has not yet been created.
 - No GitHub repository secrets are required for the MONIEZI front-end build.
-- Updates the v39 PWA cache identifier to v39.0.3 so this deployment is not held behind the earlier v39.0.1 cache name.
-- Preserves all v39.0.2 functionality and visual changes.
+- Updates the activation card to the centered single-column layout approved in review.
+- Removes the redundant "Get started" and visible "License key" label above the input, while preserving all activation behavior.
 
 ## v39.0.2 visual identity pass
 

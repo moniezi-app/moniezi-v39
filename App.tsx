@@ -99,7 +99,7 @@ import { GlobalSearchPanel } from './src/components/GlobalSearchPanel';
 import { MonieziSelect } from './src/components/MonieziSelect';
 import { MonieziEmptyState } from './src/components/visual/MonieziEmptyState';
 import { MonieziVisualStage } from './src/components/visual/MonieziVisualStage';
-import { EstimateVisualScene, InvoiceVisualScene, WelcomeVisualScene } from './src/components/visual/MonieziVisualScenes';
+import { EstimateVisualScene, InvoiceVisualScene } from './src/components/visual/MonieziVisualScenes';
 import { buildGlobalSearchGroups, type GlobalSearchResult } from './src/features/search/globalSearch';
 import { TransactionEditorShell } from './src/features/transactions/TransactionEditorShell';
 import { useKeyboardEditingState } from './src/hooks/useKeyboardEditingState';
@@ -7120,7 +7120,7 @@ export default function App() {
   }
 
   // Show license activation screen if not valid.
-  // v39.0.2: first production use of the illustration-led visual system.
+  // v39.0.4: approved light-mode welcome screen with the selected two-character illustration style.
   if (LICENSING_ENABLED && isLicenseValid === false) {
     return (
       <div className="license-gate v39-license-gate">
@@ -7141,41 +7141,38 @@ export default function App() {
             <div className="v39-license-copy">
               <div className="v39-license-eyebrow">Your business. Your records.</div>
               <h1 id="v39-license-welcome-title">Welcome to MONIEZI</h1>
-              <p>Keep everyday bookkeeping on your device, without a bank connection or a monthly subscription.</p>
+              <p>Keep your business records on your device, without a bank connection or a monthly subscription.</p>
             </div>
 
-            <MonieziVisualStage
-              className="v39-license-visual"
-              ariaLabel="A private MONIEZI business ledger with invoice, receipt and profit records"
-            >
-              <WelcomeVisualScene />
-            </MonieziVisualStage>
+            <div className="v39-license-hero" aria-hidden="true">
+              <img
+                src={`${import.meta.env.BASE_URL}welcome-hero-v39-04.png`}
+                alt=""
+                className="v39-license-hero__image"
+                draggable={false}
+              />
+            </div>
 
             <div className="v39-license-benefits" aria-label="MONIEZI purchase benefits">
-              <span><CheckCircle size={17} strokeWidth={1.7} /> One-time purchase</span>
-              <span><Shield size={17} strokeWidth={1.7} /> Local-first records</span>
-              <span><Zap size={17} strokeWidth={1.7} /> Works offline</span>
+              <span><CheckCircle size={18} strokeWidth={1.8} /> One-time purchase</span>
+              <span><CheckCircle size={18} strokeWidth={1.8} /> Local first records</span>
+              <span><CheckCircle size={18} strokeWidth={1.8} /> Works offline</span>
             </div>
           </section>
 
           <section className="v39-license-card" aria-labelledby="v39-license-activate-title">
             <div className="v39-license-card__heading">
               <div className="v39-license-card__key" aria-hidden="true">
-                <Key size={21} strokeWidth={1.6} />
+                <Key size={24} strokeWidth={1.8} />
               </div>
-              <div>
-                <div className="v39-license-card__eyebrow">Get started</div>
-                <h2 id="v39-license-activate-title">Activate your copy</h2>
-              </div>
+              <h2 id="v39-license-activate-title">Activate your copy</h2>
             </div>
 
             <p className="v39-license-card__intro">Enter the license key from your purchase confirmation.</p>
 
             <div className="v39-license-form">
-              <div>
-                <label className="v39-license-label" htmlFor="moniezi-license-key">
-                  License Key
-                </label>
+              <div className="v39-license-input-wrap">
+                <Key size={20} strokeWidth={1.7} className="v39-license-input__icon" aria-hidden="true" />
                 <input
                   id="moniezi-license-key"
                   type="text"
@@ -7183,12 +7180,13 @@ export default function App() {
                   onChange={(e) => { setLicenseKey(e.target.value); setLicenseError(''); }}
                   onKeyDown={(e) => e.key === 'Enter' && handleActivateLicense()}
                   placeholder="Paste or enter your license key"
-                  className="v39-license-input"
+                  className="v39-license-input v39-license-input--with-icon"
                   disabled={isValidatingLicense}
                   autoCapitalize="none"
                   autoCorrect="off"
                   spellCheck={false}
                   autoFocus
+                  aria-label="License key"
                 />
               </div>
 
