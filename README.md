@@ -26,3 +26,11 @@ This package preserves the approved v39.0.4 welcome-screen direction and the v39
 ## Documentation
 
 This clean source intentionally does not carry individual per-build `*_RELEASE_NOTE.md` files. Deployment and license configuration are documented in `DEPLOYMENT_AND_LICENSE_SETUP.md`.
+
+
+## Image optimization
+
+- Converted the large welcome character artwork from PNG to high-quality WebP.
+- Reduced that asset from about 676 KB to about 67 KB without changing its displayed dimensions.
+- Existing demo receipt images remain WebP because they are already compact (about 28–47 KB each).
+- App/PWA icons remain PNG for manifest and launcher compatibility.

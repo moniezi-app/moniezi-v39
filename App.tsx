@@ -7147,7 +7147,7 @@ export default function App() {
 
             <div className="v39-license-hero" aria-hidden="true">
               <img
-                src={`${import.meta.env.BASE_URL}welcome-hero-v39-04.png`}
+                src={`${import.meta.env.BASE_URL}welcome-hero-v39-04.webp`}
                 alt=""
                 className="v39-license-hero__image"
                 draggable={false}
