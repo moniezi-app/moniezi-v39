@@ -7418,38 +7418,64 @@ html, body, #root {
         const iosInstallContext = getIosInstallContext();
         const isIosInstallBanner = showIosInstallCta && iosInstallContext.isIosDevice && !deferredInstallPrompt;
         const bannerCopy = isIosInstallBanner
-          ? 'Add MONIEZI to your Home screen and use it like a regular app.'
-          : 'Add MONIEZI to your Home screen and use it like a regular app.';
+          ? 'Add MONIEZI to your Home screen for faster access and a more app-like experience.'
+          : 'Add MONIEZI to your Home screen for faster access and a more app-like experience.';
 
         return (
-          <div className="fixed inset-0 z-[95] flex items-center justify-center overflow-y-auto bg-slate-950/80 px-4 py-8 backdrop-blur-sm animate-in fade-in duration-200 modal-overlay">
+          <div className="fixed inset-0 z-[95] flex items-center justify-center overflow-y-auto bg-slate-950/70 px-4 py-8 backdrop-blur-md animate-in fade-in duration-200 modal-overlay">
             <div className="w-full max-w-md">
-            <div className={`rounded-[15px] border backdrop-blur-xl overflow-hidden ${theme === 'dark' ? 'border-sky-300/35 bg-gradient-to-br from-slate-800/98 via-slate-800/96 to-blue-950/92 shadow-[0_18px_48px_rgba(2,6,23,0.52)] ring-1 ring-white/8' : 'border-sky-300/65 bg-gradient-to-br from-slate-50/98 via-white/98 to-sky-50/96 shadow-[0_18px_48px_rgba(15,23,42,0.16)] ring-1 ring-sky-200/70'}`}>
-              <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(96,165,250,0.20),transparent_38%),radial-gradient(circle_at_bottom_left,rgba(125,211,252,0.10),transparent_32%)]" />
-              <div className="relative px-6 py-7">
-                <div className={`mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-3xl border shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] ${theme === 'dark' ? 'bg-gradient-to-br from-sky-500/20 to-blue-600/10 border-sky-300/25' : 'bg-gradient-to-br from-sky-100 to-blue-50 border-sky-200/90 shadow-[0_8px_20px_rgba(59,130,246,0.12)]'}`}>
-                  {isIosInstallBanner
-                    ? <Share2 size={28} className={theme === 'dark' ? 'text-sky-200' : 'text-sky-500'} />
-                    : <Download size={28} className={theme === 'dark' ? 'text-sky-200' : 'text-sky-500'} />}
+              <div className="overflow-hidden rounded-[28px] border border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f7faff_100%)] shadow-[0_28px_80px_rgba(15,23,42,0.22)] ring-1 ring-white/70">
+                <div className="pointer-events-none absolute inset-0" />
+                <div className="relative px-6 py-7 sm:px-7 sm:py-8">
+                  <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-[28px] border border-blue-100 bg-[radial-gradient(circle_at_30%_30%,#ffffff_0%,#eef4ff_55%,#e3ecff_100%)] shadow-[0_16px_34px_rgba(59,130,246,0.16)]">
+                    {isIosInstallBanner
+                      ? <Share2 size={34} className="text-blue-500" />
+                      : <Download size={34} className="text-blue-500" />}
+                  </div>
+
+                  <div className="text-center text-[38px] font-bold leading-tight tracking-[-0.04em] text-slate-950 font-brand">
+                    Install MONIEZI
+                  </div>
+                  <p className="mx-auto mt-3 max-w-[32ch] text-center text-[16px] leading-7 text-slate-600">
+                    {bannerCopy}
+                  </p>
+
+                  <div className="mt-6 space-y-3">
+                    {[
+                      {
+                        icon: <Smartphone size={18} className="text-blue-500" strokeWidth={2} />,
+                        title: 'Quick access',
+                        body: 'Open MONIEZI from your Home screen with one tap.',
+                      },
+                      {
+                        icon: <Shield size={18} className="text-blue-500" strokeWidth={1.8} />,
+                        title: 'Secure & private',
+                        body: 'Works like any other trusted app on your device.',
+                      },
+                      {
+                        icon: <Download size={18} className="text-blue-500" strokeWidth={2} />,
+                        title: 'Works offline',
+                        body: 'Access your data anytime, even without internet.',
+                      },
+                    ].map((item) => (
+                      <div key={item.title} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-[0_8px_20px_rgba(15,23,42,0.05)]">
+                        <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-50">{item.icon}</div>
+                        <div>
+                          <div className="text-[15px] font-bold text-slate-900">{item.title}</div>
+                          <div className="mt-0.5 text-[13px] leading-5 text-slate-600">{item.body}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={isIosInstallBanner ? openIosInstallHelp : triggerDeferredInstallPrompt}
+                    className="mt-6 w-full rounded-2xl bg-blue-600 px-5 py-4 text-center text-[17px] font-bold text-white shadow-[0_14px_28px_rgba(37,99,235,0.30)] transition-colors hover:bg-blue-500"
+                  >
+                    {isIosInstallBanner ? 'Show me how' : 'Install MONIEZI'}
+                  </button>
                 </div>
-
-                <div className={`text-center text-2xl font-extrabold leading-tight tracking-tight ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
-                  Install MONIEZI
-                </div>
-                <p className={`mx-auto mt-2.5 max-w-[34ch] text-center text-[14px] leading-6 ${theme === 'dark' ? 'text-slate-200/90' : 'text-slate-800'}`}>
-                  {bannerCopy}
-                </p>
-
-
-                <button
-                  onClick={isIosInstallBanner ? openIosInstallHelp : triggerDeferredInstallPrompt}
-                  className="mt-5 w-full rounded-xl bg-amber-500 px-5 py-4 text-center text-[16px] font-bold text-white shadow-lg shadow-amber-950/30 transition-colors hover:bg-amber-400"
-                >
-                  {isIosInstallBanner ? 'Show me how' : 'Install MONIEZI'}
-                </button>
-
               </div>
-            </div>
             </div>
           </div>
         );
@@ -7922,23 +7948,22 @@ html, body, #root {
 
 
       {justInstalled && !isRunningStandalone && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/90 backdrop-blur-sm p-4 modal-overlay">
-          <div className="w-full max-w-sm rounded-2xl border border-emerald-500/30 bg-white p-6 shadow-2xl dark:bg-slate-900">
-            <div className="mb-4 flex items-center gap-3">
-              <div className="rounded-full bg-emerald-100 p-3 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
-                <CheckCircle size={24} strokeWidth={2} />
+        <div className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/72 backdrop-blur-md p-4 modal-overlay">
+          <div className="w-full max-w-sm overflow-hidden rounded-[28px] border border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-6 shadow-[0_28px_80px_rgba(15,23,42,0.24)] ring-1 ring-white/70 sm:p-7">
+            <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-[radial-gradient(circle,#e8fff2_0%,#d6f8e4_55%,#c7efd8_100%)] shadow-[0_16px_36px_rgba(22,163,74,0.18)]">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#16a34a] text-white shadow-[0_10px_24px_rgba(22,163,74,0.28)]">
+                <CheckCircle size={30} strokeWidth={2.4} />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white sm:text-xl">MONIEZI is installed</h3>
             </div>
-            <p className="mb-5 font-medium leading-relaxed text-slate-600 dark:text-slate-300">
+            <h3 className="text-center text-[36px] font-bold tracking-[-0.04em] text-slate-950 font-brand">MONIEZI is installed</h3>
+            <p className="mx-auto mt-3 max-w-[22ch] text-center text-[16px] leading-7 text-slate-600">
               Open MONIEZI from your Home screen to get started.
             </p>
             <button
               onClick={() => {
                 try { window.close(); } catch { /* browser may refuse */ }
               }}
-              className="w-full rounded-lg bg-emerald-600 py-3 font-bold text-white transition-colors hover:bg-emerald-700"
-              style={{ backgroundColor: '#059669', color: '#ffffff' }}
+              className="mt-7 w-full rounded-2xl bg-blue-600 py-4 text-[17px] font-bold text-white shadow-[0_14px_28px_rgba(37,99,235,0.28)] transition-colors hover:bg-blue-500"
             >
               Got it
             </button>
@@ -8079,67 +8104,70 @@ html, body, #root {
           through: dark glass panel, one bright amber action, and a quiet link
           for the alternative. The orange is the button, not the whole card. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
-        <div className={`relative mb-6 overflow-hidden rounded-[15px] border backdrop-blur-xl ${theme === 'dark'
-          ? 'border-sky-300/35 bg-gradient-to-br from-slate-800/98 via-slate-800/96 to-blue-950/92 shadow-[0_18px_48px_rgba(2,6,23,0.52)] ring-1 ring-white/8'
-          : 'border-sky-300/65 bg-gradient-to-br from-slate-50/98 via-white/98 to-sky-50/96 shadow-[0_18px_48px_rgba(15,23,42,0.16)] ring-1 ring-sky-200/70'}`}>
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(96,165,250,0.20),transparent_38%),radial-gradient(circle_at_bottom_left,rgba(125,211,252,0.10),transparent_32%)]" />
+        <div className="relative mb-6 overflow-hidden rounded-[28px] border border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f7faff_100%)] shadow-[0_20px_48px_rgba(15,23,42,0.10)] ring-1 ring-white/80">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.10),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(139,92,246,0.06),transparent_26%)]" />
 
-          <div className="relative px-6 py-7">
-            <div className={`mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-3xl border shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] ${theme === 'dark'
-              ? 'border-sky-300/25 bg-gradient-to-br from-sky-500/20 to-blue-600/10'
-              : 'border-sky-200/90 bg-gradient-to-br from-sky-100 to-blue-50 shadow-[0_8px_20px_rgba(59,130,246,0.12)]'}`}>
-              {hasTriedSampleData
-                ? <Plus size={30} className={theme === 'dark' ? 'text-sky-200' : 'text-sky-500'} strokeWidth={2.5} />
-                : <PlayCircle size={28} className={theme === 'dark' ? 'text-sky-200' : 'text-sky-500'} strokeWidth={2} />}
-            </div>
+          <div className="relative px-5 py-5 sm:px-6 sm:py-6">
+            <div className="rounded-[24px] border border-blue-100 bg-[linear-gradient(180deg,#f3f7ff_0%,#eef4ff_100%)] p-4 shadow-[0_12px_24px_rgba(59,130,246,0.10)] sm:p-5">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/85 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-blue-600 shadow-sm">
+                <PlayCircle size={14} strokeWidth={2} />
+                {hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}
+              </div>
+              <div className="overflow-hidden rounded-[22px] border border-white/80 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_12px_30px_rgba(59,130,246,0.10)]">
+                <div className="bg-[radial-gradient(circle_at_20%_20%,rgba(96,165,250,0.20),transparent_30%),linear-gradient(180deg,#f5f8ff_0%,#eef3ff_100%)] px-4 py-4 sm:px-5 sm:py-5">
+                  <div className="rounded-[20px] border border-blue-100/80 bg-[linear-gradient(180deg,#ffffff_0%,#f4f7ff_100%)] p-3 shadow-[0_8px_18px_rgba(59,130,246,0.08)]">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <div className="text-[13px] font-bold text-slate-900">{hasTriedSampleData ? 'Start with your own business' : 'Load the demo'}</div>
+                        <div className="mt-1 max-w-[32ch] text-[12px] leading-5 text-slate-500">
+                          {hasTriedSampleData
+                            ? 'The demo is cleared. Add your own jobs, expenses, mileage, invoices, or anything you did today.'
+                            : 'Explore a complete demo business you can look around, then clear out and replace with your own data.'}
+                        </div>
+                      </div>
+                      <div className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 sm:flex">
+                        {hasTriedSampleData ? <Plus size={26} className="text-blue-500" strokeWidth={2.3} /> : <Monitor size={26} className="text-blue-500" strokeWidth={1.9} />}
+                      </div>
+                    </div>
 
-            <div className={`text-center text-2xl font-extrabold leading-tight tracking-tight ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
-              {hasTriedSampleData ? 'Now make it yours' : 'Load the demo'}
-            </div>
-            <p className={`mx-auto mt-2.5 max-w-[34ch] text-center text-[14px] leading-6 ${theme === 'dark' ? 'text-slate-200/90' : 'text-slate-800'}`}>
-              {hasTriedSampleData
-                ? 'The demo is cleared. Record a job, an expense, a mile or an invoice — whatever you did today.'
-                : 'A complete demo business you can look around, then clear out and start your own. Nothing to undo.'}
-            </p>
-
-            {/* Real counts, read from the sample data itself. Only shown while
-                the demo is still being offered as the main action. */}
-            {!hasTriedSampleData && (
-            <div className="mt-5 flex gap-2">
-              {[
-                { value: sampleDataCounts.transactions, label: 'RECORDS' },
-                { value: sampleDataCounts.invoices, label: 'INVOICES' },
-                { value: sampleDataCounts.clients, label: 'CLIENTS' },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex-1 rounded-xl border border-emerald-200 bg-emerald-50 px-1.5 py-3 text-center dark:border-emerald-700/40 dark:bg-emerald-500/10"
-                >
-                  <div className="text-[19px] font-extrabold text-emerald-700 dark:text-emerald-300">{stat.value}</div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300">
-                    {stat.label}
+                    {!hasTriedSampleData && (
+                      <div className="mt-4 grid grid-cols-3 gap-2.5 sm:gap-3">
+                        {[
+                          { value: sampleDataCounts.transactions, label: 'Records', icon: <Receipt size={16} className="text-blue-500" strokeWidth={1.8} /> },
+                          { value: sampleDataCounts.invoices, label: 'Invoices', icon: <FileText size={16} className="text-blue-500" strokeWidth={1.8} /> },
+                          { value: sampleDataCounts.clients, label: 'Clients', icon: <Users size={16} className="text-blue-500" strokeWidth={1.8} /> },
+                        ].map((stat) => (
+                          <div key={stat.label} className="rounded-2xl border border-slate-200 bg-white px-2 py-3 text-center shadow-[0_6px_14px_rgba(15,23,42,0.04)]">
+                            <div className="mb-2 flex justify-center">{stat.icon}</div>
+                            <div className="text-[30px] font-bold leading-none tracking-[-0.04em] text-slate-950 font-brand">{stat.value}</div>
+                            <div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{stat.label}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
-              ))}
+
+                <div className="px-4 pb-4 pt-1 sm:px-5 sm:pb-5">
+                  <button
+                    onClick={hasTriedSampleData ? () => handleOpenUnifiedAdd() : handleLoadSampleData}
+                    className="w-full rounded-2xl bg-blue-600 px-5 py-4 text-center text-[16px] font-bold text-white shadow-[0_14px_28px_rgba(37,99,235,0.28)] transition-colors hover:bg-blue-500"
+                  >
+                    <span className="inline-flex items-center justify-center gap-2">
+                      {hasTriedSampleData ? 'Record my first entry' : 'Load the demo'}
+                      <ArrowRight size={18} strokeWidth={2.1} />
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={hasTriedSampleData ? handleLoadSampleData : () => handleOpenUnifiedAdd()}
+                    className="mt-3 w-full py-1 text-center text-[14px] font-semibold text-blue-600 underline underline-offset-4 transition-colors hover:text-blue-700"
+                  >
+                    {hasTriedSampleData ? 'Show the demo again' : 'Skip — record my first entry'}
+                  </button>
+                </div>
+              </div>
             </div>
-            )}
-
-            {/* Once the demo has been seen, the actions swap. Offering "load the
-                example" as the main button to someone who just removed it is the
-                one thing they are certain not to want. */}
-            <button
-              onClick={hasTriedSampleData ? () => handleOpenUnifiedAdd() : handleLoadSampleData}
-              className="mt-5 w-full rounded-xl bg-amber-500 px-5 py-4 text-center text-[16px] font-bold text-white shadow-lg shadow-amber-950/30 transition-colors hover:bg-amber-400"
-            >
-              {hasTriedSampleData ? 'Record my first entry' : 'Load the demo'}
-            </button>
-
-            <button
-              onClick={hasTriedSampleData ? handleLoadSampleData : () => handleOpenUnifiedAdd()}
-              className={`mt-3.5 w-full py-2 text-center text-[13px] font-semibold underline underline-offset-4 transition-colors ${theme === 'dark' ? 'text-slate-400 hover:text-slate-200' : 'text-slate-500 hover:text-slate-800'}`}
-            >
-              {hasTriedSampleData ? 'Show the demo again' : 'Skip — record my first entry'}
-            </button>
           </div>
         </div>
       )}
