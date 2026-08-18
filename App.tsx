@@ -7272,9 +7272,9 @@ export default function App() {
    White canvas + stronger text
    ================================ */
 html:not(.dark) .bg-slatebg { background: #ffffff !important; }
-html:not(.dark) .text-slate-200 { color: rgb(100 116 139) !important; }
-html:not(.dark) .text-slate-300 { color: rgb(71 85 105) !important; }
-html:not(.dark) .text-slate-400 { color: rgb(51 65 85) !important; }
+html:not(.dark) .text-slate-200 { color: rgb(71 85 105) !important; }
+html:not(.dark) .text-slate-300 { color: rgb(51 65 85) !important; }
+html:not(.dark) .text-slate-400 { color: rgb(30 41 59) !important; }
 html:not(.dark) .text-slate-500 { color: rgb(30 41 59) !important; }
 html:not(.dark) .text-slate-600 { color: rgb(15 23 42) !important; }
 html:not(.dark) .text-slate-700,
@@ -7435,7 +7435,7 @@ html, body, #root {
                 <h2 className="text-center text-[28px] font-bold leading-[1.08] tracking-[-0.04em] text-[#0B1739] font-brand sm:text-[30px]">
                   Install MONIEZI
                 </h2>
-                <p className="mx-auto mt-3 max-w-[28ch] text-center text-[14px] leading-[1.55] font-medium text-[#64748B] sm:text-[15px]">
+                <p className="mx-auto mt-3 max-w-[28ch] text-center text-[14px] leading-[1.55] font-semibold text-[#55667E] sm:text-[15px]">
                   {bannerCopy}
                 </p>
 
@@ -7460,8 +7460,8 @@ html, body, #root {
                     <div key={item.title} className="flex items-start gap-3 rounded-[18px] border border-[#E6EBF5] bg-white px-4 py-3.5 shadow-[0_8px_18px_rgba(15,23,42,0.04)]">
                       <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#F3F7FF]">{item.icon}</div>
                       <div className="min-w-0">
-                        <div className="text-[14px] font-bold leading-5 text-[#0B1739]">{item.title}</div>
-                        <div className="mt-1 text-[13px] leading-[1.45] font-medium text-[#64748B]">{item.body}</div>
+                        <div className="text-[14px] font-extrabold leading-5 text-[#0B1739]">{item.title}</div>
+                        <div className="mt-1 text-[13px] leading-[1.45] font-semibold text-[#55667E]">{item.body}</div>
                       </div>
                     </div>
                   ))}
@@ -7955,7 +7955,7 @@ html, body, #root {
               </div>
             </div>
             <h3 className="text-center text-[26px] font-bold leading-[1.18] tracking-[-0.04em] text-[#0B1739] font-brand sm:text-[28px]">MONIEZI is installed</h3>
-            <p className="mx-auto mt-3 max-w-[20ch] text-center text-[14px] leading-[1.6] font-medium text-[#64748B] sm:text-[15px]">
+            <p className="mx-auto mt-3 max-w-[20ch] text-center text-[14px] leading-[1.6] font-semibold text-[#55667E] sm:text-[15px]">
               Open MONIEZI from your Home screen to get started.
             </p>
             <button
@@ -8171,23 +8171,23 @@ html, body, #root {
                 <h3 className="text-center text-[18px] font-bold leading-tight tracking-[-0.03em] text-[#0B1739] font-brand sm:text-[19px]">
                   {hasTriedSampleData ? 'Start with your own business' : 'Load the demo'}
                 </h3>
-                <p className="mx-auto mt-2 max-w-[31ch] text-center text-[14px] leading-[1.55] font-medium text-[#64748B]">
+                <p className="mx-auto mt-2 max-w-[31ch] text-center text-[14px] leading-[1.55] font-semibold text-[#55667E]">
                   {hasTriedSampleData
                     ? 'The demo is cleared. Record your first real entry and start building your own records.'
                     : 'Explore a complete demo business you can look around, then clear out and start your own. Nothing to undo.'}
                 </p>
 
                 {!hasTriedSampleData && (
-                  <div className="mt-4 grid grid-cols-3 gap-3">
+                  <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
                     {[
                       { value: sampleDataCounts.transactions, label: 'RECORDS', icon: <Receipt size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
                       { value: sampleDataCounts.invoices, label: 'INVOICES', icon: <FileText size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
                       { value: sampleDataCounts.clients, label: 'CLIENTS', icon: <Users size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
                     ].map((stat) => (
-                      <div key={stat.label} className="rounded-[18px] border border-[#E6EBF5] bg-white px-3 py-3 text-center shadow-[0_8px_18px_rgba(15,23,42,0.04)]">
+                      <div key={stat.label} className="min-w-0 rounded-[18px] border border-[#E0E7F3] bg-white px-2.5 py-3 text-center shadow-[0_8px_18px_rgba(15,23,42,0.04)] sm:px-3">
                         <div className="mb-2 flex justify-center">{stat.icon}</div>
-                        <div className="text-[34px] font-bold leading-none tracking-[-0.05em] text-[#0B1739] font-brand">{stat.value}</div>
-                        <div className="mt-1 text-[10px] font-bold tracking-[0.14em] text-[#6B7280]">{stat.label}</div>
+                        <div className="text-[31px] font-bold leading-none tracking-[-0.05em] text-[#0B1739] font-brand sm:text-[34px]">{stat.value}</div>
+                        <div className="mt-1 overflow-hidden text-[9px] font-extrabold leading-[1.15] tracking-[0.10em] text-[#5F6B82] sm:text-[10px] sm:tracking-[0.12em]">{stat.label}</div>
                       </div>
                     ))}
                   </div>
@@ -8205,7 +8205,7 @@ html, body, #root {
 
                 <button
                   onClick={hasTriedSampleData ? handleLoadSampleData : () => handleOpenUnifiedAdd()}
-                  className="mt-4 w-full text-center text-[14px] font-semibold text-[#2563EB] underline underline-offset-4 transition-colors hover:text-[#1D4ED8]"
+                  className="mt-4 w-full text-center text-[14px] font-bold text-[#2563EB] underline underline-offset-4 transition-colors hover:text-[#1D4ED8]"
                 >
                   {hasTriedSampleData ? 'Show the demo again' : 'Skip — record my first entry'}
                 </button>

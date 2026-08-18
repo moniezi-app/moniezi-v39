@@ -1,10 +1,10 @@
-# MONIEZI v39.0.9
+# MONIEZI v39.0.10
 
 Controlled visual-redesign branch for MONIEZI v39.
 
 This package preserves the approved v39 welcome-screen direction, the v39 Android/PWA identification update, and the proof-matched onboarding work, while correcting the Invoices and Estimates true-empty states so they use the approved illustrations rather than substitute drawings.
 
-## v39.0.9 approved invoice and estimate illustration correction
+## v39.0.10 approved invoice and estimate illustration correction
 
 This build corrects the visual implementation of the Invoices and Estimates true-empty states.
 

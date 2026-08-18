@@ -36,7 +36,7 @@ export const WelcomeVisualScene: React.FC = () => (
 
 export const InvoiceVisualScene: React.FC = () => (
   <img
-    src={`${publicBase}invoice-empty-v39-09.webp`}
+    src={`${publicBase}invoice-empty-v39-10.webp`}
     alt=""
     className="v39-approved-illustration"
     loading="eager"
@@ -46,7 +46,7 @@ export const InvoiceVisualScene: React.FC = () => (
 
 export const EstimateVisualScene: React.FC = () => (
   <img
-    src={`${publicBase}estimate-empty-v39-09.webp`}
+    src={`${publicBase}estimate-empty-v39-10.webp`}
     alt=""
     className="v39-approved-illustration"
     loading="eager"

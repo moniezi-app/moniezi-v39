@@ -643,7 +643,7 @@ html {
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #64748b;
+  color: #56677f;
 }
 
 .dark .v39-empty-state__eyebrow {
@@ -665,7 +665,7 @@ html {
   font-size: 17px;
   line-height: 1.55;
   font-weight: 400;
-  color: #64748b;
+  color: #56677f;
 }
 
 .dark .v39-empty-state__body {
@@ -726,7 +726,7 @@ html {
   font-size: 15px;
   line-height: 1.45;
   font-weight: 400;
-  color: #64748b;
+  color: #56677f;
 }
 
 .dark .v39-section-header__description {
@@ -841,7 +841,7 @@ html {
   font-size: clamp(18px, 2.6vw, 27px);
   line-height: 1.48;
   font-weight: 500;
-  color: #6b7c99;
+  color: #56677f;
 }
 
 .v39-license-hero {
@@ -878,7 +878,7 @@ html {
   color: #16233f;
   font-size: 14px;
   line-height: 1.35;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -934,7 +934,7 @@ html {
   text-align: center;
   font-size: 16px;
   line-height: 1.55;
-  color: #7182a0;
+  color: #55667f;
 }
 
 .v39-license-form {
@@ -955,7 +955,7 @@ html {
   left: 17px;
   top: 50%;
   transform: translateY(-50%);
-  color: #b4bfd4;
+  color: #8ea0bd;
   pointer-events: none;
 }
 
@@ -980,7 +980,7 @@ html {
 }
 
 .v39-license-input::placeholder {
-  color: #a8b4ca;
+  color: #7b8da7;
 }
 
 .v39-license-input:focus {
@@ -990,7 +990,9 @@ html {
 
 .v39-license-input:disabled {
   cursor: wait;
-  opacity: 0.68;
+  opacity: 1;
+  background: #f7faff;
+  color: #475569;
 }
 
 .v39-license-error {
@@ -1024,7 +1026,7 @@ html {
   color: #ffffff;
   font-size: 16px;
   line-height: 1.2;
-  font-weight: 500;
+  font-weight: 700;
   box-shadow: 0 16px 28px rgba(79, 124, 255, 0.18);
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
@@ -1049,9 +1051,9 @@ html {
 
 .v39-license-button:disabled {
   cursor: not-allowed;
-  border-color: #d2daea;
-  background: #dbe4ff;
-  color: #7584a8;
+  border-color: #c6d4f8;
+  background: #dbe7ff;
+  color: #4f5f84;
   box-shadow: none;
 }
 
@@ -1062,7 +1064,7 @@ html {
   text-align: center;
   font-size: 12px;
   line-height: 1.55;
-  color: #7584a8;
+  color: #5c6d87;
 }
 
 .v39-license-links p {
@@ -1167,7 +1169,7 @@ html {
 
 
 /* ================================================================
-   MONIEZI v39.0.9 — invoice and estimate proof-matched empty states
+   MONIEZI v39.0.10 — contrast and containment correction pass
    ================================================================ */
 :root {
   --v39-visual-ink: #4b5b79;
@@ -1288,11 +1290,11 @@ html {
   font-size: 14px;
   line-height: 1.55;
   font-weight: 500;
-  color: #5d6b84;
+  color: #55657d;
 }
 
 .dark .v39-empty-state__body {
-  color: #b7c4dd;
+  color: #c6d3ea;
 }
 
 .v39-empty-state__supporting {
@@ -1348,11 +1350,11 @@ html {
   font-size: 13px;
   line-height: 1.45;
   font-weight: 500;
-  color: #64748b;
+  color: #56677f;
 }
 
 .dark .v39-feature-row__body {
-  color: #b7c4dd;
+  color: #c6d3ea;
 }
 
 .v39-empty-state__primary {
@@ -1382,7 +1384,7 @@ html {
   padding: 0;
   font-size: 14px;
   line-height: 1.4;
-  font-weight: 700;
+  font-weight: 800;
   color: #2f67f6;
   text-decoration: none;
 }
