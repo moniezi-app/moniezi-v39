@@ -7169,7 +7169,6 @@ export default function App() {
               <h2 id="v39-license-activate-title">Activate your copy</h2>
             </div>
 
-            <p className="v39-license-card__intro">Enter the license key from your purchase confirmation.</p>
 
             <div className="v39-license-form">
               <div className="v39-license-input-wrap">
@@ -8169,25 +8168,25 @@ html, body, #root {
 
               <div className="px-4 py-4 sm:px-5 sm:py-5">
                 <h3 className="text-center text-[18px] font-bold leading-tight tracking-[-0.03em] text-[#0B1739] font-brand sm:text-[19px]">
-                  {hasTriedSampleData ? 'Start with your own business' : 'Load the demo'}
+                  {hasTriedSampleData ? 'Start with your own business' : 'Load the demo business'}
                 </h3>
-                <p className="mx-auto mt-2 max-w-[31ch] text-center text-[14px] leading-[1.55] font-semibold text-[#55667E]">
-                  {hasTriedSampleData
-                    ? 'The demo is cleared. Record your first real entry and start building your own records.'
-                    : 'Explore a complete demo business you can look around, then clear out and start your own. Nothing to undo.'}
-                </p>
+                {hasTriedSampleData && (
+                  <p className="mx-auto mt-2 max-w-[31ch] text-center text-[14px] leading-[1.55] font-semibold text-[#55667E]">
+                    The demo is cleared. Record your first real entry and start building your own records.
+                  </p>
+                )}
 
                 {!hasTriedSampleData && (
                   <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
                     {[
-                      { value: sampleDataCounts.transactions, label: 'RECORDS', icon: <Receipt size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
-                      { value: sampleDataCounts.invoices, label: 'INVOICES', icon: <FileText size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
-                      { value: sampleDataCounts.clients, label: 'CLIENTS', icon: <Users size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
+                      { value: sampleDataCounts.transactions, label: 'Records', icon: <Receipt size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
+                      { value: sampleDataCounts.invoices, label: 'Invoices', icon: <FileText size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
+                      { value: sampleDataCounts.clients, label: 'Clients', icon: <Users size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
                     ].map((stat) => (
                       <div key={stat.label} className="min-w-0 rounded-[18px] border border-[#E0E7F3] bg-white px-2.5 py-3 text-center shadow-[0_8px_18px_rgba(15,23,42,0.04)] sm:px-3">
                         <div className="mb-2 flex justify-center">{stat.icon}</div>
                         <div className="text-[31px] font-bold leading-none tracking-[-0.05em] text-[#0B1739] font-brand sm:text-[34px]">{stat.value}</div>
-                        <div className="mt-1 overflow-hidden text-[9px] font-extrabold leading-[1.15] tracking-[0.10em] text-[#5F6B82] sm:text-[10px] sm:tracking-[0.12em]">{stat.label}</div>
+                        <div className="mt-1 w-full min-w-0 whitespace-nowrap text-center text-[10px] font-extrabold leading-[1.15] tracking-normal text-[#4B5870] sm:text-[11px]">{stat.label}</div>
                       </div>
                     ))}
                   </div>

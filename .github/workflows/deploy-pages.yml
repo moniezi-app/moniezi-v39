@@ -1,6 +1,6 @@
-# package marker: moniezi-v39.0.6
+# package marker: moniezi-v39.0.11
 name: Deploy Vite app to GitHub Pages
-# package-revision: v39.0.6
+# package-revision: v39.0.11
 
 on:
   push:
