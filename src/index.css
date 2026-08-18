@@ -1234,10 +1234,26 @@ html {
   color: var(--v39-visual-ink);
 }
 
+.v39-approved-illustration-pair {
+  width: 100%;
+}
+
 .v39-approved-illustration {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.v39-approved-illustration--dark {
+  display: none;
+}
+
+.dark .v39-approved-illustration--light {
+  display: none;
+}
+
+.dark .v39-approved-illustration--dark {
+  display: block;
 }
 
 .v39-empty-state {
@@ -1378,7 +1394,13 @@ html {
   font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: #ffffff !important;
   box-shadow: 0 14px 28px rgba(47, 103, 246, 0.18);
+}
+
+.v39-primary-action svg {
+  color: #ffffff !important;
+  stroke: currentColor;
 }
 
 .v39-secondary-link {

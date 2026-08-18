@@ -35,23 +35,41 @@ export const WelcomeVisualScene: React.FC = () => (
 );
 
 export const InvoiceVisualScene: React.FC = () => (
-  <img
-    src={`${publicBase}invoice-empty-v39-10.webp`}
-    alt=""
-    className="v39-approved-illustration"
-    loading="eager"
-    decoding="async"
-  />
+  <div className="v39-approved-illustration-pair" aria-hidden="true">
+    <img
+      src={`${publicBase}invoice-empty-v39-17-light.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--light"
+      loading="eager"
+      decoding="async"
+    />
+    <img
+      src={`${publicBase}invoice-empty-v39-17-dark.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--dark"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
 );
 
 export const EstimateVisualScene: React.FC = () => (
-  <img
-    src={`${publicBase}estimate-empty-v39-10.webp`}
-    alt=""
-    className="v39-approved-illustration"
-    loading="eager"
-    decoding="async"
-  />
+  <div className="v39-approved-illustration-pair" aria-hidden="true">
+    <img
+      src={`${publicBase}estimate-empty-v39-17-light.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--light"
+      loading="eager"
+      decoding="async"
+    />
+    <img
+      src={`${publicBase}estimate-empty-v39-17-dark.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--dark"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
 );
 
 export default WelcomeVisualScene;

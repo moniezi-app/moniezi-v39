@@ -1,8 +1,16 @@
-# MONIEZI v39.0.16
+# MONIEZI v39.0.17
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-## v39.0.16 invoice and estimate CTA cleanup
+## v39.0.17 approved Invoice / Estimate illustration integration
+
+- Uses the approved light Invoice illustration in light mode.
+- Uses the approved light Estimate illustration in light mode.
+- Uses the approved dark Invoice illustration in dark mode.
+- Uses the approved dark Estimate illustration in dark mode.
+- Keeps the single primary CTA only; the misleading “Learn how…” links remain removed.
+- Forces CTA label and plus icon to white in light and dark modes.
+- Precaches all four approved empty-state illustration assets for offline use.
 
 This build fixes the production placement of the approved Invoice and Estimate illustrated empty states.
 
