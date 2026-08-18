@@ -9093,9 +9093,12 @@ html, body, #root {
                 </button>
               </div>
             </div>
-            <PeriodSelector period={filterPeriod} setPeriod={setFilterPeriod} refDate={referenceDate} setRefDate={setReferenceDate} options={['monthly', 'yearly', 'all']} className="mb-0" />
+            {((billingDocType === 'invoice' && invoices.length > 0) || (billingDocType === 'estimate' && estimates.length > 0)) && (
+              <PeriodSelector period={filterPeriod} setPeriod={setFilterPeriod} refDate={referenceDate} setRefDate={setReferenceDate} options={['monthly', 'yearly', 'all']} className="mb-0" />
+            )}
 
             {billingDocType === 'invoice' && (<>
+            {invoices.length > 0 && (
             <div className="flex gap-2 flex-wrap">
               <button
                 type="button"
@@ -9119,8 +9122,9 @@ html, body, #root {
                 Overdue ({invoiceQuickCounts.overdue})
               </button>
             </div>
+            )}
 
-             {filterPeriod !== 'all' && (
+             {invoices.length > 0 && filterPeriod !== 'all' && (
                 <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 mb-6 shadow-sm">
                    <div className="grid grid-cols-1 divide-y divide-slate-200 dark:divide-slate-700 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                      <div className="flex items-center justify-between gap-4 py-2.5 sm:block sm:px-2 sm:py-2 sm:text-center">
@@ -9265,6 +9269,7 @@ html, body, #root {
 
             {billingDocType === 'estimate' && (
               <>
+                {estimates.length > 0 && (
                 <div className="flex gap-2 flex-wrap">
                   <button type="button" onClick={() => setEstimateQuickFilter('all')} className={`min-h-11 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border transition-colors ${estimateQuickFilter === 'all' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-800 dark:hover:bg-slate-800'}`}>All ({estimateQuickCounts.all})</button>
                   <button type="button" onClick={() => setEstimateQuickFilter('draft')} className={`min-h-11 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border transition-colors ${estimateQuickFilter === 'draft' ? 'bg-slate-700 text-white border-slate-700' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-800 dark:hover:bg-slate-800'}`}>Draft ({estimateQuickCounts.draft})</button>
@@ -9272,6 +9277,7 @@ html, body, #root {
                   <button type="button" onClick={() => setEstimateQuickFilter('accepted')} className={`min-h-11 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border transition-colors ${estimateQuickFilter === 'accepted' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-800 dark:hover:bg-slate-800'}`}>Accepted ({estimateQuickCounts.accepted})</button>
                   <button type="button" onClick={() => setEstimateQuickFilter('declined')} className={`min-h-11 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border transition-colors ${estimateQuickFilter === 'declined' ? 'bg-red-600 text-white border-red-600' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-800 dark:hover:bg-slate-800'}`}>Declined ({estimateQuickCounts.declined})</button>
                 </div>
+                )}
 
                 <div className="space-y-4">
                   {displayedEstimates.length === 0 ? (

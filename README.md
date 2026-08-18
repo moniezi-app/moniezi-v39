@@ -1,14 +1,23 @@
-# MONIEZI v39.0.14
+# MONIEZI v39.0.15
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-## v39.0.14 first-run theme integration foundation
+## v39.0.15 invoice and estimate true-empty-state priority correction
 
-- Welcome / activation remains intentionally light.
-- The installed app still defaults to Dark on a fresh device.
-- Added a first-run **Choose your look** selector directly above the Demo / Skip decision.
-- Dark and Light update immediately so the user can preview the actual app theme before loading the demo or recording the first entry.
-- The choice uses the existing v39 theme preference and stays synchronized with the normal header theme button.
-- The first-run Demo surface now has coordinated Dark and Light presentations instead of always forcing a light panel.
-- The existing Quick Add selector follows the active theme, so Light leads into the light menu and Dark leads into the dark menu.
-- All demo loading, skip, activation, storage, and business functionality remains unchanged.
+This build fixes the production placement of the approved Invoice and Estimate illustrated empty states.
+
+- When there are zero invoices, the approved Invoice empty-state illustration now appears directly after the Invoices/Estimates selector.
+- When there are zero estimates, the approved Estimate empty-state illustration now appears directly after the selector.
+- Period controls, zero-count status filters, and the invoice $0 summary are hidden while the selected document type is truly empty.
+- Once the first invoice or estimate exists, the normal operational controls return automatically.
+- Filtered-zero states remain compact when records exist but the current filter/time period has no matches.
+- The approved illustrations, dark/light theme behavior, creation flows, filtering, statuses, PDF/export behavior, and all business logic are preserved.
+
+## v39 baseline rules
+
+- Preserve all existing MONIEZI functionality while the visual redesign is developed in controlled passes.
+- Keep v38 available as the stable rollback/reference build.
+- v39 business data, receipts, theme, demo state, KPI preferences, and insight-dismissal state use v39-specific browser storage.
+- v39 does **not** automatically import v38 or legacy business data. Use MONIEZI backup/restore explicitly when test data should be moved between versions.
+- The device identity remains shared with v38 during parallel testing so validating the same license on the same physical device does not unnecessarily consume another device slot. The v39 license record itself is stored separately.
+- The PWA manifest ID and service-worker cache are v39-specific so v38 and v39 can be installed/tested independently.
