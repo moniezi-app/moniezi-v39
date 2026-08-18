@@ -940,6 +940,7 @@ html {
 .v39-license-form {
   display: grid;
   gap: 16px;
+  margin-top: 24px;
 }
 
 .v39-license-label {
@@ -1151,6 +1152,11 @@ html {
 
   .v39-license-card h2 {
     font-size: 26px;
+    line-height: 1.16;
+  }
+
+  .v39-license-form {
+    margin-top: 22px;
   }
 
   .v39-license-input,

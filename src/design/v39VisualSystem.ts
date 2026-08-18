@@ -5,7 +5,7 @@
  * It defines the shared visual language that v39 screens can opt into one by one.
  */
 
-export const V39_VISUAL_SYSTEM_VERSION = '39.0.11';
+export const V39_VISUAL_SYSTEM_VERSION = '39.0.12';
 
 export const monieziVisual = {
   typography: {
