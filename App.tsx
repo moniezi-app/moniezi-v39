@@ -8143,86 +8143,70 @@ html, body, #root {
               {hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}
             </div>
 
-            <div className={`mt-4 overflow-hidden rounded-[24px] border shadow-[0_12px_28px_rgba(15,23,42,0.08)] ${theme === 'dark'
-              ? 'border-slate-700/90 bg-slate-950'
-              : 'border-[#E7EEFB] bg-white'
+            <div className={`mt-4 overflow-hidden rounded-[24px] shadow-[0_12px_28px_rgba(15,23,42,0.08)] ${theme === 'dark'
+              ? 'bg-[#0B1730]'
+              : 'bg-white'
             }`}>
               <div className={`px-4 pt-4 pb-3 sm:px-5 sm:pt-5 ${theme === 'dark'
-                ? 'bg-[linear-gradient(180deg,#101F3D_0%,#0B1830_100%)]'
-                : 'bg-[linear-gradient(180deg,#F3F7FF_0%,#EDF3FF_100%)]'
+                ? 'bg-[linear-gradient(180deg,#0F1B35_0%,#0A1630_100%)]'
+                : 'bg-[linear-gradient(180deg,#F8FBFF_0%,#F3F7FF_100%)]'
               }`}>
-                <div className={`relative overflow-hidden rounded-[22px] border px-4 py-4 sm:px-5 sm:py-5 ${theme === 'dark'
-                  ? 'border-blue-400/20 bg-[radial-gradient(circle_at_18%_18%,rgba(80,124,255,0.22),transparent_26%),radial-gradient(circle_at_82%_24%,rgba(98,137,255,0.14),transparent_24%),linear-gradient(180deg,#132442_0%,#0E1C35_100%)]'
-                  : 'border-[#E0E9FF] bg-[radial-gradient(circle_at_18%_18%,rgba(118,159,255,0.24),transparent_26%),radial-gradient(circle_at_82%_24%,rgba(180,206,255,0.34),transparent_24%),linear-gradient(180deg,#F5F8FF_0%,#EEF3FF_100%)]'
+                <div className={`relative overflow-hidden rounded-[26px] px-4 py-4 sm:px-5 sm:py-5 ${theme === 'dark'
+                  ? 'bg-[linear-gradient(180deg,#102041_0%,#0D1A34_100%)]'
+                  : 'bg-[linear-gradient(180deg,#F1F6FF_0%,#EAF1FF_100%)]'
                 }`}>
-                  {!hasTriedSampleData && (
-                    <div className={`absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-bold shadow-sm ${theme === 'dark'
-                      ? 'border-blue-400/25 bg-slate-950/90 text-blue-300'
-                      : 'border-white/90 bg-white/95 text-[#5B80F8]'
+                  <div className={`pointer-events-none absolute inset-x-8 bottom-4 h-16 rounded-full blur-2xl ${theme === 'dark' ? 'bg-blue-500/18' : 'bg-[#D6E3FF]'}`} />
+                  <div className="relative z-10 mx-auto max-w-[310px] sm:max-w-[330px]">
+                    <div className={`rounded-[24px] shadow-[0_18px_34px_rgba(53,101,227,0.16)] ${theme === 'dark'
+                      ? 'border border-blue-300/20 bg-[#FBFCFF]'
+                      : 'border border-[#CFDDFF] bg-white'
                     }`}>
-                      <PlayCircle size={12} strokeWidth={2} /> Explore before you start
-                    </div>
-                  )}
-                  <div className="relative mx-auto mt-5 flex h-[150px] max-w-[290px] items-end justify-center sm:h-[170px] sm:max-w-[320px]">
-                    <div className={`absolute bottom-0 left-1/2 h-3 w-[220px] -translate-x-1/2 rounded-full blur-xl ${theme === 'dark' ? 'bg-blue-500/25' : 'bg-[#DCE7FF]'}`} />
-                    <div className="absolute left-1 bottom-[18px] flex flex-col items-center">
-                      <div className={`h-[42px] w-[42px] rounded-full border shadow-[0_10px_18px_rgba(15,23,42,0.08)] ${theme === 'dark' ? 'border-blue-300/25 bg-slate-900' : 'border-[#D9E6FF] bg-white'}`} />
-                      <div className={`-mt-[30px] ml-[8px] h-[22px] w-[10px] rounded-r-full border-r-[5px] ${theme === 'dark' ? 'border-blue-300/30' : 'border-[#D9E6FF]'}`} />
-                    </div>
-                    <div className="absolute right-0 bottom-[18px] flex items-end gap-[2px]">
-                      <div className={`h-[18px] w-[34px] rounded-full shadow-[0_8px_16px_rgba(15,23,42,0.05)] ${theme === 'dark' ? 'bg-blue-400/15' : 'bg-[#E6F4FF]'}`} />
-                      <div className="relative flex h-[42px] w-[28px] items-end justify-center">
-                        <div className="absolute bottom-[8px] h-[22px] w-[16px] rounded-t-full bg-[#64C98D]" />
-                        <div className="absolute bottom-[8px] left-[1px] h-[26px] w-[12px] rounded-t-full bg-[#8BD8A7] rotate-[-10deg]" />
-                        <div className="absolute bottom-0 h-[14px] w-[18px] rounded-t-[6px] bg-[#5B80F8]" />
+                      <div className="flex items-center gap-1.5 rounded-t-[24px] border-b border-[#E7EEFB] bg-[#F7FAFF] px-3 py-2">
+                        <span className="h-2 w-2 rounded-full bg-[#C7D7FF]" />
+                        <span className="h-2 w-2 rounded-full bg-[#D8E4FF]" />
+                        <span className="h-2 w-2 rounded-full bg-[#E5EEFF]" />
                       </div>
-                    </div>
-                    <div className="relative z-10 w-[235px] sm:w-[265px]">
-                      <div className={`rounded-[18px] border shadow-[0_16px_32px_rgba(53,101,227,0.14)] ${theme === 'dark' ? 'border-blue-300/25 bg-[#F8FAFF]' : 'border-[#CFE0FF] bg-white'}`}>
-                        <div className="flex items-center gap-1.5 rounded-t-[18px] border-b border-[#E7EEFB] bg-[#F7FAFF] px-3 py-2">
-                          <span className="h-2 w-2 rounded-full bg-[#C7D7FF]" />
-                          <span className="h-2 w-2 rounded-full bg-[#D8E4FF]" />
-                          <span className="h-2 w-2 rounded-full bg-[#E5EEFF]" />
-                        </div>
-                        <div className="grid grid-cols-[1.4fr,0.95fr] gap-3 p-3">
-                          <div className="space-y-2">
-                            <div className="h-16 rounded-[12px] bg-[linear-gradient(180deg,#EDF3FF_0%,#F7FAFF_100%)] p-2">
-                              <div className="flex h-full items-end gap-1.5">
-                                {[36, 58, 46, 68, 54, 72].map((h, idx) => (
-                                  <div key={idx} className="w-3 rounded-t-full bg-[#5B80F8]" style={{ height: h + '%' }} />
-                                ))}
-                              </div>
-                            </div>
-                            <div className="grid grid-cols-2 gap-2">
-                              <div className="rounded-[10px] bg-[#F6F9FF] p-2">
-                                <div className="mb-1 h-2.5 w-12 rounded-full bg-[#D9E6FF]" />
-                                <div className="h-4 w-16 rounded-full bg-[#6C8FFF]" />
-                              </div>
-                              <div className="rounded-[10px] bg-[#F6F9FF] p-2">
-                                <div className="mb-1 h-2.5 w-10 rounded-full bg-[#D9E6FF]" />
-                                <div className="h-4 w-12 rounded-full bg-[#71C992]" />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="flex h-16 items-center justify-center rounded-[12px] bg-[#F6F9FF]">
-                              <div className="relative h-11 w-11 rounded-full bg-[conic-gradient(#5B80F8_0_220deg,#DDE8FF_220deg_360deg)]">
-                                <div className="absolute inset-[8px] rounded-full bg-white" />
-                              </div>
-                            </div>
-                            <div className="space-y-2 rounded-[10px] bg-[#F6F9FF] p-2.5">
-                              {[1,2,3].map((line) => (
-                                <div key={line} className="flex items-center gap-2">
-                                  <span className="h-2 w-2 rounded-full bg-[#5B80F8]" />
-                                  <span className="h-2.5 flex-1 rounded-full bg-[#D9E6FF]" />
-                                </div>
+                      <div className="grid grid-cols-[1.4fr,0.95fr] gap-3 p-3.5 sm:p-4">
+                        <div className="space-y-2.5">
+                          <div className="h-16 rounded-[14px] bg-[linear-gradient(180deg,#EDF3FF_0%,#F7FAFF_100%)] p-2.5">
+                            <div className="flex h-full items-end gap-1.5">
+                              {[36, 58, 46, 68, 54, 72].map((h, idx) => (
+                                <div key={idx} className="w-3 rounded-t-full bg-[#5B80F8]" style={{ height: h + '%' }} />
                               ))}
                             </div>
                           </div>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="rounded-[12px] bg-[#F6F9FF] p-2.5">
+                              <div className="mb-1.5 h-2.5 w-12 rounded-full bg-[#D9E6FF]" />
+                              <div className="h-4 w-16 rounded-full bg-[#6C8FFF]" />
+                            </div>
+                            <div className="rounded-[12px] bg-[#F6F9FF] p-2.5">
+                              <div className="mb-1.5 h-2.5 w-10 rounded-full bg-[#D9E6FF]" />
+                              <div className="h-4 w-12 rounded-full bg-[#71C992]" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-y-2.5">
+                          <div className="flex h-16 items-center justify-center rounded-[14px] bg-[#F6F9FF]">
+                            <div className="relative h-11 w-11 rounded-full bg-[conic-gradient(#5B80F8_0_220deg,#DDE8FF_220deg_360deg)]">
+                              <div className="absolute inset-[8px] rounded-full bg-white" />
+                            </div>
+                          </div>
+                          <div className="space-y-2 rounded-[12px] bg-[#F6F9FF] p-2.5">
+                            {[1, 2, 3].map((line) => (
+                              <div key={line} className="flex items-center gap-2">
+                                <span className="h-2 w-2 rounded-full bg-[#5B80F8]" />
+                                <span className="h-2.5 flex-1 rounded-full bg-[#D9E6FF]" />
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                      <div className={`mx-auto h-[10px] w-[170px] rounded-b-[14px] shadow-[0_8px_14px_rgba(83,126,236,0.20)] ${theme === 'dark' ? 'bg-[#385BBA]' : 'bg-[#C6D7FF]'}`} />
                     </div>
+                    <div className={`mx-auto h-[11px] w-[180px] rounded-b-[16px] ${theme === 'dark'
+                      ? 'bg-[#3C61C3] shadow-[0_10px_18px_rgba(59,97,195,0.28)]'
+                      : 'bg-[#C4D6FF] shadow-[0_10px_18px_rgba(90,126,233,0.18)]'
+                    }`} />
                   </div>
                 </div>
               </div>

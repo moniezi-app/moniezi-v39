@@ -1,8 +1,8 @@
-# MONIEZI v39.0.13
+# MONIEZI v39.0.14
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-## v39.0.13 first-run theme integration foundation
+## v39.0.14 first-run theme integration foundation
 
 - Welcome / activation remains intentionally light.
 - The installed app still defaults to Dark on a fresh device.
