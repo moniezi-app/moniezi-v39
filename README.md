@@ -1,8 +1,15 @@
-# MONIEZI v39.0.20
+# MONIEZI v39.0.21
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-## v39.0.20 illustrated empty-state expansion
+## v39.0.21 mileage and receipts illustration fixes
+
+- Fixes the Mileage illustration so the trip route and destination read as one clear trip story inside the map instead of an ambiguous route-to-nowhere.
+- Fixes the Receipts illustration so the receipt currency mark is an unmistakable $ sign for the U.S.-focused app.
+- Replaces the confusing top-right Receipts badge with a clearer sync/capture confirmation symbol.
+- Keeps the v39 illustrated empty-state expansion for Receipts, Mileage, Clients, and Jobs / Projects.
+
+## v39.0.21 illustrated empty-state expansion
 
 - Extends the v39 illustrated empty-state treatment beyond Invoices and Estimates.
 - Adds a new illustrated true-empty state for Clients.

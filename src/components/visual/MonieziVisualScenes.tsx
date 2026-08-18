@@ -76,7 +76,6 @@ export const EstimateVisualScene: React.FC = () => (
   </div>
 );
 
-
 export const ReceiptsVisualScene: React.FC = () => (
   <svg viewBox="0 0 320 220" fill="none" aria-hidden="true">
     <g transform="translate(46 32)">
@@ -92,13 +91,16 @@ export const ReceiptsVisualScene: React.FC = () => (
       <path d="M16 21h37M16 31h45M16 41h32" stroke={ink} strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
       <path d="M15 53h20" stroke={ink} strokeWidth="1.3" strokeLinecap="round" opacity="0.46" />
       <circle cx="59" cy="51" r="10" fill={amber} fillOpacity="0.15" stroke={amber} strokeWidth="1.3" />
-      <path d="M59 46v10M55 48.5h5.6a2.3 2.3 0 010 4.6H56.5" stroke={amber} strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M59 43v15" stroke={amber} strokeWidth="1.35" strokeLinecap="round" />
+      <path d="M63 46.5h-5.2c-2 0-3.6 1.5-3.6 3.3s1.5 3.1 3.6 3.1h2.6c2 0 3.6 1.4 3.6 3.2S62.4 59 60.4 59h-5.6" stroke={amber} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
     </g>
     <g transform="translate(232 56)">
       <rect width="48" height="48" rx="14" fill={paper} stroke={cyan} strokeWidth="1.5" />
-      <circle cx="18" cy="18" r="5.5" fill={cyan} fillOpacity="0.18" stroke={cyan} strokeWidth="1.2" />
-      <path d="M13 18h10M18 13v10" stroke={cyan} strokeWidth="1.4" strokeLinecap="round" />
-      <path d="M16 35l7-8 4 4 7-10" stroke={ink} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" opacity="0.72" />
+      <path d="M24 12a10 10 0 00-9.8 8.1" stroke={cyan} strokeWidth="1.35" strokeLinecap="round" />
+      <path d="M14.5 16.8l-1.8 3.5 4 .3" stroke={cyan} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M24 36a10 10 0 009.8-8.1" stroke={cyan} strokeWidth="1.35" strokeLinecap="round" />
+      <path d="M33.5 31.2l1.8-3.5-4-.3" stroke={cyan} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16 25l5 5 11-12" stroke={ink} strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" opacity="0.72" />
     </g>
     <path d="M111 67c-7 4-13 11-17 20" stroke={amber} strokeWidth="2.4" strokeLinecap="round" strokeDasharray="3 6" opacity="0.85" />
   </svg>
@@ -106,22 +108,21 @@ export const ReceiptsVisualScene: React.FC = () => (
 
 export const MileageVisualScene: React.FC = () => (
   <svg viewBox="0 0 320 220" fill="none" aria-hidden="true">
-    <g transform="translate(38 44)">
-      <rect width="188" height="126" rx="24" fill={paper} stroke={ink} strokeWidth="1.5" />
-      <path d="M33 86c17-12 23-43 49-43 17 0 24 12 39 12 19 0 22-16 44-16 15 0 28 9 41 24" stroke={cyan} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="34" cy="86" r="6.5" fill={paper} stroke={cyan} strokeWidth="2.4" />
-      <circle cx="161" cy="63" r="6.5" fill={paper} stroke={cyan} strokeWidth="2.4" />
-      <g transform="translate(56 78)">
+    <g transform="translate(40 44)">
+      <rect width="192" height="126" rx="24" fill={paper} stroke={ink} strokeWidth="1.5" />
+      <path d="M30 88C46 73 58 46 85 46c18 0 28 14 46 14 16 0 25-10 40-10 17 0 29 11 43 25" stroke={cyan} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="30" cy="88" r="6.5" fill={paper} stroke={cyan} strokeWidth="2.4" />
+      <g transform="translate(56 76)">
         <rect x="6" y="14" width="56" height="17" rx="8.5" fill={teal} fillOpacity="0.18" stroke={teal} strokeWidth="1.4" />
         <path d="M16 14l7-12h22l7 12" stroke={ink} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="20" cy="32" r="6" fill={paper} stroke={ink} strokeWidth="1.35" />
         <circle cx="48" cy="32" r="6" fill={paper} stroke={ink} strokeWidth="1.35" />
         <path d="M15 22h38" stroke={ink} strokeWidth="1.25" strokeLinecap="round" opacity="0.7" />
       </g>
-    </g>
-    <g transform="translate(237 66)">
-      <path d="M21 0c11.6 0 21 8.8 21 20.5 0 14.8-18 30.6-21 34-3-3.4-21-19.2-21-34C0 8.8 9.4 0 21 0z" fill={blue} fillOpacity="0.12" stroke={blue} strokeWidth="1.5" />
-      <circle cx="21" cy="20" r="6.8" fill={paper} stroke={ink} strokeWidth="1.3" />
+      <g transform="translate(138 60)">
+        <path d="M33 0c11.2 0 20.5 8.7 20.5 20.2 0 14.1-17.4 29.3-20.5 32.7-3.1-3.4-20.5-18.6-20.5-32.7C12.5 8.7 21.8 0 33 0z" fill={blue} fillOpacity="0.12" stroke={blue} strokeWidth="1.5" />
+        <circle cx="33" cy="20" r="6.8" fill={paper} stroke={ink} strokeWidth="1.3" />
+      </g>
     </g>
     <g transform="translate(214 141)">
       <rect width="62" height="40" rx="14" fill={paper} stroke={green} strokeWidth="1.5" />

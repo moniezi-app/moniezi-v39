@@ -1,6 +1,6 @@
 # MONIEZI v39 Visual System
 
-Version: 39.0.20
+Version: 39.0.21
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 
@@ -155,7 +155,7 @@ The first production visual pass now uses the v39 system in three controlled are
 The original SVG scene family is implemented in `src/components/visual/MonieziVisualScenes.tsx`. No invoice, estimate, license-validation, storage, PDF, filtering, or editing business logic is changed by this pass.
 
 
-## v39.0.20 illustrated empty-state expansion
+## v39.0.21 illustrated empty-state expansion
 
 The v39 visual language now extends to four additional true-empty areas:
 
