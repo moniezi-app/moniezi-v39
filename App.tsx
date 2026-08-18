@@ -1883,7 +1883,7 @@ export default function App() {
             setShowIosInstallCta(true);
           }
         }
-        showToast('License activated', 'success');
+        showToast('License activated', 'success', 2000);
       } else {
         setLicenseError('Invalid license key. Please check and try again.');
       }
@@ -1926,12 +1926,12 @@ export default function App() {
       applyThemePreference(theme === 'light' ? 'dark' : 'light');
   };
 
-  const showToast = useCallback((message: string, type: 'success' | 'error' | 'info' = 'info') => {
+  const showToast = useCallback((message: string, type: 'success' | 'error' | 'info' = 'info', durationMs = 4000) => {
     const id = Date.now().toString();
     setNotifications(prev => [...prev, { id, message, type }]);
     setTimeout(() => {
       setNotifications(prev => prev.filter(n => n.id !== id));
-    }, 4000);
+    }, durationMs);
   }, []);
 
   useEffect(() => {

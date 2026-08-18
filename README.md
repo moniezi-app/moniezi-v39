@@ -1,8 +1,8 @@
-# MONIEZI v39.0.17
+# MONIEZI v39.0.18
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-## v39.0.17 approved Invoice / Estimate illustration integration
+## v39.0.18 license activation confirmation timing
 
 - Uses the approved light Invoice illustration in light mode.
 - Uses the approved light Estimate illustration in light mode.
