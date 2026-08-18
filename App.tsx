@@ -100,7 +100,7 @@ import { GlobalSearchPanel } from './src/components/GlobalSearchPanel';
 import { MonieziSelect } from './src/components/MonieziSelect';
 import { MonieziEmptyState } from './src/components/visual/MonieziEmptyState';
 import { MonieziVisualStage } from './src/components/visual/MonieziVisualStage';
-import { EstimateVisualScene, InvoiceVisualScene } from './src/components/visual/MonieziVisualScenes';
+import { ClientsVisualScene, EstimateVisualScene, InvoiceVisualScene, JobsVisualScene, MileageVisualScene, ReceiptsVisualScene } from './src/components/visual/MonieziVisualScenes';
 import { buildGlobalSearchGroups, type GlobalSearchResult } from './src/features/search/globalSearch';
 import { TransactionEditorShell } from './src/features/transactions/TransactionEditorShell';
 import { useKeyboardEditingState } from './src/hooks/useKeyboardEditingState';
@@ -8677,6 +8677,57 @@ html, body, #root {
                     );
                   })}
                 </div>
+              ) : receipts.length === 0 ? (
+                <div className="v39-record-empty-shell pt-1">
+                  <MonieziEmptyState
+                    visual={
+                      <MonieziVisualStage compact ariaLabel="A phone capture and paper receipt showing how to start receipt tracking">
+                        <ReceiptsVisualScene />
+                      </MonieziVisualStage>
+                    }
+                    title="Capture your first receipt"
+                    body={<>Scan or add your first receipt so MONIEZI can keep your expense documentation organized.</>}
+                    supportingContent={
+                      <div className="v39-feature-list">
+                        {[
+                          {
+                            icon: <Receipt size={18} strokeWidth={1.9} />,
+                            title: 'Keep proof together',
+                            body: 'Store receipt images with the matching expense instead of hunting for them later',
+                          },
+                          {
+                            icon: <Camera size={18} strokeWidth={1.9} />,
+                            title: 'Capture on the go',
+                            body: 'Scan a paper receipt now or add the expense first and link the image after',
+                          },
+                          {
+                            icon: <Shield size={18} strokeWidth={1.9} />,
+                            title: 'Stay audit ready',
+                            body: 'Build cleaner documentation for tax prep and business records from day one',
+                          },
+                        ].map((item) => (
+                          <div key={item.title} className="v39-feature-row">
+                            <div className="v39-feature-row__icon">{item.icon}</div>
+                            <div>
+                              <p className="v39-feature-row__title">{item.title}</p>
+                              <p className="v39-feature-row__body">{item.body}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    }
+                    primaryAction={
+                      <button
+                        type="button"
+                        onClick={() => { setScanMode('receiptOnly'); scanInputRef.current?.click(); }}
+                        className="v39-primary-action"
+                      >
+                        <Camera size={19} strokeWidth={1.8} />
+                        Scan your first receipt
+                      </button>
+                    }
+                  />
+                </div>
               ) : (
                 <div className="rounded-xl border border-slate-300 bg-white px-4 py-5 text-center dark:border-slate-700 dark:bg-slate-900">
                   <div className="text-sm font-bold text-slate-900 dark:text-white">No linked receipt images yet</div>
@@ -9471,6 +9522,59 @@ html, body, #root {
               </button>
             </div>
 
+            {mileageTrips.length === 0 ? (
+              <div className="mt-6 v39-record-empty-shell">
+                <MonieziEmptyState
+                  visual={
+                    <MonieziVisualStage ariaLabel="A business mileage route with a car, map pin, and tax-ready trip note">
+                      <MileageVisualScene />
+                    </MonieziVisualStage>
+                  }
+                  title="Start tracking business miles"
+                  body={<>Log each business trip so your annual mileage and estimated deduction stay organized from the beginning.</>}
+                  supportingContent={
+                    <div className="v39-feature-list">
+                      {[
+                        {
+                          icon: <Car size={18} strokeWidth={1.9} />,
+                          title: 'Record trips clearly',
+                          body: 'Save the date, purpose, miles, notes, and related client or job',
+                        },
+                        {
+                          icon: <Calculator size={18} strokeWidth={1.9} />,
+                          title: 'Stay tax ready',
+                          body: 'Let MONIEZI total your miles and estimated deduction for the year',
+                        },
+                        {
+                          icon: <Briefcase size={18} strokeWidth={1.9} />,
+                          title: 'Connect your work',
+                          body: 'Attach mileage to jobs and clients so travel stays part of the real cost',
+                        },
+                      ].map((item) => (
+                        <div key={item.title} className="v39-feature-row">
+                          <div className="v39-feature-row__icon">{item.icon}</div>
+                          <div>
+                            <p className="v39-feature-row__title">{item.title}</p>
+                            <p className="v39-feature-row__body">{item.body}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  }
+                  primaryAction={
+                    <button
+                      type="button"
+                      onClick={openMileageAddDrawer}
+                      className="v39-primary-action"
+                    >
+                      <Plus size={19} strokeWidth={1.8} />
+                      Add your first trip
+                    </button>
+                  }
+                />
+              </div>
+            ) : (
+              <>
             <div className="mt-6 flex flex-wrap items-end justify-between gap-3 border-b border-slate-200 pb-5 dark:border-slate-800">
               <div className="w-[118px]">
                 <label className="mb-1.5 block text-xs font-semibold text-slate-500 dark:text-slate-400">Tax year</label>
@@ -9527,6 +9631,8 @@ html, body, #root {
                 {renderMileageTripList()}
               </div>
             </section>
+              </>
+            )}
           </div>
         )}
 
@@ -11405,22 +11511,80 @@ html, body, #root {
                   })
                   .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
 
+                if (clients.length === 0) {
+                  return (
+                    <div className="v39-record-empty-shell">
+                      <MonieziEmptyState
+                        visual={
+                          <MonieziVisualStage ariaLabel="Two client cards showing a lead becoming an organized customer record">
+                            <ClientsVisualScene />
+                          </MonieziVisualStage>
+                        }
+                        title="Your client list starts here"
+                        body={<>Add your first lead or client so estimates, invoices, jobs, and follow-ups stay connected.</>}
+                        supportingContent={
+                          <div className="v39-feature-list">
+                            {[
+                              {
+                                icon: <Users size={18} strokeWidth={1.9} />,
+                                title: 'Keep contacts organized',
+                                body: 'Store names, companies, emails, phone numbers, and notes in one place',
+                              },
+                              {
+                                icon: <FileText size={18} strokeWidth={1.9} />,
+                                title: 'Connect billing records',
+                                body: 'Link clients to estimates and invoices without retyping details',
+                              },
+                              {
+                                icon: <Briefcase size={18} strokeWidth={1.9} />,
+                                title: 'Support job tracking',
+                                body: 'Use the same client across jobs and projects as your work grows',
+                              },
+                            ].map((item) => (
+                              <div key={item.title} className="v39-feature-row">
+                                <div className="v39-feature-row__icon">{item.icon}</div>
+                                <div>
+                                  <p className="v39-feature-row__title">{item.title}</p>
+                                  <p className="v39-feature-row__body">{item.body}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        }
+                        primaryAction={
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingClient({ status: 'lead' });
+                              setIsClientModalOpen(true);
+                            }}
+                            className="v39-primary-action"
+                          >
+                            <Plus size={19} strokeWidth={1.8} />
+                            Add your first client
+                          </button>
+                        }
+                      />
+                    </div>
+                  );
+                }
+
                 if (filtered.length === 0) {
                   return (
-                    <EmptyState
-                      icon={<Users size={32} />}
-                      title="No Clients Found"
-                      subtitle={clientSearch.trim()
-                        ? `No clients match “${clientSearch.trim()}”.`
-                        : clientFilter === 'all'
-                          ? 'Start by adding your first lead or client.'
+                    <div className="rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 sm:p-6 shadow-sm">
+                      <EmptyState
+                        icon={<Users size={32} />}
+                        title="No Clients Match This View"
+                        subtitle={clientSearch.trim()
+                          ? `No clients match “${clientSearch.trim()}”.`
                           : `No ${clientFilter === 'lead' ? 'leads' : clientFilter === 'client' ? 'clients' : 'inactive clients'} found.`}
-                      action={() => {
-                        setEditingClient({ status: 'lead' });
-                        setIsClientModalOpen(true);
-                      }}
-                      actionLabel="Add Client"
-                    />
+                        action={() => {
+                          setEditingClient({ status: 'lead' });
+                          setIsClientModalOpen(true);
+                        }}
+                        actionLabel="Add Client"
+                      />
+                    </div>
                   );
                 }
 
@@ -11575,13 +11739,68 @@ html, body, #root {
 
             <div className="space-y-4">
               {filteredJobRows.length === 0 ? (
-                <EmptyState
-                  icon={<Briefcase size={32} />}
-                  title={jobs.length === 0 ? 'No Jobs Yet' : 'No Jobs in This View'}
-                  subtitle={jobs.length === 0 ? 'Create a job or project, set its budget, then link invoices, costs, labor, income, and mileage to see complete job profitability.' : 'Choose another status or create a new job.'}
-                  action={() => openNewJob()}
-                  actionLabel="Create Job"
-                />
+                jobs.length === 0 ? (
+                  <div className="v39-record-empty-shell">
+                    <MonieziEmptyState
+                      visual={
+                        <MonieziVisualStage ariaLabel="A jobs checklist and progress cards showing connected project work">
+                          <JobsVisualScene />
+                        </MonieziVisualStage>
+                      }
+                      title="See every job in one place"
+                      body={<>Create your first job or project, then link billing, expenses, labor, and mileage to track real profitability.</>}
+                      supportingContent={
+                        <div className="v39-feature-list">
+                          {[
+                            {
+                              icon: <Briefcase size={18} strokeWidth={1.9} />,
+                              title: 'Track the full picture',
+                              body: 'Bring revenue, costs, labor, and mileage together inside one job record',
+                            },
+                            {
+                              icon: <BarChart3 size={18} strokeWidth={1.9} />,
+                              title: 'Know your profit',
+                              body: 'See margin, outstanding balance, and cash position as work progresses',
+                            },
+                            {
+                              icon: <Repeat size={18} strokeWidth={1.9} />,
+                              title: 'Repeat what works',
+                              body: 'Reuse successful job setups for similar projects in the future',
+                            },
+                          ].map((item) => (
+                            <div key={item.title} className="v39-feature-row">
+                              <div className="v39-feature-row__icon">{item.icon}</div>
+                              <div>
+                                <p className="v39-feature-row__title">{item.title}</p>
+                                <p className="v39-feature-row__body">{item.body}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      }
+                      primaryAction={
+                        <button
+                          type="button"
+                          onClick={() => openNewJob()}
+                          className="v39-primary-action"
+                        >
+                          <Plus size={19} strokeWidth={1.8} />
+                          Create your first job
+                        </button>
+                      }
+                    />
+                  </div>
+                ) : (
+                  <div className="rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 sm:p-6 shadow-sm">
+                    <EmptyState
+                      icon={<Briefcase size={32} />}
+                      title="No Jobs in This View"
+                      subtitle="Choose another status or create a new job."
+                      action={() => openNewJob()}
+                      actionLabel="Create Job"
+                    />
+                  </div>
+                )
               ) : filteredJobRows.map(row => (
                 <button
                   key={row.job.id}

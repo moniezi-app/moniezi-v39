@@ -1,6 +1,6 @@
 # MONIEZI v39 Visual System
 
-Version: 39.0.19
+Version: 39.0.20
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 
@@ -153,3 +153,15 @@ The first production visual pass now uses the v39 system in three controlled are
 - Filtered views that happen to contain zero matching records remain compact. Large illustrations appear only when the underlying document collection is genuinely empty.
 
 The original SVG scene family is implemented in `src/components/visual/MonieziVisualScenes.tsx`. No invoice, estimate, license-validation, storage, PDF, filtering, or editing business logic is changed by this pass.
+
+
+## v39.0.20 illustrated empty-state expansion
+
+The v39 visual language now extends to four additional true-empty areas:
+
+- Home Receipts uses a receipt-capture scene when there are no receipt records yet.
+- Mileage uses a route/car scene when there are no mileage trips yet.
+- Clients uses a contact/client scene only when the entire client collection is empty.
+- Jobs / Projects uses a connected-work scene only when the entire jobs collection is empty.
+
+Search/filter views with existing underlying records remain compact. This preserves the core v39 rule: illustrations invite and explain before data exists; once records exist, the user's data becomes the visual focus.

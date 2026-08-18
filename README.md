@@ -1,6 +1,16 @@
-# MONIEZI v39.0.19
+# MONIEZI v39.0.20
 
 Controlled visual-redesign branch for MONIEZI v39.
+
+## v39.0.20 illustrated empty-state expansion
+
+- Extends the v39 illustrated empty-state treatment beyond Invoices and Estimates.
+- Adds a new illustrated true-empty state for Clients.
+- Adds a new illustrated true-empty state for Jobs / Projects.
+- Adds a new illustrated true-empty state for Mileage when no trips exist yet.
+- Adds a new illustrated true-empty state for the Home Receipts module when no receipt records exist yet.
+- Keeps filter/search zero states compact when records already exist but the current view has no matches.
+- Preserves all invoice, estimate, receipts, mileage, jobs, and client business logic while making more of the app feel visually consistent with the approved v39 direction.
 
 ## v39.0.19 Invoice / Estimate empty-state readability
 
