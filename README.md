@@ -1,6 +1,14 @@
-# MONIEZI v39.0.23
+# MONIEZI v39.0.24
 
 Controlled visual-redesign branch for MONIEZI v39.
+
+## v39.0.24 demo-business illustration upgrade
+
+- Replaces the simple first-run demo graphic with the approved detailed MONIEZI business dashboard illustration.
+- Adds separate approved light and dark production assets.
+- Both assets use real transparency: no baked light/dark rectangle, no checkerboard, and no illustration background panel.
+- The illustration now depicts the demo experience itself: dashboard charts, records, receipts, mileage, reports, and business activity.
+- Keeps the existing theme selector, demo counts, demo loading behavior, and first-run workflow unchanged.
 
 ## v39.0.23 transparent illustration integration
 

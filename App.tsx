@@ -8147,67 +8147,15 @@ html, body, #root {
               ? 'bg-[#0B1730]'
               : 'bg-white'
             }`}>
-              <div className={`px-4 pt-4 pb-3 sm:px-5 sm:pt-5 ${theme === 'dark'
-                ? 'bg-[linear-gradient(180deg,#0F1B35_0%,#0A1630_100%)]'
-                : 'bg-[linear-gradient(180deg,#F8FBFF_0%,#F3F7FF_100%)]'
-              }`}>
-                <div className={`relative overflow-hidden rounded-[26px] px-4 py-4 sm:px-5 sm:py-5 ${theme === 'dark'
-                  ? 'bg-[linear-gradient(180deg,#102041_0%,#0D1A34_100%)]'
-                  : 'bg-[linear-gradient(180deg,#F1F6FF_0%,#EAF1FF_100%)]'
-                }`}>
-                  <div className={`pointer-events-none absolute inset-x-8 bottom-4 h-16 rounded-full blur-2xl ${theme === 'dark' ? 'bg-blue-500/18' : 'bg-[#D6E3FF]'}`} />
-                  <div className="relative z-10 mx-auto max-w-[310px] sm:max-w-[330px]">
-                    <div className={`rounded-[24px] shadow-[0_18px_34px_rgba(53,101,227,0.16)] ${theme === 'dark'
-                      ? 'border border-blue-300/20 bg-[#FBFCFF]'
-                      : 'border border-[#CFDDFF] bg-white'
-                    }`}>
-                      <div className="flex items-center gap-1.5 rounded-t-[24px] border-b border-[#E7EEFB] bg-[#F7FAFF] px-3 py-2">
-                        <span className="h-2 w-2 rounded-full bg-[#C7D7FF]" />
-                        <span className="h-2 w-2 rounded-full bg-[#D8E4FF]" />
-                        <span className="h-2 w-2 rounded-full bg-[#E5EEFF]" />
-                      </div>
-                      <div className="grid grid-cols-[1.4fr,0.95fr] gap-3 p-3.5 sm:p-4">
-                        <div className="space-y-2.5">
-                          <div className="h-16 rounded-[14px] bg-[linear-gradient(180deg,#EDF3FF_0%,#F7FAFF_100%)] p-2.5">
-                            <div className="flex h-full items-end gap-1.5">
-                              {[36, 58, 46, 68, 54, 72].map((h, idx) => (
-                                <div key={idx} className="w-3 rounded-t-full bg-[#5B80F8]" style={{ height: h + '%' }} />
-                              ))}
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-2">
-                            <div className="rounded-[12px] bg-[#F6F9FF] p-2.5">
-                              <div className="mb-1.5 h-2.5 w-12 rounded-full bg-[#D9E6FF]" />
-                              <div className="h-4 w-16 rounded-full bg-[#6C8FFF]" />
-                            </div>
-                            <div className="rounded-[12px] bg-[#F6F9FF] p-2.5">
-                              <div className="mb-1.5 h-2.5 w-10 rounded-full bg-[#D9E6FF]" />
-                              <div className="h-4 w-12 rounded-full bg-[#71C992]" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="space-y-2.5">
-                          <div className="flex h-16 items-center justify-center rounded-[14px] bg-[#F6F9FF]">
-                            <div className="relative h-11 w-11 rounded-full bg-[conic-gradient(#5B80F8_0_220deg,#DDE8FF_220deg_360deg)]">
-                              <div className="absolute inset-[8px] rounded-full bg-white" />
-                            </div>
-                          </div>
-                          <div className="space-y-2 rounded-[12px] bg-[#F6F9FF] p-2.5">
-                            {[1, 2, 3].map((line) => (
-                              <div key={line} className="flex items-center gap-2">
-                                <span className="h-2 w-2 rounded-full bg-[#5B80F8]" />
-                                <span className="h-2.5 flex-1 rounded-full bg-[#D9E6FF]" />
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={`mx-auto h-[11px] w-[180px] rounded-b-[16px] ${theme === 'dark'
-                      ? 'bg-[#3C61C3] shadow-[0_10px_18px_rgba(59,97,195,0.28)]'
-                      : 'bg-[#C4D6FF] shadow-[0_10px_18px_rgba(90,126,233,0.18)]'
-                    }`} />
-                  </div>
+              <div className="px-2 pt-3 pb-2 sm:px-4 sm:pt-4">
+                <div className="mx-auto w-full max-w-[430px]">
+                  <img
+                    src={`${import.meta.env.BASE_URL}${theme === 'dark' ? 'demo-business-v39-24-dark.webp' : 'demo-business-v39-24-light.webp'}`}
+                    alt="A MONIEZI demo dashboard surrounded by sample receipts, reports, mileage, and business records"
+                    className="block h-auto w-full object-contain"
+                    loading="eager"
+                    decoding="async"
+                  />
                 </div>
               </div>
 
