@@ -9193,16 +9193,6 @@ html, body, #root {
                           Create your first invoice
                         </button>
                       }
-                      secondaryAction={
-                        <button
-                          type="button"
-                          onClick={() => handleOpenFAB('billing', 'invoice')}
-                          className="v39-secondary-link"
-                        >
-                          Learn how invoicing works
-                          <ArrowRight size={16} strokeWidth={2.1} />
-                        </button>
-                      }
                     />
                   </div>
                 ) : (
@@ -9328,16 +9318,6 @@ html, body, #root {
                             >
                               <Plus size={19} strokeWidth={1.8} />
                               Create your first estimate
-                            </button>
-                          }
-                          secondaryAction={
-                            <button
-                              type="button"
-                              onClick={() => handleOpenFAB('billing', 'estimate')}
-                              className="v39-secondary-link"
-                            >
-                              Learn how estimates work
-                              <ArrowRight size={16} strokeWidth={2.1} />
                             </button>
                           }
                         />

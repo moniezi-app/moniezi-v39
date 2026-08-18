@@ -1,8 +1,8 @@
-# MONIEZI v39.0.15
+# MONIEZI v39.0.16
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-## v39.0.15 invoice and estimate true-empty-state priority correction
+## v39.0.16 invoice and estimate CTA cleanup
 
 This build fixes the production placement of the approved Invoice and Estimate illustrated empty states.
 
