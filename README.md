@@ -1,6 +1,16 @@
-# MONIEZI v39.0.21
+# MONIEZI v39.0.22
 
 Controlled visual-redesign branch for MONIEZI v39.
+
+## v39.0.22 approved Receipts / Clients / Mileage illustrations
+
+- Replaces the rejected generated SVG artwork on Receipts, Clients, and Mileage with the user-approved production illustrations.
+- Adds six separate optimized assets: light and dark variants for Receipts, Clients, and Mileage.
+- Each screen automatically follows the current MONIEZI theme and shows only its matching illustration.
+- Receipts depicts a paper receipt moving into the app and being confirmed.
+- Clients depicts individual client records being organized into a centralized client file.
+- Mileage depicts a vehicle trip, route/destination, and the recorded trip inside the app.
+- Keeps all existing business logic, empty-state copy, actions, filtering, and other v39 behavior unchanged.
 
 ## v39.0.21 mileage and receipts illustration fixes
 

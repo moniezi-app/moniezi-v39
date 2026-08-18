@@ -77,83 +77,60 @@ export const EstimateVisualScene: React.FC = () => (
 );
 
 export const ReceiptsVisualScene: React.FC = () => (
-  <svg viewBox="0 0 320 220" fill="none" aria-hidden="true">
-    <g transform="translate(46 32)">
-      <rect x="86" y="10" width="102" height="152" rx="24" fill={paper} stroke={ink} strokeWidth="1.5" />
-      <rect x="98" y="25" width="78" height="116" rx="14" fill={blue} fillOpacity="0.08" stroke={blue} strokeOpacity="0.22" strokeWidth="1.3" />
-      <path d="M114 43h46M114 54h34" stroke={ink} strokeWidth="1.35" strokeLinecap="round" opacity="0.62" />
-      <path d="M116 74h42M116 84h46M116 94h28M116 116h18" stroke={ink} strokeWidth="1.35" strokeLinecap="round" opacity="0.56" />
-      <path d="M139 123l9 8 18-23" stroke={green} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="137" cy="153" r="4" fill={ink} opacity="0.48" />
-    </g>
-    <g transform="translate(34 80)">
-      <path d="M0 10c10 0 10-6 20-6s10 6 20 6 10-6 20-6 10 6 20 6v54c-10 0-10 6-20 6s-10-6-20-6-10 6-20 6-10-6-20-6V10z" fill={paper} stroke={amber} strokeWidth="1.5" />
-      <path d="M16 21h37M16 31h45M16 41h32" stroke={ink} strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
-      <path d="M15 53h20" stroke={ink} strokeWidth="1.3" strokeLinecap="round" opacity="0.46" />
-      <circle cx="59" cy="51" r="10" fill={amber} fillOpacity="0.15" stroke={amber} strokeWidth="1.3" />
-      <path d="M59 43v15" stroke={amber} strokeWidth="1.35" strokeLinecap="round" />
-      <path d="M63 46.5h-5.2c-2 0-3.6 1.5-3.6 3.3s1.5 3.1 3.6 3.1h2.6c2 0 3.6 1.4 3.6 3.2S62.4 59 60.4 59h-5.6" stroke={amber} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
-    </g>
-    <g transform="translate(232 56)">
-      <rect width="48" height="48" rx="14" fill={paper} stroke={cyan} strokeWidth="1.5" />
-      <path d="M24 12a10 10 0 00-9.8 8.1" stroke={cyan} strokeWidth="1.35" strokeLinecap="round" />
-      <path d="M14.5 16.8l-1.8 3.5 4 .3" stroke={cyan} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M24 36a10 10 0 009.8-8.1" stroke={cyan} strokeWidth="1.35" strokeLinecap="round" />
-      <path d="M33.5 31.2l1.8-3.5-4-.3" stroke={cyan} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M16 25l5 5 11-12" stroke={ink} strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" opacity="0.72" />
-    </g>
-    <path d="M111 67c-7 4-13 11-17 20" stroke={amber} strokeWidth="2.4" strokeLinecap="round" strokeDasharray="3 6" opacity="0.85" />
-  </svg>
+  <div className="v39-approved-illustration-pair" aria-hidden="true">
+    <img
+      src={`${publicBase}receipts-empty-v39-22-light.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--light"
+      loading="eager"
+      decoding="async"
+    />
+    <img
+      src={`${publicBase}receipts-empty-v39-22-dark.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--dark"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
 );
 
 export const MileageVisualScene: React.FC = () => (
-  <svg viewBox="0 0 320 220" fill="none" aria-hidden="true">
-    <g transform="translate(40 44)">
-      <rect width="192" height="126" rx="24" fill={paper} stroke={ink} strokeWidth="1.5" />
-      <path d="M30 88C46 73 58 46 85 46c18 0 28 14 46 14 16 0 25-10 40-10 17 0 29 11 43 25" stroke={cyan} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="30" cy="88" r="6.5" fill={paper} stroke={cyan} strokeWidth="2.4" />
-      <g transform="translate(56 76)">
-        <rect x="6" y="14" width="56" height="17" rx="8.5" fill={teal} fillOpacity="0.18" stroke={teal} strokeWidth="1.4" />
-        <path d="M16 14l7-12h22l7 12" stroke={ink} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="20" cy="32" r="6" fill={paper} stroke={ink} strokeWidth="1.35" />
-        <circle cx="48" cy="32" r="6" fill={paper} stroke={ink} strokeWidth="1.35" />
-        <path d="M15 22h38" stroke={ink} strokeWidth="1.25" strokeLinecap="round" opacity="0.7" />
-      </g>
-      <g transform="translate(138 60)">
-        <path d="M33 0c11.2 0 20.5 8.7 20.5 20.2 0 14.1-17.4 29.3-20.5 32.7-3.1-3.4-20.5-18.6-20.5-32.7C12.5 8.7 21.8 0 33 0z" fill={blue} fillOpacity="0.12" stroke={blue} strokeWidth="1.5" />
-        <circle cx="33" cy="20" r="6.8" fill={paper} stroke={ink} strokeWidth="1.3" />
-      </g>
-    </g>
-    <g transform="translate(214 141)">
-      <rect width="62" height="40" rx="14" fill={paper} stroke={green} strokeWidth="1.5" />
-      <path d="M15 16h21M15 24h31" stroke={ink} strokeWidth="1.3" strokeLinecap="round" opacity="0.56" />
-      <path d="M39 15l5 5 8-10" stroke={green} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-    </g>
-  </svg>
+  <div className="v39-approved-illustration-pair" aria-hidden="true">
+    <img
+      src={`${publicBase}mileage-empty-v39-22-light.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--light"
+      loading="eager"
+      decoding="async"
+    />
+    <img
+      src={`${publicBase}mileage-empty-v39-22-dark.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--dark"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
 );
 
 export const ClientsVisualScene: React.FC = () => (
-  <svg viewBox="0 0 320 220" fill="none" aria-hidden="true">
-    <g transform="translate(35 82)">
-      <rect width="114" height="84" rx="22" fill={paper} stroke={ink} strokeWidth="1.5" />
-      <circle cx="31" cy="29" r="13" fill={violet} fillOpacity="0.16" stroke={violet} strokeWidth="1.4" />
-      <path d="M31 24a5 5 0 110 10 5 5 0 010-10zM21 46c2.7-5 15.3-5 20 0" stroke={ink} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M56 25h38M56 35h28" stroke={ink} strokeWidth="1.35" strokeLinecap="round" opacity="0.6" />
-      <path d="M20 60h73" stroke={ink} strokeWidth="1.2" strokeLinecap="round" opacity="0.14" />
-      <path d="M20 69h42" stroke={ink} strokeWidth="1.25" strokeLinecap="round" opacity="0.42" />
-    </g>
-    <g transform="translate(134 44)">
-      <rect width="142" height="104" rx="24" fill={paper} stroke={amber} strokeWidth="1.5" />
-      <rect x="18" y="18" width="46" height="46" rx="16" fill={amber} fillOpacity="0.15" stroke={amber} strokeWidth="1.3" />
-      <path d="M41 28a8 8 0 110 16 8 8 0 010-16zM26 53c4.6-8.1 25.4-8.1 30 0" stroke={ink} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M79 28h41M79 39h31M79 56h45" stroke={ink} strokeWidth="1.35" strokeLinecap="round" opacity="0.62" />
-      <g transform="translate(80 68)">
-        <rect width="40" height="18" rx="9" fill={green} fillOpacity="0.14" stroke={green} strokeWidth="1.2" />
-        <path d="M12 10h16" stroke={green} strokeWidth="1.8" strokeLinecap="round" />
-      </g>
-    </g>
-    <path d="M141 153c-6 9-14 16-23 20" stroke={violet} strokeWidth="2.3" strokeLinecap="round" strokeDasharray="3 6" opacity="0.8" />
-  </svg>
+  <div className="v39-approved-illustration-pair" aria-hidden="true">
+    <img
+      src={`${publicBase}clients-empty-v39-22-light.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--light"
+      loading="eager"
+      decoding="async"
+    />
+    <img
+      src={`${publicBase}clients-empty-v39-22-dark.webp`}
+      alt=""
+      className="v39-approved-illustration v39-approved-illustration--dark"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
 );
 
 export const JobsVisualScene: React.FC = () => (
