@@ -1915,12 +1915,15 @@ export default function App() {
     }
   }, [currentPage, scrollToTaxSnapshot]);
 
+  const applyThemePreference = (nextTheme: 'light' | 'dark') => {
+      setTheme(nextTheme);
+      document.documentElement.classList.toggle('dark', nextTheme === 'dark');
+      document.documentElement.classList.toggle('theme-light', nextTheme === 'light');
+      try { localStorage.setItem(`moniezi_theme_${STORAGE_NAMESPACE}`, nextTheme); } catch { /* ignore */ }
+  };
+
   const toggleTheme = () => {
-      const newTheme = theme === 'light' ? 'dark' : 'light';
-      setTheme(newTheme);
-      document.documentElement.classList.toggle('dark', newTheme === 'dark');
-      document.documentElement.classList.toggle('theme-light', newTheme === 'light');
-      localStorage.setItem(`moniezi_theme_${STORAGE_NAMESPACE}`, newTheme);
+      applyThemePreference(theme === 'light' ? 'dark' : 'light');
   };
 
   const showToast = useCallback((message: string, type: 'success' | 'error' | 'info' = 'info') => {
@@ -8082,42 +8085,100 @@ html, body, #root {
         </div>
       )}
 
-      {/* First run. Two honest choices — we never force anyone through the demo. */}
-      {/* First run. Same anatomy as the install gate the customer just came
-          through: dark glass panel, one bright amber action, and a quiet link
-          for the alternative. The orange is the button, not the whole card. */}
+      {/* First-run theme choice + demo entry point. Welcome/activation stays light,
+          while the installed app starts in dark mode by default and lets the user
+          preview/switch the actual app theme before choosing Demo or their own data. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
-        <div className="mb-6 rounded-[30px] border border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-4 shadow-[0_20px_46px_rgba(15,23,42,0.10)] ring-1 ring-white/80 sm:p-5">
-          <div className="rounded-[24px] border border-[#E7EEFB] bg-[linear-gradient(180deg,#F8FBFF_0%,#F3F7FF_100%)] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] sm:p-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#E6EBF7] bg-white px-3 py-2 text-[12px] font-bold uppercase tracking-[0.18em] text-[#3365E3] shadow-sm">
+        <div className={`mb-6 rounded-[30px] border p-4 shadow-[0_20px_46px_rgba(15,23,42,0.12)] transition-colors sm:p-5 ${theme === 'dark'
+          ? 'border-slate-700/90 bg-[linear-gradient(180deg,#081226_0%,#0B1730_100%)] ring-1 ring-blue-400/10'
+          : 'border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] ring-1 ring-white/80'
+        }`}>
+          {!hasTriedSampleData && (
+            <div className={`mb-4 rounded-[22px] border p-3.5 ${theme === 'dark'
+              ? 'border-slate-700 bg-slate-950/65'
+              : 'border-[#E3EAF7] bg-white'
+            }`}>
+              <div className="mb-3 text-center">
+                <div className={`text-[15px] font-extrabold tracking-[-0.02em] ${theme === 'dark' ? 'text-white' : 'text-[#0B1739]'}`}>Choose your look</div>
+                <div className={`mt-1 text-[12px] font-semibold ${theme === 'dark' ? 'text-slate-300' : 'text-[#5B6B84]'}`}>You can change this anytime from the header.</div>
+              </div>
+              <div className={`grid grid-cols-2 gap-2 rounded-[16px] p-1.5 ${theme === 'dark' ? 'bg-slate-900' : 'bg-[#F2F5FA]'}`}>
+                <button
+                  type="button"
+                  onClick={() => applyThemePreference('dark')}
+                  aria-pressed={theme === 'dark'}
+                  className={`flex min-h-[50px] items-center justify-center gap-2 rounded-[13px] border px-3 text-[14px] font-extrabold transition-all ${theme === 'dark'
+                    ? 'border-blue-400/55 bg-[#17284D] text-white shadow-[0_8px_18px_rgba(0,0,0,0.22)]'
+                    : 'border-transparent bg-transparent text-slate-600 hover:bg-white'
+                  }`}
+                >
+                  <Moon size={18} strokeWidth={1.8} />
+                  Dark
+                </button>
+                <button
+                  type="button"
+                  onClick={() => applyThemePreference('light')}
+                  aria-pressed={theme === 'light'}
+                  className={`flex min-h-[50px] items-center justify-center gap-2 rounded-[13px] border px-3 text-[14px] font-extrabold transition-all ${theme === 'light'
+                    ? 'border-blue-300 bg-white text-[#0B1739] shadow-[0_8px_18px_rgba(15,23,42,0.08)]'
+                    : 'border-transparent bg-transparent text-slate-300 hover:bg-slate-800'
+                  }`}
+                >
+                  <Sun size={18} strokeWidth={1.8} />
+                  Light
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className={`rounded-[24px] border p-4 transition-colors sm:p-5 ${theme === 'dark'
+            ? 'border-blue-400/20 bg-[linear-gradient(180deg,#0D1A34_0%,#0A162C_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]'
+            : 'border-[#E7EEFB] bg-[linear-gradient(180deg,#F8FBFF_0%,#F3F7FF_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]'
+          }`}>
+            <div className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-[12px] font-bold uppercase tracking-[0.18em] shadow-sm ${theme === 'dark'
+              ? 'border-blue-400/25 bg-slate-950/80 text-blue-300'
+              : 'border-[#E6EBF7] bg-white text-[#3365E3]'
+            }`}>
               <PlayCircle size={14} strokeWidth={2} />
               {hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}
             </div>
 
-            <div className="mt-4 overflow-hidden rounded-[24px] border border-[#E7EEFB] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
-              <div className="bg-[linear-gradient(180deg,#F3F7FF_0%,#EDF3FF_100%)] px-4 pt-4 pb-3 sm:px-5 sm:pt-5">
-                <div className="relative overflow-hidden rounded-[22px] border border-[#E0E9FF] bg-[radial-gradient(circle_at_18%_18%,rgba(118,159,255,0.24),transparent_26%),radial-gradient(circle_at_82%_24%,rgba(180,206,255,0.34),transparent_24%),linear-gradient(180deg,#F5F8FF_0%,#EEF3FF_100%)] px-4 py-4 sm:px-5 sm:py-5">
+            <div className={`mt-4 overflow-hidden rounded-[24px] border shadow-[0_12px_28px_rgba(15,23,42,0.08)] ${theme === 'dark'
+              ? 'border-slate-700/90 bg-slate-950'
+              : 'border-[#E7EEFB] bg-white'
+            }`}>
+              <div className={`px-4 pt-4 pb-3 sm:px-5 sm:pt-5 ${theme === 'dark'
+                ? 'bg-[linear-gradient(180deg,#101F3D_0%,#0B1830_100%)]'
+                : 'bg-[linear-gradient(180deg,#F3F7FF_0%,#EDF3FF_100%)]'
+              }`}>
+                <div className={`relative overflow-hidden rounded-[22px] border px-4 py-4 sm:px-5 sm:py-5 ${theme === 'dark'
+                  ? 'border-blue-400/20 bg-[radial-gradient(circle_at_18%_18%,rgba(80,124,255,0.22),transparent_26%),radial-gradient(circle_at_82%_24%,rgba(98,137,255,0.14),transparent_24%),linear-gradient(180deg,#132442_0%,#0E1C35_100%)]'
+                  : 'border-[#E0E9FF] bg-[radial-gradient(circle_at_18%_18%,rgba(118,159,255,0.24),transparent_26%),radial-gradient(circle_at_82%_24%,rgba(180,206,255,0.34),transparent_24%),linear-gradient(180deg,#F5F8FF_0%,#EEF3FF_100%)]'
+                }`}>
                   {!hasTriedSampleData && (
-                    <div className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/90 bg-white/92 px-3 py-1 text-[10px] font-bold text-[#5B80F8] shadow-sm">
+                    <div className={`absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-bold shadow-sm ${theme === 'dark'
+                      ? 'border-blue-400/25 bg-slate-950/90 text-blue-300'
+                      : 'border-white/90 bg-white/95 text-[#5B80F8]'
+                    }`}>
                       <PlayCircle size={12} strokeWidth={2} /> Explore before you start
                     </div>
                   )}
                   <div className="relative mx-auto mt-5 flex h-[150px] max-w-[290px] items-end justify-center sm:h-[170px] sm:max-w-[320px]">
-                    <div className="absolute bottom-0 left-1/2 h-3 w-[220px] -translate-x-1/2 rounded-full bg-[#DCE7FF] blur-xl opacity-90" />
+                    <div className={`absolute bottom-0 left-1/2 h-3 w-[220px] -translate-x-1/2 rounded-full blur-xl ${theme === 'dark' ? 'bg-blue-500/25' : 'bg-[#DCE7FF]'}`} />
                     <div className="absolute left-1 bottom-[18px] flex flex-col items-center">
-                      <div className="h-[42px] w-[42px] rounded-full border border-[#D9E6FF] bg-white shadow-[0_10px_18px_rgba(15,23,42,0.08)]" />
-                      <div className="-mt-[30px] ml-[8px] h-[22px] w-[10px] rounded-r-full border-r-[5px] border-[#D9E6FF]" />
+                      <div className={`h-[42px] w-[42px] rounded-full border shadow-[0_10px_18px_rgba(15,23,42,0.08)] ${theme === 'dark' ? 'border-blue-300/25 bg-slate-900' : 'border-[#D9E6FF] bg-white'}`} />
+                      <div className={`-mt-[30px] ml-[8px] h-[22px] w-[10px] rounded-r-full border-r-[5px] ${theme === 'dark' ? 'border-blue-300/30' : 'border-[#D9E6FF]'}`} />
                     </div>
                     <div className="absolute right-0 bottom-[18px] flex items-end gap-[2px]">
-                      <div className="h-[18px] w-[34px] rounded-full bg-[#E6F4FF] shadow-[0_8px_16px_rgba(15,23,42,0.05)]" />
+                      <div className={`h-[18px] w-[34px] rounded-full shadow-[0_8px_16px_rgba(15,23,42,0.05)] ${theme === 'dark' ? 'bg-blue-400/15' : 'bg-[#E6F4FF]'}`} />
                       <div className="relative flex h-[42px] w-[28px] items-end justify-center">
-                        <div className="absolute bottom-[8px] h-[22px] w-[16px] rounded-t-full bg-[#9CD7A7]" />
-                        <div className="absolute bottom-[8px] left-[1px] h-[26px] w-[12px] rounded-t-full bg-[#B8E2C0] rotate-[-10deg]" />
-                        <div className="absolute bottom-0 h-[14px] w-[18px] rounded-t-[6px] bg-[#98B6FF]" />
+                        <div className="absolute bottom-[8px] h-[22px] w-[16px] rounded-t-full bg-[#64C98D]" />
+                        <div className="absolute bottom-[8px] left-[1px] h-[26px] w-[12px] rounded-t-full bg-[#8BD8A7] rotate-[-10deg]" />
+                        <div className="absolute bottom-0 h-[14px] w-[18px] rounded-t-[6px] bg-[#5B80F8]" />
                       </div>
                     </div>
                     <div className="relative z-10 w-[235px] sm:w-[265px]">
-                      <div className="rounded-[18px] border border-[#CFE0FF] bg-white shadow-[0_16px_32px_rgba(53,101,227,0.14)]">
+                      <div className={`rounded-[18px] border shadow-[0_16px_32px_rgba(53,101,227,0.14)] ${theme === 'dark' ? 'border-blue-300/25 bg-[#F8FAFF]' : 'border-[#CFE0FF] bg-white'}`}>
                         <div className="flex items-center gap-1.5 rounded-t-[18px] border-b border-[#E7EEFB] bg-[#F7FAFF] px-3 py-2">
                           <span className="h-2 w-2 rounded-full bg-[#C7D7FF]" />
                           <span className="h-2 w-2 rounded-full bg-[#D8E4FF]" />
@@ -8128,31 +8189,31 @@ html, body, #root {
                             <div className="h-16 rounded-[12px] bg-[linear-gradient(180deg,#EDF3FF_0%,#F7FAFF_100%)] p-2">
                               <div className="flex h-full items-end gap-1.5">
                                 {[36, 58, 46, 68, 54, 72].map((h, idx) => (
-                                  <div key={idx} className="w-3 rounded-t-full bg-[#7BA3FF]" style={{ height: h + '%' }} />
+                                  <div key={idx} className="w-3 rounded-t-full bg-[#5B80F8]" style={{ height: h + '%' }} />
                                 ))}
                               </div>
                             </div>
                             <div className="grid grid-cols-2 gap-2">
                               <div className="rounded-[10px] bg-[#F6F9FF] p-2">
                                 <div className="mb-1 h-2.5 w-12 rounded-full bg-[#D9E6FF]" />
-                                <div className="h-4 w-16 rounded-full bg-[#7BA3FF]/85" />
+                                <div className="h-4 w-16 rounded-full bg-[#6C8FFF]" />
                               </div>
                               <div className="rounded-[10px] bg-[#F6F9FF] p-2">
                                 <div className="mb-1 h-2.5 w-10 rounded-full bg-[#D9E6FF]" />
-                                <div className="h-4 w-12 rounded-full bg-[#8FD0A8]/90" />
+                                <div className="h-4 w-12 rounded-full bg-[#71C992]" />
                               </div>
                             </div>
                           </div>
                           <div className="space-y-2">
                             <div className="flex h-16 items-center justify-center rounded-[12px] bg-[#F6F9FF]">
-                              <div className="relative h-11 w-11 rounded-full bg-[conic-gradient(#7BA3FF_0_220deg,#DDE8FF_220deg_360deg)]">
+                              <div className="relative h-11 w-11 rounded-full bg-[conic-gradient(#5B80F8_0_220deg,#DDE8FF_220deg_360deg)]">
                                 <div className="absolute inset-[8px] rounded-full bg-white" />
                               </div>
                             </div>
                             <div className="space-y-2 rounded-[10px] bg-[#F6F9FF] p-2.5">
                               {[1,2,3].map((line) => (
                                 <div key={line} className="flex items-center gap-2">
-                                  <span className="h-2 w-2 rounded-full bg-[#7BA3FF]" />
+                                  <span className="h-2 w-2 rounded-full bg-[#5B80F8]" />
                                   <span className="h-2.5 flex-1 rounded-full bg-[#D9E6FF]" />
                                 </div>
                               ))}
@@ -8160,18 +8221,18 @@ html, body, #root {
                           </div>
                         </div>
                       </div>
-                      <div className="mx-auto h-[10px] w-[170px] rounded-b-[14px] bg-[#C6D7FF] shadow-[0_8px_14px_rgba(83,126,236,0.20)]" />
+                      <div className={`mx-auto h-[10px] w-[170px] rounded-b-[14px] shadow-[0_8px_14px_rgba(83,126,236,0.20)] ${theme === 'dark' ? 'bg-[#385BBA]' : 'bg-[#C6D7FF]'}`} />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="px-4 py-4 sm:px-5 sm:py-5">
-                <h3 className="text-center text-[18px] font-bold leading-tight tracking-[-0.03em] text-[#0B1739] font-brand sm:text-[19px]">
+              <div className={`px-4 py-4 sm:px-5 sm:py-5 ${theme === 'dark' ? 'bg-[#0B1730]' : 'bg-white'}`}>
+                <h3 className={`text-center text-[18px] font-bold leading-tight tracking-[-0.03em] font-brand sm:text-[19px] ${theme === 'dark' ? 'text-white' : 'text-[#0B1739]'}`}>
                   {hasTriedSampleData ? 'Start with your own business' : 'Load the demo business'}
                 </h3>
                 {hasTriedSampleData && (
-                  <p className="mx-auto mt-2 max-w-[31ch] text-center text-[14px] leading-[1.55] font-semibold text-[#55667E]">
+                  <p className={`mx-auto mt-2 max-w-[31ch] text-center text-[14px] leading-[1.55] font-semibold ${theme === 'dark' ? 'text-slate-300' : 'text-[#55667E]'}`}>
                     The demo is cleared. Record your first real entry and start building your own records.
                   </p>
                 )}
@@ -8179,14 +8240,17 @@ html, body, #root {
                 {!hasTriedSampleData && (
                   <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
                     {[
-                      { value: sampleDataCounts.transactions, label: 'Records', icon: <Receipt size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
-                      { value: sampleDataCounts.invoices, label: 'Invoices', icon: <FileText size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
-                      { value: sampleDataCounts.clients, label: 'Clients', icon: <Users size={16} className="text-[#5B80F8]" strokeWidth={1.8} /> },
+                      { value: sampleDataCounts.transactions, label: 'Records', icon: <Receipt size={16} className={theme === 'dark' ? 'text-blue-300' : 'text-[#5B80F8]'} strokeWidth={1.8} /> },
+                      { value: sampleDataCounts.invoices, label: 'Invoices', icon: <FileText size={16} className={theme === 'dark' ? 'text-blue-300' : 'text-[#5B80F8]'} strokeWidth={1.8} /> },
+                      { value: sampleDataCounts.clients, label: 'Clients', icon: <Users size={16} className={theme === 'dark' ? 'text-blue-300' : 'text-[#5B80F8]'} strokeWidth={1.8} /> },
                     ].map((stat) => (
-                      <div key={stat.label} className="min-w-0 rounded-[18px] border border-[#E0E7F3] bg-white px-2.5 py-3 text-center shadow-[0_8px_18px_rgba(15,23,42,0.04)] sm:px-3">
+                      <div key={stat.label} className={`min-w-0 rounded-[18px] border px-2 py-3 text-center shadow-[0_8px_18px_rgba(15,23,42,0.06)] sm:px-3 ${theme === 'dark'
+                        ? 'border-blue-400/20 bg-slate-950/80'
+                        : 'border-[#E0E7F3] bg-white'
+                      }`}>
                         <div className="mb-2 flex justify-center">{stat.icon}</div>
-                        <div className="text-[31px] font-bold leading-none tracking-[-0.05em] text-[#0B1739] font-brand sm:text-[34px]">{stat.value}</div>
-                        <div className="mt-1 w-full min-w-0 whitespace-nowrap text-center text-[10px] font-extrabold leading-[1.15] tracking-normal text-[#4B5870] sm:text-[11px]">{stat.label}</div>
+                        <div className={`text-[30px] font-bold leading-none tracking-[-0.05em] font-brand sm:text-[34px] ${theme === 'dark' ? 'text-white' : 'text-[#0B1739]'}`}>{stat.value}</div>
+                        <div className={`mt-1 w-full min-w-0 whitespace-nowrap text-center text-[9px] font-extrabold leading-[1.15] tracking-normal sm:text-[11px] ${theme === 'dark' ? 'text-slate-300' : 'text-[#4B5870]'}`}>{stat.label}</div>
                       </div>
                     ))}
                   </div>
@@ -8204,7 +8268,7 @@ html, body, #root {
 
                 <button
                   onClick={hasTriedSampleData ? handleLoadSampleData : () => handleOpenUnifiedAdd()}
-                  className="mt-4 w-full text-center text-[14px] font-bold text-[#2563EB] underline underline-offset-4 transition-colors hover:text-[#1D4ED8]"
+                  className={`mt-4 w-full text-center text-[14px] font-bold underline underline-offset-4 transition-colors ${theme === 'dark' ? 'text-blue-300 hover:text-blue-200' : 'text-[#2563EB] hover:text-[#1D4ED8]'}`}
                 >
                   {hasTriedSampleData ? 'Show the demo again' : 'Skip — record my first entry'}
                 </button>
