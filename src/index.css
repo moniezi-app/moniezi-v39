@@ -1262,20 +1262,20 @@ html {
   align-items: center;
   width: min(100%, 620px);
   margin-inline: auto;
-  padding: 8px 0 20px;
+  padding: 8px 0 32px;
   text-align: center;
 }
 
 .v39-empty-state__visual {
   width: min(100%, 360px);
-  margin-bottom: 10px;
+  margin-bottom: 22px;
 }
 
 .v39-empty-state__copy {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 
 .v39-empty-state__eyebrow {
@@ -1310,7 +1310,7 @@ html {
   max-width: 360px;
   margin: 0;
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.75;
   font-weight: 500;
   color: #55657d;
 }
@@ -1321,12 +1321,12 @@ html {
 
 .v39-empty-state__supporting {
   width: min(100%, 360px);
-  margin-top: 18px;
+  margin-top: 30px;
 }
 
 .v39-feature-list {
   display: grid;
-  gap: 12px;
+  gap: 22px;
   text-align: left;
 }
 
@@ -1368,9 +1368,9 @@ html {
 }
 
 .v39-feature-row__body {
-  margin: 3px 0 0;
+  margin: 7px 0 0;
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 1.62;
   font-weight: 500;
   color: #56677f;
 }
@@ -1381,7 +1381,7 @@ html {
 
 .v39-empty-state__primary {
   width: min(100%, 420px);
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .v39-empty-state__secondary {

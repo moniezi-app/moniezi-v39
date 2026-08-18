@@ -1,6 +1,16 @@
-# MONIEZI v39.0.18
+# MONIEZI v39.0.19
 
 Controlled visual-redesign branch for MONIEZI v39.
+
+## v39.0.19 Invoice / Estimate empty-state readability
+
+- Adds more vertical breathing room between the approved illustration and the empty-state headline.
+- Increases spacing between the headline and supporting copy.
+- Increases supporting-copy line height for easier mobile reading.
+- Adds more space between benefit rows and between each benefit title and description.
+- Adds more space before the primary CTA so the empty state can scroll naturally rather than compressing the content.
+- Applies identically to Invoices and Estimates in both light and dark modes.
+- Preserves the approved illustrations, copy, CTA behavior, business logic, and all existing v39.0.18 functionality.
 
 ## v39.0.18 license activation confirmation timing
 
