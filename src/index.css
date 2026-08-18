@@ -1444,3 +1444,13 @@ html {
     font-size: 14px;
   }
 }
+
+/* v39.0.23: production empty-state artwork must sit directly on the app surface. */
+.v39-approved-illustration-pair,
+.v39-approved-illustration {
+  background: transparent !important;
+}
+
+.v39-approved-illustration {
+  object-fit: contain;
+}

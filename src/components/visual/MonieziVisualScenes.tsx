@@ -79,14 +79,14 @@ export const EstimateVisualScene: React.FC = () => (
 export const ReceiptsVisualScene: React.FC = () => (
   <div className="v39-approved-illustration-pair" aria-hidden="true">
     <img
-      src={`${publicBase}receipts-empty-v39-22-light.webp`}
+      src={`${publicBase}receipts-empty-v39-23-light.webp`}
       alt=""
       className="v39-approved-illustration v39-approved-illustration--light"
       loading="eager"
       decoding="async"
     />
     <img
-      src={`${publicBase}receipts-empty-v39-22-dark.webp`}
+      src={`${publicBase}receipts-empty-v39-23-dark.webp`}
       alt=""
       className="v39-approved-illustration v39-approved-illustration--dark"
       loading="eager"
@@ -98,14 +98,14 @@ export const ReceiptsVisualScene: React.FC = () => (
 export const MileageVisualScene: React.FC = () => (
   <div className="v39-approved-illustration-pair" aria-hidden="true">
     <img
-      src={`${publicBase}mileage-empty-v39-22-light.webp`}
+      src={`${publicBase}mileage-empty-v39-23-light.webp`}
       alt=""
       className="v39-approved-illustration v39-approved-illustration--light"
       loading="eager"
       decoding="async"
     />
     <img
-      src={`${publicBase}mileage-empty-v39-22-dark.webp`}
+      src={`${publicBase}mileage-empty-v39-23-dark.webp`}
       alt=""
       className="v39-approved-illustration v39-approved-illustration--dark"
       loading="eager"
@@ -117,14 +117,14 @@ export const MileageVisualScene: React.FC = () => (
 export const ClientsVisualScene: React.FC = () => (
   <div className="v39-approved-illustration-pair" aria-hidden="true">
     <img
-      src={`${publicBase}clients-empty-v39-22-light.webp`}
+      src={`${publicBase}clients-empty-v39-23-light.webp`}
       alt=""
       className="v39-approved-illustration v39-approved-illustration--light"
       loading="eager"
       decoding="async"
     />
     <img
-      src={`${publicBase}clients-empty-v39-22-dark.webp`}
+      src={`${publicBase}clients-empty-v39-23-dark.webp`}
       alt=""
       className="v39-approved-illustration v39-approved-illustration--dark"
       loading="eager"

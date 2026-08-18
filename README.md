@@ -1,6 +1,15 @@
-# MONIEZI v39.0.22
+# MONIEZI v39.0.23
 
 Controlled visual-redesign branch for MONIEZI v39.
+
+## v39.0.23 transparent illustration integration
+
+- Replaces the Receipts, Clients, and Mileage light/dark production assets with normalized transparent artwork.
+- Removes baked-in rectangular dark backgrounds so illustrations sit directly on the MONIEZI app surface.
+- Removes any checkerboard/transparency-preview appearance from production assets.
+- Normalizes crop, canvas, and visible artwork scale across each light/dark pair.
+- Keeps the approved Receipts, Clients, and Mileage concepts and all existing business logic unchanged.
+- Precaches all six new transparent illustration assets for offline use.
 
 ## v39.0.22 approved Receipts / Clients / Mileage illustrations
 
