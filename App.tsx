@@ -8150,7 +8150,7 @@ html, body, #root {
               <div className="px-2 pt-3 pb-2 sm:px-4 sm:pt-4">
                 <div className="mx-auto w-full max-w-[430px]">
                   <img
-                    src={`${import.meta.env.BASE_URL}${theme === 'dark' ? 'demo-business-v39-24-dark.webp' : 'demo-business-v39-24-light.webp'}`}
+                    src={`${import.meta.env.BASE_URL}${theme === 'dark' ? 'demo-business-v39-25-dark.webp' : 'demo-business-v39-25-light.webp'}`}
                     alt="A MONIEZI demo dashboard surrounded by sample receipts, reports, mileage, and business records"
                     className="block h-auto w-full object-contain"
                     loading="eager"

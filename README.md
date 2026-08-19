@@ -1,8 +1,14 @@
-# MONIEZI v39.0.24
+# MONIEZI v39.0.25
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-## v39.0.24 demo-business illustration upgrade
+## v39.0.25 dark-mode demo illustration contrast refinement
+
+- Replaces the dark-mode demo-business illustration with a higher-contrast professional version for better separation from MONIEZI's dark screen background.
+- Keeps the approved light-mode illustration.
+- Continues using transparent illustration assets with no baked rectangular background.
+
+## v39.0.25 demo-business illustration upgrade
 
 - Replaces the simple first-run demo graphic with the approved detailed MONIEZI business dashboard illustration.
 - Adds separate approved light and dark production assets.
