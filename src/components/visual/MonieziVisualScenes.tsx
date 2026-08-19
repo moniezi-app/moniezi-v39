@@ -99,28 +99,15 @@ export const ClientsVisualScene: React.FC = () => (
 );
 
 export const JobsVisualScene: React.FC = () => (
-  <svg viewBox="0 0 320 220" fill="none" aria-hidden="true">
-    <g transform="translate(48 32)">
-      <rect x="50" width="124" height="156" rx="24" fill={paper} stroke={ink} strokeWidth="1.5" />
-      <rect x="86" y="16" width="52" height="12" rx="6" fill={cyan} fillOpacity="0.18" stroke={cyan} strokeWidth="1.2" />
-      <path d="M73 53h18l5 5 8-12" stroke={green} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M116 50h34M116 59h26" stroke={ink} strokeWidth="1.35" strokeLinecap="round" opacity="0.6" />
-      <path d="M73 88h18l5 5 8-12" stroke={green} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M116 85h38M116 94h28" stroke={ink} strokeWidth="1.35" strokeLinecap="round" opacity="0.6" />
-      <path d="M73 123h18l5 5 8-12" stroke={blue} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M116 120h32M116 129h24" stroke={ink} strokeWidth="1.35" strokeLinecap="round" opacity="0.6" />
-    </g>
-    <g transform="translate(34 135)">
-      <rect width="62" height="40" rx="14" fill={paper} stroke={amber} strokeWidth="1.5" />
-      <path d="M18 11v18M11 18h14" stroke={amber} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M34 16h14M34 24h10" stroke={ink} strokeWidth="1.3" strokeLinecap="round" opacity="0.55" />
-    </g>
-    <g transform="translate(236 108)">
-      <rect width="48" height="58" rx="16" fill={paper} stroke={teal} strokeWidth="1.5" />
-      <path d="M13 38l8-8 7 5 10-14" stroke={teal} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15 18h18M15 25h13" stroke={ink} strokeWidth="1.25" strokeLinecap="round" opacity="0.54" />
-    </g>
-  </svg>
+  <div className="v39-approved-illustration-pair" aria-hidden="true">
+    <img
+      src={`${publicBase}jobs-empty-v39-28-shared.webp`}
+      alt=""
+      className="v39-approved-illustration"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
 );
 
 export default WelcomeVisualScene;

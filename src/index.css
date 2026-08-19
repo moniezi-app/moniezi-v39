@@ -782,10 +782,10 @@ html {
 
 .v39-license-shell {
   position: relative;
-  width: min(100%, 920px);
+  width: min(100%, 860px);
   margin: 0 auto;
   display: grid;
-  gap: 20px;
+  gap: 16px;
 }
 
 .v39-license-intro {
@@ -796,7 +796,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   font-size: 13px;
   line-height: 1;
   font-weight: 700;
@@ -813,7 +813,7 @@ html {
 }
 
 .v39-license-copy {
-  max-width: 720px;
+  max-width: 680px;
 }
 
 .v39-license-eyebrow {
@@ -828,62 +828,62 @@ html {
 
 .v39-license-copy h1 {
   margin: 0;
-  font-size: clamp(42px, 8vw, 74px);
-  line-height: 0.98;
+  font-size: clamp(36px, 7vw, 62px);
+  line-height: 1.02;
   font-weight: 700;
   letter-spacing: -0.055em;
   color: #06153a;
 }
 
 .v39-license-copy p {
-  margin: 18px 0 0;
-  max-width: 600px;
-  font-size: clamp(18px, 2.6vw, 27px);
+  margin: 12px 0 0;
+  max-width: 560px;
+  font-size: clamp(16px, 2.2vw, 22px);
   line-height: 1.48;
   font-weight: 500;
   color: #56677f;
 }
 
 .v39-license-hero {
-  margin-top: 18px;
+  margin-top: 12px;
   display: flex;
   justify-content: center;
 }
 
 .v39-license-hero__image {
-  width: min(100%, 820px);
+  width: min(100%, 520px);
   display: block;
   border-radius: 30px;
 }
 
 .v39-license-benefits {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 14px;
-  border: 1px solid rgba(206, 214, 230, 0.95);
-  border-radius: 20px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2px;
 }
 
 .v39-license-benefits span {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  min-height: 92px;
-  padding: 18px 20px;
+  gap: 10px;
+  min-height: 52px;
+  padding: 14px 18px;
+  border: 1px solid rgba(206, 214, 230, 0.95);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.05);
   color: #16233f;
   font-size: 14px;
   line-height: 1.35;
   font-weight: 600;
   text-align: center;
+  flex: 1 1 180px;
 }
 
 .v39-license-benefits span + span {
-  border-left: 1px solid rgba(210, 218, 234, 1);
+  border-left: 0;
 }
 
 .v39-license-benefits svg {
@@ -892,7 +892,7 @@ html {
 }
 
 .v39-license-card {
-  padding: clamp(24px, 5vw, 38px);
+  padding: clamp(22px, 4.2vw, 34px);
   border: 1px solid rgba(211, 218, 233, 0.95);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.96);
@@ -902,7 +902,7 @@ html {
 .v39-license-card__heading {
   display: grid;
   justify-items: center;
-  gap: 14px;
+  gap: 10px;
   text-align: center;
 }
 
@@ -922,7 +922,7 @@ html {
 
 .v39-license-card h2 {
   margin: 0;
-  font-size: clamp(28px, 4vw, 37px);
+  font-size: clamp(24px, 3.2vw, 32px);
   line-height: 1.12;
   font-weight: 700;
   letter-spacing: -0.04em;
@@ -939,8 +939,8 @@ html {
 
 .v39-license-form {
   display: grid;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 14px;
+  margin-top: 18px;
 }
 
 .v39-license-label {
@@ -1061,7 +1061,7 @@ html {
 .v39-license-links {
   display: grid;
   gap: 8px;
-  margin-top: 22px;
+  margin-top: 18px;
   text-align: center;
   font-size: 12px;
   line-height: 1.55;
@@ -1083,25 +1083,25 @@ html {
   }
 
   .v39-license-brand {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
 
   .v39-license-copy h1 {
-    font-size: clamp(38px, 12vw, 58px);
+    font-size: clamp(34px, 10vw, 52px);
   }
 
   .v39-license-copy p {
-    font-size: 18px;
-    margin-top: 14px;
+    font-size: 17px;
+    margin-top: 12px;
   }
 
   .v39-license-hero__image {
-    width: min(100%, 720px);
+    width: min(100%, 460px);
   }
 
   .v39-license-benefits span {
-    min-height: 84px;
-    padding: 16px 14px;
+    min-height: 48px;
+    padding: 12px 14px;
     font-size: 13px;
   }
 }
@@ -1126,22 +1126,23 @@ html {
   }
 
   .v39-license-benefits {
-    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .v39-license-benefits span {
     justify-content: flex-start;
     text-align: left;
-    min-height: 62px;
+    min-height: 48px;
+    width: 100%;
   }
 
   .v39-license-benefits span + span {
     border-left: 0;
-    border-top: 1px solid rgba(210, 218, 234, 1);
+    border-top: 0;
   }
 
   .v39-license-card {
-    padding: 22px 16px;
+    padding: 20px 16px;
     border-radius: 20px;
   }
 
@@ -1156,7 +1157,7 @@ html {
   }
 
   .v39-license-form {
-    margin-top: 22px;
+    margin-top: 16px;
   }
 
   .v39-license-input,

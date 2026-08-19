@@ -7157,11 +7157,6 @@ export default function App() {
               />
             </div>
 
-            <div className="v39-license-benefits" aria-label="MONIEZI purchase benefits">
-              <span><CheckCircle size={18} strokeWidth={1.8} /> One-time purchase</span>
-              <span><CheckCircle size={18} strokeWidth={1.8} /> Local first records</span>
-              <span><CheckCircle size={18} strokeWidth={1.8} /> Works offline</span>
-            </div>
           </section>
 
           <section className="v39-license-card" aria-labelledby="v39-license-activate-title">
@@ -7241,6 +7236,12 @@ export default function App() {
               ) : null}
             </div>
           </section>
+
+          <div className="v39-license-benefits" aria-label="MONIEZI purchase benefits">
+            <span><CheckCircle size={18} strokeWidth={1.8} /> One-time purchase</span>
+            <span><CheckCircle size={18} strokeWidth={1.8} /> Local first records</span>
+            <span><CheckCircle size={18} strokeWidth={1.8} /> Works offline</span>
+          </div>
         </main>
       </div>
     );

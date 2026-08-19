@@ -1,8 +1,14 @@
-# MONIEZI v39.0.27
+# MONIEZI v39.0.28
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-## v39.0.27 shared illustrations across themes
+## v39.0.28 jobs illustration and welcome activation-first layout
+
+- Replaces the Jobs / Projects empty-state illustration with the newly approved shared transparent illustration, used in both light and dark mode.
+- Reworks the welcome/license screen so activation comes earlier: the benefits strip moves below the activation card and the hero section is reduced so users reach the license field sooner.
+- Keeps the approved transparent shared-illustration rule for the other custom illustration screens.
+
+## v39.0.28 shared illustrations across themes
 
 - Uses one approved illustration asset in both light and dark mode for Receipts, Clients, Mileage, Invoices, and Estimates.
 - Receipts, Clients, and Mileage use their approved light-mode transparent artwork as the shared master.
@@ -10,19 +16,19 @@ Controlled visual-redesign branch for MONIEZI v39.
 - Removes the theme-specific illustration switching for these five screens.
 - Keeps the shared demo-business illustration behavior introduced in v39.0.26.
 
-## v39.0.27 shared demo-business illustration
+## v39.0.28 shared demo-business illustration
 
 - Uses the approved light-mode demo-business illustration in both light and dark themes.
 - Removes the dark-specific demo illustration because the light illustration reads more clearly on MONIEZI's dark background.
 - Keeps the illustration transparent with no baked rectangular background.
 
-## v39.0.27 dark-mode demo illustration contrast refinement
+## v39.0.28 dark-mode demo illustration contrast refinement
 
 - Replaces the dark-mode demo-business illustration with a higher-contrast professional version for better separation from MONIEZI's dark screen background.
 - Keeps the approved light-mode illustration.
 - Continues using transparent illustration assets with no baked rectangular background.
 
-## v39.0.27 demo-business illustration upgrade
+## v39.0.28 demo-business illustration upgrade
 
 - Replaces the simple first-run demo graphic with the approved detailed MONIEZI business dashboard illustration.
 - Adds separate approved light and dark production assets.
