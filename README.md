@@ -1,20 +1,28 @@
-# MONIEZI v39.0.26
+# MONIEZI v39.0.27
 
 Controlled visual-redesign branch for MONIEZI v39.
 
-## v39.0.26 shared demo-business illustration
+## v39.0.27 shared illustrations across themes
+
+- Uses one approved illustration asset in both light and dark mode for Receipts, Clients, Mileage, Invoices, and Estimates.
+- Receipts, Clients, and Mileage use their approved light-mode transparent artwork as the shared master.
+- Invoice and Estimate use their approved light illustrations with only the connected outer canvas removed, preserving the document artwork while allowing it to sit directly on either app background.
+- Removes the theme-specific illustration switching for these five screens.
+- Keeps the shared demo-business illustration behavior introduced in v39.0.26.
+
+## v39.0.27 shared demo-business illustration
 
 - Uses the approved light-mode demo-business illustration in both light and dark themes.
 - Removes the dark-specific demo illustration because the light illustration reads more clearly on MONIEZI's dark background.
 - Keeps the illustration transparent with no baked rectangular background.
 
-## v39.0.26 dark-mode demo illustration contrast refinement
+## v39.0.27 dark-mode demo illustration contrast refinement
 
 - Replaces the dark-mode demo-business illustration with a higher-contrast professional version for better separation from MONIEZI's dark screen background.
 - Keeps the approved light-mode illustration.
 - Continues using transparent illustration assets with no baked rectangular background.
 
-## v39.0.26 demo-business illustration upgrade
+## v39.0.27 demo-business illustration upgrade
 
 - Replaces the simple first-run demo graphic with the approved detailed MONIEZI business dashboard illustration.
 - Adds separate approved light and dark production assets.
