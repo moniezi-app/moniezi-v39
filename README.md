@@ -1,26 +1,25 @@
-# MONIEZI v39.3.2
+# MONIEZI v39.3.4
 
-## v39.3.2 Luminous Glass consistency corrections
+## v39.3.4 Home + footer readability restoration
 
-This correction build keeps the v39.3.0 lifecycle footer architecture and fixes two visual inconsistencies identified during phone QA.
+This correction build restores comfortable mobile typography after phone QA showed that the Home dashboard and six-item sticky footer had become too small to read easily.
 
-### First-run / post-demo dashboard
+### Home dashboard
 
-- Rebuilds the **Ready for your first records / Explore before you start** experience using the same Luminous Glass hierarchy as the production Home dashboard.
-- Removes the oversized layered-shell treatment that made the empty first-run state look like a different design generation.
-- Uses the same glass card, inset surface, controlled luminous border, typography hierarchy, and integrated action treatment as the Home cards.
-- Keeps the approved demo-business illustration and all existing demo / first-entry behavior unchanged.
-- Keeps the early light/dark theme choice, but integrates it into the same glass material system.
+- Increases card-title, subtitle, action, selector, status, metric, progress, Jobs-status, and secondary-section text sizes.
+- Enlarges small Home-only utility labels such as invoice summaries, pipeline labels, Tax Snapshot copy, and receipt actions.
+- Keeps the approved Luminous Glass card design, spacing hierarchy, calculations, and interactions unchanged.
+- Keeps the Monthly Business Goals decorative target/dart completely removed.
 
-### Monthly Business Goals target
+### Sticky footer
 
-- Replaces the previous CSS-drawn target/arrow symbol whose arrowhead pointed outward.
-- The new target uses a conventional dart/arrow with the point directed **into the bullseye**, so the visual clearly reads as setting/reaching a goal.
-- Keeps the target compact and supporting; real goal data remains the visual priority after goals are configured.
+- Restores readable **11px** navigation labels on normal phone widths rather than shrinking Estimates/Invoices to 9px.
+- Restores normal 20px navigation icons.
+- Keeps the approved six destinations: **Home · Clients · Jobs · Estimates · Invoices · Mileage**.
+- Uses even width distribution and compact gaps rather than microscopic typography to make the footer fit.
 
-### Preserved from v39.3.0
+### Preserved
 
-- Sticky footer remains **Home · Clients · Jobs · Estimates · Invoices · Mileage**.
 - Activity and Reports remain in the full application menu.
 - Existing storage, calculations, licensing, demo data, invoices, estimates, jobs, receipts, mileage, reports, and exports are unchanged.
 

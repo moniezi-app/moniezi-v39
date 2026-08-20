@@ -195,9 +195,9 @@ Covered surfaces include Activity, Income, Expenses, Invoices, Estimates, Mileag
 The persistent footer now follows the primary service-business lifecycle: **Home · Clients · Jobs · Estimates · Invoices · Mileage**. Activity and Reports remain in the complete application directory. Estimates and Invoices intentionally share the billing page while maintaining separate footer actions and active states.
 
 
-## v39.3.2 consistency corrections
+## v39.3.4 Monthly Goals cleanup
 
 - First-run and post-demo empty Dashboard experience must use the same Luminous Glass card/inset hierarchy as the working Home dashboard.
 - Avoid oversized nested shells that make onboarding/empty states look like a separate application.
-- Monthly Business Goals target visual uses an arrow directed into the bullseye; outward-pointing target arrows are prohibited.
+- Monthly Business Goals no longer uses decorative target/dart artwork; the empty state is text + action only.
 - v39.3.0 lifecycle footer architecture remains unchanged.

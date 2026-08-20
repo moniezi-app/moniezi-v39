@@ -134,40 +134,7 @@ const selectNumericValueOnFocus = (event: React.FocusEvent<HTMLInputElement>) =>
   });
 };
 
-// v39.3.2: replace the previous thin-line arrow with a compact dart asset
-// whose body, point, and fins read clearly at mobile size. The dart now lands
-// decisively in the bullseye instead of looking like a line laid across rings.
-const GoalTargetVisual = () => (
-  <svg
-    className="v3931-goal-target-svg"
-    viewBox="0 0 96 96"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <defs>
-      <linearGradient id="v3932GoalDartBody" x1="65" y1="22" x2="46" y2="50" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#8ef0ff" />
-        <stop offset="1" stopColor="#44c8ff" />
-      </linearGradient>
-      <linearGradient id="v3932GoalDartTail" x1="74" y1="18" x2="84" y2="31" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#b6f8ff" />
-        <stop offset="1" stopColor="#73ddf0" />
-      </linearGradient>
-    </defs>
-
-    <circle className="v3931-goal-target-ring v3931-goal-target-ring--outer" cx="46" cy="50" r="33" />
-    <circle className="v3931-goal-target-ring v3931-goal-target-ring--middle" cx="46" cy="50" r="22" />
-    <circle className="v3931-goal-target-ring v3931-goal-target-ring--inner" cx="46" cy="50" r="10" />
-    <circle className="v3931-goal-target-center" cx="46" cy="50" r="4.4" />
-
-    <g className="v3932-goal-dart">
-      <path className="v3932-goal-dart-body" d="M79 18.5 L83.5 23 L57 49.5 L52.5 45 Z" />
-      <path className="v3932-goal-dart-head" d="M46 50 L59.2 51.2 L51.2 43.2 Z" />
-      <path className="v3932-goal-dart-fin v3932-goal-dart-fin--upper" d="M76.8 20.4 L88 11.2 L82.2 26.2 Z" />
-      <path className="v3932-goal-dart-fin v3932-goal-dart-fin--lower" d="M80 24.3 L92.3 24.3 L76.2 30.1 Z" />
-    </g>
-  </svg>
-);
+// v39.3.3: decorative target artwork removed from Monthly Business Goals.
 
 // --- Utility: Invoice/Estimate Number Generator ---
 const generateDocNumber = (prefix: 'INV' | 'EST', existingDocs: { number?: string }[]): string => {
@@ -8159,7 +8126,7 @@ html, body, #root {
         </div>
       )}
 
-      {/* v39.3.2 — first-run / post-demo empty experience now uses the same
+      {/* v39.3.3 — first-run / post-demo empty experience now uses the same
           Luminous Glass hierarchy as the rest of the dashboard. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
         <div className="mb-6">
@@ -8257,7 +8224,7 @@ html, body, #root {
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
         {(currentPage === Page.Dashboard) && (
-          <div className="v391-dashboard space-y-5 sm:space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="v391-dashboard v3934-home-readable space-y-5 sm:space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <MonieziGlassCard hero>
               <div className="v391-card-header">
                 <div className="v391-card-header__main">
@@ -8404,7 +8371,6 @@ html, body, #root {
                       <PlusCircle size={15} /> Set Monthly Goals
                     </MonieziGlassAction>
                   </div>
-                  <div className="v3931-goal-target-wrap" aria-hidden="true"><GoalTargetVisual /></div>
                 </MonieziGlassInset>
               ) : (
                 <>
@@ -8507,21 +8473,21 @@ html, body, #root {
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-300"><FileText size={20} /></div>
                   <div className="min-w-0">
                     <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">Invoices & Collections</h3>
-                    <p className="mt-0.5 text-xs font-medium text-slate-500 dark:text-slate-400">Open customer balances</p>
+                    <p className="mt-0.5 text-[13px] font-medium text-slate-500 dark:text-slate-400">Open customer balances</p>
                   </div>
                 </div>
                 <ChevronRight size={18} className="shrink-0 text-slate-400" />
               </div>
               <div className="v391-glass-inset mt-4 grid grid-cols-2 divide-x divide-slate-200 dark:divide-slate-800">
                 <div className="px-4 py-3.5">
-                  <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Open</div>
+                  <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Open</div>
                   <div className="mt-1 text-lg font-extrabold tabular-nums text-slate-950 dark:text-white">{formatCurrency.format(totals.pendingAmount)}</div>
-                  <div className="mt-0.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400">{totals.pendingCount} invoice{totals.pendingCount === 1 ? '' : 's'}</div>
+                  <div className="mt-0.5 text-[13px] font-semibold text-slate-500 dark:text-slate-400">{totals.pendingCount} invoice{totals.pendingCount === 1 ? '' : 's'}</div>
                 </div>
                 <div className="px-4 py-3.5">
-                  <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Overdue</div>
+                  <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Overdue</div>
                   <div className={`mt-1 text-lg font-extrabold tabular-nums ${totals.overdueCount > 0 ? 'text-red-600 dark:text-red-300' : 'text-slate-950 dark:text-white'}`}>{formatCurrency.format(totals.overdueAmount)}</div>
-                  <div className="mt-0.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400">{totals.overdueCount} invoice{totals.overdueCount === 1 ? '' : 's'}</div>
+                  <div className="mt-0.5 text-[13px] font-semibold text-slate-500 dark:text-slate-400">{totals.overdueCount} invoice{totals.overdueCount === 1 ? '' : 's'}</div>
                 </div>
               </div>
             </div>
@@ -8545,13 +8511,13 @@ html, body, #root {
                     </div>
                     <div>
                       <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wide">Sales Pipeline</h3>
-                      <p className="text-xs text-slate-600 dark:text-slate-300">Estimates & Proposals</p>
+                      <p className="text-[13px] text-slate-600 dark:text-slate-300">Estimates & Proposals</p>
                     </div>
                   </div>
                   {pipelineStats.conversionRate > 0 && (
                     <div className="text-right">
                       <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{pipelineStats.conversionRate.toFixed(0)}%</div>
-                      <div className="text-[10px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Win Rate</div>
+                      <div className="text-[12px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Win Rate</div>
                     </div>
                   )}
                 </div>
@@ -8559,9 +8525,9 @@ html, body, #root {
                 {/* Pipeline Value */}
                 {pipelineStats.pipelineValue > 0 && (
                   <div className="v391-glass-inset p-4 mb-5">
-                    <div className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">Pipeline Value</div>
+                    <div className="text-[13px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">Pipeline Value</div>
                     <div className="text-3xl font-extrabold text-slate-900 dark:text-white">{formatCurrency.format(pipelineStats.pipelineValue)}</div>
-                    <div className="text-xs text-slate-600 dark:text-slate-300 mt-1">
+                    <div className="text-[13px] text-slate-600 dark:text-slate-300 mt-1">
                       {pipelineStats.draft.count} draft{pipelineStats.draft.count !== 1 ? 's' : ''} + {pipelineStats.sent.count} awaiting response
                     </div>
                   </div>
@@ -8571,31 +8537,31 @@ html, body, #root {
                 <div className="grid grid-cols-4 gap-2 mb-4">
                   <div className="text-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
                     <div className="text-lg font-bold text-slate-600 dark:text-slate-300">{pipelineStats.draft.count}</div>
-                    <div className="text-[10px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Draft</div>
+                    <div className="text-[12px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Draft</div>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
                     <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{pipelineStats.sent.count}</div>
-                    <div className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Sent</div>
+                    <div className="text-[12px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Sent</div>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/20">
                     <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{pipelineStats.accepted.count}</div>
-                    <div className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Won</div>
+                    <div className="text-[12px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Won</div>
                   </div>
                   <div className="text-center p-3 rounded-lg bg-red-50 dark:bg-red-900/20">
                     <div className="text-lg font-bold text-red-500 dark:text-red-400">{pipelineStats.declined.count}</div>
-                    <div className="text-[10px] font-bold text-red-500 dark:text-red-400 uppercase tracking-wider">Lost</div>
+                    <div className="text-[12px] font-bold text-red-500 dark:text-red-400 uppercase tracking-wider">Lost</div>
                   </div>
                 </div>
 
                 {/* Won Revenue */}
                 {pipelineStats.accepted.amount > 0 && (
                   <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                    <div className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Revenue Won (All Time)</div>
+                    <div className="text-[13px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Revenue Won (All Time)</div>
                     <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency.format(pipelineStats.accepted.amount)}</div>
                   </div>
                 )}
 
-                <div className="text-[11px] text-slate-600 dark:text-slate-300 font-semibold mt-4 text-center">Tap to view estimates</div>
+                <div className="text-[13px] text-slate-600 dark:text-slate-300 font-semibold mt-4 text-center">Tap to view estimates</div>
               </div>
             )}
             
@@ -8617,7 +8583,7 @@ html, body, #root {
                       </div>
                       <div className="text-right flex-shrink-0">
                          <div className={`text-base font-bold whitespace-nowrap ${t.type === 'income' ? 'text-emerald-600' : 'text-red-600'}`}>{t.type === 'income' ? '+' : ''}{formatCurrency.format(t.amount)}</div>
-                         <div className="text-left md:text-right mt-1"><div className="text-xs font-bold text-slate-600 dark:text-slate-300 whitespace-nowrap">{t.date}</div></div>
+                         <div className="text-left md:text-right mt-1"><div className="text-[13px] font-bold text-slate-600 dark:text-slate-300 whitespace-nowrap">{t.date}</div></div>
                       </div>
                     </div>
                   ))
@@ -8627,21 +8593,21 @@ html, body, #root {
 
             <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card cursor-pointer active:scale-[0.99] transition-all group">
                <div className="flex justify-between items-start mb-4">
-                  <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400"><Calculator size={20} /><span className="text-xs font-bold uppercase tracking-widest font-brand">Tax Snapshot</span></div>
+                  <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400"><Calculator size={20} /><span className="text-[13px] font-bold uppercase tracking-widest font-brand">Tax Snapshot</span></div>
                   <ArrowRight size={18} className="text-slate-300 dark:text-slate-300 -rotate-45 group-hover:rotate-0 group-hover:text-emerald-500 transition-all duration-300"/>
                </div>
                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
-                  <div><div className="text-xs text-slate-600 dark:text-slate-300 uppercase tracking-wider font-bold mb-1">Set Aside (YTD)</div><div className="text-2xl font-extrabold font-brand text-slate-900 dark:text-white">{formatCurrency.format(reportData.totalEstimatedTax)}</div></div>
-                  <div><div className="text-xs text-slate-600 dark:text-slate-300 uppercase tracking-wider font-bold mb-1">YTD Net Profit</div><div className="text-2xl font-bold text-slate-600 dark:text-slate-200">{formatCurrency.format(reportData.ytdNetProfit)}</div></div>
+                  <div><div className="text-[13px] text-slate-600 dark:text-slate-300 uppercase tracking-wider font-bold mb-1">Set Aside (YTD)</div><div className="text-2xl font-extrabold font-brand text-slate-900 dark:text-white">{formatCurrency.format(reportData.totalEstimatedTax)}</div></div>
+                  <div><div className="text-[13px] text-slate-600 dark:text-slate-300 uppercase tracking-wider font-bold mb-1">YTD Net Profit</div><div className="text-2xl font-bold text-slate-600 dark:text-slate-200">{formatCurrency.format(reportData.ytdNetProfit)}</div></div>
                </div>
-               <p className="mb-3 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
+               <p className="mb-3 text-[13px] leading-relaxed text-slate-500 dark:text-slate-400">
                   A cautious reserve, not a tax bill. Your standard deduction and other
                   personal reductions aren&apos;t applied here, so what you actually owe is
                   usually less.
                </p>
                <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Next Deadline: <span className="text-emerald-600 dark:text-emerald-400">{getNextEstimatedTaxDeadline().date}</span> — {getNextEstimatedTaxDeadline().days} days left</div>
-                  <div onClick={(e) => { e.stopPropagation(); setCurrentPage(Page.Reports); setTimeout(() => { setScrollToTaxSnapshot(true); handleOpenTaxDrawer(); }, 100); }} className="text-xs font-bold text-blue-500 hover:underline uppercase tracking-wider cursor-pointer">Log Payment</div>
+                  <div className="text-[13px] font-bold text-slate-600 dark:text-slate-300">Next Deadline: <span className="text-emerald-600 dark:text-emerald-400">{getNextEstimatedTaxDeadline().date}</span> — {getNextEstimatedTaxDeadline().days} days left</div>
+                  <div onClick={(e) => { e.stopPropagation(); setCurrentPage(Page.Reports); setTimeout(() => { setScrollToTaxSnapshot(true); handleOpenTaxDrawer(); }, 100); }} className="text-[13px] font-bold text-blue-500 hover:underline uppercase tracking-wider cursor-pointer">Log Payment</div>
                </div>
             </div>
 
@@ -8650,7 +8616,7 @@ html, body, #root {
               <div className="flex items-center justify-between mb-4 pl-2">
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-brand">Receipts</h3>
-                  <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">Capture receipts, record expenses, and see what still needs documentation.</p>
+                  <p className="mt-1 text-[13px] font-medium text-slate-500 dark:text-slate-400">Capture receipts, record expenses, and see what still needs documentation.</p>
                 </div>
               </div>
 
@@ -8659,19 +8625,19 @@ html, body, #root {
                    <div className="bg-white dark:bg-slate-900 p-2.5 rounded-full shadow-sm text-amber-700 dark:text-amber-300">
                      <Camera size={20} />
                    </div>
-                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-300">Scan Receipt</span>
+                   <span className="text-[12px] font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-300">Scan Receipt</span>
                 </button>
                 <button onClick={() => { handleOpenFAB('expense'); }} className="min-h-24 bg-red-50 dark:bg-red-500/10 rounded-xl flex flex-col items-center justify-center gap-2 hover:bg-red-100 dark:hover:bg-red-500/15 transition-colors border border-red-200 dark:border-red-700/40 active:scale-[0.98]">
                    <div className="bg-white dark:bg-slate-900 p-2.5 rounded-full shadow-sm text-red-700 dark:text-red-300">
                      <PlusCircle size={20} />
                    </div>
-                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-red-700 dark:text-red-300">Add Expense</span>
+                   <span className="text-[12px] font-extrabold uppercase tracking-wider text-red-700 dark:text-red-300">Add Expense</span>
                 </button>
               </div>
 
               <div className="flex items-center justify-between mb-3 px-1">
-                <div className="text-[11px] font-extrabold uppercase tracking-widest text-slate-600 dark:text-slate-300">Recent Receipts</div>
-                {homeRecentReceipts.length > 0 && <div className="text-[10px] font-bold text-slate-400">Tap a receipt to open its expense</div>}
+                <div className="text-[13px] font-extrabold uppercase tracking-widest text-slate-600 dark:text-slate-300">Recent Receipts</div>
+                {homeRecentReceipts.length > 0 && <div className="text-[12px] font-bold text-slate-400">Tap a receipt to open its expense</div>}
               </div>
 
               {homeRecentReceipts.length > 0 ? (
@@ -8754,7 +8720,7 @@ html, body, #root {
               ) : (
                 <div className="rounded-xl border border-slate-300 bg-white px-4 py-5 text-center dark:border-slate-700 dark:bg-slate-900">
                   <div className="text-sm font-bold text-slate-900 dark:text-white">No linked receipt images yet</div>
-                  <div className="mt-1 text-xs text-slate-500 dark:text-slate-400">Scan a receipt and link it to an expense to see it here.</div>
+                  <div className="mt-1 text-[13px] text-slate-500 dark:text-slate-400">Scan a receipt and link it to an expense to see it here.</div>
                 </div>
               )}
 
@@ -8766,15 +8732,15 @@ html, body, #root {
                     </div>
                     <div className="min-w-0">
                       <div className="text-sm font-extrabold text-slate-900 dark:text-white">{homeMissingReceiptExpenses.length} expense{homeMissingReceiptExpenses.length === 1 ? '' : 's'} need receipt{homeMissingReceiptExpenses.length === 1 ? '' : 's'}</div>
-                      <div className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-300">{formatCurrency.format(homeMissingReceiptAmount)} needs documentation for {homeReceiptYear}</div>
+                      <div className="mt-1 text-[13px] font-semibold text-slate-600 dark:text-slate-300">{formatCurrency.format(homeMissingReceiptAmount)} needs documentation for {homeReceiptYear}</div>
                     </div>
                   </div>
-                  <div className="flex shrink-0 items-center gap-1 text-xs font-extrabold text-amber-700 dark:text-amber-300">Review <ChevronRight size={16} /></div>
+                  <div className="flex shrink-0 items-center gap-1 text-[13px] font-extrabold text-amber-700 dark:text-amber-300">Review <ChevronRight size={16} /></div>
                 </button>
               ) : (
                 <div className="mt-4 flex items-center gap-3 rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 dark:border-emerald-700/50 dark:bg-emerald-500/10">
                   <CheckCircle size={18} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
-                  <div className="text-xs font-bold text-emerald-800 dark:text-emerald-300">All {homeReceiptYear} expenses have receipts attached.</div>
+                  <div className="text-[13px] font-bold text-emerald-800 dark:text-emerald-300">All {homeReceiptYear} expenses have receipts attached.</div>
                 </div>
               )}
             </div>
@@ -8824,13 +8790,13 @@ html, body, #root {
 
                {ledgerSearch.trim() && (
                  <div className={isActivityPage ? 'flex items-center justify-between gap-3 px-1' : 'flex items-center justify-between rounded-lg border border-blue-200 bg-blue-50 px-3 py-2.5 dark:border-blue-900/50 dark:bg-blue-900/20'}>
-                   <span className={isActivityPage ? 'text-xs font-semibold text-blue-700 dark:text-blue-300' : 'text-xs font-bold text-blue-800 dark:text-blue-200'}>
+                   <span className={isActivityPage ? 'text-[13px] font-semibold text-blue-700 dark:text-blue-300' : 'text-[13px] font-bold text-blue-800 dark:text-blue-200'}>
                      {filteredLedgerItems.length} {filteredLedgerItems.length === 1 ? 'match' : 'matches'} across all dates
                    </span>
                    <button
                      type="button"
                      onClick={() => setLedgerSearch('')}
-                     className="text-xs font-bold uppercase tracking-wider text-blue-700 hover:text-blue-900 dark:text-blue-300 dark:hover:text-blue-100"
+                     className="text-[13px] font-bold uppercase tracking-wider text-blue-700 hover:text-blue-900 dark:text-blue-300 dark:hover:text-blue-100"
                    >
                      Clear
                    </button>
@@ -8843,7 +8809,7 @@ html, body, #root {
                      <button
                        key={f}
                        onClick={() => setLedgerFilter(f)}
-                       className={`min-h-11 min-w-0 rounded-lg px-1 py-2.5 text-[11px] font-bold uppercase tracking-wide transition-all sm:text-xs ${ledgerFilter === f ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'}`}
+                       className={`min-h-11 min-w-0 rounded-lg px-1 py-2.5 text-[13px] font-bold uppercase tracking-wide transition-all sm:text-[13px] ${ledgerFilter === f ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'}`}
                      >
                        {f === 'all' ? 'All' : f.charAt(0).toUpperCase() + f.slice(1)}
                      </button>
@@ -8868,7 +8834,7 @@ html, body, #root {
                      <button
                        onClick={() => setShowTxnFilters(v => !v)}
                        aria-expanded={showTxnFilters}
-                       className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border transition-colors ${
+                       className={`flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-bold uppercase tracking-wider border transition-colors ${
                          activeCount > 0
                            ? 'bg-blue-600 text-white border-blue-600'
                            : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800'
@@ -8877,7 +8843,7 @@ html, body, #root {
                        <Filter size={14} />
                        Filters
                        {activeCount > 0 && (
-                         <span className="ml-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-white/25 flex items-center justify-center text-[11px]">
+                         <span className="ml-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-white/25 flex items-center justify-center text-[13px]">
                            {activeCount}
                          </span>
                        )}
@@ -8887,7 +8853,7 @@ html, body, #root {
                      {activeCount > 0 && (
                        <button
                          onClick={() => { setExpenseReceiptFilter('all'); setExpenseReviewFilter('all'); }}
-                         className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+                         className="text-[13px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
                        >
                          Clear
                        </button>
@@ -8897,16 +8863,16 @@ html, body, #root {
                    {showTxnFilters && (
                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 animate-in fade-in duration-150">
                        <div className="flex flex-wrap gap-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3">
-                         <div className="w-full text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Receipts</div>
-                         <button onClick={() => setExpenseReceiptFilter('all')} className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider ${expenseReceiptFilter === 'all' ? 'bg-blue-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>All</button>
-                         <button onClick={() => setExpenseReceiptFilter('with_receipts')} className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider ${expenseReceiptFilter === 'with_receipts' ? 'bg-blue-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>With receipts</button>
-                         <button onClick={() => setExpenseReceiptFilter('without_receipts')} className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider ${expenseReceiptFilter === 'without_receipts' ? 'bg-blue-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>Without receipts</button>
+                         <div className="w-full text-[12px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Receipts</div>
+                         <button onClick={() => setExpenseReceiptFilter('all')} className={`px-3 py-1.5 rounded-lg text-[13px] font-bold uppercase tracking-wider ${expenseReceiptFilter === 'all' ? 'bg-blue-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>All</button>
+                         <button onClick={() => setExpenseReceiptFilter('with_receipts')} className={`px-3 py-1.5 rounded-lg text-[13px] font-bold uppercase tracking-wider ${expenseReceiptFilter === 'with_receipts' ? 'bg-blue-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>With receipts</button>
+                         <button onClick={() => setExpenseReceiptFilter('without_receipts')} className={`px-3 py-1.5 rounded-lg text-[13px] font-bold uppercase tracking-wider ${expenseReceiptFilter === 'without_receipts' ? 'bg-blue-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>Without receipts</button>
                        </div>
                        <div className="flex flex-wrap gap-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3">
-                         <div className="w-full text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Review status</div>
-                         <button onClick={() => setExpenseReviewFilter('all')} className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider ${expenseReviewFilter === 'all' ? 'bg-emerald-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>All</button>
-                         <button onClick={() => setExpenseReviewFilter('new')} className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider ${expenseReviewFilter === 'new' ? 'bg-emerald-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>New</button>
-                         <button onClick={() => setExpenseReviewFilter('reviewed')} className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider ${expenseReviewFilter === 'reviewed' ? 'bg-emerald-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>Reviewed</button>
+                         <div className="w-full text-[12px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Review status</div>
+                         <button onClick={() => setExpenseReviewFilter('all')} className={`px-3 py-1.5 rounded-lg text-[13px] font-bold uppercase tracking-wider ${expenseReviewFilter === 'all' ? 'bg-emerald-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>All</button>
+                         <button onClick={() => setExpenseReviewFilter('new')} className={`px-3 py-1.5 rounded-lg text-[13px] font-bold uppercase tracking-wider ${expenseReviewFilter === 'new' ? 'bg-emerald-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>New</button>
+                         <button onClick={() => setExpenseReviewFilter('reviewed')} className={`px-3 py-1.5 rounded-lg text-[13px] font-bold uppercase tracking-wider ${expenseReviewFilter === 'reviewed' ? 'bg-emerald-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'}`}>Reviewed</button>
                        </div>
                      </div>
                    )}
@@ -8918,18 +8884,18 @@ html, body, #root {
                 isActivityPage ? (
                   <div className="grid grid-cols-2 divide-x divide-slate-200 rounded-xl border border-slate-200 bg-slate-50/70 px-2 py-3.5 dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900/70">
                      <div className="px-3">
-                       <div className="text-[11px] font-bold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">Cash In</div>
+                       <div className="text-[13px] font-bold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">Cash In</div>
                        <div className="mt-1 text-base font-bold tracking-tight text-slate-950 dark:text-white sm:text-lg">{formatCurrency.format(periodTotals.inc)}</div>
                      </div>
                      <div className="px-3">
-                       <div className="text-[11px] font-bold uppercase tracking-wide text-red-600 dark:text-red-400">Cash Out</div>
+                       <div className="text-[13px] font-bold uppercase tracking-wide text-red-600 dark:text-red-400">Cash Out</div>
                        <div className="mt-1 text-base font-bold tracking-tight text-slate-950 dark:text-white sm:text-lg">{formatCurrency.format(periodTotals.exp)}</div>
                      </div>
                   </div>
                 ) : (
                   <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 mb-6 flex items-center justify-between shadow-sm">
-                     <div className="text-center flex-1 border-r border-slate-200 dark:border-slate-800"><div className="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">Cash In</div><div className="text-lg font-bold text-slate-900 dark:text-white">{formatCurrency.format(periodTotals.inc)}</div></div>
-                     <div className="text-center flex-1"><div className="text-xs font-bold text-red-600 uppercase tracking-wider mb-1">Cash Out</div><div className="text-lg font-bold text-slate-900 dark:text-white">{formatCurrency.format(periodTotals.exp)}</div></div>
+                     <div className="text-center flex-1 border-r border-slate-200 dark:border-slate-800"><div className="text-[13px] font-bold text-emerald-600 uppercase tracking-wider mb-1">Cash In</div><div className="text-lg font-bold text-slate-900 dark:text-white">{formatCurrency.format(periodTotals.inc)}</div></div>
+                     <div className="text-center flex-1"><div className="text-[13px] font-bold text-red-600 uppercase tracking-wider mb-1">Cash Out</div><div className="text-lg font-bold text-slate-900 dark:text-white">{formatCurrency.format(periodTotals.exp)}</div></div>
                   </div>
                 )
              )}
@@ -8971,7 +8937,7 @@ html, body, #root {
                     }
                     
                     invoiceStatusBadge = (
-                      <span className={`text-xs font-bold px-2 py-0.5 rounded uppercase flex-shrink-0 ${badgeClass}`}>
+                      <span className={`text-[13px] font-bold px-2 py-0.5 rounded uppercase flex-shrink-0 ${badgeClass}`}>
                         {badgeText}
                       </span>
                     );
@@ -9004,7 +8970,7 @@ html, body, #root {
                             <div className="flex items-start justify-between gap-3">
                               <div className="min-w-0 flex-1">
                                 <div className="truncate text-[15px] font-bold leading-5 text-slate-950 dark:text-white sm:text-base">{title}</div>
-                                <div className="mt-1.5 text-xs font-medium leading-5 text-slate-500 dark:text-slate-400">{secondary}</div>
+                                <div className="mt-1.5 text-[13px] font-medium leading-5 text-slate-500 dark:text-slate-400">{secondary}</div>
                               </div>
                               <div className={`flex-shrink-0 whitespace-nowrap text-base font-bold tracking-tight sm:text-lg ${amountColor}`}>
                                 {isIncome ? '+' : ''}{formatCurrency.format(item.amount)}
@@ -9019,14 +8985,14 @@ html, body, #root {
                               <div className="mt-3 flex flex-wrap items-center gap-2">
                                 {isInvoice && invoiceStatusBadge}
                                 {isInvoice && item.due && (
-                                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Due {item.due}</span>
+                                  <span className="text-[13px] font-medium text-slate-500 dark:text-slate-400">Due {item.due}</span>
                                 )}
                                 {isExpense && (
                                   <>
-                                    <span className={`rounded-full px-2 py-1 text-[10px] font-bold uppercase tracking-wide ${item.receiptId ? 'bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'}`}>
+                                    <span className={`rounded-full px-2 py-1 text-[12px] font-bold uppercase tracking-wide ${item.receiptId ? 'bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'}`}>
                                       {item.receiptId ? 'Receipt' : 'No receipt'}
                                     </span>
-                                    <span className={`rounded-full px-2 py-1 text-[10px] font-bold uppercase tracking-wide ${(item as any).reviewedAt ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-300'}`}>
+                                    <span className={`rounded-full px-2 py-1 text-[12px] font-bold uppercase tracking-wide ${(item as any).reviewedAt ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-300'}`}>
                                       {(item as any).reviewedAt ? 'Reviewed' : 'New'}
                                     </span>
                                   </>
@@ -9055,25 +9021,25 @@ html, body, #root {
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-2 mb-1 flex-wrap">
                               <div className={`font-bold text-slate-900 dark:text-white text-lg ${isVoid ? 'line-through text-slate-400' : ''}`}>{inv.client}</div>
-                              {inv.jobId && jobs.find(job => job.id === inv.jobId) && <span className="inline-flex items-center gap-1 rounded-full bg-cyan-100 px-2 py-0.5 text-[10px] font-extrabold text-cyan-800 dark:bg-cyan-500/15 dark:text-cyan-200"><Briefcase size={11} /> {jobs.find(job => job.id === inv.jobId)?.title}</span>}
-                              {isRecurring && <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Recurring</span>}
+                              {inv.jobId && jobs.find(job => job.id === inv.jobId) && <span className="inline-flex items-center gap-1 rounded-full bg-cyan-100 px-2 py-0.5 text-[12px] font-extrabold text-cyan-800 dark:bg-cyan-500/15 dark:text-cyan-200"><Briefcase size={11} /> {jobs.find(job => job.id === inv.jobId)?.title}</span>}
+                              {isRecurring && <span className="text-[13px] bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Recurring</span>}
                             </div>
                             <div className="text-sm font-medium text-slate-600 dark:text-slate-300">{inv.description}</div>
-                            <div className="text-xs text-slate-600 dark:text-slate-300 mt-1">{inv.date}</div>
+                            <div className="text-[13px] text-slate-600 dark:text-slate-300 mt-1">{inv.date}</div>
                           </div>
                         </div>
                         
                         {/* Bottom Section: Amount, Status, Actions */}
                         <div className="flex items-end justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
                           <div>
-                              <label className="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1 uppercase tracking-wide">Total</label>
+                              <label className="text-[13px] font-bold text-slate-600 dark:text-slate-300 block mb-1 uppercase tracking-wide">Total</label>
                               <div className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white mb-2">{formatCurrency.format(inv.amount)}</div>
                               <div className="flex flex-col gap-1">
-                                <div className={`flex-shrink-0 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 w-fit ${isVoid ? 'bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-300' : inv.status === 'paid' ? 'bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300' : isOverdue ? 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300' : 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300'}`}>
+                                <div className={`flex-shrink-0 px-3 py-1 rounded-full text-[13px] font-bold uppercase tracking-wider inline-flex items-center gap-1.5 w-fit ${isVoid ? 'bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-300' : inv.status === 'paid' ? 'bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300' : isOverdue ? 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300' : 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300'}`}>
                                   {isOverdue && !isVoid && <AlertTriangle size={12} />}
                                   {isVoid ? 'Void' : inv.status === 'paid' ? 'Paid' : isOverdue ? `Overdue (${overdueDays}d)` : 'Unpaid'}
                                 </div>
-                                <div className={`text-xs font-medium ${isOverdue && !isVoid ? 'text-red-600 dark:text-red-400' : 'text-slate-600 dark:text-slate-300'}`}>
+                                <div className={`text-[13px] font-medium ${isOverdue && !isVoid ? 'text-red-600 dark:text-red-400' : 'text-slate-600 dark:text-slate-300'}`}>
                                   {isOverdue && !isVoid ? `Due was ${inv.due}` : `Due ${inv.due}`}
                                   {isRecurring && inv.recurrence && <span className="block text-blue-500 mt-0.5">Next: {inv.recurrence.nextDate}</span>}
                                 </div>
@@ -9101,12 +9067,12 @@ html, body, #root {
                                       <div className="font-bold text-slate-900 dark:text-white text-base leading-tight">{item.name || item.client}</div>
                                       {invoiceStatusBadge}
                                   </div>
-                                  <div className="text-xs font-medium text-slate-600 dark:text-slate-300">{item.date} · {item.category}</div>
-                                  {item.jobId && jobs.find(job => job.id === item.jobId) && <div className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-cyan-100 px-2 py-0.5 text-[10px] font-extrabold text-cyan-800 dark:bg-cyan-500/15 dark:text-cyan-200"><Briefcase size={11} /> {jobs.find(job => job.id === item.jobId)?.title}</div>}
+                                  <div className="text-[13px] font-medium text-slate-600 dark:text-slate-300">{item.date} · {item.category}</div>
+                                  {item.jobId && jobs.find(job => job.id === item.jobId) && <div className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-cyan-100 px-2 py-0.5 text-[12px] font-extrabold text-cyan-800 dark:bg-cyan-500/15 dark:text-cyan-200"><Briefcase size={11} /> {jobs.find(job => job.id === item.jobId)?.title}</div>}
                                   {!isIncome && !isInvoice && (
                                     <div className="mt-2 flex flex-wrap gap-2">
-                                      <span className={`text-[10px] font-extrabold uppercase tracking-widest px-2 py-1 rounded-full ${item.receiptId ? 'bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'}`}>{item.receiptId ? 'Receipt attached' : 'No receipt'}</span>
-                                      <span className={`text-[10px] font-extrabold uppercase tracking-widest px-2 py-1 rounded-full ${(item as any).reviewedAt ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-300'}`}>{(item as any).reviewedAt ? 'Reviewed' : 'New'}</span>
+                                      <span className={`text-[12px] font-extrabold uppercase tracking-widest px-2 py-1 rounded-full ${item.receiptId ? 'bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'}`}>{item.receiptId ? 'Receipt attached' : 'No receipt'}</span>
+                                      <span className={`text-[12px] font-extrabold uppercase tracking-widest px-2 py-1 rounded-full ${(item as any).reviewedAt ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-300'}`}>{(item as any).reviewedAt ? 'Reviewed' : 'New'}</span>
                                     </div>
                                   )}
                               </div>

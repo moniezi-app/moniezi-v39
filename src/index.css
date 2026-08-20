@@ -1956,55 +1956,10 @@ html {
 .v391-goal-empty {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 82px;
-  gap: 16px;
-  align-items: center;
+  display: block;
   margin-top: 16px;
   padding: 16px;
 }
-.v391-goal-target {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 76px;
-  height: 76px;
-  justify-self: end;
-}
-.v391-goal-target::before,
-.v391-goal-target::after,
-.v391-goal-target span {
-  content: '';
-  position: absolute;
-  border-radius: 999px;
-  border: 2px solid rgba(79,124,255,0.34);
-  box-shadow: 0 0 14px rgba(79,124,255,0.10);
-}
-.v391-goal-target::before { width: 70px; height: 70px; }
-.v391-goal-target::after { width: 47px; height: 47px; border-color: rgba(79,124,255,0.52); }
-.v391-goal-target span { width: 23px; height: 23px; border-color: rgba(79,124,255,0.72); background: rgba(79,124,255,0.10); }
-.v391-goal-target i {
-  position: absolute;
-  width: 36px;
-  height: 2px;
-  transform: rotate(-38deg) translate(8px,-4px);
-  transform-origin: center;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #4f7cff, #35c8e6);
-  box-shadow: 0 0 10px rgba(53,200,230,0.28);
-}
-.v391-goal-target i::after {
-  content: '';
-  position: absolute;
-  right: -2px;
-  top: -4px;
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 8px solid #35c8e6;
-}
-
 .v391-progress-stack {
   position: relative;
   z-index: 1;
@@ -2127,8 +2082,7 @@ html {
   .v391-card-kpi { margin-top: 20px; }
   .v391-glass-metric { padding: 11px; }
   .v391-glass-metric__value { font-size: 17px; }
-  .v391-goal-empty { grid-template-columns:minmax(0,1fr) 72px; padding:14px; }
-  .v391-goal-target { width:68px; height:68px; transform:scale(.90); }
+  .v391-goal-empty { padding:14px; }
   .v391-jobs-metrics { gap: 5px; }
   .v391-job-stat { padding: 10px 3px 9px; border-radius: 13px; }
   .v391-job-stat__value { font-size: 18px; }
@@ -2500,7 +2454,7 @@ html {
 }
 
 /* ================================================================
-   MONIEZI v39.3.2 — Goal icon + footer spacing corrections
+   MONIEZI v39.3.3 — Remove Monthly Goals target artwork
    ----------------------------------------------------------------
    1. First-run / post-demo empty dashboard now uses the same material
       hierarchy as the production Home cards.
@@ -2766,80 +2720,132 @@ html {
 .dark .v3931-first-run-secondary { color: #91bdff !important; }
 .v3931-first-run-secondary:focus-visible { outline: 2px solid rgba(91,169,255,0.58); outline-offset: 2px; }
 
-.v3931-goal-target-wrap {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 82px;
-  height: 82px;
-  justify-self: end;
-}
-
-.v3931-goal-target-svg {
-  width: 82px;
-  height: 82px;
-  overflow: visible;
-  color: #4f7cff;
-  filter: drop-shadow(0 8px 14px rgba(79,124,255,0.13));
-}
-
-.v3931-goal-target-ring {
-  fill: rgba(79,124,255,0.025);
-  stroke: currentColor;
-  stroke-width: 2.25;
-  vector-effect: non-scaling-stroke;
-}
-
-.v3931-goal-target-ring--outer { opacity: 0.40; }
-.v3931-goal-target-ring--middle { opacity: 0.62; }
-.v3931-goal-target-ring--inner { opacity: 0.84; fill: rgba(79,124,255,0.075); }
-
-.v3931-goal-target-center {
-  fill: #5b8fff;
-  opacity: 0.96;
-  filter: drop-shadow(0 0 6px rgba(91,143,255,0.28));
-}
-
-.v3932-goal-dart { filter: drop-shadow(0 0 7px rgba(53,200,230,0.20)); }
-.v3932-goal-dart-body {
-  fill: url(#v3932GoalDartBody);
-  stroke: rgba(255,255,255,0.18);
-  stroke-width: 0.7;
-}
-.v3932-goal-dart-head {
-  fill: #67dfff;
-  stroke: rgba(255,255,255,0.14);
-  stroke-width: 0.6;
-}
-.v3932-goal-dart-fin {
-  fill: url(#v3932GoalDartTail);
-  stroke: rgba(255,255,255,0.12);
-  stroke-width: 0.55;
-}
-.v3932-goal-dart-fin--upper { opacity: 0.98; }
-.v3932-goal-dart-fin--lower { opacity: 0.92; }
-
-.dark .v3931-goal-target-svg {
-  color: #78a8ff;
-  filter: drop-shadow(0 8px 14px rgba(71,157,255,0.18));
-}
-
-.dark .v3931-goal-target-ring--inner { fill: rgba(120,168,255,0.08); }
-.dark .v3931-goal-target-center { fill: #78a8ff; }
-.dark .v3931-goal-arrow-shaft,
-.dark .v3931-goal-arrow-fin { stroke: #6addff; }
-.dark .v3931-goal-arrow-head { fill: #6addff; }
-
 @media (max-width: 390px) {
   .v3931-first-run-card { padding: 15px; }
   .v3931-first-run-kicker { padding-inline: 12px; font-size: 9px; letter-spacing: 0.12em; }
   .v3931-first-run-visual { min-height: 196px; padding-inline: 7px; }
   .v3931-first-run-title { font-size: 19px; }
-  .v3931-goal-target-wrap,
-  .v3931-goal-target-svg { width: 72px; height: 72px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .v3931-theme-choice__button,
   .v3931-first-run-primary { transition: none; }
+}
+
+
+/* ================================================================
+   MONIEZI v39.3.4 — Home readability restoration
+   Restores comfortable Home-card typography and readable six-item footer
+   without changing the approved Luminous Glass hierarchy.
+   ================================================================ */
+.v3934-home-readable .v391-card-title {
+  font-size: 18px;
+  line-height: 1.3;
+}
+.v3934-home-readable .v391-card-title--hero {
+  font-size: clamp(19px, 5vw, 22px);
+}
+.v3934-home-readable .v391-card-subtitle {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.v3934-home-readable .v391-glass-action {
+  min-height: 44px;
+  padding: 10px 13px;
+  font-size: 13px;
+}
+.v3934-home-readable .v391-glass-segment {
+  font-size: 13px;
+}
+.v3934-home-readable .v391-glass-metric__label {
+  font-size: 11.5px;
+}
+.v3934-home-readable .v391-glass-metric__value {
+  font-size: 21px;
+}
+.v3934-home-readable .v391-glass-metric__detail {
+  font-size: 12px;
+}
+.v3934-home-readable .v391-status-title {
+  font-size: 15.5px;
+}
+.v3934-home-readable .v391-status-detail {
+  font-size: 13px;
+  line-height: 1.5;
+}
+.v3934-home-readable .v391-readiness-label {
+  font-size: 12.5px;
+}
+.v3934-home-readable .v391-action-row__title {
+  font-size: 13.5px;
+}
+.v3934-home-readable .v391-action-row__detail {
+  font-size: 12px;
+}
+.v3934-home-readable .v391-progress-label {
+  font-size: 11.5px;
+}
+.v3934-home-readable .v391-progress-value {
+  font-size: 18px;
+}
+.v3934-home-readable .v391-progress-value span,
+.v3934-home-readable .v391-progress-detail,
+.v3934-home-readable .v391-goal-history {
+  font-size: 12px;
+}
+.v3934-home-readable .v391-job-stat__value {
+  font-size: 21px;
+}
+.v3934-home-readable .v391-job-stat__label {
+  font-size: 10.5px;
+  line-height: 1.2;
+}
+.v3934-home-readable .v391-section-heading h3 {
+  font-size: 17px;
+}
+.v3934-home-readable .v391-section-heading p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Footer: do not shrink labels to make six destinations fit. The available
+   width is shared evenly; labels stay readable and icons retain normal size. */
+.v3932-nav-item {
+  min-width: 0;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.v3932-nav-icon {
+  padding: 5px !important;
+}
+.v3932-nav-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.v3932-nav-label,
+.v3932-nav-label--long {
+  font-size: 11px !important;
+  line-height: 1.12;
+  margin-top: 2px !important;
+  letter-spacing: -0.015em;
+}
+
+@media (max-width: 430px) {
+  .v3934-home-readable .v391-card-title { font-size: 18px; }
+  .v3934-home-readable .v391-card-subtitle { font-size: 13.5px; }
+  .v3934-home-readable .v391-glass-segment { font-size: 13px; }
+  .v3934-home-readable .v391-glass-metric__value { font-size: 21px; }
+  .v3934-home-readable .v391-job-stat__value { font-size: 20px; }
+  .v3934-home-readable .v391-job-stat__label { font-size: 10.5px; }
+  .v3932-nav-item { padding-top: 3px; padding-bottom: 3px; }
+  .v3932-nav-icon { padding: 5px !important; }
+  .v3932-nav-icon svg { width: 20px; height: 20px; }
+  .v3932-nav-label, .v3932-nav-label--long {
+    font-size: 11px !important;
+    letter-spacing: -0.02em;
+  }
+}
+
+@media (max-width: 360px) {
+  .v3932-nav-label, .v3932-nav-label--long { font-size: 10.5px !important; }
 }
