@@ -134,9 +134,9 @@ const selectNumericValueOnFocus = (event: React.FocusEvent<HTMLInputElement>) =>
   });
 };
 
-// v39.3.1: the goal visual uses a conventional arrow that points INTO the
-// bullseye. The previous CSS-drawn icon put the arrowhead outside the target,
-// which made the symbol read as an arrow leaving the goal.
+// v39.3.2: replace the previous thin-line arrow with a compact dart asset
+// whose body, point, and fins read clearly at mobile size. The dart now lands
+// decisively in the bullseye instead of looking like a line laid across rings.
 const GoalTargetVisual = () => (
   <svg
     className="v3931-goal-target-svg"
@@ -144,16 +144,28 @@ const GoalTargetVisual = () => (
     aria-hidden="true"
     focusable="false"
   >
+    <defs>
+      <linearGradient id="v3932GoalDartBody" x1="65" y1="22" x2="46" y2="50" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#8ef0ff" />
+        <stop offset="1" stopColor="#44c8ff" />
+      </linearGradient>
+      <linearGradient id="v3932GoalDartTail" x1="74" y1="18" x2="84" y2="31" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#b6f8ff" />
+        <stop offset="1" stopColor="#73ddf0" />
+      </linearGradient>
+    </defs>
+
     <circle className="v3931-goal-target-ring v3931-goal-target-ring--outer" cx="46" cy="50" r="33" />
     <circle className="v3931-goal-target-ring v3931-goal-target-ring--middle" cx="46" cy="50" r="22" />
     <circle className="v3931-goal-target-ring v3931-goal-target-ring--inner" cx="46" cy="50" r="10" />
-    <circle className="v3931-goal-target-center" cx="46" cy="50" r="4.25" />
+    <circle className="v3931-goal-target-center" cx="46" cy="50" r="4.4" />
 
-    {/* Shaft runs from the tail at upper-right toward the bullseye. */}
-    <path className="v3931-goal-arrow-shaft" d="M78 18 L52.5 43.5" />
-    {/* Arrowhead point is at the bullseye, not outside the target. */}
-    <path className="v3931-goal-arrow-head" d="M46 50 L54.8 46.4 L49.6 41.2 Z" />
-    <path className="v3931-goal-arrow-fin" d="M75 21 L84 12 M76.5 22.5 L86 22.5" />
+    <g className="v3932-goal-dart">
+      <path className="v3932-goal-dart-body" d="M79 18.5 L83.5 23 L57 49.5 L52.5 45 Z" />
+      <path className="v3932-goal-dart-head" d="M46 50 L59.2 51.2 L51.2 43.2 Z" />
+      <path className="v3932-goal-dart-fin v3932-goal-dart-fin--upper" d="M76.8 20.4 L88 11.2 L82.2 26.2 Z" />
+      <path className="v3932-goal-dart-fin v3932-goal-dart-fin--lower" d="M80 24.3 L92.3 24.3 L76.2 30.1 Z" />
+    </g>
   </svg>
 );
 
@@ -8147,7 +8159,7 @@ html, body, #root {
         </div>
       )}
 
-      {/* v39.3.1 — first-run / post-demo empty experience now uses the same
+      {/* v39.3.2 — first-run / post-demo empty experience now uses the same
           Luminous Glass hierarchy as the rest of the dashboard. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
         <div className="mb-6">
@@ -12682,77 +12694,77 @@ html, body, #root {
 
       <div className={`dark-chrome no-print fixed bottom-0 left-0 right-0 z-[55] pb-safe transition-opacity duration-150 ${shouldHideBottomNav ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className={`v391-bottom-nav-surface ${useDarkChrome ? 'bg-slate-950 border-t border-slate-800/50' : 'bg-white/95 dark:bg-slate-950/95 border-t border-slate-200 dark:border-slate-800/50'} ${useDarkChrome ? '' : 'backdrop-blur-xl'} px-1 pt-2 pb-3`}>
-          <div className="max-w-xl mx-auto flex justify-between items-end relative">
+          <div className="max-w-xl mx-auto flex items-end relative gap-0.5 sm:gap-1">
             {/* Home */}
             <button 
               onClick={() => setCurrentPage(Page.Dashboard)} 
-              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Dashboard ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Dashboard ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item v3932-nav-item ${currentPage === Page.Dashboard ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Dashboard ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Dashboard ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
-              <div className={`p-1.5 rounded-lg ${currentPage === Page.Dashboard ? 'text-white' : ''}`}>
+              <div className={`v3932-nav-icon p-1.5 rounded-lg ${currentPage === Page.Dashboard ? 'text-white' : ''}`}>
                 <LayoutGrid size={20} strokeWidth={currentPage === Page.Dashboard ? 2 : 1.5} />
               </div>
-              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Dashboard ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Dashboard ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Home</span>
+              <span className={`v3932-nav-label text-[11px] mt-0.5 ${currentPage === Page.Dashboard ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Dashboard ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Home</span>
             </button>
 
             {/* Clients */}
             <button
               onClick={() => setCurrentPage(Page.Clients)}
-              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Clients ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Clients ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item v3932-nav-item ${currentPage === Page.Clients ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Clients ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Clients ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
-              <div className={`p-1.5 rounded-lg ${currentPage === Page.Clients ? 'text-white' : ''}`}>
+              <div className={`v3932-nav-icon p-1.5 rounded-lg ${currentPage === Page.Clients ? 'text-white' : ''}`}>
                 <Users size={20} strokeWidth={currentPage === Page.Clients ? 2 : 1.5} />
               </div>
-              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Clients ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Clients ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Clients</span>
+              <span className={`v3932-nav-label text-[11px] mt-0.5 ${currentPage === Page.Clients ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Clients ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Clients</span>
             </button>
 
             {/* Jobs */}
             <button
               onClick={() => setCurrentPage(Page.Jobs)}
-              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Jobs ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Jobs ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item v3932-nav-item ${currentPage === Page.Jobs ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Jobs ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Jobs ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
-              <div className={`p-1.5 rounded-lg ${currentPage === Page.Jobs ? 'text-white' : ''}`}>
+              <div className={`v3932-nav-icon p-1.5 rounded-lg ${currentPage === Page.Jobs ? 'text-white' : ''}`}>
                 <Briefcase size={20} strokeWidth={currentPage === Page.Jobs ? 2 : 1.5} />
               </div>
-              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Jobs ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Jobs ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Jobs</span>
+              <span className={`v3932-nav-label text-[11px] mt-0.5 ${currentPage === Page.Jobs ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Jobs ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Jobs</span>
             </button>
 
             {/* Estimates — shares the billing screen with invoices but remains a distinct business-stage destination. */}
             <button 
               onClick={() => { setBillingDocType('estimate'); setCurrentPage(Page.Invoices); }} 
-              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item v3932-nav-item ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Invoices && billingDocType === 'estimate' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
-              <div className={`p-1.5 rounded-lg ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'text-white' : ''}`}>
+              <div className={`v3932-nav-icon p-1.5 rounded-lg ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'text-white' : ''}`}>
                 <ClipboardList size={20} strokeWidth={currentPage === Page.Invoices && billingDocType === 'estimate' ? 2 : 1.5} />
               </div>
-              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Invoices && billingDocType === 'estimate' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Estimates</span>
+              <span className={`v3932-nav-label v3932-nav-label--long text-[11px] mt-0.5 ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Invoices && billingDocType === 'estimate' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Estimates</span>
             </button>
 
             {/* Invoices */}
             <button 
               onClick={() => { setBillingDocType('invoice'); setCurrentPage(Page.Invoices); }} 
-              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item v3932-nav-item ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Invoices && billingDocType === 'invoice' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
-              <div className={`p-1.5 rounded-lg ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'text-white' : ''}`}>
+              <div className={`v3932-nav-icon p-1.5 rounded-lg ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'text-white' : ''}`}>
                 <FileText size={20} strokeWidth={currentPage === Page.Invoices && billingDocType === 'invoice' ? 2 : 1.5} />
               </div>
-              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Invoices && billingDocType === 'invoice' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Invoices</span>
+              <span className={`v3932-nav-label v3932-nav-label--long text-[11px] mt-0.5 ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Invoices && billingDocType === 'invoice' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Invoices</span>
             </button>
 
             {/* Mileage */}
             <button 
               onClick={() => setCurrentPage(Page.Mileage)} 
-              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Mileage ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Mileage ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item v3932-nav-item ${currentPage === Page.Mileage ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Mileage ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Mileage ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
-              <div className={`p-1.5 rounded-lg ${currentPage === Page.Mileage ? 'text-white' : ''}`}>
+              <div className={`v3932-nav-icon p-1.5 rounded-lg ${currentPage === Page.Mileage ? 'text-white' : ''}`}>
                 <Car size={20} strokeWidth={currentPage === Page.Mileage ? 2 : 1.5} />
               </div>
-              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Mileage ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Mileage ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Mileage</span>
+              <span className={`v3932-nav-label text-[11px] mt-0.5 ${currentPage === Page.Mileage ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Mileage ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Mileage</span>
             </button>
           </div>
         </div>

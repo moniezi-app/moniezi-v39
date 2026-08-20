@@ -2092,6 +2092,30 @@ html {
 .v391-nav-item.active svg { color:#80b7ff!important; filter:drop-shadow(0 0 6px rgba(77,158,255,0.42)); }
 .v391-nav-item.active span { color:#ffffff!important; }
 
+
+.v3932-nav-item {
+  min-width: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.v3932-nav-icon {
+  display: grid;
+  place-items: center;
+}
+
+.v3932-nav-label {
+  display: block;
+  width: 100%;
+  text-align: center;
+  line-height: 1.08;
+  white-space: nowrap;
+}
+
+.v3932-nav-label--long {
+  letter-spacing: -0.02em;
+}
+
 @media (max-width: 430px) {
   .v391-glass-card { padding: 17px; border-radius: 22px; }
   .v391-card-header__main { gap: 10px; }
@@ -2109,7 +2133,13 @@ html {
   .v391-job-stat { padding: 10px 3px 9px; border-radius: 13px; }
   .v391-job-stat__value { font-size: 18px; }
   .v391-job-stat__label { font-size: 9px; letter-spacing: -0.01em; }
+  .v3932-nav-item { padding-top: 2px; padding-bottom: 2px; }
+  .v3932-nav-icon { padding: 4px !important; }
+  .v3932-nav-icon svg { width: 18px; height: 18px; }
+  .v3932-nav-label { font-size: 10px !important; margin-top: 1px !important; letter-spacing: -0.015em; }
+  .v3932-nav-label--long { font-size: 9px !important; letter-spacing: -0.03em; }
 }
+
 
 @media (min-width: 640px) {
   .v391-glass-card { padding: 24px; }
@@ -2470,12 +2500,13 @@ html {
 }
 
 /* ================================================================
-   MONIEZI v39.3.1 — Luminous Glass consistency corrections
+   MONIEZI v39.3.2 — Goal icon + footer spacing corrections
    ----------------------------------------------------------------
    1. First-run / post-demo empty dashboard now uses the same material
       hierarchy as the production Home cards.
-   2. Monthly Goals target uses a conventional arrow pointing into the
-      bullseye instead of the previous outward-pointing CSS arrow.
+   2. Monthly Goals target replaces the previous fragile line icon with a compact
+      dart-in-bullseye asset, and the six-item lifecycle footer gets compact
+      spacing so Estimates and Invoices remain readable on narrow phones.
    ================================================================ */
 
 .v3931-first-run-card {
@@ -2749,43 +2780,44 @@ html {
   height: 82px;
   overflow: visible;
   color: #4f7cff;
-  filter: drop-shadow(0 7px 12px rgba(79,124,255,0.12));
+  filter: drop-shadow(0 8px 14px rgba(79,124,255,0.13));
 }
 
 .v3931-goal-target-ring {
   fill: rgba(79,124,255,0.025);
   stroke: currentColor;
-  stroke-width: 2;
+  stroke-width: 2.25;
   vector-effect: non-scaling-stroke;
 }
 
-.v3931-goal-target-ring--outer { opacity: 0.42; }
+.v3931-goal-target-ring--outer { opacity: 0.40; }
 .v3931-goal-target-ring--middle { opacity: 0.62; }
-.v3931-goal-target-ring--inner { opacity: 0.84; fill: rgba(79,124,255,0.07); }
+.v3931-goal-target-ring--inner { opacity: 0.84; fill: rgba(79,124,255,0.075); }
 
 .v3931-goal-target-center {
-  fill: #4f7cff;
-  opacity: 0.92;
+  fill: #5b8fff;
+  opacity: 0.96;
+  filter: drop-shadow(0 0 6px rgba(91,143,255,0.28));
 }
 
-.v3931-goal-arrow-shaft,
-.v3931-goal-arrow-fin {
-  fill: none;
-  stroke: #35c8e6;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
+.v3932-goal-dart { filter: drop-shadow(0 0 7px rgba(53,200,230,0.20)); }
+.v3932-goal-dart-body {
+  fill: url(#v3932GoalDartBody);
+  stroke: rgba(255,255,255,0.18);
+  stroke-width: 0.7;
 }
-
-.v3931-goal-arrow-fin {
-  stroke-width: 3.2;
+.v3932-goal-dart-head {
+  fill: #67dfff;
+  stroke: rgba(255,255,255,0.14);
+  stroke-width: 0.6;
 }
-
-.v3931-goal-arrow-head {
-  fill: #35c8e6;
-  filter: drop-shadow(0 0 6px rgba(53,200,230,0.30));
+.v3932-goal-dart-fin {
+  fill: url(#v3932GoalDartTail);
+  stroke: rgba(255,255,255,0.12);
+  stroke-width: 0.55;
 }
+.v3932-goal-dart-fin--upper { opacity: 0.98; }
+.v3932-goal-dart-fin--lower { opacity: 0.92; }
 
 .dark .v3931-goal-target-svg {
   color: #78a8ff;

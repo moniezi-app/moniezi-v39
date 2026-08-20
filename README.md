@@ -1,6 +1,6 @@
-# MONIEZI v39.3.1
+# MONIEZI v39.3.2
 
-## v39.3.1 Luminous Glass consistency corrections
+## v39.3.2 Luminous Glass consistency corrections
 
 This correction build keeps the v39.3.0 lifecycle footer architecture and fixes two visual inconsistencies identified during phone QA.
 
