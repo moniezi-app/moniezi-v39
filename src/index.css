@@ -2849,3 +2849,385 @@ html {
 @media (max-width: 360px) {
   .v3932-nav-label, .v3932-nav-label--long { font-size: 10.5px !important; }
 }
+
+/* ================================================================
+   MONIEZI v39.3.5 — Home breathing room + readable lifecycle footer
+   The Home dashboard is intentionally allowed to become taller. The goal is
+   a calm visual rhythm, not fitting the maximum number of elements on screen.
+   ================================================================ */
+.v3935-home-breathing > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 28px !important;
+}
+
+.v3935-home-breathing .v391-glass-card,
+.v3935-home-breathing .v391-secondary-card {
+  padding: 24px;
+}
+
+.v3935-home-breathing .v391-card-header {
+  gap: 16px;
+}
+.v3935-home-breathing .v391-card-header__main {
+  gap: 15px;
+}
+.v3935-home-breathing .v391-card-subtitle {
+  margin-top: 7px;
+  font-size: 14.5px;
+  line-height: 1.62;
+}
+.v3935-home-breathing .v391-card-title {
+  font-size: 19px;
+  line-height: 1.34;
+}
+.v3935-home-breathing .v391-card-title--hero {
+  font-size: clamp(21px, 5.4vw, 24px);
+}
+.v3935-home-breathing .v391-glass-icon {
+  width: 46px;
+  height: 46px;
+}
+.v3935-home-breathing .v391-glass-action {
+  min-height: 46px;
+  padding: 11px 14px;
+  font-size: 13.5px;
+}
+
+/* Net Profit */
+.v3935-home-breathing .v391-glass-segments {
+  gap: 6px;
+  margin-top: 26px;
+  padding: 7px;
+}
+.v3935-home-breathing .v391-glass-segment {
+  min-height: 48px;
+  padding: 9px 5px;
+  font-size: 13.5px;
+}
+.v3935-home-breathing .v391-card-kpi {
+  margin-top: 30px;
+}
+.v3935-home-breathing .v391-metric-grid {
+  gap: 14px;
+  margin-top: 28px;
+}
+.v3935-home-breathing .v391-glass-metric {
+  padding: 16px;
+}
+.v3935-home-breathing .v391-glass-metric__top {
+  gap: 9px;
+}
+.v3935-home-breathing .v391-glass-metric__label {
+  font-size: 12.5px;
+}
+.v3935-home-breathing .v391-glass-metric__value {
+  margin-top: 10px;
+  font-size: 22px;
+}
+.v3935-home-breathing .v391-glass-metric__detail {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Needs Your Attention + Continue Work */
+.v3935-home-breathing .v391-attention-body {
+  margin-top: 24px;
+  padding: 18px;
+}
+.v3935-home-breathing .v391-status-row {
+  gap: 15px;
+}
+.v3935-home-breathing .v391-status-dot {
+  width: 42px;
+  height: 42px;
+}
+.v3935-home-breathing .v391-status-title {
+  font-size: 16.5px;
+  line-height: 1.42;
+}
+.v3935-home-breathing .v391-status-detail {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.62;
+}
+.v3935-home-breathing .v391-readiness-row {
+  gap: 16px;
+  margin-top: 18px !important;
+  padding-top: 18px;
+}
+.v3935-home-breathing .v391-readiness-label {
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+.v3935-home-breathing .v391-action-list {
+  gap: 12px;
+  margin-top: 22px;
+}
+.v3935-home-breathing .v391-action-row {
+  gap: 14px;
+  padding: 14px 15px;
+}
+.v3935-home-breathing .v391-action-row__icon {
+  width: 40px;
+  height: 40px;
+}
+.v3935-home-breathing .v391-action-row__title {
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+.v3935-home-breathing .v391-action-row__detail {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* Monthly Business Goals */
+.v3935-home-breathing .v391-goal-empty {
+  margin-top: 24px;
+  padding: 20px;
+}
+.v3935-home-breathing .v391-goal-empty .v391-glass-action {
+  margin-top: 18px !important;
+}
+.v3935-home-breathing .v391-progress-stack {
+  gap: 14px;
+  margin-top: 24px;
+}
+.v3935-home-breathing .v391-progress-panel {
+  padding: 18px;
+}
+.v3935-home-breathing .v391-progress-head {
+  gap: 16px;
+}
+.v3935-home-breathing .v391-progress-label {
+  font-size: 12.5px;
+}
+.v3935-home-breathing .v391-progress-value {
+  margin-top: 7px;
+  font-size: 19px;
+}
+.v3935-home-breathing .v391-progress-value span,
+.v3935-home-breathing .v391-progress-detail,
+.v3935-home-breathing .v391-goal-history {
+  font-size: 13px;
+  line-height: 1.5;
+}
+.v3935-home-breathing .v391-progress-track {
+  margin-top: 12px;
+  height: 8px;
+}
+.v3935-home-breathing .v391-progress-detail {
+  margin-top: 8px;
+}
+.v3935-home-breathing .v391-goal-history {
+  gap: 10px 18px;
+  margin-top: 20px;
+  padding-top: 16px;
+}
+
+/* Jobs */
+.v3935-home-breathing .v391-jobs-metrics {
+  gap: 10px;
+  margin-top: 24px;
+}
+.v3935-home-breathing .v391-job-stat {
+  padding: 16px 6px 14px;
+}
+.v3935-home-breathing .v391-job-stat__value {
+  font-size: 22px;
+}
+.v3935-home-breathing .v391-job-stat__label {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+/* Secondary Home cards: titles and ordinary supporting copy should not fall
+   back to the smaller legacy utility sizes. */
+.v3935-home-breathing .v391-section-heading {
+  gap: 16px;
+}
+.v3935-home-breathing .v391-section-heading h3 {
+  font-size: 18px;
+}
+.v3935-home-breathing .v391-section-heading p {
+  margin-top: 7px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.v3935-home-breathing .text-\[13px\] {
+  font-size: 14px !important;
+  line-height: 1.5;
+}
+.v3935-home-breathing .text-\[12px\] {
+  font-size: 13px !important;
+  line-height: 1.45;
+}
+
+/* Invoices & Collections */
+.v3935-home-invoices > .flex:first-child {
+  gap: 16px;
+}
+.v3935-home-invoices h3 {
+  font-size: 18px !important;
+  line-height: 1.35;
+}
+.v3935-home-invoices h3 + p {
+  margin-top: 6px !important;
+  font-size: 14px !important;
+  line-height: 1.5;
+}
+.v3935-home-invoices > .v391-glass-inset {
+  margin-top: 24px !important;
+}
+.v3935-home-invoices > .v391-glass-inset > div {
+  padding: 18px 18px !important;
+}
+.v3935-home-invoices > .v391-glass-inset [class*="text-lg"] {
+  margin-top: 7px !important;
+  font-size: 21px !important;
+}
+
+/* Sales Pipeline */
+.v3935-home-pipeline > .flex:first-of-type {
+  margin-bottom: 26px !important;
+}
+.v3935-home-pipeline h3 {
+  font-size: 18px !important;
+  line-height: 1.35;
+}
+.v3935-home-pipeline h3 + p {
+  margin-top: 5px;
+  font-size: 14px !important;
+}
+.v3935-home-pipeline > .v391-glass-inset {
+  margin-bottom: 26px !important;
+  padding: 18px !important;
+}
+.v3935-home-pipeline > .grid {
+  gap: 10px !important;
+  margin-bottom: 22px !important;
+}
+.v3935-home-pipeline > .grid > div {
+  padding: 14px 6px !important;
+}
+.v3935-home-pipeline > .grid > div > div:first-child {
+  font-size: 20px !important;
+}
+.v3935-home-pipeline > .mt-4,
+.v3935-home-pipeline > .pt-4 {
+  margin-top: 22px !important;
+  padding-top: 18px !important;
+}
+
+/* Recent activity */
+.v3935-home-recent .v391-section-heading {
+  margin-bottom: 22px !important;
+}
+.v3935-home-recent .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 16px !important;
+}
+.v3935-home-recent .v391-glass-inset {
+  padding: 18px !important;
+}
+.v3935-home-recent .v391-glass-inset > .flex,
+.v3935-home-recent .v391-glass-inset .flex.items-center {
+  gap: 16px;
+}
+
+/* Tax Snapshot */
+.v3935-home-tax > .flex:first-child {
+  margin-bottom: 22px !important;
+}
+.v3935-home-tax > .grid {
+  gap: 18px !important;
+  margin-bottom: 18px !important;
+}
+.v3935-home-tax > p {
+  margin-bottom: 20px !important;
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+}
+.v3935-home-tax > .flex:last-child {
+  gap: 16px;
+  padding-top: 18px !important;
+}
+
+/* Receipts */
+.v3935-home-receipts > .flex:first-child {
+  margin-bottom: 22px !important;
+  padding-left: 0 !important;
+}
+.v3935-home-receipts h3 {
+  font-size: 18px !important;
+}
+.v3935-home-receipts h3 + p {
+  margin-top: 7px !important;
+  font-size: 14px !important;
+  line-height: 1.6;
+}
+.v3935-home-receipts > .grid {
+  gap: 14px !important;
+  margin-bottom: 26px !important;
+}
+.v3935-home-receipts > .grid > button {
+  min-height: 108px;
+  gap: 10px;
+}
+.v3935-home-receipts > .flex.items-center.justify-between.mb-3 {
+  margin-bottom: 16px !important;
+}
+.v3935-home-receipts .custom-scrollbar {
+  gap: 14px !important;
+  padding-bottom: 18px !important;
+}
+
+/* Footer: all six lifecycle destinations stay readable. Spacing is solved by
+   equal-width items and a small physical gap, never by microscopic labels. */
+.v3932-nav-item {
+  min-height: 60px;
+  min-width: 0;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 5px 0 4px !important;
+}
+.v3932-nav-icon {
+  padding: 6px !important;
+}
+.v3932-nav-icon svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+.v3932-nav-label,
+.v3932-nav-label--long {
+  display: block;
+  width: 100%;
+  margin-top: 3px !important;
+  font-size: 12.5px !important;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  white-space: nowrap;
+  text-align: center;
+}
+
+@media (max-width: 430px) {
+  .v3935-home-breathing > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 28px !important;
+  }
+  .v3935-home-breathing .v391-glass-card,
+  .v3935-home-breathing .v391-secondary-card {
+    padding: 22px;
+  }
+  .v3935-home-breathing .v391-card-title { font-size: 19px; }
+  .v3935-home-breathing .v391-card-subtitle { font-size: 14px; }
+  .v3935-home-breathing .v391-job-stat__label { font-size: 11.5px; }
+  .v3932-nav-item { min-height: 60px; }
+  .v3932-nav-icon svg { width: 22px !important; height: 22px !important; }
+  .v3932-nav-label,
+  .v3932-nav-label--long { font-size: 12.5px !important; letter-spacing: -0.015em; }
+}
+
+@media (max-width: 360px) {
+  .v3932-nav-label,
+  .v3932-nav-label--long { font-size: 12.5px !important; }
+}

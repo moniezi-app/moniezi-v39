@@ -1,4 +1,13 @@
-# MONIEZI v39.3.4
+# MONIEZI v39.3.5
+
+## v39.3.5 Home breathing room + footer readability
+
+- Expands internal padding and vertical rhythm across every Home dashboard card.
+- Increases spacing between headings, subtitles, controls, KPI panels, status rows, actions, dividers, and card-to-card sections.
+- Keeps the Monthly Business Goals decorative target removed.
+- Restores a genuinely readable six-item footer with 22px icons and 12.5px labels without a narrow-screen micro-font fallback.
+- Preserves the approved lifecycle order: Home · Clients · Jobs · Estimates · Invoices · Mileage.
+- No business logic, storage, calculations, licensing, or data workflows are intentionally changed.
 
 ## v39.3.4 Home + footer readability restoration
 

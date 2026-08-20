@@ -8224,7 +8224,7 @@ html, body, #root {
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
         {(currentPage === Page.Dashboard) && (
-          <div className="v391-dashboard v3934-home-readable space-y-5 sm:space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="v391-dashboard v3934-home-readable v3935-home-breathing space-y-7 sm:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <MonieziGlassCard hero>
               <div className="v391-card-header">
                 <div className="v391-card-header__main">
@@ -8453,7 +8453,7 @@ html, body, #root {
             </MonieziGlassCard>
 
             <div
-              className="v391-glass-card v391-secondary-card cursor-pointer transition-all"
+              className="v391-glass-card v391-secondary-card v3935-home-invoices cursor-pointer transition-all"
               onClick={() => {
                 setInvoiceQuickFilter(totals.pendingCount > 0 ? 'unpaid' : 'all');
                 setCurrentPage(Page.Invoices);
@@ -8495,7 +8495,7 @@ html, body, #root {
             {/* Sales Pipeline Widget */}
             {(pipelineStats.totalEstimates > 0 || pipelineStats.pipelineValue > 0) && (
               <div
-                className="v391-glass-card v391-secondary-card relative cursor-pointer transition-all"
+                className="v391-glass-card v391-secondary-card v3935-home-pipeline relative cursor-pointer transition-all"
                 onClick={() => {
                   setBillingDocType('estimate');
                   setCurrentPage(Page.Invoices);
@@ -8565,7 +8565,7 @@ html, body, #root {
               </div>
             )}
             
-            <div className="v391-glass-card v391-secondary-card">
+            <div className="v391-glass-card v391-secondary-card v3935-home-recent">
               <div className="v391-section-heading mb-4">
                 <h3>Recent activity</h3>
                 <button onClick={() => setCurrentPage(Page.AllTransactions)} className="min-h-11 px-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors">See all</button>
@@ -8591,7 +8591,7 @@ html, body, #root {
               </div>
             </div>
 
-            <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card cursor-pointer active:scale-[0.99] transition-all group">
+            <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card v3935-home-tax cursor-pointer active:scale-[0.99] transition-all group">
                <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400"><Calculator size={20} /><span className="text-[13px] font-bold uppercase tracking-widest font-brand">Tax Snapshot</span></div>
                   <ArrowRight size={18} className="text-slate-300 dark:text-slate-300 -rotate-45 group-hover:rotate-0 group-hover:text-emerald-500 transition-all duration-300"/>
@@ -8612,7 +8612,7 @@ html, body, #root {
             </div>
 
             {/* Home Receipts: actions + real linked receipt images + missing-documentation workflow */}
-            <div id="home-receipts" className="v391-glass-card v391-secondary-card scroll-mt-6">
+            <div id="home-receipts" className="v391-glass-card v391-secondary-card v3935-home-receipts scroll-mt-6">
               <div className="flex items-center justify-between mb-4 pl-2">
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-brand">Receipts</h3>
@@ -12660,7 +12660,7 @@ html, body, #root {
 
       <div className={`dark-chrome no-print fixed bottom-0 left-0 right-0 z-[55] pb-safe transition-opacity duration-150 ${shouldHideBottomNav ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className={`v391-bottom-nav-surface ${useDarkChrome ? 'bg-slate-950 border-t border-slate-800/50' : 'bg-white/95 dark:bg-slate-950/95 border-t border-slate-200 dark:border-slate-800/50'} ${useDarkChrome ? '' : 'backdrop-blur-xl'} px-1 pt-2 pb-3`}>
-          <div className="max-w-xl mx-auto flex items-end relative gap-0.5 sm:gap-1">
+          <div className="max-w-xl mx-auto flex items-end relative gap-[2px]">
             {/* Home */}
             <button 
               onClick={() => setCurrentPage(Page.Dashboard)} 
