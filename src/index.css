@@ -144,29 +144,31 @@ body.modal-open {
 
 
 
-/* MONIEZI v39.0.29 premium dark glass system */
+/* MONIEZI v39.0.30 premium dark glass system */
 :root {
+  --moniezi-dark-ambient-bg:
+    radial-gradient(circle at 14% -4%, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0) 30%),
+    radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0) 26%),
+    linear-gradient(180deg, #020617 0%, #030b1a 100%);
   --moniezi-dark-surface-hero:
-    radial-gradient(circle at 18% 12%, rgba(147, 197, 253, 0.28) 0%, rgba(147, 197, 253, 0) 34%),
-    radial-gradient(circle at 100% 0%, rgba(129, 140, 248, 0.28) 0%, rgba(129, 140, 248, 0) 32%),
-    linear-gradient(152deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 16%, rgba(35, 81, 188, 0.86) 28%, rgba(15, 36, 95, 0.92) 58%, rgba(34, 23, 90, 0.98) 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 12%, rgba(255, 255, 255, 0.015) 24%, rgba(8, 18, 38, 0.50) 24%, rgba(7, 16, 35, 0.56) 100%),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.20) 0%, rgba(14, 165, 233, 0.11) 34%, rgba(99, 102, 241, 0.10) 100%);
   --moniezi-dark-surface-card:
-    radial-gradient(circle at 16% 10%, rgba(96, 165, 250, 0.22) 0%, rgba(96, 165, 250, 0) 32%),
-    radial-gradient(circle at 100% 0%, rgba(129, 140, 248, 0.18) 0%, rgba(129, 140, 248, 0) 30%),
-    linear-gradient(158deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.04) 14%, rgba(18, 54, 130, 0.82) 24%, rgba(11, 27, 74, 0.92) 56%, rgba(28, 21, 72, 0.98) 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 14%, rgba(255, 255, 255, 0.012) 24%, rgba(8, 18, 38, 0.48) 24%, rgba(6, 15, 34, 0.54) 100%),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.16) 0%, rgba(14, 165, 233, 0.09) 30%, rgba(99, 102, 241, 0.08) 100%);
   --moniezi-dark-surface-inset:
-    radial-gradient(circle at 14% 8%, rgba(96, 165, 250, 0.16) 0%, rgba(96, 165, 250, 0) 28%),
-    linear-gradient(158deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.025) 16%, rgba(10, 32, 82, 0.84) 26%, rgba(7, 21, 56, 0.95) 100%);
-  --moniezi-dark-border-strong: rgba(191, 219, 254, 0.34);
-  --moniezi-dark-border-soft: rgba(125, 174, 255, 0.24);
-  --moniezi-dark-border-faint: rgba(125, 174, 255, 0.16);
-  --moniezi-dark-shadow-card: 0 18px 44px rgba(2, 6, 23, 0.34), 0 0 0 1px rgba(255, 255, 255, 0.03) inset, 0 1px 0 rgba(255, 255, 255, 0.12) inset;
-  --moniezi-dark-shadow-hero: 0 22px 54px rgba(2, 6, 23, 0.38), 0 0 0 1px rgba(255, 255, 255, 0.04) inset, 0 1px 0 rgba(255, 255, 255, 0.18) inset;
-  --moniezi-dark-shadow-inset: 0 10px 28px rgba(2, 6, 23, 0.24), 0 0 0 1px rgba(255, 255, 255, 0.025) inset, 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 14%, rgba(4, 11, 26, 0.58) 24%, rgba(3, 10, 24, 0.66) 100%),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.10) 0%, rgba(59, 130, 246, 0.05) 40%, rgba(99, 102, 241, 0.05) 100%);
+  --moniezi-dark-border-strong: rgba(255, 255, 255, 0.20);
+  --moniezi-dark-border-soft: rgba(255, 255, 255, 0.13);
+  --moniezi-dark-border-faint: rgba(191, 219, 254, 0.10);
+  --moniezi-dark-shadow-card: 0 18px 48px rgba(2, 6, 23, 0.34), 0 4px 18px rgba(37, 99, 235, 0.12), 0 1px 0 rgba(255, 255, 255, 0.12) inset;
+  --moniezi-dark-shadow-hero: 0 22px 56px rgba(2, 6, 23, 0.38), 0 8px 26px rgba(59, 130, 246, 0.16), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
+  --moniezi-dark-shadow-inset: 0 12px 28px rgba(2, 6, 23, 0.24), 0 1px 0 rgba(255, 255, 255, 0.08) inset;
 }
 
 .dark .moniezi-app-shell {
-  background: #020617;
+  background: var(--moniezi-dark-ambient-bg);
 }
 
 .dark .moniezi-drawer-panel {
@@ -203,8 +205,8 @@ body.modal-open {
   background: var(--moniezi-dark-surface-card) !important;
   border-color: var(--moniezi-dark-border-soft) !important;
   box-shadow: var(--moniezi-dark-shadow-card) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(135%);
-  backdrop-filter: blur(18px) saturate(135%);
+  -webkit-backdrop-filter: blur(24px) saturate(155%);
+  backdrop-filter: blur(24px) saturate(155%);
 }
 
 .dark :is(div, section, article, aside)[class*="rounded"][class*="dark:bg-slate-800"],
@@ -212,8 +214,8 @@ body.modal-open {
   background: var(--moniezi-dark-surface-inset) !important;
   border-color: var(--moniezi-dark-border-faint) !important;
   box-shadow: var(--moniezi-dark-shadow-inset) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(128%);
-  backdrop-filter: blur(16px) saturate(128%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  backdrop-filter: blur(18px) saturate(145%);
 }
 
 /* Preserve the deepest chrome and data-entry surfaces instead of turning everything blue. */
@@ -236,16 +238,16 @@ body.modal-open {
 .dark :is(div, section, article, aside)[class*="dark:from-blue-800"][class*="dark:to-indigo-950"],
 .dark :is(div, section, article, aside)[class*="dark:from-blue-800"][class*="dark:to-indigo-900"] {
   background: var(--moniezi-dark-surface-hero) !important;
-  border-color: rgba(191, 219, 254, 0.30) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
   box-shadow: var(--moniezi-dark-shadow-hero) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(165%);
+  backdrop-filter: blur(28px) saturate(165%);
 }
 
-/* v39 utility surfaces should harmonize with the dark glass card family. */
+/* v39 utility surfaces should stay in the same glass family without becoming heavy blue blocks. */
 .dark {
-  --v39-section-surface: rgba(8, 20, 43, 0.74);
-  --v39-section-border: rgba(125, 174, 255, 0.24);
+  --v39-section-surface: rgba(8, 18, 38, 0.50);
+  --v39-section-border: rgba(255, 255, 255, 0.14);
 }
 
 /* Subtle blue hover language for dark cards */
@@ -260,7 +262,7 @@ body.modal-open {
 .dark .dark\:hover\:bg-slate-900\/50:hover,
 .dark .dark\:hover\:bg-slate-900\/60:hover,
 .dark .dark\:hover\:bg-slate-900\/70:hover {
-  background-color: rgba(29, 78, 216, 0.20) !important;
+  background-color: rgba(59, 130, 246, 0.14) !important;
 }
 
 /* Extreme-contrast light mode pass */
