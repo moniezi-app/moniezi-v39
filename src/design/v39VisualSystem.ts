@@ -5,7 +5,27 @@
  * It defines the shared visual language that v39 screens can opt into one by one.
  */
 
-export const V39_VISUAL_SYSTEM_VERSION = '39.0.28';
+export const V39_VISUAL_SYSTEM_VERSION = '39.1.0';
+
+
+
+/**
+ * v39.1.0 Luminous Glass surface tokens.
+ * These names intentionally describe surface roles rather than screen content so
+ * the dashboard, lists, and future business modules can reuse one material system.
+ */
+export const monieziGlass = {
+  radius: {
+    card: 24,
+    inset: 18,
+    control: 14,
+    icon: 14,
+  },
+  motion: {
+    pressScale: 0.99,
+    durationMs: 180,
+  },
+} as const;
 
 export const monieziVisual = {
   typography: {

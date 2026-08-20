@@ -1,6 +1,6 @@
 # MONIEZI v39 Visual System
 
-Version: 39.0.33
+Version: 39.1.0
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 
@@ -132,6 +132,19 @@ Any v39 illustration motion should be optional and restrained.
 - v39 CSS variables and component styles in `src/index.css`.
 
 These primitives are intentionally not wired into production screens yet. Individual screens will migrate one at a time so functionality remains stable and each visual change can be reviewed separately.
+
+
+## v39.1.0 Luminous Glass dashboard surfaces
+
+The Home dashboard now adds a second visual layer to the v39 illustration system: reusable **Luminous Glass** surfaces for data-rich business cards. The goal is stronger card separation and depth without turning the bookkeeping UI into neon decoration.
+
+- Major Home cards use layered navy/frosted surfaces, gradient edge light, inner highlights, and restrained ambient glow.
+- Dark mode carries the strongest luminous expression; light mode uses the same geometry with quieter frosted-white surfaces and blue-tinted edge depth.
+- `MonieziGlassCard`, `MonieziGlassInset`, `MonieziGlassIcon`, `MonieziGlassAction`, `MonieziGlassSegments`, and `MonieziGlassMetric` are presentation-only primitives in `src/components/visual/MonieziGlass.tsx`.
+- Net Profit is the Home anchor card; Needs Your Attention, Monthly Business Goals, and Jobs use the same material hierarchy.
+- Continue Work and the remaining Home business cards use a quieter secondary glass intensity.
+- The sticky footer keeps the existing destinations and behavior but replaces the solid active block with an illuminated selection well.
+- No storage schema, accounting logic, licensing flow, report logic, or feature persistence is changed by the surface system.
 
 ## Recommended implementation order after this foundation
 

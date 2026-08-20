@@ -1,4 +1,16 @@
-# MONIEZI v39.0.28
+# MONIEZI v39.1.0
+
+## v39.1.0 Luminous Glass dashboard system
+
+- Introduces the reusable Luminous Glass card, inset, icon-well, action, segmented-control, and metric primitives.
+- Redesigns Home around premium layered surfaces with controlled blue/cyan edge illumination in dark mode and a quieter frosted translation in light mode.
+- Moves the Overview identity and primary add action into the Net Profit hero card, with side-by-side IN / OUT metrics.
+- Redesigns Needs Your Attention and Monthly Business Goals with nested glass hierarchy while preserving existing logic.
+- Adds a compact Home Jobs summary derived from existing job, estimate, and invoice data without adding new stored counters or statuses.
+- Applies the quieter glass treatment to Continue Work, Invoices & Collections, Sales Pipeline, Recent Activity, Tax Snapshot, and Receipts.
+- Refines the sticky footer selection from a solid blue block to an illuminated glass selection well.
+- Preserves existing licensing, PWA, IndexedDB/localStorage, demo/reset, reports, invoices, estimates, receipts, mileage, goals, and Jobs persistence behavior.
+
 
 Controlled visual-redesign branch for MONIEZI v39.
 

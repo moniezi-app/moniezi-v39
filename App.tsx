@@ -100,6 +100,7 @@ import { GlobalSearchPanel } from './src/components/GlobalSearchPanel';
 import { MonieziSelect } from './src/components/MonieziSelect';
 import { MonieziEmptyState } from './src/components/visual/MonieziEmptyState';
 import { MonieziVisualStage } from './src/components/visual/MonieziVisualStage';
+import { MonieziGlassAction, MonieziGlassCard, MonieziGlassIcon, MonieziGlassInset, MonieziGlassMetric, MonieziGlassSegments } from './src/components/visual/MonieziGlass';
 import { ClientsVisualScene, EstimateVisualScene, InvoiceVisualScene, JobsVisualScene, MileageVisualScene, ReceiptsVisualScene } from './src/components/visual/MonieziVisualScenes';
 import { buildGlobalSearchGroups, type GlobalSearchResult } from './src/features/search/globalSearch';
 import { TransactionEditorShell } from './src/features/transactions/TransactionEditorShell';
@@ -632,8 +633,8 @@ const ToastContainer: React.FC<{ notifications: Notification[]; remove: (id: str
 };
 
 const EmptyState: React.FC<{ icon: React.ReactNode, title: string, subtitle: string, action?: () => void, actionLabel?: string }> = ({ icon, title, subtitle, action, actionLabel }) => (
-  <div className="moniezi-luminous-empty flex flex-col items-center justify-center py-16 px-4 text-center border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
-    <div className="moniezi-luminous-icon mb-4 text-slate-600 dark:text-slate-300 p-4 bg-white rounded-full shadow-sm border border-slate-200">
+  <div className="flex flex-col items-center justify-center py-16 px-4 text-center border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/50">
+    <div className="mb-4 text-slate-600 dark:text-slate-300 p-4 bg-white dark:bg-slate-950 rounded-full shadow-sm border border-slate-200 dark:border-slate-800">
       {icon}
     </div>
     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1 font-brand">{title}</h3>
@@ -5036,6 +5037,43 @@ export default function App() {
     return items.sort((a, b) => b.priority - a.priority);
   }, [invoices, estimates, transactions, mileageTrips]);
 
+  const homeJobSummary = useMemo(() => {
+    const waitingJobIds = new Set(
+      invoices
+        .filter(invoice => invoice.status === 'unpaid' && invoice.jobId)
+        .map(invoice => invoice.jobId as string),
+    );
+    const reviewJobIds = new Set(
+      estimates
+        .filter(estimate => estimate.status === 'sent' && estimate.jobId)
+        .map(estimate => estimate.jobId as string),
+    );
+
+    let inProgress = 0;
+    let review = 0;
+    let waiting = 0;
+    let completed = 0;
+
+    jobs.forEach(job => {
+      if (job.status === 'completed') {
+        completed += 1;
+        return;
+      }
+      if (job.status !== 'active') return;
+      if (waitingJobIds.has(job.id)) {
+        waiting += 1;
+        return;
+      }
+      if (reviewJobIds.has(job.id)) {
+        review += 1;
+        return;
+      }
+      inProgress += 1;
+    });
+
+    return { inProgress, review, waiting, completed };
+  }, [jobs, invoices, estimates]);
+
   const monthlyGoalProgress = useMemo(() => buildMonthlyGoalProgress(
     transactions,
     settings.monthlyRevenueGoal,
@@ -8215,76 +8253,45 @@ html, body, #root {
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
         {(currentPage === Page.Dashboard) && (
-          <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                <div className="p-2.5 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400 flex-shrink-0">
-                  <LayoutGrid size={22} strokeWidth={1.7} />
+          <div className="v391-dashboard space-y-5 sm:space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <MonieziGlassCard hero>
+              <div className="v391-card-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="blue" label="Overview">
+                    <LayoutGrid size={21} />
+                  </MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h2 className="v391-card-title v391-card-title--hero">
+                      Net Profit <span className="text-blue-600 dark:text-blue-300">({homeTotals.label})</span>
+                    </h2>
+                    <p className="v391-card-subtitle">{homeTotals.rangeText}</p>
+                  </div>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Overview</h2>
-              </div>
-              <button onClick={() => handleOpenUnifiedAdd()} className="w-11 h-11 sm:w-12 sm:h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-md shadow-blue-600/20 hover:bg-blue-500 transition-all active:scale-95 flex-shrink-0" aria-label="Add new record"><Plus size={21} strokeWidth={2.5} /></button>
-            </div>
-
-            <div className="moniezi-luminous-hero bg-white p-6 sm:p-8 rounded-xl shadow-xl border border-slate-200 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-80 h-80 bg-slate-100/50 dark:bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 group-hover:bg-slate-200/50 transition-colors duration-700 pointer-events-none" />
-
-              <div className="flex flex-col gap-4 mb-4">
-                {/* Header - Larger Typography */}
-                <div className="relative z-10">
-                  <h2 className="text-base sm:text-lg font-extrabold tracking-tight font-brand mb-1" style={{ color: 'var(--text-primary)' }}>
-                    Net Profit <span className="text-blue-600 dark:text-blue-300">({homeTotals.label})</span>
-                  </h2>
-                  <p className="text-sm sm:text-base font-semibold tracking-wide" style={{ color: 'var(--text-secondary)' }}>{homeTotals.rangeText}</p>
-                </div>
-
-                {/* Redesigned Period Selector - User Friendly */}
-                <div className="moniezi-luminous-segment grid grid-cols-4 gap-1.5 sm:gap-2 bg-slate-100/80 p-1.5 sm:p-2 rounded-2xl border border-slate-200/70 shadow-sm">
-                  {(['ytd', 'mtd', '30d', 'all'] as HomeKpiPeriod[]).map(p => {
-                    const isActive = homeKpiPeriod === p;
-                    const labels: Record<HomeKpiPeriod, { short: string; full: string }> = {
-                      'ytd': { short: 'Year', full: 'This Year' },
-                      'mtd': { short: 'Month', full: 'This Month' },
-                      '30d': { short: '30 Days', full: '30 Days' },
-                      'all': { short: 'All', full: 'All Time' }
-                    };
-                    return (
-                      <button
-                        key={p}
-                        onClick={() => setHomeKpiPeriod(p)}
-                        className={`relative flex flex-col items-center justify-center min-h-[48px] sm:min-h-[52px] px-2 py-2 rounded-xl transition-all duration-200 ${
-                          isActive 
-                            ? 'moniezi-luminous-segment-active bg-white shadow-lg shadow-blue-500/10 ring-1 ring-blue-500/20' 
-                            : 'hover:bg-white/50 dark:hover:bg-white/5 active:scale-95'
-                        }`}
-                      >
-                        <span 
-                          className={`text-[13px] sm:text-sm font-bold leading-tight text-center transition-colors ${
-                            isActive 
-                              ? 'text-blue-600 dark:text-white' 
-                              : ''
-                          }`}
-                          style={{ 
-                            fontVariantNumeric: 'tabular-nums',
-                            color: isActive ? undefined : 'var(--tab-inactive)'
-                          }}
-                        >
-                          {labels[p].short}
-                        </span>
-                        {isActive && (
-                          <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-6 h-1 bg-blue-500 dark:bg-blue-400 rounded-full" />
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
+                <button onClick={() => handleOpenUnifiedAdd()} className="v391-primary-orb" aria-label="Add new record">
+                  <Plus size={21} strokeWidth={2.4} />
+                </button>
               </div>
 
-              <div className="text-4xl font-extrabold tracking-tighter mb-6 text-slate-950 dark:text-white font-brand">{formatCurrency.format(homeTotals.profit)}</div>
+              <MonieziGlassSegments<HomeKpiPeriod>
+                value={homeKpiPeriod}
+                onChange={setHomeKpiPeriod}
+                options={[
+                  { value: 'ytd', label: 'Year', ariaLabel: 'This Year' },
+                  { value: 'mtd', label: 'Month', ariaLabel: 'This Month' },
+                  { value: '30d', label: '30 Days' },
+                  { value: 'all', label: 'All', ariaLabel: 'All Time' },
+                ]}
+              />
 
-              <div className="grid grid-cols-1 gap-2">
-                <button
-                  type="button"
+              <div className="v391-card-kpi">{formatCurrency.format(homeTotals.profit)}</div>
+
+              <div className="v391-metric-grid">
+                <MonieziGlassMetric
+                  label="In"
+                  value={formatCurrency.format(homeTotals.income)}
+                  tone="green"
+                  icon={<TrendingUp size={16} />}
+                  ariaLabel="View income in Activity"
                   onClick={() => {
                     setLedgerSearch('');
                     setExpenseReceiptFilter('all');
@@ -8292,14 +8299,13 @@ html, body, #root {
                     setLedgerFilter('income');
                     setCurrentPage(Page.AllTransactions);
                   }}
-                  aria-label="View income in Activity"
-                  className="moniezi-luminous-inset w-full bg-slate-50 px-4 py-3 rounded-lg border border-slate-200 flex items-center justify-between text-left cursor-pointer active:scale-[0.99] transition-transform"
-                >
-                  <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-300"><TrendingUp size={18} strokeWidth={2.5} /><span className="text-sm font-bold uppercase tracking-wide">In</span></div>
-                  <div className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency.format(homeTotals.income)}</div>
-                </button>
-                <button
-                  type="button"
+                />
+                <MonieziGlassMetric
+                  label="Out"
+                  value={formatCurrency.format(homeTotals.expense)}
+                  tone="rose"
+                  icon={<TrendingDown size={16} />}
+                  ariaLabel="View expenses in Activity"
                   onClick={() => {
                     setLedgerSearch('');
                     setExpenseReceiptFilter('all');
@@ -8307,113 +8313,177 @@ html, body, #root {
                     setLedgerFilter('expense');
                     setCurrentPage(Page.AllTransactions);
                   }}
-                  aria-label="View expenses in Activity"
-                  className="moniezi-luminous-inset w-full bg-slate-50 px-4 py-3 rounded-lg border border-slate-200 flex items-center justify-between text-left cursor-pointer active:scale-[0.99] transition-transform"
-                >
-                  <div className="flex items-center gap-2 text-red-600 dark:text-red-300"><TrendingDown size={18} strokeWidth={2.5} /><span className="text-sm font-bold uppercase tracking-wide">Out</span></div>
-                  <div className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency.format(homeTotals.expense)}</div>
-                </button>
+                />
               </div>
-            </div>
+            </MonieziGlassCard>
 
-            <section className="moniezi-luminous-card rounded-xl border border-slate-300 bg-white shadow-sm overflow-hidden">
-              <div className="moniezi-luminous-header flex items-start justify-between gap-3 border-b border-slate-200 px-5 py-4">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <AlertTriangle size={18} className={businessActionItems.length ? 'text-amber-600 dark:text-amber-400' : 'text-emerald-600 dark:text-emerald-400'} />
-                    <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Needs Your Attention</h3>
+            <MonieziGlassCard>
+              <div className="v391-card-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone={businessActionItems.length ? 'amber' : 'green'}>
+                    <AlertTriangle size={20} />
+                  </MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Needs Your Attention</h3>
+                    <p className="v391-card-subtitle">MONIEZI checks collections, follow-ups and record readiness.</p>
                   </div>
-                  <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">MONIEZI checks collections, follow-ups and record readiness.</p>
                 </div>
-                <button type="button" onClick={() => setShowInsights(true)} className="moniezi-luminous-control shrink-0 rounded-lg border border-slate-300 bg-white px-3 py-2 text-[11px] font-bold text-blue-700 transition-colors hover:bg-blue-50 dark:text-blue-300 dark:hover:bg-blue-500/10">Insights</button>
+                <MonieziGlassAction onClick={() => setShowInsights(true)} tone="cyan">
+                  Insights <ChevronRight size={14} />
+                </MonieziGlassAction>
               </div>
+
               {businessActionItems.length === 0 ? (
-                <div className="moniezi-luminous-inset mx-4 my-4 flex items-center gap-3 rounded-xl px-4 py-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300"><CheckCircle size={18} /></div>
-                  <div><div className="font-bold text-slate-900 dark:text-white">Nothing urgent right now</div><div className="text-xs text-slate-500 dark:text-slate-400">No overdue collections or major record gaps were detected.</div></div>
-                </div>
+                <MonieziGlassInset className="v391-attention-body">
+                  <div className="v391-status-row">
+                    <div className="v391-status-dot"><CheckCircle size={18} /></div>
+                    <div className="min-w-0">
+                      <div className="v391-status-title">Nothing urgent right now</div>
+                      <div className="v391-status-detail">No overdue collections or major record gaps were detected.</div>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }}
+                    className="v391-readiness-row w-full text-left"
+                  >
+                    <span className="v391-readiness-label">Tax Prep Readiness · {new Date().getFullYear()}</span>
+                    <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
+                  </button>
+                </MonieziGlassInset>
               ) : (
-                <div className="divide-y divide-slate-200 dark:divide-slate-800">
-                  {businessActionItems.slice(0, 5).map(item => {
-                    const toneClass = item.tone === 'red' ? 'bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300' : item.tone === 'amber' ? 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300';
-                    return (
-                      <button key={item.id} type="button" onClick={() => handleBusinessAction(item.id)} className="flex w-full items-center gap-3 px-5 py-4 text-left transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                        <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${toneClass}`}><AlertCircle size={17} /></div>
-                        <div className="min-w-0 flex-1"><div className="text-sm font-extrabold text-slate-900 dark:text-white">{item.title}</div><div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{item.detail}</div></div>
-                        <ChevronRight size={17} className="shrink-0 text-slate-400" />
-                      </button>
-                    );
-                  })}
-                </div>
+                <>
+                  <div className="v391-action-list">
+                    {businessActionItems.slice(0, 5).map(item => {
+                      const toneClass = item.tone === 'red' ? 'bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300' : item.tone === 'amber' ? 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300';
+                      return (
+                        <button key={item.id} type="button" onClick={() => handleBusinessAction(item.id)} className="v391-action-row">
+                          <div className={`v391-action-row__icon ${toneClass}`}><AlertCircle size={17} /></div>
+                          <div className="v391-action-row__copy"><div className="v391-action-row__title">{item.title}</div><div className="v391-action-row__detail">{item.detail}</div></div>
+                          <ChevronRight size={17} className="shrink-0 text-slate-400" />
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }}
+                    className="v391-readiness-row relative z-[1] mt-3 w-full text-left"
+                  >
+                    <span className="v391-readiness-label">Tax Prep Readiness · {new Date().getFullYear()}</span>
+                    <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
+                  </button>
+                </>
               )}
-              <button type="button" onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }} className="moniezi-luminous-footer flex w-full items-center justify-between gap-3 border-t border-slate-200 bg-slate-50 px-5 py-3.5 text-left">
-                <span className="text-xs font-bold text-slate-600 dark:text-slate-300">Tax Prep Readiness · {new Date().getFullYear()}</span>
-                <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
-              </button>
-            </section>
+            </MonieziGlassCard>
 
-            <section className="moniezi-luminous-card rounded-xl border border-slate-300 bg-white shadow-sm overflow-hidden">
-              <div className="moniezi-luminous-header flex items-start justify-between gap-3 border-b border-slate-200 px-5 py-4">
-                <div>
-                  <div className="flex items-center gap-2"><Percent size={18} className="text-blue-600 dark:text-blue-400" /><h3 className="text-base font-extrabold text-slate-900 dark:text-white">Monthly Business Goals</h3></div>
-                  <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">{monthlyGoalLabel} · track revenue and profit without a separate planning tool.</p>
+            <MonieziGlassCard>
+              <div className="v391-card-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="violet"><Percent size={20} /></MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Monthly Business Goals</h3>
+                    <p className="v391-card-subtitle">{monthlyGoalLabel} · track revenue and profit without a separate planning tool.</p>
+                  </div>
                 </div>
-                <button type="button" onClick={openGoalsEditor} className="moniezi-luminous-control shrink-0 rounded-lg border border-slate-300 bg-white px-3 py-2 text-[11px] font-bold text-blue-700 transition-colors hover:bg-blue-50 dark:text-blue-300 dark:hover:bg-blue-500/10">{monthlyGoalProgress.hasRevenueGoal || monthlyGoalProgress.hasProfitGoal ? 'Edit' : 'Set Goals'}</button>
+                <MonieziGlassAction onClick={openGoalsEditor} tone="violet">
+                  {monthlyGoalProgress.hasRevenueGoal || monthlyGoalProgress.hasProfitGoal ? 'Edit' : 'Set Goals'}
+                </MonieziGlassAction>
               </div>
-              {!monthlyGoalProgress.hasRevenueGoal && !monthlyGoalProgress.hasProfitGoal ? (
-                <div className="moniezi-luminous-inset mx-4 my-4 rounded-xl px-4 py-4">
-                  <div className="text-sm font-extrabold text-slate-900 dark:text-white">Set a target for the month</div>
-                  <p className="mt-1 text-xs font-medium leading-5 text-slate-500 dark:text-slate-400">Optional goals show how much revenue or profit is still needed this month.</p>
-                  <button type="button" onClick={openGoalsEditor} className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3.5 py-2.5 text-xs font-extrabold text-white shadow-sm transition hover:bg-blue-500"><PlusCircle size={15} /> Set Monthly Goals</button>
-                </div>
-              ) : (
-                <div className="space-y-5 px-5 py-5">
-                  {monthlyGoalProgress.hasRevenueGoal && (
-                    <div>
-                      <div className="flex items-end justify-between gap-3"><div><div className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Revenue Goal</div><div className="mt-1 text-lg font-extrabold text-slate-950 dark:text-white">{formatCurrency.format(monthlyGoalProgress.revenue)} <span className="text-xs font-bold text-slate-400">of {formatCurrency.format(monthlyGoalProgress.revenueGoal)}</span></div></div><div className="text-sm font-extrabold text-blue-600 dark:text-blue-300">{Math.round(monthlyGoalProgress.revenuePct)}%</div></div>
-                      <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800"><div className="h-full rounded-full bg-blue-600 transition-all" style={{ width: `${Math.min(100, monthlyGoalProgress.revenuePct)}%` }} /></div>
-                      <div className="mt-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400">{monthlyGoalProgress.revenueRemaining > 0 ? `${formatCurrency.format(monthlyGoalProgress.revenueRemaining)} remaining` : 'Revenue goal reached'}</div>
-                    </div>
-                  )}
-                  {monthlyGoalProgress.hasProfitGoal && (
-                    <div>
-                      <div className="flex items-end justify-between gap-3"><div><div className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Profit Goal</div><div className="mt-1 text-lg font-extrabold text-slate-950 dark:text-white">{formatCurrency.format(monthlyGoalProgress.profit)} <span className="text-xs font-bold text-slate-400">of {formatCurrency.format(monthlyGoalProgress.profitGoal)}</span></div></div><div className="text-sm font-extrabold text-emerald-600 dark:text-emerald-300">{Math.round(monthlyGoalProgress.profitPct)}%</div></div>
-                      <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800"><div className="h-full rounded-full bg-emerald-600 transition-all" style={{ width: `${Math.min(100, monthlyGoalProgress.profitPct)}%` }} /></div>
-                      <div className="mt-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400">{monthlyGoalProgress.profitRemaining > 0 ? `${formatCurrency.format(monthlyGoalProgress.profitRemaining)} remaining` : 'Profit goal reached'}</div>
-                    </div>
-                  )}
-                </div>
-              )}
-              {(monthlyGoalProgress.hasRevenueGoal || monthlyGoalProgress.hasProfitGoal) && (
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-slate-200 bg-slate-50 px-5 py-3 text-[11px] font-semibold text-slate-500 dark:border-slate-800 dark:bg-slate-950/50 dark:text-slate-400">
-                  <span>{previousGoalMonthLabel} revenue: <strong className="text-slate-700 dark:text-slate-200">{formatCurrency.format(monthlyGoalProgress.previousRevenue)}</strong></span>
-                  <span>{previousGoalMonthLabel} profit: <strong className="text-slate-700 dark:text-slate-200">{formatCurrency.format(monthlyGoalProgress.previousProfit)}</strong></span>
-                </div>
-              )}
-            </section>
 
-            <section className="moniezi-luminous-card rounded-xl border border-slate-300 bg-white shadow-sm overflow-hidden">
-              <div className="moniezi-luminous-header border-b border-slate-200 px-5 py-4">
-                <div className="flex items-center gap-2"><Zap size={18} className="text-amber-600 dark:text-amber-400" /><h3 className="text-base font-extrabold text-slate-900 dark:text-white">Continue Work</h3></div>
-                <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">Fast shortcuts based on what you were already doing in MONIEZI.</p>
+              {!monthlyGoalProgress.hasRevenueGoal && !monthlyGoalProgress.hasProfitGoal ? (
+                <MonieziGlassInset className="v391-goal-empty">
+                  <div className="min-w-0">
+                    <div className="v391-status-title">Set a target for the month</div>
+                    <p className="v391-status-detail">Optional goals show how much revenue or profit is still needed this month.</p>
+                    <MonieziGlassAction onClick={openGoalsEditor} className="mt-3" tone="blue">
+                      <PlusCircle size={15} /> Set Monthly Goals
+                    </MonieziGlassAction>
+                  </div>
+                  <div className="v391-goal-target" aria-hidden="true"><span /><i /></div>
+                </MonieziGlassInset>
+              ) : (
+                <>
+                  <div className="v391-progress-stack">
+                    {monthlyGoalProgress.hasRevenueGoal && (
+                      <MonieziGlassInset className="v391-progress-panel">
+                        <div className="v391-progress-head">
+                          <div className="min-w-0"><div className="v391-progress-label">Revenue Goal</div><div className="v391-progress-value">{formatCurrency.format(monthlyGoalProgress.revenue)} <span>of {formatCurrency.format(monthlyGoalProgress.revenueGoal)}</span></div></div>
+                          <div className="text-sm font-extrabold text-blue-600 dark:text-blue-300">{Math.round(monthlyGoalProgress.revenuePct)}%</div>
+                        </div>
+                        <div className="v391-progress-track"><div className="v391-progress-bar" style={{ width: `${Math.min(100, monthlyGoalProgress.revenuePct)}%` }} /></div>
+                        <div className="v391-progress-detail">{monthlyGoalProgress.revenueRemaining > 0 ? `${formatCurrency.format(monthlyGoalProgress.revenueRemaining)} remaining` : 'Revenue goal reached'}</div>
+                      </MonieziGlassInset>
+                    )}
+                    {monthlyGoalProgress.hasProfitGoal && (
+                      <MonieziGlassInset className="v391-progress-panel">
+                        <div className="v391-progress-head">
+                          <div className="min-w-0"><div className="v391-progress-label">Profit Goal</div><div className="v391-progress-value">{formatCurrency.format(monthlyGoalProgress.profit)} <span>of {formatCurrency.format(monthlyGoalProgress.profitGoal)}</span></div></div>
+                          <div className="text-sm font-extrabold text-emerald-600 dark:text-emerald-300">{Math.round(monthlyGoalProgress.profitPct)}%</div>
+                        </div>
+                        <div className="v391-progress-track"><div className="v391-progress-bar v391-progress-bar--green" style={{ width: `${Math.min(100, monthlyGoalProgress.profitPct)}%` }} /></div>
+                        <div className="v391-progress-detail">{monthlyGoalProgress.profitRemaining > 0 ? `${formatCurrency.format(monthlyGoalProgress.profitRemaining)} remaining` : 'Profit goal reached'}</div>
+                      </MonieziGlassInset>
+                    )}
+                  </div>
+                  <div className="v391-goal-history">
+                    <span>{previousGoalMonthLabel} revenue: <strong>{formatCurrency.format(monthlyGoalProgress.previousRevenue)}</strong></span>
+                    <span>{previousGoalMonthLabel} profit: <strong>{formatCurrency.format(monthlyGoalProgress.previousProfit)}</strong></span>
+                  </div>
+                </>
+              )}
+            </MonieziGlassCard>
+
+            <MonieziGlassCard>
+              <div className="v391-card-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="teal"><Briefcase size={20} /></MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Jobs</h3>
+                    <p className="v391-card-subtitle">See work in progress, customer decisions and payment waiting at a glance.</p>
+                  </div>
+                </div>
+                <MonieziGlassAction onClick={() => setCurrentPage(Page.Jobs)} tone="teal">
+                  View All <ChevronRight size={14} />
+                </MonieziGlassAction>
+              </div>
+              <div className="v391-jobs-metrics">
+                <div className="v391-job-stat v391-job-stat--blue"><div className="v391-job-stat__value">{homeJobSummary.inProgress}</div><div className="v391-job-stat__label">In Progress</div></div>
+                <div className="v391-job-stat v391-job-stat--violet"><div className="v391-job-stat__value">{homeJobSummary.review}</div><div className="v391-job-stat__label">Review</div></div>
+                <div className="v391-job-stat v391-job-stat--amber"><div className="v391-job-stat__value">{homeJobSummary.waiting}</div><div className="v391-job-stat__label">Waiting</div></div>
+                <div className="v391-job-stat v391-job-stat--green"><div className="v391-job-stat__value">{homeJobSummary.completed}</div><div className="v391-job-stat__label">Completed</div></div>
+              </div>
+            </MonieziGlassCard>
+
+            <MonieziGlassCard className="v391-secondary-card">
+              <div className="v391-card-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="amber"><Zap size={20} /></MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Continue Work</h3>
+                    <p className="v391-card-subtitle">Fast shortcuts based on what you were already doing in MONIEZI.</p>
+                  </div>
+                </div>
               </div>
               {dailyEfficiencyActions.length === 0 ? (
-                <div className="px-5 py-5 text-sm font-medium text-slate-500 dark:text-slate-400">Add your first job, invoice, expense or mileage trip and MONIEZI will offer repeat-work shortcuts here.</div>
+                <MonieziGlassInset className="v391-attention-body mt-4">
+                  <div className="v391-status-detail">Add your first job, invoice, expense or mileage trip and MONIEZI will offer repeat-work shortcuts here.</div>
+                </MonieziGlassInset>
               ) : (
-                <div className="divide-y divide-slate-200 dark:divide-slate-800">
+                <div className="v391-action-list">
                   {dailyEfficiencyActions.map(action => (
-                    <button key={`${action.id}-${action.recordId}`} type="button" onClick={() => handleDailyEfficiencyAction(action)} className="flex w-full items-center gap-3 px-5 py-4 text-left transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">{action.id === 'jobexpense' || action.id === 'job' ? <Briefcase size={17} /> : action.id === 'mileage' ? <Car size={17} /> : <Repeat size={17} />}</div>
-                      <div className="min-w-0 flex-1"><div className="text-sm font-extrabold text-slate-900 dark:text-white">{action.title}</div><div className="mt-0.5 text-xs font-medium text-slate-500 dark:text-slate-400">{action.detail}</div></div>
+                    <button key={`${action.id}-${action.recordId}`} type="button" onClick={() => handleDailyEfficiencyAction(action)} className="v391-action-row">
+                      <div className="v391-action-row__icon bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">{action.id === 'jobexpense' || action.id === 'job' ? <Briefcase size={17} /> : action.id === 'mileage' ? <Car size={17} /> : <Repeat size={17} />}</div>
+                      <div className="v391-action-row__copy"><div className="v391-action-row__title">{action.title}</div><div className="v391-action-row__detail">{action.detail}</div></div>
                       <ChevronRight size={17} className="shrink-0 text-slate-400" />
                     </button>
                   ))}
                 </div>
               )}
-            </section>
+            </MonieziGlassCard>
 
             <div
-              className="moniezi-luminous-card rounded-xl border border-slate-300 bg-white p-5 shadow-sm transition-all hover:border-blue-400 hover:shadow-md"
+              className="v391-glass-card v391-secondary-card cursor-pointer transition-all"
               onClick={() => {
                 setInvoiceQuickFilter(totals.pendingCount > 0 ? 'unpaid' : 'all');
                 setCurrentPage(Page.Invoices);
@@ -8438,7 +8508,7 @@ html, body, #root {
                 </div>
                 <ChevronRight size={18} className="shrink-0 text-slate-400" />
               </div>
-              <div className="moniezi-luminous-inset mt-4 grid grid-cols-2 divide-x divide-slate-200 rounded-lg border border-slate-200 bg-slate-50 dark:divide-cyan-300/10">
+              <div className="v391-glass-inset mt-4 grid grid-cols-2 divide-x divide-slate-200 dark:divide-slate-800">
                 <div className="px-4 py-3.5">
                   <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Open</div>
                   <div className="mt-1 text-lg font-extrabold tabular-nums text-slate-950 dark:text-white">{formatCurrency.format(totals.pendingAmount)}</div>
@@ -8455,7 +8525,7 @@ html, body, #root {
             {/* Sales Pipeline Widget */}
             {(pipelineStats.totalEstimates > 0 || pipelineStats.pipelineValue > 0) && (
               <div
-                className="rounded-xl border border-slate-300 bg-white p-6 shadow-sm transition-all hover:border-purple-400 hover:shadow-md dark:border-slate-700 dark:bg-slate-900"
+                className="v391-glass-card v391-secondary-card relative cursor-pointer transition-all"
                 onClick={() => {
                   setBillingDocType('estimate');
                   setCurrentPage(Page.Invoices);
@@ -8484,7 +8554,7 @@ html, body, #root {
 
                 {/* Pipeline Value */}
                 {pipelineStats.pipelineValue > 0 && (
-                  <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-4 mb-5 border border-purple-100 dark:border-purple-800/30">
+                  <div className="v391-glass-inset p-4 mb-5">
                     <div className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">Pipeline Value</div>
                     <div className="text-3xl font-extrabold text-slate-900 dark:text-white">{formatCurrency.format(pipelineStats.pipelineValue)}</div>
                     <div className="text-xs text-slate-600 dark:text-slate-300 mt-1">
@@ -8525,15 +8595,15 @@ html, body, #root {
               </div>
             )}
             
-            <div>
-              <div className="flex items-center justify-between mb-4 pl-2">
-                <h3 className="text-base font-bold text-slate-900 dark:text-white font-brand">Recent activity</h3>
+            <div className="v391-glass-card v391-secondary-card">
+              <div className="v391-section-heading mb-4">
+                <h3>Recent activity</h3>
                 <button onClick={() => setCurrentPage(Page.AllTransactions)} className="min-h-11 px-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors">See all</button>
               </div>
               <div className="space-y-3">
                 {transactions.length === 0 ? <EmptyState icon={<ClipboardList size={24} />} title="No activity yet" subtitle="Your latest transactions will appear here once you start recording." action={handleOpenUnifiedAdd} actionLabel="Add Transaction" /> :
                   transactions.slice().sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5).map(t => (
-                    <div key={t.id} className="moniezi-luminous-card group flex items-center justify-between p-5 bg-white rounded-lg border border-slate-300 hover:border-blue-500/40 hover:shadow-md transition-all cursor-pointer shadow-sm relative z-10" onClick={() => handleEditItem(t)}>
+                    <div key={t.id} className="v391-glass-inset v391-glass-inset--interactive group flex items-center justify-between p-4 transition-all cursor-pointer relative z-10" onClick={() => handleEditItem(t)}>
                       <div className="flex items-center gap-4 flex-1 min-w-0">
                         <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${t.type === 'income' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-red-500/10 text-red-600'}`}>{t.type === 'income' ? <ArrowRight size={18} className="-rotate-45" strokeWidth={2.5} /> : <ArrowRight size={18} className="rotate-45" strokeWidth={2.5} />}</div>
                         <div className="min-w-0 pr-2">
@@ -8551,7 +8621,7 @@ html, body, #root {
               </div>
             </div>
 
-            <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white p-6 rounded-xl shadow-sm border border-slate-300 dark:border-slate-700 cursor-pointer active:scale-95 transition-all hover:shadow-md hover:border-emerald-500/40 group">
+            <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card cursor-pointer active:scale-[0.99] transition-all group">
                <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400"><Calculator size={20} /><span className="text-xs font-bold uppercase tracking-widest font-brand">Tax Snapshot</span></div>
                   <ArrowRight size={18} className="text-slate-300 dark:text-slate-300 -rotate-45 group-hover:rotate-0 group-hover:text-emerald-500 transition-all duration-300"/>
@@ -8572,7 +8642,7 @@ html, body, #root {
             </div>
 
             {/* Home Receipts: actions + real linked receipt images + missing-documentation workflow */}
-            <div id="home-receipts" className="scroll-mt-6">
+            <div id="home-receipts" className="v391-glass-card v391-secondary-card scroll-mt-6">
               <div className="flex items-center justify-between mb-4 pl-2">
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-brand">Receipts</h3>
@@ -8842,7 +8912,7 @@ html, body, #root {
 
              {filterPeriod !== 'all' && !ledgerSearch.trim() && (
                 isActivityPage ? (
-                  <div className="moniezi-luminous-card grid grid-cols-2 divide-x divide-slate-200 rounded-xl border border-slate-200 bg-slate-50/70 px-2 py-3.5 dark:divide-cyan-300/10">
+                  <div className="grid grid-cols-2 divide-x divide-slate-200 rounded-xl border border-slate-200 bg-slate-50/70 px-2 py-3.5 dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900/70">
                      <div className="px-3">
                        <div className="text-[11px] font-bold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">Cash In</div>
                        <div className="mt-1 text-base font-bold tracking-tight text-slate-950 dark:text-white sm:text-lg">{formatCurrency.format(periodTotals.inc)}</div>
@@ -8853,7 +8923,7 @@ html, body, #root {
                      </div>
                   </div>
                 ) : (
-                  <div className="moniezi-luminous-card bg-slate-50 border border-slate-200 rounded-xl p-5 mb-6 flex items-center justify-between shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 mb-6 flex items-center justify-between shadow-sm">
                      <div className="text-center flex-1 border-r border-slate-200 dark:border-slate-800"><div className="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">Cash In</div><div className="text-lg font-bold text-slate-900 dark:text-white">{formatCurrency.format(periodTotals.inc)}</div></div>
                      <div className="text-center flex-1"><div className="text-xs font-bold text-red-600 uppercase tracking-wider mb-1">Cash Out</div><div className="text-lg font-bold text-slate-900 dark:text-white">{formatCurrency.format(periodTotals.exp)}</div></div>
                   </div>
@@ -12619,12 +12689,12 @@ html, body, #root {
       )}
 
       <div className={`dark-chrome no-print fixed bottom-0 left-0 right-0 z-[55] pb-safe transition-opacity duration-150 ${shouldHideBottomNav ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-        <div className={`moniezi-luminous-nav ${useDarkChrome ? 'bg-slate-950 border-t border-slate-800/50' : 'bg-white/95 dark:bg-slate-950/95 border-t border-slate-200 dark:border-slate-800/50'} ${useDarkChrome ? '' : 'backdrop-blur-xl'} px-1 pt-2 pb-3`}>
+        <div className={`v391-bottom-nav-surface ${useDarkChrome ? 'bg-slate-950 border-t border-slate-800/50' : 'bg-white/95 dark:bg-slate-950/95 border-t border-slate-200 dark:border-slate-800/50'} ${useDarkChrome ? '' : 'backdrop-blur-xl'} px-1 pt-2 pb-3`}>
           <div className="max-w-xl mx-auto flex justify-between items-end relative">
             {/* Home */}
             <button 
               onClick={() => setCurrentPage(Page.Dashboard)} 
-              className={`dark-chrome-nav-item ${currentPage === Page.Dashboard ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Dashboard ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Dashboard ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Dashboard ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Dashboard ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
               <div className={`p-1.5 rounded-lg ${currentPage === Page.Dashboard ? 'text-white' : ''}`}>
@@ -12636,7 +12706,7 @@ html, body, #root {
             {/* Jobs */}
             <button
               onClick={() => setCurrentPage(Page.Jobs)}
-              className={`dark-chrome-nav-item ${currentPage === Page.Jobs ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Jobs ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Jobs ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Jobs ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Jobs ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
               <div className={`p-1.5 rounded-lg ${currentPage === Page.Jobs ? 'text-white' : ''}`}>
@@ -12648,7 +12718,7 @@ html, body, #root {
             {/* Invoice */}
             <button 
               onClick={() => { setBillingDocType('invoice'); setCurrentPage(Page.Invoices); }} 
-              className={`dark-chrome-nav-item ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Invoices && billingDocType === 'invoice' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
               <div className={`p-1.5 rounded-lg ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'text-white' : ''}`}>
@@ -12661,7 +12731,7 @@ html, body, #root {
             {/* Center Nav - Activity */}
             <button 
               onClick={() => setCurrentPage(Page.AllTransactions)} 
-              className={`dark-chrome-nav-item ${(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item ${(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
               <div className={`p-1.5 rounded-lg ${(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 'text-white' : ''}`}>
@@ -12673,7 +12743,7 @@ html, body, #root {
             {/* Mileage */}
             <button 
               onClick={() => setCurrentPage(Page.Mileage)} 
-              className={`dark-chrome-nav-item ${currentPage === Page.Mileage ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Mileage ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Mileage ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Mileage ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Mileage ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
               <div className={`p-1.5 rounded-lg ${currentPage === Page.Mileage ? 'text-white' : ''}`}>
@@ -12687,7 +12757,7 @@ html, body, #root {
             {/* Reports */}
             <button 
               onClick={() => { setReportsMenuSection('menu'); setCurrentPage(Page.Reports); mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }); }} 
-              className={`dark-chrome-nav-item ${currentPage === Page.Reports ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Reports ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Reports ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Reports ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
               style={currentPage === Page.Reports ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
             >
               <div className={`p-1.5 rounded-lg ${currentPage === Page.Reports ? 'text-white' : ''}`}>
@@ -13757,7 +13827,7 @@ html, body, #root {
       {showJobTimeModal && selectedJobDashboard && (
         <div className="fixed inset-0 z-[145] flex items-end justify-center bg-slate-950/80 p-4 backdrop-blur-sm sm:items-center modal-overlay" onClick={() => { setShowJobTimeModal(false); setEditingJobTimeEntryId(null); }}>
           <div className="w-full max-w-md overflow-hidden rounded-xl border border-violet-300 bg-white shadow-2xl dark:border-violet-700/60 dark:bg-slate-900" onClick={event => event.stopPropagation()}>
-            <div className="moniezi-luminous-header flex items-start justify-between gap-3 border-b border-slate-200 px-5 py-4"><div><div className="text-lg font-extrabold text-slate-950 dark:text-white">{editingJobTimeEntryId ? 'Edit Labor Time' : 'Log Labor Time'}</div><div className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">{selectedJobDashboard.job.title}</div></div><button type="button" onClick={() => { setShowJobTimeModal(false); setEditingJobTimeEntryId(null); }} className="rounded-full p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"><X size={18} /></button></div>
+            <div className="flex items-start justify-between gap-3 border-b border-slate-200 px-5 py-4 dark:border-slate-800"><div><div className="text-lg font-extrabold text-slate-950 dark:text-white">{editingJobTimeEntryId ? 'Edit Labor Time' : 'Log Labor Time'}</div><div className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">{selectedJobDashboard.job.title}</div></div><button type="button" onClick={() => { setShowJobTimeModal(false); setEditingJobTimeEntryId(null); }} className="rounded-full p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"><X size={18} /></button></div>
             <div className="space-y-4 p-5">
               <DateInput label="Work Date" value={jobTimeDraft.date} onChange={date => setJobTimeDraft(prev => ({ ...prev, date }))} />
               <div className="grid grid-cols-2 gap-3">
@@ -13776,7 +13846,7 @@ html, body, #root {
       {showGoalsEditor && (
         <div className="fixed inset-0 z-[130] flex items-end justify-center bg-slate-950/75 p-4 backdrop-blur-sm sm:items-center modal-overlay" onClick={() => setShowGoalsEditor(false)}>
           <div className="w-full max-w-md overflow-hidden rounded-xl border border-slate-300 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900" onClick={event => event.stopPropagation()}>
-            <div className="moniezi-luminous-header flex items-start justify-between gap-3 border-b border-slate-200 px-5 py-4"><div><h3 className="text-lg font-extrabold text-slate-950 dark:text-white">Monthly Business Goals</h3><p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">Set either goal, both goals, or leave a field blank to hide it.</p></div><button type="button" onClick={() => setShowGoalsEditor(false)} className="rounded-full p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800" aria-label="Close goals editor"><X size={18} /></button></div>
+            <div className="flex items-start justify-between gap-3 border-b border-slate-200 px-5 py-4 dark:border-slate-800"><div><h3 className="text-lg font-extrabold text-slate-950 dark:text-white">Monthly Business Goals</h3><p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">Set either goal, both goals, or leave a field blank to hide it.</p></div><button type="button" onClick={() => setShowGoalsEditor(false)} className="rounded-full p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800" aria-label="Close goals editor"><X size={18} /></button></div>
             <div className="space-y-4 p-5">
               <div><label className="mb-2 block text-xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-300">Monthly Revenue Goal</label><div className="relative"><span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-500 dark:text-slate-400">{settings.currencySymbol}</span><input type="number" inputMode="decimal" min="0" step="1" value={goalDraft.revenue} onChange={event => setGoalDraft(prev => ({ ...prev, revenue: event.target.value }))} className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-10 pr-4 text-base font-bold text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white" placeholder="10000" /></div></div>
               <div><label className="mb-2 block text-xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-300">Monthly Profit Goal</label><div className="relative"><span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-500 dark:text-slate-400">{settings.currencySymbol}</span><input type="number" inputMode="decimal" min="0" step="1" value={goalDraft.profit} onChange={event => setGoalDraft(prev => ({ ...prev, profit: event.target.value }))} className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-10 pr-4 text-base font-bold text-slate-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white" placeholder="4000" /></div></div>
