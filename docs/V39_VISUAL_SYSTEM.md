@@ -1,6 +1,6 @@
 # MONIEZI v39 Visual System
 
-Version: 39.1.0
+Version: 39.2.0
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 
@@ -182,3 +182,10 @@ Search/filter views with existing underlying records remain compact. This preser
 ## v39.0.22 approved production illustration assets
 
 Receipts, Clients, and Mileage now use separate approved raster illustration pairs instead of generated inline SVG scenes. Each feature has one light asset and one dark asset, and the existing theme-aware illustration pair switches between them automatically. The assets are precached by the service worker for offline use. No feature business logic or empty-state behavior changes in this pass.
+
+
+## v39.2.0 Application-wide Luminous Glass rollout
+
+The v39.1.0 Home/dashboard material system is now the application-wide presentation layer. Working screens use two intensity levels: primary record/report panels receive the full glass perimeter and depth treatment, while nested metrics, filters, controls and form fields use quieter inset glass. Semantic warning/success colors remain visible and PDF/print document previews stay deliberately white.
+
+Covered surfaces include Activity, Income, Expenses, Invoices, Estimates, Mileage, Reports, Tax tools, Clients, Jobs / Projects, Settings, global search, drawers, form shells, custom selects, empty states and confirmation modals. Light and dark modes use the same hierarchy with different glow intensity.

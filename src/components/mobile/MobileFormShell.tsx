@@ -15,7 +15,7 @@ export function MobileFormShell({ isEditing, title, description, toolbar, form, 
   const hasTopContent = hasIntro || Boolean(toolbar);
 
   return (
-    <section className={`flex-1 min-h-0 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xl transition-all duration-150 ${isEditing ? 'p-4 sm:p-5' : 'p-5 sm:p-8'} ${className}`.trim()}>
+    <section className={`v392-form-shell flex-1 min-h-0 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xl transition-all duration-150 ${isEditing ? 'p-4 sm:p-5' : 'p-5 sm:p-8'} ${className}`.trim()}>
       {!isEditing && hasTopContent ? (
         <div className={`flex flex-col lg:flex-row lg:items-center justify-between ${hasIntro && toolbar ? 'gap-4' : 'gap-0'}`}>
           {hasIntro ? (

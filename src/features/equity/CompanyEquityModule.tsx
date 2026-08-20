@@ -889,8 +889,8 @@ export function CompanyEquityModule({ equity, onChange, currencySymbol, defaultB
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-right-4 pb-24">
       <section className="rounded-2xl border border-slate-300 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6">
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-200">
+        <div className="v392-page-header flex items-center gap-3">
+          <div className="v392-page-icon flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-200">
             <Landmark size={24} />
           </div>
           <h1 className="min-w-0 text-2xl font-black tracking-tight text-slate-950 dark:!text-white sm:text-3xl font-brand">Private Raise Tracker</h1>

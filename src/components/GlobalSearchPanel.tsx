@@ -132,7 +132,7 @@ export const GlobalSearchPanel: React.FC<GlobalSearchPanelProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-[99990] flex flex-col bg-slate-50 text-slate-950 dark:bg-slate-950 dark:text-white modal-overlay"
+      className="v392-search-panel fixed inset-0 z-[99990] flex flex-col bg-slate-50 text-slate-950 dark:bg-slate-950 dark:text-white modal-overlay"
       style={{
         paddingTop: 'max(10px, env(safe-area-inset-top, 0px))',
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
@@ -141,7 +141,7 @@ export const GlobalSearchPanel: React.FC<GlobalSearchPanelProps> = ({
       aria-modal="true"
       aria-label="Search MONIEZI"
     >
-      <div className="shrink-0 border-b border-slate-200 bg-white/95 px-4 pb-4 pt-3 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/95 sm:px-6">
+      <div className="v392-search-header shrink-0 border-b border-slate-200 bg-white/95 px-4 pb-4 pt-3 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/95 sm:px-6">
         <div className="mx-auto flex w-full max-w-3xl items-center gap-3">
           <div className="relative min-w-0 flex-1">
             <Search
@@ -225,7 +225,7 @@ export const GlobalSearchPanel: React.FC<GlobalSearchPanelProps> = ({
                       </span>
                     </div>
 
-                    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+                    <div className="v392-search-group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
                       {visibleResults.map((result, index) => {
                         const tone = toneClasses[result.tone];
                         return (

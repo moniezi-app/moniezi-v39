@@ -1,4 +1,23 @@
-# MONIEZI v39.1.0
+# MONIEZI v39.2.0
+
+## v39.2.0 Application-wide Luminous Glass rollout
+
+v39.2.0 extends the approved Luminous Glass design language from Home across the working application while preserving the existing business logic and local-first data model.
+
+### Application-wide visual rollout
+- Activity, Income and Expenses: luminous record surfaces, inset search/filters and integrated page actions.
+- Invoices and Estimates: glass selector, filters, summary panels and record cards with existing billing behavior unchanged.
+- Mileage: glass header/action treatment, empty state, summaries and trip/editor surfaces.
+- Reports and Tax tools: report-center groups, report cards, selectors and nested summary surfaces use the same material hierarchy.
+- Clients: glass search/filter controls, client record cards and client editor/modal surfaces.
+- Jobs / Projects: luminous overview, nested profit metrics, filters, job cards and editor/detail surfaces.
+- Settings / Demo / Data: tab navigation, settings panels, backup/update/data controls and confirmation surfaces.
+- Private Raise Tracker / Company Equity: primary surface, nested metrics, navigation and record panels follow the same glass hierarchy.
+- Search, forms, drawers, custom selects and modal workflows now share the same material system.
+- Light mode uses a restrained frosted translation; dark mode carries the stronger luminous depth.
+
+### Regression boundary
+The rollout is presentation-focused. Storage, licensing, calculations, invoices, estimates, receipts, mileage, jobs, reports, demo/reset behavior and export/PDF logic remain functionally unchanged.
 
 ## v39.1.0 Luminous Glass dashboard system
 

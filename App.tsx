@@ -7448,7 +7448,7 @@ html, body, #root {
 }
 `}</style>
       <div
-        className="moniezi-app-shell flex flex-col w-full max-w-2xl mx-auto relative bg-slatebg dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300"
+        className="moniezi-app-shell v392-app-wide flex flex-col w-full max-w-2xl mx-auto relative bg-slatebg dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300"
         style={{
           height: 'calc(var(--moniezi-app-vh, 1vh) * 100)',
           minHeight: 'calc(var(--moniezi-app-vh, 1vh) * 100)',
@@ -8102,7 +8102,7 @@ html, body, #root {
         />
       )}
 
-      <div key={`main-scroll-${currentPage}`} ref={mainScrollRef} className="main-scroll-lock flex-1 min-h-0 overflow-y-auto px-4 sm:px-6 md:px-8 pt-5 sm:pt-6 md:pt-7 no-print custom-scrollbar" style={{ paddingBottom: shouldHideBottomNav ? 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' : 'calc(11rem + env(safe-area-inset-bottom, 0px))' }} role="main">
+      <div key={`main-scroll-${currentPage}`} ref={mainScrollRef} className="main-scroll-lock v392-screen flex-1 min-h-0 overflow-y-auto px-4 sm:px-6 md:px-8 pt-5 sm:pt-6 md:pt-7 no-print custom-scrollbar" data-page={currentPage} data-billing-doc-type={billingDocType} style={{ paddingBottom: shouldHideBottomNav ? 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' : 'calc(11rem + env(safe-area-inset-bottom, 0px))' }} role="main">
 
       {/* Sample-data banner. Always visible while example records are loaded, so
           nobody mistakes them for real figures and the exit is always one tap. */}
@@ -8779,10 +8779,10 @@ html, body, #root {
 
         {(currentPage === Page.Income || currentPage === Page.Expenses || (currentPage === Page.AllTransactions || currentPage === Page.Ledger)) && (
            <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4">
-             <div className="flex items-center justify-between gap-3">
+             <div className="v392-page-header flex items-center justify-between gap-3">
                  <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                      <div className="flex items-center gap-2 sm:gap-3">
-                       <div className={`p-2.5 rounded-xl flex-shrink-0 ${currentPage === Page.Income ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' : currentPage === Page.Expenses ? 'bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-500' : 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400'}`}>{currentPage === Page.Income ? <TrendingUp size={22} strokeWidth={1.7}/> : currentPage === Page.Expenses ? <TrendingDown size={22} strokeWidth={1.7}/> : <History size={22} strokeWidth={1.7} />}</div>
+                       <div className={`v392-page-icon p-2.5 rounded-xl flex-shrink-0 ${currentPage === Page.Income ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' : currentPage === Page.Expenses ? 'bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-500' : 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400'}`}>{currentPage === Page.Income ? <TrendingUp size={22} strokeWidth={1.7}/> : currentPage === Page.Expenses ? <TrendingDown size={22} strokeWidth={1.7}/> : <History size={22} strokeWidth={1.7} />}</div>
                        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">{currentPage === Page.Income ? 'Income' : currentPage === Page.Expenses ? 'Expenses' : 'Activity'}</h2>
                      </div>
                  </div>
@@ -9127,9 +9127,9 @@ html, body, #root {
         {(currentPage === Page.Invoices) && (
           <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 min-w-0 max-w-full">
             <div className="space-y-3 sm:space-y-4 min-w-0">
-              <div className="flex items-center justify-between gap-3 min-w-0">
+              <div className="v392-page-header flex items-center justify-between gap-3 min-w-0">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className={`p-2.5 rounded-xl flex-shrink-0 ${billingDocType === 'estimate' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300' : 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400'}`}>
+                  <div className={`v392-page-icon p-2.5 rounded-xl flex-shrink-0 ${billingDocType === 'estimate' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300' : 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400'}`}>
                     <FileText size={22} strokeWidth={1.7} />
                   </div>
                   <h2 className="min-w-0 text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">{billingDocType === 'estimate' ? 'Estimates' : 'Invoices'}</h2>
@@ -9517,10 +9517,10 @@ html, body, #root {
 
         {currentPage === Page.Mileage && (
           <div className="min-h-full animate-in fade-in slide-in-from-right-4">
-            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div className="v392-page-header flex flex-col items-stretch gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 sm:gap-3">
-                  <div className="p-2.5 rounded-xl bg-teal-50 text-teal-700 dark:bg-teal-500/10 dark:text-teal-300 flex-shrink-0">
+                  <div className="v392-page-icon p-2.5 rounded-xl bg-teal-50 text-teal-700 dark:bg-teal-500/10 dark:text-teal-300 flex-shrink-0">
                     <Car size={22} strokeWidth={1.7} />
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Mileage</h2>
@@ -9657,9 +9657,9 @@ html, body, #root {
 
         {currentPage === Page.Reports && (
            <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4">
-              <div className="flex items-center justify-between gap-3">
+              <div className="v392-page-header flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                  <div className="p-2.5 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400 flex-shrink-0">
+                  <div className="v392-page-icon p-2.5 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400 flex-shrink-0">
                     <BarChart3 size={22} strokeWidth={1.7} />
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Reports</h2>
@@ -11459,9 +11459,9 @@ html, body, #root {
         {currentPage === Page.Clients && (
           <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 pb-24">
             {/* Header */}
-            <div className="flex items-center justify-between gap-3">
+            <div className="v392-page-header flex items-center justify-between gap-3">
               <div className="flex items-center gap-3 min-w-0">
-                <div className="p-2.5 rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400 flex-shrink-0">
+                <div className="v392-page-icon p-2.5 rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400 flex-shrink-0">
                   <Users size={22} strokeWidth={1.7} />
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Clients</h2>
@@ -11682,9 +11682,9 @@ html, body, #root {
         {/* ==================== JOBS / PROJECTS PAGE ==================== */}
         {currentPage === Page.Jobs && (
           <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 pb-24">
-            <div className="flex items-center justify-between gap-3">
+            <div className="v392-page-header flex items-center justify-between gap-3">
               <div className="flex items-center gap-3 min-w-0">
-                <div className="p-2.5 rounded-xl bg-cyan-50 text-cyan-700 dark:bg-cyan-500/10 dark:text-cyan-300 flex-shrink-0">
+                <div className="v392-page-icon p-2.5 rounded-xl bg-cyan-50 text-cyan-700 dark:bg-cyan-500/10 dark:text-cyan-300 flex-shrink-0">
                   <Briefcase size={22} strokeWidth={1.7} />
                 </div>
                 <div className="min-w-0">
@@ -11905,8 +11905,8 @@ html, body, #root {
         {currentPage === Page.Settings && (
           <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 pb-24">
             {/* Settings Header */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="p-2.5 rounded-xl bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 flex-shrink-0">
+            <div className="v392-page-header flex items-center gap-2 sm:gap-3">
+              <div className="v392-page-icon p-2.5 rounded-xl bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 flex-shrink-0">
                 <Settings size={22} strokeWidth={1.7} />
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Settings</h2>

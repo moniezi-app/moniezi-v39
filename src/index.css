@@ -2128,3 +2128,343 @@ html {
     transition: none !important;
   }
 }
+
+/* ================================================================
+   MONIEZI v39.2.0 — Application-wide Luminous Glass rollout
+   ----------------------------------------------------------------
+   v39.1.0 established the material language on Home. v39.2.0 extends
+   that same hierarchy to every working surface: records, filters,
+   forms, reports, settings, drawers, search, and modal workflows.
+   ================================================================ */
+:root,
+.v392-app-wide {
+  --v392-surface-bg: var(--v391-glass-bg);
+  --v392-inset-bg: var(--v391-glass-inset);
+  --v392-edge-a: rgba(72, 139, 255, 0.46);
+  --v392-edge-b: rgba(74, 198, 255, 0.18);
+  --v392-edge-c: rgba(128, 101, 245, 0.28);
+  --v392-soft-shadow: rgba(28, 48, 84, 0.10);
+  --v392-control-bg: rgba(255,255,255,0.78);
+  --v392-control-border: rgba(67, 113, 205, 0.24);
+  --v392-control-focus: rgba(59,130,246,0.28);
+}
+
+.dark,
+.dark .v392-app-wide {
+  --v392-edge-a: rgba(86, 200, 255, 0.54);
+  --v392-edge-b: rgba(83, 131, 255, 0.22);
+  --v392-edge-c: rgba(131, 103, 255, 0.42);
+  --v392-soft-shadow: rgba(0, 5, 20, 0.42);
+  --v392-control-bg: rgba(4, 17, 42, 0.74);
+  --v392-control-border: rgba(105, 166, 255, 0.20);
+  --v392-control-focus: rgba(91,163,255,0.30);
+}
+
+.v392-app-wide .v392-screen {
+  position: relative;
+  isolation: isolate;
+}
+
+.dark .v392-app-wide .v392-screen {
+  background-image:
+    radial-gradient(circle at 12% -4%, rgba(44, 112, 246, 0.08), transparent 28%),
+    radial-gradient(circle at 92% 8%, rgba(94, 76, 230, 0.06), transparent 24%);
+  background-attachment: local;
+}
+
+/* Page identity: make every working screen feel like it belongs to the
+   dashboard system without turning the entire header into a heavy card. */
+.v392-page-header {
+  position: relative;
+  min-width: 0;
+}
+
+.v392-page-header :is(h1,h2) {
+  color: var(--v391-glass-text) !important;
+  letter-spacing: -0.035em !important;
+}
+
+.v392-page-icon {
+  position: relative;
+  display: inline-grid !important;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0 !important;
+  border: 1px solid rgba(84, 151, 255, 0.30) !important;
+  border-radius: 14px !important;
+  background: linear-gradient(145deg, rgba(75, 132, 255, 0.15), rgba(255,255,255,0.04)) !important;
+  box-shadow: 0 0 18px rgba(64, 133, 255, 0.13), inset 0 1px 0 rgba(255,255,255,0.12) !important;
+}
+
+.dark .v392-page-icon {
+  background: linear-gradient(145deg, rgba(64, 139, 255, 0.20), rgba(2,12,30,0.36)) !important;
+  border-color: rgba(102, 191, 255, 0.30) !important;
+  box-shadow: 0 0 20px rgba(45, 143, 255, 0.17), inset 0 1px 0 rgba(255,255,255,0.09) !important;
+}
+
+.v392-page-header > button,
+.v392-page-header > div + button {
+  border: 1px solid rgba(87, 149, 255, 0.24) !important;
+  box-shadow: 0 10px 24px rgba(31, 75, 160, 0.14), 0 0 16px rgba(71, 143, 255, 0.12), inset 0 1px 0 rgba(255,255,255,0.13) !important;
+}
+
+.dark .v392-page-header > button,
+.dark .v392-page-header > div + button {
+  box-shadow: 0 12px 26px rgba(0, 5, 20, 0.36), 0 0 18px rgba(68, 147, 255, 0.18), inset 0 1px 0 rgba(255,255,255,0.09) !important;
+}
+
+/* Major record surfaces. These selectors deliberately scope to structural
+   div/section/article/aside elements. Inputs and colored alert cards keep
+   their semantic treatments. */
+.v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="bg-white"]:not(.v391-glass-card):not(.v39-record-empty-shell),
+.v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="dark:bg-slate-900"]:not(.v391-glass-card):not(.v39-record-empty-shell) {
+  border: 1px solid transparent !important;
+  background:
+    var(--v392-surface-bg) padding-box,
+    linear-gradient(134deg, var(--v392-edge-a), var(--v392-edge-b) 38%, rgba(255,255,255,0.05) 62%, var(--v392-edge-c)) border-box !important;
+  box-shadow:
+    0 14px 34px var(--v392-soft-shadow),
+    0 0 19px rgba(55, 128, 245, 0.09),
+    inset 0 1px 0 var(--v391-glass-edge) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(112%);
+  backdrop-filter: blur(16px) saturate(112%);
+}
+
+.dark .v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="bg-white"]:not(.v391-glass-card):not(.v39-record-empty-shell),
+.dark .v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="dark:bg-slate-900"]:not(.v391-glass-card):not(.v39-record-empty-shell) {
+  box-shadow:
+    0 16px 38px rgba(0, 5, 20, 0.38),
+    0 0 22px rgba(42, 130, 255, 0.13),
+    inset 0 1px 0 rgba(191, 228, 255, 0.08) !important;
+}
+
+/* Interactive record cards such as Clients and list rows receive the same
+   material but keep their semantic text colors and status accents. */
+.v392-app-wide .v392-screen button[class*="bg-white"][class*="rounded"][class*="border"],
+.v392-app-wide .v392-screen button[class*="dark:bg-slate-900"][class*="rounded"][class*="border"] {
+  border-color: transparent !important;
+  background:
+    var(--v392-surface-bg) padding-box,
+    linear-gradient(134deg, var(--v392-edge-a), var(--v392-edge-b) 42%, rgba(255,255,255,0.04) 64%, var(--v392-edge-c)) border-box !important;
+  box-shadow: 0 12px 28px var(--v392-soft-shadow), inset 0 1px 0 var(--v391-glass-edge) !important;
+}
+
+.v392-app-wide .v392-screen button[class*="bg-white"][class*="rounded"][class*="border"]:hover,
+.v392-app-wide .v392-screen button[class*="dark:bg-slate-900"][class*="rounded"][class*="border"]:hover {
+  filter: brightness(1.035);
+  box-shadow: 0 15px 32px var(--v392-soft-shadow), 0 0 18px rgba(70, 145, 255, 0.12), inset 0 1px 0 var(--v391-glass-edge) !important;
+}
+
+/* Secondary/inset surfaces: filter bars, summary blocks and nested metrics. */
+.v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="bg-slate-50"],
+.v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="bg-slate-100"],
+.v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="bg-slate-200"] {
+  background: var(--v392-inset-bg) !important;
+  border-color: rgba(92, 145, 237, 0.18) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(22, 48, 92, 0.06) !important;
+}
+
+.dark .v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="bg-slate-50"],
+.dark .v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="bg-slate-100"],
+.dark .v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="bg-slate-200"] {
+  background: var(--v391-glass-inset) !important;
+  border-color: rgba(103, 166, 255, 0.16) !important;
+  box-shadow: inset 0 1px 0 rgba(182, 222, 255, 0.06), inset 0 -10px 24px rgba(1,7,24,0.14) !important;
+}
+
+/* Common tabs and inactive controls should read as recessed glass instead of
+   old flat slate rectangles. Active semantic colors remain intact. */
+.v392-app-wide .v392-screen button[class*="bg-slate-50"][class*="rounded"],
+.v392-app-wide .v392-screen button[class*="bg-slate-100"][class*="rounded"],
+.v392-app-wide .v392-screen button[class*="dark:bg-slate-800"][class*="rounded"] {
+  border-color: rgba(91, 145, 238, 0.16) !important;
+  background: var(--v392-inset-bg) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07) !important;
+}
+
+.v392-app-wide .v392-screen button[class*="bg-blue-600"],
+.v392-app-wide .v392-screen button[class*="bg-indigo-600"],
+.v392-app-wide .v392-screen button[class*="bg-purple-600"],
+.v392-app-wide .v392-screen button[class*="bg-cyan-700"],
+.v392-app-wide .v392-screen button[class*="bg-teal-600"],
+.v392-app-wide .v392-screen button[class*="bg-emerald-600"] {
+  box-shadow: 0 10px 24px rgba(30, 92, 213, 0.20), 0 0 18px rgba(64, 143, 255, 0.18), inset 0 1px 0 rgba(255,255,255,0.18) !important;
+}
+
+/* Inputs, search fields, textareas and native selects become inset glass. */
+.v392-app-wide .v392-screen :is(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.v392-form-shell :is(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.v392-search-panel input {
+  background: var(--v392-control-bg) !important;
+  border-color: var(--v392-control-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -8px 18px rgba(10,35,80,0.025) !important;
+}
+
+.dark .v392-app-wide .v392-screen :is(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.dark .v392-form-shell :is(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.dark .v392-search-panel input {
+  color: #f4f8ff !important;
+  box-shadow: inset 0 1px 0 rgba(174, 219, 255, 0.06), inset 0 -12px 24px rgba(1,7,24,0.20) !important;
+}
+
+.v392-app-wide .v392-screen :is(input,textarea,select):focus,
+.v392-form-shell :is(input,textarea,select):focus,
+.v392-search-panel input:focus {
+  border-color: rgba(77, 145, 255, 0.48) !important;
+  box-shadow: 0 0 0 3px var(--v392-control-focus), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+}
+
+/* Existing illustration-led empty states now sit inside the same material
+   system instead of becoming a visual exception when reached from new pages. */
+.v392-app-wide .v39-record-empty-shell {
+  border: 1px solid transparent !important;
+  border-radius: 24px !important;
+  background:
+    var(--v391-glass-bg) padding-box,
+    linear-gradient(135deg, rgba(76, 153, 255, 0.42), rgba(95, 190, 255, 0.14) 42%, rgba(129, 102, 244, 0.26)) border-box !important;
+  box-shadow: 0 16px 38px var(--v392-soft-shadow), 0 0 22px rgba(59,130,246,0.10), inset 0 1px 0 var(--v391-glass-edge) !important;
+  overflow: hidden;
+}
+
+/* Search overlay. */
+.v392-search-panel {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(55, 123, 246, 0.10), transparent 28%),
+    #f5f8fd !important;
+}
+.dark .v392-search-panel {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(48, 123, 255, 0.12), transparent 30%),
+    #020617 !important;
+}
+.v392-search-header {
+  background: rgba(248, 251, 255, 0.88) !important;
+  border-color: rgba(70, 118, 206, 0.16) !important;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06), inset 0 -1px 0 rgba(255,255,255,0.62);
+}
+.dark .v392-search-header {
+  background: rgba(3, 12, 31, 0.88) !important;
+  border-color: rgba(96, 165, 250, 0.14) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.28), inset 0 -1px 0 rgba(111,176,255,0.07);
+}
+.v392-search-group {
+  border: 1px solid transparent !important;
+  background:
+    var(--v391-glass-bg) padding-box,
+    linear-gradient(135deg, var(--v392-edge-a), var(--v392-edge-b) 44%, var(--v392-edge-c)) border-box !important;
+  box-shadow: 0 14px 32px var(--v392-soft-shadow), inset 0 1px 0 var(--v391-glass-edge) !important;
+}
+
+/* Drawer / editor surfaces. */
+.v392-drawer-panel,
+.v392-form-shell {
+  border-color: transparent !important;
+  background:
+    var(--v391-glass-bg) padding-box,
+    linear-gradient(134deg, var(--v392-edge-a), var(--v392-edge-b) 44%, var(--v392-edge-c)) border-box !important;
+  box-shadow: 0 26px 70px rgba(2,6,23,0.24), 0 0 24px rgba(61,138,255,0.10), inset 0 1px 0 var(--v391-glass-edge) !important;
+}
+.dark .v392-drawer-panel,
+.dark .v392-form-shell {
+  box-shadow: 0 28px 78px rgba(0,0,0,0.52), 0 0 28px rgba(48,134,255,0.15), inset 0 1px 0 rgba(198,230,255,0.08) !important;
+}
+
+.v392-drawer-panel .moniezi-drawer-header {
+  border-bottom: 1px solid rgba(96, 153, 245, 0.13);
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+}
+.dark .v392-drawer-panel .moniezi-drawer-header {
+  background: linear-gradient(180deg, rgba(70,141,255,0.06), rgba(3,12,31,0));
+}
+
+/* Custom select menus are rendered through a portal, so they need explicit
+   classes rather than ancestor-scoped selectors. */
+.v392-select-menu {
+  border-color: transparent !important;
+  background:
+    var(--v391-glass-bg) padding-box,
+    linear-gradient(134deg, var(--v392-edge-a), var(--v392-edge-b) 44%, var(--v392-edge-c)) border-box !important;
+  box-shadow: 0 24px 60px rgba(2,6,23,0.22), 0 0 22px rgba(61,138,255,0.10), inset 0 1px 0 var(--v391-glass-edge) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(116%);
+  backdrop-filter: blur(20px) saturate(116%);
+}
+.dark .v392-select-menu {
+  box-shadow: 0 26px 70px rgba(0,0,0,0.50), 0 0 25px rgba(48,134,255,0.16), inset 0 1px 0 rgba(198,230,255,0.08) !important;
+}
+.v392-select-group {
+  background: var(--v391-glass-inset) !important;
+  border-color: rgba(94, 151, 244, 0.16) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07) !important;
+}
+
+/* Generic confirmation/form modal panels, excluding the deliberately white
+   800px invoice/estimate document preview used for print/PDF rendering. */
+.v392-app-wide .modal-overlay > div[class*="bg-white"]:not([class*="max-w-[800px]"]),
+.v392-app-wide .modal-overlay > section[class*="bg-white"]:not([class*="max-w-[800px]"]) {
+  border-color: transparent !important;
+  background:
+    var(--v391-glass-bg) padding-box,
+    linear-gradient(134deg, var(--v392-edge-a), var(--v392-edge-b) 44%, var(--v392-edge-c)) border-box !important;
+  box-shadow: 0 24px 68px rgba(2,6,23,0.30), 0 0 24px rgba(61,138,255,0.11), inset 0 1px 0 var(--v391-glass-edge) !important;
+}
+.dark .v392-app-wide .modal-overlay > div[class*="bg-white"]:not([class*="max-w-[800px]"]),
+.dark .v392-app-wide .modal-overlay > section[class*="bg-white"]:not([class*="max-w-[800px]"]) {
+  box-shadow: 0 28px 76px rgba(0,0,0,0.56), 0 0 28px rgba(48,134,255,0.16), inset 0 1px 0 rgba(198,230,255,0.08) !important;
+}
+
+/* Separators become quieter and slightly cooler so cards remain the primary
+   outline instead of every internal row competing with the perimeter. */
+.v392-app-wide .v392-screen [class*="border-t"][class*="border-slate"],
+.v392-app-wide .v392-screen [class*="border-b"][class*="border-slate"] {
+  border-color: rgba(87, 133, 213, 0.14) !important;
+}
+.dark .v392-app-wide .v392-screen [class*="border-t"][class*="border-slate"],
+.dark .v392-app-wide .v392-screen [class*="border-b"][class*="border-slate"] {
+  border-color: rgba(103, 166, 255, 0.12) !important;
+}
+
+@media (max-width: 430px) {
+  .v392-page-header :is(h1,h2) { font-size: 1.5rem !important; }
+  .v392-page-icon { width: 42px; height: 42px; border-radius: 13px !important; }
+  .v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="bg-white"]:not(.v391-glass-card),
+  .v392-app-wide .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"][class*="dark:bg-slate-900"]:not(.v391-glass-card) {
+    box-shadow: 0 12px 28px var(--v392-soft-shadow), 0 0 15px rgba(55,128,245,0.08), inset 0 1px 0 var(--v391-glass-edge) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v392-app-wide .v392-screen button,
+  .v392-select-menu,
+  .v392-drawer-panel,
+  .v392-search-group {
+    transition: none !important;
+  }
+}
+
+/* v39.2.0 completion pass for modal form controls and custom select triggers. */
+.v392-app-wide .modal-overlay :is(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.v392-app-wide .v392-select-trigger[class*="border"] {
+  background: var(--v392-control-bg) !important;
+  border-color: var(--v392-control-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -8px 18px rgba(10,35,80,0.025) !important;
+}
+.dark .v392-app-wide .modal-overlay :is(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.dark .v392-app-wide .v392-select-trigger[class*="border"] {
+  color: #f4f8ff !important;
+  box-shadow: inset 0 1px 0 rgba(174,219,255,0.06), inset 0 -12px 24px rgba(1,7,24,0.20) !important;
+}
+.v392-app-wide .modal-overlay :is(input,textarea,select):focus,
+.v392-app-wide .v392-select-trigger[class*="border"]:focus-visible {
+  border-color: rgba(77,145,255,0.48) !important;
+  box-shadow: 0 0 0 3px var(--v392-control-focus), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+}
+
+.v392-app-wide .modal-overlay > div[class*="dark:bg-slate-900"]:not([class*="max-w-[800px]"]),
+.v392-app-wide .modal-overlay > section[class*="dark:bg-slate-900"]:not([class*="max-w-[800px]"]) {
+  border-color: transparent !important;
+  background:
+    var(--v391-glass-bg) padding-box,
+    linear-gradient(134deg, var(--v392-edge-a), var(--v392-edge-b) 44%, var(--v392-edge-c)) border-box !important;
+  box-shadow: 0 24px 68px rgba(2,6,23,0.30), 0 0 24px rgba(61,138,255,0.11), inset 0 1px 0 var(--v391-glass-edge) !important;
+}

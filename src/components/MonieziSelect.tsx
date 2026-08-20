@@ -179,7 +179,7 @@ export function MonieziSelect({
             ref={menuRef}
             role="listbox"
             aria-label={ariaLabel}
-            className={`${menuVariant === 'screen'
+            className={`v392-select-menu ${menuVariant === 'screen'
               ? 'fixed flex flex-col overflow-hidden border border-blue-300 bg-white p-3 font-sans shadow-2xl dark:border-blue-400/30 dark:bg-slate-950'
               : 'fixed overflow-y-auto overscroll-contain border border-slate-300 bg-white p-1.5 shadow-2xl dark:border-slate-700 dark:bg-slate-900'} ${menuClassName}`.trim()}
             style={{
@@ -212,7 +212,7 @@ export function MonieziSelect({
                     return (
                       <section
                         key={group || 'choices'}
-                        className="rounded-2xl border border-slate-300/90 bg-slate-50/70 p-2 shadow-sm dark:border-blue-400/25 dark:bg-blue-500/[0.055]"
+                        className="v392-select-group rounded-2xl border border-slate-300/90 bg-slate-50/70 p-2 shadow-sm dark:border-blue-400/25 dark:bg-blue-500/[0.055]"
                       >
                         {group ? (
                           <div className="mx-3 mb-2 mt-2 inline-flex w-fit items-center rounded-md border border-blue-200/90 bg-blue-100/80 px-2.5 py-1 text-xs font-medium uppercase tracking-[0.04em] text-blue-900 shadow-sm dark:border-blue-400/30 dark:bg-blue-400/10 dark:text-blue-100">
@@ -294,7 +294,7 @@ export function MonieziSelect({
             if (disabled) return;
             setOpen(current => !current);
           }}
-          className={`inline-flex items-center justify-between gap-2 text-left disabled:cursor-not-allowed disabled:opacity-50 ${className}`.trim()}
+          className={`v392-select-trigger inline-flex items-center justify-between gap-2 text-left disabled:cursor-not-allowed disabled:opacity-50 ${className}`.trim()}
         >
           <span className="min-w-0 flex-1 truncate">{selectedOption?.label ?? placeholder}</span>
           <ChevronDown size={15} strokeWidth={2} className={`flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
