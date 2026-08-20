@@ -144,27 +144,45 @@ body.modal-open {
 
 
 
-/* MONIEZI v39.0.30 premium dark glass system */
+/* MONIEZI v39.0.31 luminous glass dark system */
 :root {
   --moniezi-dark-ambient-bg:
-    radial-gradient(circle at 14% -4%, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0) 30%),
-    radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0) 26%),
-    linear-gradient(180deg, #020617 0%, #030b1a 100%);
+    radial-gradient(circle at 0% 18%, rgba(34, 211, 238, 0.10) 0%, rgba(34, 211, 238, 0) 22%),
+    radial-gradient(circle at 100% 12%, rgba(96, 165, 250, 0.13) 0%, rgba(96, 165, 250, 0) 24%),
+    radial-gradient(circle at 84% 62%, rgba(67, 56, 202, 0.12) 0%, rgba(67, 56, 202, 0) 22%),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.06) 0%, rgba(59, 130, 246, 0.02) 18%, rgba(2, 6, 23, 0) 28%, rgba(2, 6, 23, 0) 72%, rgba(99, 102, 241, 0.03) 82%, rgba(99, 102, 241, 0.06) 100%),
+    linear-gradient(180deg, #010713 0%, #020a17 100%);
   --moniezi-dark-surface-hero:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 12%, rgba(255, 255, 255, 0.015) 24%, rgba(8, 18, 38, 0.50) 24%, rgba(7, 16, 35, 0.56) 100%),
-    linear-gradient(135deg, rgba(59, 130, 246, 0.20) 0%, rgba(14, 165, 233, 0.11) 34%, rgba(99, 102, 241, 0.10) 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.06) 9%, rgba(255, 255, 255, 0.015) 18%, rgba(5, 15, 33, 0.34) 18%, rgba(5, 14, 31, 0.42) 100%),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.08) 44%, rgba(99, 102, 241, 0.10) 100%);
   --moniezi-dark-surface-card:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 14%, rgba(255, 255, 255, 0.012) 24%, rgba(8, 18, 38, 0.48) 24%, rgba(6, 15, 34, 0.54) 100%),
-    linear-gradient(135deg, rgba(59, 130, 246, 0.16) 0%, rgba(14, 165, 233, 0.09) 30%, rgba(99, 102, 241, 0.08) 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.045) 10%, rgba(255, 255, 255, 0.012) 18%, rgba(4, 12, 28, 0.34) 18%, rgba(4, 12, 27, 0.42) 100%),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.06) 42%, rgba(99, 102, 241, 0.08) 100%);
   --moniezi-dark-surface-inset:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 14%, rgba(4, 11, 26, 0.58) 24%, rgba(3, 10, 24, 0.66) 100%),
-    linear-gradient(135deg, rgba(59, 130, 246, 0.10) 0%, rgba(59, 130, 246, 0.05) 40%, rgba(99, 102, 241, 0.05) 100%);
-  --moniezi-dark-border-strong: rgba(255, 255, 255, 0.20);
-  --moniezi-dark-border-soft: rgba(255, 255, 255, 0.13);
-  --moniezi-dark-border-faint: rgba(191, 219, 254, 0.10);
-  --moniezi-dark-shadow-card: 0 18px 48px rgba(2, 6, 23, 0.34), 0 4px 18px rgba(37, 99, 235, 0.12), 0 1px 0 rgba(255, 255, 255, 0.12) inset;
-  --moniezi-dark-shadow-hero: 0 22px 56px rgba(2, 6, 23, 0.38), 0 8px 26px rgba(59, 130, 246, 0.16), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
-  --moniezi-dark-shadow-inset: 0 12px 28px rgba(2, 6, 23, 0.24), 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.026) 10%, rgba(3, 10, 23, 0.42) 18%, rgba(3, 10, 22, 0.50) 100%),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.04) 46%, rgba(99, 102, 241, 0.05) 100%);
+  --moniezi-dark-border-strong: rgba(151, 224, 255, 0.44);
+  --moniezi-dark-border-soft: rgba(132, 212, 255, 0.28);
+  --moniezi-dark-border-faint: rgba(132, 212, 255, 0.17);
+  --moniezi-dark-shadow-card:
+    0 0 0 1px rgba(151, 224, 255, 0.10) inset,
+    0 1px 0 rgba(255, 255, 255, 0.13) inset,
+    0 0 24px rgba(56, 189, 248, 0.08),
+    0 10px 28px rgba(2, 6, 23, 0.32),
+    -1px 0 18px rgba(34, 211, 238, 0.10),
+    1px 0 18px rgba(99, 102, 241, 0.12);
+  --moniezi-dark-shadow-hero:
+    0 0 0 1px rgba(151, 224, 255, 0.13) inset,
+    0 1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 0 32px rgba(56, 189, 248, 0.12),
+    0 16px 34px rgba(2, 6, 23, 0.34),
+    -2px 0 24px rgba(34, 211, 238, 0.14),
+    2px 0 24px rgba(99, 102, 241, 0.14);
+  --moniezi-dark-shadow-inset:
+    0 0 0 1px rgba(151, 224, 255, 0.05) inset,
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 8px 18px rgba(2, 6, 23, 0.22),
+    0 0 14px rgba(56, 189, 248, 0.04);
 }
 
 .dark .moniezi-app-shell {
@@ -172,13 +190,17 @@ body.modal-open {
 }
 
 .dark .moniezi-drawer-panel {
-  background: #071328;
+  background: rgba(4, 11, 25, 0.88);
   color: #ffffff;
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  backdrop-filter: blur(18px) saturate(130%);
 }
 
 .dark .dark-chrome {
-  background-color: rgba(2, 6, 23, 0.94) !important;
-  border-color: rgba(96, 165, 250, 0.16) !important;
+  background-color: rgba(2, 8, 21, 0.80) !important;
+  border-color: rgba(132, 212, 255, 0.14) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+  backdrop-filter: blur(18px) saturate(125%);
 }
 
 .dark .dark\:border-slate-700 {
@@ -205,8 +227,8 @@ body.modal-open {
   background: var(--moniezi-dark-surface-card) !important;
   border-color: var(--moniezi-dark-border-soft) !important;
   box-shadow: var(--moniezi-dark-shadow-card) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(155%);
-  backdrop-filter: blur(24px) saturate(155%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  backdrop-filter: blur(22px) saturate(150%);
 }
 
 .dark :is(div, section, article, aside)[class*="rounded"][class*="dark:bg-slate-800"],
@@ -214,43 +236,43 @@ body.modal-open {
   background: var(--moniezi-dark-surface-inset) !important;
   border-color: var(--moniezi-dark-border-faint) !important;
   box-shadow: var(--moniezi-dark-shadow-inset) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(145%);
-  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(142%);
+  backdrop-filter: blur(18px) saturate(142%);
 }
 
-/* Preserve the deepest chrome and data-entry surfaces instead of turning everything blue. */
+/* Preserve the deepest chrome and data-entry surfaces instead of turning everything into bright glass. */
 .dark :is(input, textarea, select)[class*="dark:bg-slate-950"],
 .dark :is(input, textarea, select)[class*="dark:bg-slate-900"],
 .dark button[class*="dark:bg-slate-950"],
 .dark button[class*="dark:bg-slate-900"][class*="rounded-full"] {
-  background: rgba(3, 12, 31, 0.94) !important;
+  background: rgba(3, 11, 25, 0.78) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
 }
 
 .dark .moniezi-app-shell,
-.dark .dark-chrome,
-.dark .moniezi-drawer-panel,
 .dark .modal-overlay,
 .dark .moniezi-drawer-overlay {
   box-shadow: none;
 }
 
-/* Keep the signature Overview / hero KPI cards brighter than standard cards. */
+/* Keep the signature Overview / hero KPI cards brighter and more luminous. */
 .dark :is(div, section, article, aside)[class*="dark:from-blue-800"][class*="dark:to-indigo-950"],
 .dark :is(div, section, article, aside)[class*="dark:from-blue-800"][class*="dark:to-indigo-900"] {
   background: var(--moniezi-dark-surface-hero) !important;
-  border-color: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(151, 224, 255, 0.34) !important;
   box-shadow: var(--moniezi-dark-shadow-hero) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(165%);
-  backdrop-filter: blur(28px) saturate(165%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
 }
 
-/* v39 utility surfaces should stay in the same glass family without becoming heavy blue blocks. */
+/* v39 utility surfaces should align with the luminous-glass card family. */
 .dark {
-  --v39-section-surface: rgba(8, 18, 38, 0.50);
-  --v39-section-border: rgba(255, 255, 255, 0.14);
+  --v39-section-surface: rgba(4, 12, 28, 0.34);
+  --v39-section-border: rgba(132, 212, 255, 0.22);
 }
 
-/* Subtle blue hover language for dark cards */
+/* Subtle luminous hover language for dark cards */
 .dark .dark\:hover\:bg-slate-700:hover,
 .dark .dark\:hover\:bg-slate-800:hover,
 .dark .dark\:hover\:bg-slate-800\/50:hover,
@@ -262,7 +284,7 @@ body.modal-open {
 .dark .dark\:hover\:bg-slate-900\/50:hover,
 .dark .dark\:hover\:bg-slate-900\/60:hover,
 .dark .dark\:hover\:bg-slate-900\/70:hover {
-  background-color: rgba(59, 130, 246, 0.14) !important;
+  background-color: rgba(34, 211, 238, 0.12) !important;
 }
 
 /* Extreme-contrast light mode pass */
