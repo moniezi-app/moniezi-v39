@@ -1,3 +1,53 @@
+# MONIEZI v39.3.1
+
+## v39.3.1 Luminous Glass consistency corrections
+
+This correction build keeps the v39.3.0 lifecycle footer architecture and fixes two visual inconsistencies identified during phone QA.
+
+### First-run / post-demo dashboard
+
+- Rebuilds the **Ready for your first records / Explore before you start** experience using the same Luminous Glass hierarchy as the production Home dashboard.
+- Removes the oversized layered-shell treatment that made the empty first-run state look like a different design generation.
+- Uses the same glass card, inset surface, controlled luminous border, typography hierarchy, and integrated action treatment as the Home cards.
+- Keeps the approved demo-business illustration and all existing demo / first-entry behavior unchanged.
+- Keeps the early light/dark theme choice, but integrates it into the same glass material system.
+
+### Monthly Business Goals target
+
+- Replaces the previous CSS-drawn target/arrow symbol whose arrowhead pointed outward.
+- The new target uses a conventional dart/arrow with the point directed **into the bullseye**, so the visual clearly reads as setting/reaching a goal.
+- Keeps the target compact and supporting; real goal data remains the visual priority after goals are configured.
+
+### Preserved from v39.3.0
+
+- Sticky footer remains **Home · Clients · Jobs · Estimates · Invoices · Mileage**.
+- Activity and Reports remain in the full application menu.
+- Existing storage, calculations, licensing, demo data, invoices, estimates, jobs, receipts, mileage, reports, and exports are unchanged.
+
+---
+
+# MONIEZI v39.3.0
+
+## v39.3.0 Lifecycle Navigation Architecture
+
+v39.3.0 keeps the application-wide Luminous Glass system from v39.2.0 and updates the sticky footer to match MONIEZI's everyday business workflow.
+
+### Sticky footer
+
+**Home · Clients · Jobs · Estimates · Invoices · Mileage**
+
+- Clients and Estimates are now permanent footer destinations.
+- Activity and Reports remain available in the main menu and contextual Home links, but no longer consume permanent footer slots.
+- Invoice is renamed to Invoices.
+- Estimates and Invoices remain two distinct user destinations while sharing the existing billing screen and business logic. Their selected footer states are independent.
+- Quick Add remains separate from navigation and continues to handle creation actions.
+
+### Scope
+
+This release changes navigation information architecture only. Existing business logic, local storage, calculations, reports, licensing, demo data, jobs, clients, estimates, invoices, receipts, and mileage behavior are preserved.
+
+---
+
 # MONIEZI v39.2.0
 
 ## v39.2.0 Application-wide Luminous Glass rollout

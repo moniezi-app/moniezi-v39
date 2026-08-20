@@ -189,3 +189,15 @@ Receipts, Clients, and Mileage now use separate approved raster illustration pai
 The v39.1.0 Home/dashboard material system is now the application-wide presentation layer. Working screens use two intensity levels: primary record/report panels receive the full glass perimeter and depth treatment, while nested metrics, filters, controls and form fields use quieter inset glass. Semantic warning/success colors remain visible and PDF/print document previews stay deliberately white.
 
 Covered surfaces include Activity, Income, Expenses, Invoices, Estimates, Mileage, Reports, Tax tools, Clients, Jobs / Projects, Settings, global search, drawers, form shells, custom selects, empty states and confirmation modals. Light and dark modes use the same hierarchy with different glow intensity.
+
+## v39.3.0 navigation architecture
+
+The persistent footer now follows the primary service-business lifecycle: **Home · Clients · Jobs · Estimates · Invoices · Mileage**. Activity and Reports remain in the complete application directory. Estimates and Invoices intentionally share the billing page while maintaining separate footer actions and active states.
+
+
+## v39.3.1 consistency corrections
+
+- First-run and post-demo empty Dashboard experience must use the same Luminous Glass card/inset hierarchy as the working Home dashboard.
+- Avoid oversized nested shells that make onboarding/empty states look like a separate application.
+- Monthly Business Goals target visual uses an arrow directed into the bullseye; outward-pointing target arrows are prohibited.
+- v39.3.0 lifecycle footer architecture remains unchanged.

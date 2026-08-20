@@ -134,6 +134,29 @@ const selectNumericValueOnFocus = (event: React.FocusEvent<HTMLInputElement>) =>
   });
 };
 
+// v39.3.1: the goal visual uses a conventional arrow that points INTO the
+// bullseye. The previous CSS-drawn icon put the arrowhead outside the target,
+// which made the symbol read as an arrow leaving the goal.
+const GoalTargetVisual = () => (
+  <svg
+    className="v3931-goal-target-svg"
+    viewBox="0 0 96 96"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle className="v3931-goal-target-ring v3931-goal-target-ring--outer" cx="46" cy="50" r="33" />
+    <circle className="v3931-goal-target-ring v3931-goal-target-ring--middle" cx="46" cy="50" r="22" />
+    <circle className="v3931-goal-target-ring v3931-goal-target-ring--inner" cx="46" cy="50" r="10" />
+    <circle className="v3931-goal-target-center" cx="46" cy="50" r="4.25" />
+
+    {/* Shaft runs from the tail at upper-right toward the bullseye. */}
+    <path className="v3931-goal-arrow-shaft" d="M78 18 L52.5 43.5" />
+    {/* Arrowhead point is at the bullseye, not outside the target. */}
+    <path className="v3931-goal-arrow-head" d="M46 50 L54.8 46.4 L49.6 41.2 Z" />
+    <path className="v3931-goal-arrow-fin" d="M75 21 L84 12 M76.5 22.5 L86 22.5" />
+  </svg>
+);
+
 // --- Utility: Invoice/Estimate Number Generator ---
 const generateDocNumber = (prefix: 'INV' | 'EST', existingDocs: { number?: string }[]): string => {
   const now = new Date();
@@ -8124,131 +8147,100 @@ html, body, #root {
         </div>
       )}
 
-      {/* First-run theme choice + demo entry point. Welcome/activation stays light,
-          while the installed app starts in dark mode by default and lets the user
-          preview/switch the actual app theme before choosing Demo or their own data. */}
+      {/* v39.3.1 — first-run / post-demo empty experience now uses the same
+          Luminous Glass hierarchy as the rest of the dashboard. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
-        <div className={`mb-6 rounded-[30px] border p-4 shadow-[0_20px_46px_rgba(15,23,42,0.12)] transition-colors sm:p-5 ${theme === 'dark'
-          ? 'border-slate-700/90 bg-[linear-gradient(180deg,#081226_0%,#0B1730_100%)] ring-1 ring-blue-400/10'
-          : 'border-slate-200/90 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] ring-1 ring-white/80'
-        }`}>
-          {!hasTriedSampleData && (
-            <div className={`mb-4 rounded-[22px] border p-3.5 ${theme === 'dark'
-              ? 'border-slate-700 bg-slate-950/65'
-              : 'border-[#E3EAF7] bg-white'
-            }`}>
-              <div className="mb-3 text-center">
-                <div className={`text-[15px] font-extrabold tracking-[-0.02em] ${theme === 'dark' ? 'text-white' : 'text-[#0B1739]'}`}>Choose your look</div>
-                <div className={`mt-1 text-[12px] font-semibold ${theme === 'dark' ? 'text-slate-300' : 'text-[#5B6B84]'}`}>You can change this anytime from the header.</div>
-              </div>
-              <div className={`grid grid-cols-2 gap-2 rounded-[16px] p-1.5 ${theme === 'dark' ? 'bg-slate-900' : 'bg-[#F2F5FA]'}`}>
-                <button
-                  type="button"
-                  onClick={() => applyThemePreference('dark')}
-                  aria-pressed={theme === 'dark'}
-                  className={`flex min-h-[50px] items-center justify-center gap-2 rounded-[13px] border px-3 text-[14px] font-extrabold transition-all ${theme === 'dark'
-                    ? 'border-blue-400/55 bg-[#17284D] text-white shadow-[0_8px_18px_rgba(0,0,0,0.22)]'
-                    : 'border-transparent bg-transparent text-slate-600 hover:bg-white'
-                  }`}
-                >
-                  <Moon size={18} strokeWidth={1.8} />
-                  Dark
-                </button>
-                <button
-                  type="button"
-                  onClick={() => applyThemePreference('light')}
-                  aria-pressed={theme === 'light'}
-                  className={`flex min-h-[50px] items-center justify-center gap-2 rounded-[13px] border px-3 text-[14px] font-extrabold transition-all ${theme === 'light'
-                    ? 'border-blue-300 bg-white text-[#0B1739] shadow-[0_8px_18px_rgba(15,23,42,0.08)]'
-                    : 'border-transparent bg-transparent text-slate-300 hover:bg-slate-800'
-                  }`}
-                >
-                  <Sun size={18} strokeWidth={1.8} />
-                  Light
-                </button>
-              </div>
-            </div>
-          )}
-
-          <div className={`rounded-[24px] border p-4 transition-colors sm:p-5 ${theme === 'dark'
-            ? 'border-blue-400/20 bg-[linear-gradient(180deg,#0D1A34_0%,#0A162C_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]'
-            : 'border-[#E7EEFB] bg-[linear-gradient(180deg,#F8FBFF_0%,#F3F7FF_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]'
-          }`}>
-            <div className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-[12px] font-bold uppercase tracking-[0.18em] shadow-sm ${theme === 'dark'
-              ? 'border-blue-400/25 bg-slate-950/80 text-blue-300'
-              : 'border-[#E6EBF7] bg-white text-[#3365E3]'
-            }`}>
-              <PlayCircle size={14} strokeWidth={2} />
-              {hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}
-            </div>
-
-            <div className={`mt-4 overflow-hidden rounded-[24px] shadow-[0_12px_28px_rgba(15,23,42,0.08)] ${theme === 'dark'
-              ? 'bg-[#0B1730]'
-              : 'bg-white'
-            }`}>
-              <div className="px-2 pt-3 pb-2 sm:px-4 sm:pt-4">
-                <div className="mx-auto w-full max-w-[430px]">
-                  <img
-                    src={`${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`}
-                    alt="A MONIEZI demo dashboard surrounded by sample receipts, reports, mileage, and business records"
-                    className="block h-auto w-full object-contain"
-                    loading="eager"
-                    decoding="async"
-                  />
+        <div className="mb-6">
+          <MonieziGlassCard hero className="v3931-first-run-card">
+            {!hasTriedSampleData && (
+              <MonieziGlassInset className="v3931-theme-choice">
+                <div className="v3931-theme-choice__copy">
+                  <div className="v3931-theme-choice__title">Choose your look</div>
+                  <div className="v3931-theme-choice__detail">You can change this anytime from the header.</div>
                 </div>
-              </div>
+                <div className="v3931-theme-choice__buttons" role="group" aria-label="Choose app theme">
+                  <button
+                    type="button"
+                    onClick={() => applyThemePreference('dark')}
+                    aria-pressed={theme === 'dark'}
+                    className={`v3931-theme-choice__button ${theme === 'dark' ? 'is-active' : ''}`}
+                  >
+                    <Moon size={18} strokeWidth={1.8} />
+                    Dark
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => applyThemePreference('light')}
+                    aria-pressed={theme === 'light'}
+                    className={`v3931-theme-choice__button ${theme === 'light' ? 'is-active' : ''}`}
+                  >
+                    <Sun size={18} strokeWidth={1.8} />
+                    Light
+                  </button>
+                </div>
+              </MonieziGlassInset>
+            )}
 
-              <div className={`px-4 py-4 sm:px-5 sm:py-5 ${theme === 'dark' ? 'bg-[#0B1730]' : 'bg-white'}`}>
-                <h3 className={`text-center text-[18px] font-bold leading-tight tracking-[-0.03em] font-brand sm:text-[19px] ${theme === 'dark' ? 'text-white' : 'text-[#0B1739]'}`}>
-                  {hasTriedSampleData ? 'Start with your own business' : 'Load the demo business'}
-                </h3>
-                {hasTriedSampleData && (
-                  <p className={`mx-auto mt-2 max-w-[31ch] text-center text-[14px] leading-[1.55] font-semibold ${theme === 'dark' ? 'text-slate-300' : 'text-[#55667E]'}`}>
-                    The demo is cleared. Record your first real entry and start building your own records.
-                  </p>
-                )}
-
-                {!hasTriedSampleData && (
-                  <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
-                    {[
-                      { value: sampleDataCounts.transactions, label: 'Records', icon: <Receipt size={16} className={theme === 'dark' ? 'text-blue-300' : 'text-[#5B80F8]'} strokeWidth={1.8} /> },
-                      { value: sampleDataCounts.invoices, label: 'Invoices', icon: <FileText size={16} className={theme === 'dark' ? 'text-blue-300' : 'text-[#5B80F8]'} strokeWidth={1.8} /> },
-                      { value: sampleDataCounts.clients, label: 'Clients', icon: <Users size={16} className={theme === 'dark' ? 'text-blue-300' : 'text-[#5B80F8]'} strokeWidth={1.8} /> },
-                    ].map((stat) => (
-                      <div key={stat.label} className={`min-w-0 rounded-[18px] border px-2 py-3 text-center shadow-[0_8px_18px_rgba(15,23,42,0.06)] sm:px-3 ${theme === 'dark'
-                        ? 'border-blue-400/20 bg-slate-950/80'
-                        : 'border-[#E0E7F3] bg-white'
-                      }`}>
-                        <div className="mb-2 flex justify-center">{stat.icon}</div>
-                        <div className={`text-[30px] font-bold leading-none tracking-[-0.05em] font-brand sm:text-[34px] ${theme === 'dark' ? 'text-white' : 'text-[#0B1739]'}`}>{stat.value}</div>
-                        <div className={`mt-1 w-full min-w-0 whitespace-nowrap text-center text-[9px] font-extrabold leading-[1.15] tracking-normal sm:text-[11px] ${theme === 'dark' ? 'text-slate-300' : 'text-[#4B5870]'}`}>{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                <button
-                  onClick={hasTriedSampleData ? () => handleOpenUnifiedAdd() : handleLoadSampleData}
-                  className="mt-5 w-full rounded-[18px] bg-[#2563EB] px-5 py-[15px] text-center text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
-                >
-                  <span className="inline-flex items-center justify-center gap-2">
-                    {hasTriedSampleData ? 'Record my first entry' : 'Load the demo'}
-                    <ArrowRight size={18} strokeWidth={2.15} />
-                  </span>
-                </button>
-
-                <button
-                  onClick={hasTriedSampleData ? handleLoadSampleData : () => handleOpenUnifiedAdd()}
-                  className={`mt-4 w-full text-center text-[14px] font-bold underline underline-offset-4 transition-colors ${theme === 'dark' ? 'text-blue-300 hover:text-blue-200' : 'text-[#2563EB] hover:text-[#1D4ED8]'}`}
-                >
-                  {hasTriedSampleData ? 'Show the demo again' : 'Skip — record my first entry'}
-                </button>
-              </div>
+            <div className="v3931-first-run-kicker">
+              <span className="v3931-first-run-kicker__icon"><PlayCircle size={15} strokeWidth={2} /></span>
+              <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>
             </div>
-          </div>
+
+            <MonieziGlassInset className="v3931-first-run-visual">
+              <img
+                src={`${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`}
+                alt="A MONIEZI dashboard surrounded by receipts, reports, mileage, and business records"
+                className="v3931-first-run-visual__image"
+                loading="eager"
+                decoding="async"
+              />
+            </MonieziGlassInset>
+
+            <div className="v3931-first-run-content">
+              <h3 className="v3931-first-run-title">
+                {hasTriedSampleData ? 'Start with your own business' : 'Load the demo business'}
+              </h3>
+
+              <p className="v3931-first-run-body">
+                {hasTriedSampleData
+                  ? 'The demo is cleared. Record your first real entry and start building your own records.'
+                  : 'See MONIEZI filled with realistic business records before you enter your own information.'}
+              </p>
+
+              {!hasTriedSampleData && (
+                <div className="v3931-first-run-stats">
+                  {[
+                    { value: sampleDataCounts.transactions, label: 'Records', icon: <Receipt size={16} strokeWidth={1.9} /> },
+                    { value: sampleDataCounts.invoices, label: 'Invoices', icon: <FileText size={16} strokeWidth={1.9} /> },
+                    { value: sampleDataCounts.clients, label: 'Clients', icon: <Users size={16} strokeWidth={1.9} /> },
+                  ].map((stat) => (
+                    <div key={stat.label} className="v3931-first-run-stat">
+                      <span className="v3931-first-run-stat__icon">{stat.icon}</span>
+                      <strong>{stat.value}</strong>
+                      <span>{stat.label}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <button
+                onClick={hasTriedSampleData ? () => handleOpenUnifiedAdd() : handleLoadSampleData}
+                className="v3931-first-run-primary"
+              >
+                <span>{hasTriedSampleData ? 'Record my first entry' : 'Load the demo'}</span>
+                <ArrowRight size={19} strokeWidth={2.2} />
+              </button>
+
+              <button
+                onClick={hasTriedSampleData ? handleLoadSampleData : () => handleOpenUnifiedAdd()}
+                className="v3931-first-run-secondary"
+              >
+                {hasTriedSampleData ? 'Show the demo again' : 'Skip — record my first entry'}
+              </button>
+            </div>
+          </MonieziGlassCard>
         </div>
       )}
-
 
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
@@ -8400,7 +8392,7 @@ html, body, #root {
                       <PlusCircle size={15} /> Set Monthly Goals
                     </MonieziGlassAction>
                   </div>
-                  <div className="v391-goal-target" aria-hidden="true"><span /><i /></div>
+                  <div className="v3931-goal-target-wrap" aria-hidden="true"><GoalTargetVisual /></div>
                 </MonieziGlassInset>
               ) : (
                 <>
@@ -12703,6 +12695,18 @@ html, body, #root {
               <span className={`text-[11px] mt-0.5 ${currentPage === Page.Dashboard ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Dashboard ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Home</span>
             </button>
 
+            {/* Clients */}
+            <button
+              onClick={() => setCurrentPage(Page.Clients)}
+              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Clients ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Clients ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              style={currentPage === Page.Clients ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
+            >
+              <div className={`p-1.5 rounded-lg ${currentPage === Page.Clients ? 'text-white' : ''}`}>
+                <Users size={20} strokeWidth={currentPage === Page.Clients ? 2 : 1.5} />
+              </div>
+              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Clients ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Clients ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Clients</span>
+            </button>
+
             {/* Jobs */}
             <button
               onClick={() => setCurrentPage(Page.Jobs)}
@@ -12715,7 +12719,19 @@ html, body, #root {
               <span className={`text-[11px] mt-0.5 ${currentPage === Page.Jobs ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Jobs ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Jobs</span>
             </button>
 
-            {/* Invoice */}
+            {/* Estimates — shares the billing screen with invoices but remains a distinct business-stage destination. */}
+            <button 
+              onClick={() => { setBillingDocType('estimate'); setCurrentPage(Page.Invoices); }} 
+              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
+              style={currentPage === Page.Invoices && billingDocType === 'estimate' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
+            >
+              <div className={`p-1.5 rounded-lg ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'text-white' : ''}`}>
+                <ClipboardList size={20} strokeWidth={currentPage === Page.Invoices && billingDocType === 'estimate' ? 2 : 1.5} />
+              </div>
+              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Invoices && billingDocType === 'estimate' ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Invoices && billingDocType === 'estimate' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Estimates</span>
+            </button>
+
+            {/* Invoices */}
             <button 
               onClick={() => { setBillingDocType('invoice'); setCurrentPage(Page.Invoices); }} 
               className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
@@ -12724,20 +12740,7 @@ html, body, #root {
               <div className={`p-1.5 rounded-lg ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'text-white' : ''}`}>
                 <FileText size={20} strokeWidth={currentPage === Page.Invoices && billingDocType === 'invoice' ? 2 : 1.5} />
               </div>
-              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Invoices && billingDocType === 'invoice' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Invoice</span>
-            </button>
-
-
-            {/* Center Nav - Activity */}
-            <button 
-              onClick={() => setCurrentPage(Page.AllTransactions)} 
-              className={`dark-chrome-nav-item v391-nav-item ${(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
-              style={(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
-            >
-              <div className={`p-1.5 rounded-lg ${(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 'text-white' : ''}`}>
-                <History size={20} strokeWidth={(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 2 : 1.5} />
-              </div>
-              <span className={`text-[11px] mt-0.5 ${(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? 'font-bold text-white' : 'font-semibold'}`} style={(currentPage === Page.AllTransactions || currentPage === Page.Ledger) ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Activity</span>
+              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Invoices && billingDocType === 'invoice' ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Invoices && billingDocType === 'invoice' ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Invoices</span>
             </button>
 
             {/* Mileage */}
@@ -12750,20 +12753,6 @@ html, body, #root {
                 <Car size={20} strokeWidth={currentPage === Page.Mileage ? 2 : 1.5} />
               </div>
               <span className={`text-[11px] mt-0.5 ${currentPage === Page.Mileage ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Mileage ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Mileage</span>
-            </button>
-
-
-
-            {/* Reports */}
-            <button 
-              onClick={() => { setReportsMenuSection('menu'); setCurrentPage(Page.Reports); mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }); }} 
-              className={`dark-chrome-nav-item v391-nav-item ${currentPage === Page.Reports ? 'active' : ''} flex-1 flex flex-col items-center justify-center py-1 transition-all active:scale-95 ${currentPage === Page.Reports ? 'bg-blue-600 text-white rounded-xl shadow-sm mx-0.5' : ''}`}
-              style={currentPage === Page.Reports ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}
-            >
-              <div className={`p-1.5 rounded-lg ${currentPage === Page.Reports ? 'text-white' : ''}`}>
-                <BarChart3 size={20} strokeWidth={currentPage === Page.Reports ? 2 : 1.5} />
-              </div>
-              <span className={`text-[11px] mt-0.5 ${currentPage === Page.Reports ? 'font-bold text-white' : 'font-semibold'}`} style={currentPage === Page.Reports ? darkChromeNavActiveStyle : darkChromeNavInactiveStyle}>Reports</span>
             </button>
           </div>
         </div>
