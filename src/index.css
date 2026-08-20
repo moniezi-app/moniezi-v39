@@ -3231,3 +3231,101 @@ html {
   .v3932-nav-label,
   .v3932-nav-label--long { font-size: 12.5px !important; }
 }
+
+/* ================================================================
+   MONIEZI v39.3.6 — Home width + single-line financial values
+   Prevent narrow header copy columns and stop currency figures from wrapping.
+   ================================================================ */
+.v3936-home-wide-header {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 14px !important;
+  row-gap: 14px !important;
+}
+.v3936-home-wide-header .v391-card-header__main,
+.v3936-home-wide-header .v391-card-header__copy {
+  display: contents;
+}
+.v3936-home-wide-header .v391-glass-icon {
+  grid-column: 1;
+  grid-row: 1;
+}
+.v3936-home-wide-header .v391-card-title {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  min-width: 0;
+}
+.v3936-home-wide-header .v391-card-subtitle {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  max-width: none;
+  margin-top: 0 !important;
+}
+.v3936-home-wide-header > .v391-glass-action,
+.v3936-home-wide-header > .v391-primary-orb {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: center;
+}
+
+/* Financial figures must always read as one figure, never one amount split
+   over two lines. Give the two metric cards more usable width and scale the
+   number itself instead of wrapping it. */
+.v3935-home-breathing .v391-metric-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.v3936-home-money-metric {
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+}
+.v3936-home-money-metric .v391-glass-metric__value {
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  font-size: clamp(17px, 4.8vw, 20px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.045em !important;
+  font-variant-numeric: tabular-nums;
+}
+.v3935-home-breathing .v391-card-kpi {
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+  font-size: clamp(42px, 11vw, 64px);
+  letter-spacing: -0.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* On phone widths, use two wider Jobs status tiles per row rather than four
+   cramped tiles. This keeps the larger v39.3.5 typography without squeezing
+   labels into narrow boxes. */
+@media (max-width: 430px) {
+  .v3935-home-breathing .v391-jobs-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .v3935-home-breathing .v391-job-stat {
+    min-height: 88px;
+    padding: 16px 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .v3935-home-breathing .v391-job-stat__label {
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  .v3936-home-wide-header {
+    column-gap: 12px !important;
+    row-gap: 13px !important;
+  }
+  .v3936-home-wide-header > .v391-glass-action {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}

@@ -1,6 +1,6 @@
-# MONIEZI v39.3.5
+# MONIEZI v39.3.6
 
-## v39.3.5 Home breathing room + footer readability
+## v39.3.6 Home breathing room + footer readability
 
 - Expands internal padding and vertical rhythm across every Home dashboard card.
 - Increases spacing between headings, subtitles, controls, KPI panels, status rows, actions, dividers, and card-to-card sections.

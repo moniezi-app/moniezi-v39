@@ -8226,7 +8226,7 @@ html, body, #root {
         {(currentPage === Page.Dashboard) && (
           <div className="v391-dashboard v3934-home-readable v3935-home-breathing space-y-7 sm:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <MonieziGlassCard hero>
-              <div className="v391-card-header">
+              <div className="v391-card-header v3936-home-wide-header">
                 <div className="v391-card-header__main">
                   <MonieziGlassIcon tone="blue" label="Overview">
                     <LayoutGrid size={21} />
@@ -8261,6 +8261,7 @@ html, body, #root {
                   label="In"
                   value={formatCurrency.format(homeTotals.income)}
                   tone="green"
+                  className="v3936-home-money-metric"
                   icon={<TrendingUp size={16} />}
                   ariaLabel="View income in Activity"
                   onClick={() => {
@@ -8275,6 +8276,7 @@ html, body, #root {
                   label="Out"
                   value={formatCurrency.format(homeTotals.expense)}
                   tone="rose"
+                  className="v3936-home-money-metric"
                   icon={<TrendingDown size={16} />}
                   ariaLabel="View expenses in Activity"
                   onClick={() => {
@@ -8289,7 +8291,7 @@ html, body, #root {
             </MonieziGlassCard>
 
             <MonieziGlassCard>
-              <div className="v391-card-header">
+              <div className="v391-card-header v3936-home-wide-header">
                 <div className="v391-card-header__main">
                   <MonieziGlassIcon tone={businessActionItems.length ? 'amber' : 'green'}>
                     <AlertTriangle size={20} />
@@ -8349,7 +8351,7 @@ html, body, #root {
             </MonieziGlassCard>
 
             <MonieziGlassCard>
-              <div className="v391-card-header">
+              <div className="v391-card-header v3936-home-wide-header">
                 <div className="v391-card-header__main">
                   <MonieziGlassIcon tone="violet"><Percent size={20} /></MonieziGlassIcon>
                   <div className="v391-card-header__copy">
@@ -8405,7 +8407,7 @@ html, body, #root {
             </MonieziGlassCard>
 
             <MonieziGlassCard>
-              <div className="v391-card-header">
+              <div className="v391-card-header v3936-home-wide-header">
                 <div className="v391-card-header__main">
                   <MonieziGlassIcon tone="teal"><Briefcase size={20} /></MonieziGlassIcon>
                   <div className="v391-card-header__copy">
