@@ -1,16 +1,17 @@
-# MONIEZI v39.4.0
+# MONIEZI v39.4.1
 
-## v39.4.0 Install-first mobile onboarding
+## v39.4.1 Simplified supported mobile installation
 
-- Mobile browser first run is now **install first, activate second**.
-- iPhone/iPad and Android browser tabs show an **Install MONIEZI** screen before any license field.
-- Standalone/PWA mode is detected synchronously on the first React render, preventing an install-screen flash when the installed app opens.
-- Browser-aware install guidance is included for Safari, Chrome, Firefox, Samsung Internet, Edge, and an unknown-browser fallback.
-- Chromium-compatible Android browsers use the native `beforeinstallprompt` flow when available.
-- Manual-install browsers receive short browser-specific steps plus a manual browser-guide selector.
-- After installation, the browser tells the customer to open MONIEZI from the Home Screen; activation happens inside the installed app.
-- Desktop keeps the existing license-first behavior and native install prompt when supported.
-- Existing license validation, offline grace, data storage, Demo, navigation, and business logic are unchanged.
+- Mobile onboarding remains **install first, activate second**.
+- Official Android installation path: **Google Chrome only**.
+- Official iPhone/iPad installation path: **Safari only**.
+- Android browsers other than Chrome now show **Open MONIEZI in Chrome** plus a Copy app link handoff instead of Firefox/Edge/Samsung-specific installation instructions.
+- iPhone/iPad browsers other than Safari now show **Open MONIEZI in Safari** plus a Copy app link handoff.
+- Chrome on Android continues to use the native `beforeinstallprompt` flow when available, with a short Chrome fallback guide if the native prompt is unavailable.
+- Safari instructions match real-device testing: **Share → View More → scroll down → Add to Home Screen → leave Open as Web App on → Add**.
+- The old multi-browser guide selector and Firefox/Edge/Samsung/Chrome-iOS installation guides are removed.
+- After installation, the customer opens the clean MONIEZI Home Screen icon and activates the license inside the installed PWA.
+- Desktop behavior and existing license validation, offline grace, Demo, navigation, storage, and business logic remain unchanged.
 
 ## v39.3.14 Activation heading compact layout
 

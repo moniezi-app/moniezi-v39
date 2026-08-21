@@ -1,3 +1,15 @@
+## v39.4.1 simplified supported mobile installation
+
+Real-device installation QA reduced MONIEZI's official mobile install matrix to two predictable paths:
+
+- **Android:** Google Chrome.
+- **iPhone/iPad:** Safari.
+- Android non-Chrome browsers receive a Chrome handoff screen with Copy app link.
+- iPhone/iPad non-Safari browsers receive a Safari handoff screen with Copy app link.
+- Safari guidance uses the tested sequence: Share → View More → scroll down → Add to Home Screen → keep Open as Web App enabled → Add.
+- The multi-browser guide selector and browser-specific Firefox, Edge, Samsung Internet, and Chrome-iOS install flows are removed.
+- Installation still happens before license activation; the activation form remains inside the installed standalone PWA.
+
 # MONIEZI v39 Visual System
 
 Version: 39.2.0

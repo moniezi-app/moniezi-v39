@@ -904,7 +904,7 @@ function isLicenceRecheckDue(candidate: StoredLicense | null, recheckDays: numbe
   return Date.now() - lastMs >= recheckDays * 24 * 60 * 60 * 1000;
 }
 
-// --- v39.4.0 install-first onboarding environment detection ---
+// --- v39.4.1 simplified install-first onboarding environment detection ---
 type InstallPlatform = 'ios' | 'android' | 'desktop' | 'other';
 type InstallBrowser = 'safari' | 'chrome' | 'firefox' | 'samsung' | 'edge' | 'other';
 type InstallEnvironment = {
@@ -983,116 +983,55 @@ type InstallGuideDetails = {
   note: string;
 };
 
+function isOfficialMobileInstallPath(environment: InstallEnvironment): boolean {
+  return (
+    (environment.platform === 'android' && environment.browser === 'chrome') ||
+    (environment.platform === 'ios' && environment.browser === 'safari')
+  );
+}
+
+function getRequiredInstallBrowser(platform: InstallPlatform): 'Chrome' | 'Safari' | 'supported browser' {
+  if (platform === 'android') return 'Chrome';
+  if (platform === 'ios') return 'Safari';
+  return 'supported browser';
+}
+
+/**
+ * v39.4.1 officially supports only the two mobile installation paths that were
+ * verified on real devices: Chrome on Android and Safari on iPhone/iPad.
+ */
 function getInstallGuideDetails(platform: InstallPlatform, browser: InstallBrowser): InstallGuideDetails {
-  if (platform === 'ios') {
-    if (browser === 'chrome') {
-      return {
-        title: 'Install with Chrome',
-        steps: [
-          'Tap the Share icon next to the address bar.',
-          'Tap Add to Home Screen.',
-          'Tap Add, then open MONIEZI from the new Home Screen icon.',
-        ],
-        note: 'After installation, activate your copy inside the MONIEZI Home Screen app.',
-      };
-    }
-    if (browser === 'firefox') {
-      return {
-        title: 'Install with Firefox',
-        steps: [
-          'Tap the Share icon in Firefox.',
-          'Tap Add to Home Screen.',
-          'Tap Add, then open MONIEZI from the new Home Screen icon.',
-        ],
-        note: 'After installation, activate your copy inside the MONIEZI Home Screen app.',
-      };
-    }
-    if (browser === 'edge') {
-      return {
-        title: 'Install with Edge',
-        steps: [
-          'Tap the Share button in Edge.',
-          'Choose Add to Home Screen.',
-          'Tap Add, then open MONIEZI from the new Home Screen icon.',
-        ],
-        note: 'After installation, activate your copy inside the MONIEZI Home Screen app.',
-      };
-    }
+  if (platform === 'ios' && browser === 'safari') {
     return {
-      title: browser === 'other' ? 'Install on iPhone / iPad' : 'Install with Safari',
+      title: 'Install with Safari',
       steps: [
-        'Tap the Share button.',
-        'Tap Add to Home Screen.',
-        'If Open as Web App is shown, leave it on. Tap Add, then open MONIEZI from the new Home Screen icon.',
+        'Tap the Share button in Safari.',
+        'Tap View More.',
+        'Scroll down and tap Add to Home Screen.',
+        'Leave Open as Web App turned on, then tap Add.',
+        'Open MONIEZI from the new Home Screen icon to activate your copy.',
       ],
-      note: 'After installation, activate your copy inside the MONIEZI Home Screen app.',
+      note: 'Safari is the supported MONIEZI installation browser on iPhone and iPad.',
     };
   }
 
-  if (platform === 'android') {
-    if (browser === 'firefox') {
-      return {
-        title: 'Install with Firefox',
-        steps: [
-          'Tap the three-dot menu (⋮).',
-          'Tap Install.',
-          'Confirm Add to Home Screen, then open MONIEZI from the new icon.',
-        ],
-        note: 'Firefox keeps the install command in its menu. Your license is entered after you open the installed app.',
-      };
-    }
-    if (browser === 'samsung') {
-      return {
-        title: 'Install with Samsung Internet',
-        steps: [
-          'Open the Samsung Internet menu.',
-          'Choose Add page to, then Home screen. If Install is shown, choose Install.',
-          'Confirm, then open MONIEZI from the new Home Screen icon.',
-        ],
-        note: 'Your license is entered after you open the installed MONIEZI app.',
-      };
-    }
-    if (browser === 'edge') {
-      return {
-        title: 'Install with Edge',
-        steps: [
-          'Open the Edge menu.',
-          'Choose Add to phone or Add to Home screen.',
-          'Confirm the installation, then open MONIEZI from the new Home Screen icon.',
-        ],
-        note: 'Your license is entered after you open the installed MONIEZI app.',
-      };
-    }
-    if (browser === 'chrome') {
-      return {
-        title: 'Install with Chrome',
-        steps: [
-          'Tap the three-dot menu (⋮).',
-          'Tap Add to Home screen, then Install.',
-          'Confirm, then open MONIEZI from the new Home Screen icon.',
-        ],
-        note: 'If Chrome offers its native install prompt, MONIEZI will use it automatically.',
-      };
-    }
+  if (platform === 'android' && browser === 'chrome') {
     return {
-      title: 'Install MONIEZI on Android',
+      title: 'Install with Chrome',
       steps: [
-        'Open your browser menu.',
-        'Choose Install, Add to Home screen, or the equivalent command.',
-        'Confirm, then open MONIEZI from the new Home Screen icon.',
+        'Tap the three-dot menu (⋮) in Chrome.',
+        'Tap Add to Home screen.',
+        'Tap Install and confirm.',
+        'Open MONIEZI from the new Home Screen icon to activate your copy.',
       ],
-      note: 'If your browser uses different wording, choose a browser guide below.',
+      note: 'Chrome is the supported MONIEZI installation browser on Android.',
     };
   }
 
   return {
     title: 'Install MONIEZI',
-    steps: [
-      'Open your browser menu.',
-      'Choose Install or Add to Home Screen.',
-      'Open MONIEZI from the new Home Screen icon.',
-    ],
-    note: 'Activation happens inside the installed MONIEZI app.',
+    steps: [],
+    note: 'Use the supported browser for your phone before installing MONIEZI.',
   };
 }
 
@@ -1278,6 +1217,7 @@ export default function App() {
   const [isRunningStandalone, setIsRunningStandalone] = useState<boolean>(() => getStandaloneSnapshot());
   const [installGuideBrowser, setInstallGuideBrowser] = useState<InstallBrowser | null>(null);
   const [justInstalled, setJustInstalled] = useState(false);
+  const [installLinkCopied, setInstallLinkCopied] = useState(false);
 
   const evaluateStandaloneMode = useCallback(() => {
     const next = detectInstallEnvironment();
@@ -1306,20 +1246,54 @@ export default function App() {
     setInstallGuideBrowser(browser || installEnvironment.browser || 'other');
   }, [installEnvironment.browser]);
 
+  const copyInstallLink = useCallback(async () => {
+    const appUrl = `${window.location.origin}${window.location.pathname}`;
+    try {
+      await navigator.clipboard.writeText(appUrl);
+      setInstallLinkCopied(true);
+      window.setTimeout(() => setInstallLinkCopied(false), 1800);
+      return;
+    } catch {
+      // Clipboard API can be blocked in some in-app browsers. Fall back to a
+      // temporary textarea so the supported-browser handoff still works.
+    }
+
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = appUrl;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setInstallLinkCopied(true);
+      window.setTimeout(() => setInstallLinkCopied(false), 1800);
+    } catch {
+      setInstallLinkCopied(false);
+    }
+  }, []);
+
   const handleMobileInstallAction = useCallback(async () => {
     const env = installEnvironment;
-    const canUseNativePrompt =
-      env.platform === 'android' &&
-      (env.browser === 'chrome' || env.browser === 'edge' || env.browser === 'samsung') &&
-      !!deferredInstallPrompt;
 
-    if (canUseNativePrompt) {
+    // v39.4.1: Chrome on Android is the only supported mobile path where the
+    // browser can expose MONIEZI's native install prompt.
+    if (env.platform === 'android' && env.browser === 'chrome' && deferredInstallPrompt) {
       const outcome = await triggerDeferredInstallPrompt();
-      if (outcome !== 'accepted') openInstallGuide(env.browser);
+      if (outcome !== 'accepted') openInstallGuide('chrome');
       return;
     }
 
-    openInstallGuide(env.browser);
+    // Safari on iPhone/iPad requires the manual Share-sheet sequence. Chrome
+    // without a native prompt gets a short menu fallback.
+    if (
+      (env.platform === 'ios' && env.browser === 'safari') ||
+      (env.platform === 'android' && env.browser === 'chrome')
+    ) {
+      openInstallGuide(env.browser);
+    }
   }, [deferredInstallPrompt, installEnvironment, openInstallGuide, triggerDeferredInstallPrompt]);
 
   // Reset the viewport only when the main page actually changes.
@@ -3910,7 +3884,7 @@ export default function App() {
   }, []);
 
   /**
-   * v39.4.0: mobile browsers are installation launchers, not the place where a
+   * v39.4.1: mobile browsers are installation launchers, not the place where a
    * customer activates or starts recording business data. Desktop keeps the
    * previous post-activation native install prompt when the browser offers it.
    */
@@ -7378,26 +7352,21 @@ export default function App() {
       return { subtotal, total, tax: taxAmount };
   }, [activeItem]);
 
-  // v39.4.0 mobile first run: install the PWA before presenting licensing.
-  // A browser tab is intentionally only an installation launcher. The license
-  // form appears after the customer opens MONIEZI from the Home Screen icon.
+  // v39.4.1 mobile first run: install before licensing, but keep the
+  // officially supported installation matrix intentionally small and reliable:
+  // Chrome on Android, Safari on iPhone/iPad.
   if (mobileInstallGateActive) {
+    const supportedPath = isOfficialMobileInstallPath(installEnvironment);
+    const requiredBrowser = getRequiredInstallBrowser(installEnvironment.platform);
     const guideBrowser = installGuideBrowser || installEnvironment.browser;
     const guide = getInstallGuideDetails(installEnvironment.platform, guideBrowser);
     const platformLabel = installEnvironment.platform === 'ios' ? 'iPhone / iPad' : 'Android';
-    const browserChoices: Array<{ value: InstallBrowser; label: string }> = installEnvironment.platform === 'ios'
-      ? [
-          { value: 'safari', label: 'Safari' },
-          { value: 'chrome', label: 'Chrome' },
-          { value: 'firefox', label: 'Firefox' },
-          { value: 'edge', label: 'Edge' },
-        ]
-      : [
-          { value: 'chrome', label: 'Chrome' },
-          { value: 'firefox', label: 'Firefox' },
-          { value: 'samsung', label: 'Samsung Internet' },
-          { value: 'edge', label: 'Edge' },
-        ];
+    const unsupportedHeading = installEnvironment.platform === 'ios'
+      ? 'Open MONIEZI in Safari'
+      : 'Open MONIEZI in Chrome';
+    const unsupportedBody = installEnvironment.platform === 'ios'
+      ? 'MONIEZI installs on iPhone and iPad using Safari.'
+      : 'MONIEZI installs on Android using Google Chrome.';
 
     return (
       <div className="min-h-[100dvh] bg-[linear-gradient(180deg,#f9fbff_0%,#f3f6fc_100%)] px-4 py-[max(24px,env(safe-area-inset-top))] text-[#0B1739]">
@@ -7425,7 +7394,7 @@ export default function App() {
                   Your browser tab is finished. Continue from the MONIEZI icon on your Home Screen.
                 </div>
               </>
-            ) : (
+            ) : supportedPath ? (
               <>
                 <div className="mt-5 text-center text-[12px] font-extrabold uppercase tracking-[0.12em] text-[#45658F]">
                   First step
@@ -7439,7 +7408,7 @@ export default function App() {
 
                 <div className="mx-auto mt-5 inline-flex w-full items-center justify-center gap-2 text-center text-[13px] font-bold text-[#52647D]">
                   <Smartphone size={16} strokeWidth={2} className="text-[#4473E8]" />
-                  <span>{installEnvironment.browserLabel} on {platformLabel}</span>
+                  <span>{requiredBrowser} on {platformLabel}</span>
                 </div>
 
                 <button
@@ -7455,6 +7424,37 @@ export default function App() {
                   Already installed? <span className="font-extrabold text-[#1E3A66]">Open MONIEZI from your Home Screen.</span>
                 </p>
               </>
+            ) : (
+              <>
+                <div className="mt-5 text-center text-[12px] font-extrabold uppercase tracking-[0.12em] text-[#45658F]">
+                  Supported installation
+                </div>
+                <h1 className="mx-auto mt-2 max-w-[12ch] text-center font-brand text-[28px] font-extrabold leading-[1.1] tracking-[-0.04em] text-[#0B1739]">
+                  {unsupportedHeading}
+                </h1>
+                <p className="mx-auto mt-4 max-w-[31ch] text-center text-[15px] font-semibold leading-[1.6] text-[#43536B]">
+                  {unsupportedBody}
+                </p>
+
+                <button
+                  type="button"
+                  onClick={() => { void copyInstallLink(); }}
+                  className="mt-7 flex w-full items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-5 py-[15px] text-[16px] font-extrabold text-white shadow-[0_14px_28px_rgba(37,99,235,0.24)] transition active:scale-[0.99]"
+                >
+                  {installLinkCopied ? <CheckCircle size={20} strokeWidth={2.2} /> : <Copy size={20} strokeWidth={2.2} />}
+                  {installLinkCopied ? 'Link copied' : 'Copy app link'}
+                </button>
+
+                <div className="mt-5 rounded-lg border border-[#DCE6F8] bg-[#F8FAFF] px-4 py-4 text-[13px] font-semibold leading-6 text-[#43536B]">
+                  <div><span className="font-extrabold text-[#17335E]">1.</span> Copy the MONIEZI link.</div>
+                  <div><span className="font-extrabold text-[#17335E]">2.</span> Open {requiredBrowser}.</div>
+                  <div><span className="font-extrabold text-[#17335E]">3.</span> Paste the link into the address bar.</div>
+                </div>
+
+                <p className="mt-5 text-center text-[13px] font-semibold leading-5 text-[#52647D]">
+                  Already installed? <span className="font-extrabold text-[#1E3A66]">Open MONIEZI from your Home Screen.</span>
+                </p>
+              </>
             )}
           </section>
 
@@ -7463,7 +7463,7 @@ export default function App() {
           </p>
         </main>
 
-        {installGuideBrowser !== null && !justInstalled && (
+        {supportedPath && installGuideBrowser !== null && !justInstalled && (
           <div className="fixed inset-0 z-[130] flex items-end justify-center bg-slate-950/55 p-3 backdrop-blur-[3px] sm:items-center sm:p-5" onClick={() => setInstallGuideBrowser(null)}>
             <section
               className="max-h-[88dvh] w-full max-w-[430px] overflow-y-auto rounded-xl border border-[#DCE6F8] bg-white px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-4 text-[#0B1739] shadow-[0_28px_80px_rgba(2,6,23,0.32)] sm:px-5"
@@ -7491,22 +7491,6 @@ export default function App() {
 
               <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-3.5 py-3 text-[13px] font-semibold leading-5 text-[#5B4A19]">
                 {guide.note}
-              </div>
-
-              <div className="mt-5 border-t border-slate-200 pt-4">
-                <div className="text-[12px] font-extrabold text-[#3E4F68]">Using a different browser?</div>
-                <div className="mt-2 grid grid-cols-2 gap-2">
-                  {browserChoices.map((choice) => (
-                    <button
-                      key={choice.value}
-                      type="button"
-                      onClick={() => setInstallGuideBrowser(choice.value)}
-                      className={`rounded-lg border px-3 py-2.5 text-[13px] font-bold transition ${guideBrowser === choice.value ? 'border-blue-500 bg-blue-50 text-blue-800' : 'border-slate-200 bg-white text-slate-700'}`}
-                    >
-                      {choice.label}
-                    </button>
-                  ))}
-                </div>
               </div>
 
               <button type="button" onClick={() => setInstallGuideBrowser(null)} className="mt-5 w-full rounded-lg bg-[#2563EB] px-4 py-3.5 text-[15px] font-extrabold text-white">
@@ -12883,13 +12867,16 @@ html, body, #root {
                         While connected to the internet (<span className="font-semibold">Wi‑Fi</span> or <span className="font-semibold">cellular</span>): open MONIEZI in <span className="font-semibold">Safari</span>.
                       </li>
                       <li>
-                        Tap <span className="font-semibold">Share</span> → <span className="font-semibold">Add to Home Screen</span>.
+                        Tap <span className="font-semibold">Share</span>, then tap <span className="font-semibold">View More</span>.
                       </li>
                       <li>
-                        Still connected: open MONIEZI from the <span className="font-semibold">Home Screen icon</span> a second time (this finishes saving the app to your device).
+                        Scroll down and tap <span className="font-semibold">Add to Home Screen</span>.
                       </li>
                       <li>
-                        Done! MONIEZI will now work without an internet connection (<span className="font-semibold">offline</span>).
+                        Leave <span className="font-semibold">Open as Web App</span> turned on, then tap <span className="font-semibold">Add</span>.
+                      </li>
+                      <li>
+                        Open MONIEZI from the new <span className="font-semibold">Home Screen icon</span>. MONIEZI will then work as the installed app and can be used offline after its app files are cached.
                       </li>
                     </ol>
                     <div className="mt-3 text-xs text-slate-600 dark:text-slate-300">
@@ -12910,16 +12897,13 @@ html, body, #root {
                         While connected to the internet (<span className="font-semibold">Wi‑Fi</span> or <span className="font-semibold">cellular</span>): open MONIEZI in <span className="font-semibold">Chrome</span>.
                       </li>
                       <li>
-                        A banner will appear at the top of the screen saying <span className="font-semibold">&quot;Install MONIEZI&quot;</span> — tap <span className="font-semibold">Install</span>.
+                        On the MONIEZI install screen, tap <span className="font-semibold">Install MONIEZI</span>, then tap <span className="font-semibold">Install</span> in Chrome&apos;s install dialog.
                         <span className="block mt-1">
-                          (If you don&apos;t see the banner, tap the browser menu → <span className="font-semibold">Add to Home Screen</span>.)
+                          (If Chrome does not show the install dialog, use the Chrome menu → <span className="font-semibold">Add to Home screen</span> → <span className="font-semibold">Install</span>.)
                         </span>
                       </li>
                       <li>
-                        Open the installed MONIEZI app once more while still connected (this finishes saving the app to your device).
-                      </li>
-                      <li>
-                        Done! MONIEZI will now work without an internet connection (<span className="font-semibold">offline</span>).
+                        Open MONIEZI from the new <span className="font-semibold">Home Screen icon</span>. MONIEZI will then work as the installed app and can be used offline after its app files are cached.
                       </li>
                     </ol>
                   </div>
