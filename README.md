@@ -1,4 +1,11 @@
-# MONIEZI v39.3.8
+# MONIEZI v39.3.9
+
+## v39.3.9 Welcome startup + Receipts deep-link + demo illustration correction
+- Removes the brief standalone MONIEZI logo/Loading flash before the Welcome/license screen. A new browser with no stored license now renders Welcome on the first React paint, while the HTML startup shell is only a matching blank background.
+- Keeps stored-license validation behavior intact: an existing stored license can still enter the normal checking path when needed.
+- Fixes **Menu → Records & tax → Receipts** so it opens Home and scrolls the internal Home container directly to the Receipts card, including when invoked while already on Home.
+- Removes the dark inset/background panel behind the pre-demo / first-record illustration. The transparent illustration now sits directly on the existing Luminous Glass card surface.
+- Preserves the v39.3.8 restrained-radius system, Home spacing/readability, footer navigation, licensing rules, demo logic, storage, and business calculations.
 
 ## v39.3.8 Restrained application-wide corner radius
 - Replaces the oversized rounded/bubble geometry with a restrained business-app radius scale.

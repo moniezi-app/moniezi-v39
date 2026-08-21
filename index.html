@@ -10,9 +10,10 @@
     <meta name="description" content="Private, offline bookkeeping for small businesses — income, expenses, invoices, estimates, mileage, receipts, jobs, and tax-ready reports." />
 
     <!--
-      iOS "blank white screen" fix:
-      This inline, "critical" CSS + loader renders instantly (before Tailwind/fonts load),
-      so Safari has something visible during the 1–3s boot time.
+      iOS startup shell:
+      Keep an instant background so Safari never shows a blank page while the bundle
+      initializes. v39.3.9 deliberately shows no logo or loading message here, so a
+      new customer transitions directly into the Welcome / license screen.
     -->
     <style>
       html, body { height: 100%; margin: 0; }
@@ -25,11 +26,9 @@
       #app-loader {
         position: fixed;
         inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: inherit;   /* matches light/dark */
-        color: inherit;
+        background:
+          radial-gradient(circle at 50% 24%, rgba(99, 102, 241, 0.08), transparent 32%),
+          linear-gradient(180deg, #f9fbff 0%, #f3f6fc 100%);
         z-index: 9999;
       }
 
@@ -505,17 +504,8 @@
       })();
     </script>
     <div id="root">
-      <!-- Instant loader (visible on iOS while JS/CSS loads). React replaces this automatically. -->
-      <div id="app-loader" aria-label="Loading MONIEZI">
-        <div class="wrap">
-         <div class="mark" aria-hidden="true">
-  <img src="icons/icon-192.png" alt="MONIEZI" />
-</div>
-
-          <div class="brand">MONIEZI</div>
-          <div class="hint">Loading…</div>
-        </div>
-      </div>
+      <!-- Instant blank startup surface. React replaces this automatically. -->
+      <div id="app-loader" aria-hidden="true"></div>
     </div>
 
     <script type="module" src="index.tsx"></script>

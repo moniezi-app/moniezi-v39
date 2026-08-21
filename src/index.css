@@ -2583,17 +2583,15 @@ html {
   place-items: center;
   margin-top: 16px;
   min-height: 220px;
-  overflow: hidden;
+  overflow: visible;
   padding: 12px 10px;
-  background:
-    radial-gradient(circle at 50% 44%, rgba(63, 132, 255, 0.12), rgba(63, 132, 255, 0) 62%),
-    var(--v391-glass-inset);
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 .dark .v3931-first-run-visual {
-  background:
-    radial-gradient(circle at 50% 44%, rgba(63, 147, 255, 0.16), rgba(63, 147, 255, 0) 62%),
-    var(--v391-glass-inset);
+  background: transparent !important;
 }
 
 .v3931-first-run-visual__image {
@@ -3548,4 +3546,14 @@ html {
 }
 .v3931-first-run-primary {
   border-radius: var(--v3938-radius-control) !important;
+}
+
+
+/* ================================================================
+   MONIEZI v39.3.9 — startup + deep-link + illustration corrections
+   ================================================================ */
+.v3939-first-run-visual-clean {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }

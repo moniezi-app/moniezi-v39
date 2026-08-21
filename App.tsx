@@ -1055,6 +1055,7 @@ export default function App() {
   // not the browser window. Without resetting this container, switching pages via the
   // bottom nav keeps the previous scroll position.
   const mainScrollRef = useRef<HTMLDivElement>(null);
+  const [pendingHomeAnchor, setPendingHomeAnchor] = useState<'receipts' | null>(null);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [isKeyboardEditing, setIsKeyboardEditing] = useState(false);
   const [isActivitySearchFocused, setIsActivitySearchFocused] = useState(false);
@@ -1175,7 +1176,16 @@ export default function App() {
   
   // License / Activation State
     const LICENSING_ENABLED = true;
-  const [isLicenseValid, setIsLicenseValid] = useState<boolean | null>(LICENSING_ENABLED ? null : true); // null = checking, false = invalid, true = valid
+  const [isLicenseValid, setIsLicenseValid] = useState<boolean | null>(() => {
+    if (!LICENSING_ENABLED) return true;
+    try {
+      // A brand-new/unlicensed browser does not need a visible "checking" screen.
+      // If no license is stored, render Welcome / activation on the first React paint.
+      return localStorage.getItem(LICENSE_STORAGE_KEY) ? null : false;
+    } catch {
+      return false;
+    }
+  }); // null = stored license needs checking, false = show activation, true = valid
   const [licenseKey, setLicenseKey] = useState('');
   const [licenseError, setLicenseError] = useState('');
   const [isValidatingLicense, setIsValidatingLicense] = useState(false);
@@ -1310,6 +1320,46 @@ export default function App() {
   const [goalDraft, setGoalDraft] = useState({ revenue: '', profit: '' });
   const [billingDocType, setBillingDocType] = useState<'invoice' | 'estimate'>('invoice');
   const [showMainMenu, setShowMainMenu] = useState(false);
+
+  // v39.3.9: deep-link menu destinations into sections inside Home's internal
+  // scrolling container. Waiting until the Dashboard and drawer state have committed
+  // avoids the old behavior where Receipts landed at the top of Home.
+  useEffect(() => {
+    if (currentPage !== Page.Dashboard || !pendingHomeAnchor || showMainMenu) return;
+
+    let cancelled = false;
+    const timers: number[] = [];
+
+    const scrollToPendingSection = (attempt = 0) => {
+      if (cancelled) return;
+      const container = mainScrollRef.current;
+      const target = document.getElementById(`home-${pendingHomeAnchor}`);
+
+      if (!container || !target) {
+        if (attempt < 4) {
+          timers.push(window.setTimeout(() => scrollToPendingSection(attempt + 1), 80 + attempt * 60));
+        }
+        return;
+      }
+
+      const containerRect = container.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const top = Math.max(0, container.scrollTop + targetRect.top - containerRect.top - 14);
+      container.scrollTo({ top, behavior: 'smooth' });
+      setPendingHomeAnchor(null);
+    };
+
+    const raf = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => scrollToPendingSection());
+    });
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(raf);
+      timers.forEach(timer => window.clearTimeout(timer));
+    };
+  }, [currentPage, pendingHomeAnchor, showMainMenu, dataLoaded]);
+
   const [showGlobalSearch, setShowGlobalSearch] = useState(false);
   const [globalSearchQuery, setGlobalSearchQuery] = useState('');
   const [activeItem, setActiveItem] = useState<Record<string, any>>({});
@@ -8165,7 +8215,7 @@ html, body, #root {
               <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>
             </div>
 
-            <MonieziGlassInset className="v3931-first-run-visual">
+            <div className="v3931-first-run-visual">
               <img
                 src={`${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`}
                 alt="A MONIEZI dashboard surrounded by receipts, reports, mileage, and business records"
@@ -8173,7 +8223,7 @@ html, body, #root {
                 loading="eager"
                 decoding="async"
               />
-            </MonieziGlassInset>
+            </div>
 
             <div className="v3931-first-run-content">
               <h3 className="v3931-first-run-title">
@@ -12885,9 +12935,9 @@ html, body, #root {
             <div className="space-y-1">
               <button
                 onClick={() => {
+                  setPendingHomeAnchor('receipts');
                   setCurrentPage(Page.Dashboard);
                   setShowMainMenu(false);
-                  window.setTimeout(() => document.getElementById('home-receipts')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
                 }}
                 className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
