@@ -1,8 +1,8 @@
-# MONIEZI v39.3.10
+# MONIEZI v39.3.11
 
-## v39.3.10 Receipts deep-link + Home cloud + demo toast correction
+## v39.3.11 Receipts scroll-lifecycle correction
 
-- Makes Hamburger → Receipts a deterministic Home section deep link that bypasses the normal page-top reset and lands on the Receipts card.
+- Corrects the Home scroll-reset lifecycle so clearing the temporary Receipts deep-link state no longer triggers a second reset back to the top of Home. Menu → Receipts now lands on the Receipts card and stays there.
 - Removes the decorative upper-right blue radial cloud from Home Luminous Glass cards while preserving borders, glass surfaces, shadows, and depth.
 - Limits successful Demo Mode load and exit notifications to 2 seconds maximum; avoids the duplicate reset toast when exiting Demo Mode from an otherwise empty app.
 - Preserves the v39.3.9 startup and transparent first-record illustration corrections.

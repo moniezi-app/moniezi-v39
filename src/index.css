@@ -1522,7 +1522,7 @@ html {
   backdrop-filter: blur(18px) saturate(116%);
 }
 
-/* v39.3.10: removed the decorative upper-right radial cloud from Home glass cards.
+/* v39.3.11: removed the decorative upper-right radial cloud from Home glass cards.
    The border gradient, glass surface, shadow, and inner edge remain intact. */
 
 .v391-glass-card--hero {
@@ -3536,7 +3536,7 @@ html {
 
 
 /* ================================================================
-   MONIEZI v39.3.10 — startup + deep-link + illustration corrections
+   MONIEZI v39.3.11 — startup + deep-link + illustration corrections
    ================================================================ */
 .v3939-first-run-visual-clean {
   background: transparent !important;

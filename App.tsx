@@ -1132,15 +1132,17 @@ export default function App() {
     setShowIosInstallHelp(true);
   }, []);
 
-  // Always reset scroll position when switching bottom tabs.
-  // Some mobile browsers "remember" the scrollTop of the same scrolling container.
-  // We enforce it (and re-enforce on the next tick) so each tab starts at the top.
+  // Reset the viewport only when the main page actually changes.
+  // v39.3.11: pendingHomeAnchor is intentionally NOT a dependency here. Clearing
+  // the Receipts deep-link instruction after a successful scroll must not trigger
+  // this effect again and send Home back to the top.
   useLayoutEffect(() => {
-    // A pending Home section deep link owns the scroll position. Do not run the
-    // normal page-top reset in parallel with it.
+    // A pending Home section deep link owns the scroll position during the page
+    // transition. The deep-link effect below will place the Receipts card itself.
     if (currentPage === Page.Dashboard && pendingHomeAnchor) return;
     forceResetMainViewport();
-  }, [currentPage, pendingHomeAnchor, forceResetMainViewport]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, forceResetMainViewport]);
 
   // Scroll-to-top button visibility
   // Listen on BOTH the internal scroll container AND window (belt-and-suspenders).
@@ -1327,7 +1329,7 @@ export default function App() {
   const [billingDocType, setBillingDocType] = useState<'invoice' | 'estimate'>('invoice');
   const [showMainMenu, setShowMainMenu] = useState(false);
 
-  // v39.3.10: deep-link menu destinations into sections inside Home's internal
+  // v39.3.11: deep-link menu destinations into sections inside Home's internal
   // scrolling container. Waiting until the Dashboard and drawer state have committed
   // avoids the old behavior where Receipts landed at the top of Home.
   useEffect(() => {
