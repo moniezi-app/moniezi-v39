@@ -7279,7 +7279,7 @@ export default function App() {
 
           <div className="v39-license-benefits" aria-label="MONIEZI purchase benefits">
             <span><CheckCircle size={18} strokeWidth={1.8} /> One-time purchase</span>
-            <span><CheckCircle size={18} strokeWidth={1.8} /> Local first records</span>
+            <span><CheckCircle size={18} strokeWidth={1.8} /> Records stay on your device</span>
             <span><CheckCircle size={18} strokeWidth={1.8} /> Works offline</span>
           </div>
         </main>
@@ -8204,7 +8204,7 @@ html, body, #root {
 
               <button
                 onClick={hasTriedSampleData ? () => handleOpenUnifiedAdd() : handleLoadSampleData}
-                className="v3931-first-run-primary"
+                className={`v3931-first-run-primary ${!hasTriedSampleData ? 'v3937-demo-load-primary' : ''}`}
               >
                 <span>{hasTriedSampleData ? 'Record my first entry' : 'Load the demo'}</span>
                 <ArrowRight size={19} strokeWidth={2.2} />

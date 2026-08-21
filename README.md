@@ -1,6 +1,14 @@
-# MONIEZI v39.3.6
+# MONIEZI v39.3.7
 
-## v39.3.6 Home breathing room + footer readability
+## v39.3.7 Welcome + demo-entry refinements
+- Welcome benefit copy now says **Records stay on your device**.
+- All three welcome benefits are centered and slightly larger for readability.
+- Initial **Load the demo** action uses the bright MONIEZI yellow treatment to make the recommended path unmistakable.
+- The **Skip — record my first entry** link is larger and has more space below the primary demo action.
+- License validation, demo loading, post-demo behavior, and all business logic are unchanged.
+
+
+## v39.3.7 Home breathing room + footer readability
 
 - Expands internal padding and vertical rhythm across every Home dashboard card.
 - Increases spacing between headings, subtitles, controls, KPI panels, status rows, actions, dividers, and card-to-card sections.
