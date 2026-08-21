@@ -1,6 +1,11 @@
-# MONIEZI v39.3.9
+# MONIEZI v39.3.10
 
-## v39.3.9 Welcome startup + Receipts deep-link + demo illustration correction
+## v39.3.10 Receipts deep-link + Home cloud + demo toast correction
+
+- Makes Hamburger → Receipts a deterministic Home section deep link that bypasses the normal page-top reset and lands on the Receipts card.
+- Removes the decorative upper-right blue radial cloud from Home Luminous Glass cards while preserving borders, glass surfaces, shadows, and depth.
+- Limits successful Demo Mode load and exit notifications to 2 seconds maximum; avoids the duplicate reset toast when exiting Demo Mode from an otherwise empty app.
+- Preserves the v39.3.9 startup and transparent first-record illustration corrections.
 - Removes the brief standalone MONIEZI logo/Loading flash before the Welcome/license screen. A new browser with no stored license now renders Welcome on the first React paint, while the HTML startup shell is only a matching blank background.
 - Keeps stored-license validation behavior intact: an existing stored license can still enter the normal checking path when needed.
 - Fixes **Menu → Records & tax → Receipts** so it opens Home and scrolls the internal Home container directly to the Receipts card, including when invoked while already on Home.

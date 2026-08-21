@@ -1522,22 +1522,8 @@ html {
   backdrop-filter: blur(18px) saturate(116%);
 }
 
-.v391-glass-card::after {
-  content: '';
-  position: absolute;
-  top: -64px;
-  right: -48px;
-  width: 190px;
-  height: 150px;
-  border-radius: 999px;
-  pointer-events: none;
-  background: radial-gradient(circle, rgba(80, 159, 255, 0.16) 0%, rgba(80, 159, 255, 0) 72%);
-  filter: blur(4px);
-}
-
-.dark .v391-glass-card::after {
-  background: radial-gradient(circle, rgba(61, 170, 255, 0.19) 0%, rgba(61, 170, 255, 0) 72%);
-}
+/* v39.3.10: removed the decorative upper-right radial cloud from Home glass cards.
+   The border gradient, glass surface, shadow, and inner edge remain intact. */
 
 .v391-glass-card--hero {
   background:
@@ -3550,7 +3536,7 @@ html {
 
 
 /* ================================================================
-   MONIEZI v39.3.9 — startup + deep-link + illustration corrections
+   MONIEZI v39.3.10 — startup + deep-link + illustration corrections
    ================================================================ */
 .v3939-first-run-visual-clean {
   background: transparent !important;

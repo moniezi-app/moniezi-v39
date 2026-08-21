@@ -998,9 +998,10 @@ export default function App() {
   }, []);
 
   const setCurrentPage = useCallback(
-    (p: any, opts?: { replace?: boolean }) => {
+    (p: any, opts?: { replace?: boolean; skipViewportReset?: boolean }) => {
       const nextPage = normalizePage(p);
       const nextPath = pageToHashPath(nextPage);
+      const skipViewportReset = opts?.skipViewportReset === true;
 
       // Clear modal params when switching main pages (keep navigation clean)
       const nextHash = buildHash(nextPath, {});
@@ -1012,7 +1013,9 @@ export default function App() {
         // ignore
       }
 
-      forceResetMainViewport();
+      // Normal page navigation starts at the top. Section deep links inside Home
+      // deliberately skip this reset so the destination scroll cannot be overwritten.
+      if (!skipViewportReset) forceResetMainViewport();
 
       if (opts?.replace) {
         window.history.replaceState(null, '', base + nextHash);
@@ -1022,7 +1025,7 @@ export default function App() {
       }
 
       _setCurrentPage(nextPage);
-      forceResetMainViewport();
+      if (!skipViewportReset) forceResetMainViewport();
     },
     [forceResetMainViewport, syncHashToState]
   );
@@ -1133,8 +1136,11 @@ export default function App() {
   // Some mobile browsers "remember" the scrollTop of the same scrolling container.
   // We enforce it (and re-enforce on the next tick) so each tab starts at the top.
   useLayoutEffect(() => {
+    // A pending Home section deep link owns the scroll position. Do not run the
+    // normal page-top reset in parallel with it.
+    if (currentPage === Page.Dashboard && pendingHomeAnchor) return;
     forceResetMainViewport();
-  }, [currentPage, forceResetMainViewport]);
+  }, [currentPage, pendingHomeAnchor, forceResetMainViewport]);
 
   // Scroll-to-top button visibility
   // Listen on BOTH the internal scroll container AND window (belt-and-suspenders).
@@ -1321,7 +1327,7 @@ export default function App() {
   const [billingDocType, setBillingDocType] = useState<'invoice' | 'estimate'>('invoice');
   const [showMainMenu, setShowMainMenu] = useState(false);
 
-  // v39.3.9: deep-link menu destinations into sections inside Home's internal
+  // v39.3.10: deep-link menu destinations into sections inside Home's internal
   // scrolling container. Waiting until the Dashboard and drawer state have committed
   // avoids the old behavior where Receipts landed at the top of Home.
   useEffect(() => {
@@ -1345,7 +1351,9 @@ export default function App() {
       const containerRect = container.getBoundingClientRect();
       const targetRect = target.getBoundingClientRect();
       const top = Math.max(0, container.scrollTop + targetRect.top - containerRect.top - 14);
-      container.scrollTo({ top, behavior: 'smooth' });
+      // Jump deterministically to the section. A direct jump is preferable here
+      // because a competing smooth animation can be interrupted by drawer/page paints.
+      container.scrollTo({ top, behavior: 'auto' });
       setPendingHomeAnchor(null);
     };
 
@@ -3612,7 +3620,7 @@ export default function App() {
 
   const handleClearData = () => setShowResetConfirm(true);
   
-  const performReset = () => {
+  const performReset = (opts?: { suppressToast?: boolean }) => {
     // Clear legacy localStorage payload (if present)
     try { localStorage.removeItem(DB_KEY); } catch { /* ignore */ }
 
@@ -3663,7 +3671,7 @@ export default function App() {
     setIsDemoData(false);
     setSeedSuccess(false);
     setShowResetConfirm(false);
-    showToast("All data has been wiped.", "success");
+    if (!opts?.suppressToast) showToast("All data has been wiped.", "success");
     setCurrentPage(Page.Dashboard);
   };
 
@@ -3765,15 +3773,15 @@ export default function App() {
         await clearDemoReturnState();
         setShowMainMenu(false);
         setCurrentPage(Page.Dashboard);
-        showToast("Demo closed. Your business records are back.", "success");
+        showToast("Demo closed. Your business records are back.", "success", 2000);
         return;
       }
 
-      performReset();
+      performReset({ suppressToast: true });
       setIsDemoData(false);
       await clearDemoReturnState();
       setShowMainMenu(false);
-      showToast("Demo closed.", "success");
+      showToast("Demo closed.", "success", 2000);
     } catch (error) {
       console.error("Failed to exit demo mode", error);
       showToast("Could not exit Demo Mode safely. Your saved business was not changed.", "error");
@@ -3816,7 +3824,7 @@ export default function App() {
       markSampleDataTried();
       setShowMainMenu(false);
       setCurrentPage(Page.Dashboard);
-      showToast("Demo ready. Sample business data is loaded.", "success");
+      showToast("Demo ready. Sample business data is loaded.", "success", 2000);
     } catch (error) {
       console.error("Failed to enter demo mode", error);
       showToast("Could not start Demo Mode safely. Your business records were not changed.", "error");
@@ -12936,7 +12944,7 @@ html, body, #root {
               <button
                 onClick={() => {
                   setPendingHomeAnchor('receipts');
-                  setCurrentPage(Page.Dashboard);
+                  setCurrentPage(Page.Dashboard, { skipViewportReset: true });
                   setShowMainMenu(false);
                 }}
                 className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
