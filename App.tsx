@@ -7450,7 +7450,7 @@ html, body, #root {
 }
 `}</style>
       <div
-        className="moniezi-app-shell v392-app-wide flex flex-col w-full max-w-2xl mx-auto relative bg-slatebg dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300"
+        className="moniezi-app-shell v392-app-wide v3938-tight-radius flex flex-col w-full max-w-2xl mx-auto relative bg-slatebg dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300"
         style={{
           height: 'calc(var(--moniezi-app-vh, 1vh) * 100)',
           minHeight: 'calc(var(--moniezi-app-vh, 1vh) * 100)',
@@ -7468,8 +7468,8 @@ html, body, #root {
         return (
           <div className="fixed inset-0 z-[95] flex items-center justify-center overflow-y-auto bg-slate-950/72 px-4 py-8 backdrop-blur-md animate-in fade-in duration-200 modal-overlay">
             <div className="w-full max-w-[360px]">
-              <div className="overflow-hidden rounded-[34px] border border-slate-200/95 bg-[linear-gradient(180deg,#ffffff_0%,#f7f9fe_100%)] px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.26)] ring-1 ring-white/75 sm:px-6 sm:py-7">
-                <div className="mx-auto mb-5 flex h-[88px] w-[88px] items-center justify-center rounded-[28px] border border-[#e3ecff] bg-[radial-gradient(circle_at_32%_28%,#ffffff_0%,#eef4ff_58%,#e6eeff_100%)] shadow-[0_16px_34px_rgba(37,99,235,0.12)]">
+              <div className="overflow-hidden rounded-xl border border-slate-200/95 bg-[linear-gradient(180deg,#ffffff_0%,#f7f9fe_100%)] px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.26)] ring-1 ring-white/75 sm:px-6 sm:py-7">
+                <div className="mx-auto mb-5 flex h-[88px] w-[88px] items-center justify-center rounded-xl border border-[#e3ecff] bg-[radial-gradient(circle_at_32%_28%,#ffffff_0%,#eef4ff_58%,#e6eeff_100%)] shadow-[0_16px_34px_rgba(37,99,235,0.12)]">
                   {isIosInstallBanner
                     ? <Share2 size={34} className="text-[#2563EB]" strokeWidth={2.2} />
                     : <Download size={34} className="text-[#2563EB]" strokeWidth={2.2} />}
@@ -7500,7 +7500,7 @@ html, body, #root {
                       body: 'Access your data anytime, even without internet.',
                     },
                   ].map((item) => (
-                    <div key={item.title} className="flex items-start gap-3 rounded-[18px] border border-[#E6EBF5] bg-white px-4 py-3.5 shadow-[0_8px_18px_rgba(15,23,42,0.04)]">
+                    <div key={item.title} className="flex items-start gap-3 rounded-xl border border-[#E6EBF5] bg-white px-4 py-3.5 shadow-[0_8px_18px_rgba(15,23,42,0.04)]">
                       <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#F3F7FF]">{item.icon}</div>
                       <div className="min-w-0">
                         <div className="text-[14px] font-extrabold leading-5 text-[#0B1739]">{item.title}</div>
@@ -7512,7 +7512,7 @@ html, body, #root {
 
                 <button
                   onClick={isIosInstallBanner ? openIosInstallHelp : triggerDeferredInstallPrompt}
-                  className="mt-6 w-full rounded-[18px] bg-[#2563EB] px-5 py-[15px] text-center text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
+                  className="mt-6 w-full rounded-xl bg-[#2563EB] px-5 py-[15px] text-center text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
                 >
                   {isIosInstallBanner ? 'Show me how' : 'Install MONIEZI'}
                 </button>
@@ -7527,7 +7527,7 @@ html, body, #root {
         const isLight = theme !== 'dark';
         return (
           <div className={`fixed inset-0 z-[110] flex items-end justify-center p-3 sm:p-4 animate-in fade-in duration-200 modal-overlay ${isLight ? 'bg-slate-900/28 backdrop-blur-[3px]' : 'bg-slate-950/92'}`}>
-            <div className={`w-full max-w-md rounded-[15px] overflow-hidden ${isLight ? 'border border-sky-300/65 bg-gradient-to-br from-slate-50/98 via-white/98 to-sky-50/96 text-slate-900 shadow-[0_24px_64px_rgba(15,23,42,0.20)] ring-1 ring-sky-200/70' : 'border border-sky-300/18 bg-slate-900 text-white shadow-[0_24px_64px_rgba(2,6,23,0.72)] ring-1 ring-white/6'}`}>
+            <div className={`w-full max-w-md rounded-xl overflow-hidden ${isLight ? 'border border-sky-300/65 bg-gradient-to-br from-slate-50/98 via-white/98 to-sky-50/96 text-slate-900 shadow-[0_24px_64px_rgba(15,23,42,0.20)] ring-1 ring-sky-200/70' : 'border border-sky-300/18 bg-slate-900 text-white shadow-[0_24px_64px_rgba(2,6,23,0.72)] ring-1 ring-white/6'}`}>
               <div className={`px-4 py-4 border-b flex items-center justify-between gap-3 ${isLight ? 'border-slate-200 bg-transparent' : 'border-white/10 bg-slate-900'}`}>
                 <div>
                   <div className={`text-[16px] font-bold leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>Install MONIEZI on iPhone</div>
@@ -7991,7 +7991,7 @@ html, body, #root {
 
       {justInstalled && !isRunningStandalone && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/72 backdrop-blur-md p-4 modal-overlay">
-          <div className="w-full max-w-[340px] overflow-hidden rounded-[34px] border border-slate-200/95 bg-[linear-gradient(180deg,#ffffff_0%,#f7f9fe_100%)] px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.26)] ring-1 ring-white/75 sm:px-6 sm:py-7">
+          <div className="w-full max-w-[340px] overflow-hidden rounded-xl border border-slate-200/95 bg-[linear-gradient(180deg,#ffffff_0%,#f7f9fe_100%)] px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.26)] ring-1 ring-white/75 sm:px-6 sm:py-7">
             <div className="mx-auto mb-5 flex h-[104px] w-[104px] items-center justify-center rounded-full bg-[radial-gradient(circle,#E9FFF0_0%,#DDF8E6_58%,#D5F0DF_100%)] shadow-[0_16px_36px_rgba(22,163,74,0.16)]">
               <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-[#16A34A] text-white shadow-[0_12px_24px_rgba(22,163,74,0.26)]">
                 <CheckCircle size={32} strokeWidth={2.5} />
@@ -8005,7 +8005,7 @@ html, body, #root {
               onClick={() => {
                 try { window.close(); } catch { /* browser may refuse */ }
               }}
-              className="mt-6 w-full rounded-[18px] bg-[#2563EB] py-[15px] text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
+              className="mt-6 w-full rounded-xl bg-[#2563EB] py-[15px] text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
             >
               Got it
             </button>
@@ -11058,7 +11058,7 @@ html, body, #root {
 
               {/* PDF Content */}
               <div className="flex-1 overflow-y-auto p-4 sm:p-6 overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
-                <div id="pro-pl-pdf-content" className="moniezi-report-font bg-slate-50 text-slate-900 rounded-[14px] shadow-lg mx-auto overflow-hidden border border-slate-200" style={{ fontFamily: 'var(--moniezi-report-font)', width: '760px', maxWidth: '100%' }}>
+                <div id="pro-pl-pdf-content" className="moniezi-report-font bg-slate-50 text-slate-900 rounded-lg shadow-lg mx-auto overflow-hidden border border-slate-200" style={{ fontFamily: 'var(--moniezi-report-font)', width: '760px', maxWidth: '100%' }}>
                   <div className="bg-slate-950 text-white px-6 sm:px-8 pt-7 pb-6">
                     <div className="flex items-start justify-between gap-6">
                       <div className="min-w-0 flex-1">

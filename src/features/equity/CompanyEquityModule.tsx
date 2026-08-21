@@ -303,8 +303,8 @@ function SigningPackagePreview({ record, companyName, currencySymbol }: { record
   const risk = paragraphize(record.packageRiskText || defaultRiskText());
   const displayName = record.investorName || record.packagePreparedFor || 'Investor';
   return (
-    <div className="rounded-[16px] border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 p-3 sm:p-5">
-      <div className="rounded-[14px] bg-white dark:bg-slate-950 shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+    <div className="rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 p-3 sm:p-5">
+      <div className="rounded-lg bg-white dark:bg-slate-950 shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800">
         <div className="bg-slate-950 !text-white p-6 sm:p-8">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-blue-300">{companyName || 'Company'}</div>
           <h3 className="mt-2 text-3xl font-black leading-tight">{record.packageTitle || 'Private Investment Reservation'}</h3>

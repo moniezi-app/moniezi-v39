@@ -5,21 +5,21 @@
  * It defines the shared visual language that v39 screens can opt into one by one.
  */
 
-export const V39_VISUAL_SYSTEM_VERSION = '39.3.7';
+export const V39_VISUAL_SYSTEM_VERSION = '39.3.8';
 
 
 
 /**
- * v39.3.7 Application-wide Luminous Glass + lifecycle navigation surface tokens.
+ * v39.3.8 restrained-radius Luminous Glass + lifecycle navigation surface tokens.
  * These names intentionally describe surface roles rather than screen content so
  * the dashboard, lists, and future business modules can reuse one material system.
  */
 export const monieziGlass = {
   radius: {
-    card: 24,
-    inset: 18,
-    control: 14,
-    icon: 14,
+    card: 12,
+    inset: 10,
+    control: 8,
+    icon: 9,
   },
   motion: {
     pressScale: 0.99,
@@ -37,7 +37,7 @@ export const monieziVisual = {
   illustration: {
     /** Thin enough to feel refined, strong enough to survive mobile scaling. */
     strokeWidth: 1.5,
-    cornerRadius: 18,
+    cornerRadius: 10,
     preferredWidth: 220,
     compactWidth: 164,
   },

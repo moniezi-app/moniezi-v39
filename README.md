@@ -1,4 +1,14 @@
-# MONIEZI v39.3.7
+# MONIEZI v39.3.8
+
+## v39.3.8 Restrained application-wide corner radius
+- Replaces the oversized rounded/bubble geometry with a restrained business-app radius scale.
+- Main cards and major surfaces use approximately **12px** corners.
+- Insets and secondary panels use approximately **10px** corners.
+- Buttons, fields, selectors, and navigation wells use approximately **8px** corners.
+- Icon wells use approximately **9px** corners.
+- True circles/pills remain round only where semantically appropriate.
+- Applies across Home, Clients, Jobs, Estimates, Invoices, Mileage, Activity, Reports, Receipts, Settings, demo/data flows, forms, drawers, modals, search, and the Welcome/license screen.
+- Luminous Glass styling, typography, spacing, navigation, licensing, storage, calculations, and business behavior are preserved.
 
 ## v39.3.7 Welcome + demo-entry refinements
 - Welcome benefit copy now says **Records stay on your device**.
@@ -8,7 +18,7 @@
 - License validation, demo loading, post-demo behavior, and all business logic are unchanged.
 
 
-## v39.3.7 Home breathing room + footer readability
+## v39.3.5 Home breathing room + footer readability
 
 - Expands internal padding and vertical rhythm across every Home dashboard card.
 - Increases spacing between headings, subtitles, controls, KPI panels, status rows, actions, dividers, and card-to-card sections.
