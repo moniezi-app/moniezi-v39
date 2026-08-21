@@ -1,4 +1,11 @@
-# MONIEZI v39.3.12
+# MONIEZI v39.3.13
+
+## v39.3.13 Receipts state + onboarding badge + menu hierarchy
+
+- Hides the green receipt-completion message when the current year has zero expenses; completion appears only when expenses exist and every one has a receipt.
+- Enlarges the first-run/demo-entry kicker ("Explore before you start" / "Ready for your first records") in light and dark mode.
+- Moves Try the demo / Remove the demo directly beneath Settings at the top of the hamburger menu and removes the old duplicate demo section.
+
 
 ## v39.3.12 Welcome focus + light-mode text strength
 

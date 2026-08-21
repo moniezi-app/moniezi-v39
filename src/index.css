@@ -2534,17 +2534,17 @@ html {
   align-items: center;
   align-self: center;
   justify-content: center;
-  gap: 8px;
+  gap: 9px;
   border: 1px solid rgba(91, 169, 255, 0.25);
   border-radius: 999px;
-  padding: 9px 14px;
+  padding: 10px 16px;
   background: var(--v391-control-bg);
   color: #2f68d7 !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 8px 20px rgba(24, 60, 120, 0.08);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.35;
   font-weight: 850;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.09em;
   text-align: center;
   text-transform: uppercase;
 }
@@ -2706,7 +2706,7 @@ html {
 
 @media (max-width: 390px) {
   .v3931-first-run-card { padding: 15px; }
-  .v3931-first-run-kicker { padding-inline: 12px; font-size: 9px; letter-spacing: 0.12em; }
+  .v3931-first-run-kicker { padding: 9px 13px; font-size: 11px; letter-spacing: 0.075em; }
   .v3931-first-run-visual { min-height: 196px; padding-inline: 7px; }
   .v3931-first-run-title { font-size: 19px; }
 }
@@ -3640,3 +3640,12 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     max-width: 330px;
   }
 }
+
+
+/* ================================================================
+   MONIEZI v39.3.13 — Receipts state + first-run badge + menu hierarchy
+   ----------------------------------------------------------------
+   - First-run/demo kicker is larger and easier to read in both themes.
+   - Receipt completion state is hidden when there are zero expenses.
+   - Demo utility sits directly beneath Settings in the main menu.
+   ================================================================ */

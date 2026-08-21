@@ -5221,13 +5221,16 @@ export default function App() {
   }, [selectedClientStatementKey, reportClientRows, reportYearInvoices, reportYearEstimates]);
 
   const homeReceiptYear = new Date().getFullYear();
-  const homeMissingReceiptExpenses = useMemo(() => transactions
+  const homeReceiptYearExpenses = useMemo(() => transactions
     .filter(transaction => transaction.type === 'expense')
     .filter(transaction => {
       const year = new Date(`${transaction.date}T12:00:00`).getFullYear();
-      return year === homeReceiptYear && !(transaction as any).receiptId;
+      return year === homeReceiptYear;
     })
     .sort((a, b) => b.date.localeCompare(a.date)), [transactions, homeReceiptYear]);
+
+  const homeMissingReceiptExpenses = useMemo(() => homeReceiptYearExpenses
+    .filter(transaction => !(transaction as any).receiptId), [homeReceiptYearExpenses]);
 
   const homeMissingReceiptAmount = useMemo(() => homeMissingReceiptExpenses
     .reduce((sum, transaction) => sum + Number(transaction.amount || 0), 0), [homeMissingReceiptExpenses]);
@@ -8191,7 +8194,7 @@ html, body, #root {
         <div className="mb-6">
           <MonieziGlassCard hero className="v3931-first-run-card">
             <div className="v3931-first-run-kicker">
-              <span className="v3931-first-run-kicker__icon"><PlayCircle size={15} strokeWidth={2} /></span>
+              <span className="v3931-first-run-kicker__icon"><PlayCircle size={18} strokeWidth={2} /></span>
               <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>
             </div>
 
@@ -8769,12 +8772,12 @@ html, body, #root {
                   </div>
                   <div className="flex shrink-0 items-center gap-1 text-[13px] font-extrabold text-amber-700 dark:text-amber-300">Review <ChevronRight size={16} /></div>
                 </button>
-              ) : (
+              ) : homeReceiptYearExpenses.length > 0 ? (
                 <div className="mt-4 flex items-center gap-3 rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 dark:border-emerald-700/50 dark:bg-emerald-500/10">
                   <CheckCircle size={18} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
-                  <div className="text-[13px] font-bold text-emerald-800 dark:text-emerald-300">All {homeReceiptYear} expenses have receipts attached.</div>
+                  <div className="text-[13px] font-bold text-emerald-800 dark:text-emerald-300">All {homeReceiptYearExpenses.length} expense{homeReceiptYearExpenses.length === 1 ? '' : 's'} have receipts attached.</div>
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
         )}
@@ -12774,20 +12777,50 @@ html, body, #root {
       <AppDrawer isOpen={showMainMenu} onClose={() => setShowMainMenu(false)} title="Menu">
         <div className="pt-5 pb-4">
 
-          {/* Settings is intentionally first: it is a universal app destination. */}
+          {/* Settings and Demo are app-level utilities, so they stay together at the top. */}
           <section className="pb-6">
-            <button
-              onClick={() => { setCurrentPage(Page.Settings); setShowMainMenu(false); mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-300 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
-                <Settings size={18} />
-              </span>
-              <span className="min-w-0">
-                Settings
-                <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">Business details, backup, preferences and features</span>
-              </span>
-            </button>
+            <div className="space-y-1">
+              <button
+                onClick={() => { setCurrentPage(Page.Settings); setShowMainMenu(false); mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-300 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
+                  <Settings size={18} />
+                </span>
+                <span className="min-w-0">
+                  Settings
+                  <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">Business details, backup, preferences and features</span>
+                </span>
+              </button>
+
+              {isDemoData ? (
+                <button
+                  onClick={() => { handleRemoveSampleData(); setShowMainMenu(false); }}
+                  className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-red-700 dark:border-red-700/40 dark:bg-red-500/10 dark:text-red-300">
+                    <Trash2 size={18} />
+                  </span>
+                  <span className="min-w-0">
+                    Remove the demo
+                    <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">Exit Demo Mode and return to your business</span>
+                  </span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => { handleLoadSampleData(); setShowMainMenu(false); }}
+                  className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-700/40 dark:bg-amber-500/10 dark:text-amber-300">
+                    <PlayCircle size={18} />
+                  </span>
+                  <span className="min-w-0">
+                    Try the demo
+                    <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">Explore it any time. Your own records are preserved.</span>
+                  </span>
+                </button>
+              )}
+            </div>
           </section>
 
           <section className="border-t border-slate-300 dark:border-slate-700 py-6">
@@ -12945,40 +12978,7 @@ html, body, #root {
             </div>
           </section>
 
-          <section className="border-t border-slate-300 dark:border-slate-700 py-6">
-            <div className="px-1 pb-3 text-xs font-extrabold uppercase tracking-[0.14em] text-slate-600 dark:text-slate-300">
-              Trying MONIEZI
-            </div>
-            <div className="space-y-1">
-              {isDemoData ? (
-                <button
-                  onClick={() => { handleRemoveSampleData(); setShowMainMenu(false); }}
-                  className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-red-200 bg-red-50 text-red-700 dark:border-red-700/40 dark:bg-red-500/10 dark:text-red-300">
-                    <Trash2 size={18} />
-                  </span>
-                  <span className="min-w-0">
-                    Remove the demo
-                    <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">Exit Demo Mode and return to your business</span>
-                  </span>
-                </button>
-              ) : (
-                <button
-                  onClick={() => { handleLoadSampleData(); setShowMainMenu(false); }}
-                  className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-700/40 dark:bg-amber-500/10 dark:text-amber-300">
-                    <PlayCircle size={18} />
-                  </span>
-                  <span className="min-w-0">
-                    Try the demo
-                    <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">Explore it any time. Your own records are preserved.</span>
-                  </span>
-                </button>
-              )}
-            </div>
-          </section>
+
 
           {settings.companyEquityEnabled && (
             <section className="border-t border-slate-300 dark:border-slate-700 py-6">
