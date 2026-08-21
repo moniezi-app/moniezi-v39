@@ -904,6 +904,198 @@ function isLicenceRecheckDue(candidate: StoredLicense | null, recheckDays: numbe
   return Date.now() - lastMs >= recheckDays * 24 * 60 * 60 * 1000;
 }
 
+// --- v39.4.0 install-first onboarding environment detection ---
+type InstallPlatform = 'ios' | 'android' | 'desktop' | 'other';
+type InstallBrowser = 'safari' | 'chrome' | 'firefox' | 'samsung' | 'edge' | 'other';
+type InstallEnvironment = {
+  platform: InstallPlatform;
+  browser: InstallBrowser;
+  browserLabel: string;
+  standalone: boolean;
+  isMobile: boolean;
+};
+
+function getStandaloneSnapshot(): boolean {
+  try {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') return false;
+    return !!(
+      window.matchMedia?.('(display-mode: standalone)')?.matches ||
+      (navigator as Navigator & { standalone?: boolean }).standalone === true
+    );
+  } catch {
+    return false;
+  }
+}
+
+function detectInstallEnvironment(): InstallEnvironment {
+  try {
+    const nav = navigator as Navigator & { maxTouchPoints?: number };
+    const ua = nav.userAgent || '';
+    const platformString = nav.platform || '';
+    const touchPoints = Number(nav.maxTouchPoints || 0);
+    const isIos = /iPad|iPhone|iPod/i.test(ua) || (platformString === 'MacIntel' && touchPoints > 1);
+    const isAndroid = /Android/i.test(ua);
+    const standalone = getStandaloneSnapshot();
+
+    let platform: InstallPlatform = 'other';
+    if (isIos) platform = 'ios';
+    else if (isAndroid) platform = 'android';
+    else if (/Windows|Macintosh|Linux|CrOS/i.test(ua)) platform = 'desktop';
+
+    let browser: InstallBrowser = 'other';
+    if (/SamsungBrowser/i.test(ua)) browser = 'samsung';
+    else if (/FxiOS|Firefox/i.test(ua)) browser = 'firefox';
+    else if (/EdgiOS|EdgA|Edg\//i.test(ua)) browser = 'edge';
+    else if (/CriOS|Chrome|Chromium/i.test(ua)) browser = 'chrome';
+    else if (isIos && /Safari/i.test(ua)) browser = 'safari';
+    else if (/Safari/i.test(ua) && !/Chrome|Chromium|Edg/i.test(ua)) browser = 'safari';
+
+    const browserLabel: Record<InstallBrowser, string> = {
+      safari: 'Safari',
+      chrome: 'Chrome',
+      firefox: 'Firefox',
+      samsung: 'Samsung Internet',
+      edge: 'Edge',
+      other: 'your browser',
+    };
+
+    return {
+      platform,
+      browser,
+      browserLabel: browserLabel[browser],
+      standalone,
+      isMobile: isIos || isAndroid,
+    };
+  } catch {
+    return {
+      platform: 'other',
+      browser: 'other',
+      browserLabel: 'your browser',
+      standalone: false,
+      isMobile: false,
+    };
+  }
+}
+
+type InstallGuideDetails = {
+  title: string;
+  steps: string[];
+  note: string;
+};
+
+function getInstallGuideDetails(platform: InstallPlatform, browser: InstallBrowser): InstallGuideDetails {
+  if (platform === 'ios') {
+    if (browser === 'chrome') {
+      return {
+        title: 'Install with Chrome',
+        steps: [
+          'Tap the Share icon next to the address bar.',
+          'Tap Add to Home Screen.',
+          'Tap Add, then open MONIEZI from the new Home Screen icon.',
+        ],
+        note: 'After installation, activate your copy inside the MONIEZI Home Screen app.',
+      };
+    }
+    if (browser === 'firefox') {
+      return {
+        title: 'Install with Firefox',
+        steps: [
+          'Tap the Share icon in Firefox.',
+          'Tap Add to Home Screen.',
+          'Tap Add, then open MONIEZI from the new Home Screen icon.',
+        ],
+        note: 'After installation, activate your copy inside the MONIEZI Home Screen app.',
+      };
+    }
+    if (browser === 'edge') {
+      return {
+        title: 'Install with Edge',
+        steps: [
+          'Tap the Share button in Edge.',
+          'Choose Add to Home Screen.',
+          'Tap Add, then open MONIEZI from the new Home Screen icon.',
+        ],
+        note: 'After installation, activate your copy inside the MONIEZI Home Screen app.',
+      };
+    }
+    return {
+      title: browser === 'other' ? 'Install on iPhone / iPad' : 'Install with Safari',
+      steps: [
+        'Tap the Share button.',
+        'Tap Add to Home Screen.',
+        'If Open as Web App is shown, leave it on. Tap Add, then open MONIEZI from the new Home Screen icon.',
+      ],
+      note: 'After installation, activate your copy inside the MONIEZI Home Screen app.',
+    };
+  }
+
+  if (platform === 'android') {
+    if (browser === 'firefox') {
+      return {
+        title: 'Install with Firefox',
+        steps: [
+          'Tap the three-dot menu (⋮).',
+          'Tap Install.',
+          'Confirm Add to Home Screen, then open MONIEZI from the new icon.',
+        ],
+        note: 'Firefox keeps the install command in its menu. Your license is entered after you open the installed app.',
+      };
+    }
+    if (browser === 'samsung') {
+      return {
+        title: 'Install with Samsung Internet',
+        steps: [
+          'Open the Samsung Internet menu.',
+          'Choose Add page to, then Home screen. If Install is shown, choose Install.',
+          'Confirm, then open MONIEZI from the new Home Screen icon.',
+        ],
+        note: 'Your license is entered after you open the installed MONIEZI app.',
+      };
+    }
+    if (browser === 'edge') {
+      return {
+        title: 'Install with Edge',
+        steps: [
+          'Open the Edge menu.',
+          'Choose Add to phone or Add to Home screen.',
+          'Confirm the installation, then open MONIEZI from the new Home Screen icon.',
+        ],
+        note: 'Your license is entered after you open the installed MONIEZI app.',
+      };
+    }
+    if (browser === 'chrome') {
+      return {
+        title: 'Install with Chrome',
+        steps: [
+          'Tap the three-dot menu (⋮).',
+          'Tap Add to Home screen, then Install.',
+          'Confirm, then open MONIEZI from the new Home Screen icon.',
+        ],
+        note: 'If Chrome offers its native install prompt, MONIEZI will use it automatically.',
+      };
+    }
+    return {
+      title: 'Install MONIEZI on Android',
+      steps: [
+        'Open your browser menu.',
+        'Choose Install, Add to Home screen, or the equivalent command.',
+        'Confirm, then open MONIEZI from the new Home Screen icon.',
+      ],
+      note: 'If your browser uses different wording, choose a browser guide below.',
+    };
+  }
+
+  return {
+    title: 'Install MONIEZI',
+    steps: [
+      'Open your browser menu.',
+      'Choose Install or Add to Home Screen.',
+      'Open MONIEZI from the new Home Screen icon.',
+    ],
+    note: 'Activation happens inside the installed MONIEZI app.',
+  };
+}
+
 export default function App() {
   useEffect(() => {
     installMonieziFonts();
@@ -1082,55 +1274,53 @@ export default function App() {
     try { localStorage.setItem(`moniezi_sample_tried_v1_${STORAGE_NAMESPACE}`, '1'); } catch { /* ignore */ }
     setHasTriedSampleData(true);
   }, []);
-  const [showIosInstallCta, setShowIosInstallCta] = useState(false);
-  const [showIosInstallHelp, setShowIosInstallHelp] = useState(false);
-  const [isRunningStandalone, setIsRunningStandalone] = useState(false);
+  const [installEnvironment, setInstallEnvironment] = useState<InstallEnvironment>(() => detectInstallEnvironment());
+  const [isRunningStandalone, setIsRunningStandalone] = useState<boolean>(() => getStandaloneSnapshot());
+  const [installGuideBrowser, setInstallGuideBrowser] = useState<InstallBrowser | null>(null);
   const [justInstalled, setJustInstalled] = useState(false);
 
-  const getIosInstallContext = useCallback(() => {
-    try {
-      const nav = navigator as Navigator & { standalone?: boolean; maxTouchPoints?: number };
-      const ua = nav.userAgent || '';
-      const platform = nav.platform || '';
-      const touchPoints = Number(nav.maxTouchPoints || 0);
-      const isIosDevice = /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && touchPoints > 1);
-      const isSafariLike = /Safari/i.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS|OPT\//i.test(ua);
-      return { isIosDevice, isSafariLike };
-    } catch {
-      return { isIosDevice: false, isSafariLike: false };
-    }
-  }, []);
-
   const evaluateStandaloneMode = useCallback(() => {
-    try {
-      const standalone = window.matchMedia?.('(display-mode: standalone)')?.matches || (navigator as any).standalone === true;
-      setIsRunningStandalone(!!standalone);
-      return !!standalone;
-    } catch {
-      setIsRunningStandalone(false);
-      return false;
-    }
+    const next = detectInstallEnvironment();
+    setInstallEnvironment(next);
+    setIsRunningStandalone(next.standalone);
+    return next.standalone;
   }, []);
 
-  const triggerDeferredInstallPrompt = useCallback(async () => {
-    if (!deferredInstallPrompt) return;
+  const triggerDeferredInstallPrompt = useCallback(async (): Promise<'accepted' | 'dismissed' | 'unavailable'> => {
+    if (!deferredInstallPrompt) return 'unavailable';
     try {
       await deferredInstallPrompt.prompt();
       const choice = await deferredInstallPrompt.userChoice;
-      if (choice?.outcome === 'accepted') {
-        setJustInstalled(true);
-      }
+      const outcome = choice?.outcome === 'accepted' ? 'accepted' : 'dismissed';
+      if (outcome === 'accepted') setJustInstalled(true);
+      return outcome;
     } catch {
-      // ignore user dismissal / browser differences
+      return 'unavailable';
     } finally {
       setShowDeferredInstallCta(false);
       setDeferredInstallPrompt(null);
     }
   }, [deferredInstallPrompt]);
 
-  const openIosInstallHelp = useCallback(() => {
-    setShowIosInstallHelp(true);
-  }, []);
+  const openInstallGuide = useCallback((browser?: InstallBrowser) => {
+    setInstallGuideBrowser(browser || installEnvironment.browser || 'other');
+  }, [installEnvironment.browser]);
+
+  const handleMobileInstallAction = useCallback(async () => {
+    const env = installEnvironment;
+    const canUseNativePrompt =
+      env.platform === 'android' &&
+      (env.browser === 'chrome' || env.browser === 'edge' || env.browser === 'samsung') &&
+      !!deferredInstallPrompt;
+
+    if (canUseNativePrompt) {
+      const outcome = await triggerDeferredInstallPrompt();
+      if (outcome !== 'accepted') openInstallGuide(env.browser);
+      return;
+    }
+
+    openInstallGuide(env.browser);
+  }, [deferredInstallPrompt, installEnvironment, openInstallGuide, triggerDeferredInstallPrompt]);
 
   // Reset the viewport only when the main page actually changes.
   // v39.3.12: pendingHomeAnchor is intentionally NOT a dependency here. Clearing
@@ -1767,30 +1957,29 @@ export default function App() {
     }
   }, []);
 
+  // Preserve the previous post-activation install prompt on desktop. Mobile
+  // browsers use the new install-first gate before licensing is ever shown.
   useEffect(() => {
-    if (isLicenseValid === true && deferredInstallPrompt && !isRunningStandalone) {
+    if (
+      isLicenseValid === true &&
+      deferredInstallPrompt &&
+      !isRunningStandalone &&
+      !installEnvironment.isMobile
+    ) {
       const timer = window.setTimeout(() => setShowDeferredInstallCta(true), 600);
       return () => window.clearTimeout(timer);
     }
     setShowDeferredInstallCta(false);
-  }, [isLicenseValid, deferredInstallPrompt, isRunningStandalone]);
+  }, [isLicenseValid, deferredInstallPrompt, isRunningStandalone, installEnvironment.isMobile]);
 
-  useEffect(() => {
-    const { isIosDevice } = getIosInstallContext();
-    if (isLicenseValid === true && isIosDevice && !isRunningStandalone) {
-      const timer = window.setTimeout(() => setShowIosInstallCta(true), 700);
-      return () => window.clearTimeout(timer);
-    }
-    setShowIosInstallCta(false);
-    setShowIosInstallHelp(false);
-  }, [getIosInstallContext, isLicenseValid, isRunningStandalone]);
-
-  // License validation on app load
+  // License validation on app load. On a normal mobile browser MONIEZI is only
+  // an installation launcher; activation happens after the Home Screen app opens.
   useEffect(() => {
     if (!LICENSING_ENABLED) {
       setIsLicenseValid(true);
       return;
     }
+    if (installEnvironment.isMobile && !isRunningStandalone) return;
     const checkStoredLicense = async () => {
       const stored = localStorage.getItem(LICENSE_STORAGE_KEY);
       if (stored) {
@@ -1814,7 +2003,7 @@ export default function App() {
       }
     };
     checkStoredLicense();
-  }, []);
+  }, [installEnvironment.isMobile, isRunningStandalone]);
 
   // Production licensing configuration. The app never accepts an unverified customer key.
   const LICENSE_API_BASE = String((import.meta as any).env?.VITE_LICENSE_API_BASE || "https://moniezi-license-v37.moniezi-vg.workers.dev").trim();
@@ -1939,12 +2128,8 @@ export default function App() {
         setShowLicenseModal(false);
         setTimeout(() => window.scrollTo({ top: 0, left: 0 }), 60);
         const standalone = evaluateStandaloneMode();
-        if (!standalone) {
-          if (deferredInstallPrompt) {
-            setShowDeferredInstallCta(true);
-          } else if (getIosInstallContext().isIosDevice) {
-            setShowIosInstallCta(true);
-          }
+        if (!standalone && !installEnvironment.isMobile && deferredInstallPrompt) {
+          setShowDeferredInstallCta(true);
         }
         showToast('License activated', 'success', 2000);
       } else {
@@ -3725,16 +3910,17 @@ export default function App() {
   }, []);
 
   /**
-   * The install prompt takes the whole screen when it applies, so nobody starts
-   * entering records in a browser tab and then loses them.
-   *
-   * This matters most on iPhone: a home-screen app does NOT share storage with
-   * Safari, so anything created in the browser vanishes after installing.
+   * v39.4.0: mobile browsers are installation launchers, not the place where a
+   * customer activates or starts recording business data. Desktop keeps the
+   * previous post-activation native install prompt when the browser offers it.
    */
+  const mobileInstallGateActive = installEnvironment.isMobile && !isRunningStandalone;
   const installGateActive =
+    !installEnvironment.isMobile &&
     !isRunningStandalone &&
     isLicenseValid === true &&
-    ((showDeferredInstallCta && !!deferredInstallPrompt) || showIosInstallCta);
+    showDeferredInstallCta &&
+    !!deferredInstallPrompt;
 
   const isAppEmpty =
     transactions.length === 0 &&
@@ -7192,6 +7378,147 @@ export default function App() {
       return { subtotal, total, tax: taxAmount };
   }, [activeItem]);
 
+  // v39.4.0 mobile first run: install the PWA before presenting licensing.
+  // A browser tab is intentionally only an installation launcher. The license
+  // form appears after the customer opens MONIEZI from the Home Screen icon.
+  if (mobileInstallGateActive) {
+    const guideBrowser = installGuideBrowser || installEnvironment.browser;
+    const guide = getInstallGuideDetails(installEnvironment.platform, guideBrowser);
+    const platformLabel = installEnvironment.platform === 'ios' ? 'iPhone / iPad' : 'Android';
+    const browserChoices: Array<{ value: InstallBrowser; label: string }> = installEnvironment.platform === 'ios'
+      ? [
+          { value: 'safari', label: 'Safari' },
+          { value: 'chrome', label: 'Chrome' },
+          { value: 'firefox', label: 'Firefox' },
+          { value: 'edge', label: 'Edge' },
+        ]
+      : [
+          { value: 'chrome', label: 'Chrome' },
+          { value: 'firefox', label: 'Firefox' },
+          { value: 'samsung', label: 'Samsung Internet' },
+          { value: 'edge', label: 'Edge' },
+        ];
+
+    return (
+      <div className="min-h-[100dvh] bg-[linear-gradient(180deg,#f9fbff_0%,#f3f6fc_100%)] px-4 py-[max(24px,env(safe-area-inset-top))] text-[#0B1739]">
+        <main className="mx-auto flex min-h-[calc(100dvh-48px)] w-full max-w-[430px] flex-col justify-center py-6">
+          <section className="rounded-xl border border-[#DCE6F8] bg-white/95 px-5 py-7 shadow-[0_24px_70px_rgba(15,23,42,0.12)] ring-1 ring-white sm:px-7 sm:py-8">
+            <img
+              src={`${import.meta.env.BASE_URL}icons/icon-192.png`}
+              alt=""
+              className="mx-auto h-[74px] w-[74px] object-contain drop-shadow-[0_12px_24px_rgba(47,103,246,0.18)]"
+              draggable={false}
+            />
+
+            {justInstalled ? (
+              <>
+                <div className="mx-auto mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                  <CheckCircle size={27} strokeWidth={2.3} />
+                </div>
+                <h1 className="mt-4 text-center font-brand text-[27px] font-extrabold leading-[1.15] tracking-[-0.035em] text-[#0B1739]">
+                  MONIEZI is installed
+                </h1>
+                <p className="mx-auto mt-3 max-w-[31ch] text-center text-[15px] font-semibold leading-6 text-[#43536B]">
+                  Open MONIEZI from your Home Screen to activate your copy.
+                </p>
+                <div className="mt-6 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-4 text-center text-[14px] font-bold leading-6 text-emerald-900">
+                  Your browser tab is finished. Continue from the MONIEZI icon on your Home Screen.
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="mt-5 text-center text-[12px] font-extrabold uppercase tracking-[0.12em] text-[#45658F]">
+                  First step
+                </div>
+                <h1 className="mt-2 text-center font-brand text-[29px] font-extrabold leading-[1.08] tracking-[-0.04em] text-[#0B1739] sm:text-[31px]">
+                  Install MONIEZI
+                </h1>
+                <p className="mx-auto mt-4 max-w-[32ch] text-center text-[15px] font-semibold leading-[1.6] text-[#43536B]">
+                  Add MONIEZI to your Home Screen first. Then open it and activate your copy.
+                </p>
+
+                <div className="mx-auto mt-5 inline-flex w-full items-center justify-center gap-2 text-center text-[13px] font-bold text-[#52647D]">
+                  <Smartphone size={16} strokeWidth={2} className="text-[#4473E8]" />
+                  <span>{installEnvironment.browserLabel} on {platformLabel}</span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleMobileInstallAction}
+                  className="mt-7 flex w-full items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-5 py-[15px] text-[16px] font-extrabold text-white shadow-[0_14px_28px_rgba(37,99,235,0.24)] transition active:scale-[0.99]"
+                >
+                  <Download size={20} strokeWidth={2.2} />
+                  Install MONIEZI
+                </button>
+
+                <p className="mt-5 text-center text-[13px] font-semibold leading-5 text-[#52647D]">
+                  Already installed? <span className="font-extrabold text-[#1E3A66]">Open MONIEZI from your Home Screen.</span>
+                </p>
+              </>
+            )}
+          </section>
+
+          <p className="mx-auto mt-4 max-w-[34ch] text-center text-[12px] font-semibold leading-5 text-[#61718A]">
+            License activation happens inside the installed MONIEZI app, not in this browser tab.
+          </p>
+        </main>
+
+        {installGuideBrowser !== null && !justInstalled && (
+          <div className="fixed inset-0 z-[130] flex items-end justify-center bg-slate-950/55 p-3 backdrop-blur-[3px] sm:items-center sm:p-5" onClick={() => setInstallGuideBrowser(null)}>
+            <section
+              className="max-h-[88dvh] w-full max-w-[430px] overflow-y-auto rounded-xl border border-[#DCE6F8] bg-white px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-4 text-[#0B1739] shadow-[0_28px_80px_rgba(2,6,23,0.32)] sm:px-5"
+              onClick={(event) => event.stopPropagation()}
+              aria-labelledby="install-guide-title"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <div className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#5271A0]">{platformLabel}</div>
+                  <h2 id="install-guide-title" className="mt-1 font-brand text-[21px] font-extrabold tracking-[-0.025em] text-[#0B1739]">{guide.title}</h2>
+                </div>
+                <button type="button" onClick={() => setInstallGuideBrowser(null)} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-700" aria-label="Close installation instructions">
+                  <X size={19} />
+                </button>
+              </div>
+
+              <div className="mt-5 space-y-3">
+                {guide.steps.map((step, index) => (
+                  <div key={`${guide.title}-${index}`} className="flex items-start gap-3 rounded-lg border border-[#E2E8F2] bg-[#F9FBFF] px-3.5 py-3.5">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#E7F0FF] text-[13px] font-extrabold text-[#2455B8]">{index + 1}</div>
+                    <p className="pt-0.5 text-[14px] font-semibold leading-6 text-[#33445C]">{step}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-3.5 py-3 text-[13px] font-semibold leading-5 text-[#5B4A19]">
+                {guide.note}
+              </div>
+
+              <div className="mt-5 border-t border-slate-200 pt-4">
+                <div className="text-[12px] font-extrabold text-[#3E4F68]">Using a different browser?</div>
+                <div className="mt-2 grid grid-cols-2 gap-2">
+                  {browserChoices.map((choice) => (
+                    <button
+                      key={choice.value}
+                      type="button"
+                      onClick={() => setInstallGuideBrowser(choice.value)}
+                      className={`rounded-lg border px-3 py-2.5 text-[13px] font-bold transition ${guideBrowser === choice.value ? 'border-blue-500 bg-blue-50 text-blue-800' : 'border-slate-200 bg-white text-slate-700'}`}
+                    >
+                      {choice.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <button type="button" onClick={() => setInstallGuideBrowser(null)} className="mt-5 w-full rounded-lg bg-[#2563EB] px-4 py-3.5 text-[15px] font-extrabold text-white">
+                Got it
+              </button>
+            </section>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   // Show loading state while checking license
   if (LICENSING_ENABLED && isLicenseValid === null) {
     return (
@@ -7520,114 +7847,28 @@ html, body, #root {
           paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         }}
       >
-      {installGateActive && (() => {
-        const iosInstallContext = getIosInstallContext();
-        const isIosInstallBanner = showIosInstallCta && iosInstallContext.isIosDevice && !deferredInstallPrompt;
-        const bannerCopy = isIosInstallBanner
-          ? 'Add MONIEZI to your Home screen and use it like a regular app.'
-          : 'Add MONIEZI to your Home screen and use it like a regular app.';
-
-        return (
-          <div className="fixed inset-0 z-[95] flex items-center justify-center overflow-y-auto bg-slate-950/72 px-4 py-8 backdrop-blur-md animate-in fade-in duration-200 modal-overlay">
-            <div className="w-full max-w-[360px]">
-              <div className="overflow-hidden rounded-xl border border-slate-200/95 bg-[linear-gradient(180deg,#ffffff_0%,#f7f9fe_100%)] px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.26)] ring-1 ring-white/75 sm:px-6 sm:py-7">
-                <div className="mx-auto mb-5 flex h-[88px] w-[88px] items-center justify-center rounded-xl border border-[#e3ecff] bg-[radial-gradient(circle_at_32%_28%,#ffffff_0%,#eef4ff_58%,#e6eeff_100%)] shadow-[0_16px_34px_rgba(37,99,235,0.12)]">
-                  {isIosInstallBanner
-                    ? <Share2 size={34} className="text-[#2563EB]" strokeWidth={2.2} />
-                    : <Download size={34} className="text-[#2563EB]" strokeWidth={2.2} />}
-                </div>
-
-                <h2 className="text-center text-[28px] font-bold leading-[1.08] tracking-[-0.04em] text-[#0B1739] font-brand sm:text-[30px]">
-                  Install MONIEZI
-                </h2>
-                <p className="mx-auto mt-3 max-w-[28ch] text-center text-[14px] leading-[1.55] font-semibold text-[#55667E] sm:text-[15px]">
-                  {bannerCopy}
-                </p>
-
-                <div className="mt-5 space-y-3">
-                  {[
-                    {
-                      icon: <Smartphone size={18} className="text-[#4F73FF]" strokeWidth={2.1} />,
-                      title: 'Quick access',
-                      body: 'Open MONIEZI from your Home screen with one tap.',
-                    },
-                    {
-                      icon: <Shield size={18} className="text-[#4F73FF]" strokeWidth={1.95} />,
-                      title: 'Secure & private',
-                      body: 'Works like any other trusted app on your device.',
-                    },
-                    {
-                      icon: <Wifi size={18} className="text-[#4F73FF]" strokeWidth={2.0} />,
-                      title: 'Works offline',
-                      body: 'Access your data anytime, even without internet.',
-                    },
-                  ].map((item) => (
-                    <div key={item.title} className="flex items-start gap-3 rounded-xl border border-[#E6EBF5] bg-white px-4 py-3.5 shadow-[0_8px_18px_rgba(15,23,42,0.04)]">
-                      <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#F3F7FF]">{item.icon}</div>
-                      <div className="min-w-0">
-                        <div className="text-[14px] font-extrabold leading-5 text-[#0B1739]">{item.title}</div>
-                        <div className="mt-1 text-[13px] leading-[1.45] font-semibold text-[#55667E]">{item.body}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  onClick={isIosInstallBanner ? openIosInstallHelp : triggerDeferredInstallPrompt}
-                  className="mt-6 w-full rounded-xl bg-[#2563EB] px-5 py-[15px] text-center text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
-                >
-                  {isIosInstallBanner ? 'Show me how' : 'Install MONIEZI'}
-                </button>
+      {installGateActive && (
+        <div className="fixed inset-0 z-[95] flex items-center justify-center overflow-y-auto bg-slate-950/72 px-4 py-8 backdrop-blur-md animate-in fade-in duration-200 modal-overlay">
+          <div className="w-full max-w-[360px]">
+            <div className="overflow-hidden rounded-xl border border-slate-200/95 bg-[linear-gradient(180deg,#ffffff_0%,#f7f9fe_100%)] px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.26)] ring-1 ring-white/75 sm:px-6 sm:py-7">
+              <div className="mx-auto mb-5 flex h-[76px] w-[76px] items-center justify-center rounded-lg border border-[#e3ecff] bg-[#F3F7FF]">
+                <Download size={30} className="text-[#2563EB]" strokeWidth={2.2} />
               </div>
+              <h2 className="text-center font-brand text-[27px] font-extrabold leading-[1.08] tracking-[-0.04em] text-[#0B1739]">Install MONIEZI</h2>
+              <p className="mx-auto mt-3 max-w-[29ch] text-center text-[14px] font-semibold leading-[1.55] text-[#55667E]">
+                Add MONIEZI to this computer for quick app-like access.
+              </p>
+              <button
+                type="button"
+                onClick={() => { void triggerDeferredInstallPrompt(); }}
+                className="mt-6 w-full rounded-lg bg-[#2563EB] px-5 py-[15px] text-center text-[16px] font-extrabold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
+              >
+                Install MONIEZI
+              </button>
             </div>
           </div>
-        );
-      })()}
-
-
-      {showIosInstallHelp && !isRunningStandalone && (() => {
-        const isLight = theme !== 'dark';
-        return (
-          <div className={`fixed inset-0 z-[110] flex items-end justify-center p-3 sm:p-4 animate-in fade-in duration-200 modal-overlay ${isLight ? 'bg-slate-900/28 backdrop-blur-[3px]' : 'bg-slate-950/92'}`}>
-            <div className={`w-full max-w-md rounded-xl overflow-hidden ${isLight ? 'border border-sky-300/65 bg-gradient-to-br from-slate-50/98 via-white/98 to-sky-50/96 text-slate-900 shadow-[0_24px_64px_rgba(15,23,42,0.20)] ring-1 ring-sky-200/70' : 'border border-sky-300/18 bg-slate-900 text-white shadow-[0_24px_64px_rgba(2,6,23,0.72)] ring-1 ring-white/6'}`}>
-              <div className={`px-4 py-4 border-b flex items-center justify-between gap-3 ${isLight ? 'border-slate-200 bg-transparent' : 'border-white/10 bg-slate-900'}`}>
-                <div>
-                  <div className={`text-[16px] font-bold leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>Install MONIEZI on iPhone</div>
-                </div>
-                <button onClick={() => setShowIosInstallHelp(false)} className={`p-2 rounded-full transition-colors ${isLight ? 'bg-slate-100 text-slate-700 hover:bg-slate-200' : 'bg-slate-800 hover:bg-slate-700 text-white'}`} aria-label="Close install steps">
-                  <X size={18} />
-                </button>
-              </div>
-              <div className={`px-4 py-4 space-y-3 ${isLight ? 'bg-transparent' : 'bg-slate-900'}`}>
-                <div className={`rounded-2xl px-3 py-3 ${isLight ? 'border border-slate-200 bg-white/92 shadow-sm' : 'border border-slate-700 bg-slate-800'}`}>
-                  <div className="flex items-start gap-3">
-                    <div className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[13px] font-bold ${isLight ? 'bg-sky-100 text-sky-700' : 'bg-sky-500/20 text-sky-100'}`}>1</div>
-                    <p className={`text-[14px] leading-6 ${isLight ? 'text-slate-800' : 'text-slate-100'}`}>In <span className={`font-semibold ${isLight ? 'text-slate-950' : 'text-white'}`}>Safari</span>, tap the <span className={`font-semibold ${isLight ? 'text-slate-950' : 'text-white'}`}>Share</span> button.</p>
-                  </div>
-                </div>
-                <div className={`rounded-2xl px-3 py-3 ${isLight ? 'border border-slate-200 bg-white/92 shadow-sm' : 'border border-slate-700 bg-slate-800'}`}>
-                  <div className="flex items-start gap-3">
-                    <div className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[13px] font-bold ${isLight ? 'bg-sky-100 text-sky-700' : 'bg-sky-500/20 text-sky-100'}`}>2</div>
-                    <p className={`text-[14px] leading-6 ${isLight ? 'text-slate-800' : 'text-slate-100'}`}>Tap <span className={`font-semibold ${isLight ? 'text-slate-950' : 'text-white'}`}>View More</span> or scroll down to <span className={`font-semibold ${isLight ? 'text-slate-950' : 'text-white'}`}>Add to Home Screen</span>.</p>
-                  </div>
-                </div>
-                <div className={`rounded-2xl px-3 py-3 ${isLight ? 'border border-slate-200 bg-white/92 shadow-sm' : 'border border-slate-700 bg-slate-800'}`}>
-                  <div className="flex items-start gap-3">
-                    <div className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[13px] font-bold ${isLight ? 'bg-sky-100 text-sky-700' : 'bg-sky-500/20 text-sky-100'}`}>3</div>
-                    <p className={`text-[14px] leading-6 ${isLight ? 'text-slate-800' : 'text-slate-100'}`}>Tap <span className={`font-semibold ${isLight ? 'text-slate-950' : 'text-white'}`}>Add to Home Screen</span>, then tap <span className={`font-semibold ${isLight ? 'text-slate-950' : 'text-white'}`}>Add</span>. MONIEZI will appear on your home screen like an app.</p>
-                  </div>
-                </div>
-              </div>
-              <div className={`px-4 pt-1 pb-3 ${isLight ? 'bg-transparent' : 'bg-slate-900'}`}>
-                <div className={`mb-3 rounded-2xl px-3 py-3 text-[13px] leading-6 ${isLight ? 'border border-amber-300/60 bg-amber-50 text-slate-800' : 'border border-amber-400/20 bg-amber-500/10 text-slate-100'}`}>
-                  <span className={`font-semibold ${isLight ? 'text-slate-950' : 'text-white'}`}>Next:</span> After MONIEZI is added to Home Screen, close Safari and open MONIEZI from your Home Screen icon.
-                </div>
-                <button onClick={() => setShowIosInstallHelp(false)} className="w-full rounded-xl bg-blue-600 hover:bg-blue-500 px-4 py-3 text-[15px] font-bold text-white transition-colors">Got it</button>
-              </div>
-            </div>
-          </div>
-        );
-      })()}
+        </div>
+      )}
 
       {/* Scan Receipt Confirm Modal */}
       {scanPreview && (

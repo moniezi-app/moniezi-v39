@@ -201,3 +201,16 @@ The persistent footer now follows the primary service-business lifecycle: **Home
 - Avoid oversized nested shells that make onboarding/empty states look like a separate application.
 - Monthly Business Goals no longer uses decorative target/dart artwork; the empty state is text + action only.
 - v39.3.0 lifecycle footer architecture remains unchanged.
+
+## v39.4.0 install-first mobile onboarding
+
+MONIEZI now separates mobile installation from commercial activation so browser differences do not strand a customer inside Safari, Chrome, Firefox, Samsung Internet, or Edge after entering a license key.
+
+- A normal iPhone/iPad or Android browser is treated as an installation launcher.
+- The mobile browser first shows **Install MONIEZI**; it does not show the license-key form.
+- Standalone mode is detected synchronously on the first React render using `display-mode: standalone` plus the iOS `navigator.standalone` fallback.
+- Browser-aware guidance covers Safari, Chrome, Firefox, Samsung Internet, Edge, and an unknown-browser fallback with a manual guide selector.
+- Android Chromium-family browsers use `beforeinstallprompt` when the browser exposes it; otherwise the user receives the matching manual steps.
+- After installation, the browser tells the customer to open MONIEZI from the Home Screen. The Welcome / Activation screen belongs to the installed PWA.
+- Desktop retains the prior license-first flow and can still use the native browser install prompt when available.
+- License validation, device binding, offline grace, Demo behavior, storage, and business logic are unchanged.

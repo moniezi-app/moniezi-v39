@@ -1,4 +1,16 @@
-# MONIEZI v39.3.14
+# MONIEZI v39.4.0
+
+## v39.4.0 Install-first mobile onboarding
+
+- Mobile browser first run is now **install first, activate second**.
+- iPhone/iPad and Android browser tabs show an **Install MONIEZI** screen before any license field.
+- Standalone/PWA mode is detected synchronously on the first React render, preventing an install-screen flash when the installed app opens.
+- Browser-aware install guidance is included for Safari, Chrome, Firefox, Samsung Internet, Edge, and an unknown-browser fallback.
+- Chromium-compatible Android browsers use the native `beforeinstallprompt` flow when available.
+- Manual-install browsers receive short browser-specific steps plus a manual browser-guide selector.
+- After installation, the browser tells the customer to open MONIEZI from the Home Screen; activation happens inside the installed app.
+- Desktop keeps the existing license-first behavior and native install prompt when supported.
+- Existing license validation, offline grace, data storage, Demo, navigation, and business logic are unchanged.
 
 ## v39.3.14 Activation heading compact layout
 
