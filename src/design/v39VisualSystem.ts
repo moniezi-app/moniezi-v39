@@ -5,12 +5,12 @@
  * It defines the shared visual language that v39 screens can opt into one by one.
  */
 
-export const V39_VISUAL_SYSTEM_VERSION = '39.3.11';
+export const V39_VISUAL_SYSTEM_VERSION = '39.3.12';
 
 
 
 /**
- * v39.3.11 restrained-radius Luminous Glass + startup/deep-link correction tokens.
+ * v39.3.12 restrained-radius Luminous Glass + startup/deep-link correction tokens.
  * These names intentionally describe surface roles rather than screen content so
  * the dashboard, lists, and future business modules can reuse one material system.
  */

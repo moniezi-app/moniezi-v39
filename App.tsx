@@ -1133,7 +1133,7 @@ export default function App() {
   }, []);
 
   // Reset the viewport only when the main page actually changes.
-  // v39.3.11: pendingHomeAnchor is intentionally NOT a dependency here. Clearing
+  // v39.3.12: pendingHomeAnchor is intentionally NOT a dependency here. Clearing
   // the Receipts deep-link instruction after a successful scroll must not trigger
   // this effect again and send Home back to the top.
   useLayoutEffect(() => {
@@ -1329,7 +1329,7 @@ export default function App() {
   const [billingDocType, setBillingDocType] = useState<'invoice' | 'estimate'>('invoice');
   const [showMainMenu, setShowMainMenu] = useState(false);
 
-  // v39.3.11: deep-link menu destinations into sections inside Home's internal
+  // v39.3.12: deep-link menu destinations into sections inside Home's internal
   // scrolling container. Waiting until the Dashboard and drawer state have committed
   // avoids the old behavior where Receipts landed at the top of Home.
   useEffect(() => {
@@ -7232,20 +7232,19 @@ export default function App() {
 
         <main className="v39-license-shell">
           <section className="v39-license-intro" aria-labelledby="v39-license-welcome-title">
-            <div className="v39-license-brand">
+            <div className="v39-license-brand v39312-license-brand-centered">
               <img
                 src={`${import.meta.env.BASE_URL}icons/icon-192.png`}
                 alt=""
                 className="v39-license-brand__icon"
                 draggable={false}
               />
-              <span>MONIEZI</span>
             </div>
 
-            <div className="v39-license-copy">
+            <div className="v39-license-copy v39312-license-copy-centered">
               <div className="v39-license-eyebrow">Your business. Your records.</div>
               <h1 id="v39-license-welcome-title">Welcome to MONIEZI</h1>
-              <p>Keep your business records on your device, without a bank connection or a monthly subscription.</p>
+              <p>Keep your business records on your device — no bank connection, no monthly subscription.</p>
             </div>
 
             <div className="v39-license-hero" aria-hidden="true">
@@ -8191,35 +8190,6 @@ html, body, #root {
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
         <div className="mb-6">
           <MonieziGlassCard hero className="v3931-first-run-card">
-            {!hasTriedSampleData && (
-              <MonieziGlassInset className="v3931-theme-choice">
-                <div className="v3931-theme-choice__copy">
-                  <div className="v3931-theme-choice__title">Choose your look</div>
-                  <div className="v3931-theme-choice__detail">You can change this anytime from the header.</div>
-                </div>
-                <div className="v3931-theme-choice__buttons" role="group" aria-label="Choose app theme">
-                  <button
-                    type="button"
-                    onClick={() => applyThemePreference('dark')}
-                    aria-pressed={theme === 'dark'}
-                    className={`v3931-theme-choice__button ${theme === 'dark' ? 'is-active' : ''}`}
-                  >
-                    <Moon size={18} strokeWidth={1.8} />
-                    Dark
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => applyThemePreference('light')}
-                    aria-pressed={theme === 'light'}
-                    className={`v3931-theme-choice__button ${theme === 'light' ? 'is-active' : ''}`}
-                  >
-                    <Sun size={18} strokeWidth={1.8} />
-                    Light
-                  </button>
-                </div>
-              </MonieziGlassInset>
-            )}
-
             <div className="v3931-first-run-kicker">
               <span className="v3931-first-run-kicker__icon"><PlayCircle size={15} strokeWidth={2} /></span>
               <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>

@@ -1474,7 +1474,7 @@ html {
   --v391-glass-glow: rgba(54, 112, 245, 0.14);
   --v391-glass-shadow: rgba(28, 48, 84, 0.13);
   --v391-glass-text: #0b1739;
-  --v391-glass-muted: #55657d;
+  --v391-glass-muted: #3d4c61;
   --v391-control-bg: rgba(255,255,255,0.78);
   --v391-control-border: rgba(75, 117, 205, 0.20);
   --v391-divider: rgba(78, 111, 166, 0.16);
@@ -3542,4 +3542,101 @@ html {
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
+}
+
+
+/* ================================================================
+   MONIEZI v39.3.12 — Welcome focus + stronger light-mode typography
+   ----------------------------------------------------------------
+   - Center the activation brand icon and introductory copy.
+   - Remove the redundant MONIEZI wordmark beside the icon.
+   - Strengthen secondary/supporting text in light mode.
+   - The initial demo experience no longer reserves a large theme-choice panel;
+     theme switching stays available from the permanent header control.
+   ================================================================ */
+
+.v39312-license-brand-centered {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.v39312-license-brand-centered .v39-license-brand__icon {
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 12px 28px rgba(47, 103, 246, 0.20);
+}
+
+.v39312-license-copy-centered {
+  max-width: 620px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.v39312-license-copy-centered .v39-license-eyebrow {
+  text-align: center;
+}
+
+.v39312-license-copy-centered h1,
+.v39312-license-copy-centered p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.v39312-license-copy-centered p {
+  max-width: 540px;
+  color: #405069;
+  font-weight: 600;
+}
+
+/* Light-mode supporting copy should remain secondary without looking faded. */
+html:not(.dark) .v39-empty-state__body,
+html:not(.dark) .v39-feature-row__body {
+  color: #3f4e63;
+  font-weight: 600;
+}
+
+html:not(.dark) .v39-empty-state__eyebrow {
+  color: #2459d4;
+}
+
+html:not(.dark) .v392-app-wide .v392-screen .v391-card-subtitle,
+html:not(.dark) .v392-app-wide .v392-screen .v391-section-heading p,
+html:not(.dark) .v392-app-wide .v392-screen .v391-action-row__detail,
+html:not(.dark) .v392-app-wide .v392-screen .v391-readiness-label,
+html:not(.dark) .v392-app-wide .v392-screen .v391-progress-detail,
+html:not(.dark) .v392-app-wide .v392-screen .v391-progress-label,
+html:not(.dark) .v392-app-wide .v392-screen .v391-progress-value span,
+html:not(.dark) .v392-app-wide .v392-screen .v391-job-stat__label,
+html:not(.dark) .v392-app-wide .v392-screen .v3931-first-run-body,
+html:not(.dark) .v392-app-wide .v392-screen .v3931-first-run-stat > span:last-child {
+  color: #3d4c61 !important;
+}
+
+html:not(.dark) .v392-app-wide .v392-screen .v391-card-subtitle,
+html:not(.dark) .v392-app-wide .v392-screen .v391-section-heading p,
+html:not(.dark) .v392-app-wide .v392-screen .v3931-first-run-body {
+  font-weight: 650 !important;
+}
+
+
+/* Catch Tailwind opacity-suffixed slate utilities (for example
+   text-slate-500/70) so light mode does not wash supporting copy out. */
+html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-400/"],
+html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-500/"],
+html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
+  color: #3d4c61 !important;
+}
+
+@media (max-width: 520px) {
+  .v39312-license-brand-centered .v39-license-brand__icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .v39312-license-copy-centered p {
+    max-width: 330px;
+  }
 }
