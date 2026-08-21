@@ -1,6 +1,13 @@
-# MONIEZI v39.3.13
+# MONIEZI v39.3.14
 
-## v39.3.13 Receipts state + onboarding badge + menu hierarchy
+## v39.3.14 Activation heading compact layout
+
+### Activation screen refinement
+- Places the key icon inline to the left of **Activate your copy**.
+- Keeps the heading group centered while reducing vertical height.
+- Moves the license-key field and activation CTA higher on phone screens.
+- No change to license validation, activation, or stored-license behavior.
+
 
 - Hides the green receipt-completion message when the current year has zero expenses; completion appears only when expenses exist and every one has a receipt.
 - Enlarges the first-run/demo-entry kicker ("Explore before you start" / "Ready for your first records") in light and dark mode.

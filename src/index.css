@@ -900,18 +900,20 @@ html {
 }
 
 .v39-license-card__heading {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: left;
 }
 
 .v39-license-card__key {
   display: grid;
   place-items: center;
-  width: 68px;
-  height: 68px;
-  border-radius: 18px;
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   color: #4d6fff;
   background: #f1f4ff;
 }
@@ -1147,8 +1149,8 @@ html {
   }
 
   .v39-license-card__key {
-    width: 62px;
-    height: 62px;
+    width: 40px;
+    height: 40px;
   }
 
   .v39-license-card h2 {
@@ -3648,4 +3650,13 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
    - First-run/demo kicker is larger and easier to read in both themes.
    - Receipt completion state is hidden when there are zero expenses.
    - Demo utility sits directly beneath Settings in the main menu.
+   ================================================================ */
+
+
+/* ================================================================
+   MONIEZI v39.3.14 — Activation heading compact layout
+   ----------------------------------------------------------------
+   - Key icon and "Activate your copy" now share one centered row.
+   - Reduces activation-header height so the license field and CTA sit higher
+     on phone screens without changing validation behavior.
    ================================================================ */
