@@ -1317,13 +1317,20 @@ export default function App() {
       // Check the internal scroll container first
       if (el) {
         const scrollTop = el.scrollTop;
-        if (scrollTop > 300) {
+        const remaining = Math.max(0, el.scrollHeight - scrollTop - el.clientHeight);
+        // Keep the floating control away from the final CTA / last card. It is
+        // useful mid-page, but it should disappear as the user approaches the
+        // bottom where primary actions live.
+        if (scrollTop > 300 && remaining > 190) {
           setShowScrollToTop(true);
           return;
         }
       }
-      // Also check window scroll (fallback for any layout)
-      if ((window.scrollY || window.pageYOffset || 0) > 300) {
+      // Also check window scroll (fallback for any layout), with the same
+      // near-bottom protection.
+      const windowScrollTop = window.scrollY || window.pageYOffset || 0;
+      const windowRemaining = Math.max(0, document.documentElement.scrollHeight - windowScrollTop - window.innerHeight);
+      if (windowScrollTop > 300 && windowRemaining > 190) {
         setShowScrollToTop(true);
         return;
       }
@@ -7728,6 +7735,26 @@ html.theme-light .dark-chrome .dark-chrome-nav-item { color: #e2e8f0 !important;
 html.theme-light .dark-chrome .dark-chrome-nav-item.active { color: #ffffff !important; }
 
 
+/* v39.4.3 — consistent mobile page width / horizontal gutters.
+   Every authenticated screen uses the same safe inset so cards never feel
+   flush with or wider than the phone viewport. */
+.v3943-mobile-gutters {
+  box-sizing: border-box;
+  padding-left: clamp(20px, 5.2vw, 24px) !important;
+  padding-right: clamp(20px, 5.2vw, 24px) !important;
+}
+.v3943-mobile-gutters > * {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+@media (min-width: 768px) {
+  .v3943-mobile-gutters {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
 /* iPhone transaction drawer containment pass */
 html, body, #root {
   max-width: 100%;
@@ -8394,7 +8421,7 @@ html, body, #root {
         />
       )}
 
-      <div key={`main-scroll-${currentPage}`} ref={mainScrollRef} className="main-scroll-lock v392-screen flex-1 min-h-0 overflow-y-auto px-4 sm:px-6 md:px-8 pt-5 sm:pt-6 md:pt-7 no-print custom-scrollbar" data-page={currentPage} data-billing-doc-type={billingDocType} style={{ paddingBottom: shouldHideBottomNav ? 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' : 'calc(11rem + env(safe-area-inset-bottom, 0px))' }} role="main">
+      <div key={`main-scroll-${currentPage}`} ref={mainScrollRef} className="main-scroll-lock v392-screen v3943-mobile-gutters flex-1 min-h-0 overflow-y-auto px-0 pt-5 sm:pt-6 md:pt-7 no-print custom-scrollbar" data-page={currentPage} data-billing-doc-type={billingDocType} style={{ paddingBottom: shouldHideBottomNav ? 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' : 'calc(11rem + env(safe-area-inset-bottom, 0px))' }} role="main">
 
       {/* Sample-data banner. Always visible while example records are loaded, so
           nobody mistakes them for real figures and the exit is always one tap. */}
@@ -9909,7 +9936,7 @@ html, body, #root {
               </div>
 
               <p className="text-slate-600 dark:text-slate-300 font-semibold leading-6">
-                {reportsMenuSection === 'menu' ? 'Choose the business question you want answered.' : 'Review the report below, then return to the Report Center for another view.'}
+                {reportsMenuSection === 'menu' ? 'View your business reports.' : 'Review the report below, then return to the Report Center for another view.'}
               </p>
 
               {reportsMenuSection === 'menu' && (
@@ -12814,14 +12841,14 @@ html, body, #root {
       </div>
 
       {/* Scroll to Top Button - rendered via Portal to escape overflow-hidden container */}
-      {showScrollToTop && !shouldHideBottomNav && createPortal(
+      {showScrollToTop && !shouldHideBottomNav && !(currentPage === Page.Dashboard && isAppEmpty) && createPortal(
         <button
           onClick={scrollToTop}
           className="no-print w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-lg shadow-slate-900/10 dark:shadow-black/30 hover:shadow-xl hover:scale-105"
           style={{
             position: 'fixed',
             right: '16px',
-            bottom: 'calc(5rem + env(safe-area-inset-bottom, 0px) + 20px)',
+            bottom: 'calc(5.75rem + env(safe-area-inset-bottom, 0px) + 20px)',
             zIndex: 99998,
             pointerEvents: 'auto',
           }}
@@ -13262,8 +13289,14 @@ html, body, #root {
 
       {/* Insights Modal */}
       {showInsights && (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/70 backdrop-blur-sm p-4 animate-in fade-in duration-200 modal-overlay">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-5xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800">
+        <div
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/70 backdrop-blur-sm px-5 py-5 animate-in fade-in duration-200 modal-overlay"
+          style={{
+            paddingTop: 'max(20px, env(safe-area-inset-top, 20px))',
+            paddingBottom: 'max(20px, env(safe-area-inset-bottom, 20px))',
+          }}
+        >
+          <div className="bg-white dark:bg-slate-900 w-full max-w-[520px] max-h-[calc(100dvh-40px)] rounded-xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800">
             <InsightsDashboard
               transactions={transactions}
               invoices={invoices}

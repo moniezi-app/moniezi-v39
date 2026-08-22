@@ -123,6 +123,7 @@ export default function InsightsDashboard({
       medium: insightsBySeverity.medium.length,
       low: insightsBySeverity.low.length,
       actionable: active.filter((i) => i.actionable).length,
+      dismissed: allInsights.filter((i) => dismissed.has(i.id)).length,
     };
   }, [allInsights, dismissed, insightsBySeverity]);
 
@@ -291,11 +292,12 @@ export default function InsightsDashboard({
   };
 
   return (
-    <div className="h-screen flex flex-col bg-white dark:bg-slate-950">
-      {/* Modern Clean Header */}
-      <div className="flex-shrink-0 relative px-6 py-6 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
+    <div className="flex max-h-[calc(100dvh-40px)] min-h-0 flex-col bg-white dark:bg-slate-950">
+      {/* Compact, content-driven header. The Insights panel should shrink when
+          there is little content instead of filling the entire phone height. */}
+      <div className="flex-shrink-0 relative px-5 py-5 sm:px-6 sm:py-6 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
         {/* Action Buttons */}
-        <div className="absolute top-6 right-6 flex items-center gap-3 z-10">
+        <div className="absolute top-5 right-5 sm:top-6 sm:right-6 flex items-center gap-2 z-10">
           <button
             onClick={handleRefresh}
             disabled={isRefreshing}
@@ -314,20 +316,20 @@ export default function InsightsDashboard({
         </div>
 
         {/* Title Section */}
-        <div className="pr-28 mb-5">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-2xl bg-purple-100 dark:bg-purple-900/30">
-              <BrainCircuit className="w-7 h-7 text-purple-600 dark:text-purple-400" strokeWidth={2} />
+        <div className="pr-[92px] mb-5">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-100 dark:bg-purple-900/30">
+              <BrainCircuit className="w-6 h-6 text-purple-600 dark:text-purple-400" strokeWidth={2} />
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-1">Business Insights</h2>
+            <div className="min-w-0">
+              <h2 className="text-[21px] sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight mb-1">Business Insights</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">{stats.active} business signals</p>
             </div>
           </div>
         </div>
 
-        {/* Quick Stats Pills - Modern Flat Design */}
-        <div className="flex flex-wrap items-center gap-2.5">
+        {/* Responsive 2-column stats prevent arbitrary pill wrapping on phones. */}
+        <div className="grid grid-cols-2 gap-2.5">
           {stats.high > 0 && (
             <div className="px-4 py-2 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold border border-red-200 dark:border-red-800/50">
               {stats.high} High
@@ -343,17 +345,20 @@ export default function InsightsDashboard({
               {stats.actionable} Need Action
             </div>
           )}
-          <button
-            onClick={resetDismissed}
-            className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold transition-colors border border-slate-200 dark:border-slate-800"
-          >
-            Reset Dismissed
-          </button>
+          {stats.dismissed > 0 && (
+            <button
+              onClick={resetDismissed}
+              className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold transition-colors border border-slate-200 dark:border-slate-800"
+            >
+              Reset Dismissed
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Full-Height Scrollable Content - Like Weather App */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Content grows naturally; it becomes internally scrollable only when the
+          content would exceed the available phone viewport. */}
+      <div className="min-h-0 overflow-y-auto overscroll-contain">
         {stats.active === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 px-6">
             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center mb-4 shadow-lg">
@@ -374,8 +379,8 @@ export default function InsightsDashboard({
           </>
         )}
         
-        {/* Bottom Padding - Generous space to prevent cutoff */}
-        <div className="h-32" />
+        {/* Modest bottom clearance without forcing an empty full-height panel. */}
+        <div className="h-6" />
       </div>
     </div>
   );

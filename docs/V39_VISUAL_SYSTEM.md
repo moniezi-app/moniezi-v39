@@ -1,3 +1,11 @@
+## v39.4.3 responsive width + overlay correction
+
+- Main authenticated screens share one mobile horizontal-gutter rule instead of relying on page-by-page width assumptions.
+- Direct children of the main scroll surface are explicitly constrained to the available inline size.
+- Business Insights now uses content-driven height with a viewport maximum; short states no longer render a tall empty shell.
+- Floating scroll-to-top visibility accounts for distance from the bottom so final actions remain unobstructed.
+- Reports uses direct report-oriented intro copy.
+
 ## v39.4.2 installed-success simplification
 
 - Removes the browser-tab licensing explanation from the mobile install gate.

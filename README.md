@@ -1,5 +1,14 @@
-# MONIEZI v39.4.2
+# MONIEZI v39.4.3
 
+## v39.4.3 Responsive width + overlay corrections
+
+- Normalizes authenticated mobile screen gutters with one safe horizontal inset across Home, Clients, Jobs, Estimates, Invoices, Mileage, Reports, Receipts, and other main screens.
+- Adds containment to direct screen children so cards and working surfaces cannot visually overrun the phone viewport.
+- Makes Business Insights content-driven instead of forcing a full-screen-height panel; long insight content still scrolls inside the modal.
+- Uses a compact 2-column Insights stats layout and only shows **Reset Dismissed** when dismissed insights actually exist.
+- Prevents the floating scroll-to-top control from covering final CTAs by hiding it near the bottom; it is also suppressed on the completely empty Home onboarding state.
+- Changes Reports intro copy from **Choose the business question you want answered.** to **View your business reports.**
+- Preserves v39.4.2 installation behavior, licensing, Demo, records, calculations, and illustrations.
 
 ## v39.4.2 Installed-success simplification
 
