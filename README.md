@@ -1,4 +1,13 @@
-# MONIEZI v39.4.1
+# MONIEZI v39.4.2
+
+
+## v39.4.2 Installed-success simplification
+
+- Removes the technical footer sentence about license activation happening in the browser tab.
+- Simplifies the post-install screen to **MONIEZI is installed** and **Open MONIEZI from your Home Screen to get started.**
+- Restores a single **Got it** action that attempts to close the browser tab after installation, matching the simpler pre-v39.4 onboarding behavior.
+- Preserves the official mobile install paths introduced in v39.4.1: Chrome on Android and Safari on iPhone/iPad.
+- No changes to licensing, PWA installability, business data, Demo, navigation, or calculations.
 
 ## v39.4.1 Simplified supported mobile installation
 

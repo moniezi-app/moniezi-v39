@@ -1,3 +1,10 @@
+## v39.4.2 installed-success simplification
+
+- Removes the browser-tab licensing explanation from the mobile install gate.
+- Post-install confirmation is reduced to a clear success message plus **Got it**.
+- **Got it** attempts to close the browser tab so the customer can continue from the installed MONIEZI Home Screen icon.
+- Chrome/Android and Safari/iPhone/iPad remain the only officially supported mobile installation paths.
+
 ## v39.4.1 simplified supported mobile installation
 
 Real-device installation QA reduced MONIEZI's official mobile install matrix to two predictable paths:

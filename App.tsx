@@ -7387,12 +7387,18 @@ export default function App() {
                 <h1 className="mt-4 text-center font-brand text-[27px] font-extrabold leading-[1.15] tracking-[-0.035em] text-[#0B1739]">
                   MONIEZI is installed
                 </h1>
-                <p className="mx-auto mt-3 max-w-[31ch] text-center text-[15px] font-semibold leading-6 text-[#43536B]">
-                  Open MONIEZI from your Home Screen to activate your copy.
+                <p className="mx-auto mt-3 max-w-[24ch] text-center text-[15px] font-semibold leading-6 text-[#43536B]">
+                  Open MONIEZI from your Home Screen to get started.
                 </p>
-                <div className="mt-6 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-4 text-center text-[14px] font-bold leading-6 text-emerald-900">
-                  Your browser tab is finished. Continue from the MONIEZI icon on your Home Screen.
-                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    try { window.close(); } catch { /* browser may refuse */ }
+                  }}
+                  className="mt-7 w-full rounded-lg bg-[#2563EB] px-5 py-[15px] text-[16px] font-extrabold text-white shadow-[0_14px_28px_rgba(37,99,235,0.24)] transition active:scale-[0.99]"
+                >
+                  Got it
+                </button>
               </>
             ) : supportedPath ? (
               <>
@@ -7458,9 +7464,6 @@ export default function App() {
             )}
           </section>
 
-          <p className="mx-auto mt-4 max-w-[34ch] text-center text-[12px] font-semibold leading-5 text-[#61718A]">
-            License activation happens inside the installed MONIEZI app, not in this browser tab.
-          </p>
         </main>
 
         {supportedPath && installGuideBrowser !== null && !justInstalled && (
