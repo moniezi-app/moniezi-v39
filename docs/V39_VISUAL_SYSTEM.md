@@ -1,3 +1,9 @@
+## v39.4.8 tighter radius + stronger first-run state badge
+
+- Tightened non-pill radius tokens to 10px card / 8px surface / 7px control / 8px icon / 6px small.
+- Preserved semantic pills and circles.
+- Increased the Home first-run state badge size, padding, icon presence, and contrast in both Explore and Ready states.
+
 ## v39.4.7 GitHub Actions typecheck fix
 
 - Adds `Page.Insights` to the exhaustive routed-page safety list so the v39.4.6 full-page Insights route passes TypeScript and cannot fall through to the navigation-error safety net.
@@ -52,7 +58,7 @@ Real-device installation QA reduced MONIEZI's official mobile install matrix to 
 
 # MONIEZI v39 Visual System
 
-Version: 39.4.7
+Version: 39.4.8
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 

@@ -2536,17 +2536,18 @@ html {
   align-items: center;
   align-self: center;
   justify-content: center;
-  gap: 9px;
-  border: 1px solid rgba(91, 169, 255, 0.25);
+  gap: 11px;
+  border: 1px solid rgba(91, 169, 255, 0.32);
   border-radius: 999px;
-  padding: 10px 16px;
+  padding: 13px 20px;
+  min-height: 48px;
   background: var(--v391-control-bg);
   color: #2f68d7 !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 8px 20px rgba(24, 60, 120, 0.08);
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: 14px;
+  line-height: 1.25;
   font-weight: 850;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.075em;
   text-align: center;
   text-transform: uppercase;
 }
@@ -2558,6 +2559,7 @@ html {
 
 .v3931-first-run-kicker__icon {
   display: inline-grid;
+  transform: scale(1.12);
   place-items: center;
   flex: 0 0 auto;
   color: #4f7cff;
@@ -2708,7 +2710,7 @@ html {
 
 @media (max-width: 390px) {
   .v3931-first-run-card { padding: 15px; }
-  .v3931-first-run-kicker { padding: 9px 13px; font-size: 11px; letter-spacing: 0.075em; }
+  .v3931-first-run-kicker { padding: 12px 16px; min-height: 46px; font-size: 13px; letter-spacing: 0.065em; }
   .v3931-first-run-visual { min-height: 196px; padding-inline: 7px; }
   .v3931-first-run-title { font-size: 19px; }
 }
@@ -3398,11 +3400,11 @@ html {
    circular controls, avatars, progress tracks, and status dots.
    ================================================================ */
 :root {
-  --v3938-radius-card: 12px;
-  --v3938-radius-surface: 10px;
-  --v3938-radius-control: 8px;
-  --v3938-radius-icon: 9px;
-  --v3938-radius-small: 7px;
+  --v3938-radius-card: 10px;
+  --v3938-radius-surface: 8px;
+  --v3938-radius-control: 7px;
+  --v3938-radius-icon: 8px;
+  --v3938-radius-small: 6px;
 }
 
 /* Main Luminous Glass system. */
@@ -3659,4 +3661,15 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
    - Key icon and "Activate your copy" now share one centered row.
    - Reduces activation-header height so the license field and CTA sit higher
      on phone screens without changing validation behavior.
+   ================================================================ */
+
+
+/* ================================================================
+   MONIEZI v39.4.8 — tighter radius + stronger first-run state badge
+   ----------------------------------------------------------------
+   - Tightens the authenticated app radius scale to a restrained 10/8/7px
+     hierarchy inspired by the approved reference application.
+   - Keeps semantic pills and circular controls intentionally round.
+   - Makes Explore before you start / Ready for your first records more
+     prominent without changing the illustration or first-run workflow.
    ================================================================ */

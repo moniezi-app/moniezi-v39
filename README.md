@@ -1,4 +1,11 @@
-# MONIEZI v39.4.7
+# MONIEZI v39.4.8
+## v39.4.8 radius + first-run prominence
+
+- Tightened application-wide non-pill corner radii to a restrained 10px card / 8px surface / 7px control scale.
+- Preserved true circles and pill controls.
+- Enlarged the Home empty-state status badge in both states: **Explore before you start** and **Ready for your first records**.
+- No illustration, licensing, demo, records, or navigation behavior changes.
+
 
 ## v39.4.7 GitHub Actions typecheck fix
 
