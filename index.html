@@ -10,10 +10,11 @@
     <meta name="description" content="Private, offline bookkeeping for small businesses — income, expenses, invoices, estimates, mileage, receipts, jobs, and tax-ready reports." />
 
     <!--
-      v39.4.10 deterministic startup surface.
+      v39.4.11 pixel-stable install startup surface.
       On the two officially supported mobile browser install paths, the first HTML
-      frame mirrors the React Install MONIEZI screen so the page does not jump while
-      the JS bundle and Plus Jakarta Sans font assets finish loading. Installed/desktop
+      frame and the React Install MONIEZI screen share one isolated, exact CSS geometry.
+      The installer is explicitly exempt from the app-wide webfont/type-scale/root-rem
+      system so hydration cannot change its font metrics or box sizing. Installed/desktop
       launches retain the simple centered app mark.
     -->
     <style>
@@ -181,6 +182,163 @@
       @media (min-width: 640px) {
         #app-loader .boot-install-card { padding: 32px 28px; }
         #app-loader .boot-install-title { font-size: 31px; }
+      }
+
+      /*
+        v39.4.11 — shared pre-React + React installer geometry.
+        These selectors deliberately outrank the later global MONIEZI typography
+        rules. Every first-screen metric is px-based (except the stable svh top
+        offset), and box-sizing is fixed before Tailwind/preflight arrives.
+      */
+      .moniezi-install-surface,
+      .moniezi-install-surface *,
+      .moniezi-install-surface *::before,
+      .moniezi-install-surface *::after {
+        box-sizing: border-box !important;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+        -webkit-text-size-adjust: none !important;
+        text-size-adjust: none !important;
+      }
+
+      .moniezi-install-surface {
+        color: #0B1739;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      .moniezi-install-surface .mi-main {
+        width: 100% !important;
+        max-width: 430px !important;
+        margin: 0 auto !important;
+        padding-top: clamp(36px, 7svh, 68px) !important;
+        padding-bottom: 24px !important;
+      }
+
+      .moniezi-install-surface .mi-card {
+        width: 100% !important;
+        margin: 0 !important;
+        border: 1px solid #DCE6F8 !important;
+        border-radius: 8px !important;
+        background: rgba(255,255,255,0.95) !important;
+        padding: 28px 20px !important;
+        box-shadow: 0 24px 70px rgba(15,23,42,0.12) !important;
+      }
+
+      .moniezi-install-surface .mi-logo {
+        width: 74px !important;
+        height: 74px !important;
+        display: block !important;
+        margin: 0 auto !important;
+        object-fit: contain !important;
+        filter: drop-shadow(0 12px 24px rgba(47,103,246,0.18)) !important;
+      }
+
+      .moniezi-install-surface .mi-kicker {
+        margin: 20px 0 0 !important;
+        text-align: center !important;
+        font-size: 12px !important;
+        line-height: 16.2px !important;
+        font-weight: 800 !important;
+        letter-spacing: 1.44px !important;
+        text-transform: uppercase !important;
+        color: #45658F !important;
+      }
+
+      .moniezi-install-surface .mi-title {
+        margin: 8px 0 0 !important;
+        text-align: center !important;
+        font-size: 29px !important;
+        line-height: 31.32px !important;
+        font-weight: 800 !important;
+        letter-spacing: -1.16px !important;
+        color: #0B1739 !important;
+      }
+
+      .moniezi-install-surface .mi-copy {
+        max-width: 32ch !important;
+        margin: 16px auto 0 !important;
+        text-align: center !important;
+        font-size: 15px !important;
+        line-height: 24px !important;
+        font-weight: 600 !important;
+        letter-spacing: 0 !important;
+        color: #43536B !important;
+      }
+
+      .moniezi-install-surface .mi-platform {
+        width: 100% !important;
+        margin: 20px auto 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        text-align: center !important;
+        font-size: 13px !important;
+        line-height: 17.55px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0 !important;
+        color: #52647D !important;
+      }
+
+      .moniezi-install-surface .mi-platform svg {
+        width: 16px !important;
+        height: 16px !important;
+        flex: 0 0 16px !important;
+        color: #4473E8 !important;
+      }
+
+      .moniezi-install-surface .mi-button {
+        width: 100% !important;
+        min-height: 50px !important;
+        margin: 28px 0 0 !important;
+        padding: 15px 20px !important;
+        border: 0 !important;
+        border-radius: 6px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        background: #2563EB !important;
+        color: #ffffff !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0 !important;
+        box-shadow: 0 14px 28px rgba(37,99,235,0.24) !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+      }
+
+      .moniezi-install-surface .mi-button svg {
+        width: 20px !important;
+        height: 20px !important;
+        flex: 0 0 20px !important;
+      }
+
+      .moniezi-install-surface .mi-existing {
+        margin: 20px 0 0 !important;
+        text-align: center !important;
+        font-size: 13px !important;
+        line-height: 20px !important;
+        font-weight: 600 !important;
+        letter-spacing: 0 !important;
+        color: #52647D !important;
+      }
+
+      .moniezi-install-surface .mi-existing strong,
+      .moniezi-install-surface .mi-existing span {
+        color: #1E3A66 !important;
+        font-weight: 800 !important;
+      }
+
+      @media (min-width: 640px) {
+        .moniezi-install-surface .mi-card { padding: 32px 28px !important; }
+        .moniezi-install-surface .mi-title {
+          font-size: 31px !important;
+          line-height: 33.48px !important;
+          letter-spacing: -1.24px !important;
+        }
       }
     </style>
 
@@ -623,23 +781,23 @@
       <!-- Instant deterministic startup surface. React replaces this automatically. -->
       <div id="app-loader" aria-hidden="true">
         <div class="mark"><img src="icons/icon-192.png" alt="" /></div>
-        <div class="boot-install-shell">
-          <main class="boot-install-main">
-            <section class="boot-install-card">
-              <img class="boot-install-logo" src="icons/icon-192.png" alt="" />
-              <div class="boot-install-kicker">First step</div>
-              <h1 class="boot-install-title">Install MONIEZI</h1>
-              <p class="boot-install-copy">Add MONIEZI to your Home Screen first. Then open it and activate your copy.</p>
-              <div class="boot-install-platform">
+        <div class="boot-install-shell moniezi-install-surface">
+          <main class="boot-install-main mi-main">
+            <section class="boot-install-card mi-card">
+              <img class="boot-install-logo mi-logo" src="icons/icon-192.png" alt="" />
+              <div class="boot-install-kicker mi-kicker">First step</div>
+              <h1 class="boot-install-title mi-title">Install MONIEZI</h1>
+              <p class="boot-install-copy mi-copy">Add MONIEZI to your Home Screen first. Then open it and activate your copy.</p>
+              <div class="boot-install-platform mi-platform">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
                 <span class="boot-android-label">Chrome on Android</span>
                 <span class="boot-ios-label">Safari on iPhone / iPad</span>
               </div>
-              <div class="boot-install-button">
+              <div class="boot-install-button mi-button">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
                 <span>Install MONIEZI</span>
               </div>
-              <p class="boot-install-existing">Already installed? <strong>Open MONIEZI from your Home Screen.</strong></p>
+              <p class="boot-install-existing mi-existing">Already installed? <strong>Open MONIEZI from your Home Screen.</strong></p>
             </section>
           </main>
         </div>

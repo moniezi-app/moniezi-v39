@@ -5,12 +5,12 @@
  * It defines the shared visual language that v39 screens can opt into one by one.
  */
 
-export const V39_VISUAL_SYSTEM_VERSION = '39.4.10';
+export const V39_VISUAL_SYSTEM_VERSION = '39.4.11';
 
 
 
 /**
- * v39.4.10 preserves the 8/6/5px radius hierarchy and stabilizes the first browser install frame.
+ * v39.4.11 preserves the 8/6/5px radius hierarchy and isolates the browser installer from global font/type-scale/root-rem changes.
  * These names intentionally describe surface roles rather than screen content so
  * the dashboard, lists, and future business modules can reuse one material system.
  */

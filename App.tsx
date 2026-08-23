@@ -7371,24 +7371,20 @@ export default function App() {
 
     return (
       <div
-        className="moniezi-install-gate fixed inset-0 z-[95] overflow-y-auto bg-[linear-gradient(180deg,#f9fbff_0%,#f3f6fc_100%)] px-4 text-[#0B1739]"
+        className="moniezi-install-gate moniezi-install-surface fixed inset-0 z-[95] overflow-y-auto bg-[linear-gradient(180deg,#f9fbff_0%,#f3f6fc_100%)] text-[#0B1739]"
         style={{
           paddingTop: 'max(24px, env(safe-area-inset-top))',
+          paddingRight: '16px',
           paddingBottom: '24px',
+          paddingLeft: '16px',
         }}
       >
-        <main
-          className="mx-auto w-full max-w-[430px]"
-          style={{
-            paddingTop: 'clamp(36px, 7svh, 68px)',
-            paddingBottom: '24px',
-          }}
-        >
-          <section className="rounded-lg border border-[#DCE6F8] bg-white/95 px-5 py-7 shadow-[0_24px_70px_rgba(15,23,42,0.12)] ring-1 ring-white sm:px-7 sm:py-8">
+        <main className="mi-main">
+          <section className="mi-card">
             <img
               src={`${import.meta.env.BASE_URL}icons/icon-192.png`}
               alt=""
-              className="mx-auto h-[74px] w-[74px] object-contain drop-shadow-[0_12px_24px_rgba(47,103,246,0.18)]"
+              className="mi-logo"
               draggable={false}
             />
 
@@ -7415,32 +7411,32 @@ export default function App() {
               </>
             ) : supportedPath ? (
               <>
-                <div className="mt-5 text-center text-[12px] font-extrabold uppercase tracking-[0.12em] text-[#45658F]">
+                <div className="mi-kicker">
                   First step
                 </div>
-                <h1 className="mt-2 text-center font-brand text-[29px] font-extrabold leading-[1.08] tracking-[-0.04em] text-[#0B1739] sm:text-[31px]">
+                <h1 className="mi-title">
                   Install MONIEZI
                 </h1>
-                <p className="mx-auto mt-4 max-w-[32ch] text-center text-[15px] font-semibold leading-[1.6] text-[#43536B]">
+                <p className="mi-copy">
                   Add MONIEZI to your Home Screen first. Then open it and activate your copy.
                 </p>
 
-                <div className="mx-auto mt-5 inline-flex w-full items-center justify-center gap-2 text-center text-[13px] font-bold text-[#52647D]">
-                  <Smartphone size={16} strokeWidth={2} className="text-[#4473E8]" />
+                <div className="mi-platform">
+                  <Smartphone size={16} strokeWidth={2} />
                   <span>{requiredBrowser} on {platformLabel}</span>
                 </div>
 
                 <button
                   type="button"
                   onClick={handleMobileInstallAction}
-                  className="mt-7 flex w-full items-center justify-center gap-2 rounded-[6px] bg-[#2563EB] px-5 py-[15px] text-[16px] font-extrabold text-white shadow-[0_14px_28px_rgba(37,99,235,0.24)] transition active:scale-[0.99]"
+                  className="mi-button"
                 >
                   <Download size={20} strokeWidth={2.2} />
-                  Install MONIEZI
+                  <span>Install MONIEZI</span>
                 </button>
 
-                <p className="mt-5 text-center text-[13px] font-semibold leading-5 text-[#52647D]">
-                  Already installed? <span className="font-extrabold text-[#1E3A66]">Open MONIEZI from your Home Screen.</span>
+                <p className="mi-existing">
+                  Already installed? <span>Open MONIEZI from your Home Screen.</span>
                 </p>
               </>
             ) : (

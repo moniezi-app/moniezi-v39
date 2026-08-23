@@ -3683,11 +3683,10 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
    ================================================================ */
 
 /* ---------------------------------------------------------
-   v39.4.10 — deterministic browser install screen
-   Keep the first-run installer on a stable system font stack so the locally
-   bundled Plus Jakarta Sans webfont cannot trigger a late font-metric swap.
-   The installer is top-anchored rather than vertically centered, preventing
-   Chrome/Safari dynamic browser chrome from shifting the whole card.
+   v39.4.11 — pixel-stable browser install handoff
+   The exact startup geometry lives inline in index.html so it exists before
+   the JS/CSS bundle. This duplicate font fence is intentional defense-in-depth:
+   the install surface must never inherit the app webfont during hydration.
    --------------------------------------------------------- */
 .moniezi-install-gate,
 .moniezi-install-gate * {

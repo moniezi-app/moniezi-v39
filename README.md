@@ -1,3 +1,11 @@
+# MONIEZI v39.4.11
+## v39.4.11 pixel-stable Install MONIEZI handoff
+- Uses one shared installer geometry for the pre-React startup frame and the hydrated React screen.
+- Isolates the installer from Plus Jakarta Sans, the global MONIEZI type-scale overrides, and the 106.25% root rem scale.
+- Locks box sizing before Tailwind/preflight loads, preventing width/padding changes during hydration.
+- Uses explicit px typography/line-height/letter-spacing for the first install screen so its text metrics cannot redraw after mount.
+- Keeps the v39.4.10 stable top-anchored installer and the v39.4.9 8/6/5px radius system.
+
 # MONIEZI v39.4.10
 ## v39.4.10 stable Install MONIEZI startup
 
