@@ -1,4 +1,13 @@
-# MONIEZI v39.4.5
+# MONIEZI v39.4.6
+
+## v39.4.6 Full-page Business Insights + empty-Home scroll-to-top
+
+- Converts Business Insights from a modal/popup into a normal routed MONIEZI screen opened from the permanent brain icon or the Home Insights action.
+- Removes the modal shell, close button, sticky/internal header behavior, nested Insights scroll container, and the redundant `business signals` count line.
+- Keeps the portrait-first summary: High, Medium, Need Action, and Reset Dismissed each use their own vertical row.
+- Business Insights now scrolls with the same main app viewport as Clients, Jobs, Reports, and other authenticated pages; normal browser/app navigation leaves the screen.
+- Restores the scroll-to-top control on the no-demo / empty Home state. Once activated after scrolling, it remains visible through the bottom just like other long screens.
+- Preserves v39.4.5 portrait spacing, v39.4.4 shared mobile geometry, Chrome/Safari install behavior, licensing, Demo, records, and calculations.
 
 ## v39.4.5 Portrait-first Business Insights + persistent scroll-to-top
 

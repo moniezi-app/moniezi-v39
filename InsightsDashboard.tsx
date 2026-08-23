@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  X,
   RefreshCcw,
   AlertTriangle,
   Info,
@@ -35,7 +34,6 @@ type Props = {
   mileageTrips: MileageTrip[];
   taxPayments: TaxPayment[];
   settings: UserSettings;
-  onClose: () => void;
 };
 
 function getCategoryIcon(category: InsightCategory) {
@@ -52,31 +50,22 @@ function getCategoryIcon(category: InsightCategory) {
   }
 }
 
-function SeverityIcon({ severity }: { severity: Insight["severity"] }) {
-  if (severity === "high") return <AlertTriangle className="w-5 h-5" />;
-  if (severity === "medium") return <Info className="w-5 h-5" />;
-  return <CheckCircle2 className="w-5 h-5" />;
-}
-
 function severityColors(severity: Insight["severity"]) {
   switch (severity) {
     case "high":
       return {
         icon: "text-red-500",
-        bg: "bg-red-50 dark:bg-red-950/10",
-        border: "border-red-200 dark:border-red-900/20",
+        bg: "bg-red-50 dark:bg-red-950/20",
       };
     case "medium":
       return {
         icon: "text-amber-500",
-        bg: "bg-amber-50 dark:bg-amber-950/10",
-        border: "border-amber-200 dark:border-amber-900/20",
+        bg: "bg-amber-50 dark:bg-amber-950/20",
       };
     default:
       return {
         icon: "text-emerald-500",
-        bg: "bg-emerald-50 dark:bg-emerald-950/10",
-        border: "border-emerald-200 dark:border-emerald-900/20",
+        bg: "bg-emerald-50 dark:bg-emerald-950/20",
       };
   }
 }
@@ -88,10 +77,9 @@ export default function InsightsDashboard({
   mileageTrips,
   taxPayments,
   settings,
-  onClose,
 }: Props) {
   const [dismissed, setDismissed] = useState<Set<string>>(new Set());
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set()); // All collapsed by default
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
   const [expandedInsights, setExpandedInsights] = useState<Set<string>>(new Set());
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -106,7 +94,7 @@ export default function InsightsDashboard({
   const insightsBySeverity = useMemo(() => {
     const active = allInsights.filter((i) => !dismissed.has(i.id));
     active.sort((a, b) => b.priority - a.priority);
-    
+
     return {
       high: active.filter((i) => i.severity === "high"),
       medium: active.filter((i) => i.severity === "medium"),
@@ -117,11 +105,9 @@ export default function InsightsDashboard({
   const stats = useMemo(() => {
     const active = allInsights.filter((i) => !dismissed.has(i.id));
     return {
-      total: allInsights.length,
       active: active.length,
       high: insightsBySeverity.high.length,
       medium: insightsBySeverity.medium.length,
-      low: insightsBySeverity.low.length,
       actionable: active.filter((i) => i.actionable).length,
       dismissed: allInsights.filter((i) => dismissed.has(i.id)).length,
     };
@@ -143,251 +129,201 @@ export default function InsightsDashboard({
   };
 
   const toggleCategory = (severity: string) => {
-    const newExpanded = new Set(expandedCategories);
-    if (newExpanded.has(severity)) {
-      newExpanded.delete(severity);
-    } else {
-      newExpanded.add(severity);
-    }
-    setExpandedCategories(newExpanded);
+    const next = new Set(expandedCategories);
+    if (next.has(severity)) next.delete(severity);
+    else next.add(severity);
+    setExpandedCategories(next);
   };
 
   const toggleInsightDetail = (id: string) => {
-    const newExpanded = new Set(expandedInsights);
-    if (newExpanded.has(id)) {
-      newExpanded.delete(id);
-    } else {
-      newExpanded.add(id);
-    }
-    setExpandedInsights(newExpanded);
+    const next = new Set(expandedInsights);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    setExpandedInsights(next);
   };
 
   const renderInsightSection = (severity: "high" | "medium" | "low", insights: Insight[]) => {
+    if (insights.length === 0) return null;
+
     const isExpanded = expandedCategories.has(severity);
     const colors = severityColors(severity);
     const labels = {
-      high: { title: "High Priority", count: insights.length, icon: AlertTriangle },
-      medium: { title: "Medium Priority", count: insights.length, icon: Info },
-      low: { title: "Good News", count: insights.length, icon: CheckCircle2 },
+      high: { title: "High Priority", icon: AlertTriangle },
+      medium: { title: "Medium Priority", icon: Info },
+      low: { title: "Good News", icon: CheckCircle2 },
     };
     const label = labels[severity];
     const Icon = label.icon;
 
-    if (insights.length === 0) return null;
-
     return (
-      <div key={severity} className="border-b border-slate-200 dark:border-slate-800">
-        {/* Section Header - Collapsible */}
+      <section key={severity} className="overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
         <button
+          type="button"
           onClick={() => toggleCategory(severity)}
-          className="w-full px-6 py-6 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors"
+          className="flex w-full items-center justify-between gap-4 px-4 py-5 text-left transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/60 sm:px-5"
         >
-          <div className="flex items-center gap-4">
-            <div className={`p-3 rounded-xl ${colors.bg}`}>
+          <div className="flex min-w-0 items-center gap-3.5">
+            <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${colors.bg}`}>
               <Icon className={`w-5 h-5 ${colors.icon}`} />
             </div>
-            <div className="text-left">
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+            <div className="min-w-0">
+              <h3 className="text-[18px] font-bold leading-tight text-slate-900 dark:text-white">
                 {label.title}
               </h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                {label.count} {label.count === 1 ? 'insight' : 'insights'}
+              <p className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">
+                {insights.length} {insights.length === 1 ? "insight" : "insights"}
               </p>
             </div>
           </div>
           <ChevronDown
-            className={`w-6 h-6 text-slate-400 transition-transform ${
-              isExpanded ? "rotate-180" : ""
-            }`}
+            className={`h-6 w-6 shrink-0 text-slate-400 transition-transform ${isExpanded ? "rotate-180" : ""}`}
           />
         </button>
 
-        {/* Expanded Insights */}
         {isExpanded && (
-          <div className="bg-slate-50/50 dark:bg-slate-950/20">
+          <div className="border-t border-slate-200 bg-slate-50/60 dark:border-slate-800 dark:bg-slate-950/25">
             {insights.map((insight, index) => {
               const isDetailExpanded = expandedInsights.has(insight.id);
-              
+
               return (
-                <div
+                <article
                   key={insight.id}
-                  className={`${index !== 0 ? 'border-t border-slate-200 dark:border-slate-800' : ''}`}
+                  className={`${index !== 0 ? "border-t border-slate-200 dark:border-slate-800" : ""} px-4 py-5 sm:px-5 sm:py-6`}
                 >
-                  {/* Mobile-First Card Layout */}
-                  <div className="p-4 sm:p-6 hover:bg-white dark:hover:bg-slate-900/30 transition-colors">
-                    
-                    {/* Top Row: Icon + Title (Single Line) */}
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg ${colors.bg} flex items-center justify-center`}>
-                        {getCategoryIcon(insight.category)}
-                      </div>
-                      <h4 className="flex-1 text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">
-                        {insight.title}
-                      </h4>
+                  <div className="flex items-start gap-3.5">
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${colors.bg} ${colors.icon}`}>
+                      {getCategoryIcon(insight.category)}
                     </div>
+                    <h4 className="min-w-0 flex-1 text-[17px] font-bold leading-snug text-slate-900 dark:text-white">
+                      {insight.title}
+                    </h4>
+                  </div>
 
-                    {/* Message - Full Width */}
-                    <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                      {insight.message}
-                    </p>
+                  <p className="mt-4 text-[15px] font-medium leading-6 text-slate-600 dark:text-slate-300">
+                    {insight.message}
+                  </p>
 
-                    {/* Badges Row - Stack on Mobile */}
-                    <div className="flex flex-wrap items-center gap-2 mb-4">
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold capitalize">
-                        {insight.category}
-                      </span>
-                      {insight.actionable && (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-bold">
-                          <Target className="w-3 h-3" />
-                          Action
+                  <div className="mt-4 space-y-2">
+                    <span className="inline-flex items-center rounded-full bg-slate-200 px-3 py-1.5 text-xs font-semibold capitalize text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                      {insight.category}
+                    </span>
+                    {insight.actionable && (
+                      <div>
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-purple-100 px-3 py-1.5 text-xs font-bold text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">
+                          <Target className="h-3.5 w-3.5" /> Action
                         </span>
-                      )}
-                    </div>
-
-                    {/* Expandable Recommendation Detail */}
-                    {insight.detail && (
-                      <div className="mb-4">
-                        {isDetailExpanded && (
-                          <div className="mb-3 p-4 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                            <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-                              {insight.detail}
-                            </p>
-                          </div>
-                        )}
-                        <button
-                          onClick={() => toggleInsightDetail(insight.id)}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600 text-white text-sm font-semibold transition-colors"
-                        >
-                          {isDetailExpanded ? (
-                            <>
-                              <ChevronUp className="w-4 h-4" />
-                              Hide Details
-                            </>
-                          ) : (
-                            <>
-                              <ChevronRight className="w-4 h-4" />
-                              View Recommendation
-                            </>
-                          )}
-                        </button>
                       </div>
                     )}
-
-                    {/* Dismiss Button - Full Width on Mobile */}
-                    <button
-                      onClick={() => dismiss(insight.id)}
-                      className="w-full sm:w-auto px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-semibold transition-colors"
-                    >
-                      Dismiss
-                    </button>
-
                   </div>
-                </div>
+
+                  {insight.detail && (
+                    <div className="mt-5">
+                      {isDetailExpanded && (
+                        <div className="mb-3 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900">
+                          <p className="text-[15px] font-medium leading-6 text-slate-700 dark:text-slate-300">
+                            {insight.detail}
+                          </p>
+                        </div>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => toggleInsightDetail(insight.id)}
+                        className="flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600"
+                      >
+                        {isDetailExpanded ? (
+                          <><ChevronUp className="h-4 w-4" /> Hide Details</>
+                        ) : (
+                          <><ChevronRight className="h-4 w-4" /> View Recommendation</>
+                        )}
+                      </button>
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => dismiss(insight.id)}
+                    className="mt-3 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800"
+                  >
+                    Dismiss
+                  </button>
+                </article>
               );
             })}
           </div>
         )}
-      </div>
+      </section>
     );
   };
 
   return (
-    <div className="flex max-h-[calc(100dvh-40px)] min-h-0 flex-col bg-white dark:bg-slate-950">
-      {/* v39.4.5 — portrait-first Insights header. Utility controls live on
-          their own row; the title and signal summary flow vertically so the
-          phone layout never has to compress important information sideways. */}
-      <div className="flex-shrink-0 px-5 pt-5 pb-7 sm:px-6 sm:pt-6 sm:pb-8 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
-        {/* Utility controls — deliberately separate from the title row. */}
-        <div className="flex items-center justify-end gap-3 mb-7">
-          <button
-            onClick={handleRefresh}
-            disabled={isRefreshing}
-            className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all disabled:opacity-50"
-            title="Refresh"
-            aria-label="Refresh business insights"
-          >
-            <RefreshCcw className={`w-5 h-5 ${isRefreshing ? "animate-spin" : ""}`} />
-          </button>
-          <button
-            onClick={onClose}
-            className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all"
-            title="Close"
-            aria-label="Close business insights"
-          >
-            <X className="w-5 h-5" />
-          </button>
+    <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 pb-24">
+      {/* v39.4.6 — Business Insights is a normal routed MONIEZI page. There is
+          no modal shell, close button, sticky internal header, or nested scroll. */}
+      <div className="v392-page-header flex items-center gap-3">
+        <div className="v392-page-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400">
+          <BrainCircuit size={23} strokeWidth={1.8} />
         </div>
-
-        {/* Title — icon and name get their own full-width row. */}
-        <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-purple-100 dark:bg-purple-900/30">
-            <BrainCircuit className="w-7 h-7 text-purple-600 dark:text-purple-400" strokeWidth={2} />
-          </div>
-          <h2 className="min-w-0 whitespace-nowrap text-[22px] sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-none">
-            Business Insights
-          </h2>
-        </div>
-
-        <p className="mt-4 text-base text-slate-600 dark:text-slate-300 font-medium">
-          {stats.active} business signals
-        </p>
-
-        {/* Portrait-first summary: one status per line, never a grid. */}
-        {(stats.high > 0 || stats.medium > 0 || stats.actionable > 0 || stats.dismissed > 0) && (
-          <div className="mt-7 space-y-3.5">
-            {stats.high > 0 && (
-              <div className="w-full px-4 py-3.5 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-sm font-bold border border-red-200 dark:border-red-800/50">
-                {stats.high} High
-              </div>
-            )}
-            {stats.medium > 0 && (
-              <div className="w-full px-4 py-3.5 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-sm font-bold border border-amber-200 dark:border-amber-800/50">
-                {stats.medium} Medium
-              </div>
-            )}
-            {stats.actionable > 0 && (
-              <div className="w-full px-4 py-3.5 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-sm font-bold border border-purple-200 dark:border-purple-800/50">
-                {stats.actionable} Need Action
-              </div>
-            )}
-            {stats.dismissed > 0 && (
-              <button
-                onClick={resetDismissed}
-                className="w-full px-4 py-3.5 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-bold text-left transition-colors border border-slate-200 dark:border-slate-800"
-              >
-                Reset Dismissed
-              </button>
-            )}
-          </div>
-        )}
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">
+          Business Insights
+        </h2>
       </div>
 
-      {/* Content grows naturally; it becomes internally scrollable only when the
-          content would exceed the available phone viewport. */}
-      <div className="min-h-0 overflow-y-auto overscroll-contain">
-        {stats.active === 0 ? (
-          <div className="flex flex-col items-center justify-center py-16 px-6">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center mb-4 shadow-lg">
-              <BrainCircuit className="w-8 h-8 text-white" strokeWidth={1.2} />
+      <button
+        type="button"
+        onClick={handleRefresh}
+        disabled={isRefreshing}
+        className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-[15px] font-bold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+      >
+        <RefreshCcw className={`h-5 w-5 ${isRefreshing ? "animate-spin" : ""}`} />
+        Refresh Insights
+      </button>
+
+      {(stats.high > 0 || stats.medium > 0 || stats.actionable > 0 || stats.dismissed > 0) && (
+        <div className="space-y-3.5">
+          {stats.high > 0 && (
+            <div className="w-full rounded-xl border border-red-200 bg-red-100 px-4 py-4 text-[15px] font-bold text-red-700 dark:border-red-800/50 dark:bg-red-900/30 dark:text-red-300">
+              {stats.high} High
             </div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
-              All Clear!
-            </h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400 text-center max-w-sm">
-              No active insights. Add more transactions or reset dismissed insights.
-            </p>
+          )}
+          {stats.medium > 0 && (
+            <div className="w-full rounded-xl border border-amber-200 bg-amber-100 px-4 py-4 text-[15px] font-bold text-amber-700 dark:border-amber-800/50 dark:bg-amber-900/30 dark:text-amber-300">
+              {stats.medium} Medium
+            </div>
+          )}
+          {stats.actionable > 0 && (
+            <div className="w-full rounded-xl border border-purple-200 bg-purple-100 px-4 py-4 text-[15px] font-bold text-purple-700 dark:border-purple-800/50 dark:bg-purple-900/30 dark:text-purple-300">
+              {stats.actionable} Need Action
+            </div>
+          )}
+          {stats.dismissed > 0 && (
+            <button
+              type="button"
+              onClick={resetDismissed}
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-4 text-left text-[15px] font-bold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+            >
+              Reset Dismissed
+            </button>
+          )}
+        </div>
+      )}
+
+      {stats.active === 0 ? (
+        <section className="rounded-xl border border-slate-300 bg-white px-5 py-12 text-center shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:px-6">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-blue-600 shadow-lg">
+            <BrainCircuit className="h-8 w-8 text-white" strokeWidth={1.2} />
           </div>
-        ) : (
-          <>
-            {renderInsightSection("high", insightsBySeverity.high)}
-            {renderInsightSection("medium", insightsBySeverity.medium)}
-            {renderInsightSection("low", insightsBySeverity.low)}
-          </>
-        )}
-        
-        {/* Modest bottom clearance without forcing an empty full-height panel. */}
-        <div className="h-6" />
-      </div>
+          <h3 className="mt-5 text-xl font-bold text-slate-900 dark:text-white">All Clear!</h3>
+          <p className="mx-auto mt-3 max-w-sm text-[15px] font-medium leading-6 text-slate-600 dark:text-slate-300">
+            No active insights. Add more transactions or reset dismissed insights.
+          </p>
+        </section>
+      ) : (
+        <div className="space-y-4">
+          {renderInsightSection("high", insightsBySeverity.high)}
+          {renderInsightSection("medium", insightsBySeverity.medium)}
+          {renderInsightSection("low", insightsBySeverity.low)}
+        </div>
+      )}
     </div>
   );
 }

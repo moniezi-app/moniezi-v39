@@ -1318,7 +1318,7 @@ export default function App() {
       if (el) {
         const scrollTop = el.scrollTop;
         // Once the user has scrolled far enough to need the control, keep it
-        // visible all the way to the end of the screen. v39.4.5 removes the
+        // visible all the way to the end of the screen. v39.4.6 preserves the
         // near-bottom suppression introduced in v39.4.3.
         if (scrollTop > 300) {
           setShowScrollToTop(true);
@@ -1576,7 +1576,6 @@ export default function App() {
   const [isGeneratingProPLPdf, setIsGeneratingProPLPdf] = useState(false);
   const [seedSuccess, setSeedSuccess] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
-  const [showInsights, setShowInsights] = useState(false);
   const [duplicationCount, setDuplicationCount] = useState<Record<string, number>>({});
   const [showTemplateSuggestion, setShowTemplateSuggestion] = useState(false);
   const [templateSuggestionData, setTemplateSuggestionData] = useState<{name: string, category: string, type: string} | null>(null);
@@ -2258,9 +2257,6 @@ export default function App() {
     if (isClientModalOpen) { lockBodyScroll(); return () => { unlockBodyScroll(); }; }
   }, [isClientModalOpen, lockBodyScroll, unlockBodyScroll]);
 
-  useEffect(() => {
-    if (showInsights) { lockBodyScroll(); return () => { unlockBodyScroll(); }; }
-  }, [showInsights, lockBodyScroll, unlockBodyScroll]);
 
   useKeyboardSafeScroll({ containerRef: mainScrollRef, enabled: true });
 
@@ -8463,7 +8459,7 @@ html, body, #root {
              <Search size={18} className="sm:w-5 sm:h-5" strokeWidth={1.5} />
            </button>
            <button
-             onClick={() => setShowInsights(true)}
+             onClick={() => setCurrentPage(Page.Insights)}
              className="chrome-btn relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full transition-all border text-slate-200 hover:text-white"
              style={headerActionButtonStyle}
              title="Insights"
@@ -8666,7 +8662,7 @@ html, body, #root {
                     <p className="v391-card-subtitle">MONIEZI checks collections, follow-ups and record readiness.</p>
                   </div>
                 </div>
-                <MonieziGlassAction onClick={() => setShowInsights(true)} tone="cyan">
+                <MonieziGlassAction onClick={() => setCurrentPage(Page.Insights)} tone="cyan">
                   Insights <ChevronRight size={14} />
                 </MonieziGlassAction>
               </div>
@@ -9990,6 +9986,17 @@ html, body, #root {
               </>
             )}
           </div>
+        )}
+
+        {currentPage === Page.Insights && (
+          <InsightsDashboard
+            transactions={transactions}
+            invoices={invoices}
+            estimates={estimates}
+            mileageTrips={mileageTrips}
+            taxPayments={taxPayments}
+            settings={settings}
+          />
         )}
 
         {currentPage === Page.Reports && (
@@ -12918,7 +12925,7 @@ html, body, #root {
       </div>
 
       {/* Scroll to Top Button - rendered via Portal to escape overflow-hidden container */}
-      {showScrollToTop && !shouldHideBottomNav && !(currentPage === Page.Dashboard && isAppEmpty) && createPortal(
+      {showScrollToTop && !shouldHideBottomNav && createPortal(
         <button
           onClick={scrollToTop}
           className="no-print w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-lg shadow-slate-900/10 dark:shadow-black/30 hover:shadow-xl hover:scale-105"
@@ -13364,28 +13371,7 @@ html, body, #root {
         </div>
       </AppDrawer>
 
-      {/* Insights Modal */}
-      {showInsights && (
-        <div
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/70 backdrop-blur-sm px-5 py-5 animate-in fade-in duration-200 modal-overlay"
-          style={{
-            paddingTop: 'max(20px, env(safe-area-inset-top, 20px))',
-            paddingBottom: 'max(20px, env(safe-area-inset-bottom, 20px))',
-          }}
-        >
-          <div className="bg-white dark:bg-slate-900 w-full max-w-[520px] max-h-[calc(100dvh-40px)] rounded-xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800">
-            <InsightsDashboard
-              transactions={transactions}
-              invoices={invoices}
-              estimates={estimates}
-              mileageTrips={mileageTrips}
-              taxPayments={taxPayments}
-              settings={settings}
-              onClose={() => setShowInsights(false)}
-            />
-          </div>
-        </div>
-      )}
+      {/* Business Insights is a normal routed page in v39.4.6. */}
 
       <AppDrawer
          isOpen={isDrawerOpen}

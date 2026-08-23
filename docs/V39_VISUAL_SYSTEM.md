@@ -1,3 +1,11 @@
+## v39.4.6 full-page Business Insights + empty-Home scroll-to-top
+
+- Business Insights is now a normal routed portrait page, not a modal or nested scrolling panel.
+- The global brain icon and Home Insights action navigate to the Insights page.
+- The redundant business-signal count line and modal close control are removed.
+- High / Medium / Need Action remain vertically stacked, one item per row.
+- Empty Home now uses the same scroll-to-top visibility rule as every other scrollable screen.
+
 ## v39.4.5 portrait-first Business Insights + persistent scroll-to-top
 
 - Business Insights uses a vertical mobile hierarchy instead of a two-column status grid.
@@ -42,7 +50,7 @@ Real-device installation QA reduced MONIEZI's official mobile install matrix to 
 
 # MONIEZI v39 Visual System
 
-Version: 39.4.5
+Version: 39.4.6
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 

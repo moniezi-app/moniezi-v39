@@ -409,6 +409,7 @@ export enum Page {
   Jobs = 'jobs',
   Mileage = 'mileage',
   Reports = 'reports',
+  Insights = 'insights',
   CompanyEquity = 'company_equity',
   Settings = 'settings',
   InvoiceDoc = 'invoice_doc'
