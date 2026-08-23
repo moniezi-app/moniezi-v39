@@ -1,4 +1,8 @@
-## v39.4.11 pixel-stable install handoff + v39.4.9 tighter radius
+## v39.4.12 simplified Insights + v39.4.11 pixel-stable install handoff + v39.4.9 tighter radius
+
+- Business Insights uses one information layer: High Priority, Medium Priority, and Good News are the summary and expandable navigation.
+- Redundant High / Medium / Need Action statistic cards are removed.
+- Refresh is a compact utility action beside the page title rather than a full-width content card.
 
 - Tightened non-pill radius tokens to 10px card / 8px surface / 7px control / 8px icon / 6px small.
 - Preserved semantic pills and circles.
@@ -58,7 +62,7 @@ Real-device installation QA reduced MONIEZI's official mobile install matrix to 
 
 # MONIEZI v39 Visual System
 
-Version: 39.4.11
+Version: 39.4.12
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 

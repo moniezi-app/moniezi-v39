@@ -1,4 +1,11 @@
-# MONIEZI v39.4.11
+# MONIEZI v39.4.12
+## v39.4.12 simplified Business Insights hierarchy
+- Removes the redundant High / Medium / Need Action summary cards above the category sections.
+- Converts Refresh Insights from a full-width card into a compact icon action beside the Business Insights title.
+- Keeps High Priority, Medium Priority, and Good News as the primary summary/navigation surfaces because they already show the useful counts and expand into the underlying insights.
+- Preserves Reset dismissed as a compact secondary text action only when dismissed insights exist.
+- No changes to insight-generation logic, Demo data, navigation, licensing, install flow, or the v39.4.11 startup handoff.
+
 ## v39.4.11 pixel-stable Install MONIEZI handoff
 - Uses one shared installer geometry for the pre-React startup frame and the hydrated React screen.
 - Isolates the installer from Plus Jakarta Sans, the global MONIEZI type-scale overrides, and the 106.25% root rem scale.

@@ -259,51 +259,39 @@ export default function InsightsDashboard({
     <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 pb-24">
       {/* v39.4.7 — Business Insights is a normal routed MONIEZI page. There is
           no modal shell, close button, sticky internal header, or nested scroll. */}
-      <div className="v392-page-header flex items-center gap-3">
-        <div className="v392-page-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400">
-          <BrainCircuit size={23} strokeWidth={1.8} />
+      {/* v39.4.12 — the category cards below are the summary and navigation.
+          Keep only a compact refresh utility beside the page title; do not repeat
+          High / Medium / Need Action counts in a second summary layer. */}
+      <div className="v392-page-header flex items-center justify-between gap-4">
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="v392-page-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400">
+            <BrainCircuit size={23} strokeWidth={1.8} />
+          </div>
+          <h2 className="min-w-0 text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">
+            Business Insights
+          </h2>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">
-          Business Insights
-        </h2>
+        <button
+          type="button"
+          onClick={handleRefresh}
+          disabled={isRefreshing}
+          aria-label="Refresh insights"
+          title="Refresh insights"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 shadow-sm transition-colors hover:bg-slate-50 disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+        >
+          <RefreshCcw className={`h-5 w-5 ${isRefreshing ? "animate-spin" : ""}`} />
+        </button>
       </div>
 
-      <button
-        type="button"
-        onClick={handleRefresh}
-        disabled={isRefreshing}
-        className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-[15px] font-bold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
-      >
-        <RefreshCcw className={`h-5 w-5 ${isRefreshing ? "animate-spin" : ""}`} />
-        Refresh Insights
-      </button>
-
-      {(stats.high > 0 || stats.medium > 0 || stats.actionable > 0 || stats.dismissed > 0) && (
-        <div className="space-y-3.5">
-          {stats.high > 0 && (
-            <div className="w-full rounded-xl border border-red-200 bg-red-100 px-4 py-4 text-[15px] font-bold text-red-700 dark:border-red-800/50 dark:bg-red-900/30 dark:text-red-300">
-              {stats.high} High
-            </div>
-          )}
-          {stats.medium > 0 && (
-            <div className="w-full rounded-xl border border-amber-200 bg-amber-100 px-4 py-4 text-[15px] font-bold text-amber-700 dark:border-amber-800/50 dark:bg-amber-900/30 dark:text-amber-300">
-              {stats.medium} Medium
-            </div>
-          )}
-          {stats.actionable > 0 && (
-            <div className="w-full rounded-xl border border-purple-200 bg-purple-100 px-4 py-4 text-[15px] font-bold text-purple-700 dark:border-purple-800/50 dark:bg-purple-900/30 dark:text-purple-300">
-              {stats.actionable} Need Action
-            </div>
-          )}
-          {stats.dismissed > 0 && (
-            <button
-              type="button"
-              onClick={resetDismissed}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-4 text-left text-[15px] font-bold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
-            >
-              Reset Dismissed
-            </button>
-          )}
+      {stats.dismissed > 0 && (
+        <div className="flex justify-end">
+          <button
+            type="button"
+            onClick={resetDismissed}
+            className="text-sm font-bold text-slate-600 underline decoration-slate-300 underline-offset-4 transition-colors hover:text-slate-900 dark:text-slate-300 dark:decoration-slate-600 dark:hover:text-white"
+          >
+            Reset dismissed
+          </button>
         </div>
       )}
 
