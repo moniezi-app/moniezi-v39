@@ -5,12 +5,12 @@
  * It defines the shared visual language that v39 screens can opt into one by one.
  */
 
-export const V39_VISUAL_SYSTEM_VERSION = '39.4.4';
+export const V39_VISUAL_SYSTEM_VERSION = '39.4.5';
 
 
 
 /**
- * v39.4.4 shared mobile geometry + restrained-radius Luminous Glass tokens.
+ * v39.4.5 portrait-first insights + persistent scroll-to-top + restrained-radius Luminous Glass tokens.
  * These names intentionally describe surface roles rather than screen content so
  * the dashboard, lists, and future business modules can reuse one material system.
  */

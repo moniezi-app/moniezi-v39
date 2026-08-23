@@ -293,67 +293,73 @@ export default function InsightsDashboard({
 
   return (
     <div className="flex max-h-[calc(100dvh-40px)] min-h-0 flex-col bg-white dark:bg-slate-950">
-      {/* Compact, content-driven header. The Insights panel should shrink when
-          there is little content instead of filling the entire phone height. */}
-      <div className="flex-shrink-0 relative px-5 py-5 sm:px-6 sm:py-6 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
-        {/* Action Buttons */}
-        <div className="absolute top-5 right-5 sm:top-6 sm:right-6 flex items-center gap-2 z-10">
+      {/* v39.4.5 — portrait-first Insights header. Utility controls live on
+          their own row; the title and signal summary flow vertically so the
+          phone layout never has to compress important information sideways. */}
+      <div className="flex-shrink-0 px-5 pt-5 pb-7 sm:px-6 sm:pt-6 sm:pb-8 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
+        {/* Utility controls — deliberately separate from the title row. */}
+        <div className="flex items-center justify-end gap-3 mb-7">
           <button
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all disabled:opacity-50"
+            className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all disabled:opacity-50"
             title="Refresh"
+            aria-label="Refresh business insights"
           >
-            <RefreshCcw className={`w-4 h-4 ${isRefreshing ? "animate-spin" : ""}`} />
+            <RefreshCcw className={`w-5 h-5 ${isRefreshing ? "animate-spin" : ""}`} />
           </button>
           <button
             onClick={onClose}
-            className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all"
+            className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all"
             title="Close"
+            aria-label="Close business insights"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Title Section */}
-        <div className="pr-[92px] mb-5">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-100 dark:bg-purple-900/30">
-              <BrainCircuit className="w-6 h-6 text-purple-600 dark:text-purple-400" strokeWidth={2} />
-            </div>
-            <div className="min-w-0">
-              <h2 className="text-[21px] sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight mb-1">Business Insights</h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">{stats.active} business signals</p>
-            </div>
+        {/* Title — icon and name get their own full-width row. */}
+        <div className="flex items-center gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-purple-100 dark:bg-purple-900/30">
+            <BrainCircuit className="w-7 h-7 text-purple-600 dark:text-purple-400" strokeWidth={2} />
           </div>
+          <h2 className="min-w-0 whitespace-nowrap text-[22px] sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-none">
+            Business Insights
+          </h2>
         </div>
 
-        {/* Responsive 2-column stats prevent arbitrary pill wrapping on phones. */}
-        <div className="grid grid-cols-2 gap-2.5">
-          {stats.high > 0 && (
-            <div className="px-4 py-2 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold border border-red-200 dark:border-red-800/50">
-              {stats.high} High
-            </div>
-          )}
-          {stats.medium > 0 && (
-            <div className="px-4 py-2 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-bold border border-amber-200 dark:border-amber-800/50">
-              {stats.medium} Medium
-            </div>
-          )}
-          {stats.actionable > 0 && (
-            <div className="px-4 py-2 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-bold border border-purple-200 dark:border-purple-800/50">
-              {stats.actionable} Need Action
-            </div>
-          )}
-          {stats.dismissed > 0 && (
-            <button
-              onClick={resetDismissed}
-              className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold transition-colors border border-slate-200 dark:border-slate-800"
-            >
-              Reset Dismissed
-            </button>
-          )}
-        </div>
+        <p className="mt-4 text-base text-slate-600 dark:text-slate-300 font-medium">
+          {stats.active} business signals
+        </p>
+
+        {/* Portrait-first summary: one status per line, never a grid. */}
+        {(stats.high > 0 || stats.medium > 0 || stats.actionable > 0 || stats.dismissed > 0) && (
+          <div className="mt-7 space-y-3.5">
+            {stats.high > 0 && (
+              <div className="w-full px-4 py-3.5 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-sm font-bold border border-red-200 dark:border-red-800/50">
+                {stats.high} High
+              </div>
+            )}
+            {stats.medium > 0 && (
+              <div className="w-full px-4 py-3.5 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-sm font-bold border border-amber-200 dark:border-amber-800/50">
+                {stats.medium} Medium
+              </div>
+            )}
+            {stats.actionable > 0 && (
+              <div className="w-full px-4 py-3.5 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-sm font-bold border border-purple-200 dark:border-purple-800/50">
+                {stats.actionable} Need Action
+              </div>
+            )}
+            {stats.dismissed > 0 && (
+              <button
+                onClick={resetDismissed}
+                className="w-full px-4 py-3.5 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-bold text-left transition-colors border border-slate-200 dark:border-slate-800"
+              >
+                Reset Dismissed
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Content grows naturally; it becomes internally scrollable only when the

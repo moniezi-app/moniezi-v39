@@ -1,4 +1,11 @@
-# MONIEZI v39.4.4
+# MONIEZI v39.4.5
+
+## v39.4.5 Portrait-first Business Insights + persistent scroll-to-top
+
+- Business Insights now follows a phone-first vertical hierarchy: utility controls on their own row, one-line title below, signal count below that, and each High / Medium / Need Action summary on its own full-width row.
+- Removed the two-column Insights summary grid so the panel has more breathing room on portrait phones.
+- Scroll-to-top remains visible once activated all the way through the bottom of a scrollable screen; the near-bottom suppression from v39.4.3 is removed.
+- v39.4.4 shared mobile geometry and internal card insets are preserved.
 
 ## v39.4.4 Shared mobile geometry + internal card insets
 

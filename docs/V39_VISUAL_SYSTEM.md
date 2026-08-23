@@ -1,3 +1,10 @@
+## v39.4.5 portrait-first Business Insights + persistent scroll-to-top
+
+- Business Insights uses a vertical mobile hierarchy instead of a two-column status grid.
+- Refresh/close controls are separated from the title row.
+- High, Medium and Need Action summaries each occupy their own row with generous vertical spacing.
+- Scroll-to-top remains visible to the bottom once activated.
+
 ## v39.4.4 shared mobile geometry + internal card insets
 
 - Home and Reports remain the reference for correct mobile width rhythm.
@@ -35,7 +42,7 @@ Real-device installation QA reduced MONIEZI's official mobile install matrix to 
 
 # MONIEZI v39 Visual System
 
-Version: 39.4.4
+Version: 39.4.5
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 

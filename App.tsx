@@ -1317,20 +1317,18 @@ export default function App() {
       // Check the internal scroll container first
       if (el) {
         const scrollTop = el.scrollTop;
-        const remaining = Math.max(0, el.scrollHeight - scrollTop - el.clientHeight);
-        // Keep the floating control away from the final CTA / last card. It is
-        // useful mid-page, but it should disappear as the user approaches the
-        // bottom where primary actions live.
-        if (scrollTop > 300 && remaining > 190) {
+        // Once the user has scrolled far enough to need the control, keep it
+        // visible all the way to the end of the screen. v39.4.5 removes the
+        // near-bottom suppression introduced in v39.4.3.
+        if (scrollTop > 300) {
           setShowScrollToTop(true);
           return;
         }
       }
-      // Also check window scroll (fallback for any layout), with the same
-      // near-bottom protection.
+      // Also check window scroll as a fallback for layouts that scroll the page
+      // rather than the internal app container. Do not hide near the bottom.
       const windowScrollTop = window.scrollY || window.pageYOffset || 0;
-      const windowRemaining = Math.max(0, document.documentElement.scrollHeight - windowScrollTop - window.innerHeight);
-      if (windowScrollTop > 300 && windowRemaining > 190) {
+      if (windowScrollTop > 300) {
         setShowScrollToTop(true);
         return;
       }
