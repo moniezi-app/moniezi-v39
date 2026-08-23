@@ -5,21 +5,23 @@
  * It defines the shared visual language that v39 screens can opt into one by one.
  */
 
-export const V39_VISUAL_SYSTEM_VERSION = '39.4.8';
+export const V39_VISUAL_SYSTEM_VERSION = '39.4.9';
 
 
 
 /**
- * v39.4.8 routed full-page insights + empty-Home scroll-to-top + Page.Insights navigation safety-net type fix + restrained-radius Luminous Glass tokens.
+ * v39.4.9 tighter application-wide 8/6/5px radius hierarchy + routed full-page insights + empty-Home scroll-to-top.
  * These names intentionally describe surface roles rather than screen content so
  * the dashboard, lists, and future business modules can reuse one material system.
  */
 export const monieziGlass = {
   radius: {
-    card: 12,
-    inset: 10,
-    control: 8,
-    icon: 9,
+    card: 8,
+    inset: 6,
+    control: 6,
+    icon: 6,
+    metric: 5,
+    badge: 4,
   },
   spacing: {
     mobilePageGutter: 20,

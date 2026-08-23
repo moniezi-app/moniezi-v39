@@ -1,4 +1,4 @@
-## v39.4.8 tighter radius + stronger first-run state badge
+## v39.4.9 tighter radius + stronger first-run state badge
 
 - Tightened non-pill radius tokens to 10px card / 8px surface / 7px control / 8px icon / 6px small.
 - Preserved semantic pills and circles.
@@ -58,7 +58,7 @@ Real-device installation QA reduced MONIEZI's official mobile install matrix to 
 
 # MONIEZI v39 Visual System
 
-Version: 39.4.8
+Version: 39.4.9
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 

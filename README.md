@@ -1,5 +1,11 @@
-# MONIEZI v39.4.8
-## v39.4.8 radius + first-run prominence
+# MONIEZI v39.4.9
+## v39.4.9 tighter radius system
+- Major cards, large panels, drawers and modal shells: 8px.
+- Nested surfaces, inputs, selectors, buttons and icon wells: 6px.
+- Metric/status blocks and small surfaces: 5px.
+- Non-pill micro badges: 4px where applicable.
+- True pills and circular controls remain intentionally round.
+- No illustration, spacing, navigation, licensing, demo, or business-logic changes in this pass.
 
 - Tightened application-wide non-pill corner radii to a restrained 10px card / 8px surface / 7px control scale.
 - Preserved true circles and pill controls.

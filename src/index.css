@@ -3400,11 +3400,13 @@ html {
    circular controls, avatars, progress tracks, and status dots.
    ================================================================ */
 :root {
-  --v3938-radius-card: 10px;
-  --v3938-radius-surface: 8px;
-  --v3938-radius-control: 7px;
-  --v3938-radius-icon: 8px;
-  --v3938-radius-small: 6px;
+  --v3949-radius-card: 8px;
+  --v3949-radius-surface: 6px;
+  --v3949-radius-control: 6px;
+  --v3949-radius-icon: 6px;
+  --v3949-radius-small: 5px;
+  --v3949-radius-metric: 5px;
+  --v3949-radius-badge: 4px;
 }
 
 /* Main Luminous Glass system. */
@@ -3414,18 +3416,22 @@ html {
 .v392-search-group,
 .v392-drawer-panel,
 .v392-form-shell {
-  border-radius: var(--v3938-radius-card) !important;
+  border-radius: var(--v3949-radius-card) !important;
 }
 
 .v391-glass-inset,
-.v391-glass-metric,
 .v391-attention-body,
 .v391-progress-panel,
-.v391-job-stat,
 .v391-goal-empty,
 .v391-action-row,
 .v391-section-card {
-  border-radius: var(--v3938-radius-surface) !important;
+  border-radius: var(--v3949-radius-surface) !important;
+}
+
+.v391-glass-metric,
+.v391-job-stat,
+.v3931-first-run-stat {
+  border-radius: var(--v3949-radius-metric) !important;
 }
 
 .v391-glass-icon,
@@ -3433,7 +3439,7 @@ html {
 .v391-status-dot,
 .v391-action-row__icon,
 .v3931-first-run-icon {
-  border-radius: var(--v3938-radius-icon) !important;
+  border-radius: var(--v3949-radius-icon) !important;
 }
 
 .v391-glass-action,
@@ -3441,38 +3447,38 @@ html {
 .v391-glass-segments,
 .v391-nav-item,
 .v3932-nav-item {
-  border-radius: var(--v3938-radius-control) !important;
+  border-radius: var(--v3949-radius-control) !important;
 }
 
 /* Tailwind radius utilities throughout the authenticated app. Keep the
    hierarchy small but visible rather than flattening every surface to square. */
 .v3938-tight-radius .rounded-3xl,
 .v3938-tight-radius .rounded-2xl {
-  border-radius: var(--v3938-radius-card) !important;
+  border-radius: var(--v3949-radius-card) !important;
 }
 .v3938-tight-radius .rounded-xl {
-  border-radius: var(--v3938-radius-surface) !important;
+  border-radius: var(--v3949-radius-surface) !important;
 }
 .v3938-tight-radius .rounded-lg {
-  border-radius: var(--v3938-radius-control) !important;
+  border-radius: var(--v3949-radius-control) !important;
 }
 .v3938-tight-radius .rounded-md {
-  border-radius: var(--v3938-radius-small) !important;
+  border-radius: var(--v3949-radius-small) !important;
 }
 .v3938-tight-radius .rounded-t-2xl {
-  border-top-left-radius: var(--v3938-radius-card) !important;
-  border-top-right-radius: var(--v3938-radius-card) !important;
+  border-top-left-radius: var(--v3949-radius-card) !important;
+  border-top-right-radius: var(--v3949-radius-card) !important;
 }
 .v3938-tight-radius .rounded-b-xl {
-  border-bottom-left-radius: var(--v3938-radius-surface) !important;
-  border-bottom-right-radius: var(--v3938-radius-surface) !important;
+  border-bottom-left-radius: var(--v3949-radius-surface) !important;
+  border-bottom-right-radius: var(--v3949-radius-surface) !important;
 }
 
 /* Structural surfaces caught by the app-wide material selector should follow
    the same radius even when legacy class combinations remain in JSX. */
 .v3938-tight-radius .v392-screen :is(div,section,article,aside)[class*="rounded"][class*="border"]:not([class*="rounded-full"]),
 .v3938-tight-radius .v392-screen button[class*="rounded"][class*="border"]:not([class*="rounded-full"]) {
-  border-radius: var(--v3938-radius-surface) !important;
+  border-radius: var(--v3949-radius-surface) !important;
 }
 
 /* Form controls and selectors: restrained, not pill-like. */
@@ -3480,31 +3486,31 @@ html {
 .v3938-tight-radius .v392-form-shell :is(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 .v3938-tight-radius .v392-search-panel input,
 .v3938-tight-radius button[class*="rounded"]:not([class*="rounded-full"]):not(.v391-glass-card) {
-  border-radius: var(--v3938-radius-control) !important;
+  border-radius: var(--v3949-radius-control) !important;
 }
 
 /* Welcome / license screen is rendered before the authenticated app shell, so
    it receives the same radius scale explicitly. */
 .v39-license-hero__image {
-  border-radius: var(--v3938-radius-card) !important;
+  border-radius: var(--v3949-radius-card) !important;
 }
 .v39-license-benefits span,
 .v39-license-card {
-  border-radius: var(--v3938-radius-card) !important;
+  border-radius: var(--v3949-radius-card) !important;
 }
 .v39-license-brand__icon,
 .v39-license-card__key {
-  border-radius: var(--v3938-radius-icon) !important;
+  border-radius: var(--v3949-radius-icon) !important;
 }
 .v39-license-input,
 .v39-license-error,
 .v39-license-button,
 .v39-primary-action {
-  border-radius: var(--v3938-radius-control) !important;
+  border-radius: var(--v3949-radius-control) !important;
 }
 .v39-visual-stage,
 .v39-section-header__icon {
-  border-radius: var(--v3938-radius-surface) !important;
+  border-radius: var(--v3949-radius-surface) !important;
 }
 
 /* Preserve true semantic pills/circles. */
@@ -3519,23 +3525,25 @@ html {
 @media (max-width: 430px) {
   .v391-glass-card,
   .v391-secondary-card {
-    border-radius: var(--v3938-radius-card) !important;
+    border-radius: var(--v3949-radius-card) !important;
   }
   .v391-glass-icon,
   .v392-page-icon,
   .v391-job-stat {
-    border-radius: var(--v3938-radius-icon) !important;
+    border-radius: var(--v3949-radius-icon) !important;
   }
 }
 
 /* Demo / first-run custom surfaces do not use Tailwind radius utilities, so
    normalize them explicitly to the same restrained scale. */
-.v3931-theme-choice__buttons,
+.v3931-theme-choice__buttons {
+  border-radius: var(--v3949-radius-surface) !important;
+}
 .v3931-first-run-stat {
-  border-radius: var(--v3938-radius-surface) !important;
+  border-radius: var(--v3949-radius-metric) !important;
 }
 .v3931-first-run-primary {
-  border-radius: var(--v3938-radius-control) !important;
+  border-radius: var(--v3949-radius-control) !important;
 }
 
 
@@ -3665,10 +3673,10 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
 
 /* ================================================================
-   MONIEZI v39.4.8 — tighter radius + stronger first-run state badge
+   MONIEZI v39.4.9 — tighter 8/6/5px radius system
    ----------------------------------------------------------------
-   - Tightens the authenticated app radius scale to a restrained 10/8/7px
-     hierarchy inspired by the approved reference application.
+   - Tightens the application geometry again: 8px major surfaces, 6px nested
+     surfaces/controls/icons, 5px metric blocks, and 4px non-pill badges.
    - Keeps semantic pills and circular controls intentionally round.
    - Makes Explore before you start / Ready for your first records more
      prominent without changing the illustration or first-run workflow.
