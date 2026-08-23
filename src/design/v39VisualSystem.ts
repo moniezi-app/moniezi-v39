@@ -5,12 +5,12 @@
  * It defines the shared visual language that v39 screens can opt into one by one.
  */
 
-export const V39_VISUAL_SYSTEM_VERSION = '39.4.3';
+export const V39_VISUAL_SYSTEM_VERSION = '39.4.4';
 
 
 
 /**
- * v39.4.3 responsive-width + restrained-radius Luminous Glass tokens.
+ * v39.4.4 shared mobile geometry + restrained-radius Luminous Glass tokens.
  * These names intentionally describe surface roles rather than screen content so
  * the dashboard, lists, and future business modules can reuse one material system.
  */
@@ -20,6 +20,11 @@ export const monieziGlass = {
     inset: 10,
     control: 8,
     icon: 9,
+  },
+  spacing: {
+    mobilePageGutter: 20,
+    cardContentInset: 16,
+    nestedContentInset: 14,
   },
   motion: {
     pressScale: 0.99,

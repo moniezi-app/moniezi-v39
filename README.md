@@ -1,4 +1,14 @@
-# MONIEZI v39.4.3
+# MONIEZI v39.4.4
+
+## v39.4.4 Shared mobile geometry + internal card insets
+
+- Preserves the already-good Home and Reports width geometry as the visual reference.
+- Establishes one shared mobile spacing model: **page gutter → card shell → internal content inset → content**.
+- Fixes the shared empty-state family used by Clients, Jobs, Estimates, Invoices, Mileage, Receipts, and related first-use screens so text, feature rows, and primary CTAs no longer sit against card borders.
+- Keeps approved illustrations at their existing size and placement; the new inset applies only to copy, feature content, and actions beneath/around them.
+- Applies a slightly smaller nested inset to the Home Receipts empty-state block because it already sits inside a padded Home glass card.
+- Documents shared geometry tokens for mobile page gutter, card-content inset, and nested-content inset.
+- Preserves v39.4.3 Business Insights behavior, Reports copy, installation flows, licensing, Demo, records, calculations, and navigation.
 
 ## v39.4.3 Responsive width + overlay corrections
 

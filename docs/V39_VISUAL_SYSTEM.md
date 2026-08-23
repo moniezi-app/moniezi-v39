@@ -1,3 +1,11 @@
+## v39.4.4 shared mobile geometry + internal card insets
+
+- Home and Reports remain the reference for correct mobile width rhythm.
+- Shared geometry now distinguishes **page gutter**, **card shell**, **card-content inset**, and **nested-content inset**.
+- Shared record empty states apply the content inset to copy, feature rows, and primary actions while leaving illustration stages full-width.
+- Home Receipts uses the nested-content inset because the empty state is already inside a padded glass card.
+- The objective is consistent perceived width across screen types without blindly changing screens that already look correct.
+
 ## v39.4.3 responsive width + overlay correction
 
 - Main authenticated screens share one mobile horizontal-gutter rule instead of relying on page-by-page width assumptions.
@@ -27,7 +35,7 @@ Real-device installation QA reduced MONIEZI's official mobile install matrix to 
 
 # MONIEZI v39 Visual System
 
-Version: 39.2.0
+Version: 39.4.4
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 

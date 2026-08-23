@@ -7735,23 +7735,102 @@ html.theme-light .dark-chrome .dark-chrome-nav-item { color: #e2e8f0 !important;
 html.theme-light .dark-chrome .dark-chrome-nav-item.active { color: #ffffff !important; }
 
 
-/* v39.4.3 — consistent mobile page width / horizontal gutters.
-   Every authenticated screen uses the same safe inset so cards never feel
-   flush with or wider than the phone viewport. */
+/* v39.4.4 — shared mobile geometry.
+   Preserve the good Home/Reports page gutter and give shared empty-state cards
+   a distinct internal content inset. Approved illustrations remain full-width. */
+:root {
+  --v3944-mobile-page-gutter: clamp(20px, 5.2vw, 24px);
+  --v3944-card-content-inset: 16px;
+  --v3944-nested-content-inset: 14px;
+}
 .v3943-mobile-gutters {
   box-sizing: border-box;
-  padding-left: clamp(20px, 5.2vw, 24px) !important;
-  padding-right: clamp(20px, 5.2vw, 24px) !important;
+  padding-left: var(--v3944-mobile-page-gutter) !important;
+  padding-right: var(--v3944-mobile-page-gutter) !important;
 }
 .v3943-mobile-gutters > * {
   box-sizing: border-box;
   min-width: 0;
   max-width: 100%;
 }
+.v392-app-wide .v39-record-empty-shell {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.v392-app-wide .v39-record-empty-shell > .v39-empty-state {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  padding-left: 0;
+  padding-right: 0;
+  box-sizing: border-box;
+}
+.v392-app-wide .v39-record-empty-shell .v39-empty-state__visual {
+  width: min(100%, 360px);
+  max-width: 100%;
+  min-width: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.v392-app-wide .v39-record-empty-shell .v39-empty-state__copy {
+  width: min(calc(100% - var(--v3944-card-content-inset) - var(--v3944-card-content-inset)), 500px);
+  max-width: calc(100% - var(--v3944-card-content-inset) - var(--v3944-card-content-inset));
+  min-width: 0;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+.v392-app-wide .v39-record-empty-shell .v39-empty-state__supporting {
+  width: min(calc(100% - var(--v3944-card-content-inset) - var(--v3944-card-content-inset)), 360px);
+  max-width: calc(100% - var(--v3944-card-content-inset) - var(--v3944-card-content-inset));
+  min-width: 0;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+.v392-app-wide .v39-record-empty-shell .v39-empty-state__primary {
+  width: min(calc(100% - var(--v3944-card-content-inset) - var(--v3944-card-content-inset)), 420px);
+  max-width: calc(100% - var(--v3944-card-content-inset) - var(--v3944-card-content-inset));
+  min-width: 0;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+.v392-app-wide .v39-record-empty-shell .v39-empty-state__secondary {
+  max-width: calc(100% - var(--v3944-card-content-inset) - var(--v3944-card-content-inset));
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+.v392-app-wide .v39-record-empty-shell .v39-feature-list,
+.v392-app-wide .v39-record-empty-shell .v39-feature-row,
+.v392-app-wide .v39-record-empty-shell .v39-feature-row > div:last-child {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.v392-app-wide .v39-record-empty-shell .v39-empty-state__primary > * {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.v3935-home-receipts .v39-record-empty-shell {
+  --v3944-card-content-inset: var(--v3944-nested-content-inset);
+}
+@media (max-width: 380px) {
+  :root {
+    --v3944-mobile-page-gutter: 18px;
+    --v3944-card-content-inset: 15px;
+    --v3944-nested-content-inset: 13px;
+  }
+}
 @media (min-width: 768px) {
-  .v3943-mobile-gutters {
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
+  :root {
+    --v3944-mobile-page-gutter: 32px;
+    --v3944-card-content-inset: 20px;
+    --v3944-nested-content-inset: 16px;
   }
 }
 
