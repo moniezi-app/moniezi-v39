@@ -3692,3 +3692,65 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .moniezi-install-gate * {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
 }
+
+
+/* ================================================================
+   MONIEZI v39.4.13 — pixel-stable installed Welcome / activation
+   ----------------------------------------------------------------
+   - Installed, unlicensed launches use a deterministic Welcome shell before React.
+   - React Welcome uses the same geometry and a stable system font stack.
+   - Reserve the 820:575 hero image footprint before decode.
+   - Remove dynamic-viewport and autofocus-driven repositioning.
+   ================================================================ */
+.moniezi-license-stable-surface,
+.moniezi-license-stable-surface * {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+}
+
+.moniezi-license-stable-surface.v39-license-gate {
+  min-height: 100svh !important;
+  height: auto !important;
+  padding-top: max(18px, env(safe-area-inset-top, 0px)) !important;
+  overflow-x: hidden;
+}
+
+.moniezi-license-stable-surface .v39-license-shell {
+  width: min(100%, 860px);
+  margin: 0 auto;
+  gap: 16px;
+}
+
+.moniezi-license-stable-surface .v39-license-brand__icon {
+  display: block;
+}
+
+.moniezi-license-stable-surface .v39-license-hero {
+  width: 100%;
+}
+
+.moniezi-license-stable-surface .v39-license-hero__image {
+  width: min(100%, 460px) !important;
+  height: auto !important;
+  aspect-ratio: 820 / 575;
+  object-fit: contain;
+}
+
+.moniezi-license-stable-surface .v39-license-copy h1,
+.moniezi-license-stable-surface .v39-license-copy p,
+.moniezi-license-stable-surface .v39-license-eyebrow,
+.moniezi-license-stable-surface .v39-license-card h2,
+.moniezi-license-stable-surface .v39-license-input,
+.moniezi-license-stable-surface .v39-license-button,
+.moniezi-license-stable-surface .v39-license-benefits span,
+.moniezi-license-stable-surface .v39-license-links {
+  font-synthesis: none;
+}
+
+@media (max-width: 520px) {
+  .moniezi-license-stable-surface.v39-license-gate {
+    padding-inline: max(14px, env(safe-area-inset-left, 0px)) !important;
+  }
+}

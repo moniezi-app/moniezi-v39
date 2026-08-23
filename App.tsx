@@ -7553,7 +7553,7 @@ export default function App() {
   // v39.0.4: approved light-mode welcome screen with the selected two-character illustration style.
   if (LICENSING_ENABLED && isLicenseValid === false) {
     return (
-      <div className="license-gate v39-license-gate">
+      <div className="license-gate v39-license-gate moniezi-license-stable-surface">
         <div className="v39-license-backdrop" aria-hidden="true" />
 
         <main className="v39-license-shell">
@@ -7578,6 +7578,8 @@ export default function App() {
                 src={`${import.meta.env.BASE_URL}welcome-hero-v39-04.webp`}
                 alt=""
                 className="v39-license-hero__image"
+                width={820}
+                height={575}
                 draggable={false}
               />
             </div>
@@ -7608,7 +7610,6 @@ export default function App() {
                   autoCapitalize="none"
                   autoCorrect="off"
                   spellCheck={false}
-                  autoFocus
                   aria-label="License key"
                 />
               </div>

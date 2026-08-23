@@ -10,7 +10,7 @@
     <meta name="description" content="Private, offline bookkeeping for small businesses — income, expenses, invoices, estimates, mileage, receipts, jobs, and tax-ready reports." />
 
     <!--
-      v39.4.11 pixel-stable install startup surface.
+      v39.4.13 pixel-stable install + installed Welcome startup surfaces.
       On the two officially supported mobile browser install paths, the first HTML
       frame and the React Install MONIEZI screen share one isolated, exact CSS geometry.
       The installer is explicitly exempt from the app-wide webfont/type-scale/root-rem
@@ -340,6 +340,63 @@
           letter-spacing: -1.24px !important;
         }
       }
+
+
+      /* v39.4.13 installed/unlicensed Welcome boot shell. It intentionally uses
+         the exact same public class names as the React activation screen so the
+         first visible composition does not jump when React mounts. */
+      #app-loader .boot-license-shell { display: none; }
+      html.moniezi-license-boot #app-loader {
+        display: block;
+        place-items: initial;
+        position: fixed;
+        inset: 0;
+        overflow-y: auto;
+        background: linear-gradient(180deg, #f9fbff 0%, #f3f6fc 100%);
+      }
+      html.moniezi-license-boot #app-loader > .mark { display: none; }
+      html.moniezi-license-boot #app-loader .boot-license-shell { display: block; }
+
+      #app-loader .boot-license-shell,
+      #app-loader .boot-license-shell * {
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+        text-size-adjust: none;
+        -webkit-text-size-adjust: none;
+      }
+      #app-loader .boot-license-shell {
+        position: relative;
+        min-height: 100svh;
+        overflow: auto;
+        padding: max(18px, env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) max(22px, env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
+        color: #0f172a;
+        background: radial-gradient(circle at 50% 24%, rgba(99,102,241,.08), transparent 32%), linear-gradient(180deg,#f9fbff 0%,#f3f6fc 100%);
+      }
+      #app-loader .boot-license-backdrop {
+        position: absolute; inset: 0; pointer-events: none; opacity: .5;
+        background: radial-gradient(circle at 18% 8%, rgba(59,130,246,.06), transparent 16%), radial-gradient(circle at 82% 18%, rgba(139,92,246,.05), transparent 18%), radial-gradient(circle at 50% 100%, rgba(59,130,246,.04), transparent 30%);
+      }
+      #app-loader .boot-license-main { position: relative; width: min(100%,860px); margin: 0 auto; display: grid; gap: 16px; }
+      #app-loader .boot-license-brand { display:flex; width:100%; justify-content:center; margin-bottom:18px; }
+      #app-loader .boot-license-brand img { width:52px; height:52px; border-radius:6px; object-fit:cover; display:block; box-shadow:0 12px 28px rgba(47,103,246,.20); }
+      #app-loader .boot-license-copy { max-width:620px; margin-inline:auto; text-align:center; }
+      #app-loader .boot-license-eyebrow { margin-bottom:12px; font-size:12px; line-height:1.35; font-weight:700; letter-spacing:.26em; text-transform:uppercase; color:#2f5dff; text-align:center; }
+      #app-loader .boot-license-title { margin:0; font-size:34px; line-height:1.02; font-weight:700; letter-spacing:-.055em; color:#06153a; text-align:center; }
+      #app-loader .boot-license-copy p { max-width:330px; margin:12px auto 0; font-size:16px; line-height:1.5; font-weight:600; color:#405069; text-align:center; }
+      #app-loader .boot-license-hero { margin-top:12px; display:flex; justify-content:center; width:100%; }
+      #app-loader .boot-license-hero img { width:min(100%,460px); height:auto; aspect-ratio:820/575; object-fit:contain; display:block; border-radius:8px; }
+      #app-loader .boot-license-card { padding:20px 16px; border:1px solid rgba(211,218,233,.95); border-radius:8px; background:rgba(255,255,255,.96); box-shadow:0 18px 40px rgba(15,23,42,.07); }
+      #app-loader .boot-license-heading { display:flex; align-items:center; justify-content:center; gap:12px; text-align:left; }
+      #app-loader .boot-license-keybox { display:grid; place-items:center; flex:0 0 auto; width:40px; height:40px; border-radius:6px; color:#4d6fff; background:#f1f4ff; }
+      #app-loader .boot-license-heading h2 { margin:0; font-size:26px; line-height:1.16; font-weight:700; letter-spacing:-.04em; color:#091738; }
+      #app-loader .boot-license-form { display:grid; gap:14px; margin-top:16px; }
+      #app-loader .boot-license-input { position:relative; width:100%; min-height:56px; padding:16px 18px 16px 50px; border:1px solid rgba(208,216,232,1); border-radius:6px; background:#fff; color:#7b8da7; font-size:16px; line-height:1.4; font-weight:500; display:flex; align-items:center; }
+      #app-loader .boot-license-input svg { position:absolute; left:17px; top:50%; transform:translateY(-50%); width:20px; height:20px; color:#8ea0bd; }
+      #app-loader .boot-license-button { width:100%; min-height:56px; border:1px solid #c6d4f8; border-radius:6px; background:#dbe7ff; color:#4f5f84; display:flex; align-items:center; justify-content:center; gap:9px; font-size:16px; line-height:1.2; font-weight:700; }
+      #app-loader .boot-license-links { display:grid; gap:8px; margin-top:18px; text-align:center; font-size:12px; line-height:1.55; color:#5c6d87; }
+      #app-loader .boot-license-benefits { display:flex; flex-direction:column; gap:10px; margin-top:2px; }
+      #app-loader .boot-license-benefits span { display:flex; align-items:center; justify-content:flex-start; gap:10px; min-height:48px; padding:12px 14px; border:1px solid rgba(206,214,230,.95); border-radius:8px; background:rgba(255,255,255,.94); box-shadow:0 10px 22px rgba(15,23,42,.05); color:#16233f; font-size:13px; line-height:1.35; font-weight:600; text-align:left; }
+      #app-loader .boot-license-benefits svg { width:18px; height:18px; flex:0 0 18px; color:#4f73ff; }
     </style>
 
     <script>
@@ -354,6 +411,10 @@
           if (!standalone && (chromeAndroid || safariIos)) {
             document.documentElement.classList.add('moniezi-supported-install-boot');
             document.documentElement.classList.add(chromeAndroid ? 'moniezi-install-android' : 'moniezi-install-ios');
+          } else if (standalone) {
+            var storedLicense = null;
+            try { storedLicense = localStorage.getItem('moniezi_license_v1_v39'); } catch (_) {}
+            if (!storedLicense) document.documentElement.classList.add('moniezi-license-boot');
           }
         } catch (_) {}
       })();
@@ -781,6 +842,36 @@
       <!-- Instant deterministic startup surface. React replaces this automatically. -->
       <div id="app-loader" aria-hidden="true">
         <div class="mark"><img src="icons/icon-192.png" alt="" /></div>
+        <div class="boot-license-shell moniezi-license-stable-surface">
+          <div class="boot-license-backdrop" aria-hidden="true"></div>
+          <main class="boot-license-main">
+            <section>
+              <div class="boot-license-brand"><img src="icons/icon-192.png" alt="" /></div>
+              <div class="boot-license-copy">
+                <div class="boot-license-eyebrow">Your business. Your records.</div>
+                <h1 class="boot-license-title">Welcome to MONIEZI</h1>
+                <p>Keep your business records on your device — no bank connection, no monthly subscription.</p>
+              </div>
+              <div class="boot-license-hero"><img src="welcome-hero-v39-04.webp" alt="" width="820" height="575" /></div>
+            </section>
+            <section class="boot-license-card">
+              <div class="boot-license-heading">
+                <div class="boot-license-keybox" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15.5 7.5 3 3L22 7l-3-3"></path></svg></div>
+                <h2>Activate your copy</h2>
+              </div>
+              <div class="boot-license-form">
+                <div class="boot-license-input"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15.5 7.5 3 3L22 7l-3-3"></path></svg><span>Paste or enter your license key</span></div>
+                <div class="boot-license-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span>Activate MONIEZI</span></div>
+              </div>
+              <div class="boot-license-links"></div>
+            </section>
+            <div class="boot-license-benefits">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>One-time purchase</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Records stay on your device</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Works offline</span>
+            </div>
+          </main>
+        </div>
         <div class="boot-install-shell moniezi-install-surface">
           <main class="boot-install-main mi-main">
             <section class="boot-install-card mi-card">
