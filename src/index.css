@@ -3681,3 +3681,15 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
    - Makes Explore before you start / Ready for your first records more
      prominent without changing the illustration or first-run workflow.
    ================================================================ */
+
+/* ---------------------------------------------------------
+   v39.4.10 — deterministic browser install screen
+   Keep the first-run installer on a stable system font stack so the locally
+   bundled Plus Jakarta Sans webfont cannot trigger a late font-metric swap.
+   The installer is top-anchored rather than vertically centered, preventing
+   Chrome/Safari dynamic browser chrome from shifting the whole card.
+   --------------------------------------------------------- */
+.moniezi-install-gate,
+.moniezi-install-gate * {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+}

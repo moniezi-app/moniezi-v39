@@ -1,4 +1,12 @@
-# MONIEZI v39.4.9
+# MONIEZI v39.4.10
+## v39.4.10 stable Install MONIEZI startup
+
+- Mirrors the supported mobile install screen in the initial HTML frame.
+- Uses a stable system-font stack on the install gate to prevent webfont metric swapping.
+- Uses fixed/top-anchored install geometry instead of `100dvh` vertical centering.
+- Startup and install logos are both 74×74px.
+- Preserves the v39.4.9 8/6/5px radius system.
+
 ## v39.4.9 tighter radius system
 - Major cards, large panels, drawers and modal shells: 8px.
 - Nested surfaces, inputs, selectors, buttons and icon wells: 6px.

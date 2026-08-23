@@ -10,17 +10,15 @@
     <meta name="description" content="Private, offline bookkeeping for small businesses — income, expenses, invoices, estimates, mileage, receipts, jobs, and tax-ready reports." />
 
     <!--
-      iOS startup shell:
-      Keep an instant, branded surface so Safari never shows a blank/black flash while
-      the bundle initializes. v39.4.9 keeps only the centered MONIEZI app icon — no
-      loading text and no extra intermediate screen.
+      v39.4.10 deterministic startup surface.
+      On the two officially supported mobile browser install paths, the first HTML
+      frame mirrors the React Install MONIEZI screen so the page does not jump while
+      the JS bundle and Plus Jakarta Sans font assets finish loading. Installed/desktop
+      launches retain the simple centered app mark.
     -->
     <style>
       html, body { height: 100%; margin: 0; }
-      /* Default (dark) — your <html> starts with class="dark" */
       body { background: #0b1020; color: #ffffff; }
-
-      /* Light mode (when you remove .dark from <html>) */
       html:not(.dark) body { background: #dbe7ff; color: #0f172a; }
 
       #app-loader {
@@ -28,27 +26,180 @@
         inset: 0;
         display: grid;
         place-items: center;
-        background:
-          radial-gradient(circle at 50% 38%, rgba(59, 130, 246, 0.08), transparent 30%),
-          linear-gradient(180deg, #f9fbff 0%, #f3f6fc 100%);
+        overflow-y: auto;
+        background: linear-gradient(180deg, #f9fbff 0%, #f3f6fc 100%);
         z-index: 9999;
       }
 
       #app-loader .mark {
-        width: 68px;
-        height: 68px;
+        width: 74px;
+        height: 74px;
         display: grid;
         place-items: center;
       }
 
       #app-loader .mark img {
-        width: 68px;
-        height: 68px;
+        width: 74px;
+        height: 74px;
         object-fit: contain;
         display: block;
         filter: drop-shadow(0 12px 24px rgba(47, 103, 246, 0.18));
       }
+
+      #app-loader .boot-install-shell { display: none; }
+
+      html.moniezi-supported-install-boot #app-loader {
+        display: block;
+        place-items: initial;
+      }
+
+      html.moniezi-supported-install-boot #app-loader .mark { display: none; }
+      html.moniezi-supported-install-boot #app-loader .boot-install-shell {
+        display: block;
+        min-height: 100svh;
+        padding: max(24px, env(safe-area-inset-top)) 16px 24px;
+        color: #0B1739;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      #app-loader .boot-install-main {
+        width: 100%;
+        max-width: 430px;
+        margin: 0 auto;
+        padding-top: clamp(36px, 7svh, 68px);
+        padding-bottom: 24px;
+      }
+
+      #app-loader .boot-install-card {
+        width: 100%;
+        border: 1px solid #DCE6F8;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.95);
+        padding: 28px 20px;
+        box-shadow: 0 24px 70px rgba(15,23,42,0.12);
+      }
+
+      #app-loader .boot-install-logo {
+        width: 74px;
+        height: 74px;
+        display: block;
+        margin: 0 auto;
+        object-fit: contain;
+        filter: drop-shadow(0 12px 24px rgba(47,103,246,0.18));
+      }
+
+      #app-loader .boot-install-kicker {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.35;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #45658F;
+      }
+
+      #app-loader .boot-install-title {
+        margin: 8px 0 0;
+        text-align: center;
+        font-size: 29px;
+        line-height: 1.08;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: #0B1739;
+      }
+
+      #app-loader .boot-install-copy {
+        max-width: 32ch;
+        margin: 16px auto 0;
+        text-align: center;
+        font-size: 15px;
+        line-height: 1.6;
+        font-weight: 600;
+        color: #43536B;
+      }
+
+      #app-loader .boot-install-platform {
+        width: 100%;
+        margin: 20px auto 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-align: center;
+        font-size: 13px;
+        line-height: 1.35;
+        font-weight: 700;
+        color: #52647D;
+      }
+
+      #app-loader .boot-install-platform svg {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 16px;
+        color: #4473E8;
+      }
+
+      #app-loader .boot-ios-label,
+      #app-loader .boot-android-label { display: none; }
+      html.moniezi-install-ios #app-loader .boot-ios-label { display: inline; }
+      html.moniezi-install-android #app-loader .boot-android-label { display: inline; }
+
+      #app-loader .boot-install-button {
+        width: 100%;
+        margin-top: 28px;
+        min-height: 50px;
+        border: 0;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #2563EB;
+        color: #ffffff;
+        font: inherit;
+        font-size: 16px;
+        line-height: 1.25;
+        font-weight: 800;
+        box-shadow: 0 14px 28px rgba(37,99,235,0.24);
+      }
+
+      #app-loader .boot-install-button svg { width: 20px; height: 20px; flex: 0 0 20px; }
+
+      #app-loader .boot-install-existing {
+        margin: 20px 0 0;
+        text-align: center;
+        font-size: 13px;
+        line-height: 20px;
+        font-weight: 600;
+        color: #52647D;
+      }
+      #app-loader .boot-install-existing strong { color: #1E3A66; font-weight: 800; }
+
+      @media (min-width: 640px) {
+        #app-loader .boot-install-card { padding: 32px 28px; }
+        #app-loader .boot-install-title { font-size: 31px; }
+      }
     </style>
+
+    <script>
+      (function () {
+        try {
+          var ua = navigator.userAgent || '';
+          var ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+          var android = /Android/i.test(ua);
+          var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+          var chromeAndroid = android && /Chrome\//i.test(ua) && !/EdgA|SamsungBrowser|OPR|Firefox/i.test(ua);
+          var safariIos = ios && /Safari/i.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/i.test(ua);
+          if (!standalone && (chromeAndroid || safariIos)) {
+            document.documentElement.classList.add('moniezi-supported-install-boot');
+            document.documentElement.classList.add(chromeAndroid ? 'moniezi-install-android' : 'moniezi-install-ios');
+          }
+        } catch (_) {}
+      })();
+    </script>
 
 
     <!-- Favicons -->
@@ -469,9 +620,29 @@
       })();
     </script>
     <div id="root">
-      <!-- Instant branded startup surface. React replaces this automatically. -->
+      <!-- Instant deterministic startup surface. React replaces this automatically. -->
       <div id="app-loader" aria-hidden="true">
         <div class="mark"><img src="icons/icon-192.png" alt="" /></div>
+        <div class="boot-install-shell">
+          <main class="boot-install-main">
+            <section class="boot-install-card">
+              <img class="boot-install-logo" src="icons/icon-192.png" alt="" />
+              <div class="boot-install-kicker">First step</div>
+              <h1 class="boot-install-title">Install MONIEZI</h1>
+              <p class="boot-install-copy">Add MONIEZI to your Home Screen first. Then open it and activate your copy.</p>
+              <div class="boot-install-platform">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+                <span class="boot-android-label">Chrome on Android</span>
+                <span class="boot-ios-label">Safari on iPhone / iPad</span>
+              </div>
+              <div class="boot-install-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+                <span>Install MONIEZI</span>
+              </div>
+              <p class="boot-install-existing">Already installed? <strong>Open MONIEZI from your Home Screen.</strong></p>
+            </section>
+          </main>
+        </div>
       </div>
     </div>
 

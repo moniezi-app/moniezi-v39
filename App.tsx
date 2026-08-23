@@ -7370,9 +7370,21 @@ export default function App() {
       : 'MONIEZI installs on Android using Google Chrome.';
 
     return (
-      <div className="min-h-[100dvh] bg-[linear-gradient(180deg,#f9fbff_0%,#f3f6fc_100%)] px-4 py-[max(24px,env(safe-area-inset-top))] text-[#0B1739]">
-        <main className="mx-auto flex min-h-[calc(100dvh-48px)] w-full max-w-[430px] flex-col justify-center py-6">
-          <section className="rounded-xl border border-[#DCE6F8] bg-white/95 px-5 py-7 shadow-[0_24px_70px_rgba(15,23,42,0.12)] ring-1 ring-white sm:px-7 sm:py-8">
+      <div
+        className="moniezi-install-gate fixed inset-0 z-[95] overflow-y-auto bg-[linear-gradient(180deg,#f9fbff_0%,#f3f6fc_100%)] px-4 text-[#0B1739]"
+        style={{
+          paddingTop: 'max(24px, env(safe-area-inset-top))',
+          paddingBottom: '24px',
+        }}
+      >
+        <main
+          className="mx-auto w-full max-w-[430px]"
+          style={{
+            paddingTop: 'clamp(36px, 7svh, 68px)',
+            paddingBottom: '24px',
+          }}
+        >
+          <section className="rounded-lg border border-[#DCE6F8] bg-white/95 px-5 py-7 shadow-[0_24px_70px_rgba(15,23,42,0.12)] ring-1 ring-white sm:px-7 sm:py-8">
             <img
               src={`${import.meta.env.BASE_URL}icons/icon-192.png`}
               alt=""
@@ -7421,7 +7433,7 @@ export default function App() {
                 <button
                   type="button"
                   onClick={handleMobileInstallAction}
-                  className="mt-7 flex w-full items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-5 py-[15px] text-[16px] font-extrabold text-white shadow-[0_14px_28px_rgba(37,99,235,0.24)] transition active:scale-[0.99]"
+                  className="mt-7 flex w-full items-center justify-center gap-2 rounded-[6px] bg-[#2563EB] px-5 py-[15px] text-[16px] font-extrabold text-white shadow-[0_14px_28px_rgba(37,99,235,0.24)] transition active:scale-[0.99]"
                 >
                   <Download size={20} strokeWidth={2.2} />
                   Install MONIEZI
