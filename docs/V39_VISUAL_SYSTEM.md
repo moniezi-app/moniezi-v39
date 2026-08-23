@@ -1,5 +1,7 @@
-## v39.4.6 full-page Business Insights + empty-Home scroll-to-top
+## v39.4.7 GitHub Actions typecheck fix
 
+- Adds `Page.Insights` to the exhaustive routed-page safety list so the v39.4.6 full-page Insights route passes TypeScript and cannot fall through to the navigation-error safety net.
+- No visual-system behavior changes in this patch.
 - Business Insights is now a normal routed portrait page, not a modal or nested scrolling panel.
 - The global brain icon and Home Insights action navigate to the Insights page.
 - The redundant business-signal count line and modal close control are removed.
@@ -50,7 +52,7 @@ Real-device installation QA reduced MONIEZI's official mobile install matrix to 
 
 # MONIEZI v39 Visual System
 
-Version: 39.4.6
+Version: 39.4.7
 
 This is the visual foundation for the v39 redesign. It defines how illustrations, empty states, section hierarchy, typography and visual accents should work before individual screens are redesigned.
 

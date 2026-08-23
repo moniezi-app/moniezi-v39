@@ -5,12 +5,12 @@
  * It defines the shared visual language that v39 screens can opt into one by one.
  */
 
-export const V39_VISUAL_SYSTEM_VERSION = '39.4.6';
+export const V39_VISUAL_SYSTEM_VERSION = '39.4.7';
 
 
 
 /**
- * v39.4.6 routed full-page insights + empty-Home scroll-to-top + restrained-radius Luminous Glass tokens.
+ * v39.4.7 routed full-page insights + empty-Home scroll-to-top + Page.Insights navigation safety-net type fix + restrained-radius Luminous Glass tokens.
  * These names intentionally describe surface roles rather than screen content so
  * the dashboard, lists, and future business modules can reuse one material system.
  */

@@ -1318,7 +1318,7 @@ export default function App() {
       if (el) {
         const scrollTop = el.scrollTop;
         // Once the user has scrolled far enough to need the control, keep it
-        // visible all the way to the end of the screen. v39.4.6 preserves the
+        // visible all the way to the end of the screen. v39.4.7 preserves the
         // near-bottom suppression introduced in v39.4.3.
         if (scrollTop > 300) {
           setShowScrollToTop(true);
@@ -12856,6 +12856,7 @@ html, body, #root {
           Page.Jobs,
           Page.Mileage,
           Page.Reports,
+          Page.Insights,
           Page.CompanyEquity,
           Page.Settings,
           Page.InvoiceDoc,
@@ -13371,7 +13372,7 @@ html, body, #root {
         </div>
       </AppDrawer>
 
-      {/* Business Insights is a normal routed page in v39.4.6. */}
+      {/* Business Insights is a normal routed page in v39.4.7. */}
 
       <AppDrawer
          isOpen={isDrawerOpen}

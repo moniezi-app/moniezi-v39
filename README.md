@@ -1,7 +1,10 @@
-# MONIEZI v39.4.6
+# MONIEZI v39.4.7
 
-## v39.4.6 Full-page Business Insights + empty-Home scroll-to-top
+## v39.4.7 GitHub Actions typecheck fix
 
+- Fixes the GitHub Actions TypeScript failure in the navigation safety-net by adding `Page.Insights` to the exhaustive routed-page list.
+- This resolves `TS2345` at the `includes(currentPage)` guard introduced when Business Insights became a normal routed page in v39.4.6.
+- No layout, business logic, licensing, or data behavior changes beyond the compile/navigation safety-net correction.
 - Converts Business Insights from a modal/popup into a normal routed MONIEZI screen opened from the permanent brain icon or the Home Insights action.
 - Removes the modal shell, close button, sticky/internal header behavior, nested Insights scroll container, and the redundant `business signals` count line.
 - Keeps the portrait-first summary: High, Medium, Need Action, and Reset Dismissed each use their own vertical row.

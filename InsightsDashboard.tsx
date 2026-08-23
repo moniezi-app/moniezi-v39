@@ -257,7 +257,7 @@ export default function InsightsDashboard({
 
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 pb-24">
-      {/* v39.4.6 — Business Insights is a normal routed MONIEZI page. There is
+      {/* v39.4.7 — Business Insights is a normal routed MONIEZI page. There is
           no modal shell, close button, sticky internal header, or nested scroll. */}
       <div className="v392-page-header flex items-center gap-3">
         <div className="v392-page-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400">
