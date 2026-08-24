@@ -1,3 +1,15 @@
+# MONIEZI v39.4.18
+## v39.4.18 Demo Hub + persistent Demo Explorer
+- Replaces the v39.4.17 image-based Home navigator with a native MONIEZI illustration that has no outer background rectangle and blends directly into the app canvas.
+- Removes Current focus and Expand all from the Demo experience.
+- Adds six compact Demo Hub destinations: Overview, Money, Sales, Jobs, Records, and Tax.
+- Adds visited-state tracking and a persistent `Demo · Section · X/6` capsule above the footer so the user never has to scroll back to the top to continue.
+- Adds an Explore Demo bottom sheet with current/visited states, direct section switching, and Exit Demo.
+- Adds end-of-section `Next` and `Choose another` navigation so the demo can be reviewed in sequence or non-linearly.
+- Adds Menu → Explore Demo with progress, while keeping Exit Demo separate and explicit.
+- In Demo mode, only the chosen Home section is expanded, eliminating the stack of collapsed section placeholders underneath it.
+- Keeps real-business Home behavior, licensing, records, calculations, install flow, and existing bottom navigation unchanged.
+
 # MONIEZI v39.4.16
 ## v39.4.16 illustrated Home navigator
 - Removes the rejected left-edge Home rail and slide-out Home index from v39.4.15.
