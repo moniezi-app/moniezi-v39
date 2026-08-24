@@ -1048,6 +1048,29 @@ const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
 
 const HOME_SECTION_ORDER: HomeSectionKey[] = ['overview', 'money', 'sales', 'jobs', 'records', 'tax'];
 
+const HOME_SECTION_ICON_COMPONENTS: Record<HomeSectionKey, any> = {
+  overview: LayoutGrid,
+  money: Wallet,
+  sales: BarChart3,
+  jobs: Briefcase,
+  records: FileText,
+  tax: Landmark,
+};
+
+const HOME_SECTION_ICON_CLASSES: Record<HomeSectionKey, string> = {
+  overview: 'border-blue-200 bg-blue-50 text-blue-600 dark:border-blue-400/20 dark:bg-blue-500/10 dark:text-blue-300',
+  money: 'border-emerald-200 bg-emerald-50 text-emerald-600 dark:border-emerald-400/20 dark:bg-emerald-500/10 dark:text-emerald-300',
+  sales: 'border-violet-200 bg-violet-50 text-violet-600 dark:border-violet-400/20 dark:bg-violet-500/10 dark:text-violet-300',
+  jobs: 'border-amber-200 bg-amber-50 text-amber-600 dark:border-amber-400/20 dark:bg-amber-500/10 dark:text-amber-300',
+  records: 'border-cyan-200 bg-cyan-50 text-cyan-600 dark:border-cyan-400/20 dark:bg-cyan-500/10 dark:text-cyan-300',
+  tax: 'border-fuchsia-200 bg-fuchsia-50 text-fuchsia-600 dark:border-fuchsia-400/20 dark:bg-fuchsia-500/10 dark:text-fuchsia-300',
+};
+
+function HomeSectionIcon({ section, size = 18 }: { section: HomeSectionKey; size?: number }) {
+  const Icon = HOME_SECTION_ICON_COMPONENTS[section];
+  return <Icon size={size} strokeWidth={1.9} />;
+}
+
 function HomeCollapsedSection({
   section,
   title,
@@ -1064,15 +1087,18 @@ function HomeCollapsedSection({
       id={`home-section-${section}`}
       type="button"
       onClick={() => onOpen(section)}
-      className="scroll-mt-4 w-full border-t border-slate-200 py-4 text-left transition-colors active:bg-slate-50 dark:border-slate-800 dark:active:bg-slate-900/60"
+      className="mt-4 w-full scroll-mt-4 rounded-xl border border-slate-200 bg-white/80 px-4 py-4 text-left shadow-sm transition-all hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-slate-950/55 dark:hover:border-slate-700 dark:hover:bg-slate-950/75"
       aria-label={`Open ${title} section`}
     >
-      <div className="flex items-center gap-3">
+      <div className="flex items-start gap-3">
+        <div className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${HOME_SECTION_ICON_CLASSES[section]}`}>
+          <HomeSectionIcon section={section} size={19} />
+        </div>
         <div className="min-w-0 flex-1">
           <div className="text-[13px] font-extrabold uppercase tracking-[0.12em] text-slate-900 dark:text-white">{title}</div>
           <div className="mt-1.5 text-[13px] font-semibold leading-snug text-slate-600 dark:text-slate-300">{summary}</div>
         </div>
-        <ChevronDown size={18} className="shrink-0 text-slate-400" />
+        <ChevronDown size={18} className="mt-1 shrink-0 text-slate-400" />
       </div>
     </button>
   );
@@ -8754,100 +8780,77 @@ html, body, #root {
 
         {(currentPage === Page.Dashboard) && (
           <div className="v391-dashboard v3934-home-readable v3935-home-breathing relative space-y-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* v39.4.16 — illustration-led Home navigator.
-                Navigation belongs to the visual Home experience instead of a
-                technical rail/sidebar. The selector reveals the same six Home
-                destinations without adding another permanent navigation layer. */}
+            {/* v39.4.17 — Concept 1 Home navigator.
+                The Home page starts with an inviting visual summary, direct
+                section chips, and a compact focus summary instead of a
+                dropdown. Each tap jumps straight into the chosen Home section. */}
             {!isAppEmpty && (
-              <MonieziGlassCard hero className="mb-6 overflow-visible">
+              <MonieziGlassCard hero className="mb-7 overflow-hidden">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-full overflow-hidden">
+                  <div className="w-full rounded-[10px] border border-blue-400/15 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.16),transparent_62%)] px-3 pt-3 sm:px-4 sm:pt-4">
                     <img
-                      src={`${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`}
-                      alt=""
-                      aria-hidden="true"
-                      className="mx-auto block w-[68%] max-w-[300px] object-contain"
+                      src={`${import.meta.env.BASE_URL}home-navigator-concept1-v39417.webp`}
+                      alt="A MONIEZI business overview illustration showing invoices, receipts, mileage, jobs, and cash flow around a phone dashboard"
+                      className="mx-auto block w-full max-w-[390px] object-contain"
                       loading="eager"
                       decoding="async"
-                      width="1365"
-                      height="1024"
+                      width="760"
+                      height="460"
                     />
                   </div>
 
-                  <div className="mt-1 max-w-[34rem] px-1">
-                    <h2 className="text-[24px] font-extrabold leading-tight tracking-[-0.025em] text-slate-950 dark:text-white sm:text-[27px]">
+                  <div className="mt-5 max-w-[35rem] px-1">
+                    <h2 className="text-[25px] font-extrabold leading-tight tracking-[-0.03em] text-slate-950 dark:text-white sm:text-[28px]">
                       {isDemoData ? 'Explore the demo business' : 'Your business at a glance'}
                     </h2>
-                    <p className="mx-auto mt-2 max-w-[31rem] text-[14px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
+                    <p className="mx-auto mt-2 max-w-[32rem] text-[14px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
                       {isDemoData
-                        ? 'Choose what you want to explore. Every part of this sample business is right here on Home.'
-                        : 'Choose what you want to focus on. Every part of your business stays organized here on Home.'}
+                        ? 'Jump into any part of the sample business without hunting through a long Home screen.'
+                        : 'Jump straight to the part of your business you want to review, while keeping every Home section organized on Home.'}
                     </p>
                   </div>
 
-                  <div className="relative mt-5 w-full text-left">
+                  <div className="mt-5 w-full overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                    <div className="grid min-w-max grid-flow-col auto-cols-[90px] gap-3 pr-1">
+                      {homeSectionNavItems.map((key) => {
+                        const active = homeExpandAll ? homeRailSection === key : homeSection === key;
+                        return (
+                          <button
+                            key={key}
+                            type="button"
+                            onClick={() => openHomeSection(key)}
+                            aria-pressed={active}
+                            className={`group flex min-h-[92px] flex-col items-center justify-center gap-2 rounded-xl border px-3 py-3 text-center transition-all ${active
+                              ? 'border-blue-400/45 bg-blue-50 text-blue-700 shadow-[0_10px_28px_rgba(37,99,235,0.14)] dark:border-blue-400/40 dark:bg-blue-500/12 dark:text-blue-200'
+                              : 'border-slate-200 bg-white/80 text-slate-700 hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-slate-950/55 dark:text-slate-200 dark:hover:border-slate-700 dark:hover:bg-slate-950/75'}`}
+                          >
+                            <span className={`flex h-11 w-11 items-center justify-center rounded-xl border transition-all ${HOME_SECTION_ICON_CLASSES[key]} ${active ? 'shadow-sm' : 'opacity-95'}`}>
+                              <HomeSectionIcon section={key} size={20} />
+                            </span>
+                            <span className="text-[13px] font-extrabold leading-tight">{HOME_SECTION_LABELS[key]}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex w-full flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white/70 px-4 py-3 text-left dark:border-slate-700 dark:bg-slate-950/45">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">Current focus</div>
+                      <div className="mt-1 text-[16px] font-extrabold text-slate-950 dark:text-white">{homeExpandAll ? 'All sections expanded' : HOME_SECTION_LABELS[homeSection]}</div>
+                      <div className="mt-1 text-[13px] font-semibold leading-snug text-slate-600 dark:text-slate-300">
+                        {homeExpandAll
+                          ? 'Every Home section is open. Collapse all when you want a simpler, focused view again.'
+                          : homeSectionSummaries[homeSection]}
+                      </div>
+                    </div>
                     <button
                       type="button"
-                      onClick={() => setShowHomeSectionMenu(prev => !prev)}
-                      className="flex w-full items-center justify-between gap-3 rounded-[6px] border border-blue-200 bg-white/90 px-4 py-3.5 text-left shadow-sm transition-colors hover:border-blue-300 hover:bg-white dark:border-blue-400/25 dark:bg-slate-950/55 dark:hover:border-blue-400/45 dark:hover:bg-slate-950/75"
-                      aria-label={`Choose Home content. Current selection: ${HOME_SECTION_LABELS[homeExpandAll ? homeRailSection : homeSection]}`}
-                      aria-haspopup="listbox"
-                      aria-expanded={showHomeSectionMenu}
+                      onClick={homeExpandAll ? collapseHomeSections : expandAllHomeSections}
+                      className="shrink-0 rounded-lg border border-slate-300 bg-slate-50 px-3.5 py-2 text-[13px] font-extrabold text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
                     >
-                      <span className="flex min-w-0 items-center gap-3">
-                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] border border-blue-200 bg-blue-50 text-blue-600 dark:border-blue-400/20 dark:bg-blue-500/10 dark:text-blue-300">
-                          <LayoutGrid size={19} strokeWidth={1.8} />
-                        </span>
-                        <span className="min-w-0">
-                          <span className="block text-[12px] font-extrabold uppercase tracking-[0.11em] text-slate-500 dark:text-slate-400">
-                            Explore
-                          </span>
-                          <span className="mt-0.5 block truncate text-[16px] font-extrabold text-slate-950 dark:text-white">
-                            {homeExpandAll ? HOME_SECTION_LABELS[homeRailSection] : HOME_SECTION_LABELS[homeSection]}
-                          </span>
-                        </span>
-                      </span>
-                      <ChevronDown
-                        size={20}
-                        className={`shrink-0 text-slate-500 transition-transform dark:text-slate-300 ${showHomeSectionMenu ? 'rotate-180' : ''}`}
-                      />
+                      {homeExpandAll ? 'Collapse all' : 'Expand all'}
                     </button>
-
-                    {showHomeSectionMenu && (
-                      <div
-                        className="mt-2 overflow-hidden rounded-[6px] border border-slate-200 bg-white shadow-xl dark:border-slate-700 dark:bg-slate-950"
-                        role="listbox"
-                        aria-label="Explore Home"
-                      >
-                        {homeSectionNavItems.map((key, index) => {
-                          const active = homeExpandAll ? homeRailSection === key : homeSection === key;
-                          return (
-                            <button
-                              key={key}
-                              type="button"
-                              role="option"
-                              aria-selected={active}
-                              onClick={() => openHomeSection(key)}
-                              className={`flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition-colors ${index > 0 ? 'border-t border-slate-100 dark:border-slate-800' : ''} ${active ? 'bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-200' : 'text-slate-800 hover:bg-slate-50 dark:text-slate-100 dark:hover:bg-slate-900'}`}
-                            >
-                              <span className="text-[15px] font-extrabold">{HOME_SECTION_LABELS[key]}</span>
-                              {active ? <CheckCircle size={18} strokeWidth={2} className="text-blue-500" /> : null}
-                            </button>
-                          );
-                        })}
-
-                        <div className="border-t border-slate-200 p-2 dark:border-slate-700">
-                          <button
-                            type="button"
-                            onClick={homeExpandAll ? collapseHomeSections : expandAllHomeSections}
-                            className="flex w-full items-center justify-between rounded-[5px] px-3 py-3 text-left text-[14px] font-extrabold text-slate-700 transition-colors hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900"
-                          >
-                            <span>{homeExpandAll ? 'Collapse sections' : 'Expand all'}</span>
-                            {homeExpandAll ? <ChevronUp size={17} /> : <ChevronDown size={17} />}
-                          </button>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </div>
               </MonieziGlassCard>
