@@ -1,3 +1,13 @@
+# MONIEZI v39.4.14
+## v39.4.14 Home section navigation
+- Keeps every existing Home card while organizing the dashboard into six logical sections: Overview, Money, Sales, Jobs, Records, and Tax.
+- Overview is expanded by default; the other five sections appear as informative collapsed summaries instead of a continuous wall of cards.
+- Adds a compact sticky Home-section picker that can jump directly to any section.
+- Opens one section at a time by default and includes an optional **Expand all** mode for users who want the traditional long dashboard.
+- Preserves the Receipts menu deep-link by opening Records before scrolling to the Receipts card.
+- Reorders the existing Home cards into the approved hierarchy without removing data or changing business calculations.
+- Preserves the v39.4.13 stable installed Welcome/activation startup and the v39.4.12 simplified Business Insights hierarchy.
+
 # MONIEZI v39.4.12
 ## v39.4.12 simplified Business Insights hierarchy
 - Removes the redundant High / Medium / Need Action summary cards above the category sections.
