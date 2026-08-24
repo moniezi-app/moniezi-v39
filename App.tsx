@@ -1236,8 +1236,8 @@ export default function App() {
     }
   }, [homeKpiPeriod]);
 
-  // v39.4.15 Home navigation: keep all Home information, but use a subtle
-  // left-edge rail as the page index instead of a large dropdown control.
+  // v39.4.16 Home navigation: keep every Home section, but present navigation
+  // through an illustration-led Home navigator instead of a utility-style rail.
   const [homeSection, setHomeSection] = useState<HomeSectionKey>('overview');
   const [homeRailSection, setHomeRailSection] = useState<HomeSectionKey>('overview');
   const [homeExpandAll, setHomeExpandAll] = useState(false);
@@ -1260,7 +1260,7 @@ export default function App() {
     setShowHomeSectionMenu(false);
 
     // Wait for the selected section to replace its collapsed header, then move
-    // that section into view. The left rail remains the navigation control.
+    // that section into view. The illustration-led selector remains the index.
     window.setTimeout(() => {
       document.getElementById(`home-section-${section}`)?.scrollIntoView({
         behavior: 'smooth',
@@ -1448,9 +1448,9 @@ export default function App() {
     };
   }, [currentPage, dataLoaded]); // Re-attach when page changes or data loads (ref becomes available)
 
-  // Keep the Home rail label synchronized with the section currently passing
-  // through the upper part of the scroll viewport. Every section keeps its DOM
-  // anchor even while collapsed, so the rail remains useful in either mode.
+  // When Home is expanded, keep the navigator's current-section label in sync
+  // with the section passing through the upper part of the scroll viewport.
+  // Every section keeps its DOM anchor even while collapsed.
   useEffect(() => {
     if (currentPage !== Page.Dashboard) return;
     const el = mainScrollRef.current;
@@ -8754,92 +8754,103 @@ html, body, #root {
 
         {(currentPage === Page.Dashboard) && (
           <div className="v391-dashboard v3934-home-readable v3935-home-breathing relative space-y-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* v39.4.15 — a thin left-edge rail replaces the v39.4.14 dropdown.
-                It acts as a location indicator and opens the Home index drawer. */}
+            {/* v39.4.16 — illustration-led Home navigator.
+                Navigation belongs to the visual Home experience instead of a
+                technical rail/sidebar. The selector reveals the same six Home
+                destinations without adding another permanent navigation layer. */}
             {!isAppEmpty && (
-            <button
-              type="button"
-              onClick={() => setShowHomeSectionMenu(true)}
-              className="fixed z-40 flex items-center rounded-md border border-slate-200 bg-white/95 px-1.5 py-2.5 shadow-sm backdrop-blur-xl transition-colors dark:border-slate-700 dark:bg-slate-950/95"
-              style={{ left: 'max(4px, calc(50vw - 332px))', top: 'clamp(180px, 34vh, 300px)' }}
-              aria-label={`Open Home navigation. Current section: ${HOME_SECTION_LABELS[homeRailSection]}`}
-              aria-haspopup="dialog"
-            >
-              <span className="flex flex-col gap-2" aria-hidden="true">
-                {HOME_SECTION_ORDER.map(key => {
-                  const active = homeRailSection === key;
-                  return (
-                    <span key={key} className="flex min-h-[13px] items-center gap-1.5">
-                      <span className={`block h-2 w-2 rounded-full border ${active ? 'border-blue-500 bg-blue-500' : 'border-slate-400 bg-transparent dark:border-slate-500'}`} />
-                      {active ? (
-                        <span className="max-w-[58px] truncate text-[9px] font-extrabold uppercase tracking-[0.08em] text-slate-700 dark:text-slate-200">
-                          {HOME_SECTION_LABELS[key]}
-                        </span>
-                      ) : null}
-                    </span>
-                  );
-                })}
-              </span>
-            </button>
-            )}
-
-            {showHomeSectionMenu && createPortal(
-              <div
-                className="fixed inset-0 z-[90] bg-slate-950/45 backdrop-blur-[1px]"
-                role="presentation"
-                onClick={(e) => { if (e.target === e.currentTarget) setShowHomeSectionMenu(false); }}
-              >
-                <aside
-                  className="fixed bottom-0 top-0 animate-in slide-in-from-left-6 duration-200 border-r border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-950"
-                  style={{ left: 'max(0px, calc(50vw - 336px))', width: 'min(74vw, 320px)', paddingTop: 'max(18px, env(safe-area-inset-top, 0px))', paddingBottom: 'max(18px, env(safe-area-inset-bottom, 0px))' }}
-                  role="dialog"
-                  aria-modal="true"
-                  aria-label="Home navigation"
-                >
-                  <div className="flex h-full flex-col px-4">
-                    <div className="flex items-center justify-between border-b border-slate-200 pb-4 dark:border-slate-800">
-                      <h2 className="text-lg font-extrabold text-slate-950 dark:text-white">Home</h2>
-                      <button
-                        type="button"
-                        onClick={() => setShowHomeSectionMenu(false)}
-                        className="flex h-9 w-9 items-center justify-center rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900"
-                        aria-label="Close Home navigation"
-                      >
-                        <X size={19} />
-                      </button>
-                    </div>
-
-                    <nav className="mt-4 space-y-1" aria-label="Home sections">
-                      {homeSectionNavItems.map(key => {
-                        const active = homeRailSection === key;
-                        return (
-                          <button
-                            key={key}
-                            type="button"
-                            onClick={() => openHomeSection(key)}
-                            className={`flex w-full items-center justify-between rounded-md px-3 py-3.5 text-left text-[15px] font-extrabold transition-colors ${active ? 'bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-200' : 'text-slate-800 hover:bg-slate-50 dark:text-slate-100 dark:hover:bg-slate-900'}`}
-                          >
-                            <span>{HOME_SECTION_LABELS[key]}</span>
-                            {active ? <span className="h-2 w-2 rounded-full bg-blue-500" /> : null}
-                          </button>
-                        );
-                      })}
-                    </nav>
-
-                    <div className="mt-auto border-t border-slate-200 pt-4 dark:border-slate-800">
-                      <button
-                        type="button"
-                        onClick={homeExpandAll ? collapseHomeSections : expandAllHomeSections}
-                        className="flex w-full items-center justify-between rounded-md px-3 py-3.5 text-left text-sm font-extrabold text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900"
-                      >
-                        <span>{homeExpandAll ? 'Collapse sections' : 'Expand all'}</span>
-                        {homeExpandAll ? <ChevronUp size={17} /> : <ChevronDown size={17} />}
-                      </button>
-                    </div>
+              <MonieziGlassCard hero className="mb-6 overflow-visible">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-full overflow-hidden">
+                    <img
+                      src={`${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`}
+                      alt=""
+                      aria-hidden="true"
+                      className="mx-auto block w-[68%] max-w-[300px] object-contain"
+                      loading="eager"
+                      decoding="async"
+                      width="1365"
+                      height="1024"
+                    />
                   </div>
-                </aside>
-              </div>,
-              document.body
+
+                  <div className="mt-1 max-w-[34rem] px-1">
+                    <h2 className="text-[24px] font-extrabold leading-tight tracking-[-0.025em] text-slate-950 dark:text-white sm:text-[27px]">
+                      {isDemoData ? 'Explore the demo business' : 'Your business at a glance'}
+                    </h2>
+                    <p className="mx-auto mt-2 max-w-[31rem] text-[14px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
+                      {isDemoData
+                        ? 'Choose what you want to explore. Every part of this sample business is right here on Home.'
+                        : 'Choose what you want to focus on. Every part of your business stays organized here on Home.'}
+                    </p>
+                  </div>
+
+                  <div className="relative mt-5 w-full text-left">
+                    <button
+                      type="button"
+                      onClick={() => setShowHomeSectionMenu(prev => !prev)}
+                      className="flex w-full items-center justify-between gap-3 rounded-[6px] border border-blue-200 bg-white/90 px-4 py-3.5 text-left shadow-sm transition-colors hover:border-blue-300 hover:bg-white dark:border-blue-400/25 dark:bg-slate-950/55 dark:hover:border-blue-400/45 dark:hover:bg-slate-950/75"
+                      aria-label={`Choose Home content. Current selection: ${HOME_SECTION_LABELS[homeExpandAll ? homeRailSection : homeSection]}`}
+                      aria-haspopup="listbox"
+                      aria-expanded={showHomeSectionMenu}
+                    >
+                      <span className="flex min-w-0 items-center gap-3">
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] border border-blue-200 bg-blue-50 text-blue-600 dark:border-blue-400/20 dark:bg-blue-500/10 dark:text-blue-300">
+                          <LayoutGrid size={19} strokeWidth={1.8} />
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-[12px] font-extrabold uppercase tracking-[0.11em] text-slate-500 dark:text-slate-400">
+                            Explore
+                          </span>
+                          <span className="mt-0.5 block truncate text-[16px] font-extrabold text-slate-950 dark:text-white">
+                            {homeExpandAll ? HOME_SECTION_LABELS[homeRailSection] : HOME_SECTION_LABELS[homeSection]}
+                          </span>
+                        </span>
+                      </span>
+                      <ChevronDown
+                        size={20}
+                        className={`shrink-0 text-slate-500 transition-transform dark:text-slate-300 ${showHomeSectionMenu ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+
+                    {showHomeSectionMenu && (
+                      <div
+                        className="mt-2 overflow-hidden rounded-[6px] border border-slate-200 bg-white shadow-xl dark:border-slate-700 dark:bg-slate-950"
+                        role="listbox"
+                        aria-label="Explore Home"
+                      >
+                        {homeSectionNavItems.map((key, index) => {
+                          const active = homeExpandAll ? homeRailSection === key : homeSection === key;
+                          return (
+                            <button
+                              key={key}
+                              type="button"
+                              role="option"
+                              aria-selected={active}
+                              onClick={() => openHomeSection(key)}
+                              className={`flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition-colors ${index > 0 ? 'border-t border-slate-100 dark:border-slate-800' : ''} ${active ? 'bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-200' : 'text-slate-800 hover:bg-slate-50 dark:text-slate-100 dark:hover:bg-slate-900'}`}
+                            >
+                              <span className="text-[15px] font-extrabold">{HOME_SECTION_LABELS[key]}</span>
+                              {active ? <CheckCircle size={18} strokeWidth={2} className="text-blue-500" /> : null}
+                            </button>
+                          );
+                        })}
+
+                        <div className="border-t border-slate-200 p-2 dark:border-slate-700">
+                          <button
+                            type="button"
+                            onClick={homeExpandAll ? collapseHomeSections : expandAllHomeSections}
+                            className="flex w-full items-center justify-between rounded-[5px] px-3 py-3 text-left text-[14px] font-extrabold text-slate-700 transition-colors hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900"
+                          >
+                            <span>{homeExpandAll ? 'Collapse sections' : 'Expand all'}</span>
+                            {homeExpandAll ? <ChevronUp size={17} /> : <ChevronDown size={17} />}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </MonieziGlassCard>
             )}
 
             {homeExpandAll || homeSection === 'overview' ? (

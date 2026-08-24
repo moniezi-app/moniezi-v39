@@ -1,3 +1,13 @@
+# MONIEZI v39.4.16
+## v39.4.16 illustrated Home navigator
+- Removes the rejected left-edge Home rail and slide-out Home index from v39.4.15.
+- Adds an illustration-led Home navigator card for populated Home states, including Demo mode and real business data.
+- Reuses the approved MONIEZI business illustration so Home navigation feels consistent with the first-run visual language.
+- Adds one integrated Explore selector with Overview, Money, Sales, Jobs, Records, and Tax.
+- Keeps one section open at a time by default; Expand all / Collapse sections remains available inside the selector.
+- Preserves every existing Home card and the simplified collapsed section headers.
+- Preserves Menu → Receipts deep-link behavior, scroll-to-top, Demo behavior, licensing, and all business calculations.
+
 # MONIEZI v39.4.12
 ## v39.4.12 simplified Business Insights hierarchy
 - Removes the redundant High / Medium / Need Action summary cards above the category sections.
