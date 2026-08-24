@@ -1,3 +1,20 @@
+# MONIEZI v39.4.20
+## Full-product Demo Explorer
+
+- Keeps the calm, human-first v39.4.19 Demo Hub unchanged as the entry point.
+- Expands Demo Mode from six Home business areas into a two-level **Explore MONIEZI** system: Demo Business and App Features.
+- Adds visited-state tracking for Clients, Jobs / Projects, Estimates, Invoices, Mileage, Receipts, Activity, Reports, Tax Prep, Search, Insights, Settings, and Company Equity when enabled.
+- Opens every feature from the explorer into the real MONIEZI screen rather than a tutorial mockup.
+- Adds a segmented Demo Explorer so business sections and app features are never displayed as one overwhelming list.
+- Adds a recommended Reports handoff after the six business areas are completed.
+- Changes the final Home Demo step from “review sections” to **Explore MONIEZI**, continuing naturally into the rest of the product.
+- Adds a subtle one-time hamburger-menu discovery cue after three business areas have been viewed: “Reports, Settings, Search & more.”
+- Adds Menu → **Explore MONIEZI** with overall business + feature progress.
+- Adds a compact Demo context strip on routed pages with a single Explore action and overall progress.
+- Adds a persistent feature-aware Demo capsule above the footer on non-Home pages so the explorer is always recoverable after scrolling.
+- Keeps Exit Demo available from both Menu and the explorer, without making it the primary exploration action.
+- Resets all Demo exploration state cleanly when Demo Mode is entered or exited.
+
 # MONIEZI v39.4.19
 ## v39.4.19 Human-first Demo Hub + calmer guided navigation
 
