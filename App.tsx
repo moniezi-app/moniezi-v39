@@ -1046,17 +1046,17 @@ const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   tax: 'Tax',
 };
 
+const HOME_SECTION_ORDER: HomeSectionKey[] = ['overview', 'money', 'sales', 'jobs', 'records', 'tax'];
+
 function HomeCollapsedSection({
   section,
   title,
   summary,
-  icon,
   onOpen,
 }: {
   section: HomeSectionKey;
   title: string;
   summary: string;
-  icon: React.ReactNode;
   onOpen: (section: HomeSectionKey) => void;
 }) {
   return (
@@ -1064,20 +1064,26 @@ function HomeCollapsedSection({
       id={`home-section-${section}`}
       type="button"
       onClick={() => onOpen(section)}
-      className="v391-glass-card v39414-home-collapsed scroll-mt-24 w-full text-left transition-all active:scale-[0.995]"
+      className="scroll-mt-4 w-full border-t border-slate-200 py-4 text-left transition-colors active:bg-slate-50 dark:border-slate-800 dark:active:bg-slate-900/60"
       aria-label={`Open ${title} section`}
     >
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-slate-50 text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">
-          {icon}
-        </div>
         <div className="min-w-0 flex-1">
-          <div className="text-base font-extrabold text-slate-950 dark:text-white">{title}</div>
-          <div className="mt-1 text-[13px] font-semibold leading-snug text-slate-600 dark:text-slate-300">{summary}</div>
+          <div className="text-[13px] font-extrabold uppercase tracking-[0.12em] text-slate-900 dark:text-white">{title}</div>
+          <div className="mt-1.5 text-[13px] font-semibold leading-snug text-slate-600 dark:text-slate-300">{summary}</div>
         </div>
         <ChevronDown size={18} className="shrink-0 text-slate-400" />
       </div>
     </button>
+  );
+}
+
+function HomeExpandedSectionHeading({ title }: { title: string }) {
+  return (
+    <div className="flex items-center gap-3 border-b border-slate-200 pb-3 dark:border-slate-800">
+      <div className="text-[13px] font-extrabold uppercase tracking-[0.12em] text-slate-900 dark:text-white">{title}</div>
+      <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+    </div>
   );
 }
 
@@ -1230,10 +1236,10 @@ export default function App() {
     }
   }, [homeKpiPeriod]);
 
-  // v39.4.14 Home information architecture. Home keeps every existing card, but
-  // reveals one logical section at a time so the dashboard does not become one
-  // uninterrupted wall of information on portrait phones.
+  // v39.4.15 Home navigation: keep all Home information, but use a subtle
+  // left-edge rail as the page index instead of a large dropdown control.
   const [homeSection, setHomeSection] = useState<HomeSectionKey>('overview');
+  const [homeRailSection, setHomeRailSection] = useState<HomeSectionKey>('overview');
   const [homeExpandAll, setHomeExpandAll] = useState(false);
   const [showHomeSectionMenu, setShowHomeSectionMenu] = useState(false);
 
@@ -1250,10 +1256,11 @@ export default function App() {
   const openHomeSection = useCallback((section: HomeSectionKey) => {
     setHomeExpandAll(false);
     setHomeSection(section);
+    setHomeRailSection(section);
     setShowHomeSectionMenu(false);
 
-    // Wait for the selected section to replace its collapsed summary, then bring
-    // that section to the top of the Home viewport underneath the sticky picker.
+    // Wait for the selected section to replace its collapsed header, then move
+    // that section into view. The left rail remains the navigation control.
     window.setTimeout(() => {
       document.getElementById(`home-section-${section}`)?.scrollIntoView({
         behavior: 'smooth',
@@ -1264,15 +1271,26 @@ export default function App() {
 
   const expandAllHomeSections = useCallback(() => {
     setHomeExpandAll(true);
-    setHomeSection('overview');
     setShowHomeSectionMenu(false);
     window.setTimeout(() => {
-      document.getElementById('home-section-overview')?.scrollIntoView({
+      document.getElementById(`home-section-${homeRailSection}`)?.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
       });
     }, 40);
-  }, []);
+  }, [homeRailSection]);
+
+  const collapseHomeSections = useCallback(() => {
+    setHomeExpandAll(false);
+    setHomeSection(homeRailSection);
+    setShowHomeSectionMenu(false);
+    window.setTimeout(() => {
+      document.getElementById(`home-section-${homeRailSection}`)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }, 40);
+  }, [homeRailSection]);
 
   const [pendingHomeAnchor, setPendingHomeAnchor] = useState<'receipts' | null>(null);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
@@ -1429,6 +1447,45 @@ export default function App() {
       window.removeEventListener('scroll', check);
     };
   }, [currentPage, dataLoaded]); // Re-attach when page changes or data loads (ref becomes available)
+
+  // Keep the Home rail label synchronized with the section currently passing
+  // through the upper part of the scroll viewport. Every section keeps its DOM
+  // anchor even while collapsed, so the rail remains useful in either mode.
+  useEffect(() => {
+    if (currentPage !== Page.Dashboard) return;
+    const el = mainScrollRef.current;
+    if (!el) return;
+
+    let raf = 0;
+    const updateHomeRailSection = () => {
+      window.cancelAnimationFrame(raf);
+      raf = window.requestAnimationFrame(() => {
+        const containerRect = el.getBoundingClientRect();
+        const anchorY = containerRect.top + Math.min(180, containerRect.height * 0.28);
+        let candidate: HomeSectionKey = 'overview';
+
+        for (const key of HOME_SECTION_ORDER) {
+          const node = document.getElementById(`home-section-${key}`);
+          if (!node) continue;
+          const rect = node.getBoundingClientRect();
+          if (rect.top <= anchorY) candidate = key;
+          else break;
+        }
+
+        setHomeRailSection(prev => (prev === candidate ? prev : candidate));
+      });
+    };
+
+    el.addEventListener('scroll', updateHomeRailSection, { passive: true });
+    window.addEventListener('resize', updateHomeRailSection, { passive: true });
+    updateHomeRailSection();
+
+    return () => {
+      window.cancelAnimationFrame(raf);
+      el.removeEventListener('scroll', updateHomeRailSection);
+      window.removeEventListener('resize', updateHomeRailSection);
+    };
+  }, [currentPage, homeSection, homeExpandAll, dataLoaded]);
 
   const scrollToTop = () => {
     const el = mainScrollRef.current;
@@ -7793,14 +7850,7 @@ export default function App() {
     records: `${transactions.length} record${transactions.length === 1 ? '' : 's'} · ${receipts.length} receipt${receipts.length === 1 ? '' : 's'} · ${homeMissingReceiptExpenses.length} missing`,
     tax: `${formatCurrency.format(reportData.totalEstimatedTax)} set aside · next ${homeTaxDeadline.date}`,
   };
-  const homeSectionNavItems: Array<{ key: HomeSectionKey; icon: React.ReactNode }> = [
-    { key: 'overview', icon: <LayoutGrid size={17} /> },
-    { key: 'money', icon: <Wallet size={17} /> },
-    { key: 'sales', icon: <FileText size={17} /> },
-    { key: 'jobs', icon: <Briefcase size={17} /> },
-    { key: 'records', icon: <Receipt size={17} /> },
-    { key: 'tax', icon: <Calculator size={17} /> },
-  ];
+  const homeSectionNavItems: HomeSectionKey[] = HOME_SECTION_ORDER;
 
   return (
     <>
@@ -8703,83 +8753,98 @@ html, body, #root {
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
         {(currentPage === Page.Dashboard) && (
-          <div className="v391-dashboard v3934-home-readable v3935-home-breathing space-y-7 sm:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* v39.4.14 — Home-specific information architecture. This compact
-                picker stays available while the user scrolls, while the sections
-                below retain every existing Home card with progressive disclosure. */}
-            <div className="sticky top-0 z-40 -mx-1 pb-2">
-              <div className="relative rounded-lg border border-slate-200 bg-white/95 shadow-sm backdrop-blur-xl dark:border-slate-700 dark:bg-slate-950/95">
-                <button
-                  type="button"
-                  onClick={() => setShowHomeSectionMenu(prev => !prev)}
-                  className="flex min-h-14 w-full items-center gap-3 px-4 py-3 text-left"
-                  aria-haspopup="menu"
-                  aria-expanded={showHomeSectionMenu}
-                  aria-label="Choose Home section"
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-300">
-                    <LayoutGrid size={18} />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[11px] font-extrabold uppercase tracking-[0.13em] text-slate-500 dark:text-slate-400">Home section</div>
-                    <div className="mt-0.5 text-base font-extrabold text-slate-950 dark:text-white">
-                      {homeExpandAll ? 'All sections' : HOME_SECTION_LABELS[homeSection]}
-                    </div>
-                  </div>
-                  <ChevronDown size={18} className={`shrink-0 text-slate-500 transition-transform ${showHomeSectionMenu ? 'rotate-180' : ''}`} />
-                </button>
+          <div className="v391-dashboard v3934-home-readable v3935-home-breathing relative space-y-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            {/* v39.4.15 — a thin left-edge rail replaces the v39.4.14 dropdown.
+                It acts as a location indicator and opens the Home index drawer. */}
+            {!isAppEmpty && (
+            <button
+              type="button"
+              onClick={() => setShowHomeSectionMenu(true)}
+              className="fixed z-40 flex items-center rounded-md border border-slate-200 bg-white/95 px-1.5 py-2.5 shadow-sm backdrop-blur-xl transition-colors dark:border-slate-700 dark:bg-slate-950/95"
+              style={{ left: 'max(4px, calc(50vw - 332px))', top: 'clamp(180px, 34vh, 300px)' }}
+              aria-label={`Open Home navigation. Current section: ${HOME_SECTION_LABELS[homeRailSection]}`}
+              aria-haspopup="dialog"
+            >
+              <span className="flex flex-col gap-2" aria-hidden="true">
+                {HOME_SECTION_ORDER.map(key => {
+                  const active = homeRailSection === key;
+                  return (
+                    <span key={key} className="flex min-h-[13px] items-center gap-1.5">
+                      <span className={`block h-2 w-2 rounded-full border ${active ? 'border-blue-500 bg-blue-500' : 'border-slate-400 bg-transparent dark:border-slate-500'}`} />
+                      {active ? (
+                        <span className="max-w-[58px] truncate text-[9px] font-extrabold uppercase tracking-[0.08em] text-slate-700 dark:text-slate-200">
+                          {HOME_SECTION_LABELS[key]}
+                        </span>
+                      ) : null}
+                    </span>
+                  );
+                })}
+              </span>
+            </button>
+            )}
 
-                {showHomeSectionMenu && (
-                  <div className="absolute left-0 right-0 top-[calc(100%+0.45rem)] z-50 rounded-lg border border-slate-200 bg-white p-2 shadow-xl dark:border-slate-700 dark:bg-slate-950" role="menu">
-                    <div className="space-y-1">
-                      {homeSectionNavItems.map(item => {
-                        const active = !homeExpandAll && homeSection === item.key;
+            {showHomeSectionMenu && createPortal(
+              <div
+                className="fixed inset-0 z-[90] bg-slate-950/45 backdrop-blur-[1px]"
+                role="presentation"
+                onClick={(e) => { if (e.target === e.currentTarget) setShowHomeSectionMenu(false); }}
+              >
+                <aside
+                  className="fixed bottom-0 top-0 animate-in slide-in-from-left-6 duration-200 border-r border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-950"
+                  style={{ left: 'max(0px, calc(50vw - 336px))', width: 'min(74vw, 320px)', paddingTop: 'max(18px, env(safe-area-inset-top, 0px))', paddingBottom: 'max(18px, env(safe-area-inset-bottom, 0px))' }}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Home navigation"
+                >
+                  <div className="flex h-full flex-col px-4">
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-4 dark:border-slate-800">
+                      <h2 className="text-lg font-extrabold text-slate-950 dark:text-white">Home</h2>
+                      <button
+                        type="button"
+                        onClick={() => setShowHomeSectionMenu(false)}
+                        className="flex h-9 w-9 items-center justify-center rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900"
+                        aria-label="Close Home navigation"
+                      >
+                        <X size={19} />
+                      </button>
+                    </div>
+
+                    <nav className="mt-4 space-y-1" aria-label="Home sections">
+                      {homeSectionNavItems.map(key => {
+                        const active = homeRailSection === key;
                         return (
                           <button
-                            key={item.key}
+                            key={key}
                             type="button"
-                            role="menuitem"
-                            onClick={() => openHomeSection(item.key)}
-                            className={`flex w-full items-center gap-3 rounded-md px-3 py-3 text-left transition-colors ${active ? 'bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-200' : 'text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900'}`}
+                            onClick={() => openHomeSection(key)}
+                            className={`flex w-full items-center justify-between rounded-md px-3 py-3.5 text-left text-[15px] font-extrabold transition-colors ${active ? 'bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-200' : 'text-slate-800 hover:bg-slate-50 dark:text-slate-100 dark:hover:bg-slate-900'}`}
                           >
-                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-current/10 bg-white/70 dark:bg-slate-900/70">{item.icon}</span>
-                            <span className="min-w-0 flex-1">
-                              <span className="block text-sm font-extrabold">{HOME_SECTION_LABELS[item.key]}</span>
-                              <span className="mt-0.5 block truncate text-[12px] font-semibold opacity-75">{homeSectionSummaries[item.key]}</span>
-                            </span>
-                            {active ? <CheckCircle size={17} className="shrink-0" /> : null}
+                            <span>{HOME_SECTION_LABELS[key]}</span>
+                            {active ? <span className="h-2 w-2 rounded-full bg-blue-500" /> : null}
                           </button>
                         );
                       })}
-                    </div>
-                    <div className="mt-2 border-t border-slate-200 pt-2 dark:border-slate-800">
-                      {homeExpandAll ? (
-                        <button
-                          type="button"
-                          onClick={() => openHomeSection('overview')}
-                          className="flex w-full items-center justify-between rounded-md px-3 py-3 text-sm font-extrabold text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900"
-                        >
-                          <span>Show Overview only</span>
-                          <ChevronRight size={17} />
-                        </button>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={expandAllHomeSections}
-                          className="flex w-full items-center justify-between rounded-md px-3 py-3 text-sm font-extrabold text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900"
-                        >
-                          <span>Expand all</span>
-                          <ChevronDown size={17} />
-                        </button>
-                      )}
+                    </nav>
+
+                    <div className="mt-auto border-t border-slate-200 pt-4 dark:border-slate-800">
+                      <button
+                        type="button"
+                        onClick={homeExpandAll ? collapseHomeSections : expandAllHomeSections}
+                        className="flex w-full items-center justify-between rounded-md px-3 py-3.5 text-left text-sm font-extrabold text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900"
+                      >
+                        <span>{homeExpandAll ? 'Collapse sections' : 'Expand all'}</span>
+                        {homeExpandAll ? <ChevronUp size={17} /> : <ChevronDown size={17} />}
+                      </button>
                     </div>
                   </div>
-                )}
-              </div>
-            </div>
+                </aside>
+              </div>,
+              document.body
+            )}
 
             {homeExpandAll || homeSection === 'overview' ? (
-              <section id="home-section-overview" className="scroll-mt-24 space-y-7 sm:space-y-8">
+              <section id="home-section-overview" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <HomeExpandedSectionHeading title="Overview" />
               <MonieziGlassCard hero>
                 <div className="v391-card-header v3936-home-wide-header">
                   <div className="v391-card-header__main">
@@ -8909,13 +8974,13 @@ html, body, #root {
                 section="overview"
                 title="Overview"
                 summary={homeSectionSummaries.overview}
-                icon={<LayoutGrid size={18} />}
                 onOpen={openHomeSection}
               />
             )}
 
             {homeExpandAll || homeSection === 'money' ? (
-              <section id="home-section-money" className="scroll-mt-24 space-y-7 sm:space-y-8">
+              <section id="home-section-money" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <HomeExpandedSectionHeading title="Money" />
               <MonieziGlassCard>
                 <div className="v391-card-header v3936-home-wide-header">
                   <div className="v391-card-header__main">
@@ -8977,13 +9042,13 @@ html, body, #root {
                 section="money"
                 title="Money"
                 summary={homeSectionSummaries.money}
-                icon={<Wallet size={18} />}
                 onOpen={openHomeSection}
               />
             )}
 
             {homeExpandAll || homeSection === 'sales' ? (
-              <section id="home-section-sales" className="scroll-mt-24 space-y-7 sm:space-y-8">
+              <section id="home-section-sales" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <HomeExpandedSectionHeading title="Sales" />
               <div
                 className="v391-glass-card v391-secondary-card v3935-home-invoices cursor-pointer transition-all"
                 onClick={() => {
@@ -9101,13 +9166,13 @@ html, body, #root {
                 section="sales"
                 title="Sales"
                 summary={homeSectionSummaries.sales}
-                icon={<FileText size={18} />}
                 onOpen={openHomeSection}
               />
             )}
 
             {homeExpandAll || homeSection === 'jobs' ? (
-              <section id="home-section-jobs" className="scroll-mt-24 space-y-7 sm:space-y-8">
+              <section id="home-section-jobs" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <HomeExpandedSectionHeading title="Jobs" />
               <MonieziGlassCard>
                 <div className="v391-card-header v3936-home-wide-header">
                   <div className="v391-card-header__main">
@@ -9160,13 +9225,13 @@ html, body, #root {
                 section="jobs"
                 title="Jobs"
                 summary={homeSectionSummaries.jobs}
-                icon={<Briefcase size={18} />}
                 onOpen={openHomeSection}
               />
             )}
 
             {homeExpandAll || homeSection === 'records' ? (
-              <section id="home-section-records" className="scroll-mt-24 space-y-7 sm:space-y-8">
+              <section id="home-section-records" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <HomeExpandedSectionHeading title="Records" />
               <div className="v391-glass-card v391-secondary-card v3935-home-recent">
                 <div className="v391-section-heading mb-4">
                   <h3>Recent activity</h3>
@@ -9331,13 +9396,13 @@ html, body, #root {
                 section="records"
                 title="Records"
                 summary={homeSectionSummaries.records}
-                icon={<Receipt size={18} />}
                 onOpen={openHomeSection}
               />
             )}
 
             {homeExpandAll || homeSection === 'tax' ? (
-              <section id="home-section-tax" className="scroll-mt-24 space-y-7 sm:space-y-8">
+              <section id="home-section-tax" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <HomeExpandedSectionHeading title="Tax" />
               <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card v3935-home-tax cursor-pointer active:scale-[0.99] transition-all group">
                  <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400"><Calculator size={20} /><span className="text-[13px] font-bold uppercase tracking-widest font-brand">Tax Snapshot</span></div>
@@ -9363,7 +9428,6 @@ html, body, #root {
                 section="tax"
                 title="Tax"
                 summary={homeSectionSummaries.tax}
-                icon={<Calculator size={18} />}
                 onOpen={openHomeSection}
               />
             )}
@@ -13551,6 +13615,7 @@ html, body, #root {
                 onClick={() => {
                   setHomeExpandAll(false);
                   setHomeSection('records');
+                  setHomeRailSection('records');
                   setPendingHomeAnchor('receipts');
                   setCurrentPage(Page.Dashboard, { skipViewportReset: true });
                   setShowMainMenu(false);
