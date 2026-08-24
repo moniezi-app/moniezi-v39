@@ -1,5 +1,16 @@
-# MONIEZI v39.4.18
-## v39.4.18 Demo Hub + persistent Demo Explorer
+# MONIEZI v39.4.19
+## v39.4.19 Human-first Demo Hub + calmer guided navigation
+
+- Replaces the dense Demo hero with a human-led couple illustration that has transparent edges and visually blends into the MONIEZI canvas.
+- Removes floating estimate/invoice/receipt/profit cards from the hero so the first impression is warm rather than technical.
+- Separates the hero from navigation with substantially more vertical breathing room.
+- Changes the Demo section selector from a compressed three-column metric wall to six simpler two-column exploration cards.
+- Removes numeric clutter from Demo navigation cards; each card now communicates only the section purpose.
+- Keeps the compact Demo capsule hidden while the Demo Hub is visible; it appears only after the user scrolls into the content.
+- Simplifies section endings to one primary Next action plus a quiet “Choose another demo section” link.
+- Keeps the Explore Demo bottom sheet and visited states, while reducing the visual weight of Exit Demo.
+- Demo section content receives larger vertical spacing so cards and controls no longer crowd each other.
+
 - Replaces the v39.4.17 image-based Home navigator with a native MONIEZI illustration that has no outer background rectangle and blends directly into the app canvas.
 - Removes Current focus and Expand all from the Demo experience.
 - Adds six compact Demo Hub destinations: Overview, Money, Sales, Jobs, Records, and Tax.

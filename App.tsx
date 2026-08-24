@@ -1113,85 +1113,22 @@ function HomeExpandedSectionHeading({ title }: { title: string }) {
   );
 }
 
-function DemoBusinessIllustration({
-  profit,
-  revenue,
-  openInvoices,
-}: {
-  profit: string;
-  revenue: string;
-  openInvoices: number;
-}) {
+function DemoBusinessIllustration() {
   return (
-    <div className="relative mx-auto h-[252px] w-full max-w-[520px] overflow-visible sm:h-[292px]" aria-hidden="true">
-      <svg className="absolute inset-0 h-full w-full overflow-visible opacity-70" viewBox="0 0 520 292" fill="none">
-        <path d="M84 63 C145 25 176 72 220 85" stroke="currentColor" strokeWidth="1.2" strokeDasharray="4 6" className="text-blue-400/70" />
-        <path d="M390 54 C354 42 351 94 329 103" stroke="currentColor" strokeWidth="1.2" strokeDasharray="4 6" className="text-violet-400/70" />
-        <path d="M73 203 C154 228 159 178 220 171" stroke="currentColor" strokeWidth="1.2" strokeDasharray="4 6" className="text-cyan-400/65" />
-        <path d="M443 205 C382 233 369 173 324 165" stroke="currentColor" strokeWidth="1.2" strokeDasharray="4 6" className="text-emerald-400/65" />
-        <circle cx="220" cy="85" r="4" className="fill-blue-400" />
-        <circle cx="329" cy="103" r="4" className="fill-violet-400" />
-        <circle cx="220" cy="171" r="4" className="fill-cyan-400" />
-        <circle cx="324" cy="165" r="4" className="fill-emerald-400" />
-      </svg>
-
-      <div className="absolute left-1/2 top-2 z-20 w-[164px] -translate-x-1/2 rotate-[3deg] rounded-[28px] border border-slate-400/35 bg-slate-950 p-2 shadow-[0_26px_64px_rgba(15,23,42,0.28)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.52)] sm:w-[188px]">
-        <div className="rounded-[22px] border border-blue-400/15 bg-gradient-to-b from-slate-900 to-slate-950 p-3 text-left">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/20">
-              <LayoutGrid size={14} strokeWidth={2.2} />
-            </div>
-            <span className="text-[9px] font-black uppercase tracking-[0.18em] text-white">MONIEZI</span>
-          </div>
-          <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.04] p-3">
-            <div className="text-[8px] font-bold text-slate-400">Net profit</div>
-            <div className="mt-1 text-[18px] font-black tracking-tight text-white">{profit}</div>
-            <div className="mt-1 flex items-center gap-1 text-[8px] font-extrabold text-emerald-400"><TrendingUp size={10} /> Business snapshot</div>
-            <div className="mt-3 flex h-9 items-end gap-1">
-              {[28, 46, 34, 62, 51, 73, 90].map((height, index) => (
-                <span key={index} className="flex-1 rounded-sm bg-gradient-to-t from-blue-600 to-emerald-400" style={{ height: `${height}%` }} />
-              ))}
-            </div>
-          </div>
-          <div className="mt-2 grid grid-cols-2 gap-2">
-            <div className="rounded-lg border border-white/10 bg-white/[0.035] p-2">
-              <div className="text-[7px] font-bold text-slate-500">Revenue</div>
-              <div className="mt-1 truncate text-[9px] font-black text-white">{revenue}</div>
-            </div>
-            <div className="rounded-lg border border-white/10 bg-white/[0.035] p-2">
-              <div className="text-[7px] font-bold text-slate-500">Open</div>
-              <div className="mt-1 text-[9px] font-black text-white">{openInvoices} invoices</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute left-[1%] top-[12%] z-10 w-[118px] -rotate-[7deg] rounded-xl border border-blue-400/20 bg-slate-950/95 p-3 shadow-xl dark:bg-[#101b35]/95 sm:left-[5%] sm:w-[132px]">
-        <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-wider text-blue-300"><FileText size={13} /> Estimate</div>
-        <div className="mt-2 text-[11px] font-extrabold text-white">Kitchen remodel</div>
-        <div className="mt-1 text-[13px] font-black text-white">$14,750</div>
-      </div>
-
-      <div className="absolute right-[0%] top-[10%] z-10 w-[116px] rotate-[7deg] rounded-xl border border-violet-400/20 bg-slate-950/95 p-3 shadow-xl dark:bg-[#111a34]/95 sm:right-[4%] sm:w-[130px]">
-        <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-wider text-violet-300"><FileText size={13} /> Invoice</div>
-        <div className="mt-2 text-[11px] font-extrabold text-white">Client payment</div>
-        <div className="mt-1 text-[13px] font-black text-white">$6,230</div>
-        <span className="mt-2 inline-flex rounded-md border border-emerald-400/30 bg-emerald-500/10 px-1.5 py-0.5 text-[8px] font-black text-emerald-300">PAID</span>
-      </div>
-
-      <div className="absolute bottom-[8%] left-[3%] z-10 w-[112px] rotate-[6deg] rounded-xl border border-cyan-400/20 bg-slate-950/95 p-3 shadow-xl dark:bg-[#101a33]/95 sm:left-[7%] sm:w-[126px]">
-        <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-wider text-cyan-300"><Receipt size={13} /> Receipt</div>
-        <div className="mt-2 text-[11px] font-extrabold text-white">Supplies</div>
-        <div className="mt-1 text-[13px] font-black text-white">$128.45</div>
-        <div className="mt-2 flex gap-0.5 opacity-55">{[2,1,3,1,2,3,1,2,1,3,2,1].map((w, i) => <span key={i} className="h-4 bg-slate-300" style={{ width: `${w}px` }} />)}</div>
-      </div>
-
-      <div className="absolute bottom-[6%] right-[2%] z-10 w-[116px] -rotate-[6deg] rounded-xl border border-emerald-400/20 bg-slate-950/95 p-3 shadow-xl dark:bg-[#101a33]/95 sm:right-[6%] sm:w-[130px]">
-        <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-wider text-emerald-300"><BarChart3 size={13} /> Profit</div>
-        <div className="mt-2 text-[13px] font-black text-white">{profit}</div>
-        <div className="mt-2 flex h-9 items-end gap-1">
-          {[38, 70, 50, 86].map((height, index) => <span key={index} className="flex-1 rounded-sm bg-gradient-to-t from-indigo-600 to-emerald-400" style={{ height: `${height}%` }} />)}
-        </div>
+    <div className="relative mx-auto w-full max-w-[520px]" aria-hidden="true">
+      <div className="relative mx-auto h-[255px] w-full overflow-visible sm:h-[292px]">
+        <div className="pointer-events-none absolute inset-x-[14%] bottom-3 h-20 rounded-full bg-blue-500/10 blur-3xl dark:bg-blue-500/15" />
+        <img
+          src={`${import.meta.env.BASE_URL}demo-people-v39-4-19.webp`}
+          alt=""
+          className="absolute inset-x-0 bottom-0 mx-auto h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_20px_30px_rgba(15,23,42,0.16)] dark:drop-shadow-[0_24px_38px_rgba(0,0,0,0.30)]"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%)',
+            maskImage: 'linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%)',
+          }}
+          loading="eager"
+          decoding="async"
+        />
       </div>
     </div>
   );
@@ -1260,9 +1197,11 @@ function DemoExplorerSheet({
             })}
           </div>
 
-          <button type="button" onClick={onExit} className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[14px] font-extrabold text-red-700 dark:border-red-500/20 dark:bg-red-500/10 dark:text-red-300">
-            <Trash2 size={17} /> Exit Demo
-          </button>
+          <div className="mt-4 border-t border-slate-200 pt-3 text-center dark:border-slate-700">
+            <button type="button" onClick={onExit} className="inline-flex min-h-10 items-center justify-center gap-2 px-4 text-[13px] font-extrabold text-slate-500 transition-colors hover:text-red-600 dark:text-slate-400 dark:hover:text-red-300">
+              <Trash2 size={16} /> Exit Demo
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1425,6 +1364,7 @@ export default function App() {
   const [homeExpandAll, setHomeExpandAll] = useState(false);
   const [showHomeSectionMenu, setShowHomeSectionMenu] = useState(false);
   const [showDemoExplorer, setShowDemoExplorer] = useState(false);
+  const [showDemoCapsule, setShowDemoCapsule] = useState(false);
   const [demoVisitedSections, setDemoVisitedSections] = useState<HomeSectionKey[]>(['overview']);
 
   useEffect(() => {
@@ -1722,6 +1662,29 @@ export default function App() {
   const [taxPayments, setTaxPayments] = useState<TaxPayment[]>([]);
   const [receipts, setReceipts] = useState<ReceiptType[]>([]);
   const [isDemoData, setIsDemoData] = useState<boolean>(false);
+
+  // v39.4.19: do not stack Demo navigation on top of the Demo Hub. The compact
+  // capsule appears only after the visitor has scrolled beyond the human-led hub.
+  useEffect(() => {
+    const el = mainScrollRef.current;
+    const checkDemoCapsule = () => {
+      if (!isDemoData || currentPage !== Page.Dashboard) {
+        setShowDemoCapsule(false);
+        return;
+      }
+      const top = Math.max(el?.scrollTop || 0, window.scrollY || window.pageYOffset || 0);
+      setShowDemoCapsule(top > 470);
+    };
+
+    if (el) el.addEventListener('scroll', checkDemoCapsule, { passive: true });
+    window.addEventListener('scroll', checkDemoCapsule, { passive: true });
+    checkDemoCapsule();
+    return () => {
+      if (el) el.removeEventListener('scroll', checkDemoCapsule);
+      window.removeEventListener('scroll', checkDemoCapsule);
+    };
+  }, [currentPage, isDemoData, dataLoaded]);
+
   const [mileageTrips, setMileageTrips] = useState<MileageTrip[]>([]);
   const [companyEquity, setCompanyEquity] = useState<CompanyEquityState>(() => createDefaultCompanyEquityState());
 
@@ -8058,8 +8021,19 @@ export default function App() {
     records: { label: 'Total records', value: String(transactions.length) },
     tax: { label: 'Est. tax', value: formatCurrency.format(reportData.totalEstimatedTax) },
   };
+  const demoSectionDescriptions: Record<HomeSectionKey, string> = {
+    overview: 'Business snapshot',
+    money: 'Cash & expenses',
+    sales: 'Invoices & revenue',
+    jobs: 'Projects & profit',
+    records: 'Receipts & activity',
+    tax: 'Year-end prep',
+  };
   const demoVisitedCount = demoVisitedSections.length;
   const demoNextSection = HOME_SECTION_ORDER[HOME_SECTION_ORDER.indexOf(homeSection) + 1] || null;
+  const homeExpandedSectionClass = isDemoData
+    ? 'scroll-mt-6 space-y-8 py-9 sm:space-y-10 sm:py-11'
+    : 'scroll-mt-4 space-y-7 py-5 sm:space-y-8';
 
   return (
     <>
@@ -8963,76 +8937,83 @@ html, body, #root {
 
         {(currentPage === Page.Dashboard) && (
           <div className="v391-dashboard v3934-home-readable v3935-home-breathing relative space-y-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* v39.4.18 — Demo Hub. The illustration is built from native UI
-                elements directly on the app canvas: no image rectangle, no baked
-                background, and no separate illustration card. Demo navigation is
-                available here, persistently above the footer, and at section ends. */}
+            {/* v39.4.19 — Human-first Demo Hub. The hero has transparent edges
+                and only one job: make the demo feel approachable. Navigation is
+                deliberately separated below it so the first screen is not a wall of UI. */}
             {!isAppEmpty && (
-              <section className="mb-7">
-                <div className="flex flex-col items-center text-center">
-                  <div className="flex w-full items-center justify-center gap-2">
+              <section className={isDemoData ? 'mb-14 pb-2' : 'mb-10'}>
+                <div className="flex flex-col">
+                  <div className="flex justify-center">
                     <span className="inline-flex items-center gap-2 rounded-full border border-blue-300/70 bg-blue-50/80 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.12em] text-blue-700 dark:border-blue-400/25 dark:bg-blue-500/10 dark:text-blue-300">
                       <PlayCircle size={14} />
-                      {isDemoData ? 'Explore Demo' : 'Business Navigator'}
+                      {isDemoData ? 'Demo Business' : 'Business Navigator'}
                     </span>
-                    {isDemoData && (
-                      <span className="text-[11px] font-extrabold text-slate-500 dark:text-slate-400">{demoVisitedCount}/6 viewed</span>
-                    )}
                   </div>
 
-                  <div className="mt-4 max-w-[35rem] px-2">
-                    <h2 className="text-[27px] font-black leading-[1.08] tracking-[-0.04em] text-slate-950 dark:text-white sm:text-[30px]">
+                  <div className="mx-auto mt-5 max-w-[34rem] px-3 text-center">
+                    <h2 className="text-[29px] font-black leading-[1.08] tracking-[-0.045em] text-slate-950 dark:text-white sm:text-[32px]">
                       {isDemoData ? 'Explore the demo business' : 'Your business at a glance'}
                     </h2>
-                    <p className="mx-auto mt-3 max-w-[31rem] text-[14px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
+                    <p className="mx-auto mt-4 max-w-[30rem] text-[14.5px] font-semibold leading-[1.65] text-slate-600 dark:text-slate-300">
                       {isDemoData
-                        ? 'Choose an area to review. MONIEZI remembers where you are, so you can continue without scrolling back.'
+                        ? 'See how a real service business stays organized inside MONIEZI. Start anywhere and come back whenever you want.'
                         : 'Choose the part of your business you want to review right now.'}
                     </p>
                   </div>
 
-                  <div className="mt-1 w-full">
-                    <DemoBusinessIllustration
-                      profit={formatCurrency.format(homeTotals.profit)}
-                      revenue={formatCurrency.format(homeTotals.income)}
-                      openInvoices={totals.pendingCount + totals.overdueCount}
-                    />
-                  </div>
+                  {isDemoData && (
+                    <div className="mt-7 w-full">
+                      <DemoBusinessIllustration />
+                    </div>
+                  )}
 
-                  <div className="mt-2 grid w-full grid-cols-3 gap-2.5 sm:gap-3">
-                    {homeSectionNavItems.map((key) => {
-                      const active = homeSection === key;
-                      const visited = demoVisitedSections.includes(key);
-                      const meta = homeSectionTileMeta[key];
-                      return (
-                        <button
-                          key={key}
-                          type="button"
-                          onClick={() => openHomeSection(key)}
-                          aria-pressed={active}
-                          className={`relative min-h-[122px] rounded-xl border px-2 py-3 text-center transition-all active:scale-[0.98] ${active
-                            ? 'border-blue-500/60 bg-blue-50 shadow-[0_12px_32px_rgba(37,99,235,0.16)] dark:border-blue-400/50 dark:bg-blue-500/10'
-                            : 'border-slate-200 bg-white/75 hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-white/[0.025] dark:hover:border-slate-700'}`}
-                        >
-                          {isDemoData && visited && !active && (
-                            <CheckCircle size={15} className="absolute right-2 top-2 text-emerald-500" />
-                          )}
-                          <span className={`mx-auto flex h-11 w-11 items-center justify-center rounded-xl border ${HOME_SECTION_ICON_CLASSES[key]}`}>
-                            <HomeSectionIcon section={key} size={20} />
-                          </span>
-                          <span className="mt-2 block text-[13px] font-black leading-tight text-slate-950 dark:text-white">{HOME_SECTION_LABELS[key]}</span>
-                          <span className="mt-1 block truncate text-[10px] font-bold text-slate-500 dark:text-slate-400">{meta.label}</span>
-                          <span className={`mt-1 block truncate text-[12px] font-black ${active ? 'text-blue-700 dark:text-blue-300' : 'text-slate-800 dark:text-slate-100'}`}>{meta.value}</span>
-                        </button>
-                      );
-                    })}
+                  <div className={isDemoData ? 'mt-10 sm:mt-12' : 'mt-7'}>
+                    <div className="px-1 text-left">
+                      <h3 className="text-[19px] font-black tracking-[-0.02em] text-slate-950 dark:text-white">
+                        {isDemoData ? 'Choose what to explore' : 'Choose an area'}
+                      </h3>
+                      <p className="mt-2 text-[13.5px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
+                        {isDemoData ? 'Tap one section. We will remember what you have already seen.' : 'Open the area you want to review.'}
+                      </p>
+                    </div>
+
+                    <div className="mt-5 grid w-full grid-cols-2 gap-3.5 sm:gap-4">
+                      {homeSectionNavItems.map((key) => {
+                        const active = homeSection === key;
+                        const visited = demoVisitedSections.includes(key);
+                        const meta = homeSectionTileMeta[key];
+                        return (
+                          <button
+                            key={key}
+                            type="button"
+                            onClick={() => openHomeSection(key)}
+                            aria-pressed={active}
+                            className={`relative min-h-[132px] rounded-2xl border p-4 text-left transition-all active:scale-[0.985] ${active
+                              ? 'border-blue-500/60 bg-blue-50 shadow-[0_12px_34px_rgba(37,99,235,0.13)] dark:border-blue-400/45 dark:bg-blue-500/[0.08]'
+                              : 'border-slate-200 bg-white/70 hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-white/[0.022] dark:hover:border-slate-700'}`}
+                          >
+                            {isDemoData && visited && !active && (
+                              <CheckCircle size={17} className="absolute right-3 top-3 text-emerald-500" />
+                            )}
+                            <span className={`flex h-11 w-11 items-center justify-center rounded-xl border ${HOME_SECTION_ICON_CLASSES[key]}`}>
+                              <HomeSectionIcon section={key} size={20} />
+                            </span>
+                            <span className="mt-3 block text-[14px] font-black leading-tight text-slate-950 dark:text-white">{HOME_SECTION_LABELS[key]}</span>
+                            <span className="mt-1.5 block text-[11.5px] font-semibold leading-snug text-slate-500 dark:text-slate-400">
+                              {isDemoData ? demoSectionDescriptions[key] : `${meta.label} · ${meta.value}`}
+                            </span>
+                            <ChevronRight size={16} className={`absolute bottom-4 right-3 ${active ? 'text-blue-600 dark:text-blue-300' : 'text-slate-400'}`} />
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </section>
             )}
 
             {(isDemoData ? homeSection === 'overview' : (homeExpandAll || homeSection === 'overview')) ? (
-              <section id="home-section-overview" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <section id="home-section-overview" className={homeExpandedSectionClass}>
               <HomeExpandedSectionHeading title="Overview" />
               <MonieziGlassCard hero>
                 <div className="v391-card-header v3936-home-wide-header">
@@ -9168,7 +9149,7 @@ html, body, #root {
             )}
 
             {(isDemoData ? homeSection === 'money' : (homeExpandAll || homeSection === 'money')) ? (
-              <section id="home-section-money" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <section id="home-section-money" className={homeExpandedSectionClass}>
               <HomeExpandedSectionHeading title="Money" />
               <MonieziGlassCard>
                 <div className="v391-card-header v3936-home-wide-header">
@@ -9236,7 +9217,7 @@ html, body, #root {
             )}
 
             {(isDemoData ? homeSection === 'sales' : (homeExpandAll || homeSection === 'sales')) ? (
-              <section id="home-section-sales" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <section id="home-section-sales" className={homeExpandedSectionClass}>
               <HomeExpandedSectionHeading title="Sales" />
               <div
                 className="v391-glass-card v391-secondary-card v3935-home-invoices cursor-pointer transition-all"
@@ -9360,7 +9341,7 @@ html, body, #root {
             )}
 
             {(isDemoData ? homeSection === 'jobs' : (homeExpandAll || homeSection === 'jobs')) ? (
-              <section id="home-section-jobs" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <section id="home-section-jobs" className={homeExpandedSectionClass}>
               <HomeExpandedSectionHeading title="Jobs" />
               <MonieziGlassCard>
                 <div className="v391-card-header v3936-home-wide-header">
@@ -9419,7 +9400,7 @@ html, body, #root {
             )}
 
             {(isDemoData ? homeSection === 'records' : (homeExpandAll || homeSection === 'records')) ? (
-              <section id="home-section-records" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <section id="home-section-records" className={homeExpandedSectionClass}>
               <HomeExpandedSectionHeading title="Records" />
               <div className="v391-glass-card v391-secondary-card v3935-home-recent">
                 <div className="v391-section-heading mb-4">
@@ -9590,7 +9571,7 @@ html, body, #root {
             )}
 
             {(isDemoData ? homeSection === 'tax' : (homeExpandAll || homeSection === 'tax')) ? (
-              <section id="home-section-tax" className="scroll-mt-4 space-y-7 py-5 sm:space-y-8">
+              <section id="home-section-tax" className={homeExpandedSectionClass}>
               <HomeExpandedSectionHeading title="Tax" />
               <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card v3935-home-tax cursor-pointer active:scale-[0.99] transition-all group">
                  <div className="flex justify-between items-start mb-4">
@@ -9622,34 +9603,32 @@ html, body, #root {
             )}
 
             {isDemoData && (
-              <div className="mt-7 rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm dark:border-slate-800 dark:bg-white/[0.025]">
-                <div className="flex items-start gap-3">
-                  <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${HOME_SECTION_ICON_CLASSES[homeSection]}`}>
-                    <HomeSectionIcon section={homeSection} size={19} />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[11px] font-black uppercase tracking-[0.13em] text-slate-500 dark:text-slate-400">Continue exploring</div>
-                    <div className="mt-1 text-[16px] font-black text-slate-950 dark:text-white">
-                      {demoNextSection ? `Next: ${HOME_SECTION_LABELS[demoNextSection]}` : 'You reached the last demo section'}
-                    </div>
-                    <div className="mt-1 text-[12.5px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
-                      {demoNextSection ? 'Continue in order, or jump directly to any other part of the demo.' : `${demoVisitedCount}/6 sections viewed. Review any section again or exit when you are finished.`}
-                    </div>
+              <div className="mt-12 border-t border-slate-200 pt-8 text-center dark:border-slate-800 sm:mt-14 sm:pt-10">
+                <div className="mx-auto max-w-[30rem]">
+                  <div className="text-[11px] font-black uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Continue exploring</div>
+                  <div className="mt-2 text-[19px] font-black tracking-[-0.02em] text-slate-950 dark:text-white">
+                    {demoNextSection ? `Next: ${HOME_SECTION_LABELS[demoNextSection]}` : 'You have explored the demo'}
                   </div>
-                </div>
-                <div className="mt-4 grid grid-cols-2 gap-2.5">
-                  <button type="button" onClick={() => setShowDemoExplorer(true)} className="min-h-11 rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-[13px] font-extrabold text-slate-800 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800">
-                    Choose another
-                  </button>
-                  {demoNextSection ? (
-                    <button type="button" onClick={() => openHomeSection(demoNextSection)} className="flex min-h-11 items-center justify-center gap-2 rounded-xl bg-blue-600 px-3 py-2.5 text-[13px] font-extrabold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-500 active:scale-[0.99]">
-                      Next: {HOME_SECTION_LABELS[demoNextSection]} <ArrowRight size={16} />
+                  <p className="mx-auto mt-2 max-w-[27rem] text-[13px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
+                    {demoNextSection
+                      ? `Move on when you are ready. ${HOME_SECTION_LABELS[homeSection]} stays marked as viewed.`
+                      : `${demoVisitedCount}/6 sections viewed. Revisit anything you want before leaving the demo.`}
+                  </p>
+
+                  <div className="mt-5">
+                    {demoNextSection ? (
+                      <button type="button" onClick={() => openHomeSection(demoNextSection)} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-[14px] font-extrabold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-500 active:scale-[0.99]">
+                        Next: {HOME_SECTION_LABELS[demoNextSection]} <ArrowRight size={17} />
+                      </button>
+                    ) : (
+                      <button type="button" onClick={() => setShowDemoExplorer(true)} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-[14px] font-extrabold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-500 active:scale-[0.99]">
+                        Review demo sections <LayoutGrid size={17} />
+                      </button>
+                    )}
+                    <button type="button" onClick={() => setShowDemoExplorer(true)} className="mt-3 min-h-10 px-3 text-[13px] font-extrabold text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-300 dark:hover:text-blue-200">
+                      Choose another demo section
                     </button>
-                  ) : (
-                    <button type="button" onClick={() => setShowDemoExplorer(true)} className="flex min-h-11 items-center justify-center gap-2 rounded-xl bg-blue-600 px-3 py-2.5 text-[13px] font-extrabold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-500 active:scale-[0.99]">
-                      Review sections <LayoutGrid size={16} />
-                    </button>
-                  )}
+                  </div>
                 </div>
               </div>
             )}
@@ -13472,7 +13451,7 @@ html, body, #root {
 
       </div>
 
-      {isDemoData && currentPage === Page.Dashboard && !shouldHideBottomNav && createPortal(
+      {isDemoData && currentPage === Page.Dashboard && showDemoCapsule && !shouldHideBottomNav && createPortal(
         <button
           type="button"
           onClick={() => setShowDemoExplorer(true)}
