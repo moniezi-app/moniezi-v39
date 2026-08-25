@@ -5413,3 +5413,61 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     width: calc(50% - 17px) !important;
   }
 }
+
+/* ================================================================
+   MONIEZI v39.4.38 — First Home frame stabilization
+   ----------------------------------------------------------------
+   The first-run illustration is removed from document-flow sizing. Its wrapper
+   owns a deterministic responsive height before the image is painted, while the
+   image is absolutely contained inside that reserved geometry. Combined with
+   pre-decode before the license gate unmounts, this prevents the few-frame Home
+   shift visible immediately after successful activation.
+   ================================================================ */
+.v3931-first-run-visual {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: clamp(220px, 68vw, 270px) !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  padding: 0 10px !important;
+  overflow: visible !important;
+  contain: layout size !important;
+}
+
+.v3931-first-run-visual__image {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: min(calc(100% - 20px), 360px) !important;
+  height: 100% !important;
+  margin: auto !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Keep every element of the first-run card in final geometry from its first
+   visible frame. No inherited entrance transitions are allowed to settle later. */
+.v3931-first-run-content,
+.v3931-first-run-title,
+.v3931-first-run-body,
+.v3931-first-run-stats,
+.v3931-first-run-primary,
+.v3931-first-run-secondary {
+  transform: none !important;
+  animation: none !important;
+}
+
+@media (max-width: 390px) {
+  .v3931-first-run-visual {
+    height: clamp(210px, 66vw, 258px) !important;
+    padding-inline: 7px !important;
+  }
+  .v3931-first-run-visual__image {
+    width: min(calc(100% - 14px), 344px) !important;
+  }
+}

@@ -1,4 +1,10 @@
-# MONIEZI v39.4.37
+# MONIEZI v39.4.38
+## v39.4.38 First Home frame stabilization
+- Preloads and decodes the first-run Demo illustration while the license screen is still visible.
+- Waits for bundled fonts and the Android Chrome visual viewport to settle after keyboard close before revealing Home.
+- Gives the first-run illustration a deterministic responsive box and removes the image from document-flow sizing, preventing the post-activation image/layout shift.
+- Keeps the activation sequence, Demo content, Quick Add v39.4.37 composition, navigation, records, calculations, and business logic unchanged.
+
 ## v39.4.37 Quick Add composition refinement
 - Keeps the approved icon + transaction-name-only Quick Add choices with no surrounding option cards.
 - Makes the panel content-sized when all choices fit, while retaining internal scrolling on smaller screens.

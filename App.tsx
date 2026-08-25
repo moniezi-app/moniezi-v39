@@ -1377,6 +1377,86 @@ export default function App() {
   const licenseViewportSessionRef = useRef(false);
   const licenseViewportLockedScrollRef = useRef<number | null>(null);
   const licenseViewportSettleTimerRef = useRef<number | null>(null);
+  const licenseFullViewportHeightRef = useRef(0);
+
+  // v39.4.38: the first Home frame must be complete before the activation gate
+  // disappears. Pre-decode the first-run artwork (and wait for the bundled font)
+  // while the customer is still on the activation screen, then reveal Home only
+  // after the keyboard viewport has returned to its full height. This prevents the
+  // 1-3 frame image/font/viewport settlement visible in the screen recording.
+  const firstRunHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`;
+  const firstHomeReadyPromiseRef = useRef<Promise<void> | null>(null);
+
+  const ensureFirstHomeAssetsReady = useCallback((): Promise<void> => {
+    if (firstHomeReadyPromiseRef.current) return firstHomeReadyPromiseRef.current;
+
+    const imageReady = new Promise<void>((resolve) => {
+      const image = new Image();
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        resolve();
+      };
+
+      image.decoding = 'sync';
+      image.onload = async () => {
+        try {
+          if (typeof image.decode === 'function') await image.decode();
+        } catch {
+          // A decoded cache hit can make decode() reject after load; the pixels
+          // are still available, so do not block activation on that browser quirk.
+        }
+        finish();
+      };
+      image.onerror = finish;
+      image.src = firstRunHeroSrc;
+
+      if (image.complete && image.naturalWidth > 0) {
+        Promise.resolve(typeof image.decode === 'function' ? image.decode() : undefined)
+          .catch(() => undefined)
+          .finally(finish);
+      }
+    });
+
+    const fontsReady = (document as any).fonts?.ready
+      ? Promise.resolve((document as any).fonts.ready).then(() => undefined).catch(() => undefined)
+      : Promise.resolve();
+
+    firstHomeReadyPromiseRef.current = Promise.all([imageReady, fontsReady]).then(() => undefined);
+    return firstHomeReadyPromiseRef.current;
+  }, [firstRunHeroSrc]);
+
+  const waitForActivationViewportToSettle = useCallback((): Promise<void> => {
+    return new Promise((resolve) => {
+      const viewport = window.visualViewport;
+      if (!viewport) {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+        return;
+      }
+
+      const targetHeight = licenseFullViewportHeightRef.current || viewport.height;
+      const startedAt = performance.now();
+      let previousHeight = viewport.height;
+      let stableFrames = 0;
+
+      const check = () => {
+        const currentHeight = viewport.height;
+        const nearFullHeight = currentHeight >= targetHeight - 3;
+        const unchanged = Math.abs(currentHeight - previousHeight) < 0.75;
+        stableFrames = nearFullHeight && unchanged ? stableFrames + 1 : 0;
+        previousHeight = currentHeight;
+
+        if (stableFrames >= 3 || performance.now() - startedAt > 650) {
+          resolve();
+          return;
+        }
+        requestAnimationFrame(check);
+      };
+
+      requestAnimationFrame(check);
+    });
+  }, []);
 
   const beginLicenseViewportSession = useCallback(() => {
     licenseViewportSessionRef.current = true;
@@ -1402,6 +1482,12 @@ export default function App() {
 
     const viewport = window.visualViewport;
     if (!viewport) return;
+
+    // Capture the pre-keyboard visual viewport and start decoding Home assets in
+    // parallel with license entry/validation. The maximum is retained once the
+    // keyboard opens so successful activation can wait for the viewport to return.
+    licenseFullViewportHeightRef.current = Math.max(licenseFullViewportHeightRef.current, viewport.height);
+    void ensureFirstHomeAssetsReady();
 
     const holdActivationScroll = () => {
       if (!licenseViewportSessionRef.current) return;
@@ -1432,7 +1518,7 @@ export default function App() {
       viewport.removeEventListener('resize', holdActivationScroll);
       viewport.removeEventListener('scroll', holdActivationScroll);
     };
-  }, [isLicenseValid]);
+  }, [isLicenseValid, ensureFirstHomeAssetsReady]);
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -2031,8 +2117,9 @@ export default function App() {
           // Verify the stored license is still valid
           const isValid = await validateLicenseWithServer(parsed.key);
           if (isValid) {
-            setIsLicenseValid(true);
+            await ensureFirstHomeAssetsReady();
             setLicenseInfo({ email: parsed.email, purchaseDate: parsed.purchaseDate });
+            setIsLicenseValid(true);
           } else {
             // License no longer valid, clear it
             localStorage.removeItem(LICENSE_STORAGE_KEY);
@@ -2046,7 +2133,7 @@ export default function App() {
       }
     };
     checkStoredLicense();
-  }, [installEnvironment.isMobile, isRunningStandalone]);
+  }, [installEnvironment.isMobile, isRunningStandalone, ensureFirstHomeAssetsReady]);
 
   // Production licensing configuration. The app never accepts an unverified customer key.
   const LICENSE_API_BASE = String((import.meta as any).env?.VITE_LICENSE_API_BASE || "https://moniezi-license-v37.moniezi-vg.workers.dev").trim();
@@ -2163,10 +2250,15 @@ export default function App() {
         const stored = parseStoredLicense(localStorage.getItem(LICENSE_STORAGE_KEY));
         setLicenseInfo({ email: stored?.email, purchaseDate: stored?.purchaseDate });
         (document.activeElement as HTMLElement | null)?.blur?.();
-        // v39.4.36: the activation gate is already pinned at document scroll 0.
-        // Do not run the multi-pass page viewport reset while that fixed gate is
-        // unmounting; its delayed callbacks were reaching the newly mounted Home
-        // scroller and visibly nudging the first-run Demo card after it appeared.
+
+        // v39.4.38: do not expose a partially settled Home frame. Chrome can
+        // still be expanding visualViewport after the keyboard closes, while the
+        // first-run WebP/font may also be finishing decode. Wait for both before
+        // unmounting the activation gate so Home appears once, already complete.
+        await Promise.all([ensureFirstHomeAssetsReady(), waitForActivationViewportToSettle()]);
+
+        // Keep the v39.4.36 rule: do not launch the multi-pass page scroll reset
+        // while the fixed activation gate is unmounting.
         setCurrentPage(Page.Dashboard, { skipViewportReset: true });
         setIsLicenseValid(true);
         setShowLicenseModal(false);
@@ -8634,13 +8726,14 @@ html, body, #root {
 
             <div className="v3931-first-run-visual">
               <img
-                src={`${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`}
+                src={firstRunHeroSrc}
                 alt="A MONIEZI dashboard surrounded by receipts, reports, mileage, and business records"
                 className="v3931-first-run-visual__image"
                 width={1448}
                 height={1086}
                 loading="eager"
-                decoding="async"
+                decoding="sync"
+                fetchPriority="high"
               />
             </div>
 

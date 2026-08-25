@@ -1,7 +1,7 @@
 {
   "name": "moniezi",
   "private": true,
-  "version": "39.4.37",
+  "version": "39.4.38",
   "type": "module",
   "scripts": {
     "dev": "vite",
