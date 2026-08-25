@@ -8508,16 +8508,17 @@ html, body, #root {
       {/* Sample-data banner. Always visible while example records are loaded, so
           nobody mistakes them for real figures and the exit is always one tap. */}
       {isDemoData && (
-        <div className="relative mb-5 overflow-hidden rounded-[22px] border border-violet-300/70 bg-[linear-gradient(180deg,rgba(91,73,252,0.97)_0%,rgba(52,34,180,0.98)_34%,rgba(23,24,118,0.98)_100%)] px-4 py-3.5 text-white shadow-[0_20px_36px_rgba(28,20,112,0.34)] ring-1 ring-violet-300/25 sm:px-5 sm:py-4">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-90">
-            <div className="absolute -right-10 top-[-8%] h-[160%] w-[52%] rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]" />
-            <div className="absolute right-[14%] top-0 h-full w-[22%] rounded-full border border-white/8" />
-            <div className="absolute inset-x-0 top-0 h-[46%] bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0))]" />
+        <div className="relative mb-5 overflow-hidden rounded-[22px] border border-violet-300/65 bg-[linear-gradient(90deg,rgba(7,18,73,0.98)_0%,rgba(10,20,84,0.98)_42%,rgba(46,40,160,0.96)_78%,rgba(86,72,246,0.94)_100%)] px-4 py-3.5 text-white shadow-[0_18px_34px_rgba(15,19,86,0.32)] ring-1 ring-violet-300/22 sm:px-5 sm:py-4">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-100">
+            <div className="absolute inset-x-0 top-0 h-[44%] bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0))]" />
+            <div className="absolute right-[-6%] top-[-16%] h-[155%] w-[43%] rounded-full border border-white/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02)_62%,rgba(255,255,255,0))]" />
+            <div className="absolute right-[13%] top-[-8%] h-[138%] w-[28%] rounded-full border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0)_62%)]" />
+            <div className="absolute bottom-0 right-0 h-[58%] w-[48%] bg-[radial-gradient(circle_at_80%_72%,rgba(255,184,106,0.14),rgba(255,184,106,0.04)_32%,transparent_62%)]" />
           </div>
           <div className="relative flex items-center gap-3 sm:gap-4">
-            <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-violet-200/85 bg-[radial-gradient(circle_at_30%_30%,rgba(147,115,255,0.98),rgba(96,61,231,0.98)_58%,rgba(62,34,183,0.98)_100%)] shadow-[0_12px_24px_rgba(71,37,184,0.36)] ring-2 ring-white/15 sm:h-[62px] sm:w-[62px]">
+            <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-violet-200/80 bg-[radial-gradient(circle_at_30%_30%,rgba(141,108,255,0.96),rgba(86,53,210,0.98)_56%,rgba(52,32,149,0.98)_100%)] shadow-[0_10px_22px_rgba(57,32,159,0.28)] ring-2 ring-white/14 sm:h-[62px] sm:w-[62px]">
               <Briefcase size={26} strokeWidth={2.15} className="text-white" />
-              <svg viewBox="0 0 24 24" aria-hidden="true" className="absolute right-[9px] top-[8px] h-3.5 w-3.5 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.55)] sm:right-[10px] sm:top-[9px]">
+              <svg viewBox="0 0 24 24" aria-hidden="true" className="absolute right-[9px] top-[8px] h-3.5 w-3.5 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.45)] sm:right-[10px] sm:top-[9px]">
                 <path fill="currentColor" d="M12 1.75 13.76 6l4.49 1.76L13.76 9.5 12 13.75 10.24 9.5 5.75 7.76 10.24 6 12 1.75Z" />
               </svg>
             </div>
@@ -8526,7 +8527,7 @@ html, body, #root {
             </div>
             <button
               onClick={handleRemoveSampleData}
-              className="relative shrink-0 rounded-xl border border-orange-200/25 bg-[linear-gradient(180deg,#FF9B37_0%,#F97316_100%)] px-3.5 py-2.5 text-[13px] font-bold text-white shadow-[0_12px_26px_rgba(249,115,22,0.34)] transition hover:brightness-105 sm:px-5 sm:py-3 sm:text-[15px]"
+              className="relative shrink-0 rounded-xl border border-orange-200/20 bg-[linear-gradient(180deg,#FF9C39_0%,#F97717_100%)] px-3.5 py-2.5 text-[13px] font-bold text-white shadow-[0_12px_26px_rgba(249,115,22,0.30)] transition hover:brightness-105 sm:px-5 sm:py-3 sm:text-[15px]"
             >
               Exit Demo
             </button>
