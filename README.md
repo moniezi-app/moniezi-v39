@@ -1,4 +1,10 @@
-# MONIEZI v39.4.12
+# MONIEZI v39.4.27
+## v39.4.27 Demo notification card reference match
+- Rebuilds the active Demo notification card from the approved screenshot reference.
+- Restores the two-line Demo / Sample business data hierarchy.
+- Matches the dark midnight-violet background, luminous violet perimeter, right-side curved glass layers, concentric purple briefcase badge, and orange Exit Demo control.
+- Preserves all Demo load/exit behavior and business-data restoration logic.
+
 ## v39.4.12 simplified Business Insights hierarchy
 - Removes the redundant High / Medium / Need Action summary cards above the category sections.
 - Converts Refresh Insights from a full-width card into a compact icon action beside the Business Insights title.

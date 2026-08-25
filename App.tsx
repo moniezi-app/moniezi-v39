@@ -8508,31 +8508,32 @@ html, body, #root {
       {/* Sample-data banner. Always visible while example records are loaded, so
           nobody mistakes them for real figures and the exit is always one tap. */}
       {isDemoData && (
-        <div className="relative mb-5 overflow-hidden rounded-[22px] border border-violet-300/65 bg-[linear-gradient(90deg,rgba(7,18,73,0.98)_0%,rgba(10,20,84,0.98)_42%,rgba(46,40,160,0.96)_78%,rgba(86,72,246,0.94)_100%)] px-4 py-3.5 text-white shadow-[0_18px_34px_rgba(15,19,86,0.32)] ring-1 ring-violet-300/22 sm:px-5 sm:py-4">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-100">
-            <div className="absolute inset-x-0 top-0 h-[44%] bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0))]" />
-            <div className="absolute right-[-6%] top-[-16%] h-[155%] w-[43%] rounded-full border border-white/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02)_62%,rgba(255,255,255,0))]" />
-            <div className="absolute right-[13%] top-[-8%] h-[138%] w-[28%] rounded-full border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0)_62%)]" />
-            <div className="absolute bottom-0 right-0 h-[58%] w-[48%] bg-[radial-gradient(circle_at_80%_72%,rgba(255,184,106,0.14),rgba(255,184,106,0.04)_32%,transparent_62%)]" />
-          </div>
-          <div className="relative flex items-center gap-3 sm:gap-4">
-            <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-violet-200/80 bg-[radial-gradient(circle_at_30%_30%,rgba(141,108,255,0.96),rgba(86,53,210,0.98)_56%,rgba(52,32,149,0.98)_100%)] shadow-[0_10px_22px_rgba(57,32,159,0.28)] ring-2 ring-white/14 sm:h-[62px] sm:w-[62px]">
-              <Briefcase size={26} strokeWidth={2.15} className="text-white" />
-              <svg viewBox="0 0 24 24" aria-hidden="true" className="absolute right-[9px] top-[8px] h-3.5 w-3.5 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.45)] sm:right-[10px] sm:top-[9px]">
-                <path fill="currentColor" d="M12 1.75 13.76 6l4.49 1.76L13.76 9.5 12 13.75 10.24 9.5 5.75 7.76 10.24 6 12 1.75Z" />
-              </svg>
+        <section className="v39427-demo-banner" aria-label="Demo Mode is active">
+          <div className="v39427-demo-banner__arc v39427-demo-banner__arc--outer" aria-hidden="true" />
+          <div className="v39427-demo-banner__arc v39427-demo-banner__arc--inner" aria-hidden="true" />
+          <div className="v39427-demo-banner__content">
+            <div className="v39427-demo-badge" aria-hidden="true">
+              <div className="v39427-demo-badge__core">
+                <Briefcase className="v39427-demo-badge__briefcase" strokeWidth={2.1} />
+                <svg viewBox="0 0 24 24" className="v39427-demo-badge__sparkle">
+                  <path fill="currentColor" d="M12 1.75 13.76 6l4.49 1.76L13.76 9.5 12 13.75 10.24 9.5 5.75 7.76 10.24 6 12 1.75Z" />
+                </svg>
+              </div>
             </div>
-            <div className="min-w-0 flex-1">
-              <div className="text-[24px] font-extrabold leading-none tracking-[-0.04em] text-white sm:text-[26px]">Demo</div>
+
+            <div className="v39427-demo-banner__copy">
+              <div className="v39427-demo-banner__title">Demo</div>
+              <div className="v39427-demo-banner__subtitle">Sample business data</div>
             </div>
+
             <button
               onClick={handleRemoveSampleData}
-              className="relative shrink-0 rounded-xl border border-orange-200/20 bg-[linear-gradient(180deg,#FF9C39_0%,#F97717_100%)] px-3.5 py-2.5 text-[13px] font-bold text-white shadow-[0_12px_26px_rgba(249,115,22,0.30)] transition hover:brightness-105 sm:px-5 sm:py-3 sm:text-[15px]"
+              className="v39427-demo-banner__exit"
             >
               Exit Demo
             </button>
           </div>
-        </div>
+        </section>
       )}
 
       {/* v39.3.3 — first-run / post-demo empty experience now uses the same
