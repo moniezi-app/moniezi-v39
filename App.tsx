@@ -1218,7 +1218,6 @@ export default function App() {
   const [installGuideBrowser, setInstallGuideBrowser] = useState<InstallBrowser | null>(null);
   const [justInstalled, setJustInstalled] = useState(false);
   const [installLinkCopied, setInstallLinkCopied] = useState(false);
-  const [showActivationHandoff, setShowActivationHandoff] = useState(false);
 
   const evaluateStandaloneMode = useCallback(() => {
     const next = detectInstallEnvironment();
@@ -2102,19 +2101,15 @@ export default function App() {
         window.scrollTo({ top: 0, left: 0 });
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
-        setShowActivationHandoff(true);
-        window.setTimeout(() => {
-          setCurrentPage(Page.Dashboard);
-          setIsLicenseValid(true);
-          setShowLicenseModal(false);
-          setShowActivationHandoff(false);
-          window.setTimeout(() => window.scrollTo({ top: 0, left: 0 }), 60);
-          const standalone = evaluateStandaloneMode();
-          if (!standalone && !installEnvironment.isMobile && deferredInstallPrompt) {
-            setShowDeferredInstallCta(true);
-          }
-          showToast('License activated', 'success', 2000);
-        }, 180);
+        setCurrentPage(Page.Dashboard);
+        setIsLicenseValid(true);
+        setShowLicenseModal(false);
+        setTimeout(() => window.scrollTo({ top: 0, left: 0 }), 60);
+        const standalone = evaluateStandaloneMode();
+        if (!standalone && !installEnvironment.isMobile && deferredInstallPrompt) {
+          setShowDeferredInstallCta(true);
+        }
+        showToast('License activated', 'success', 2000);
       } else {
         setLicenseError('Invalid license key. Please check and try again.');
       }
@@ -7401,18 +7396,17 @@ export default function App() {
                 <h1 className="mt-4 text-center font-brand text-[27px] font-extrabold leading-[1.15] tracking-[-0.035em] text-[#0B1739]">
                   MONIEZI is installed
                 </h1>
-                <p className="mx-auto mt-3 max-w-[26ch] text-center text-[15px] font-semibold leading-6 text-[#43536B]">
-                  Chrome stays open after installation. Go to your Home Screen, then open MONIEZI.
+                <p className="mx-auto mt-3 max-w-[24ch] text-center text-[15px] font-semibold leading-6 text-[#43536B]">
+                  Open MONIEZI from your Home Screen to get started.
                 </p>
                 <button
                   type="button"
                   onClick={() => {
-                    setJustInstalled(false);
-                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                    try { window.close(); } catch { /* browser may refuse */ }
                   }}
                   className="mt-7 w-full rounded-lg bg-[#2563EB] px-5 py-[15px] text-[16px] font-extrabold text-white shadow-[0_14px_28px_rgba(37,99,235,0.24)] transition active:scale-[0.99]"
                 >
-                  I understand
+                  Got it
                 </button>
               </>
             ) : supportedPath ? (
@@ -7549,28 +7543,6 @@ export default function App() {
           <div className="flex items-center justify-center gap-3">
             <Loader2 size={20} className="animate-spin text-blue-500" />
             <span className="text-slate-400 font-medium">Loading MONIEZI...</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (showActivationHandoff) {
-    return (
-      <div className="fixed inset-0 z-[120] flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top,rgba(91,95,255,0.28),transparent_30%),linear-gradient(180deg,#040918_0%,#09122C_100%)] px-5 text-white">
-        <div className="absolute inset-0 opacity-60" aria-hidden="true">
-          <div className="absolute left-1/2 top-0 h-[280px] w-[280px] -translate-x-1/2 rounded-full bg-violet-500/18 blur-3xl" />
-        </div>
-        <div className="relative flex w-full max-w-[320px] flex-col items-center text-center">
-          <img
-            src={`${import.meta.env.BASE_URL}icons/icon-192.png`}
-            alt=""
-            className="h-16 w-16 rounded-2xl shadow-[0_18px_36px_rgba(59,130,246,0.28)]"
-            draggable={false}
-          />
-          <div className="mt-6 flex items-center gap-3 rounded-full border border-white/10 bg-white/6 px-4 py-2 text-[13px] font-semibold text-white/82 backdrop-blur-sm">
-            <Loader2 size={16} className="animate-spin" />
-            Opening MONIEZI
           </div>
         </div>
       </div>
@@ -8425,16 +8397,16 @@ html, body, #root {
               </div>
             </div>
             <h3 className="text-center text-[26px] font-bold leading-[1.18] tracking-[-0.04em] text-[#0B1739] font-brand sm:text-[28px]">MONIEZI is installed</h3>
-            <p className="mx-auto mt-3 max-w-[22ch] text-center text-[14px] leading-[1.6] font-semibold text-[#55667E] sm:text-[15px]">
-              Chrome stays open after installation. Go to your Home screen, then open MONIEZI.
+            <p className="mx-auto mt-3 max-w-[20ch] text-center text-[14px] leading-[1.6] font-semibold text-[#55667E] sm:text-[15px]">
+              Open MONIEZI from your Home screen to get started.
             </p>
             <button
               onClick={() => {
-                setJustInstalled(false);
+                try { window.close(); } catch { /* browser may refuse */ }
               }}
               className="mt-6 w-full rounded-xl bg-[#2563EB] py-[15px] text-[16px] font-bold text-white shadow-[0_16px_30px_rgba(37,99,235,0.28)] transition-colors hover:bg-[#1D4ED8]"
             >
-              I understand
+              Got it
             </button>
           </div>
         </div>
@@ -8536,10 +8508,14 @@ html, body, #root {
       {/* Sample-data banner. Always visible while example records are loaded, so
           nobody mistakes them for real figures and the exit is always one tap. */}
       {isDemoData && (
-        <div className="relative mb-5 overflow-hidden rounded-[22px] border border-violet-400/70 bg-[linear-gradient(135deg,rgba(56,26,165,0.96)_0%,rgba(27,32,128,0.95)_42%,rgba(76,45,190,0.96)_100%)] px-4 py-3.5 text-white shadow-[0_18px_34px_rgba(35,24,122,0.34)] sm:px-5 sm:py-4">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-[44%] bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.14),transparent_55%),linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] opacity-90" />
+        <div className="relative mb-5 overflow-hidden rounded-[22px] border border-violet-300/70 bg-[linear-gradient(180deg,rgba(91,73,252,0.97)_0%,rgba(52,34,180,0.98)_34%,rgba(23,24,118,0.98)_100%)] px-4 py-3.5 text-white shadow-[0_20px_36px_rgba(28,20,112,0.34)] ring-1 ring-violet-300/25 sm:px-5 sm:py-4">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-90">
+            <div className="absolute -right-10 top-[-8%] h-[160%] w-[52%] rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]" />
+            <div className="absolute right-[14%] top-0 h-full w-[22%] rounded-full border border-white/8" />
+            <div className="absolute inset-x-0 top-0 h-[46%] bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0))]" />
+          </div>
           <div className="relative flex items-center gap-3 sm:gap-4">
-            <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-violet-300/85 bg-[radial-gradient(circle_at_30%_30%,rgba(145,104,255,0.95),rgba(92,49,214,0.98)_58%,rgba(64,25,168,0.98)_100%)] shadow-[0_12px_24px_rgba(72,31,188,0.34)] ring-2 ring-white/15 sm:h-[62px] sm:w-[62px]">
+            <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-violet-200/85 bg-[radial-gradient(circle_at_30%_30%,rgba(147,115,255,0.98),rgba(96,61,231,0.98)_58%,rgba(62,34,183,0.98)_100%)] shadow-[0_12px_24px_rgba(71,37,184,0.36)] ring-2 ring-white/15 sm:h-[62px] sm:w-[62px]">
               <Briefcase size={26} strokeWidth={2.15} className="text-white" />
               <svg viewBox="0 0 24 24" aria-hidden="true" className="absolute right-[9px] top-[8px] h-3.5 w-3.5 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.55)] sm:right-[10px] sm:top-[9px]">
                 <path fill="currentColor" d="M12 1.75 13.76 6l4.49 1.76L13.76 9.5 12 13.75 10.24 9.5 5.75 7.76 10.24 6 12 1.75Z" />
@@ -8547,13 +8523,10 @@ html, body, #root {
             </div>
             <div className="min-w-0 flex-1">
               <div className="text-[24px] font-extrabold leading-none tracking-[-0.04em] text-white sm:text-[26px]">Demo</div>
-              <div className="mt-1 text-[13px] font-medium leading-5 text-white/82 sm:text-[15px]">
-                Sample business data
-              </div>
             </div>
             <button
               onClick={handleRemoveSampleData}
-              className="relative shrink-0 rounded-xl border border-orange-200/25 bg-[linear-gradient(180deg,#FF962F_0%,#F97316_100%)] px-3.5 py-2.5 text-[13px] font-bold text-white shadow-[0_12px_26px_rgba(249,115,22,0.34)] transition hover:brightness-105 sm:px-5 sm:py-3 sm:text-[15px]"
+              className="relative shrink-0 rounded-xl border border-orange-200/25 bg-[linear-gradient(180deg,#FF9B37_0%,#F97316_100%)] px-3.5 py-2.5 text-[13px] font-bold text-white shadow-[0_12px_26px_rgba(249,115,22,0.34)] transition hover:brightness-105 sm:px-5 sm:py-3 sm:text-[15px]"
             >
               Exit Demo
             </button>
