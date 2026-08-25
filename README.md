@@ -1,14 +1,18 @@
-# MONIEZI v39.4.22
-## Prominent Demo navigation shell
+# MONIEZI v39.4.23
+## Simple Demo Mode — MONIEZI with sample business data
 
-- Rebuilds Demo controls on routed feature pages as a distinct navigation shell instead of a small inline status strip.
-- Makes **Explore MONIEZI** visually larger and stronger than page titles such as Clients, Jobs, Reports, and Settings.
-- Adds a large **Browse all Demo features** action at the top of every routed Demo feature page.
-- Adds substantial vertical separation between Demo navigation and the selected feature content so each destination feels like a new page.
-- Replaces the small floating Demo capsule with a full-width sticky Demo navigation bar above the permanent MONIEZI footer.
-- Increases the Demo-only bottom scroll clearance so feature content never feels trapped underneath the sticky Demo bar and app footer.
-- Keeps one navigation model everywhere: both the top shell and bottom bar open the same unified **Explore MONIEZI** product map.
-- Preserves the v39.4.21 unified product map, human-first Demo hero, direct access to every Demo destination, visited-state tracking, and guided tour.
+- Rejects the v39.4.22 Demo navigation shell and sticky Demo bars.
+- Makes **Explore MONIEZI** a dedicated, calm table-of-contents page rather than a second navigation system layered over the app.
+- Keeps the human-centered transparent Demo illustration.
+- Simplifies the directory into four understandable groups: **Customers & Sales**, **Work & Expenses**, **Money & Tax**, and **More MONIEZI**.
+- Removes the guided-tour card, overall progress counter, large top Demo control, persistent bottom Demo bar, next-step card, and Demo explorer sheet.
+- Opens each destination as the real MONIEZI feature with the normal app footer, hamburger menu, Search, and Insights navigation intact.
+- Adds only one familiar **‹ Explore** return action above an opened Demo feature.
+- Adds one small noninteractive **DEMO** status badge beside the MONIEZI logo so sample data is always identifiable without adding navigation clutter.
+- Keeps subtle checkmarks on visited entries when the user returns to Explore MONIEZI.
+- Keeps **Exit Demo** only at the bottom of Explore MONIEZI and in the hamburger menu.
+- Removes Demo-specific extra bottom spacing and restores the standard scroll-to-top position.
+- Preserves all commercial Demo data, real feature routes, receipts, reports, tax tools, and normal MONIEZI navigation.
 
 # MONIEZI v39.4.21
 ## Unified Explore MONIEZI Demo Map
