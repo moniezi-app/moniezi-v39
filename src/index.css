@@ -4458,3 +4458,270 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     height: 56px !important;
   }
 }
+
+/* ================================================================
+   MONIEZI v39.4.32 — Large icon page-header system
+   ----------------------------------------------------------------
+   Extends the v39.4.31 Home-card visual language to routed pages.
+   Each major destination now begins with a spacious feature card, a
+   Quick-Access-scale icon, strong title hierarchy, and a clear gap before
+   working content. Navigation source (footer, Home, or menu) does not alter
+   the destination presentation.
+   ================================================================ */
+.v39432-page-hero {
+  --v39432-tone-rgb: 83, 136, 255;
+  position: relative;
+  isolation: isolate;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center !important;
+  gap: 20px !important;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  padding: 26px !important;
+  border: 1px solid rgba(var(--v39432-tone-rgb), 0.46) !important;
+  border-radius: 22px !important;
+  background:
+    radial-gradient(105% 130% at 5% 0%, rgba(var(--v39432-tone-rgb), 0.20) 0%, rgba(var(--v39432-tone-rgb), 0.07) 46%, transparent 72%),
+    linear-gradient(145deg, rgba(255,255,255,0.94), rgba(244,248,255,0.91)) !important;
+  box-shadow:
+    0 18px 38px rgba(15, 34, 74, 0.12),
+    0 0 24px rgba(var(--v39432-tone-rgb), 0.10),
+    inset 0 1px 0 rgba(255,255,255,0.78) !important;
+}
+
+.dark .v39432-page-hero {
+  background:
+    radial-gradient(110% 135% at 4% 0%, rgba(var(--v39432-tone-rgb), 0.24) 0%, rgba(var(--v39432-tone-rgb), 0.08) 46%, transparent 72%),
+    linear-gradient(145deg, rgba(9, 24, 57, 0.98), rgba(6, 15, 38, 0.98)) !important;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.26),
+    0 0 28px rgba(var(--v39432-tone-rgb), 0.13),
+    inset 0 1px 0 rgba(255,255,255,0.09) !important;
+}
+
+.v39432-page-hero--violet { --v39432-tone-rgb: 142, 92, 246; }
+.v39432-page-hero--cyan { --v39432-tone-rgb: 41, 192, 224; }
+.v39432-page-hero--teal { --v39432-tone-rgb: 42, 191, 169; }
+
+.v39432-page-hero__main {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  align-items: center;
+  gap: 19px;
+  min-width: 0;
+}
+
+.v39432-page-hero__copy {
+  min-width: 0;
+}
+
+.v39432-page-hero__icon {
+  --v39432-icon-rgb: 83, 136, 255;
+  display: grid !important;
+  place-items: center !important;
+  width: 82px !important;
+  height: 82px !important;
+  min-width: 82px !important;
+  padding: 0 !important;
+  border: 1.5px solid rgba(var(--v39432-icon-rgb), 0.70) !important;
+  border-radius: 22px !important;
+  color: rgb(var(--v39432-icon-rgb)) !important;
+  background:
+    radial-gradient(92% 88% at 26% 18%, rgba(var(--v39432-icon-rgb), 0.34) 0%, rgba(var(--v39432-icon-rgb), 0.12) 60%, transparent 100%),
+    linear-gradient(145deg, rgba(var(--v39432-icon-rgb), 0.20), rgba(5, 15, 40, 0.08)) !important;
+  box-shadow:
+    0 15px 30px rgba(var(--v39432-icon-rgb), 0.20),
+    0 0 24px rgba(var(--v39432-icon-rgb), 0.13),
+    inset 0 1px 0 rgba(255,255,255,0.20),
+    inset 0 -12px 24px rgba(var(--v39432-icon-rgb), 0.07) !important;
+}
+
+.dark .v39432-page-hero__icon {
+  background:
+    radial-gradient(92% 88% at 26% 18%, rgba(var(--v39432-icon-rgb), 0.42) 0%, rgba(var(--v39432-icon-rgb), 0.16) 58%, transparent 100%),
+    linear-gradient(145deg, rgba(var(--v39432-icon-rgb), 0.22), rgba(2, 9, 27, 0.76)) !important;
+  box-shadow:
+    0 16px 30px rgba(var(--v39432-icon-rgb), 0.22),
+    0 0 28px rgba(var(--v39432-icon-rgb), 0.16),
+    inset 0 1px 0 rgba(255,255,255,0.14),
+    inset 0 -12px 24px rgba(0,0,0,0.14) !important;
+}
+
+.v39432-page-hero__icon--blue { --v39432-icon-rgb: 83, 136, 255; }
+.v39432-page-hero__icon--violet { --v39432-icon-rgb: 142, 92, 246; }
+.v39432-page-hero__icon--cyan { --v39432-icon-rgb: 41, 192, 224; }
+.v39432-page-hero__icon--teal { --v39432-icon-rgb: 42, 191, 169; }
+.v39432-page-hero__icon--green { --v39432-icon-rgb: 42, 190, 112; }
+.v39432-page-hero__icon--rose { --v39432-icon-rgb: 239, 93, 125; }
+
+.v39432-page-hero__icon svg {
+  width: 50px !important;
+  height: 50px !important;
+  stroke-width: 1.65 !important;
+  filter: drop-shadow(0 7px 9px rgba(var(--v39432-icon-rgb), 0.24));
+}
+
+.v39432-page-hero__title {
+  margin: 0;
+  color: #0f172a;
+  font-family: var(--font-brand, inherit);
+  font-size: clamp(21px, 5.8vw, 26px) !important;
+  line-height: 1.18 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.036em !important;
+}
+
+.dark .v39432-page-hero__title { color: #fff; }
+
+.v39432-page-hero__subtitle {
+  margin: 7px 0 0;
+  max-width: 640px;
+  color: #5b6b85;
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  font-weight: 600 !important;
+}
+
+.dark .v39432-page-hero__subtitle { color: #b5c1d6; }
+
+.v39432-page-hero__orb {
+  display: inline-grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,0.34);
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, #4e8dff, #4d5df6);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(53, 100, 238, 0.30), inset 0 1px 0 rgba(255,255,255,0.28);
+  transition: transform 130ms ease, filter 130ms ease;
+}
+
+.v39432-page-hero__orb--violet { background: linear-gradient(145deg, #9c6cff, #6c4cf2); box-shadow: 0 10px 24px rgba(115, 74, 235, 0.30), inset 0 1px 0 rgba(255,255,255,0.28); }
+.v39432-page-hero__orb--cyan { background: linear-gradient(145deg, #29bfd8, #1785c7); box-shadow: 0 10px 24px rgba(25, 151, 196, 0.28), inset 0 1px 0 rgba(255,255,255,0.26); }
+.v39432-page-hero__orb:active { transform: scale(0.96); }
+
+.v39432-page-hero__action {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 14px;
+  border: 1px solid rgba(83,136,255,0.42);
+  border-radius: 12px !important;
+  background: rgba(83,136,255,0.10);
+  color: #2458b6;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.30);
+}
+
+.dark .v39432-page-hero__action {
+  background: rgba(83,136,255,0.13);
+  color: #c6d9ff;
+  border-color: rgba(105,157,255,0.36);
+}
+
+.v39432-page-hero__action--teal {
+  border-color: rgba(42,191,169,0.42);
+  background: rgba(42,191,169,0.12);
+  color: #087d6d;
+}
+.dark .v39432-page-hero__action--teal { color: #8ff0df; border-color: rgba(86,224,201,0.34); background: rgba(42,191,169,0.13); }
+
+.v39432-page-hero__version {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: rgba(83,136,255,0.10);
+  color: #415674;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.dark .v39432-page-hero__version { color: #c5d1e4; background: rgba(120,168,255,0.10); }
+
+/* Give routed pages the same deliberate breathing room as Home. */
+.v39432-page-hero + * {
+  margin-top: 36px !important;
+}
+
+/* The equity module already uses its first section as a container for more
+   controls, so keep the large hero treatment while returning its inner flow
+   to normal block layout. */
+.v39432-equity-hero {
+  display: block !important;
+}
+.v39432-equity-hero > .v39432-page-hero__main {
+  max-width: 760px;
+}
+.v39432-equity-hero > .v39432-page-hero__main + * {
+  margin-top: 24px !important;
+}
+
+@media (max-width: 390px) {
+  .v39432-page-hero {
+    padding: 24px !important;
+    gap: 14px !important;
+    border-radius: 20px !important;
+  }
+  .v39432-page-hero__main {
+    grid-template-columns: 74px minmax(0, 1fr);
+    gap: 16px;
+  }
+  .v39432-page-hero__icon {
+    width: 74px !important;
+    height: 74px !important;
+    min-width: 74px !important;
+    border-radius: 20px !important;
+  }
+  .v39432-page-hero__icon svg {
+    width: 46px !important;
+    height: 46px !important;
+  }
+  .v39432-page-hero__title { font-size: 20px !important; }
+  .v39432-page-hero__subtitle { font-size: 13.5px !important; line-height: 1.5 !important; }
+  .v39432-page-hero__orb { width: 50px; height: 50px; }
+  .v39432-page-hero__action {
+    grid-column: 1 / -1;
+    justify-self: start;
+    min-height: 44px;
+  }
+  .v39432-page-hero + * { margin-top: 34px !important; }
+}
+
+@media (min-width: 640px) {
+  .v39432-page-hero {
+    padding: 30px !important;
+    gap: 24px !important;
+    border-radius: 24px !important;
+  }
+  .v39432-page-hero__main {
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 22px;
+  }
+  .v39432-page-hero__icon {
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 90px !important;
+    border-radius: 24px !important;
+  }
+  .v39432-page-hero__icon svg {
+    width: 56px !important;
+    height: 56px !important;
+  }
+  .v39432-page-hero__title { font-size: 27px !important; }
+  .v39432-page-hero__subtitle { font-size: 15px !important; }
+  .v39432-page-hero + * { margin-top: 44px !important; }
+}
+.v39432-page-hero--green { --v39432-tone-rgb: 42, 190, 112; }
+.v39432-page-hero--amber { --v39432-tone-rgb: 227, 157, 43; }
+.v39432-page-hero--rose { --v39432-tone-rgb: 239, 93, 125; }
+.v39432-page-hero__icon--amber { --v39432-icon-rgb: 227, 157, 43; }

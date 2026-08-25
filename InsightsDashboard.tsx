@@ -262,14 +262,15 @@ export default function InsightsDashboard({
       {/* v39.4.12 — the category cards below are the summary and navigation.
           Keep only a compact refresh utility beside the page title; do not repeat
           High / Medium / Need Action counts in a second summary layer. */}
-      <div className="v392-page-header flex items-center justify-between gap-4">
-        <div className="flex min-w-0 items-center gap-3">
-          <div className="v392-page-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400">
-            <BrainCircuit size={23} strokeWidth={1.8} />
+      <div className="v392-page-header v39432-page-hero v39432-page-hero--violet">
+        <div className="v39432-page-hero__main">
+          <div className="v392-page-icon v39432-page-hero__icon v39432-page-hero__icon--violet">
+            <BrainCircuit size={50} strokeWidth={1.65} />
           </div>
-          <h2 className="min-w-0 text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">
-            Business Insights
-          </h2>
+          <div className="v39432-page-hero__copy">
+            <h2 className="v39432-page-hero__title">Business Insights</h2>
+            <p className="v39432-page-hero__subtitle">See the business signals, follow-ups, and patterns that need your attention.</p>
+          </div>
         </div>
         <button
           type="button"
@@ -277,7 +278,7 @@ export default function InsightsDashboard({
           disabled={isRefreshing}
           aria-label="Refresh insights"
           title="Refresh insights"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 shadow-sm transition-colors hover:bg-slate-50 disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+          className="v39432-page-hero__orb v39432-page-hero__orb--violet disabled:opacity-60"
         >
           <RefreshCcw className={`h-5 w-5 ${isRefreshing ? "animate-spin" : ""}`} />
         </button>

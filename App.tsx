@@ -7692,6 +7692,23 @@ export default function App() {
   const darkChromeNavActiveStyle = useDarkChrome ? { color: '#ffffff' } : undefined;
   const isActivityPage = currentPage === Page.AllTransactions || currentPage === Page.Ledger;
   const shouldHideBottomNav = isKeyboardEditing || (isActivityPage && isActivitySearchFocused);
+  const reportHeroMeta: Record<typeof reportsMenuSection, { title: string; subtitle: string; tone: 'blue'|'violet'|'cyan'|'teal'|'green'|'amber'|'rose'; icon: React.ReactNode }> = {
+    menu: { title: 'Reports', subtitle: 'View profit, tax, receivables, mileage, and business reports.', tone: 'blue', icon: <BarChart3 size={50} strokeWidth={1.65} /> },
+    pl: { title: 'Profit & Loss', subtitle: 'Review income, expenses, and net profit for the selected period.', tone: 'blue', icon: <BarChart3 size={50} strokeWidth={1.65} /> },
+    taxsnapshot: { title: 'Tax Snapshot', subtitle: 'Review a cautious estimate of what to set aside for taxes.', tone: 'green', icon: <Calculator size={50} strokeWidth={1.65} /> },
+    taxprep: { title: 'Tax Prep / Readiness', subtitle: 'Review tax-year records, missing documentation, and your tax package.', tone: 'green', icon: <ClipboardList size={50} strokeWidth={1.65} /> },
+    planner: { title: 'Tax Planner', subtitle: 'Work through a closer tax estimate using your filing details.', tone: 'cyan', icon: <BookOpen size={50} strokeWidth={1.65} /> },
+    receivables: { title: 'Money Owed to You', subtitle: 'Review unpaid invoices, overdue balances, and money due soon.', tone: 'amber', icon: <Wallet size={50} strokeWidth={1.65} /> },
+    expensesreceipts: { title: 'Expenses & Receipts', subtitle: 'Review spending, receipt coverage, and expense documentation.', tone: 'rose', icon: <Receipt size={50} strokeWidth={1.65} /> },
+    mileage: { title: 'Mileage Report', subtitle: 'Review business trips, miles, and estimated mileage deduction.', tone: 'teal', icon: <Car size={50} strokeWidth={1.65} /> },
+    clients: { title: 'Clients & Work', subtitle: 'Review revenue, balances, and estimate activity by client.', tone: 'violet', icon: <Users size={50} strokeWidth={1.65} /> },
+    jobs: { title: 'Job Profitability', subtitle: 'Review revenue, costs, profit, margin, invoices, and mileage by job.', tone: 'cyan', icon: <Briefcase size={50} strokeWidth={1.65} /> },
+    cashflow: { title: 'Money In & Out', subtitle: 'Review month-by-month income, spending, and the difference.', tone: 'green', icon: <TrendingUp size={50} strokeWidth={1.65} /> },
+    pipeline: { title: 'Estimate Pipeline', subtitle: 'Review draft, sent, accepted, and declined estimates.', tone: 'violet', icon: <FileText size={50} strokeWidth={1.65} /> },
+    ledger: { title: 'Transaction Ledger', subtitle: 'Review every income and expense entry for the selected year.', tone: 'blue', icon: <History size={50} strokeWidth={1.65} /> },
+    yearend: { title: 'Year-End Business Summary', subtitle: 'Review the annual picture across money, mileage, invoices, and clients.', tone: 'blue', icon: <Calendar size={50} strokeWidth={1.65} /> },
+  };
+  const activeReportHero = reportHeroMeta[reportsMenuSection];
 
   return (
     <>
@@ -9082,16 +9099,17 @@ html, body, #root {
 
         {(currentPage === Page.Income || currentPage === Page.Expenses || (currentPage === Page.AllTransactions || currentPage === Page.Ledger)) && (
            <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4">
-             <div className="v392-page-header flex items-center justify-between gap-3">
-                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                     <div className="flex items-center gap-2 sm:gap-3">
-                       <div className={`v392-page-icon p-2.5 rounded-xl flex-shrink-0 ${currentPage === Page.Income ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' : currentPage === Page.Expenses ? 'bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-500' : 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400'}`}>{currentPage === Page.Income ? <TrendingUp size={22} strokeWidth={1.7}/> : currentPage === Page.Expenses ? <TrendingDown size={22} strokeWidth={1.7}/> : <History size={22} strokeWidth={1.7} />}</div>
-                       <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">{currentPage === Page.Income ? 'Income' : currentPage === Page.Expenses ? 'Expenses' : 'Activity'}</h2>
-                     </div>
+             <div className="v392-page-header v39432-page-hero">
+               <div className="v39432-page-hero__main">
+                 <div className={`v392-page-icon v39432-page-hero__icon ${currentPage === Page.Income ? 'v39432-page-hero__icon--green' : currentPage === Page.Expenses ? 'v39432-page-hero__icon--rose' : 'v39432-page-hero__icon--blue'}`}>
+                   {currentPage === Page.Income ? <TrendingUp size={50} strokeWidth={1.65}/> : currentPage === Page.Expenses ? <TrendingDown size={50} strokeWidth={1.65}/> : <History size={50} strokeWidth={1.65} />}
                  </div>
-                 {(currentPage === Page.Income || currentPage === Page.Expenses || (currentPage === Page.AllTransactions || currentPage === Page.Ledger)) && (
-                    <button onClick={handleContextualHeaderAdd} className="w-11 h-11 sm:w-12 sm:h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-md shadow-blue-600/20 hover:bg-blue-500 transition-all active:scale-95 flex-shrink-0"><Plus size={21} strokeWidth={2.5} /></button>
-                 )}
+                 <div className="v39432-page-hero__copy">
+                   <h2 className="v39432-page-hero__title">{currentPage === Page.Income ? 'Income' : currentPage === Page.Expenses ? 'Expenses' : 'Activity'}</h2>
+                   <p className="v39432-page-hero__subtitle">{currentPage === Page.Income ? 'Review money coming into the business.' : currentPage === Page.Expenses ? 'Review spending, receipts, and expense records.' : 'Review income, expenses, invoices, and business activity.'}</p>
+                 </div>
+               </div>
+               <button onClick={handleContextualHeaderAdd} className="v39432-page-hero__orb" aria-label="Add transaction"><Plus size={22} strokeWidth={2.5} /></button>
              </div>
 
              {/* Primary Activity controls: search first, then record type, then time period.
@@ -9430,14 +9448,17 @@ html, body, #root {
         {(currentPage === Page.Invoices) && (
           <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 min-w-0 max-w-full">
             <div className="space-y-3 sm:space-y-4 min-w-0">
-              <div className="v392-page-header flex items-center justify-between gap-3 min-w-0">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className={`v392-page-icon p-2.5 rounded-xl flex-shrink-0 ${billingDocType === 'estimate' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300' : 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400'}`}>
-                    <FileText size={22} strokeWidth={1.7} />
+              <div className={`v392-page-header v39432-page-hero ${billingDocType === 'estimate' ? 'v39432-page-hero--violet' : 'v39432-page-hero--blue'}`}>
+                <div className="v39432-page-hero__main">
+                  <div className={`v392-page-icon v39432-page-hero__icon ${billingDocType === 'estimate' ? 'v39432-page-hero__icon--violet' : 'v39432-page-hero__icon--blue'}`}>
+                    {billingDocType === 'estimate' ? <ClipboardList size={50} strokeWidth={1.65} /> : <FileText size={50} strokeWidth={1.65} />}
                   </div>
-                  <h2 className="min-w-0 text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">{billingDocType === 'estimate' ? 'Estimates' : 'Invoices'}</h2>
+                  <div className="v39432-page-hero__copy">
+                    <h2 className="v39432-page-hero__title">{billingDocType === 'estimate' ? 'Estimates' : 'Invoices'}</h2>
+                    <p className="v39432-page-hero__subtitle">{billingDocType === 'estimate' ? 'Create, send, and follow up on quotes and proposals.' : 'Create invoices, track balances, and manage collections.'}</p>
+                  </div>
                 </div>
-                <button onClick={() => handleOpenFAB('billing', billingDocType === 'estimate' ? 'estimate' : 'invoice')} className={`w-11 h-11 sm:w-12 sm:h-12 text-white rounded-full flex items-center justify-center shadow-md transition-all active:scale-95 flex-shrink-0 ${billingDocType === 'estimate' ? 'bg-indigo-600 shadow-indigo-600/20 hover:bg-indigo-500' : 'bg-blue-600 shadow-blue-600/20 hover:bg-blue-500'}`} aria-label={billingDocType === 'estimate' ? 'Add estimate' : 'Add invoice'}><Plus size={21} strokeWidth={2.5} /></button>
+                <button onClick={() => handleOpenFAB('billing', billingDocType === 'estimate' ? 'estimate' : 'invoice')} className={`v39432-page-hero__orb ${billingDocType === 'estimate' ? 'v39432-page-hero__orb--violet' : ''}`} aria-label={billingDocType === 'estimate' ? 'Add estimate' : 'Add invoice'}><Plus size={22} strokeWidth={2.5} /></button>
               </div>
 
               {/* Invoices/Estimates selector belongs to its own full-width row. */}
@@ -9820,27 +9841,18 @@ html, body, #root {
 
         {currentPage === Page.Mileage && (
           <div className="min-h-full animate-in fade-in slide-in-from-right-4">
-            <div className="v392-page-header flex flex-col items-stretch gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <div className="v392-page-icon p-2.5 rounded-xl bg-teal-50 text-teal-700 dark:bg-teal-500/10 dark:text-teal-300 flex-shrink-0">
-                    <Car size={22} strokeWidth={1.7} />
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Mileage</h2>
+            <div className="v392-page-header v39432-page-hero v39432-page-hero--teal">
+              <div className="v39432-page-hero__main">
+                <div className="v392-page-icon v39432-page-hero__icon v39432-page-hero__icon--teal">
+                  <Car size={50} strokeWidth={1.65} />
                 </div>
-                {!isMileageKeyboardEditing && (
-                  <p className="mt-2 max-w-xl text-sm font-medium leading-6 text-slate-600 dark:text-slate-300">
-                    Log business trips and keep your mileage ready for tax time.
-                  </p>
-                )}
+                <div className="v39432-page-hero__copy">
+                  <h2 className="v39432-page-hero__title">Mileage</h2>
+                  {!isMileageKeyboardEditing && <p className="v39432-page-hero__subtitle">Log business trips and keep your mileage ready for tax time.</p>}
+                </div>
               </div>
-              <button
-                type="button"
-                onClick={openMileageAddDrawer}
-                className="inline-flex self-start shrink-0 items-center gap-1.5 rounded-lg bg-teal-600 px-3 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-teal-700 active:scale-[0.98] sm:self-auto"
-              >
-                <Plus size={17} strokeWidth={2} />
-                <span>Add Trip</span>
+              <button type="button" onClick={openMileageAddDrawer} className="v39432-page-hero__action v39432-page-hero__action--teal">
+                <Plus size={18} strokeWidth={2.2} /><span>Add Trip</span>
               </button>
             </div>
 
@@ -9971,27 +9983,20 @@ html, body, #root {
 
         {currentPage === Page.Reports && (
            <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4">
-              <div className="v392-page-header flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                  <div className="v392-page-icon p-2.5 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400 flex-shrink-0">
-                    <BarChart3 size={22} strokeWidth={1.7} />
+              <div className={`v392-page-header v39432-page-hero v39432-page-hero--${activeReportHero.tone}`}>
+                <div className="v39432-page-hero__main">
+                  <div className={`v392-page-icon v39432-page-hero__icon v39432-page-hero__icon--${activeReportHero.tone}`}>{activeReportHero.icon}</div>
+                  <div className="v39432-page-hero__copy">
+                    <h2 className="v39432-page-hero__title">{activeReportHero.title}</h2>
+                    <p className="v39432-page-hero__subtitle">{activeReportHero.subtitle}</p>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Reports</h2>
                 </div>
                 {reportsMenuSection !== 'menu' && (
-                  <button
-                    type="button"
-                    onClick={() => { setReportsMenuSection('menu'); mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
-                  >
-                    <ArrowLeft size={15} /> Report Center
+                  <button type="button" onClick={() => { setReportsMenuSection('menu'); mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }); }} className="v39432-page-hero__action">
+                    <ArrowLeft size={16} /> <span>Report Center</span>
                   </button>
                 )}
               </div>
-
-              <p className="text-slate-600 dark:text-slate-300 font-semibold leading-6">
-                {reportsMenuSection === 'menu' ? 'View your business reports.' : 'Review the report below, then return to the Report Center for another view.'}
-              </p>
 
               {reportsMenuSection === 'menu' && (
                 <div className="space-y-5">
@@ -11773,24 +11778,22 @@ html, body, #root {
         {currentPage === Page.Clients && (
           <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 pb-24">
             {/* Header */}
-            <div className="v392-page-header flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="v392-page-icon p-2.5 rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400 flex-shrink-0">
-                  <Users size={22} strokeWidth={1.7} />
+            <div className="v392-page-header v39432-page-hero v39432-page-hero--violet">
+              <div className="v39432-page-hero__main">
+                <div className="v392-page-icon v39432-page-hero__icon v39432-page-hero__icon--violet">
+                  <Users size={50} strokeWidth={1.65} />
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Clients</h2>
+                <div className="v39432-page-hero__copy">
+                  <h2 className="v39432-page-hero__title">Clients</h2>
+                  <p className="v39432-page-hero__subtitle">Keep contacts, leads, and client history easy to find.</p>
+                </div>
               </div>
               <button
-                onClick={() => {
-                  setEditingClient({ status: 'lead' });
-                  setIsClientModalOpen(true);
-                }}
-                className="w-11 h-11 sm:w-12 sm:h-12 bg-purple-600 text-white rounded-full flex items-center justify-center shadow-md shadow-purple-600/20 hover:bg-purple-500 transition-all active:scale-95 flex-shrink-0"
+                onClick={() => { setEditingClient({ status: 'lead' }); setIsClientModalOpen(true); }}
+                className="v39432-page-hero__orb v39432-page-hero__orb--violet"
                 aria-label="Add client"
                 title="Add client"
-              >
-                <Plus size={21} strokeWidth={2.5} />
-              </button>
+              ><Plus size={22} strokeWidth={2.5} /></button>
             </div>
 
             {/* Search comes first: finding a person/company is the primary task. */}
@@ -11996,25 +11999,17 @@ html, body, #root {
         {/* ==================== JOBS / PROJECTS PAGE ==================== */}
         {currentPage === Page.Jobs && (
           <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 pb-24">
-            <div className="v392-page-header flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="v392-page-icon p-2.5 rounded-xl bg-cyan-50 text-cyan-700 dark:bg-cyan-500/10 dark:text-cyan-300 flex-shrink-0">
-                  <Briefcase size={22} strokeWidth={1.7} />
+            <div className="v392-page-header v39432-page-hero v39432-page-hero--cyan">
+              <div className="v39432-page-hero__main">
+                <div className="v392-page-icon v39432-page-hero__icon v39432-page-hero__icon--cyan">
+                  <Briefcase size={50} strokeWidth={1.65} />
                 </div>
-                <div className="min-w-0">
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Jobs / Projects</h2>
-                  <p className="mt-1 text-sm font-medium text-slate-600 dark:text-slate-300">See budget, actual costs, labor, profit, cash position, and what is still outstanding.</p>
+                <div className="v39432-page-hero__copy">
+                  <h2 className="v39432-page-hero__title">Jobs / Projects</h2>
+                  <p className="v39432-page-hero__subtitle">See budget, actual costs, labor, profit, cash position, and what is still outstanding.</p>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => openNewJob()}
-                className="w-11 h-11 sm:w-12 sm:h-12 bg-cyan-700 text-white rounded-full flex items-center justify-center shadow-md shadow-cyan-700/20 hover:bg-cyan-600 transition-all active:scale-95 flex-shrink-0"
-                aria-label="Add job"
-                title="Add job"
-              >
-                <Plus size={21} strokeWidth={2.5} />
-              </button>
+              <button type="button" onClick={() => openNewJob()} className="v39432-page-hero__orb v39432-page-hero__orb--cyan" aria-label="Add job" title="Add job"><Plus size={22} strokeWidth={2.5} /></button>
             </div>
 
             {jobs.length > 0 && (() => {
@@ -12219,12 +12214,15 @@ html, body, #root {
         {currentPage === Page.Settings && (
           <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 pb-24">
             {/* Settings Header */}
-            <div className="v392-page-header flex items-center gap-2 sm:gap-3">
-              <div className="v392-page-icon p-2.5 rounded-xl bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 flex-shrink-0">
-                <Settings size={22} strokeWidth={1.7} />
+            <div className="v392-page-header v39432-page-hero">
+              <div className="v39432-page-hero__main">
+                <div className="v392-page-icon v39432-page-hero__icon v39432-page-hero__icon--blue"><Settings size={50} strokeWidth={1.65} /></div>
+                <div className="v39432-page-hero__copy">
+                  <h2 className="v39432-page-hero__title">Settings</h2>
+                  <p className="v39432-page-hero__subtitle">Manage your business setup, backup, features, tax settings, license, and app controls.</p>
+                </div>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white font-brand">Settings</h2>
-              <div className="ml-auto text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">MONIEZI v{CUSTOMER_VERSION}</div>
+              <div className="v39432-page-hero__version">v{CUSTOMER_VERSION}</div>
             </div>
 
             {/* Tab Navigation */}

@@ -888,17 +888,16 @@ export function CompanyEquityModule({ equity, onChange, currencySymbol, defaultB
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-right-4 pb-24">
-      <section className="rounded-2xl border border-slate-300 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6">
-        <div className="v392-page-header flex items-center gap-3">
-          <div className="v392-page-icon flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-200">
-            <Landmark size={24} />
+      <section className="v39432-page-hero v39432-equity-hero">
+        <div className="v39432-page-hero__main">
+          <div className="v392-page-icon v39432-page-hero__icon v39432-page-hero__icon--blue">
+            <Landmark size={50} strokeWidth={1.65} />
           </div>
-          <h1 className="min-w-0 text-2xl font-black tracking-tight text-slate-950 dark:!text-white sm:text-3xl font-brand">Private Raise Tracker</h1>
+          <div className="v39432-page-hero__copy">
+            <h1 className="v39432-page-hero__title">Private Raise Tracker</h1>
+            <p className="v39432-page-hero__subtitle">Track private investors, ownership, SAFE records, pledges, signatures, and funding status in one place.</p>
+          </div>
         </div>
-
-        <p className="mt-4 text-sm font-semibold leading-6 text-slate-600 dark:text-slate-200 sm:text-[15px]">
-          Track private investors, ownership, SAFE records, pledges, signatures, and funding status in one place.
-        </p>
 
         <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
           <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3.5 dark:border-slate-700 dark:bg-slate-800/60">

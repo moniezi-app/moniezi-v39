@@ -1,4 +1,12 @@
-# MONIEZI v39.4.31
+# MONIEZI v39.4.32
+## v39.4.32 Routed page headers — large icons across MONIEZI
+- Extends the v39.4.31 large-icon visual language beyond Home to the primary routed pages.
+- Clients, Jobs / Projects, Estimates, Invoices, Mileage, Activity / Income / Expenses, Reports, Business Insights, Settings, and Private Raise Tracker now use spacious top feature cards with Quick-Access-scale icons. Report subpages (Tax Prep, Tax Planner, P&L, receivables, mileage, clients, jobs, ledger, etc.) also switch the large hero title/icon to the active report.
+- Footer, Home Quick Access, and main-menu navigation all arrive at the same page presentation; entry path does not change the destination UI.
+- Page header actions are retained and repositioned around the larger icon treatment (add client/job/invoice/estimate/trip, refresh insights, return to Report Center).
+- Existing lists, filters, calculations, records, forms, and business logic below the page header remain in place.
+- Adds a larger separation between each page hero header and its working content so routed screens keep the same breathing-room principle as Home.
+
 ## v39.4.31 Home feature-card headers — large icons + larger gaps
 - Keeps the v39.4.30 Home structure, Quick Access navigation, card content, calculations, actions, and Demo behavior intact.
 - Redesigns only the header treatment of the major Home detail cards so Net Profit, Needs Your Attention, Monthly Business Goals, Continue Work, Recent Activity, Tax Snapshot, and Receipts use large Quick-Access-scale icons.
