@@ -1,3 +1,20 @@
+# MONIEZI v39.4.21
+## Unified Explore MONIEZI Demo Map
+
+- Rejects the v39.4.20 two-level Demo Business / App Features architecture.
+- Replaces it with one unified **Explore MONIEZI** product map visible directly from the Demo Home view.
+- Keeps the human-first transparent illustration and generous vertical spacing from v39.4.19.
+- Groups the complete Demo experience by business intent: **Find & Win Work**, **Run the Work**, **Know Your Money**, **Understand Your Business**, and **MONIEZI Tools**.
+- Makes Clients, Estimates, Invoices, Jobs, Receipts, Mileage, Overview, Money, Sales, Tax, Tax Prep, Reports, Activity, Insights, Search, Settings, and Company Equity (when enabled) directly accessible from the same Demo view.
+- Adds a lightweight **Start guided tour** path without forcing users into a wizard or hiding free exploration.
+- Uses one overall exploration count instead of separate business/feature progress systems.
+- Uses the same grouped product map in the persistent Explore MONIEZI bottom sheet, so there is only one navigation mental model.
+- Changes the persistent Demo capsule to **Explore MONIEZI · X/Y**, removing section-specific and feature-specific navigation layers.
+- Changes Menu → **Explore MONIEZI** into a direct return to the master Demo view at the top of Home.
+- Replaces the old six-section completion handoff with one unified next recommendation across the whole product.
+- Removes the one-time hamburger hint because nothing important is hidden behind a second Demo level anymore.
+- Demo exploration progress resets cleanly on Demo enter/exit.
+
 # MONIEZI v39.4.20
 ## Full-product Demo Explorer
 

@@ -1037,13 +1037,6 @@ function getInstallGuideDetails(platform: InstallPlatform, browser: InstallBrows
 
 type HomeSectionKey = 'overview' | 'money' | 'sales' | 'jobs' | 'records' | 'tax';
 type DemoFeatureKey = 'clients' | 'jobs' | 'estimates' | 'invoices' | 'mileage' | 'receipts' | 'activity' | 'reports' | 'taxprep' | 'search' | 'insights' | 'settings' | 'companyequity';
-type DemoExplorerMode = 'business' | 'features';
-
-const DEMO_FEATURE_ORDER: DemoFeatureKey[] = [
-  'clients', 'jobs', 'estimates', 'invoices', 'mileage',
-  'receipts', 'activity', 'reports', 'taxprep',
-  'search', 'insights', 'settings', 'companyequity',
-];
 
 const DEMO_FEATURE_META: Record<DemoFeatureKey, { label: string; description: string; group: 'Work' | 'Records & reporting' | 'App tools' | 'Advanced'; icon: any }> = {
   clients: { label: 'Clients', description: 'Contacts and job history', group: 'Work', icon: Users },
@@ -1089,6 +1082,75 @@ const HOME_SECTION_ICON_CLASSES: Record<HomeSectionKey, string> = {
   records: 'border-cyan-200 bg-cyan-50 text-cyan-600 dark:border-cyan-400/20 dark:bg-cyan-500/10 dark:text-cyan-300',
   tax: 'border-fuchsia-200 bg-fuchsia-50 text-fuchsia-600 dark:border-fuchsia-400/20 dark:bg-fuchsia-500/10 dark:text-fuchsia-300',
 };
+
+type DemoHomeDestinationKey = 'overview' | 'money' | 'sales' | 'tax';
+type DemoDestinationKey = DemoHomeDestinationKey | DemoFeatureKey;
+
+type DemoDestinationGroup = {
+  title: string;
+  description: string;
+  keys: DemoDestinationKey[];
+};
+
+const DEMO_HOME_DESTINATIONS: DemoHomeDestinationKey[] = ['overview', 'money', 'sales', 'tax'];
+
+const DEMO_MASTER_GROUPS: DemoDestinationGroup[] = [
+  { title: 'Find & Win Work', description: 'From first customer to getting paid.', keys: ['clients', 'estimates', 'invoices'] },
+  { title: 'Run the Work', description: 'Manage projects, receipts and business travel.', keys: ['jobs', 'receipts', 'mileage'] },
+  { title: 'Know Your Money', description: 'See performance now and get ready for tax time.', keys: ['overview', 'money', 'sales', 'tax', 'taxprep'] },
+  { title: 'Understand Your Business', description: 'Turn day-to-day records into useful business insight.', keys: ['reports', 'activity', 'insights'] },
+  { title: 'MONIEZI Tools', description: 'Find anything, control the app and manage advanced records.', keys: ['search', 'settings', 'companyequity'] },
+];
+
+const DEMO_GUIDED_ORDER: DemoDestinationKey[] = [
+  'clients', 'estimates', 'jobs', 'receipts', 'mileage', 'invoices',
+  'overview', 'money', 'sales', 'activity', 'reports', 'tax', 'taxprep',
+  'insights', 'search', 'settings', 'companyequity',
+];
+
+const DEMO_FEATURE_ICON_CLASSES: Record<DemoFeatureKey, string> = {
+  clients: 'border-purple-200 bg-purple-50 text-purple-700 dark:border-purple-700/40 dark:bg-purple-500/10 dark:text-purple-300',
+  jobs: 'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-700/40 dark:bg-amber-500/10 dark:text-amber-300',
+  estimates: 'border-indigo-200 bg-indigo-50 text-indigo-700 dark:border-indigo-700/40 dark:bg-indigo-500/10 dark:text-indigo-300',
+  invoices: 'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-700/40 dark:bg-blue-500/10 dark:text-blue-300',
+  mileage: 'border-teal-200 bg-teal-50 text-teal-700 dark:border-teal-700/40 dark:bg-teal-500/10 dark:text-teal-300',
+  receipts: 'border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-700/40 dark:bg-rose-500/10 dark:text-rose-300',
+  activity: 'border-cyan-200 bg-cyan-50 text-cyan-700 dark:border-cyan-700/40 dark:bg-cyan-500/10 dark:text-cyan-300',
+  reports: 'border-violet-200 bg-violet-50 text-violet-700 dark:border-violet-700/40 dark:bg-violet-500/10 dark:text-violet-300',
+  taxprep: 'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-700/40 dark:bg-emerald-500/10 dark:text-emerald-300',
+  search: 'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-700/40 dark:bg-blue-500/10 dark:text-blue-300',
+  insights: 'border-fuchsia-200 bg-fuchsia-50 text-fuchsia-700 dark:border-fuchsia-700/40 dark:bg-fuchsia-500/10 dark:text-fuchsia-300',
+  settings: 'border-slate-300 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200',
+  companyequity: 'border-cyan-200 bg-cyan-50 text-cyan-700 dark:border-cyan-700/40 dark:bg-cyan-500/10 dark:text-cyan-300',
+};
+
+function isDemoHomeDestination(key: DemoDestinationKey): key is DemoHomeDestinationKey {
+  return DEMO_HOME_DESTINATIONS.includes(key as DemoHomeDestinationKey);
+}
+
+function getDemoDestinationMeta(key: DemoDestinationKey): { label: string; description: string; icon: any; iconClass: string } {
+  if (isDemoHomeDestination(key)) {
+    const homeDescriptions: Record<DemoHomeDestinationKey, string> = {
+      overview: 'Business snapshot and profit at a glance',
+      money: 'Cash flow, income and expenses',
+      sales: 'Revenue, invoices and receivables',
+      tax: 'Tax snapshot and year-end position',
+    };
+    return {
+      label: HOME_SECTION_LABELS[key],
+      description: homeDescriptions[key],
+      icon: HOME_SECTION_ICON_COMPONENTS[key],
+      iconClass: HOME_SECTION_ICON_CLASSES[key],
+    };
+  }
+  const meta = DEMO_FEATURE_META[key];
+  return { label: meta.label, description: meta.description, icon: meta.icon, iconClass: DEMO_FEATURE_ICON_CLASSES[key] };
+}
+
+function isDemoDestinationVisited(key: DemoDestinationKey, visitedBusiness: HomeSectionKey[], visitedFeatures: DemoFeatureKey[]): boolean {
+  return isDemoHomeDestination(key) ? visitedBusiness.includes(key) : visitedFeatures.includes(key);
+}
+
 
 function HomeSectionIcon({ section, size = 18 }: { section: HomeSectionKey; size?: number }) {
   const Icon = HOME_SECTION_ICON_COMPONENTS[section];
@@ -1158,215 +1220,120 @@ function DemoBusinessIllustration() {
   );
 }
 
-function DemoExplorerSheet({
-  currentBusiness,
-  currentFeature,
+function DemoMasterMap({
+  currentDestination,
   visitedBusiness,
   visitedFeatures,
-  mode,
-  onModeChange,
-  onSelectBusiness,
-  onSelectFeature,
+  onSelect,
+  includeCompanyEquity,
+  compact = false,
+}: {
+  currentDestination: DemoDestinationKey | null;
+  visitedBusiness: HomeSectionKey[];
+  visitedFeatures: DemoFeatureKey[];
+  onSelect: (destination: DemoDestinationKey) => void;
+  includeCompanyEquity: boolean;
+  compact?: boolean;
+}) {
+  const groups = DEMO_MASTER_GROUPS.map(group => ({
+    ...group,
+    keys: group.keys.filter(key => includeCompanyEquity || key !== 'companyequity'),
+  })).filter(group => group.keys.length > 0);
+
+  return (
+    <div className={compact ? 'space-y-7' : 'space-y-9'}>
+      {groups.map(group => (
+        <section key={group.title}>
+          <div className="px-1">
+            <h4 className="text-[16px] font-black tracking-[-0.015em] text-slate-950 dark:text-white">{group.title}</h4>
+            <p className="mt-1.5 text-[12.5px] font-semibold leading-relaxed text-slate-500 dark:text-slate-400">{group.description}</p>
+          </div>
+          <div className="mt-3 overflow-hidden rounded-2xl border border-slate-200 bg-white/70 dark:border-slate-800 dark:bg-white/[0.022]">
+            {group.keys.map((destination, index) => {
+              const meta = getDemoDestinationMeta(destination);
+              const Icon = meta.icon;
+              const active = currentDestination === destination;
+              const visited = isDemoDestinationVisited(destination, visitedBusiness, visitedFeatures);
+              return (
+                <button
+                  key={destination}
+                  type="button"
+                  onClick={() => onSelect(destination)}
+                  className={`flex w-full items-center gap-3.5 px-4 py-4 text-left transition-all active:scale-[0.995] ${index > 0 ? 'border-t border-slate-200 dark:border-slate-800' : ''} ${active ? 'bg-blue-50/90 dark:bg-blue-500/[0.08]' : 'hover:bg-slate-50 dark:hover:bg-white/[0.035]'}`}
+                >
+                  <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${meta.iconClass}`}>
+                    <Icon size={19} strokeWidth={1.9} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[14.5px] font-extrabold leading-tight text-slate-950 dark:text-white">{meta.label}</span>
+                    <span className="mt-1 block text-[11.5px] font-semibold leading-snug text-slate-500 dark:text-slate-400">{meta.description}</span>
+                  </span>
+                  {active ? <span className="h-3 w-3 shrink-0 rounded-full border-2 border-blue-600 bg-blue-200 dark:border-blue-300 dark:bg-blue-500" /> : visited ? <CheckCircle size={19} className="shrink-0 text-emerald-500" /> : <ChevronRight size={18} className="shrink-0 text-slate-400" />}
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function DemoExplorerSheet({
+  currentDestination,
+  visitedBusiness,
+  visitedFeatures,
+  onSelectDestination,
+  onStartTour,
   onClose,
   onExit,
   includeCompanyEquity,
 }: {
-  currentBusiness: HomeSectionKey;
-  currentFeature: DemoFeatureKey | null;
+  currentDestination: DemoDestinationKey | null;
   visitedBusiness: HomeSectionKey[];
   visitedFeatures: DemoFeatureKey[];
-  mode: DemoExplorerMode;
-  onModeChange: (mode: DemoExplorerMode) => void;
-  onSelectBusiness: (section: HomeSectionKey) => void;
-  onSelectFeature: (feature: DemoFeatureKey) => void;
+  onSelectDestination: (destination: DemoDestinationKey) => void;
+  onStartTour: () => void;
   onClose: () => void;
   onExit: () => void;
   includeCompanyEquity: boolean;
 }) {
-  const featureKeys = DEMO_FEATURE_ORDER.filter(feature => includeCompanyEquity || feature !== 'companyequity');
-  const featureVisitedCount = featureKeys.filter(feature => visitedFeatures.includes(feature)).length;
-  const businessComplete = visitedBusiness.length >= HOME_SECTION_ORDER.length;
-  const overallVisited = visitedBusiness.length + featureVisitedCount;
-  const overallTotal = HOME_SECTION_ORDER.length + featureKeys.length;
-  const featureGroups: Array<{ label: 'Work' | 'Records & reporting' | 'App tools' | 'Advanced'; keys: DemoFeatureKey[] }> = [
-    { label: 'Work' as const, keys: featureKeys.filter(key => DEMO_FEATURE_META[key].group === 'Work') },
-    { label: 'Records & reporting' as const, keys: featureKeys.filter(key => DEMO_FEATURE_META[key].group === 'Records & reporting') },
-    { label: 'App tools' as const, keys: featureKeys.filter(key => DEMO_FEATURE_META[key].group === 'App tools') },
-    { label: 'Advanced' as const, keys: featureKeys.filter(key => DEMO_FEATURE_META[key].group === 'Advanced') },
-  ].filter(group => group.keys.length > 0);
+  const destinationKeys = DEMO_GUIDED_ORDER.filter(key => includeCompanyEquity || key !== 'companyequity');
+  const visitedCount = destinationKeys.filter(key => isDemoDestinationVisited(key, visitedBusiness, visitedFeatures)).length;
+  const complete = visitedCount >= destinationKeys.length;
+  const nextDestination = destinationKeys.find(key => !isDemoDestinationVisited(key, visitedBusiness, visitedFeatures)) || destinationKeys[0];
+  const nextMeta = getDemoDestinationMeta(nextDestination);
 
   return (
     <div className="fixed inset-0 z-[120] flex items-end bg-slate-950/55 backdrop-blur-[2px]" onMouseDown={onClose} role="presentation">
-      <div
-        className="flex max-h-[88vh] w-full flex-col rounded-t-[22px] border border-slate-200 bg-white shadow-[0_-24px_70px_rgba(15,23,42,0.32)] dark:border-slate-700 dark:bg-[#0b1428]"
-        onMouseDown={(event) => event.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Explore MONIEZI"
-      >
+      <div className="flex max-h-[90vh] w-full flex-col rounded-t-[22px] border border-slate-200 bg-white shadow-[0_-24px_70px_rgba(15,23,42,0.32)] dark:border-slate-700 dark:bg-[#0b1428]" onMouseDown={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-label="Explore MONIEZI">
         <div className="px-4 pt-3">
           <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-slate-300 dark:bg-slate-600" />
           <div className="mx-auto max-w-xl">
             <div className="flex items-start justify-between gap-3 pb-3">
               <div className="min-w-0">
                 <div className="text-[20px] font-black tracking-tight text-slate-950 dark:text-white">Explore MONIEZI</div>
-                <div className="mt-1 text-[12.5px] font-semibold text-slate-500 dark:text-slate-400">{overallVisited}/{overallTotal} explored · jump anywhere and continue at any time.</div>
+                <div className="mt-1 text-[12.5px] font-semibold text-slate-500 dark:text-slate-400">{visitedCount}/{destinationKeys.length} explored · every Demo destination is here.</div>
               </div>
-              <button type="button" onClick={onClose} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-300" aria-label="Close MONIEZI explorer">
-                <X size={18} />
-              </button>
+              <button type="button" onClick={onClose} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-300" aria-label="Close MONIEZI explorer"><X size={18} /></button>
             </div>
-
-            <div className="grid grid-cols-2 gap-2 rounded-xl bg-slate-100 p-1 dark:bg-slate-950/70">
-              <button
-                type="button"
-                onClick={() => onModeChange('business')}
-                className={`rounded-lg px-3 py-2.5 text-[13px] font-extrabold transition-all ${mode === 'business' ? 'bg-white text-slate-950 shadow-sm dark:bg-slate-800 dark:text-white' : 'text-slate-500 dark:text-slate-400'}`}
-              >
-                Demo Business <span className="ml-1 text-[11px] opacity-70">{visitedBusiness.length}/6</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => onModeChange('features')}
-                className={`rounded-lg px-3 py-2.5 text-[13px] font-extrabold transition-all ${mode === 'features' ? 'bg-white text-slate-950 shadow-sm dark:bg-slate-800 dark:text-white' : 'text-slate-500 dark:text-slate-400'}`}
-              >
-                App Features <span className="ml-1 text-[11px] opacity-70">{featureVisitedCount}/{featureKeys.length}</span>
-              </button>
-            </div>
+            <button type="button" onClick={onStartTour} className={`mb-2 flex w-full items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-all active:scale-[0.99] ${complete ? 'border-emerald-200 bg-emerald-50 dark:border-emerald-700/40 dark:bg-emerald-500/10' : 'border-blue-200 bg-blue-50 dark:border-blue-700/40 dark:bg-blue-500/10'}`}>
+              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${complete ? 'bg-emerald-600' : 'bg-blue-600'} text-white`}>{complete ? <CheckCircle size={19} /> : <PlayCircle size={19} />}</span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[13px] font-black text-slate-950 dark:text-white">{complete ? 'Review the guided tour' : `Continue guided tour: ${nextMeta.label}`}</span>
+                <span className="mt-1 block text-[11.5px] font-semibold text-slate-600 dark:text-slate-300">{complete ? 'Everything has been viewed. Start again anywhere.' : 'Follow the recommended business story, or choose any feature below.'}</span>
+              </span>
+              <ArrowRight size={18} className="shrink-0 text-blue-600 dark:text-blue-300" />
+            </button>
           </div>
         </div>
-
-        <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-3 pt-4 custom-scrollbar">
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-5 pt-4 custom-scrollbar">
           <div className="mx-auto max-w-xl">
-            {mode === 'business' ? (
-              <>
-                <div className="mb-3 px-1 text-[12px] font-semibold leading-relaxed text-slate-500 dark:text-slate-400">See how the sample business works, one area at a time.</div>
-                <div className="space-y-1">
-                  {HOME_SECTION_ORDER.map((section) => {
-                    const active = currentBusiness === section;
-                    const done = visitedBusiness.includes(section) && !active;
-                    return (
-                      <button
-                        key={section}
-                        type="button"
-                        onClick={() => onSelectBusiness(section)}
-                        className={`flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left transition-all ${active
-                          ? 'border-blue-500/45 bg-blue-600 text-white shadow-[0_10px_28px_rgba(37,99,235,0.20)]'
-                          : 'border-transparent text-slate-800 hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-white/[0.05]'}`}
-                      >
-                        <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${active ? 'border-white/20 bg-white/10 text-white' : HOME_SECTION_ICON_CLASSES[section]}`}>
-                          <HomeSectionIcon section={section} size={18} />
-                        </span>
-                        <span className="min-w-0 flex-1">
-                          <span className="block text-[15px] font-extrabold">{HOME_SECTION_LABELS[section]}</span>
-                          <span className={`mt-0.5 block text-[11.5px] font-semibold ${active ? 'text-blue-100' : 'text-slate-500 dark:text-slate-400'}`}>{section === 'overview' ? 'Business snapshot' : section === 'money' ? 'Cash & expenses' : section === 'sales' ? 'Invoices & revenue' : section === 'jobs' ? 'Projects & profit' : section === 'records' ? 'Receipts & activity' : 'Year-end prep'}</span>
-                        </span>
-                        {active ? (
-                          <span className="h-3 w-3 rounded-full border-2 border-white bg-blue-200" />
-                        ) : done ? (
-                          <CheckCircle size={20} className="text-emerald-500" />
-                        ) : (
-                          <span className="h-5 w-5 rounded-full border-2 border-slate-300 dark:border-slate-600" />
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {businessComplete && (
-                  <button
-                    type="button"
-                    onClick={() => onModeChange('features')}
-                    className="mt-5 flex w-full items-center justify-between gap-3 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3.5 text-left dark:border-blue-700/40 dark:bg-blue-500/10"
-                  >
-                    <span>
-                      <span className="block text-[13px] font-black text-blue-900 dark:text-blue-100">Demo business complete</span>
-                      <span className="mt-1 block text-[12px] font-semibold text-blue-700 dark:text-blue-300">Now explore Reports, Settings, Search and the rest of the app.</span>
-                    </span>
-                    <ArrowRight size={18} className="shrink-0 text-blue-600 dark:text-blue-300" />
-                  </button>
-                )}
-              </>
-            ) : (
-              <>
-                <div className="mb-4 px-1 text-[12px] font-semibold leading-relaxed text-slate-500 dark:text-slate-400">These links open the real MONIEZI screens. Viewed features stay checked.</div>
-
-                {featureVisitedCount >= featureKeys.length && (
-                  <div className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-left dark:border-emerald-700/40 dark:bg-emerald-500/10">
-                    <div className="flex items-start gap-3">
-                      <CheckCircle size={21} className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-300" />
-                      <div>
-                        <div className="text-[14px] font-black text-emerald-900 dark:text-emerald-100">You’ve explored MONIEZI</div>
-                        <div className="mt-1 text-[12px] font-semibold leading-relaxed text-emerald-800/80 dark:text-emerald-200/80">All {featureKeys.length} app features in this Demo are marked viewed. You can revisit any of them below.</div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {businessComplete && !visitedFeatures.includes('reports') && (
-                  <button
-                    type="button"
-                    onClick={() => onSelectFeature('reports')}
-                    className="mb-5 flex w-full items-center gap-3 rounded-xl border border-violet-200 bg-violet-50 px-4 py-3.5 text-left dark:border-violet-700/40 dark:bg-violet-500/10"
-                  >
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-600 text-white"><BarChart3 size={19} /></span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-[11px] font-black uppercase tracking-[0.12em] text-violet-600 dark:text-violet-300">Recommended next</span>
-                      <span className="mt-1 block text-[14px] font-extrabold text-slate-950 dark:text-white">See what MONIEZI produces in Reports</span>
-                    </span>
-                    <ArrowRight size={18} className="shrink-0 text-violet-600 dark:text-violet-300" />
-                  </button>
-                )}
-
-                <div className="space-y-5">
-                  {featureGroups.map(group => (
-                    <section key={group.label}>
-                      <div className="mb-2 px-1 text-[10.5px] font-black uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">{group.label}</div>
-                      <div className="space-y-1">
-                        {group.keys.map(feature => {
-                          const meta = DEMO_FEATURE_META[feature];
-                          const Icon = meta.icon;
-                          const active = currentFeature === feature;
-                          const done = visitedFeatures.includes(feature);
-                          return (
-                            <button
-                              key={feature}
-                              type="button"
-                              onClick={() => onSelectFeature(feature)}
-                              className={`flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left transition-all ${active
-                                ? 'border-blue-500/45 bg-blue-600 text-white shadow-[0_10px_28px_rgba(37,99,235,0.18)]'
-                                : 'border-transparent text-slate-800 hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-white/[0.05]'}`}
-                            >
-                              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${active ? 'border-white/20 bg-white/10 text-white' : 'border-slate-200 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200'}`}>
-                                <Icon size={18} />
-                              </span>
-                              <span className="min-w-0 flex-1">
-                                <span className="block text-[15px] font-extrabold">{meta.label}</span>
-                                <span className={`mt-0.5 block text-[11.5px] font-semibold ${active ? 'text-blue-100' : 'text-slate-500 dark:text-slate-400'}`}>{meta.description}</span>
-                              </span>
-                              {active ? (
-                                <span className="h-3 w-3 rounded-full border-2 border-white bg-blue-200" />
-                              ) : done ? (
-                                <CheckCircle size={20} className="text-emerald-500" />
-                              ) : (
-                                <ChevronRight size={18} className="text-slate-400" />
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </section>
-                  ))}
-                </div>
-              </>
-            )}
+            <DemoMasterMap currentDestination={currentDestination} visitedBusiness={visitedBusiness} visitedFeatures={visitedFeatures} onSelect={onSelectDestination} includeCompanyEquity={includeCompanyEquity} compact />
           </div>
         </div>
-
         <div className="border-t border-slate-200 px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-3 text-center dark:border-slate-700">
-          <button type="button" onClick={onExit} className="inline-flex min-h-10 items-center justify-center gap-2 px-4 text-[13px] font-extrabold text-slate-500 transition-colors hover:text-red-600 dark:text-slate-400 dark:hover:text-red-300">
-            <Trash2 size={16} /> Exit Demo
-          </button>
+          <button type="button" onClick={onExit} className="inline-flex min-h-10 items-center justify-center gap-2 px-4 text-[13px] font-extrabold text-slate-500 transition-colors hover:text-red-600 dark:text-slate-400 dark:hover:text-red-300"><Trash2 size={16} /> Exit Demo</button>
         </div>
       </div>
     </div>
@@ -1529,11 +1496,9 @@ export default function App() {
   const [homeExpandAll, setHomeExpandAll] = useState(false);
   const [showHomeSectionMenu, setShowHomeSectionMenu] = useState(false);
   const [showDemoExplorer, setShowDemoExplorer] = useState(false);
-  const [demoExplorerMode, setDemoExplorerMode] = useState<DemoExplorerMode>('business');
   const [showDemoCapsule, setShowDemoCapsule] = useState(false);
-  const [demoVisitedSections, setDemoVisitedSections] = useState<HomeSectionKey[]>(['overview']);
+  const [demoVisitedSections, setDemoVisitedSections] = useState<HomeSectionKey[]>([]);
   const [demoVisitedFeatures, setDemoVisitedFeatures] = useState<DemoFeatureKey[]>([]);
-  const [demoMenuHintDismissed, setDemoMenuHintDismissed] = useState(false);
 
   useEffect(() => {
     if (currentPage !== Page.Dashboard) setShowHomeSectionMenu(false);
@@ -1551,7 +1516,6 @@ export default function App() {
     setHomeRailSection(section);
     setShowHomeSectionMenu(false);
     setShowDemoExplorer(false);
-    setDemoExplorerMode('business');
     setDemoVisitedSections(prev => prev.includes(section) ? prev : [...prev, section]);
     if (currentPage !== Page.Dashboard) setCurrentPage(Page.Dashboard, { skipViewportReset: true });
 
@@ -1837,7 +1801,7 @@ export default function App() {
   const [receipts, setReceipts] = useState<ReceiptType[]>([]);
   const [isDemoData, setIsDemoData] = useState<boolean>(false);
 
-  // v39.4.20: keep the Demo Hub calm; the compact
+  // v39.4.21: keep the Demo Hub calm; the compact
   // capsule appears only after the visitor has scrolled beyond the human-led hub.
   useEffect(() => {
     const el = mainScrollRef.current;
@@ -2079,13 +2043,12 @@ export default function App() {
   // Reports screen menu (Settings-style tiles)
   const [reportsMenuSection, setReportsMenuSection] = useState<'menu'|'pl'|'taxsnapshot'|'taxprep'|'planner'|'receivables'|'expensesreceipts'|'mileage'|'clients'|'jobs'|'cashflow'|'pipeline'|'ledger'|'yearend'>('menu');
 
-  const demoFeatureKeys = useMemo(
-    () => DEMO_FEATURE_ORDER.filter(feature => settings.companyEquityEnabled || feature !== 'companyequity'),
+  const demoDestinationKeys = useMemo(
+    () => DEMO_GUIDED_ORDER.filter(destination => settings.companyEquityEnabled || destination !== 'companyequity'),
     [settings.companyEquityEnabled]
   );
-  const demoVisitedFeatureCount = demoFeatureKeys.filter(feature => demoVisitedFeatures.includes(feature)).length;
-  const demoOverallVisitedCount = demoVisitedSections.length + demoVisitedFeatureCount;
-  const demoOverallTotal = HOME_SECTION_ORDER.length + demoFeatureKeys.length;
+  const demoOverallVisitedCount = demoDestinationKeys.filter(destination => isDemoDestinationVisited(destination, demoVisitedSections, demoVisitedFeatures)).length;
+  const demoOverallTotal = demoDestinationKeys.length;
 
   const markDemoFeatureVisited = useCallback((feature: DemoFeatureKey) => {
     setDemoVisitedFeatures(prev => prev.includes(feature) ? prev : [...prev, feature]);
@@ -2122,7 +2085,6 @@ export default function App() {
   const openDemoFeature = useCallback((feature: DemoFeatureKey) => {
     markDemoFeatureVisited(feature);
     setShowDemoExplorer(false);
-    setDemoExplorerMode('features');
     setShowMainMenu(false);
 
     if (feature === 'clients') {
@@ -2168,6 +2130,36 @@ export default function App() {
       window.setTimeout(() => mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 40);
     }
   }, [markDemoFeatureVisited, setCurrentPage]);
+
+  const currentDemoDestination = useMemo<DemoDestinationKey | null>(() => {
+    if (currentPage === Page.Dashboard) {
+      if (pendingHomeAnchor === 'receipts') return 'receipts';
+      if (homeSection === 'jobs') return 'jobs';
+      if (homeSection === 'records') return 'receipts';
+      if (DEMO_HOME_DESTINATIONS.includes(homeSection as DemoHomeDestinationKey)) return homeSection as DemoHomeDestinationKey;
+    }
+    return currentDemoFeature;
+  }, [currentPage, pendingHomeAnchor, homeSection, currentDemoFeature]);
+
+  const openDemoDestination = useCallback((destination: DemoDestinationKey) => {
+    if (isDemoHomeDestination(destination)) return openHomeSection(destination);
+    openDemoFeature(destination);
+  }, [openHomeSection, openDemoFeature]);
+
+  const demoNextGuidedDestination = useMemo<DemoDestinationKey>(() => {
+    return demoDestinationKeys.find(destination => !isDemoDestinationVisited(destination, demoVisitedSections, demoVisitedFeatures)) || demoDestinationKeys[0] || 'clients';
+  }, [demoDestinationKeys, demoVisitedSections, demoVisitedFeatures]);
+
+  const startDemoGuidedTour = useCallback(() => {
+    openDemoDestination(demoNextGuidedDestination);
+  }, [openDemoDestination, demoNextGuidedDestination]);
+
+  const openDemoMasterView = useCallback(() => {
+    setShowDemoExplorer(false);
+    setShowMainMenu(false);
+    if (currentPage !== Page.Dashboard) setCurrentPage(Page.Dashboard, { skipViewportReset: true });
+    window.setTimeout(() => mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 60);
+  }, [currentPage, setCurrentPage]);
 
   const [selectedClientStatementKey, setSelectedClientStatementKey] = useState<string | null>(null);
   const [isGeneratingAccountantPackage, setIsGeneratingAccountantPackage] = useState(false);
@@ -4490,10 +4482,8 @@ export default function App() {
         setIsDemoData(false);
         setSeedSuccess(false);
         setShowDemoExplorer(false);
-        setDemoVisitedSections(['overview']);
+        setDemoVisitedSections([]);
         setDemoVisitedFeatures([]);
-        setDemoExplorerMode('business');
-        setDemoMenuHintDismissed(false);
         setHomeSection('overview');
         setHomeRailSection('overview');
         await clearDemoReturnState();
@@ -4506,10 +4496,8 @@ export default function App() {
       performReset({ suppressToast: true });
       setIsDemoData(false);
       setShowDemoExplorer(false);
-      setDemoVisitedSections(['overview']);
+      setDemoVisitedSections([]);
       setDemoVisitedFeatures([]);
-      setDemoExplorerMode('business');
-      setDemoMenuHintDismissed(false);
       setHomeSection('overview');
       setHomeRailSection('overview');
       await clearDemoReturnState();
@@ -4555,10 +4543,8 @@ export default function App() {
 
       await handleSeedDemoData();
       markSampleDataTried();
-      setDemoVisitedSections(['overview']);
+      setDemoVisitedSections([]);
       setDemoVisitedFeatures([]);
-      setDemoExplorerMode('business');
-      setDemoMenuHintDismissed(false);
       setHomeSection('overview');
       setHomeRailSection('overview');
       setShowDemoExplorer(false);
@@ -8303,8 +8289,6 @@ export default function App() {
     records: 'Receipts & activity',
     tax: 'Year-end prep',
   };
-  const demoVisitedCount = demoVisitedSections.length;
-  const demoNextSection = HOME_SECTION_ORDER[HOME_SECTION_ORDER.indexOf(homeSection) + 1] || null;
   const homeExpandedSectionClass = isDemoData
     ? 'scroll-mt-6 space-y-8 py-9 sm:space-y-10 sm:py-11'
     : 'scroll-mt-4 space-y-7 py-5 sm:space-y-8';
@@ -9099,27 +9083,17 @@ html, body, #root {
            </button>
            <div className="relative">
              <button
-               onClick={() => { if (isDemoData) setDemoMenuHintDismissed(true); setShowMainMenu(true); }}
+               onClick={() => setShowMainMenu(true)}
                className="chrome-btn relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full transition-all border text-slate-200 hover:text-white"
                style={headerActionButtonStyle}
                title="Menu"
                aria-label="Open menu"
              >
                <MenuIcon size={18} className="sm:w-5 sm:h-5" strokeWidth={1.6} />
-               {isDemoData && demoVisitedFeatureCount < demoFeatureKeys.length && (
+               {isDemoData && demoOverallVisitedCount < demoOverallTotal && (
                  <span className="absolute right-0.5 top-0.5 h-2.5 w-2.5 rounded-full border-2 border-slate-950 bg-blue-400" aria-hidden="true" />
                )}
              </button>
-             {isDemoData && demoVisitedCount >= 3 && demoVisitedFeatures.length === 0 && !demoMenuHintDismissed && !showMainMenu && !showDemoExplorer && (
-               <button
-                 type="button"
-                 onClick={() => { setDemoMenuHintDismissed(true); setShowMainMenu(true); }}
-                 className="absolute right-0 top-[calc(100%+10px)] z-[70] w-[180px] rounded-xl border border-blue-400/30 bg-slate-950/95 px-3 py-2.5 text-left shadow-[0_14px_34px_rgba(15,23,42,0.34)] backdrop-blur-xl"
-               >
-                 <span className="block text-[12px] font-extrabold text-white">More to explore</span>
-                 <span className="mt-0.5 block text-[10.5px] font-semibold leading-snug text-slate-300">Reports, Settings, Search &amp; more</span>
-               </button>
-             )}
            </div>
         </div>
       </header>
@@ -9150,7 +9124,7 @@ html, body, #root {
           </div>
           <button
             type="button"
-            onClick={() => { setDemoExplorerMode('features'); setShowDemoExplorer(true); }}
+            onClick={() => setShowDemoExplorer(true)}
             className="shrink-0 rounded-lg border border-blue-300 bg-white px-3 py-2 text-xs font-extrabold text-blue-700 transition-colors hover:bg-blue-50 dark:border-blue-600/50 dark:bg-slate-950/60 dark:text-blue-300 dark:hover:bg-slate-900"
           >
             Explore
@@ -9228,77 +9202,73 @@ html, body, #root {
 
         {(currentPage === Page.Dashboard) && (
           <div className="v391-dashboard v3934-home-readable v3935-home-breathing relative space-y-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* v39.4.20 — Human-first Demo Hub. The hero has transparent edges
-                and only one job: make the demo feel approachable. Navigation is
-                deliberately separated below it so the first screen is not a wall of UI. */}
+            {/* v39.4.21 — one unified Demo product map. The human-first hero
+                stays calm, while every meaningful MONIEZI destination is directly
+                accessible below it in business-language groups. */}
             {!isAppEmpty && (
-              <section className={isDemoData ? 'mb-14 pb-2' : 'mb-10'}>
+              <section className={isDemoData ? 'mb-16 pb-2' : 'mb-10'}>
                 <div className="flex flex-col">
                   <div className="flex justify-center">
                     <span className="inline-flex items-center gap-2 rounded-full border border-blue-300/70 bg-blue-50/80 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.12em] text-blue-700 dark:border-blue-400/25 dark:bg-blue-500/10 dark:text-blue-300">
                       <PlayCircle size={14} />
-                      {isDemoData ? 'Demo Business' : 'Business Navigator'}
+                      {isDemoData ? 'Demo Mode' : 'Business Navigator'}
                     </span>
                   </div>
-
                   <div className="mx-auto mt-5 max-w-[34rem] px-3 text-center">
-                    <h2 className="text-[29px] font-black leading-[1.08] tracking-[-0.045em] text-slate-950 dark:text-white sm:text-[32px]">
-                      {isDemoData ? 'Explore the demo business' : 'Your business at a glance'}
-                    </h2>
-                    <p className="mx-auto mt-4 max-w-[30rem] text-[14.5px] font-semibold leading-[1.65] text-slate-600 dark:text-slate-300">
-                      {isDemoData
-                        ? 'See how a real service business stays organized inside MONIEZI. Start anywhere and come back whenever you want.'
-                        : 'Choose the part of your business you want to review right now.'}
-                    </p>
+                    <h2 className="text-[29px] font-black leading-[1.08] tracking-[-0.045em] text-slate-950 dark:text-white sm:text-[32px]">{isDemoData ? 'Explore MONIEZI' : 'Your business at a glance'}</h2>
+                    <p className="mx-auto mt-4 max-w-[30rem] text-[14.5px] font-semibold leading-[1.65] text-slate-600 dark:text-slate-300">{isDemoData ? 'See how a real service business runs from first customer to tax time. Every part of MONIEZI is available below.' : 'Choose the part of your business you want to review right now.'}</p>
                   </div>
+                  {isDemoData && <div className="mt-7 w-full"><DemoBusinessIllustration /></div>}
 
-                  {isDemoData && (
-                    <div className="mt-7 w-full">
-                      <DemoBusinessIllustration />
+                  {isDemoData ? (
+                    <div className="mt-10 sm:mt-12">
+                      <div className="rounded-2xl border border-blue-200 bg-blue-50/70 p-4 dark:border-blue-700/35 dark:bg-blue-500/[0.07]">
+                        <div className="flex items-start gap-3">
+                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white"><PlayCircle size={18} /></span>
+                          <div className="min-w-0 flex-1">
+                            <div className="text-[14px] font-black text-slate-950 dark:text-white">Choose anywhere to start</div>
+                            <div className="mt-1 text-[12px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">We remember what you have explored. Or follow the recommended business story.</div>
+                          </div>
+                        </div>
+                        <button type="button" onClick={startDemoGuidedTour} className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-[13.5px] font-extrabold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-500 active:scale-[0.99]">Start guided tour <ArrowRight size={17} /></button>
+                      </div>
+
+                      <div className="mt-10">
+                        <div className="mb-5 flex items-end justify-between gap-4 px-1">
+                          <div>
+                            <h3 className="text-[19px] font-black tracking-[-0.02em] text-slate-950 dark:text-white">Everything MONIEZI offers</h3>
+                            <p className="mt-2 text-[13px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">One product map. No hidden second demo level.</p>
+                          </div>
+                          <div className="shrink-0 text-right">
+                            <div className="text-[18px] font-black tabular-nums text-slate-950 dark:text-white">{demoOverallVisitedCount}/{demoOverallTotal}</div>
+                            <div className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400">explored</div>
+                          </div>
+                        </div>
+                        <DemoMasterMap currentDestination={currentDemoDestination} visitedBusiness={demoVisitedSections} visitedFeatures={demoVisitedFeatures} onSelect={openDemoDestination} includeCompanyEquity={settings.companyEquityEnabled} />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mt-7">
+                      <div className="px-1 text-left">
+                        <h3 className="text-[19px] font-black tracking-[-0.02em] text-slate-950 dark:text-white">Choose an area</h3>
+                        <p className="mt-2 text-[13.5px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">Open the area you want to review.</p>
+                      </div>
+                      <div className="mt-5 grid w-full grid-cols-2 gap-3.5 sm:gap-4">
+                        {homeSectionNavItems.map((key) => {
+                          const active = homeSection === key;
+                          const meta = homeSectionTileMeta[key];
+                          return (
+                            <button key={key} type="button" onClick={() => openHomeSection(key)} aria-pressed={active} className={`relative min-h-[132px] rounded-2xl border p-4 text-left transition-all active:scale-[0.985] ${active ? 'border-blue-500/60 bg-blue-50 shadow-[0_12px_34px_rgba(37,99,235,0.13)] dark:border-blue-400/45 dark:bg-blue-500/[0.08]' : 'border-slate-200 bg-white/70 hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-white/[0.022] dark:hover:border-slate-700'}`}>
+                              <span className={`flex h-11 w-11 items-center justify-center rounded-xl border ${HOME_SECTION_ICON_CLASSES[key]}`}><HomeSectionIcon section={key} size={20} /></span>
+                              <span className="mt-3 block text-[14px] font-black leading-tight text-slate-950 dark:text-white">{HOME_SECTION_LABELS[key]}</span>
+                              <span className="mt-1.5 block text-[11.5px] font-semibold leading-snug text-slate-500 dark:text-slate-400">{meta.label} · {meta.value}</span>
+                              <ChevronRight size={16} className={`absolute bottom-4 right-3 ${active ? 'text-blue-600 dark:text-blue-300' : 'text-slate-400'}`} />
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
-
-                  <div className={isDemoData ? 'mt-10 sm:mt-12' : 'mt-7'}>
-                    <div className="px-1 text-left">
-                      <h3 className="text-[19px] font-black tracking-[-0.02em] text-slate-950 dark:text-white">
-                        {isDemoData ? 'Choose what to explore' : 'Choose an area'}
-                      </h3>
-                      <p className="mt-2 text-[13.5px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
-                        {isDemoData ? 'Tap one section. We will remember what you have already seen.' : 'Open the area you want to review.'}
-                      </p>
-                    </div>
-
-                    <div className="mt-5 grid w-full grid-cols-2 gap-3.5 sm:gap-4">
-                      {homeSectionNavItems.map((key) => {
-                        const active = homeSection === key;
-                        const visited = demoVisitedSections.includes(key);
-                        const meta = homeSectionTileMeta[key];
-                        return (
-                          <button
-                            key={key}
-                            type="button"
-                            onClick={() => openHomeSection(key)}
-                            aria-pressed={active}
-                            className={`relative min-h-[132px] rounded-2xl border p-4 text-left transition-all active:scale-[0.985] ${active
-                              ? 'border-blue-500/60 bg-blue-50 shadow-[0_12px_34px_rgba(37,99,235,0.13)] dark:border-blue-400/45 dark:bg-blue-500/[0.08]'
-                              : 'border-slate-200 bg-white/70 hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-white/[0.022] dark:hover:border-slate-700'}`}
-                          >
-                            {isDemoData && visited && !active && (
-                              <CheckCircle size={17} className="absolute right-3 top-3 text-emerald-500" />
-                            )}
-                            <span className={`flex h-11 w-11 items-center justify-center rounded-xl border ${HOME_SECTION_ICON_CLASSES[key]}`}>
-                              <HomeSectionIcon section={key} size={20} />
-                            </span>
-                            <span className="mt-3 block text-[14px] font-black leading-tight text-slate-950 dark:text-white">{HOME_SECTION_LABELS[key]}</span>
-                            <span className="mt-1.5 block text-[11.5px] font-semibold leading-snug text-slate-500 dark:text-slate-400">
-                              {isDemoData ? demoSectionDescriptions[key] : `${meta.label} · ${meta.value}`}
-                            </span>
-                            <ChevronRight size={16} className={`absolute bottom-4 right-3 ${active ? 'text-blue-600 dark:text-blue-300' : 'text-slate-400'}`} />
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
                 </div>
               </section>
             )}
@@ -9894,41 +9864,14 @@ html, body, #root {
             )}
 
             {isDemoData && (
-              <div className="mt-12 border-t border-slate-200 pt-8 text-center dark:border-slate-800 sm:mt-14 sm:pt-10">
+              <div className="mt-12 border-t border-slate-200 pt-9 text-center dark:border-slate-800 sm:mt-14 sm:pt-10">
                 <div className="mx-auto max-w-[30rem]">
                   <div className="text-[11px] font-black uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Continue exploring</div>
-                  <div className="mt-2 text-[19px] font-black tracking-[-0.02em] text-slate-950 dark:text-white">
-                    {demoVisitedCount >= HOME_SECTION_ORDER.length
-                      ? 'You’ve explored the demo business'
-                      : demoNextSection
-                        ? `Next: ${HOME_SECTION_LABELS[demoNextSection]}`
-                        : 'Choose another business area'}
-                  </div>
-                  <p className="mx-auto mt-2 max-w-[27rem] text-[13px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
-                    {demoVisitedCount >= HOME_SECTION_ORDER.length
-                      ? 'Now see everything MONIEZI includes — Reports, Clients, billing, Search, Settings and more.'
-                      : demoNextSection
-                        ? `Move on when you are ready. ${HOME_SECTION_LABELS[homeSection]} stays marked as viewed.`
-                        : `${demoVisitedCount}/6 business areas viewed. Pick any remaining area when you are ready.`}
-                  </p>
-
+                  <div className="mt-2 text-[19px] font-black tracking-[-0.02em] text-slate-950 dark:text-white">{demoOverallVisitedCount >= demoOverallTotal ? 'You’ve explored MONIEZI' : `Next recommended: ${getDemoDestinationMeta(demoNextGuidedDestination).label}`}</div>
+                  <p className="mx-auto mt-2 max-w-[27rem] text-[13px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">{demoOverallVisitedCount >= demoOverallTotal ? 'Every destination in the Demo has been viewed. Revisit anything from the same product map.' : 'Keep following the business story, or choose any other MONIEZI feature.'}</p>
                   <div className="mt-5">
-                    {demoVisitedCount >= HOME_SECTION_ORDER.length ? (
-                      <button type="button" onClick={() => { setDemoExplorerMode('features'); setShowDemoExplorer(true); }} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-[14px] font-extrabold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-500 active:scale-[0.99]">
-                        Explore MONIEZI <ArrowRight size={17} />
-                      </button>
-                    ) : demoNextSection ? (
-                      <button type="button" onClick={() => openHomeSection(demoNextSection)} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-[14px] font-extrabold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-500 active:scale-[0.99]">
-                        Next: {HOME_SECTION_LABELS[demoNextSection]} <ArrowRight size={17} />
-                      </button>
-                    ) : (
-                      <button type="button" onClick={() => { setDemoExplorerMode('business'); setShowDemoExplorer(true); }} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-[14px] font-extrabold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-500 active:scale-[0.99]">
-                        Choose another area <LayoutGrid size={17} />
-                      </button>
-                    )}
-                    <button type="button" onClick={() => { setDemoExplorerMode('business'); setShowDemoExplorer(true); }} className="mt-3 min-h-10 px-3 text-[13px] font-extrabold text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-300 dark:hover:text-blue-200">
-                      Review demo business
-                    </button>
+                    <button type="button" onClick={startDemoGuidedTour} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-[14px] font-extrabold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-500 active:scale-[0.99]">{demoOverallVisitedCount >= demoOverallTotal ? 'Review guided tour' : `Next: ${getDemoDestinationMeta(demoNextGuidedDestination).label}`} <ArrowRight size={17} /></button>
+                    <button type="button" onClick={() => setShowDemoExplorer(true)} className="mt-3 min-h-10 px-3 text-[13px] font-extrabold text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-300 dark:hover:text-blue-200">Explore another MONIEZI feature</button>
                   </div>
                 </div>
               </div>
@@ -13753,57 +13696,27 @@ html, body, #root {
       </div>
 
       {isDemoData && currentPage === Page.Dashboard && showDemoCapsule && !shouldHideBottomNav && !showDemoExplorer && createPortal(
-        <button
-          type="button"
-          onClick={() => { setDemoExplorerMode('business'); setShowDemoExplorer(true); }}
-          className="no-print fixed left-1/2 z-[60] flex min-h-11 -translate-x-1/2 items-center gap-2 rounded-full border border-blue-400/40 bg-slate-950/95 px-4 py-2 text-[13px] font-extrabold text-white shadow-[0_14px_40px_rgba(15,23,42,0.42)] backdrop-blur-xl active:scale-[0.98]"
-          style={{ bottom: 'calc(5.25rem + env(safe-area-inset-bottom, 0px) + 10px)' }}
-          aria-label="Open demo business explorer"
-        >
-          <PlayCircle size={16} className="text-blue-300" />
-          <span className="text-blue-300">Demo</span>
-          <span className="h-1 w-1 rounded-full bg-slate-500" />
-          <span>{HOME_SECTION_LABELS[homeSection]}</span>
-          <span className="h-1 w-1 rounded-full bg-emerald-400" />
-          <span className="text-slate-300">{demoVisitedCount}/6</span>
-          <ChevronUp size={15} className="text-slate-300" />
-        </button>,
-        document.body
+        <button type="button" onClick={() => setShowDemoExplorer(true)} className="no-print fixed left-1/2 z-[60] flex min-h-11 max-w-[88vw] -translate-x-1/2 items-center gap-2 rounded-full border border-blue-400/40 bg-slate-950/95 px-4 py-2 text-[13px] font-extrabold text-white shadow-[0_14px_40px_rgba(15,23,42,0.42)] backdrop-blur-xl active:scale-[0.98]" style={{ bottom: 'calc(5.25rem + env(safe-area-inset-bottom, 0px) + 10px)' }} aria-label="Open Explore MONIEZI">
+          <LayoutGrid size={16} className="shrink-0 text-blue-300" />
+          <span className="truncate">Explore MONIEZI</span>
+          <span className="h-1 w-1 shrink-0 rounded-full bg-emerald-400" />
+          <span className="shrink-0 text-slate-300">{demoOverallVisitedCount}/{demoOverallTotal}</span>
+          <ChevronUp size={15} className="shrink-0 text-slate-300" />
+        </button>, document.body
       )}
 
       {isDemoData && currentPage !== Page.Dashboard && !shouldHideBottomNav && !showDemoExplorer && !showGlobalSearch && !showMainMenu && createPortal(
-        <button
-          type="button"
-          onClick={() => { setDemoExplorerMode('features'); setShowDemoExplorer(true); }}
-          className="no-print fixed left-1/2 z-[60] flex min-h-11 max-w-[88vw] -translate-x-1/2 items-center gap-2 rounded-full border border-blue-400/40 bg-slate-950/95 px-4 py-2 text-[13px] font-extrabold text-white shadow-[0_14px_40px_rgba(15,23,42,0.42)] backdrop-blur-xl active:scale-[0.98]"
-          style={{ bottom: 'calc(5.25rem + env(safe-area-inset-bottom, 0px) + 10px)' }}
-          aria-label="Open MONIEZI feature explorer"
-        >
+        <button type="button" onClick={() => setShowDemoExplorer(true)} className="no-print fixed left-1/2 z-[60] flex min-h-11 max-w-[88vw] -translate-x-1/2 items-center gap-2 rounded-full border border-blue-400/40 bg-slate-950/95 px-4 py-2 text-[13px] font-extrabold text-white shadow-[0_14px_40px_rgba(15,23,42,0.42)] backdrop-blur-xl active:scale-[0.98]" style={{ bottom: 'calc(5.25rem + env(safe-area-inset-bottom, 0px) + 10px)' }} aria-label="Open Explore MONIEZI">
           <LayoutGrid size={16} className="shrink-0 text-blue-300" />
-          <span className="shrink-0 text-blue-300">Demo</span>
-          <span className="h-1 w-1 shrink-0 rounded-full bg-slate-500" />
-          <span className="truncate">{currentDemoFeature ? DEMO_FEATURE_META[currentDemoFeature].label : 'Explore MONIEZI'}</span>
+          <span className="truncate">Explore MONIEZI</span>
           <span className="h-1 w-1 shrink-0 rounded-full bg-emerald-400" />
-          <span className="shrink-0 text-slate-300">{demoVisitedFeatureCount}/{demoFeatureKeys.length}</span>
+          <span className="shrink-0 text-slate-300">{demoOverallVisitedCount}/{demoOverallTotal}</span>
           <ChevronUp size={15} className="shrink-0 text-slate-300" />
-        </button>,
-        document.body
+        </button>, document.body
       )}
 
       {showDemoExplorer && isDemoData && createPortal(
-        <DemoExplorerSheet
-          currentBusiness={homeSection}
-          currentFeature={currentDemoFeature}
-          visitedBusiness={demoVisitedSections}
-          visitedFeatures={demoVisitedFeatures}
-          mode={demoExplorerMode}
-          onModeChange={setDemoExplorerMode}
-          onSelectBusiness={openHomeSection}
-          onSelectFeature={openDemoFeature}
-          onClose={() => setShowDemoExplorer(false)}
-          onExit={() => { setShowDemoExplorer(false); handleRemoveSampleData(); }}
-          includeCompanyEquity={settings.companyEquityEnabled}
-        />,
+        <DemoExplorerSheet currentDestination={currentDemoDestination} visitedBusiness={demoVisitedSections} visitedFeatures={demoVisitedFeatures} onSelectDestination={openDemoDestination} onStartTour={startDemoGuidedTour} onClose={() => setShowDemoExplorer(false)} onExit={() => { setShowDemoExplorer(false); handleRemoveSampleData(); }} includeCompanyEquity={settings.companyEquityEnabled} />,
         document.body
       )}
 
@@ -14005,12 +13918,7 @@ html, body, #root {
             <div className="space-y-1">
               {isDemoData && (
                 <button
-                  onClick={() => {
-                    setDemoMenuHintDismissed(true);
-                    setDemoExplorerMode('features');
-                    setShowMainMenu(false);
-                    window.setTimeout(() => setShowDemoExplorer(true), 40);
-                  }}
+                  onClick={openDemoMasterView}
                   className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-700/40 dark:bg-blue-500/10 dark:text-blue-300">
@@ -14018,7 +13926,7 @@ html, body, #root {
                   </span>
                   <span className="min-w-0 flex-1">
                     Explore MONIEZI
-                    <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">{demoOverallVisitedCount}/{demoOverallTotal} explored · business tour + app features</span>
+                    <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">{demoOverallVisitedCount}/{demoOverallTotal} explored · complete product map</span>
                   </span>
                   <ChevronRight size={18} className="shrink-0 text-slate-400" />
                 </button>
