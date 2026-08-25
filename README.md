@@ -1,4 +1,11 @@
-# MONIEZI v39.4.27
+# MONIEZI v39.4.29
+## v39.4.29 License activation visual stabilization
+- Removes the mobile `:focus-within` geometry changes that made the Welcome / license screen visibly shrink and expand when the license field received focus.
+- Keeps the hero illustration at the same width, shell gap unchanged, and activation-card geometry stable while the Android keyboard opens and closes.
+- Removes the 160ms width / margin / padding / gap animation that amplified the apparent zooming or breathing effect.
+- Preserves the complete install → launch → license activation → Demo sequence with no workflow changes.
+- Preserves the v39.4.27 Demo notification card, including the second line: **Sample business data**.
+
 ## v39.4.27 Demo notification card reference match
 - Rebuilds the active Demo notification card from the approved screenshot reference.
 - Restores the two-line Demo / Sample business data hierarchy.
