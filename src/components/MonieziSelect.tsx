@@ -180,7 +180,7 @@ export function MonieziSelect({
             role="listbox"
             aria-label={ariaLabel}
             className={`v392-select-menu ${menuVariant === 'screen'
-              ? 'fixed flex flex-col overflow-hidden border border-blue-300 bg-white p-3 font-sans shadow-2xl dark:border-blue-400/30 dark:bg-slate-950'
+              ? 'v39433-add-choice-screen fixed flex flex-col overflow-hidden border border-blue-300 bg-white p-3 font-sans shadow-2xl dark:border-blue-400/30 dark:bg-slate-950'
               : 'fixed overflow-y-auto overscroll-contain border border-slate-300 bg-white p-1.5 shadow-2xl dark:border-slate-700 dark:bg-slate-900'} ${menuClassName}`.trim()}
             style={{
               left: menuPosition.left,
@@ -212,14 +212,14 @@ export function MonieziSelect({
                     return (
                       <section
                         key={group || 'choices'}
-                        className="v392-select-group rounded-2xl border border-slate-300/90 bg-slate-50/70 p-2 shadow-sm dark:border-blue-400/25 dark:bg-blue-500/[0.055]"
+                        className="v39433-add-choice-group"
                       >
                         {group ? (
-                          <div className="mx-3 mb-2 mt-2 inline-flex w-fit items-center rounded-md border border-blue-200/90 bg-blue-100/80 px-2.5 py-1 text-xs font-medium uppercase tracking-[0.04em] text-blue-900 shadow-sm dark:border-blue-400/30 dark:bg-blue-400/10 dark:text-blue-100">
+                          <div className="v39433-add-choice-group__title">
                             {group}
                           </div>
                         ) : null}
-                        <div className="space-y-0.5">
+                        <div className="v39433-add-choice-grid">
                           {groupOptions.map(option => {
                             const selected = option.value === value;
                             return (
@@ -230,12 +230,10 @@ export function MonieziSelect({
                                 aria-selected={selected}
                                 disabled={option.disabled}
                                 onClick={() => choose(option.value, option.disabled)}
-                                className={`flex min-h-[64px] w-full items-center justify-between gap-4 rounded-xl px-4 py-3 text-left text-lg font-normal leading-7 transition-colors ${selected ? 'bg-blue-50 text-blue-900 ring-1 ring-blue-300 dark:bg-blue-500/20 dark:text-blue-100 dark:ring-blue-400/40' : 'text-slate-900 hover:bg-white dark:text-slate-100 dark:hover:bg-slate-900/70'} ${option.disabled ? 'cursor-not-allowed opacity-45' : ''}`}
+                                className={`v39433-add-choice-card ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
                               >
-                                <span className="min-w-0 flex-1 break-words">{option.label}</span>
-                                <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center">
-                                  {selected ? <Check size={22} strokeWidth={2.2} /> : null}
-                                </span>
+                                <span className="v39433-add-choice-card__label">{option.label}</span>
+                                {selected ? <span className="v39433-add-choice-card__check"><Check size={20} strokeWidth={2.3} /></span> : null}
                               </button>
                             );
                           })}

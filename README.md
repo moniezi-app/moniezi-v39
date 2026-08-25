@@ -1,4 +1,10 @@
-# MONIEZI v39.4.32
+# MONIEZI v39.4.33
+## v39.4.33 Quick Add + hamburger menu visual-system match
+- Extends the large-icon, spacious-card system into the unified Quick Add choices panel used from Home / first-entry flows and the shared + launcher.
+- Quick Add choices now use large icon-led cards, two-column mobile layout, stronger section separation, and generous gaps while preserving every existing action and navigation sequence.
+- Redesigns the hamburger Menu directory as large, spacious navigation cards with substantially larger icons and clearer separation between groups.
+- Preserves v39.4.32 routed-page headers, v39.4.31 Home feature headers/spacing, Demo behavior, licensing, install/activation sequence, records, calculations, and destination routing.
+
 ## v39.4.32 Routed page headers — large icons across MONIEZI
 - Extends the v39.4.31 large-icon visual language beyond Home to the primary routed pages.
 - Clients, Jobs / Projects, Estimates, Invoices, Mileage, Activity / Income / Expenses, Reports, Business Insights, Settings, and Private Raise Tracker now use spacious top feature cards with Quick-Access-scale icons. Report subpages (Tax Prep, Tax Planner, P&L, receivables, mileage, clients, jobs, ledger, etc.) also switch the large hero title/icon to the active report.

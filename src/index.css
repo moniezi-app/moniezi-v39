@@ -4725,3 +4725,292 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39432-page-hero--amber { --v39432-tone-rgb: 227, 157, 43; }
 .v39432-page-hero--rose { --v39432-tone-rgb: 239, 93, 125; }
 .v39432-page-hero__icon--amber { --v39432-icon-rgb: 227, 157, 43; }
+
+/* ================================================================
+   MONIEZI v39.4.33 — Quick Add + main menu visual-system match
+   ----------------------------------------------------------------
+   Extends the large-icon, spacious-card language from Home and routed pages
+   into the two remaining high-frequency navigation surfaces: the unified
+   Quick Add chooser and the hamburger menu. Navigation and actions are
+   unchanged; only hierarchy, icon scale, cards, and spacing are updated.
+   ================================================================ */
+
+/* --- Unified Quick Add / choices panel ---------------------------------- */
+.v39433-add-choice-screen {
+  padding: 14px !important;
+  border: 1px solid rgba(92, 132, 255, 0.42) !important;
+  border-radius: 24px !important;
+  background:
+    radial-gradient(120% 90% at 7% 0%, rgba(83,136,255,0.12) 0%, transparent 58%),
+    #f8fafc !important;
+  box-shadow: 0 28px 72px rgba(2, 8, 23, 0.30), inset 0 1px 0 rgba(255,255,255,0.88) !important;
+}
+
+.dark .v39433-add-choice-screen {
+  background:
+    radial-gradient(120% 90% at 7% 0%, rgba(83,136,255,0.18) 0%, transparent 58%),
+    linear-gradient(150deg, #07142f 0%, #050d20 100%) !important;
+  border-color: rgba(98, 143, 255, 0.45) !important;
+  box-shadow: 0 30px 78px rgba(0,0,0,0.46), inset 0 1px 0 rgba(255,255,255,0.07) !important;
+}
+
+.v39433-add-choice-screen > div:first-of-type {
+  margin-bottom: 20px !important;
+  padding-bottom: 4px !important;
+}
+
+.v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
+  margin-top: 34px;
+}
+
+.v39433-add-choice-group__title {
+  margin: 0 2px 15px;
+  color: #475569;
+  font-family: var(--font-brand, inherit);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dark .v39433-add-choice-group__title { color: #aab8d0; }
+
+.v39433-add-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 18px;
+  row-gap: 20px;
+}
+
+.v39433-add-choice-card {
+  --add-rgb: 83, 136, 255;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  min-width: 0;
+  min-height: 168px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 18px 16px 17px;
+  border: 1.5px solid rgba(var(--add-rgb), 0.46);
+  border-radius: 21px !important;
+  background:
+    radial-gradient(115% 105% at 15% 4%, rgba(var(--add-rgb),0.15), transparent 67%),
+    linear-gradient(145deg, rgba(255,255,255,0.97), rgba(246,249,255,0.95));
+  color: #0f172a;
+  text-align: left;
+  box-shadow: 0 14px 28px rgba(15,23,42,0.09), inset 0 1px 0 rgba(255,255,255,0.76);
+  transition: transform 130ms ease, border-color 130ms ease, box-shadow 130ms ease;
+}
+
+.dark .v39433-add-choice-card {
+  background:
+    radial-gradient(120% 112% at 15% 4%, rgba(var(--add-rgb),0.23), transparent 68%),
+    linear-gradient(145deg, rgba(8,24,57,0.98), rgba(5,13,32,0.98));
+  color: #f8fafc;
+  border-color: rgba(var(--add-rgb),0.58);
+  box-shadow: 0 17px 32px rgba(0,0,0,0.28), 0 0 20px rgba(var(--add-rgb),0.08), inset 0 1px 0 rgba(255,255,255,0.055);
+}
+
+.v39433-add-choice-card:hover { border-color: rgba(var(--add-rgb),0.78); }
+.v39433-add-choice-card:active { transform: scale(0.985); }
+.v39433-add-choice-card.is-selected { border-color: rgba(var(--add-rgb),0.92); box-shadow: 0 0 0 2px rgba(var(--add-rgb),0.14), 0 16px 32px rgba(var(--add-rgb),0.12); }
+.v39433-add-choice-card.is-disabled { cursor: not-allowed; opacity: 0.45; }
+
+/* The option labels already contain their Lucide icon + text. Turn that small
+   inline treatment into the same large icon block used throughout MONIEZI. */
+.v39433-add-choice-card__label,
+.v39433-add-choice-card__label > span {
+  display: flex !important;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 15px !important;
+  color: inherit;
+  font-family: var(--font-brand, inherit);
+  font-size: 18px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.v39433-add-choice-card__label svg {
+  width: 72px !important;
+  height: 72px !important;
+  padding: 13px;
+  border: 1.5px solid currentColor;
+  border-radius: 20px !important;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+  filter: drop-shadow(0 9px 12px color-mix(in srgb, currentColor 26%, transparent));
+  stroke-width: 1.5 !important;
+}
+
+.v39433-add-choice-card__check {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(59,130,246,0.16);
+  color: #3b82f6;
+}
+
+/* --- Hamburger / complete directory ------------------------------------ */
+.v39433-main-menu {
+  padding-top: 10px !important;
+}
+
+.v39433-main-menu section {
+  border-top-color: rgba(148,163,184,0.24) !important;
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
+}
+
+.v39433-main-menu section:first-child {
+  padding-top: 8px !important;
+}
+
+.v39433-main-menu section > div:first-child:not(:last-child) {
+  padding: 0 2px 15px !important;
+  color: #64748b !important;
+  font-size: 12px !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.12em !important;
+}
+
+.dark .v39433-main-menu section > div:first-child:not(:last-child) { color: #9fb0c8 !important; }
+
+.v39433-main-menu section > .space-y-1 {
+  display: grid;
+  gap: 18px;
+}
+
+.v39433-main-menu section > .space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0 !important;
+}
+
+.v39433-main-menu section button,
+.v39433-main-menu section a {
+  --menu-rgb: 83, 136, 255;
+  position: relative;
+  min-height: 112px;
+  gap: 18px !important;
+  padding: 16px !important;
+  border: 1.5px solid rgba(var(--menu-rgb),0.38) !important;
+  border-radius: 21px !important;
+  background:
+    radial-gradient(112% 130% at 7% 0%, rgba(var(--menu-rgb),0.12), transparent 64%),
+    linear-gradient(145deg, rgba(255,255,255,0.96), rgba(247,250,255,0.94)) !important;
+  box-shadow: 0 14px 28px rgba(15,23,42,0.075), inset 0 1px 0 rgba(255,255,255,0.76);
+}
+
+.dark .v39433-main-menu section button,
+.dark .v39433-main-menu section a {
+  background:
+    radial-gradient(118% 135% at 7% 0%, rgba(var(--menu-rgb),0.19), transparent 66%),
+    linear-gradient(145deg, rgba(8,23,54,0.98), rgba(5,13,31,0.98)) !important;
+  border-color: rgba(var(--menu-rgb),0.48) !important;
+  box-shadow: 0 17px 32px rgba(0,0,0,0.25), 0 0 20px rgba(var(--menu-rgb),0.07), inset 0 1px 0 rgba(255,255,255,0.055);
+}
+
+.v39433-main-menu section button:active,
+.v39433-main-menu section a:active { transform: scale(0.99); }
+
+/* First child span of each menu item is its existing icon container. */
+.v39433-main-menu section button > span:first-child,
+.v39433-main-menu section a > span:first-child {
+  width: 74px !important;
+  height: 74px !important;
+  min-width: 74px !important;
+  border-radius: 20px !important;
+  box-shadow: 0 12px 25px rgba(59,130,246,0.12), inset 0 1px 0 rgba(255,255,255,0.20);
+}
+
+.v39433-main-menu section button > span:first-child svg,
+.v39433-main-menu section a > span:first-child svg {
+  width: 43px !important;
+  height: 43px !important;
+  stroke-width: 1.55 !important;
+  filter: drop-shadow(0 7px 8px currentColor);
+}
+
+.v39433-main-menu section button > span:nth-child(2),
+.v39433-main-menu section a > span:nth-child(2) {
+  flex: 1 1 auto;
+  font-family: var(--font-brand, inherit);
+  font-size: 19px;
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.v39433-main-menu section button > span:nth-child(2) > span,
+.v39433-main-menu section a > span:nth-child(2) > span {
+  margin-top: 7px !important;
+  color: #64748b !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+
+.dark .v39433-main-menu section button > span:nth-child(2) > span,
+.dark .v39433-main-menu section a > span:nth-child(2) > span { color: #a9b7cd !important; }
+
+/* Give the existing menu icon colors their own glow family without changing
+   destinations or adding new semantic content. */
+.v39433-main-menu .text-purple-700,
+.v39433-main-menu .dark\:text-purple-300 { --menu-rgb: 139, 92, 246; }
+
+@media (min-width: 640px) {
+  .v39433-add-choice-grid { column-gap: 22px; row-gap: 24px; }
+  .v39433-add-choice-card { min-height: 184px; padding: 20px 18px 19px; }
+  .v39433-add-choice-card__label svg { width: 80px !important; height: 80px !important; }
+  .v39433-main-menu section > .space-y-1 { gap: 20px; }
+  .v39433-main-menu section button,
+  .v39433-main-menu section a { min-height: 124px; padding: 18px !important; }
+  .v39433-main-menu section button > span:first-child,
+  .v39433-main-menu section a > span:first-child { width: 82px !important; height: 82px !important; min-width: 82px !important; }
+  .v39433-main-menu section button > span:first-child svg,
+  .v39433-main-menu section a > span:first-child svg { width: 48px !important; height: 48px !important; }
+}
+
+/* Per-destination color identity, using the icon classes already present in
+   the existing markup so no routing/content code changes are required. */
+.v39433-add-choice-card:has(.text-emerald-500) { --add-rgb: 40, 190, 105; }
+.v39433-add-choice-card:has(.text-rose-500)    { --add-rgb: 239, 93, 125; }
+.v39433-add-choice-card:has(.text-blue-500)    { --add-rgb: 39, 143, 255; }
+.v39433-add-choice-card:has(.text-violet-500)  { --add-rgb: 139, 92, 246; }
+.v39433-add-choice-card:has(.text-cyan-500)    { --add-rgb: 21, 174, 197; }
+.v39433-add-choice-card:has(.text-amber-500)   { --add-rgb: 227, 157, 43; }
+.v39433-add-choice-card:has(.text-teal-500)    { --add-rgb: 42, 191, 169; }
+
+.v39433-main-menu section button:has(> span.text-slate-700),
+.v39433-main-menu section a:has(> span.text-slate-700)    { --menu-rgb: 100, 116, 139; }
+.v39433-main-menu section button:has(> span.text-red-700),
+.v39433-main-menu section a:has(> span.text-red-700)      { --menu-rgb: 225, 74, 92; }
+.v39433-main-menu section button:has(> span.text-amber-700),
+.v39433-main-menu section a:has(> span.text-amber-700)    { --menu-rgb: 227, 157, 43; }
+.v39433-main-menu section button:has(> span.text-blue-700),
+.v39433-main-menu section a:has(> span.text-blue-700)     { --menu-rgb: 39, 143, 255; }
+.v39433-main-menu section button:has(> span.text-violet-700),
+.v39433-main-menu section a:has(> span.text-violet-700)   { --menu-rgb: 139, 92, 246; }
+.v39433-main-menu section button:has(> span.text-purple-700),
+.v39433-main-menu section a:has(> span.text-purple-700)   { --menu-rgb: 151, 86, 241; }
+.v39433-main-menu section button:has(> span.text-cyan-700),
+.v39433-main-menu section a:has(> span.text-cyan-700)     { --menu-rgb: 21, 174, 197; }
+.v39433-main-menu section button:has(> span.text-indigo-700),
+.v39433-main-menu section a:has(> span.text-indigo-700)   { --menu-rgb: 99, 102, 241; }
+.v39433-main-menu section button:has(> span.text-teal-700),
+.v39433-main-menu section a:has(> span.text-teal-700)     { --menu-rgb: 42, 191, 169; }
+.v39433-main-menu section button:has(> span.text-rose-700),
+.v39433-main-menu section a:has(> span.text-rose-700)     { --menu-rgb: 239, 93, 125; }
+.v39433-main-menu section button:has(> span.text-emerald-700),
+.v39433-main-menu section a:has(> span.text-emerald-700)  { --menu-rgb: 42, 190, 112; }

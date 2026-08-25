@@ -13083,7 +13083,7 @@ html, body, #root {
       {/* Main menu — complete directory of MONIEZI destinations. The bottom
           navigation remains the fast-access layer; this drawer is the full app map. */}
       <AppDrawer isOpen={showMainMenu} onClose={() => setShowMainMenu(false)} title="Menu">
-        <div className="pt-5 pb-4">
+        <div className="v39433-main-menu pt-5 pb-4">
 
           {/* Settings and Demo are app-level utilities, so they stay together at the top. */}
           <section className="pb-6">
