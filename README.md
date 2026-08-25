@@ -1,4 +1,14 @@
-# MONIEZI v39.4.29
+# MONIEZI v39.4.30
+## v39.4.30 Phase 1 Home redesign — large visual quick access
+- Adds six large, icon-led Quick Access cards at the top of Home: Overview, Money, Jobs, Clients, Invoices, and Mileage.
+- Gives every launcher its own strong visual identity, large icon treatment, clear label, and direct tap destination.
+- Increases the space between launcher cards to 22px horizontally / 24px vertically on standard mobile, with even larger gaps on wider screens.
+- Increases spacing between major Home modules to create a calmer, more breathable scrolling experience.
+- Removes redundant Home-only Jobs, Invoices & Collections, and Sales Pipeline summary cards because those areas are now reached directly from Quick Access.
+- Shows Needs Your Attention only when an actual action exists, and Continue Work only when MONIEZI has a useful shortcut to offer.
+- Keeps the Net Profit overview, Monthly Business Goals, Recent activity, Tax Snapshot, and Receipts so Home remains useful rather than becoming only a menu.
+- Preserves the v39.4.29 license-screen stabilization and the v39.4.27 Demo notification card with **Sample business data**.
+
 ## v39.4.29 License activation visual stabilization
 - Removes the mobile `:focus-within` geometry changes that made the Welcome / license screen visibly shrink and expand when the license field received focus.
 - Keeps the hero illustration at the same width, shell gap unchanged, and activation-card geometry stable while the Android keyboard opens and closes.

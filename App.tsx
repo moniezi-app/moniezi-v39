@@ -8605,8 +8605,100 @@ html, body, #root {
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
         {(currentPage === Page.Dashboard) && (
-          <div className="v391-dashboard v3934-home-readable v3935-home-breathing space-y-7 sm:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <MonieziGlassCard hero>
+          <div className="v391-dashboard v3934-home-readable v3935-home-breathing v39430-home-phase1 space-y-10 sm:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <section className="v39430-home-launcher" aria-labelledby="home-quick-access-title">
+              <div className="v39430-home-launcher__heading">
+                <div>
+                  <h2 id="home-quick-access-title" className="v39430-home-launcher__title">Quick Access</h2>
+                  <p className="v39430-home-launcher__subtitle">Tap a section to open details.</p>
+                </div>
+                <button onClick={() => handleOpenUnifiedAdd()} className="v391-primary-orb v39430-home-launcher__add" aria-label="Add new record">
+                  <Plus size={21} strokeWidth={2.4} />
+                </button>
+              </div>
+
+              <div className="v39430-home-quick-grid">
+                <button
+                  type="button"
+                  className="v39430-home-quick-card v39430-home-quick-card--overview"
+                  onClick={() => document.getElementById('home-overview')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                >
+                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><BarChart3 size={58} strokeWidth={1.7} /></span>
+                  <span className="v39430-home-quick-card__copy">
+                    <span className="v39430-home-quick-card__title">Overview</span>
+                    <span className="v39430-home-quick-card__meta">{formatCurrency.format(homeTotals.profit)} profit</span>
+                  </span>
+                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
+                </button>
+
+                <button
+                  type="button"
+                  className="v39430-home-quick-card v39430-home-quick-card--money"
+                  onClick={() => {
+                    setLedgerSearch('');
+                    setExpenseReceiptFilter('all');
+                    setExpenseReviewFilter('all');
+                    setLedgerFilter('all');
+                    setCurrentPage(Page.AllTransactions);
+                  }}
+                >
+                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><Wallet size={58} strokeWidth={1.65} /></span>
+                  <span className="v39430-home-quick-card__copy">
+                    <span className="v39430-home-quick-card__title">Money</span>
+                    <span className="v39430-home-quick-card__meta">Income &amp; expenses</span>
+                  </span>
+                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
+                </button>
+
+                <button type="button" className="v39430-home-quick-card v39430-home-quick-card--jobs" onClick={() => setCurrentPage(Page.Jobs)}>
+                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><Briefcase size={58} strokeWidth={1.65} /></span>
+                  <span className="v39430-home-quick-card__copy">
+                    <span className="v39430-home-quick-card__title">Jobs</span>
+                    <span className="v39430-home-quick-card__meta">{homeJobSummary.inProgress + homeJobSummary.review + homeJobSummary.waiting} active</span>
+                  </span>
+                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
+                </button>
+
+                <button type="button" className="v39430-home-quick-card v39430-home-quick-card--clients" onClick={() => setCurrentPage(Page.Clients)}>
+                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><Users size={58} strokeWidth={1.65} /></span>
+                  <span className="v39430-home-quick-card__copy">
+                    <span className="v39430-home-quick-card__title">Clients</span>
+                    <span className="v39430-home-quick-card__meta">{clients.length} client{clients.length === 1 ? '' : 's'}</span>
+                  </span>
+                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
+                </button>
+
+                <button
+                  type="button"
+                  className="v39430-home-quick-card v39430-home-quick-card--invoices"
+                  onClick={() => { setBillingDocType('invoice'); setInvoiceQuickFilter('all'); setCurrentPage(Page.Invoices); }}
+                >
+                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><FileText size={58} strokeWidth={1.65} /></span>
+                  <span className="v39430-home-quick-card__copy">
+                    <span className="v39430-home-quick-card__title">Invoices</span>
+                    <span className="v39430-home-quick-card__meta">{formatCurrency.format(totals.pendingAmount)} open</span>
+                  </span>
+                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
+                </button>
+
+                <button type="button" className="v39430-home-quick-card v39430-home-quick-card--mileage" onClick={() => setCurrentPage(Page.Mileage)}>
+                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><Car size={58} strokeWidth={1.65} /></span>
+                  <span className="v39430-home-quick-card__copy">
+                    <span className="v39430-home-quick-card__title">Mileage</span>
+                    <span className="v39430-home-quick-card__meta">{mileageTrips.length} trip{mileageTrips.length === 1 ? '' : 's'}</span>
+                  </span>
+                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
+                </button>
+              </div>
+            </section>
+
+            <div className="v39430-home-details-heading">
+              <h2>Home details</h2>
+              <span>Scroll for more</span>
+            </div>
+
+            <div id="home-overview" className="scroll-mt-6">
+              <MonieziGlassCard hero>
               <div className="v391-card-header v3936-home-wide-header">
                 <div className="v391-card-header__main">
                   <MonieziGlassIcon tone="blue" label="Overview">
@@ -8669,12 +8761,14 @@ html, body, #root {
                   }}
                 />
               </div>
-            </MonieziGlassCard>
+              </MonieziGlassCard>
+            </div>
 
+            {businessActionItems.length > 0 && (
             <MonieziGlassCard>
               <div className="v391-card-header v3936-home-wide-header">
                 <div className="v391-card-header__main">
-                  <MonieziGlassIcon tone={businessActionItems.length ? 'amber' : 'green'}>
+                  <MonieziGlassIcon tone="amber">
                     <AlertTriangle size={20} />
                   </MonieziGlassIcon>
                   <div className="v391-card-header__copy">
@@ -8687,49 +8781,28 @@ html, body, #root {
                 </MonieziGlassAction>
               </div>
 
-              {businessActionItems.length === 0 ? (
-                <MonieziGlassInset className="v391-attention-body">
-                  <div className="v391-status-row">
-                    <div className="v391-status-dot"><CheckCircle size={18} /></div>
-                    <div className="min-w-0">
-                      <div className="v391-status-title">Nothing urgent right now</div>
-                      <div className="v391-status-detail">No overdue collections or major record gaps were detected.</div>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }}
-                    className="v391-readiness-row w-full text-left"
-                  >
-                    <span className="v391-readiness-label">Tax Prep Readiness · {new Date().getFullYear()}</span>
-                    <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
-                  </button>
-                </MonieziGlassInset>
-              ) : (
-                <>
-                  <div className="v391-action-list">
-                    {businessActionItems.slice(0, 5).map(item => {
-                      const toneClass = item.tone === 'red' ? 'bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300' : item.tone === 'amber' ? 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300';
-                      return (
-                        <button key={item.id} type="button" onClick={() => handleBusinessAction(item.id)} className="v391-action-row">
-                          <div className={`v391-action-row__icon ${toneClass}`}><AlertCircle size={17} /></div>
-                          <div className="v391-action-row__copy"><div className="v391-action-row__title">{item.title}</div><div className="v391-action-row__detail">{item.detail}</div></div>
-                          <ChevronRight size={17} className="shrink-0 text-slate-400" />
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }}
-                    className="v391-readiness-row relative z-[1] mt-3 w-full text-left"
-                  >
-                    <span className="v391-readiness-label">Tax Prep Readiness · {new Date().getFullYear()}</span>
-                    <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
-                  </button>
-                </>
-              )}
+              <div className="v391-action-list">
+                {businessActionItems.slice(0, 5).map(item => {
+                  const toneClass = item.tone === 'red' ? 'bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300' : item.tone === 'amber' ? 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300';
+                  return (
+                    <button key={item.id} type="button" onClick={() => handleBusinessAction(item.id)} className="v391-action-row">
+                      <div className={`v391-action-row__icon ${toneClass}`}><AlertCircle size={17} /></div>
+                      <div className="v391-action-row__copy"><div className="v391-action-row__title">{item.title}</div><div className="v391-action-row__detail">{item.detail}</div></div>
+                      <ChevronRight size={17} className="shrink-0 text-slate-400" />
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }}
+                className="v391-readiness-row relative z-[1] mt-3 w-full text-left"
+              >
+                <span className="v391-readiness-label">Tax Prep Readiness · {new Date().getFullYear()}</span>
+                <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
+              </button>
             </MonieziGlassCard>
+            )}
 
             <MonieziGlassCard>
               <div className="v391-card-header v3936-home-wide-header">
@@ -8787,42 +8860,17 @@ html, body, #root {
               )}
             </MonieziGlassCard>
 
-            <MonieziGlassCard>
-              <div className="v391-card-header v3936-home-wide-header">
-                <div className="v391-card-header__main">
-                  <MonieziGlassIcon tone="teal"><Briefcase size={20} /></MonieziGlassIcon>
-                  <div className="v391-card-header__copy">
-                    <h3 className="v391-card-title">Jobs</h3>
-                    <p className="v391-card-subtitle">See work in progress, customer decisions and payment waiting at a glance.</p>
+            {dailyEfficiencyActions.length > 0 && (
+              <MonieziGlassCard className="v391-secondary-card">
+                <div className="v391-card-header">
+                  <div className="v391-card-header__main">
+                    <MonieziGlassIcon tone="amber"><Zap size={20} /></MonieziGlassIcon>
+                    <div className="v391-card-header__copy">
+                      <h3 className="v391-card-title">Continue Work</h3>
+                      <p className="v391-card-subtitle">Fast shortcuts based on what you were already doing in MONIEZI.</p>
+                    </div>
                   </div>
                 </div>
-                <MonieziGlassAction onClick={() => setCurrentPage(Page.Jobs)} tone="teal">
-                  View All <ChevronRight size={14} />
-                </MonieziGlassAction>
-              </div>
-              <div className="v391-jobs-metrics">
-                <div className="v391-job-stat v391-job-stat--blue"><div className="v391-job-stat__value">{homeJobSummary.inProgress}</div><div className="v391-job-stat__label">In Progress</div></div>
-                <div className="v391-job-stat v391-job-stat--violet"><div className="v391-job-stat__value">{homeJobSummary.review}</div><div className="v391-job-stat__label">Review</div></div>
-                <div className="v391-job-stat v391-job-stat--amber"><div className="v391-job-stat__value">{homeJobSummary.waiting}</div><div className="v391-job-stat__label">Waiting</div></div>
-                <div className="v391-job-stat v391-job-stat--green"><div className="v391-job-stat__value">{homeJobSummary.completed}</div><div className="v391-job-stat__label">Completed</div></div>
-              </div>
-            </MonieziGlassCard>
-
-            <MonieziGlassCard className="v391-secondary-card">
-              <div className="v391-card-header">
-                <div className="v391-card-header__main">
-                  <MonieziGlassIcon tone="amber"><Zap size={20} /></MonieziGlassIcon>
-                  <div className="v391-card-header__copy">
-                    <h3 className="v391-card-title">Continue Work</h3>
-                    <p className="v391-card-subtitle">Fast shortcuts based on what you were already doing in MONIEZI.</p>
-                  </div>
-                </div>
-              </div>
-              {dailyEfficiencyActions.length === 0 ? (
-                <MonieziGlassInset className="v391-attention-body mt-4">
-                  <div className="v391-status-detail">Add your first job, invoice, expense or mileage trip and MONIEZI will offer repeat-work shortcuts here.</div>
-                </MonieziGlassInset>
-              ) : (
                 <div className="v391-action-list">
                   {dailyEfficiencyActions.map(action => (
                     <button key={`${action.id}-${action.recordId}`} type="button" onClick={() => handleDailyEfficiencyAction(action)} className="v391-action-row">
@@ -8832,122 +8880,9 @@ html, body, #root {
                     </button>
                   ))}
                 </div>
-              )}
-            </MonieziGlassCard>
-
-            <div
-              className="v391-glass-card v391-secondary-card v3935-home-invoices cursor-pointer transition-all"
-              onClick={() => {
-                setInvoiceQuickFilter(totals.pendingCount > 0 ? 'unpaid' : 'all');
-                setCurrentPage(Page.Invoices);
-              }}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault();
-                  setInvoiceQuickFilter(totals.pendingCount > 0 ? 'unpaid' : 'all');
-                  setCurrentPage(Page.Invoices);
-                }
-              }}
-            >
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex min-w-0 items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-300"><FileText size={20} /></div>
-                  <div className="min-w-0">
-                    <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">Invoices & Collections</h3>
-                    <p className="mt-0.5 text-[13px] font-medium text-slate-500 dark:text-slate-400">Open customer balances</p>
-                  </div>
-                </div>
-                <ChevronRight size={18} className="shrink-0 text-slate-400" />
-              </div>
-              <div className="v391-glass-inset mt-4 grid grid-cols-2 divide-x divide-slate-200 dark:divide-slate-800">
-                <div className="px-4 py-3.5">
-                  <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Open</div>
-                  <div className="mt-1 text-lg font-extrabold tabular-nums text-slate-950 dark:text-white">{formatCurrency.format(totals.pendingAmount)}</div>
-                  <div className="mt-0.5 text-[13px] font-semibold text-slate-500 dark:text-slate-400">{totals.pendingCount} invoice{totals.pendingCount === 1 ? '' : 's'}</div>
-                </div>
-                <div className="px-4 py-3.5">
-                  <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Overdue</div>
-                  <div className={`mt-1 text-lg font-extrabold tabular-nums ${totals.overdueCount > 0 ? 'text-red-600 dark:text-red-300' : 'text-slate-950 dark:text-white'}`}>{formatCurrency.format(totals.overdueAmount)}</div>
-                  <div className="mt-0.5 text-[13px] font-semibold text-slate-500 dark:text-slate-400">{totals.overdueCount} invoice{totals.overdueCount === 1 ? '' : 's'}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Sales Pipeline Widget */}
-            {(pipelineStats.totalEstimates > 0 || pipelineStats.pipelineValue > 0) && (
-              <div
-                className="v391-glass-card v391-secondary-card v3935-home-pipeline relative cursor-pointer transition-all"
-                onClick={() => {
-                  setBillingDocType('estimate');
-                  setCurrentPage(Page.Invoices);
-                }}
-              >
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/10 dark:bg-purple-400/10 rounded-full blur-2xl pointer-events-none" />
-                
-                {/* Header */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                      <Briefcase size={20} strokeWidth={1.5} />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wide">Sales Pipeline</h3>
-                      <p className="text-[13px] text-slate-600 dark:text-slate-300">Estimates & Proposals</p>
-                    </div>
-                  </div>
-                  {pipelineStats.conversionRate > 0 && (
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{pipelineStats.conversionRate.toFixed(0)}%</div>
-                      <div className="text-[12px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Win Rate</div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Pipeline Value */}
-                {pipelineStats.pipelineValue > 0 && (
-                  <div className="v391-glass-inset p-4 mb-5">
-                    <div className="text-[13px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">Pipeline Value</div>
-                    <div className="text-3xl font-extrabold text-slate-900 dark:text-white">{formatCurrency.format(pipelineStats.pipelineValue)}</div>
-                    <div className="text-[13px] text-slate-600 dark:text-slate-300 mt-1">
-                      {pipelineStats.draft.count} draft{pipelineStats.draft.count !== 1 ? 's' : ''} + {pipelineStats.sent.count} awaiting response
-                    </div>
-                  </div>
-                )}
-
-                {/* Stage Breakdown */}
-                <div className="grid grid-cols-4 gap-2 mb-4">
-                  <div className="text-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-                    <div className="text-lg font-bold text-slate-600 dark:text-slate-300">{pipelineStats.draft.count}</div>
-                    <div className="text-[12px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Draft</div>
-                  </div>
-                  <div className="text-center p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
-                    <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{pipelineStats.sent.count}</div>
-                    <div className="text-[12px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Sent</div>
-                  </div>
-                  <div className="text-center p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/20">
-                    <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{pipelineStats.accepted.count}</div>
-                    <div className="text-[12px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Won</div>
-                  </div>
-                  <div className="text-center p-3 rounded-lg bg-red-50 dark:bg-red-900/20">
-                    <div className="text-lg font-bold text-red-500 dark:text-red-400">{pipelineStats.declined.count}</div>
-                    <div className="text-[12px] font-bold text-red-500 dark:text-red-400 uppercase tracking-wider">Lost</div>
-                  </div>
-                </div>
-
-                {/* Won Revenue */}
-                {pipelineStats.accepted.amount > 0 && (
-                  <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                    <div className="text-[13px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Revenue Won (All Time)</div>
-                    <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency.format(pipelineStats.accepted.amount)}</div>
-                  </div>
-                )}
-
-                <div className="text-[13px] text-slate-600 dark:text-slate-300 font-semibold mt-4 text-center">Tap to view estimates</div>
-              </div>
+              </MonieziGlassCard>
             )}
-            
+
             <div className="v391-glass-card v391-secondary-card v3935-home-recent">
               <div className="v391-section-heading mb-4">
                 <h3>Recent activity</h3>
