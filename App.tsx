@@ -1035,240 +1035,6 @@ function getInstallGuideDetails(platform: InstallPlatform, browser: InstallBrows
   };
 }
 
-type HomeSectionKey = 'overview' | 'money' | 'sales' | 'jobs' | 'records' | 'tax';
-type DemoFeatureKey = 'clients' | 'jobs' | 'estimates' | 'invoices' | 'mileage' | 'receipts' | 'activity' | 'reports' | 'taxprep' | 'search' | 'insights' | 'settings' | 'companyequity';
-
-const DEMO_FEATURE_META: Record<DemoFeatureKey, { label: string; description: string; group: 'Work' | 'Records & reporting' | 'App tools' | 'Advanced'; icon: any }> = {
-  clients: { label: 'Clients', description: 'Contacts and job history', group: 'Work', icon: Users },
-  jobs: { label: 'Jobs / Projects', description: 'Profitability, costing and linked work', group: 'Work', icon: Briefcase },
-  estimates: { label: 'Estimates', description: 'Quotes and proposals', group: 'Work', icon: ClipboardList },
-  invoices: { label: 'Invoices', description: 'Billing and collections', group: 'Work', icon: FileText },
-  mileage: { label: 'Mileage', description: 'Business trips and mileage records', group: 'Work', icon: Car },
-  receipts: { label: 'Receipts', description: 'Receipt images and missing documentation', group: 'Records & reporting', icon: Receipt },
-  activity: { label: 'Activity', description: 'Income, expenses and invoice activity', group: 'Records & reporting', icon: History },
-  reports: { label: 'Reports', description: 'Profit, tax and business reports', group: 'Records & reporting', icon: BarChart3 },
-  taxprep: { label: 'Tax Prep', description: 'Readiness, missing records and tax package', group: 'Records & reporting', icon: Calculator },
-  search: { label: 'Search', description: 'Find records, clients, jobs and billing', group: 'App tools', icon: Search },
-  insights: { label: 'Insights', description: 'Business signals and recommendations', group: 'App tools', icon: BrainCircuit },
-  settings: { label: 'Settings', description: 'Business details, backup and preferences', group: 'App tools', icon: Settings },
-  companyequity: { label: 'Company Equity', description: 'Ownership, investors and equity records', group: 'Advanced', icon: Landmark },
-};
-
-const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
-  overview: 'Overview',
-  money: 'Money',
-  sales: 'Sales',
-  jobs: 'Jobs',
-  records: 'Records',
-  tax: 'Tax',
-};
-
-const HOME_SECTION_ORDER: HomeSectionKey[] = ['overview', 'money', 'sales', 'jobs', 'records', 'tax'];
-
-const HOME_SECTION_ICON_COMPONENTS: Record<HomeSectionKey, any> = {
-  overview: LayoutGrid,
-  money: Wallet,
-  sales: BarChart3,
-  jobs: Briefcase,
-  records: FileText,
-  tax: Landmark,
-};
-
-const HOME_SECTION_ICON_CLASSES: Record<HomeSectionKey, string> = {
-  overview: 'border-blue-200 bg-blue-50 text-blue-600 dark:border-blue-400/20 dark:bg-blue-500/10 dark:text-blue-300',
-  money: 'border-emerald-200 bg-emerald-50 text-emerald-600 dark:border-emerald-400/20 dark:bg-emerald-500/10 dark:text-emerald-300',
-  sales: 'border-violet-200 bg-violet-50 text-violet-600 dark:border-violet-400/20 dark:bg-violet-500/10 dark:text-violet-300',
-  jobs: 'border-amber-200 bg-amber-50 text-amber-600 dark:border-amber-400/20 dark:bg-amber-500/10 dark:text-amber-300',
-  records: 'border-cyan-200 bg-cyan-50 text-cyan-600 dark:border-cyan-400/20 dark:bg-cyan-500/10 dark:text-cyan-300',
-  tax: 'border-fuchsia-200 bg-fuchsia-50 text-fuchsia-600 dark:border-fuchsia-400/20 dark:bg-fuchsia-500/10 dark:text-fuchsia-300',
-};
-
-type DemoHomeDestinationKey = 'overview' | 'money' | 'sales' | 'tax';
-type DemoDestinationKey = DemoHomeDestinationKey | DemoFeatureKey;
-
-type DemoDestinationGroup = {
-  title: string;
-  description: string;
-  keys: DemoDestinationKey[];
-};
-
-const DEMO_HOME_DESTINATIONS: DemoHomeDestinationKey[] = ['overview', 'money', 'sales', 'tax'];
-
-const DEMO_MASTER_GROUPS: DemoDestinationGroup[] = [
-  { title: 'Customers & Sales', description: 'From first customer to getting paid.', keys: ['clients', 'estimates', 'invoices'] },
-  { title: 'Work & Expenses', description: 'Run jobs and keep the records that support them.', keys: ['jobs', 'receipts', 'mileage'] },
-  { title: 'Money & Tax', description: 'Understand performance, reports and tax readiness.', keys: ['overview', 'money', 'sales', 'reports', 'tax', 'taxprep'] },
-  { title: 'More MONIEZI', description: 'Activity, insights, search, settings and advanced tools.', keys: ['activity', 'insights', 'search', 'settings', 'companyequity'] },
-];
-
-const DEMO_FEATURE_ICON_CLASSES: Record<DemoFeatureKey, string> = {
-  clients: 'border-purple-200 bg-purple-50 text-purple-700 dark:border-purple-700/40 dark:bg-purple-500/10 dark:text-purple-300',
-  jobs: 'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-700/40 dark:bg-amber-500/10 dark:text-amber-300',
-  estimates: 'border-indigo-200 bg-indigo-50 text-indigo-700 dark:border-indigo-700/40 dark:bg-indigo-500/10 dark:text-indigo-300',
-  invoices: 'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-700/40 dark:bg-blue-500/10 dark:text-blue-300',
-  mileage: 'border-teal-200 bg-teal-50 text-teal-700 dark:border-teal-700/40 dark:bg-teal-500/10 dark:text-teal-300',
-  receipts: 'border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-700/40 dark:bg-rose-500/10 dark:text-rose-300',
-  activity: 'border-cyan-200 bg-cyan-50 text-cyan-700 dark:border-cyan-700/40 dark:bg-cyan-500/10 dark:text-cyan-300',
-  reports: 'border-violet-200 bg-violet-50 text-violet-700 dark:border-violet-700/40 dark:bg-violet-500/10 dark:text-violet-300',
-  taxprep: 'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-700/40 dark:bg-emerald-500/10 dark:text-emerald-300',
-  search: 'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-700/40 dark:bg-blue-500/10 dark:text-blue-300',
-  insights: 'border-fuchsia-200 bg-fuchsia-50 text-fuchsia-700 dark:border-fuchsia-700/40 dark:bg-fuchsia-500/10 dark:text-fuchsia-300',
-  settings: 'border-slate-300 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200',
-  companyequity: 'border-cyan-200 bg-cyan-50 text-cyan-700 dark:border-cyan-700/40 dark:bg-cyan-500/10 dark:text-cyan-300',
-};
-
-function isDemoHomeDestination(key: DemoDestinationKey): key is DemoHomeDestinationKey {
-  return DEMO_HOME_DESTINATIONS.includes(key as DemoHomeDestinationKey);
-}
-
-function getDemoDestinationMeta(key: DemoDestinationKey): { label: string; description: string; icon: any; iconClass: string } {
-  if (isDemoHomeDestination(key)) {
-    const homeDescriptions: Record<DemoHomeDestinationKey, string> = {
-      overview: 'Business snapshot and profit at a glance',
-      money: 'Cash flow, income and expenses',
-      sales: 'Revenue, invoices and receivables',
-      tax: 'Tax snapshot and year-end position',
-    };
-    return {
-      label: HOME_SECTION_LABELS[key],
-      description: homeDescriptions[key],
-      icon: HOME_SECTION_ICON_COMPONENTS[key],
-      iconClass: HOME_SECTION_ICON_CLASSES[key],
-    };
-  }
-  const meta = DEMO_FEATURE_META[key];
-  return { label: meta.label, description: meta.description, icon: meta.icon, iconClass: DEMO_FEATURE_ICON_CLASSES[key] };
-}
-
-function isDemoDestinationVisited(key: DemoDestinationKey, visitedBusiness: HomeSectionKey[], visitedFeatures: DemoFeatureKey[]): boolean {
-  return isDemoHomeDestination(key) ? visitedBusiness.includes(key) : visitedFeatures.includes(key);
-}
-
-
-function HomeSectionIcon({ section, size = 18 }: { section: HomeSectionKey; size?: number }) {
-  const Icon = HOME_SECTION_ICON_COMPONENTS[section];
-  return <Icon size={size} strokeWidth={1.9} />;
-}
-
-function HomeCollapsedSection({
-  section,
-  title,
-  summary,
-  onOpen,
-}: {
-  section: HomeSectionKey;
-  title: string;
-  summary: string;
-  onOpen: (section: HomeSectionKey) => void;
-}) {
-  return (
-    <button
-      id={`home-section-${section}`}
-      type="button"
-      onClick={() => onOpen(section)}
-      className="mt-4 w-full scroll-mt-4 rounded-xl border border-slate-200 bg-white/80 px-4 py-4 text-left shadow-sm transition-all hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-slate-950/55 dark:hover:border-slate-700 dark:hover:bg-slate-950/75"
-      aria-label={`Open ${title} section`}
-    >
-      <div className="flex items-start gap-3">
-        <div className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${HOME_SECTION_ICON_CLASSES[section]}`}>
-          <HomeSectionIcon section={section} size={19} />
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="text-[13px] font-extrabold uppercase tracking-[0.12em] text-slate-900 dark:text-white">{title}</div>
-          <div className="mt-1.5 text-[13px] font-semibold leading-snug text-slate-600 dark:text-slate-300">{summary}</div>
-        </div>
-        <ChevronDown size={18} className="mt-1 shrink-0 text-slate-400" />
-      </div>
-    </button>
-  );
-}
-
-function HomeExpandedSectionHeading({ title }: { title: string }) {
-  return (
-    <div className="flex items-center gap-3 border-b border-slate-200 pb-3 dark:border-slate-800">
-      <div className="text-[13px] font-extrabold uppercase tracking-[0.12em] text-slate-900 dark:text-white">{title}</div>
-      <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
-    </div>
-  );
-}
-
-function DemoBusinessIllustration() {
-  return (
-    <div className="relative mx-auto w-full max-w-[520px]" aria-hidden="true">
-      <div className="relative mx-auto h-[255px] w-full overflow-visible sm:h-[292px]">
-        <div className="pointer-events-none absolute inset-x-[14%] bottom-3 h-20 rounded-full bg-blue-500/10 blur-3xl dark:bg-blue-500/15" />
-        <img
-          src={`${import.meta.env.BASE_URL}demo-people-v39-4-19.webp`}
-          alt=""
-          className="absolute inset-x-0 bottom-0 mx-auto h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_20px_30px_rgba(15,23,42,0.16)] dark:drop-shadow-[0_24px_38px_rgba(0,0,0,0.30)]"
-          style={{
-            WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%)',
-            maskImage: 'linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%)',
-          }}
-          loading="eager"
-          decoding="async"
-        />
-      </div>
-    </div>
-  );
-}
-
-function DemoMasterMap({
-  currentDestination,
-  visitedBusiness,
-  visitedFeatures,
-  onSelect,
-  includeCompanyEquity,
-  compact = false,
-}: {
-  currentDestination: DemoDestinationKey | null;
-  visitedBusiness: HomeSectionKey[];
-  visitedFeatures: DemoFeatureKey[];
-  onSelect: (destination: DemoDestinationKey) => void;
-  includeCompanyEquity: boolean;
-  compact?: boolean;
-}) {
-  const groups = DEMO_MASTER_GROUPS.map(group => ({
-    ...group,
-    keys: group.keys.filter(key => includeCompanyEquity || key !== 'companyequity'),
-  })).filter(group => group.keys.length > 0);
-
-  return (
-    <div className={compact ? 'space-y-7' : 'space-y-9'}>
-      {groups.map(group => (
-        <section key={group.title}>
-          <div className="px-1">
-            <h4 className="text-[16px] font-black tracking-[-0.015em] text-slate-950 dark:text-white">{group.title}</h4>
-            <p className="mt-1.5 text-[12.5px] font-semibold leading-relaxed text-slate-500 dark:text-slate-400">{group.description}</p>
-          </div>
-          <div className="mt-2 border-y border-slate-200 dark:border-slate-800">
-            {group.keys.map((destination, index) => {
-              const meta = getDemoDestinationMeta(destination);
-              const Icon = meta.icon;
-              const active = currentDestination === destination;
-              const visited = isDemoDestinationVisited(destination, visitedBusiness, visitedFeatures);
-              return (
-                <button
-                  key={destination}
-                  type="button"
-                  onClick={() => onSelect(destination)}
-                  className={`flex min-h-[58px] w-full items-center gap-3 px-1 py-3 text-left transition-colors active:bg-slate-100 dark:active:bg-white/[0.04] ${index > 0 ? 'border-t border-slate-200 dark:border-slate-800' : ''} ${active ? 'text-blue-700 dark:text-blue-300' : ''}`}
-                >
-                  <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border ${meta.iconClass}`}>
-                    <Icon size={17} strokeWidth={1.9} />
-                  </span>
-                  <span className="min-w-0 flex-1 text-[15px] font-extrabold leading-tight text-slate-950 dark:text-white">{meta.label}</span>
-                  {visited ? <CheckCircle size={18} className="shrink-0 text-emerald-500" /> : <ChevronRight size={18} className="shrink-0 text-slate-400" />}
-                </button>
-              );
-            })}
-          </div>
-        </section>
-      ))}
-    </div>
-  );
-}
-
 export default function App() {
   useEffect(() => {
     installMonieziFonts();
@@ -1418,71 +1184,11 @@ export default function App() {
     }
   }, [homeKpiPeriod]);
 
-  // v39.4.16 Home navigation: keep every Home section, but present navigation
-  // through an illustration-led Home navigator instead of a utility-style rail.
-  const [homeSection, setHomeSection] = useState<HomeSectionKey>('overview');
-  const [homeRailSection, setHomeRailSection] = useState<HomeSectionKey>('overview');
-  const [homeExpandAll, setHomeExpandAll] = useState(false);
-  const [showHomeSectionMenu, setShowHomeSectionMenu] = useState(false);
-  const [showDemoMasterView, setShowDemoMasterView] = useState(true);
-  const [demoVisitedSections, setDemoVisitedSections] = useState<HomeSectionKey[]>([]);
-  const [demoVisitedFeatures, setDemoVisitedFeatures] = useState<DemoFeatureKey[]>([]);
-
-  useEffect(() => {
-    if (currentPage !== Page.Dashboard) setShowHomeSectionMenu(false);
-  }, [currentPage]);
-
 
   // The app scrolls inside an internal container (<main className="overflow-y-auto">),
   // not the browser window. Without resetting this container, switching pages via the
   // bottom nav keeps the previous scroll position.
   const mainScrollRef = useRef<HTMLDivElement>(null);
-
-  const openHomeSection = useCallback((section: HomeSectionKey) => {
-    setHomeExpandAll(false);
-    setHomeSection(section);
-    setHomeRailSection(section);
-    setShowHomeSectionMenu(false);
-    setDemoVisitedSections(prev => prev.includes(section) ? prev : [...prev, section]);
-    if (currentPage !== Page.Dashboard) setCurrentPage(Page.Dashboard, { skipViewportReset: true });
-
-    // The Demo Hub remains the visual index, but switching never requires a return
-    // to the top. When called from another page, route Home first and retry until
-    // the requested section has mounted in the internal scrolling viewport.
-    const jumpToSection = (attempt = 0) => {
-      const target = document.getElementById(`home-section-${section}`);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
-      if (attempt < 4) window.setTimeout(() => jumpToSection(attempt + 1), 70 + attempt * 50);
-    };
-    window.setTimeout(() => jumpToSection(), 70);
-  }, [currentPage, setCurrentPage]);
-
-  const expandAllHomeSections = useCallback(() => {
-    setHomeExpandAll(true);
-    setShowHomeSectionMenu(false);
-    window.setTimeout(() => {
-      document.getElementById(`home-section-${homeRailSection}`)?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }, 40);
-  }, [homeRailSection]);
-
-  const collapseHomeSections = useCallback(() => {
-    setHomeExpandAll(false);
-    setHomeSection(homeRailSection);
-    setShowHomeSectionMenu(false);
-    window.setTimeout(() => {
-      document.getElementById(`home-section-${homeRailSection}`)?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }, 40);
-  }, [homeRailSection]);
-
   const [pendingHomeAnchor, setPendingHomeAnchor] = useState<'receipts' | null>(null);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [isKeyboardEditing, setIsKeyboardEditing] = useState(false);
@@ -1639,45 +1345,6 @@ export default function App() {
     };
   }, [currentPage, dataLoaded]); // Re-attach when page changes or data loads (ref becomes available)
 
-  // When Home is expanded, keep the navigator's current-section label in sync
-  // with the section passing through the upper part of the scroll viewport.
-  // Every section keeps its DOM anchor even while collapsed.
-  useEffect(() => {
-    if (currentPage !== Page.Dashboard) return;
-    const el = mainScrollRef.current;
-    if (!el) return;
-
-    let raf = 0;
-    const updateHomeRailSection = () => {
-      window.cancelAnimationFrame(raf);
-      raf = window.requestAnimationFrame(() => {
-        const containerRect = el.getBoundingClientRect();
-        const anchorY = containerRect.top + Math.min(180, containerRect.height * 0.28);
-        let candidate: HomeSectionKey = 'overview';
-
-        for (const key of HOME_SECTION_ORDER) {
-          const node = document.getElementById(`home-section-${key}`);
-          if (!node) continue;
-          const rect = node.getBoundingClientRect();
-          if (rect.top <= anchorY) candidate = key;
-          else break;
-        }
-
-        setHomeRailSection(prev => (prev === candidate ? prev : candidate));
-      });
-    };
-
-    el.addEventListener('scroll', updateHomeRailSection, { passive: true });
-    window.addEventListener('resize', updateHomeRailSection, { passive: true });
-    updateHomeRailSection();
-
-    return () => {
-      window.cancelAnimationFrame(raf);
-      el.removeEventListener('scroll', updateHomeRailSection);
-      window.removeEventListener('resize', updateHomeRailSection);
-    };
-  }, [currentPage, homeSection, homeExpandAll, dataLoaded]);
-
   const scrollToTop = () => {
     const el = mainScrollRef.current;
     if (el) el.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1727,10 +1394,6 @@ export default function App() {
   const [taxPayments, setTaxPayments] = useState<TaxPayment[]>([]);
   const [receipts, setReceipts] = useState<ReceiptType[]>([]);
   const [isDemoData, setIsDemoData] = useState<boolean>(false);
-
-  // v39.4.23: Demo Mode uses MONIEZI's normal navigation. The only
-  // special page is the lightweight Explore MONIEZI table of contents.
-
   const [mileageTrips, setMileageTrips] = useState<MileageTrip[]>([]);
   const [companyEquity, setCompanyEquity] = useState<CompanyEquityState>(() => createDefaultCompanyEquityState());
 
@@ -1858,7 +1521,7 @@ export default function App() {
 
       const containerRect = container.getBoundingClientRect();
       const targetRect = target.getBoundingClientRect();
-      const top = Math.max(0, container.scrollTop + targetRect.top - containerRect.top - 82);
+      const top = Math.max(0, container.scrollTop + targetRect.top - containerRect.top - 14);
       // Jump deterministically to the section. A direct jump is preferable here
       // because a competing smooth animation can be interrupted by drawer/page paints.
       container.scrollTo({ top, behavior: 'auto' });
@@ -1950,110 +1613,6 @@ export default function App() {
 
   // Reports screen menu (Settings-style tiles)
   const [reportsMenuSection, setReportsMenuSection] = useState<'menu'|'pl'|'taxsnapshot'|'taxprep'|'planner'|'receivables'|'expensesreceipts'|'mileage'|'clients'|'jobs'|'cashflow'|'pipeline'|'ledger'|'yearend'>('menu');
-
-  const markDemoFeatureVisited = useCallback((feature: DemoFeatureKey) => {
-    setDemoVisitedFeatures(prev => prev.includes(feature) ? prev : [...prev, feature]);
-  }, []);
-
-  const currentDemoFeature = useMemo<DemoFeatureKey | null>(() => {
-    if (showGlobalSearch) return 'search';
-    if (currentPage === Page.Clients) return 'clients';
-    if (currentPage === Page.Jobs) return 'jobs';
-    if (currentPage === Page.Invoices) return billingDocType === 'estimate' ? 'estimates' : 'invoices';
-    if (currentPage === Page.Mileage) return 'mileage';
-    if (currentPage === Page.AllTransactions || currentPage === Page.Ledger || currentPage === Page.Income || currentPage === Page.Expenses) return 'activity';
-    if (currentPage === Page.Reports) return reportsMenuSection === 'taxprep' ? 'taxprep' : 'reports';
-    if (currentPage === Page.Insights) return 'insights';
-    if (currentPage === Page.Settings) return 'settings';
-    if (currentPage === Page.CompanyEquity) return 'companyequity';
-    return null;
-  }, [showGlobalSearch, currentPage, billingDocType, reportsMenuSection]);
-
-  useEffect(() => {
-    if (!isDemoData) return;
-    const features: DemoFeatureKey[] = [];
-    if (currentDemoFeature) features.push(currentDemoFeature);
-    if (currentPage === Page.Reports) features.push('reports');
-    if (currentPage === Page.Dashboard && pendingHomeAnchor === 'receipts') features.push('receipts');
-    if (features.length === 0) return;
-    setDemoVisitedFeatures(prev => {
-      const next = [...prev];
-      for (const feature of features) if (!next.includes(feature)) next.push(feature);
-      return next.length === prev.length ? prev : next;
-    });
-  }, [isDemoData, currentDemoFeature, currentPage, pendingHomeAnchor]);
-
-  const openDemoFeature = useCallback((feature: DemoFeatureKey) => {
-    markDemoFeatureVisited(feature);
-    setShowDemoMasterView(false);
-    setShowMainMenu(false);
-
-    if (feature === 'clients') {
-      setCurrentPage(Page.Clients);
-    } else if (feature === 'jobs') {
-      setCurrentPage(Page.Jobs);
-    } else if (feature === 'estimates') {
-      setBillingDocType('estimate');
-      setCurrentPage(Page.Invoices);
-    } else if (feature === 'invoices') {
-      setBillingDocType('invoice');
-      setCurrentPage(Page.Invoices);
-    } else if (feature === 'mileage') {
-      setCurrentPage(Page.Mileage);
-    } else if (feature === 'receipts') {
-      setHomeExpandAll(false);
-      setHomeSection('records');
-      setHomeRailSection('records');
-      setPendingHomeAnchor(null);
-      setCurrentPage(Page.Dashboard, { skipViewportReset: true });
-    } else if (feature === 'activity') {
-      setLedgerFilter('all');
-      setCurrentPage(Page.AllTransactions);
-    } else if (feature === 'reports') {
-      setReportsMenuSection('menu');
-      setCurrentPage(Page.Reports);
-    } else if (feature === 'taxprep') {
-      setTaxPrepYear(new Date().getFullYear());
-      setReportsMenuSection('taxprep');
-      setCurrentPage(Page.Reports);
-    } else if (feature === 'search') {
-      setGlobalSearchQuery('');
-      setShowGlobalSearch(true);
-    } else if (feature === 'insights') {
-      setCurrentPage(Page.Insights);
-    } else if (feature === 'settings') {
-      setCurrentPage(Page.Settings);
-    } else if (feature === 'companyequity') {
-      setCurrentPage(Page.CompanyEquity);
-    }
-
-    if (feature !== 'search') {
-      window.setTimeout(() => mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 40);
-    }
-  }, [markDemoFeatureVisited, setCurrentPage]);
-
-  const openDemoDestination = useCallback((destination: DemoDestinationKey) => {
-    setShowDemoMasterView(false);
-    if (isDemoHomeDestination(destination)) {
-      setHomeExpandAll(false);
-      setHomeSection(destination);
-      setHomeRailSection(destination);
-      setPendingHomeAnchor(null);
-      setDemoVisitedSections(prev => prev.includes(destination) ? prev : [...prev, destination]);
-      if (currentPage !== Page.Dashboard) setCurrentPage(Page.Dashboard, { skipViewportReset: true });
-      window.setTimeout(() => mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 40);
-      return;
-    }
-    openDemoFeature(destination);
-  }, [currentPage, openDemoFeature, setCurrentPage]);
-
-  const openDemoMasterView = useCallback(() => {
-    setShowDemoMasterView(true);
-    setShowMainMenu(false);
-    if (currentPage !== Page.Dashboard) setCurrentPage(Page.Dashboard, { skipViewportReset: true });
-    window.setTimeout(() => mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 60);
-  }, [currentPage, setCurrentPage]);
-
   const [selectedClientStatementKey, setSelectedClientStatementKey] = useState<string | null>(null);
   const [isGeneratingAccountantPackage, setIsGeneratingAccountantPackage] = useState(false);
   const isMileageKeyboardEditing = isKeyboardEditing && currentPage === Page.Mileage;
@@ -4374,11 +3933,6 @@ export default function App() {
         setReceiptPreviewUrls({});
         setIsDemoData(false);
         setSeedSuccess(false);
-        setShowDemoMasterView(true);
-        setDemoVisitedSections([]);
-        setDemoVisitedFeatures([]);
-        setHomeSection('overview');
-        setHomeRailSection('overview');
         await clearDemoReturnState();
         setShowMainMenu(false);
         setCurrentPage(Page.Dashboard);
@@ -4388,11 +3942,6 @@ export default function App() {
 
       performReset({ suppressToast: true });
       setIsDemoData(false);
-      setShowDemoMasterView(true);
-      setDemoVisitedSections([]);
-      setDemoVisitedFeatures([]);
-      setHomeSection('overview');
-      setHomeRailSection('overview');
       await clearDemoReturnState();
       setShowMainMenu(false);
       showToast("Demo closed.", "success", 2000);
@@ -4436,14 +3985,8 @@ export default function App() {
 
       await handleSeedDemoData();
       markSampleDataTried();
-      setDemoVisitedSections([]);
-      setDemoVisitedFeatures([]);
-      setHomeSection('overview');
-      setHomeRailSection('overview');
-      setShowDemoMasterView(true);
       setShowMainMenu(false);
       setCurrentPage(Page.Dashboard);
-      window.setTimeout(() => mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 40);
       showToast("Demo ready. Sample business data is loaded.", "success", 2000);
     } catch (error) {
       console.error("Failed to enter demo mode", error);
@@ -8150,42 +7693,6 @@ export default function App() {
   const isActivityPage = currentPage === Page.AllTransactions || currentPage === Page.Ledger;
   const shouldHideBottomNav = isKeyboardEditing || (isActivityPage && isActivitySearchFocused);
 
-  const homeTaxDeadline = getNextEstimatedTaxDeadline();
-  const homeMoneyProgressParts = [
-    monthlyGoalProgress.hasRevenueGoal ? `${Math.round(monthlyGoalProgress.revenuePct)}% revenue goal` : '',
-    monthlyGoalProgress.hasProfitGoal ? `${Math.round(monthlyGoalProgress.profitPct)}% profit goal` : '',
-  ].filter(Boolean);
-  const homeSectionSummaries: Record<HomeSectionKey, string> = {
-    overview: `${formatCurrency.format(homeTotals.profit)} net profit · ${businessActionItems.length > 0 ? `${businessActionItems.length} item${businessActionItems.length === 1 ? '' : 's'} need attention` : 'nothing urgent'}`,
-    money: homeMoneyProgressParts.length > 0
-      ? homeMoneyProgressParts.join(' · ')
-      : `${formatCurrency.format(monthlyGoalProgress.revenue)} revenue this month · goals not set`,
-    sales: `${totals.pendingCount} open · ${totals.overdueCount} overdue · ${formatCurrency.format(pipelineStats.pipelineValue)} pipeline`,
-    jobs: `${homeJobSummary.inProgress} in progress · ${homeJobSummary.waiting} waiting · ${homeJobSummary.completed} completed`,
-    records: `${transactions.length} record${transactions.length === 1 ? '' : 's'} · ${receipts.length} receipt${receipts.length === 1 ? '' : 's'} · ${homeMissingReceiptExpenses.length} missing`,
-    tax: `${formatCurrency.format(reportData.totalEstimatedTax)} set aside · next ${homeTaxDeadline.date}`,
-  };
-  const homeSectionNavItems: HomeSectionKey[] = HOME_SECTION_ORDER;
-  const homeSectionTileMeta: Record<HomeSectionKey, { label: string; value: string }> = {
-    overview: { label: 'Net profit', value: formatCurrency.format(homeTotals.profit) },
-    money: { label: 'Revenue', value: formatCurrency.format(homeTotals.income) },
-    sales: { label: 'Open invoices', value: String(totals.pendingCount + totals.overdueCount) },
-    jobs: { label: 'Active jobs', value: String(homeJobSummary.inProgress + homeJobSummary.waiting) },
-    records: { label: 'Total records', value: String(transactions.length) },
-    tax: { label: 'Est. tax', value: formatCurrency.format(reportData.totalEstimatedTax) },
-  };
-  const demoSectionDescriptions: Record<HomeSectionKey, string> = {
-    overview: 'Business snapshot',
-    money: 'Cash & expenses',
-    sales: 'Invoices & revenue',
-    jobs: 'Projects & profit',
-    records: 'Receipts & activity',
-    tax: 'Year-end prep',
-  };
-  const homeExpandedSectionClass = isDemoData
-    ? 'scroll-mt-6 space-y-8 py-9 sm:space-y-10 sm:py-11'
-    : 'scroll-mt-4 space-y-7 py-5 sm:space-y-8';
-
   return (
     <>
       <style>{`
@@ -8948,14 +8455,7 @@ html, body, #root {
         className={`dark-chrome no-print flex items-center justify-between px-4 sm:px-6 md:px-8 pb-4 sm:pb-6 sticky top-0 backdrop-blur-xl z-50 transition-colors duration-300 ${isKeyboardEditing ? 'opacity-0 pointer-events-none' : 'opacity-100'} ${useDarkChrome ? 'bg-slate-950 border-b border-slate-800' : 'bg-slatebg/90 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800'}`}
         style={{ paddingTop: 'max(1rem, calc(env(safe-area-inset-top, 0px) + var(--moniezi-ios-top-pad, 0px)))' }}
       >
-        <div className="flex min-w-0 items-center gap-2.5">
-          <Logo onClick={() => setCurrentPage(Page.Dashboard)} onDarkSurface={useDarkChrome} />
-          {isDemoData && (
-            <span className="inline-flex shrink-0 items-center rounded-full border border-blue-300 bg-blue-50 px-2 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-blue-700 dark:border-blue-400/45 dark:bg-blue-500/10 dark:text-blue-200" aria-label="Demo data is active">
-              Demo
-            </span>
-          )}
-        </div>
+        <Logo onClick={() => setCurrentPage(Page.Dashboard)} onDarkSurface={useDarkChrome} />
         <div className="flex gap-1.5 sm:gap-2 flex-shrink-0">
            <button onClick={toggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} title={theme === 'dark' ? 'Light mode' : 'Dark mode'} className="chrome-btn w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full transition-all border text-slate-200 hover:text-white" style={headerActionButtonStyle}>{theme === 'dark' ? <Sun size={18} className="sm:w-5 sm:h-5" strokeWidth={1.2} /> : <Moon size={18} className="sm:w-5 sm:h-5" strokeWidth={1.2} />}</button>
            <button
@@ -8981,17 +8481,15 @@ html, body, #root {
                </span>
              )}
            </button>
-           <div className="relative">
-             <button
-               onClick={() => setShowMainMenu(true)}
-               className="chrome-btn relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full transition-all border text-slate-200 hover:text-white"
-               style={headerActionButtonStyle}
-               title="Menu"
-               aria-label="Open menu"
-             >
-               <MenuIcon size={18} className="sm:w-5 sm:h-5" strokeWidth={1.6} />
-             </button>
-           </div>
+           <button
+             onClick={() => setShowMainMenu(true)}
+             className="chrome-btn w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full transition-all border text-slate-200 hover:text-white"
+             style={headerActionButtonStyle}
+             title="Menu"
+             aria-label="Open menu"
+           >
+             <MenuIcon size={18} className="sm:w-5 sm:h-5" strokeWidth={1.6} />
+           </button>
         </div>
       </header>
 
@@ -9007,18 +8505,22 @@ html, body, #root {
 
       <div key={`main-scroll-${currentPage}`} ref={mainScrollRef} className="main-scroll-lock v392-screen v3943-mobile-gutters flex-1 min-h-0 overflow-y-auto px-0 pt-5 sm:pt-6 md:pt-7 no-print custom-scrollbar" data-page={currentPage} data-billing-doc-type={billingDocType} style={{ paddingBottom: shouldHideBottomNav ? 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' : 'calc(11rem + env(safe-area-inset-bottom, 0px))' }} role="main">
 
-      {/* v39.4.23 — one familiar return action. Demo Mode otherwise behaves
-          like normal MONIEZI, so the product teaches itself. */}
-      {isDemoData && !(currentPage === Page.Dashboard && showDemoMasterView) && (
-        <div className="mb-8">
+      {/* Sample-data banner. Always visible while example records are loaded, so
+          nobody mistakes them for real figures and the exit is always one tap. */}
+      {isDemoData && (
+        <div className="mb-5 flex items-center gap-3 rounded-xl border border-amber-300 dark:border-amber-700/60 bg-amber-50 dark:bg-amber-900/20 px-4 py-3">
+          <PlayCircle size={18} className="shrink-0 text-amber-600 dark:text-amber-400" />
+          <div className="min-w-0 flex-1">
+            <div className="text-sm font-bold text-amber-900 dark:text-amber-100">Demo mode</div>
+            <div className="text-xs font-medium text-amber-800/80 dark:text-amber-200/70">
+              You&apos;re viewing sample business data.
+            </div>
+          </div>
           <button
-            type="button"
-            onClick={openDemoMasterView}
-            className="inline-flex min-h-10 items-center gap-1.5 px-1 text-[14px] font-extrabold text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-300 dark:hover:text-blue-200"
-            aria-label="Back to Explore MONIEZI"
+            onClick={handleRemoveSampleData}
+            className="shrink-0 rounded-lg bg-amber-600 px-3 py-2 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-amber-700"
           >
-            <ChevronLeft size={19} strokeWidth={2.2} />
-            Explore
+            Exit Demo
           </button>
         </div>
       )}
@@ -9092,664 +8594,528 @@ html, body, #root {
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
         {(currentPage === Page.Dashboard) && (
-          <div className="v391-dashboard v3934-home-readable v3935-home-breathing relative space-y-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* v39.4.23 — Explore MONIEZI is only a calm table of contents.
-                Selecting anything opens the real feature with normal app navigation. */}
-            {!isAppEmpty && (!isDemoData || showDemoMasterView) && (
-              <section className={isDemoData ? 'mb-16 pb-2' : 'mb-10'}>
-                <div className="flex flex-col">
-                  {!isDemoData && (
-                    <div className="flex justify-center">
-                      <span className="inline-flex items-center gap-2 rounded-full border border-blue-300/70 bg-blue-50/80 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.12em] text-blue-700 dark:border-blue-400/25 dark:bg-blue-500/10 dark:text-blue-300">
-                        <PlayCircle size={14} />
-                        Business Navigator
-                      </span>
-                    </div>
-                  )}
-                  <div className={`mx-auto max-w-[34rem] px-3 text-center ${isDemoData ? '' : 'mt-5'}`}>
-                    <h2 className="text-[29px] font-black leading-[1.08] tracking-[-0.045em] text-slate-950 dark:text-white sm:text-[32px]">{isDemoData ? 'Explore MONIEZI' : 'Your business at a glance'}</h2>
-                    <p className="mx-auto mt-4 max-w-[30rem] text-[14.5px] font-semibold leading-[1.65] text-slate-600 dark:text-slate-300">{isDemoData ? 'See how a real service business runs from first customer to tax time. Every part of MONIEZI is available below.' : 'Choose the part of your business you want to review right now.'}</p>
-                  </div>
-                  {isDemoData && <div className="mt-7 w-full"><DemoBusinessIllustration /></div>}
-
-                  {isDemoData ? (
-                    <div className="mt-10 sm:mt-12">
-                      <button
-                        type="button"
-                        onClick={() => openDemoDestination('clients')}
-                        className="mx-auto flex min-h-10 items-center justify-center gap-1.5 px-2 text-[13.5px] font-extrabold text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-300"
-                      >
-                        Not sure where to start? <span className="text-blue-600 dark:text-blue-300">Start with Clients</span> <ArrowRight size={16} />
-                      </button>
-
-                      <div className="mt-9">
-                        <DemoMasterMap currentDestination={null} visitedBusiness={demoVisitedSections} visitedFeatures={demoVisitedFeatures} onSelect={openDemoDestination} includeCompanyEquity={settings.companyEquityEnabled} />
-                      </div>
-
-                      <div className="mt-12 border-t border-slate-200 pt-7 text-center dark:border-slate-800">
-                        <button type="button" onClick={handleRemoveSampleData} className="min-h-10 px-3 text-[13px] font-bold text-slate-500 transition-colors hover:text-red-600 dark:text-slate-400 dark:hover:text-red-300">Exit Demo</button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="mt-7">
-                      <div className="px-1 text-left">
-                        <h3 className="text-[19px] font-black tracking-[-0.02em] text-slate-950 dark:text-white">Choose an area</h3>
-                        <p className="mt-2 text-[13.5px] font-semibold leading-relaxed text-slate-600 dark:text-slate-300">Open the area you want to review.</p>
-                      </div>
-                      <div className="mt-5 grid w-full grid-cols-2 gap-3.5 sm:gap-4">
-                        {homeSectionNavItems.map((key) => {
-                          const active = homeSection === key;
-                          const meta = homeSectionTileMeta[key];
-                          return (
-                            <button key={key} type="button" onClick={() => openHomeSection(key)} aria-pressed={active} className={`relative min-h-[132px] rounded-2xl border p-4 text-left transition-all active:scale-[0.985] ${active ? 'border-blue-500/60 bg-blue-50 shadow-[0_12px_34px_rgba(37,99,235,0.13)] dark:border-blue-400/45 dark:bg-blue-500/[0.08]' : 'border-slate-200 bg-white/70 hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-white/[0.022] dark:hover:border-slate-700'}`}>
-                              <span className={`flex h-11 w-11 items-center justify-center rounded-xl border ${HOME_SECTION_ICON_CLASSES[key]}`}><HomeSectionIcon section={key} size={20} /></span>
-                              <span className="mt-3 block text-[14px] font-black leading-tight text-slate-950 dark:text-white">{HOME_SECTION_LABELS[key]}</span>
-                              <span className="mt-1.5 block text-[11.5px] font-semibold leading-snug text-slate-500 dark:text-slate-400">{meta.label} · {meta.value}</span>
-                              <ChevronRight size={16} className={`absolute bottom-4 right-3 ${active ? 'text-blue-600 dark:text-blue-300' : 'text-slate-400'}`} />
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </section>
-            )}
-
-            {(!isDemoData || !showDemoMasterView) && (<>
-            {(isDemoData ? homeSection === 'overview' : (homeExpandAll || homeSection === 'overview')) ? (
-              <section id="home-section-overview" className={homeExpandedSectionClass}>
-              <HomeExpandedSectionHeading title="Overview" />
-              <MonieziGlassCard hero>
-                <div className="v391-card-header v3936-home-wide-header">
-                  <div className="v391-card-header__main">
-                    <MonieziGlassIcon tone="blue" label="Overview">
-                      <LayoutGrid size={21} />
-                    </MonieziGlassIcon>
-                    <div className="v391-card-header__copy">
-                      <h2 className="v391-card-title v391-card-title--hero">
-                        Net Profit <span className="text-blue-600 dark:text-blue-300">({homeTotals.label})</span>
-                      </h2>
-                      <p className="v391-card-subtitle">{homeTotals.rangeText}</p>
-                    </div>
-                  </div>
-                  <button onClick={() => handleOpenUnifiedAdd()} className="v391-primary-orb" aria-label="Add new record">
-                    <Plus size={21} strokeWidth={2.4} />
-                  </button>
-                </div>
-
-                <MonieziGlassSegments<HomeKpiPeriod>
-                  value={homeKpiPeriod}
-                  onChange={setHomeKpiPeriod}
-                  options={[
-                    { value: 'ytd', label: 'Year', ariaLabel: 'This Year' },
-                    { value: 'mtd', label: 'Month', ariaLabel: 'This Month' },
-                    { value: '30d', label: '30 Days' },
-                    { value: 'all', label: 'All', ariaLabel: 'All Time' },
-                  ]}
-                />
-
-                <div className="v391-card-kpi">{formatCurrency.format(homeTotals.profit)}</div>
-
-                <div className="v391-metric-grid">
-                  <MonieziGlassMetric
-                    label="In"
-                    value={formatCurrency.format(homeTotals.income)}
-                    tone="green"
-                    className="v3936-home-money-metric"
-                    icon={<TrendingUp size={16} />}
-                    ariaLabel="View income in Activity"
-                    onClick={() => {
-                      setLedgerSearch('');
-                      setExpenseReceiptFilter('all');
-                      setExpenseReviewFilter('all');
-                      setLedgerFilter('income');
-                      setCurrentPage(Page.AllTransactions);
-                    }}
-                  />
-                  <MonieziGlassMetric
-                    label="Out"
-                    value={formatCurrency.format(homeTotals.expense)}
-                    tone="rose"
-                    className="v3936-home-money-metric"
-                    icon={<TrendingDown size={16} />}
-                    ariaLabel="View expenses in Activity"
-                    onClick={() => {
-                      setLedgerSearch('');
-                      setExpenseReceiptFilter('all');
-                      setExpenseReviewFilter('all');
-                      setLedgerFilter('expense');
-                      setCurrentPage(Page.AllTransactions);
-                    }}
-                  />
-                </div>
-              </MonieziGlassCard>
-              <MonieziGlassCard>
-                <div className="v391-card-header v3936-home-wide-header">
-                  <div className="v391-card-header__main">
-                    <MonieziGlassIcon tone={businessActionItems.length ? 'amber' : 'green'}>
-                      <AlertTriangle size={20} />
-                    </MonieziGlassIcon>
-                    <div className="v391-card-header__copy">
-                      <h3 className="v391-card-title">Needs Your Attention</h3>
-                      <p className="v391-card-subtitle">MONIEZI checks collections, follow-ups and record readiness.</p>
-                    </div>
-                  </div>
-                  <MonieziGlassAction onClick={() => setCurrentPage(Page.Insights)} tone="cyan">
-                    Insights <ChevronRight size={14} />
-                  </MonieziGlassAction>
-                </div>
-
-                {businessActionItems.length === 0 ? (
-                  <MonieziGlassInset className="v391-attention-body">
-                    <div className="v391-status-row">
-                      <div className="v391-status-dot"><CheckCircle size={18} /></div>
-                      <div className="min-w-0">
-                        <div className="v391-status-title">Nothing urgent right now</div>
-                        <div className="v391-status-detail">No overdue collections or major record gaps were detected.</div>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }}
-                      className="v391-readiness-row w-full text-left"
-                    >
-                      <span className="v391-readiness-label">Tax Prep Readiness · {new Date().getFullYear()}</span>
-                      <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
-                    </button>
-                  </MonieziGlassInset>
-                ) : (
-                  <>
-                    <div className="v391-action-list">
-                      {businessActionItems.slice(0, 5).map(item => {
-                        const toneClass = item.tone === 'red' ? 'bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300' : item.tone === 'amber' ? 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300';
-                        return (
-                          <button key={item.id} type="button" onClick={() => handleBusinessAction(item.id)} className="v391-action-row">
-                            <div className={`v391-action-row__icon ${toneClass}`}><AlertCircle size={17} /></div>
-                            <div className="v391-action-row__copy"><div className="v391-action-row__title">{item.title}</div><div className="v391-action-row__detail">{item.detail}</div></div>
-                            <ChevronRight size={17} className="shrink-0 text-slate-400" />
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }}
-                      className="v391-readiness-row relative z-[1] mt-3 w-full text-left"
-                    >
-                      <span className="v391-readiness-label">Tax Prep Readiness · {new Date().getFullYear()}</span>
-                      <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
-                    </button>
-                  </>
-                )}
-              </MonieziGlassCard>
-              </section>
-            ) : isDemoData ? null : (
-              <HomeCollapsedSection
-                section="overview"
-                title="Overview"
-                summary={homeSectionSummaries.overview}
-                onOpen={openHomeSection}
-              />
-            )}
-
-            {(isDemoData ? homeSection === 'money' : (homeExpandAll || homeSection === 'money')) ? (
-              <section id="home-section-money" className={homeExpandedSectionClass}>
-              <HomeExpandedSectionHeading title="Money" />
-              <MonieziGlassCard>
-                <div className="v391-card-header v3936-home-wide-header">
-                  <div className="v391-card-header__main">
-                    <MonieziGlassIcon tone="violet"><Percent size={20} /></MonieziGlassIcon>
-                    <div className="v391-card-header__copy">
-                      <h3 className="v391-card-title">Monthly Business Goals</h3>
-                      <p className="v391-card-subtitle">{monthlyGoalLabel} · track revenue and profit without a separate planning tool.</p>
-                    </div>
-                  </div>
-                  <MonieziGlassAction onClick={openGoalsEditor} tone="violet">
-                    {monthlyGoalProgress.hasRevenueGoal || monthlyGoalProgress.hasProfitGoal ? 'Edit' : 'Set Goals'}
-                  </MonieziGlassAction>
-                </div>
-
-                {!monthlyGoalProgress.hasRevenueGoal && !monthlyGoalProgress.hasProfitGoal ? (
-                  <MonieziGlassInset className="v391-goal-empty">
-                    <div className="min-w-0">
-                      <div className="v391-status-title">Set a target for the month</div>
-                      <p className="v391-status-detail">Optional goals show how much revenue or profit is still needed this month.</p>
-                      <MonieziGlassAction onClick={openGoalsEditor} className="mt-3" tone="blue">
-                        <PlusCircle size={15} /> Set Monthly Goals
-                      </MonieziGlassAction>
-                    </div>
-                  </MonieziGlassInset>
-                ) : (
-                  <>
-                    <div className="v391-progress-stack">
-                      {monthlyGoalProgress.hasRevenueGoal && (
-                        <MonieziGlassInset className="v391-progress-panel">
-                          <div className="v391-progress-head">
-                            <div className="min-w-0"><div className="v391-progress-label">Revenue Goal</div><div className="v391-progress-value">{formatCurrency.format(monthlyGoalProgress.revenue)} <span>of {formatCurrency.format(monthlyGoalProgress.revenueGoal)}</span></div></div>
-                            <div className="text-sm font-extrabold text-blue-600 dark:text-blue-300">{Math.round(monthlyGoalProgress.revenuePct)}%</div>
-                          </div>
-                          <div className="v391-progress-track"><div className="v391-progress-bar" style={{ width: `${Math.min(100, monthlyGoalProgress.revenuePct)}%` }} /></div>
-                          <div className="v391-progress-detail">{monthlyGoalProgress.revenueRemaining > 0 ? `${formatCurrency.format(monthlyGoalProgress.revenueRemaining)} remaining` : 'Revenue goal reached'}</div>
-                        </MonieziGlassInset>
-                      )}
-                      {monthlyGoalProgress.hasProfitGoal && (
-                        <MonieziGlassInset className="v391-progress-panel">
-                          <div className="v391-progress-head">
-                            <div className="min-w-0"><div className="v391-progress-label">Profit Goal</div><div className="v391-progress-value">{formatCurrency.format(monthlyGoalProgress.profit)} <span>of {formatCurrency.format(monthlyGoalProgress.profitGoal)}</span></div></div>
-                            <div className="text-sm font-extrabold text-emerald-600 dark:text-emerald-300">{Math.round(monthlyGoalProgress.profitPct)}%</div>
-                          </div>
-                          <div className="v391-progress-track"><div className="v391-progress-bar v391-progress-bar--green" style={{ width: `${Math.min(100, monthlyGoalProgress.profitPct)}%` }} /></div>
-                          <div className="v391-progress-detail">{monthlyGoalProgress.profitRemaining > 0 ? `${formatCurrency.format(monthlyGoalProgress.profitRemaining)} remaining` : 'Profit goal reached'}</div>
-                        </MonieziGlassInset>
-                      )}
-                    </div>
-                    <div className="v391-goal-history">
-                      <span>{previousGoalMonthLabel} revenue: <strong>{formatCurrency.format(monthlyGoalProgress.previousRevenue)}</strong></span>
-                      <span>{previousGoalMonthLabel} profit: <strong>{formatCurrency.format(monthlyGoalProgress.previousProfit)}</strong></span>
-                    </div>
-                  </>
-                )}
-              </MonieziGlassCard>
-              </section>
-            ) : isDemoData ? null : (
-              <HomeCollapsedSection
-                section="money"
-                title="Money"
-                summary={homeSectionSummaries.money}
-                onOpen={openHomeSection}
-              />
-            )}
-
-            {(isDemoData ? homeSection === 'sales' : (homeExpandAll || homeSection === 'sales')) ? (
-              <section id="home-section-sales" className={homeExpandedSectionClass}>
-              <HomeExpandedSectionHeading title="Sales" />
-              <div
-                className="v391-glass-card v391-secondary-card v3935-home-invoices cursor-pointer transition-all"
-                onClick={() => {
-                  setInvoiceQuickFilter(totals.pendingCount > 0 ? 'unpaid' : 'all');
-                  setCurrentPage(Page.Invoices);
-                }}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    setInvoiceQuickFilter(totals.pendingCount > 0 ? 'unpaid' : 'all');
-                    setCurrentPage(Page.Invoices);
-                  }
-                }}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex min-w-0 items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-300"><FileText size={20} /></div>
-                    <div className="min-w-0">
-                      <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">Invoices & Collections</h3>
-                      <p className="mt-0.5 text-[13px] font-medium text-slate-500 dark:text-slate-400">Open customer balances</p>
-                    </div>
-                  </div>
-                  <ChevronRight size={18} className="shrink-0 text-slate-400" />
-                </div>
-                <div className="v391-glass-inset mt-4 grid grid-cols-2 divide-x divide-slate-200 dark:divide-slate-800">
-                  <div className="px-4 py-3.5">
-                    <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Open</div>
-                    <div className="mt-1 text-lg font-extrabold tabular-nums text-slate-950 dark:text-white">{formatCurrency.format(totals.pendingAmount)}</div>
-                    <div className="mt-0.5 text-[13px] font-semibold text-slate-500 dark:text-slate-400">{totals.pendingCount} invoice{totals.pendingCount === 1 ? '' : 's'}</div>
-                  </div>
-                  <div className="px-4 py-3.5">
-                    <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Overdue</div>
-                    <div className={`mt-1 text-lg font-extrabold tabular-nums ${totals.overdueCount > 0 ? 'text-red-600 dark:text-red-300' : 'text-slate-950 dark:text-white'}`}>{formatCurrency.format(totals.overdueAmount)}</div>
-                    <div className="mt-0.5 text-[13px] font-semibold text-slate-500 dark:text-slate-400">{totals.overdueCount} invoice{totals.overdueCount === 1 ? '' : 's'}</div>
+          <div className="v391-dashboard v3934-home-readable v3935-home-breathing space-y-7 sm:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <MonieziGlassCard hero>
+              <div className="v391-card-header v3936-home-wide-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="blue" label="Overview">
+                    <LayoutGrid size={21} />
+                  </MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h2 className="v391-card-title v391-card-title--hero">
+                      Net Profit <span className="text-blue-600 dark:text-blue-300">({homeTotals.label})</span>
+                    </h2>
+                    <p className="v391-card-subtitle">{homeTotals.rangeText}</p>
                   </div>
                 </div>
+                <button onClick={() => handleOpenUnifiedAdd()} className="v391-primary-orb" aria-label="Add new record">
+                  <Plus size={21} strokeWidth={2.4} />
+                </button>
               </div>
-              {/* Sales Pipeline Widget */}
-              {(pipelineStats.totalEstimates > 0 || pipelineStats.pipelineValue > 0) && (
-                <div
-                  className="v391-glass-card v391-secondary-card v3935-home-pipeline relative cursor-pointer transition-all"
+
+              <MonieziGlassSegments<HomeKpiPeriod>
+                value={homeKpiPeriod}
+                onChange={setHomeKpiPeriod}
+                options={[
+                  { value: 'ytd', label: 'Year', ariaLabel: 'This Year' },
+                  { value: 'mtd', label: 'Month', ariaLabel: 'This Month' },
+                  { value: '30d', label: '30 Days' },
+                  { value: 'all', label: 'All', ariaLabel: 'All Time' },
+                ]}
+              />
+
+              <div className="v391-card-kpi">{formatCurrency.format(homeTotals.profit)}</div>
+
+              <div className="v391-metric-grid">
+                <MonieziGlassMetric
+                  label="In"
+                  value={formatCurrency.format(homeTotals.income)}
+                  tone="green"
+                  className="v3936-home-money-metric"
+                  icon={<TrendingUp size={16} />}
+                  ariaLabel="View income in Activity"
                   onClick={() => {
-                    setBillingDocType('estimate');
-                    setCurrentPage(Page.Invoices);
+                    setLedgerSearch('');
+                    setExpenseReceiptFilter('all');
+                    setExpenseReviewFilter('all');
+                    setLedgerFilter('income');
+                    setCurrentPage(Page.AllTransactions);
                   }}
-                >
-                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/10 dark:bg-purple-400/10 rounded-full blur-2xl pointer-events-none" />
-                
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                        <Briefcase size={20} strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wide">Sales Pipeline</h3>
-                        <p className="text-[13px] text-slate-600 dark:text-slate-300">Estimates & Proposals</p>
-                      </div>
-                    </div>
-                    {pipelineStats.conversionRate > 0 && (
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{pipelineStats.conversionRate.toFixed(0)}%</div>
-                        <div className="text-[12px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Win Rate</div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Pipeline Value */}
-                  {pipelineStats.pipelineValue > 0 && (
-                    <div className="v391-glass-inset p-4 mb-5">
-                      <div className="text-[13px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">Pipeline Value</div>
-                      <div className="text-3xl font-extrabold text-slate-900 dark:text-white">{formatCurrency.format(pipelineStats.pipelineValue)}</div>
-                      <div className="text-[13px] text-slate-600 dark:text-slate-300 mt-1">
-                        {pipelineStats.draft.count} draft{pipelineStats.draft.count !== 1 ? 's' : ''} + {pipelineStats.sent.count} awaiting response
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Stage Breakdown */}
-                  <div className="grid grid-cols-4 gap-2 mb-4">
-                    <div className="text-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-                      <div className="text-lg font-bold text-slate-600 dark:text-slate-300">{pipelineStats.draft.count}</div>
-                      <div className="text-[12px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Draft</div>
-                    </div>
-                    <div className="text-center p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
-                      <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{pipelineStats.sent.count}</div>
-                      <div className="text-[12px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Sent</div>
-                    </div>
-                    <div className="text-center p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/20">
-                      <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{pipelineStats.accepted.count}</div>
-                      <div className="text-[12px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Won</div>
-                    </div>
-                    <div className="text-center p-3 rounded-lg bg-red-50 dark:bg-red-900/20">
-                      <div className="text-lg font-bold text-red-500 dark:text-red-400">{pipelineStats.declined.count}</div>
-                      <div className="text-[12px] font-bold text-red-500 dark:text-red-400 uppercase tracking-wider">Lost</div>
-                    </div>
-                  </div>
-
-                  {/* Won Revenue */}
-                  {pipelineStats.accepted.amount > 0 && (
-                    <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                      <div className="text-[13px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Revenue Won (All Time)</div>
-                      <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency.format(pipelineStats.accepted.amount)}</div>
-                    </div>
-                  )}
-
-                  <div className="text-[13px] text-slate-600 dark:text-slate-300 font-semibold mt-4 text-center">Tap to view estimates</div>
-                </div>
-              )}
-              </section>
-            ) : isDemoData ? null : (
-              <HomeCollapsedSection
-                section="sales"
-                title="Sales"
-                summary={homeSectionSummaries.sales}
-                onOpen={openHomeSection}
-              />
-            )}
-
-            {(isDemoData ? homeSection === 'jobs' : (homeExpandAll || homeSection === 'jobs')) ? (
-              <section id="home-section-jobs" className={homeExpandedSectionClass}>
-              <HomeExpandedSectionHeading title="Jobs" />
-              <MonieziGlassCard>
-                <div className="v391-card-header v3936-home-wide-header">
-                  <div className="v391-card-header__main">
-                    <MonieziGlassIcon tone="teal"><Briefcase size={20} /></MonieziGlassIcon>
-                    <div className="v391-card-header__copy">
-                      <h3 className="v391-card-title">Jobs</h3>
-                      <p className="v391-card-subtitle">See work in progress, customer decisions and payment waiting at a glance.</p>
-                    </div>
-                  </div>
-                  <MonieziGlassAction onClick={() => setCurrentPage(Page.Jobs)} tone="teal">
-                    View All <ChevronRight size={14} />
-                  </MonieziGlassAction>
-                </div>
-                <div className="v391-jobs-metrics">
-                  <div className="v391-job-stat v391-job-stat--blue"><div className="v391-job-stat__value">{homeJobSummary.inProgress}</div><div className="v391-job-stat__label">In Progress</div></div>
-                  <div className="v391-job-stat v391-job-stat--violet"><div className="v391-job-stat__value">{homeJobSummary.review}</div><div className="v391-job-stat__label">Review</div></div>
-                  <div className="v391-job-stat v391-job-stat--amber"><div className="v391-job-stat__value">{homeJobSummary.waiting}</div><div className="v391-job-stat__label">Waiting</div></div>
-                  <div className="v391-job-stat v391-job-stat--green"><div className="v391-job-stat__value">{homeJobSummary.completed}</div><div className="v391-job-stat__label">Completed</div></div>
-                </div>
-              </MonieziGlassCard>
-              <MonieziGlassCard className="v391-secondary-card">
-                <div className="v391-card-header">
-                  <div className="v391-card-header__main">
-                    <MonieziGlassIcon tone="amber"><Zap size={20} /></MonieziGlassIcon>
-                    <div className="v391-card-header__copy">
-                      <h3 className="v391-card-title">Continue Work</h3>
-                      <p className="v391-card-subtitle">Fast shortcuts based on what you were already doing in MONIEZI.</p>
-                    </div>
-                  </div>
-                </div>
-                {dailyEfficiencyActions.length === 0 ? (
-                  <MonieziGlassInset className="v391-attention-body mt-4">
-                    <div className="v391-status-detail">Add your first job, invoice, expense or mileage trip and MONIEZI will offer repeat-work shortcuts here.</div>
-                  </MonieziGlassInset>
-                ) : (
-                  <div className="v391-action-list">
-                    {dailyEfficiencyActions.map(action => (
-                      <button key={`${action.id}-${action.recordId}`} type="button" onClick={() => handleDailyEfficiencyAction(action)} className="v391-action-row">
-                        <div className="v391-action-row__icon bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">{action.id === 'jobexpense' || action.id === 'job' ? <Briefcase size={17} /> : action.id === 'mileage' ? <Car size={17} /> : <Repeat size={17} />}</div>
-                        <div className="v391-action-row__copy"><div className="v391-action-row__title">{action.title}</div><div className="v391-action-row__detail">{action.detail}</div></div>
-                        <ChevronRight size={17} className="shrink-0 text-slate-400" />
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </MonieziGlassCard>
-              </section>
-            ) : isDemoData ? null : (
-              <HomeCollapsedSection
-                section="jobs"
-                title="Jobs"
-                summary={homeSectionSummaries.jobs}
-                onOpen={openHomeSection}
-              />
-            )}
-
-            {(isDemoData ? homeSection === 'records' : (homeExpandAll || homeSection === 'records')) ? (
-              <section id="home-section-records" className={homeExpandedSectionClass}>
-              <HomeExpandedSectionHeading title="Records" />
-              <div className="v391-glass-card v391-secondary-card v3935-home-recent">
-                <div className="v391-section-heading mb-4">
-                  <h3>Recent activity</h3>
-                  <button onClick={() => setCurrentPage(Page.AllTransactions)} className="min-h-11 px-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors">See all</button>
-                </div>
-                <div className="space-y-3">
-                  {transactions.length === 0 ? <EmptyState icon={<ClipboardList size={24} />} title="No activity yet" subtitle="Your latest transactions will appear here once you start recording." action={handleOpenUnifiedAdd} actionLabel="Add Transaction" /> :
-                    transactions.slice().sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5).map(t => (
-                      <div key={t.id} className="v391-glass-inset v391-glass-inset--interactive group flex items-center justify-between p-4 transition-all cursor-pointer relative z-10" onClick={() => handleEditItem(t)}>
-                        <div className="flex items-center gap-4 flex-1 min-w-0">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${t.type === 'income' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-red-500/10 text-red-600'}`}>{t.type === 'income' ? <ArrowRight size={18} className="-rotate-45" strokeWidth={2.5} /> : <ArrowRight size={18} className="rotate-45" strokeWidth={2.5} />}</div>
-                          <div className="min-w-0 pr-2">
-                            <div className="text-base font-bold text-slate-900 dark:text-white truncate">{t.name}</div>
-                            <div className="text-sm font-medium text-slate-600 dark:text-slate-300 mt-0.5 truncate">{t.category}</div>
-                          </div>
-                        </div>
-                        <div className="text-right flex-shrink-0">
-                           <div className={`text-base font-bold whitespace-nowrap ${t.type === 'income' ? 'text-emerald-600' : 'text-red-600'}`}>{t.type === 'income' ? '+' : ''}{formatCurrency.format(t.amount)}</div>
-                           <div className="text-left md:text-right mt-1"><div className="text-[13px] font-bold text-slate-600 dark:text-slate-300 whitespace-nowrap">{t.date}</div></div>
-                        </div>
-                      </div>
-                    ))
-                  }
-                </div>
+                />
+                <MonieziGlassMetric
+                  label="Out"
+                  value={formatCurrency.format(homeTotals.expense)}
+                  tone="rose"
+                  className="v3936-home-money-metric"
+                  icon={<TrendingDown size={16} />}
+                  ariaLabel="View expenses in Activity"
+                  onClick={() => {
+                    setLedgerSearch('');
+                    setExpenseReceiptFilter('all');
+                    setExpenseReviewFilter('all');
+                    setLedgerFilter('expense');
+                    setCurrentPage(Page.AllTransactions);
+                  }}
+                />
               </div>
-              {/* Home Receipts: actions + real linked receipt images + missing-documentation workflow */}
-              <div id="home-receipts" className="v391-glass-card v391-secondary-card v3935-home-receipts scroll-mt-6">
-                <div className="flex items-center justify-between mb-4 pl-2">
-                  <div>
-                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-brand">Receipts</h3>
-                    <p className="mt-1 text-[13px] font-medium text-slate-500 dark:text-slate-400">Capture receipts, record expenses, and see what still needs documentation.</p>
+            </MonieziGlassCard>
+
+            <MonieziGlassCard>
+              <div className="v391-card-header v3936-home-wide-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone={businessActionItems.length ? 'amber' : 'green'}>
+                    <AlertTriangle size={20} />
+                  </MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Needs Your Attention</h3>
+                    <p className="v391-card-subtitle">MONIEZI checks collections, follow-ups and record readiness.</p>
                   </div>
                 </div>
+                <MonieziGlassAction onClick={() => setCurrentPage(Page.Insights)} tone="cyan">
+                  Insights <ChevronRight size={14} />
+                </MonieziGlassAction>
+              </div>
 
-                <div className="grid grid-cols-2 gap-3 mb-5">
-                  <button onClick={() => { setScanMode('receiptOnly'); scanInputRef.current?.click(); }} className="min-h-24 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex flex-col items-center justify-center gap-2 hover:bg-amber-100 dark:hover:bg-amber-500/15 transition-colors border border-dashed border-amber-300 dark:border-amber-700/50 active:scale-[0.98]">
-                     <div className="bg-white dark:bg-slate-900 p-2.5 rounded-full shadow-sm text-amber-700 dark:text-amber-300">
-                       <Camera size={20} />
-                     </div>
-                     <span className="text-[12px] font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-300">Scan Receipt</span>
+              {businessActionItems.length === 0 ? (
+                <MonieziGlassInset className="v391-attention-body">
+                  <div className="v391-status-row">
+                    <div className="v391-status-dot"><CheckCircle size={18} /></div>
+                    <div className="min-w-0">
+                      <div className="v391-status-title">Nothing urgent right now</div>
+                      <div className="v391-status-detail">No overdue collections or major record gaps were detected.</div>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }}
+                    className="v391-readiness-row w-full text-left"
+                  >
+                    <span className="v391-readiness-label">Tax Prep Readiness · {new Date().getFullYear()}</span>
+                    <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
                   </button>
-                  <button onClick={() => { handleOpenFAB('expense'); }} className="min-h-24 bg-red-50 dark:bg-red-500/10 rounded-xl flex flex-col items-center justify-center gap-2 hover:bg-red-100 dark:hover:bg-red-500/15 transition-colors border border-red-200 dark:border-red-700/40 active:scale-[0.98]">
-                     <div className="bg-white dark:bg-slate-900 p-2.5 rounded-full shadow-sm text-red-700 dark:text-red-300">
-                       <PlusCircle size={20} />
-                     </div>
-                     <span className="text-[12px] font-extrabold uppercase tracking-wider text-red-700 dark:text-red-300">Add Expense</span>
-                  </button>
-                </div>
-
-                <div className="flex items-center justify-between mb-3 px-1">
-                  <div className="text-[13px] font-extrabold uppercase tracking-widest text-slate-600 dark:text-slate-300">Recent Receipts</div>
-                  {homeRecentReceipts.length > 0 && <div className="text-[12px] font-bold text-slate-400">Tap a receipt to open its expense</div>}
-                </div>
-
-                {homeRecentReceipts.length > 0 ? (
-                  <div className="flex overflow-x-auto gap-3 pb-4 pt-1 px-1 -mx-1 custom-scrollbar snap-x">
-                    {homeRecentReceipts.map(r => {
-                      const preview = receiptPreviewUrls[r.id] || DEMO_ASSET_BY_ID.get(r.id)?.assetUrl || '';
-                      const linkedTx = (transactions as any[]).find(t => t && t.type === 'expense' && t.receiptId === r.id);
+                </MonieziGlassInset>
+              ) : (
+                <>
+                  <div className="v391-action-list">
+                    {businessActionItems.slice(0, 5).map(item => {
+                      const toneClass = item.tone === 'red' ? 'bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300' : item.tone === 'amber' ? 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300';
                       return (
-                        <button type="button" key={r.id} onClick={() => {
-                          if (linkedTx) { handleEditItem(linkedTx); return; }
-                          openReceipt(r);
-                        }} className="flex-shrink-0 w-28 h-32 bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-slate-700 overflow-hidden relative cursor-pointer shadow-sm group active:scale-95 transition-transform snap-start text-left">
-                          <img src={preview} alt={r.note ? `Receipt: ${r.note}` : 'Receipt'} className="w-full h-full object-cover" />
-                          {r.note ? (
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/55 to-transparent px-2 pt-7 pb-2">
-                              <div className="text-[9px] font-extrabold uppercase tracking-wider text-white truncate">{r.note}</div>
-                            </div>
-                          ) : null}
-                          {!linkedTx && (
-                            <div className="absolute right-1.5 top-1.5 rounded-md bg-amber-400/95 px-1.5 py-0.5 text-[8px] font-extrabold uppercase tracking-wider text-slate-950 shadow-sm">Unlinked</div>
-                          )}
-                          <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <Eye className="text-white drop-shadow-md" size={20} />
-                          </div>
+                        <button key={item.id} type="button" onClick={() => handleBusinessAction(item.id)} className="v391-action-row">
+                          <div className={`v391-action-row__icon ${toneClass}`}><AlertCircle size={17} /></div>
+                          <div className="v391-action-row__copy"><div className="v391-action-row__title">{item.title}</div><div className="v391-action-row__detail">{item.detail}</div></div>
+                          <ChevronRight size={17} className="shrink-0 text-slate-400" />
                         </button>
                       );
                     })}
                   </div>
-                ) : receipts.length === 0 ? (
-                  <div className="v39-record-empty-shell pt-1">
-                    <MonieziEmptyState
-                      visual={
-                        <MonieziVisualStage compact ariaLabel="A phone capture and paper receipt showing how to start receipt tracking">
-                          <ReceiptsVisualScene />
-                        </MonieziVisualStage>
-                      }
-                      title="Capture your first receipt"
-                      body={<>Scan or add your first receipt so MONIEZI can keep your expense documentation organized.</>}
-                      supportingContent={
-                        <div className="v39-feature-list">
-                          {[
-                            {
-                              icon: <Receipt size={18} strokeWidth={1.9} />,
-                              title: 'Keep proof together',
-                              body: 'Store receipt images with the matching expense instead of hunting for them later',
-                            },
-                            {
-                              icon: <Camera size={18} strokeWidth={1.9} />,
-                              title: 'Capture on the go',
-                              body: 'Scan a paper receipt now or add the expense first and link the image after',
-                            },
-                            {
-                              icon: <Shield size={18} strokeWidth={1.9} />,
-                              title: 'Stay audit ready',
-                              body: 'Build cleaner documentation for tax prep and business records from day one',
-                            },
-                          ].map((item) => (
-                            <div key={item.title} className="v39-feature-row">
-                              <div className="v39-feature-row__icon">{item.icon}</div>
-                              <div>
-                                <p className="v39-feature-row__title">{item.title}</p>
-                                <p className="v39-feature-row__body">{item.body}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      }
-                      primaryAction={
-                        <button
-                          type="button"
-                          onClick={() => { setScanMode('receiptOnly'); scanInputRef.current?.click(); }}
-                          className="v39-primary-action"
-                        >
-                          <Camera size={19} strokeWidth={1.8} />
-                          Scan your first receipt
-                        </button>
-                      }
-                    />
+                  <button
+                    type="button"
+                    onClick={() => { setTaxPrepYear(new Date().getFullYear()); setReportsMenuSection('taxprep'); setCurrentPage(Page.Reports); }}
+                    className="v391-readiness-row relative z-[1] mt-3 w-full text-left"
+                  >
+                    <span className="v391-readiness-label">Tax Prep Readiness · {new Date().getFullYear()}</span>
+                    <span className={`text-sm font-extrabold ${homeReadiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : homeReadiness.score >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{homeReadiness.score}%</span>
+                  </button>
+                </>
+              )}
+            </MonieziGlassCard>
+
+            <MonieziGlassCard>
+              <div className="v391-card-header v3936-home-wide-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="violet"><Percent size={20} /></MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Monthly Business Goals</h3>
+                    <p className="v391-card-subtitle">{monthlyGoalLabel} · track revenue and profit without a separate planning tool.</p>
                   </div>
-                ) : (
-                  <div className="rounded-xl border border-slate-300 bg-white px-4 py-5 text-center dark:border-slate-700 dark:bg-slate-900">
-                    <div className="text-sm font-bold text-slate-900 dark:text-white">No linked receipt images yet</div>
-                    <div className="mt-1 text-[13px] text-slate-500 dark:text-slate-400">Scan a receipt and link it to an expense to see it here.</div>
+                </div>
+                <MonieziGlassAction onClick={openGoalsEditor} tone="violet">
+                  {monthlyGoalProgress.hasRevenueGoal || monthlyGoalProgress.hasProfitGoal ? 'Edit' : 'Set Goals'}
+                </MonieziGlassAction>
+              </div>
+
+              {!monthlyGoalProgress.hasRevenueGoal && !monthlyGoalProgress.hasProfitGoal ? (
+                <MonieziGlassInset className="v391-goal-empty">
+                  <div className="min-w-0">
+                    <div className="v391-status-title">Set a target for the month</div>
+                    <p className="v391-status-detail">Optional goals show how much revenue or profit is still needed this month.</p>
+                    <MonieziGlassAction onClick={openGoalsEditor} className="mt-3" tone="blue">
+                      <PlusCircle size={15} /> Set Monthly Goals
+                    </MonieziGlassAction>
+                  </div>
+                </MonieziGlassInset>
+              ) : (
+                <>
+                  <div className="v391-progress-stack">
+                    {monthlyGoalProgress.hasRevenueGoal && (
+                      <MonieziGlassInset className="v391-progress-panel">
+                        <div className="v391-progress-head">
+                          <div className="min-w-0"><div className="v391-progress-label">Revenue Goal</div><div className="v391-progress-value">{formatCurrency.format(monthlyGoalProgress.revenue)} <span>of {formatCurrency.format(monthlyGoalProgress.revenueGoal)}</span></div></div>
+                          <div className="text-sm font-extrabold text-blue-600 dark:text-blue-300">{Math.round(monthlyGoalProgress.revenuePct)}%</div>
+                        </div>
+                        <div className="v391-progress-track"><div className="v391-progress-bar" style={{ width: `${Math.min(100, monthlyGoalProgress.revenuePct)}%` }} /></div>
+                        <div className="v391-progress-detail">{monthlyGoalProgress.revenueRemaining > 0 ? `${formatCurrency.format(monthlyGoalProgress.revenueRemaining)} remaining` : 'Revenue goal reached'}</div>
+                      </MonieziGlassInset>
+                    )}
+                    {monthlyGoalProgress.hasProfitGoal && (
+                      <MonieziGlassInset className="v391-progress-panel">
+                        <div className="v391-progress-head">
+                          <div className="min-w-0"><div className="v391-progress-label">Profit Goal</div><div className="v391-progress-value">{formatCurrency.format(monthlyGoalProgress.profit)} <span>of {formatCurrency.format(monthlyGoalProgress.profitGoal)}</span></div></div>
+                          <div className="text-sm font-extrabold text-emerald-600 dark:text-emerald-300">{Math.round(monthlyGoalProgress.profitPct)}%</div>
+                        </div>
+                        <div className="v391-progress-track"><div className="v391-progress-bar v391-progress-bar--green" style={{ width: `${Math.min(100, monthlyGoalProgress.profitPct)}%` }} /></div>
+                        <div className="v391-progress-detail">{monthlyGoalProgress.profitRemaining > 0 ? `${formatCurrency.format(monthlyGoalProgress.profitRemaining)} remaining` : 'Profit goal reached'}</div>
+                      </MonieziGlassInset>
+                    )}
+                  </div>
+                  <div className="v391-goal-history">
+                    <span>{previousGoalMonthLabel} revenue: <strong>{formatCurrency.format(monthlyGoalProgress.previousRevenue)}</strong></span>
+                    <span>{previousGoalMonthLabel} profit: <strong>{formatCurrency.format(monthlyGoalProgress.previousProfit)}</strong></span>
+                  </div>
+                </>
+              )}
+            </MonieziGlassCard>
+
+            <MonieziGlassCard>
+              <div className="v391-card-header v3936-home-wide-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="teal"><Briefcase size={20} /></MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Jobs</h3>
+                    <p className="v391-card-subtitle">See work in progress, customer decisions and payment waiting at a glance.</p>
+                  </div>
+                </div>
+                <MonieziGlassAction onClick={() => setCurrentPage(Page.Jobs)} tone="teal">
+                  View All <ChevronRight size={14} />
+                </MonieziGlassAction>
+              </div>
+              <div className="v391-jobs-metrics">
+                <div className="v391-job-stat v391-job-stat--blue"><div className="v391-job-stat__value">{homeJobSummary.inProgress}</div><div className="v391-job-stat__label">In Progress</div></div>
+                <div className="v391-job-stat v391-job-stat--violet"><div className="v391-job-stat__value">{homeJobSummary.review}</div><div className="v391-job-stat__label">Review</div></div>
+                <div className="v391-job-stat v391-job-stat--amber"><div className="v391-job-stat__value">{homeJobSummary.waiting}</div><div className="v391-job-stat__label">Waiting</div></div>
+                <div className="v391-job-stat v391-job-stat--green"><div className="v391-job-stat__value">{homeJobSummary.completed}</div><div className="v391-job-stat__label">Completed</div></div>
+              </div>
+            </MonieziGlassCard>
+
+            <MonieziGlassCard className="v391-secondary-card">
+              <div className="v391-card-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="amber"><Zap size={20} /></MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Continue Work</h3>
+                    <p className="v391-card-subtitle">Fast shortcuts based on what you were already doing in MONIEZI.</p>
+                  </div>
+                </div>
+              </div>
+              {dailyEfficiencyActions.length === 0 ? (
+                <MonieziGlassInset className="v391-attention-body mt-4">
+                  <div className="v391-status-detail">Add your first job, invoice, expense or mileage trip and MONIEZI will offer repeat-work shortcuts here.</div>
+                </MonieziGlassInset>
+              ) : (
+                <div className="v391-action-list">
+                  {dailyEfficiencyActions.map(action => (
+                    <button key={`${action.id}-${action.recordId}`} type="button" onClick={() => handleDailyEfficiencyAction(action)} className="v391-action-row">
+                      <div className="v391-action-row__icon bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">{action.id === 'jobexpense' || action.id === 'job' ? <Briefcase size={17} /> : action.id === 'mileage' ? <Car size={17} /> : <Repeat size={17} />}</div>
+                      <div className="v391-action-row__copy"><div className="v391-action-row__title">{action.title}</div><div className="v391-action-row__detail">{action.detail}</div></div>
+                      <ChevronRight size={17} className="shrink-0 text-slate-400" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </MonieziGlassCard>
+
+            <div
+              className="v391-glass-card v391-secondary-card v3935-home-invoices cursor-pointer transition-all"
+              onClick={() => {
+                setInvoiceQuickFilter(totals.pendingCount > 0 ? 'unpaid' : 'all');
+                setCurrentPage(Page.Invoices);
+              }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  setInvoiceQuickFilter(totals.pendingCount > 0 ? 'unpaid' : 'all');
+                  setCurrentPage(Page.Invoices);
+                }
+              }}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-300"><FileText size={20} /></div>
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">Invoices & Collections</h3>
+                    <p className="mt-0.5 text-[13px] font-medium text-slate-500 dark:text-slate-400">Open customer balances</p>
+                  </div>
+                </div>
+                <ChevronRight size={18} className="shrink-0 text-slate-400" />
+              </div>
+              <div className="v391-glass-inset mt-4 grid grid-cols-2 divide-x divide-slate-200 dark:divide-slate-800">
+                <div className="px-4 py-3.5">
+                  <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Open</div>
+                  <div className="mt-1 text-lg font-extrabold tabular-nums text-slate-950 dark:text-white">{formatCurrency.format(totals.pendingAmount)}</div>
+                  <div className="mt-0.5 text-[13px] font-semibold text-slate-500 dark:text-slate-400">{totals.pendingCount} invoice{totals.pendingCount === 1 ? '' : 's'}</div>
+                </div>
+                <div className="px-4 py-3.5">
+                  <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Overdue</div>
+                  <div className={`mt-1 text-lg font-extrabold tabular-nums ${totals.overdueCount > 0 ? 'text-red-600 dark:text-red-300' : 'text-slate-950 dark:text-white'}`}>{formatCurrency.format(totals.overdueAmount)}</div>
+                  <div className="mt-0.5 text-[13px] font-semibold text-slate-500 dark:text-slate-400">{totals.overdueCount} invoice{totals.overdueCount === 1 ? '' : 's'}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sales Pipeline Widget */}
+            {(pipelineStats.totalEstimates > 0 || pipelineStats.pipelineValue > 0) && (
+              <div
+                className="v391-glass-card v391-secondary-card v3935-home-pipeline relative cursor-pointer transition-all"
+                onClick={() => {
+                  setBillingDocType('estimate');
+                  setCurrentPage(Page.Invoices);
+                }}
+              >
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/10 dark:bg-purple-400/10 rounded-full blur-2xl pointer-events-none" />
+                
+                {/* Header */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+                      <Briefcase size={20} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wide">Sales Pipeline</h3>
+                      <p className="text-[13px] text-slate-600 dark:text-slate-300">Estimates & Proposals</p>
+                    </div>
+                  </div>
+                  {pipelineStats.conversionRate > 0 && (
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{pipelineStats.conversionRate.toFixed(0)}%</div>
+                      <div className="text-[12px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Win Rate</div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Pipeline Value */}
+                {pipelineStats.pipelineValue > 0 && (
+                  <div className="v391-glass-inset p-4 mb-5">
+                    <div className="text-[13px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">Pipeline Value</div>
+                    <div className="text-3xl font-extrabold text-slate-900 dark:text-white">{formatCurrency.format(pipelineStats.pipelineValue)}</div>
+                    <div className="text-[13px] text-slate-600 dark:text-slate-300 mt-1">
+                      {pipelineStats.draft.count} draft{pipelineStats.draft.count !== 1 ? 's' : ''} + {pipelineStats.sent.count} awaiting response
+                    </div>
                   </div>
                 )}
 
-                {homeMissingReceiptExpenses.length > 0 ? (
-                  <button type="button" onClick={() => handleBusinessAction('receipts', homeReceiptYear)} className="mt-4 flex w-full items-center justify-between gap-4 rounded-xl border border-amber-300 bg-amber-50 px-4 py-4 text-left shadow-sm transition-all hover:border-amber-400 active:scale-[0.99] dark:border-amber-700/60 dark:bg-amber-500/10">
-                    <div className="flex min-w-0 items-start gap-3">
-                      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">
-                        <Receipt size={18} />
+                {/* Stage Breakdown */}
+                <div className="grid grid-cols-4 gap-2 mb-4">
+                  <div className="text-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+                    <div className="text-lg font-bold text-slate-600 dark:text-slate-300">{pipelineStats.draft.count}</div>
+                    <div className="text-[12px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Draft</div>
+                  </div>
+                  <div className="text-center p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
+                    <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{pipelineStats.sent.count}</div>
+                    <div className="text-[12px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Sent</div>
+                  </div>
+                  <div className="text-center p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/20">
+                    <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{pipelineStats.accepted.count}</div>
+                    <div className="text-[12px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Won</div>
+                  </div>
+                  <div className="text-center p-3 rounded-lg bg-red-50 dark:bg-red-900/20">
+                    <div className="text-lg font-bold text-red-500 dark:text-red-400">{pipelineStats.declined.count}</div>
+                    <div className="text-[12px] font-bold text-red-500 dark:text-red-400 uppercase tracking-wider">Lost</div>
+                  </div>
+                </div>
+
+                {/* Won Revenue */}
+                {pipelineStats.accepted.amount > 0 && (
+                  <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <div className="text-[13px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Revenue Won (All Time)</div>
+                    <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency.format(pipelineStats.accepted.amount)}</div>
+                  </div>
+                )}
+
+                <div className="text-[13px] text-slate-600 dark:text-slate-300 font-semibold mt-4 text-center">Tap to view estimates</div>
+              </div>
+            )}
+            
+            <div className="v391-glass-card v391-secondary-card v3935-home-recent">
+              <div className="v391-section-heading mb-4">
+                <h3>Recent activity</h3>
+                <button onClick={() => setCurrentPage(Page.AllTransactions)} className="min-h-11 px-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors">See all</button>
+              </div>
+              <div className="space-y-3">
+                {transactions.length === 0 ? <EmptyState icon={<ClipboardList size={24} />} title="No activity yet" subtitle="Your latest transactions will appear here once you start recording." action={handleOpenUnifiedAdd} actionLabel="Add Transaction" /> :
+                  transactions.slice().sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5).map(t => (
+                    <div key={t.id} className="v391-glass-inset v391-glass-inset--interactive group flex items-center justify-between p-4 transition-all cursor-pointer relative z-10" onClick={() => handleEditItem(t)}>
+                      <div className="flex items-center gap-4 flex-1 min-w-0">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${t.type === 'income' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-red-500/10 text-red-600'}`}>{t.type === 'income' ? <ArrowRight size={18} className="-rotate-45" strokeWidth={2.5} /> : <ArrowRight size={18} className="rotate-45" strokeWidth={2.5} />}</div>
+                        <div className="min-w-0 pr-2">
+                          <div className="text-base font-bold text-slate-900 dark:text-white truncate">{t.name}</div>
+                          <div className="text-sm font-medium text-slate-600 dark:text-slate-300 mt-0.5 truncate">{t.category}</div>
+                        </div>
                       </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-extrabold text-slate-900 dark:text-white">{homeMissingReceiptExpenses.length} expense{homeMissingReceiptExpenses.length === 1 ? '' : 's'} need receipt{homeMissingReceiptExpenses.length === 1 ? '' : 's'}</div>
-                        <div className="mt-1 text-[13px] font-semibold text-slate-600 dark:text-slate-300">{formatCurrency.format(homeMissingReceiptAmount)} needs documentation for {homeReceiptYear}</div>
+                      <div className="text-right flex-shrink-0">
+                         <div className={`text-base font-bold whitespace-nowrap ${t.type === 'income' ? 'text-emerald-600' : 'text-red-600'}`}>{t.type === 'income' ? '+' : ''}{formatCurrency.format(t.amount)}</div>
+                         <div className="text-left md:text-right mt-1"><div className="text-[13px] font-bold text-slate-600 dark:text-slate-300 whitespace-nowrap">{t.date}</div></div>
                       </div>
                     </div>
-                    <div className="flex shrink-0 items-center gap-1 text-[13px] font-extrabold text-amber-700 dark:text-amber-300">Review <ChevronRight size={16} /></div>
-                  </button>
-                ) : homeReceiptYearExpenses.length > 0 ? (
-                  <div className="mt-4 flex items-center gap-3 rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 dark:border-emerald-700/50 dark:bg-emerald-500/10">
-                    <CheckCircle size={18} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
-                    <div className="text-[13px] font-bold text-emerald-800 dark:text-emerald-300">All {homeReceiptYearExpenses.length} expense{homeReceiptYearExpenses.length === 1 ? '' : 's'} have receipts attached.</div>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card v3935-home-tax cursor-pointer active:scale-[0.99] transition-all group">
+               <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400"><Calculator size={20} /><span className="text-[13px] font-bold uppercase tracking-widest font-brand">Tax Snapshot</span></div>
+                  <ArrowRight size={18} className="text-slate-300 dark:text-slate-300 -rotate-45 group-hover:rotate-0 group-hover:text-emerald-500 transition-all duration-300"/>
+               </div>
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+                  <div><div className="text-[13px] text-slate-600 dark:text-slate-300 uppercase tracking-wider font-bold mb-1">Set Aside (YTD)</div><div className="text-2xl font-extrabold font-brand text-slate-900 dark:text-white">{formatCurrency.format(reportData.totalEstimatedTax)}</div></div>
+                  <div><div className="text-[13px] text-slate-600 dark:text-slate-300 uppercase tracking-wider font-bold mb-1">YTD Net Profit</div><div className="text-2xl font-bold text-slate-600 dark:text-slate-200">{formatCurrency.format(reportData.ytdNetProfit)}</div></div>
+               </div>
+               <p className="mb-3 text-[13px] leading-relaxed text-slate-500 dark:text-slate-400">
+                  A cautious reserve, not a tax bill. Your standard deduction and other
+                  personal reductions aren&apos;t applied here, so what you actually owe is
+                  usually less.
+               </p>
+               <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+                  <div className="text-[13px] font-bold text-slate-600 dark:text-slate-300">Next Deadline: <span className="text-emerald-600 dark:text-emerald-400">{getNextEstimatedTaxDeadline().date}</span> — {getNextEstimatedTaxDeadline().days} days left</div>
+                  <div onClick={(e) => { e.stopPropagation(); setCurrentPage(Page.Reports); setTimeout(() => { setScrollToTaxSnapshot(true); handleOpenTaxDrawer(); }, 100); }} className="text-[13px] font-bold text-blue-500 hover:underline uppercase tracking-wider cursor-pointer">Log Payment</div>
+               </div>
+            </div>
+
+            {/* Home Receipts: actions + real linked receipt images + missing-documentation workflow */}
+            <div id="home-receipts" className="v391-glass-card v391-secondary-card v3935-home-receipts scroll-mt-6">
+              <div className="flex items-center justify-between mb-4 pl-2">
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-brand">Receipts</h3>
+                  <p className="mt-1 text-[13px] font-medium text-slate-500 dark:text-slate-400">Capture receipts, record expenses, and see what still needs documentation.</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                <button onClick={() => { setScanMode('receiptOnly'); scanInputRef.current?.click(); }} className="min-h-24 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex flex-col items-center justify-center gap-2 hover:bg-amber-100 dark:hover:bg-amber-500/15 transition-colors border border-dashed border-amber-300 dark:border-amber-700/50 active:scale-[0.98]">
+                   <div className="bg-white dark:bg-slate-900 p-2.5 rounded-full shadow-sm text-amber-700 dark:text-amber-300">
+                     <Camera size={20} />
+                   </div>
+                   <span className="text-[12px] font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-300">Scan Receipt</span>
+                </button>
+                <button onClick={() => { handleOpenFAB('expense'); }} className="min-h-24 bg-red-50 dark:bg-red-500/10 rounded-xl flex flex-col items-center justify-center gap-2 hover:bg-red-100 dark:hover:bg-red-500/15 transition-colors border border-red-200 dark:border-red-700/40 active:scale-[0.98]">
+                   <div className="bg-white dark:bg-slate-900 p-2.5 rounded-full shadow-sm text-red-700 dark:text-red-300">
+                     <PlusCircle size={20} />
+                   </div>
+                   <span className="text-[12px] font-extrabold uppercase tracking-wider text-red-700 dark:text-red-300">Add Expense</span>
+                </button>
+              </div>
+
+              <div className="flex items-center justify-between mb-3 px-1">
+                <div className="text-[13px] font-extrabold uppercase tracking-widest text-slate-600 dark:text-slate-300">Recent Receipts</div>
+                {homeRecentReceipts.length > 0 && <div className="text-[12px] font-bold text-slate-400">Tap a receipt to open its expense</div>}
+              </div>
+
+              {homeRecentReceipts.length > 0 ? (
+                <div className="flex overflow-x-auto gap-3 pb-4 pt-1 px-1 -mx-1 custom-scrollbar snap-x">
+                  {homeRecentReceipts.map(r => {
+                    const preview = receiptPreviewUrls[r.id] || DEMO_ASSET_BY_ID.get(r.id)?.assetUrl || '';
+                    const linkedTx = (transactions as any[]).find(t => t && t.type === 'expense' && t.receiptId === r.id);
+                    return (
+                      <button type="button" key={r.id} onClick={() => {
+                        if (linkedTx) { handleEditItem(linkedTx); return; }
+                        openReceipt(r);
+                      }} className="flex-shrink-0 w-28 h-32 bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-slate-700 overflow-hidden relative cursor-pointer shadow-sm group active:scale-95 transition-transform snap-start text-left">
+                        <img src={preview} alt={r.note ? `Receipt: ${r.note}` : 'Receipt'} className="w-full h-full object-cover" />
+                        {r.note ? (
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/55 to-transparent px-2 pt-7 pb-2">
+                            <div className="text-[9px] font-extrabold uppercase tracking-wider text-white truncate">{r.note}</div>
+                          </div>
+                        ) : null}
+                        {!linkedTx && (
+                          <div className="absolute right-1.5 top-1.5 rounded-md bg-amber-400/95 px-1.5 py-0.5 text-[8px] font-extrabold uppercase tracking-wider text-slate-950 shadow-sm">Unlinked</div>
+                        )}
+                        <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <Eye className="text-white drop-shadow-md" size={20} />
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : receipts.length === 0 ? (
+                <div className="v39-record-empty-shell pt-1">
+                  <MonieziEmptyState
+                    visual={
+                      <MonieziVisualStage compact ariaLabel="A phone capture and paper receipt showing how to start receipt tracking">
+                        <ReceiptsVisualScene />
+                      </MonieziVisualStage>
+                    }
+                    title="Capture your first receipt"
+                    body={<>Scan or add your first receipt so MONIEZI can keep your expense documentation organized.</>}
+                    supportingContent={
+                      <div className="v39-feature-list">
+                        {[
+                          {
+                            icon: <Receipt size={18} strokeWidth={1.9} />,
+                            title: 'Keep proof together',
+                            body: 'Store receipt images with the matching expense instead of hunting for them later',
+                          },
+                          {
+                            icon: <Camera size={18} strokeWidth={1.9} />,
+                            title: 'Capture on the go',
+                            body: 'Scan a paper receipt now or add the expense first and link the image after',
+                          },
+                          {
+                            icon: <Shield size={18} strokeWidth={1.9} />,
+                            title: 'Stay audit ready',
+                            body: 'Build cleaner documentation for tax prep and business records from day one',
+                          },
+                        ].map((item) => (
+                          <div key={item.title} className="v39-feature-row">
+                            <div className="v39-feature-row__icon">{item.icon}</div>
+                            <div>
+                              <p className="v39-feature-row__title">{item.title}</p>
+                              <p className="v39-feature-row__body">{item.body}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    }
+                    primaryAction={
+                      <button
+                        type="button"
+                        onClick={() => { setScanMode('receiptOnly'); scanInputRef.current?.click(); }}
+                        className="v39-primary-action"
+                      >
+                        <Camera size={19} strokeWidth={1.8} />
+                        Scan your first receipt
+                      </button>
+                    }
+                  />
+                </div>
+              ) : (
+                <div className="rounded-xl border border-slate-300 bg-white px-4 py-5 text-center dark:border-slate-700 dark:bg-slate-900">
+                  <div className="text-sm font-bold text-slate-900 dark:text-white">No linked receipt images yet</div>
+                  <div className="mt-1 text-[13px] text-slate-500 dark:text-slate-400">Scan a receipt and link it to an expense to see it here.</div>
+                </div>
+              )}
+
+              {homeMissingReceiptExpenses.length > 0 ? (
+                <button type="button" onClick={() => handleBusinessAction('receipts', homeReceiptYear)} className="mt-4 flex w-full items-center justify-between gap-4 rounded-xl border border-amber-300 bg-amber-50 px-4 py-4 text-left shadow-sm transition-all hover:border-amber-400 active:scale-[0.99] dark:border-amber-700/60 dark:bg-amber-500/10">
+                  <div className="flex min-w-0 items-start gap-3">
+                    <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">
+                      <Receipt size={18} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-sm font-extrabold text-slate-900 dark:text-white">{homeMissingReceiptExpenses.length} expense{homeMissingReceiptExpenses.length === 1 ? '' : 's'} need receipt{homeMissingReceiptExpenses.length === 1 ? '' : 's'}</div>
+                      <div className="mt-1 text-[13px] font-semibold text-slate-600 dark:text-slate-300">{formatCurrency.format(homeMissingReceiptAmount)} needs documentation for {homeReceiptYear}</div>
+                    </div>
                   </div>
-                ) : null}
-              </div>
-              </section>
-            ) : isDemoData ? null : (
-              <HomeCollapsedSection
-                section="records"
-                title="Records"
-                summary={homeSectionSummaries.records}
-                onOpen={openHomeSection}
-              />
-            )}
-
-            {(isDemoData ? homeSection === 'tax' : (homeExpandAll || homeSection === 'tax')) ? (
-              <section id="home-section-tax" className={homeExpandedSectionClass}>
-              <HomeExpandedSectionHeading title="Tax" />
-              <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card v3935-home-tax cursor-pointer active:scale-[0.99] transition-all group">
-                 <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400"><Calculator size={20} /><span className="text-[13px] font-bold uppercase tracking-widest font-brand">Tax Snapshot</span></div>
-                    <ArrowRight size={18} className="text-slate-300 dark:text-slate-300 -rotate-45 group-hover:rotate-0 group-hover:text-emerald-500 transition-all duration-300"/>
-                 </div>
-                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
-                    <div><div className="text-[13px] text-slate-600 dark:text-slate-300 uppercase tracking-wider font-bold mb-1">Set Aside (YTD)</div><div className="text-2xl font-extrabold font-brand text-slate-900 dark:text-white">{formatCurrency.format(reportData.totalEstimatedTax)}</div></div>
-                    <div><div className="text-[13px] text-slate-600 dark:text-slate-300 uppercase tracking-wider font-bold mb-1">YTD Net Profit</div><div className="text-2xl font-bold text-slate-600 dark:text-slate-200">{formatCurrency.format(reportData.ytdNetProfit)}</div></div>
-                 </div>
-                 <p className="mb-3 text-[13px] leading-relaxed text-slate-500 dark:text-slate-400">
-                    A cautious reserve, not a tax bill. Your standard deduction and other
-                    personal reductions aren&apos;t applied here, so what you actually owe is
-                    usually less.
-                 </p>
-                 <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
-                    <div className="text-[13px] font-bold text-slate-600 dark:text-slate-300">Next Deadline: <span className="text-emerald-600 dark:text-emerald-400">{getNextEstimatedTaxDeadline().date}</span> — {getNextEstimatedTaxDeadline().days} days left</div>
-                    <div onClick={(e) => { e.stopPropagation(); setCurrentPage(Page.Reports); setTimeout(() => { setScrollToTaxSnapshot(true); handleOpenTaxDrawer(); }, 100); }} className="text-[13px] font-bold text-blue-500 hover:underline uppercase tracking-wider cursor-pointer">Log Payment</div>
-                 </div>
-              </div>
-              </section>
-            ) : isDemoData ? null : (
-              <HomeCollapsedSection
-                section="tax"
-                title="Tax"
-                summary={homeSectionSummaries.tax}
-                onOpen={openHomeSection}
-              />
-            )}
-
-
-            </>)}
-
+                  <div className="flex shrink-0 items-center gap-1 text-[13px] font-extrabold text-amber-700 dark:text-amber-300">Review <ChevronRight size={16} /></div>
+                </button>
+              ) : homeReceiptYearExpenses.length > 0 ? (
+                <div className="mt-4 flex items-center gap-3 rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 dark:border-emerald-700/50 dark:bg-emerald-500/10">
+                  <CheckCircle size={18} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
+                  <div className="text-[13px] font-bold text-emerald-800 dark:text-emerald-300">All {homeReceiptYearExpenses.length} expense{homeReceiptYearExpenses.length === 1 ? '' : 's'} have receipts attached.</div>
+                </div>
+              ) : null}
+            </div>
           </div>
         )}
 
@@ -13760,26 +13126,9 @@ html, body, #root {
       <AppDrawer isOpen={showMainMenu} onClose={() => setShowMainMenu(false)} title="Menu">
         <div className="pt-5 pb-4">
 
-          {/* Demo discovery and Settings are app-level utilities. In Demo Mode the
-              complete product explorer leads, so users can always find the rest of MONIEZI. */}
+          {/* Settings and Demo are app-level utilities, so they stay together at the top. */}
           <section className="pb-6">
             <div className="space-y-1">
-              {isDemoData && (
-                <button
-                  onClick={openDemoMasterView}
-                  className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-700/40 dark:bg-blue-500/10 dark:text-blue-300">
-                    <LayoutGrid size={18} />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    Explore MONIEZI
-                    <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">Return to the Demo contents</span>
-                  </span>
-                  <ChevronRight size={18} className="shrink-0 text-slate-400" />
-                </button>
-              )}
-
               <button
                 onClick={() => { setCurrentPage(Page.Settings); setShowMainMenu(false); mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }); }}
                 className="w-full flex items-center gap-3.5 p-3 rounded-xl text-left text-[17px] font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -13802,8 +13151,8 @@ html, body, #root {
                     <Trash2 size={18} />
                   </span>
                   <span className="min-w-0">
-                    Exit Demo
-                    <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">Return to your own business records</span>
+                    Remove the demo
+                    <span className="mt-0.5 block text-[12.5px] font-medium text-slate-500 dark:text-slate-400">Exit Demo Mode and return to your business</span>
                   </span>
                 </button>
               ) : (
@@ -13948,9 +13297,6 @@ html, body, #root {
             <div className="space-y-1">
               <button
                 onClick={() => {
-                  setHomeExpandAll(false);
-                  setHomeSection('records');
-                  setHomeRailSection('records');
                   setPendingHomeAnchor('receipts');
                   setCurrentPage(Page.Dashboard, { skipViewportReset: true });
                   setShowMainMenu(false);
