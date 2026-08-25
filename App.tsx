@@ -1801,7 +1801,7 @@ export default function App() {
   const [receipts, setReceipts] = useState<ReceiptType[]>([]);
   const [isDemoData, setIsDemoData] = useState<boolean>(false);
 
-  // v39.4.21: keep the Demo Hub calm; the compact
+  // v39.4.22: keep the Demo Hub calm; the prominent
   // capsule appears only after the visitor has scrolled beyond the human-led hub.
   useEffect(() => {
     const el = mainScrollRef.current;
@@ -9108,28 +9108,42 @@ html, body, #root {
         />
       )}
 
-      <div key={`main-scroll-${currentPage}`} ref={mainScrollRef} className="main-scroll-lock v392-screen v3943-mobile-gutters flex-1 min-h-0 overflow-y-auto px-0 pt-5 sm:pt-6 md:pt-7 no-print custom-scrollbar" data-page={currentPage} data-billing-doc-type={billingDocType} style={{ paddingBottom: shouldHideBottomNav ? 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' : 'calc(11rem + env(safe-area-inset-bottom, 0px))' }} role="main">
+      <div key={`main-scroll-${currentPage}`} ref={mainScrollRef} className="main-scroll-lock v392-screen v3943-mobile-gutters flex-1 min-h-0 overflow-y-auto px-0 pt-5 sm:pt-6 md:pt-7 no-print custom-scrollbar" data-page={currentPage} data-billing-doc-type={billingDocType} style={{ paddingBottom: shouldHideBottomNav ? 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' : isDemoData ? 'calc(15rem + env(safe-area-inset-bottom, 0px))' : 'calc(11rem + env(safe-area-inset-bottom, 0px))' }} role="main">
 
-      {/* Demo context on routed pages: identify sample data without turning the
-          page into another navigation layer. A single Explore action opens the
-          full product map when the visitor wants it. */}
+      {/* v39.4.22 — Demo navigation is a separate visual shell above routed
+          feature pages. It must read as navigation, never as business data. */}
       {isDemoData && currentPage !== Page.Dashboard && (
-        <div className="mb-6 flex items-center gap-3 rounded-xl border border-blue-200 bg-blue-50/80 px-4 py-3 dark:border-blue-700/40 dark:bg-blue-500/[0.08]">
-          <PlayCircle size={18} className="shrink-0 text-blue-600 dark:text-blue-300" />
-          <div className="min-w-0 flex-1">
-            <div className="text-sm font-bold text-slate-950 dark:text-white">Demo mode</div>
-            <div className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-              {demoOverallVisitedCount}/{demoOverallTotal} explored · sample business data
+        <section className="mb-12 overflow-hidden rounded-[22px] border-2 border-blue-500/65 bg-slate-950 text-white shadow-[0_18px_48px_rgba(15,23,42,0.24)] dark:border-blue-400/55 dark:bg-[#0b1830] dark:shadow-[0_22px_54px_rgba(0,0,0,0.34)]" aria-label="Demo navigation">
+          <div className="px-5 pb-5 pt-5 sm:px-6 sm:pb-6 sm:pt-6">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-blue-300/35 bg-blue-500/20 text-blue-200">
+                <PlayCircle size={24} strokeWidth={1.9} />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-[11px] font-black uppercase tracking-[0.18em] text-blue-300">Demo mode</div>
+                <div className="mt-1 text-[29px] font-black leading-[1.03] tracking-[-0.04em] text-white sm:text-[32px]">Explore MONIEZI</div>
+                <div className="mt-2 text-[13.5px] font-semibold leading-relaxed text-slate-300">
+                  {demoOverallVisitedCount}/{demoOverallTotal} explored · sample business data
+                </div>
+              </div>
             </div>
+
+            <button
+              type="button"
+              onClick={() => setShowDemoExplorer(true)}
+              className="mt-5 flex min-h-[54px] w-full items-center justify-between gap-3 rounded-2xl border border-blue-300/45 bg-blue-600 px-4 py-3.5 text-left shadow-[0_10px_28px_rgba(37,99,235,0.28)] transition-all hover:bg-blue-500 active:scale-[0.99]"
+            >
+              <span className="flex min-w-0 items-center gap-3">
+                <LayoutGrid size={20} className="shrink-0 text-white" />
+                <span>
+                  <span className="block text-[15px] font-black leading-tight text-white">Browse all Demo features</span>
+                  <span className="mt-1 block text-[11.5px] font-semibold text-blue-100">Return to the complete MONIEZI product map</span>
+                </span>
+              </span>
+              <ChevronRight size={20} className="shrink-0 text-blue-100" />
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={() => setShowDemoExplorer(true)}
-            className="shrink-0 rounded-lg border border-blue-300 bg-white px-3 py-2 text-xs font-extrabold text-blue-700 transition-colors hover:bg-blue-50 dark:border-blue-600/50 dark:bg-slate-950/60 dark:text-blue-300 dark:hover:bg-slate-900"
-          >
-            Explore
-          </button>
-        </div>
+        </section>
       )}
 
       {/* v39.3.3 — first-run / post-demo empty experience now uses the same
@@ -9202,7 +9216,7 @@ html, body, #root {
 
         {(currentPage === Page.Dashboard) && (
           <div className="v391-dashboard v3934-home-readable v3935-home-breathing relative space-y-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* v39.4.21 — one unified Demo product map. The human-first hero
+            {/* v39.4.22 — one unified Demo product map. The human-first hero
                 stays calm, while every meaningful MONIEZI destination is directly
                 accessible below it in business-language groups. */}
             {!isAppEmpty && (
@@ -13696,22 +13710,50 @@ html, body, #root {
       </div>
 
       {isDemoData && currentPage === Page.Dashboard && showDemoCapsule && !shouldHideBottomNav && !showDemoExplorer && createPortal(
-        <button type="button" onClick={() => setShowDemoExplorer(true)} className="no-print fixed left-1/2 z-[60] flex min-h-11 max-w-[88vw] -translate-x-1/2 items-center gap-2 rounded-full border border-blue-400/40 bg-slate-950/95 px-4 py-2 text-[13px] font-extrabold text-white shadow-[0_14px_40px_rgba(15,23,42,0.42)] backdrop-blur-xl active:scale-[0.98]" style={{ bottom: 'calc(5.25rem + env(safe-area-inset-bottom, 0px) + 10px)' }} aria-label="Open Explore MONIEZI">
-          <LayoutGrid size={16} className="shrink-0 text-blue-300" />
-          <span className="truncate">Explore MONIEZI</span>
-          <span className="h-1 w-1 shrink-0 rounded-full bg-emerald-400" />
-          <span className="shrink-0 text-slate-300">{demoOverallVisitedCount}/{demoOverallTotal}</span>
-          <ChevronUp size={15} className="shrink-0 text-slate-300" />
+        <button
+          type="button"
+          onClick={() => setShowDemoExplorer(true)}
+          className="no-print fixed left-3 right-3 z-[60] mx-auto flex min-h-[84px] max-w-[680px] items-center justify-between gap-4 rounded-[20px] border-2 border-blue-400/60 bg-slate-950/98 px-4 py-3.5 text-left text-white shadow-[0_18px_50px_rgba(15,23,42,0.48)] backdrop-blur-xl transition-transform active:scale-[0.99]"
+          style={{ bottom: 'calc(5.35rem + env(safe-area-inset-bottom, 0px) + 12px)' }}
+          aria-label="Open Explore MONIEZI"
+        >
+          <span className="flex min-w-0 items-center gap-3.5">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-sm shadow-blue-600/30">
+              <LayoutGrid size={20} strokeWidth={2} />
+            </span>
+            <span className="min-w-0">
+              <span className="block text-[10.5px] font-black uppercase tracking-[0.16em] text-blue-300">Demo mode</span>
+              <span className="mt-0.5 block truncate text-[25px] font-black leading-[1.05] tracking-[-0.035em] text-white">Explore MONIEZI</span>
+              <span className="mt-1 block text-[11.5px] font-semibold text-slate-300">{demoOverallVisitedCount}/{demoOverallTotal} explored · open product map</span>
+            </span>
+          </span>
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-600 bg-slate-900 text-blue-200">
+            <ChevronUp size={20} />
+          </span>
         </button>, document.body
       )}
 
       {isDemoData && currentPage !== Page.Dashboard && !shouldHideBottomNav && !showDemoExplorer && !showGlobalSearch && !showMainMenu && createPortal(
-        <button type="button" onClick={() => setShowDemoExplorer(true)} className="no-print fixed left-1/2 z-[60] flex min-h-11 max-w-[88vw] -translate-x-1/2 items-center gap-2 rounded-full border border-blue-400/40 bg-slate-950/95 px-4 py-2 text-[13px] font-extrabold text-white shadow-[0_14px_40px_rgba(15,23,42,0.42)] backdrop-blur-xl active:scale-[0.98]" style={{ bottom: 'calc(5.25rem + env(safe-area-inset-bottom, 0px) + 10px)' }} aria-label="Open Explore MONIEZI">
-          <LayoutGrid size={16} className="shrink-0 text-blue-300" />
-          <span className="truncate">Explore MONIEZI</span>
-          <span className="h-1 w-1 shrink-0 rounded-full bg-emerald-400" />
-          <span className="shrink-0 text-slate-300">{demoOverallVisitedCount}/{demoOverallTotal}</span>
-          <ChevronUp size={15} className="shrink-0 text-slate-300" />
+        <button
+          type="button"
+          onClick={() => setShowDemoExplorer(true)}
+          className="no-print fixed left-3 right-3 z-[60] mx-auto flex min-h-[84px] max-w-[680px] items-center justify-between gap-4 rounded-[20px] border-2 border-blue-400/60 bg-slate-950/98 px-4 py-3.5 text-left text-white shadow-[0_18px_50px_rgba(15,23,42,0.48)] backdrop-blur-xl transition-transform active:scale-[0.99]"
+          style={{ bottom: 'calc(5.35rem + env(safe-area-inset-bottom, 0px) + 12px)' }}
+          aria-label="Open Explore MONIEZI"
+        >
+          <span className="flex min-w-0 items-center gap-3.5">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-sm shadow-blue-600/30">
+              <LayoutGrid size={20} strokeWidth={2} />
+            </span>
+            <span className="min-w-0">
+              <span className="block text-[10.5px] font-black uppercase tracking-[0.16em] text-blue-300">Demo mode</span>
+              <span className="mt-0.5 block truncate text-[25px] font-black leading-[1.05] tracking-[-0.035em] text-white">Explore MONIEZI</span>
+              <span className="mt-1 block text-[11.5px] font-semibold text-slate-300">{demoOverallVisitedCount}/{demoOverallTotal} explored · open product map</span>
+            </span>
+          </span>
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-600 bg-slate-900 text-blue-200">
+            <ChevronUp size={20} />
+          </span>
         </button>, document.body
       )}
 
@@ -13728,7 +13770,7 @@ html, body, #root {
           style={{
             position: 'fixed',
             right: '16px',
-            bottom: 'calc(5.75rem + env(safe-area-inset-bottom, 0px) + 20px)',
+            bottom: isDemoData ? 'calc(11.25rem + env(safe-area-inset-bottom, 0px) + 16px)' : 'calc(5.75rem + env(safe-area-inset-bottom, 0px) + 20px)',
             zIndex: 99998,
             pointerEvents: 'auto',
           }}
