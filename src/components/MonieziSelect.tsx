@@ -240,7 +240,6 @@ export function MonieziSelect({
                                 className={`v39433-add-choice-card ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
                               >
                                 <span className="v39433-add-choice-card__label">{option.label}</span>
-                                {selected ? <span className="v39433-add-choice-card__check"><Check size={20} strokeWidth={2.3} /></span> : null}
                               </button>
                             );
                           })}

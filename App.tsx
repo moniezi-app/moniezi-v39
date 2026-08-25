@@ -2163,13 +2163,13 @@ export default function App() {
         const stored = parseStoredLicense(localStorage.getItem(LICENSE_STORAGE_KEY));
         setLicenseInfo({ email: stored?.email, purchaseDate: stored?.purchaseDate });
         (document.activeElement as HTMLElement | null)?.blur?.();
-        window.scrollTo({ top: 0, left: 0 });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-        setCurrentPage(Page.Dashboard);
+        // v39.4.36: the activation gate is already pinned at document scroll 0.
+        // Do not run the multi-pass page viewport reset while that fixed gate is
+        // unmounting; its delayed callbacks were reaching the newly mounted Home
+        // scroller and visibly nudging the first-run Demo card after it appeared.
+        setCurrentPage(Page.Dashboard, { skipViewportReset: true });
         setIsLicenseValid(true);
         setShowLicenseModal(false);
-        setTimeout(() => window.scrollTo({ top: 0, left: 0 }), 60);
         const standalone = evaluateStandaloneMode();
         if (!standalone && !installEnvironment.isMobile && deferredInstallPrompt) {
           setShowDeferredInstallCta(true);
@@ -3841,7 +3841,7 @@ export default function App() {
     setReceipts([...(demo.receipts || [])] as ReceiptType[]);
 
     setSeedSuccess(true);
-    setCurrentPage(Page.Dashboard);
+    setCurrentPage(Page.Dashboard, { skipViewportReset: true });
     setTimeout(() => setSeedSuccess(false), 2000);
   };
 
@@ -4051,6 +4051,9 @@ export default function App() {
       await handleSeedDemoData();
       markSampleDataTried();
       setShowMainMenu(false);
+      // One final, immediate Dashboard commit after all demo records are ready.
+      // The seed step above deliberately skips viewport resets so the Demo banner
+      // cannot mount while competing delayed scroll corrections are still running.
       setCurrentPage(Page.Dashboard);
       showToast("Demo ready. Sample business data is loaded.", "success", 2000);
     } catch (error) {
@@ -8634,6 +8637,8 @@ html, body, #root {
                 src={`${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`}
                 alt="A MONIEZI dashboard surrounded by receipts, reports, mileage, and business records"
                 className="v3931-first-run-visual__image"
+                width={1448}
+                height={1086}
                 loading="eager"
                 decoding="async"
               />
@@ -13443,8 +13448,7 @@ html, body, #root {
                     ariaLabel="Choose what to add"
                     menuVariant="screen"
                     menuTitle="Quick Add"
-                    menuSubtitle="Choose what to add"
-                    options={unifiedAddOptions}
+                                        options={unifiedAddOptions}
                     className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-lg font-normal text-slate-900 shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                   />
                 ) : null}
@@ -13515,8 +13519,7 @@ html, body, #root {
                         ariaLabel="Choose what to add"
                         menuVariant="screen"
                         menuTitle="Quick Add"
-                    menuSubtitle="Choose what to add"
-                        options={unifiedAddOptions}
+                                            options={unifiedAddOptions}
                         autoOpen
                         hideTrigger
                         onDismiss={closeDrawer}
@@ -13530,8 +13533,7 @@ html, body, #root {
                           menuMinWidth={280}
                           menuVariant="screen"
                           menuTitle="Quick Add"
-                    menuSubtitle="Choose what to add"
-                          options={unifiedAddOptions}
+                                              options={unifiedAddOptions}
                           className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-lg font-normal text-slate-900 shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                         />
                       </div>
@@ -14093,8 +14095,7 @@ html, body, #root {
               ariaLabel="Choose what to add"
               menuVariant="screen"
               menuTitle="Quick Add"
-                    menuSubtitle="Choose what to add"
-              options={unifiedAddOptions}
+                                  options={unifiedAddOptions}
               className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-lg font-normal text-slate-900 shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
             />
           ) : null}
@@ -14245,8 +14246,7 @@ html, body, #root {
                   ariaLabel="Choose what to add"
                   menuVariant="screen"
                   menuTitle="Quick Add"
-                    menuSubtitle="Choose what to add"
-                  options={unifiedAddOptions}
+                                      options={unifiedAddOptions}
                   className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-lg font-normal text-slate-900 shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                 />
               </div>

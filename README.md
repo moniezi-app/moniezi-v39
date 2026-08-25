@@ -1,4 +1,12 @@
-# MONIEZI v39.4.35
+# MONIEZI v39.4.36
+## v39.4.36 Quick Add icon-only choices + stable Demo/Home arrival
+- Removes the redundant visible **Choose what to add** line; the unified chooser now shows only **Quick Add** in its header.
+- Removes the large rounded transaction-choice cards from Quick Add. Each choice is now a centered standalone icon with its transaction name directly underneath, while preserving the two-column layout, scrolling, groups, and every existing action.
+- Removes the screen-menu selected check so Quick Add choices contain only the requested icon + transaction name presentation.
+- Fixes the remaining activation-to-Home Demo-card nudge by preventing the license handoff from scheduling repeated viewport resets against the newly mounted Home scroller.
+- Reserves the first-run Demo illustration geometry before image decode and disables scroll anchoring/entrance movement on that first Home card. Demo loading also avoids duplicate Dashboard viewport resets.
+- Preserves the installation/activation sequence, Demo content and notification design, Home/page large-icon system, hamburger menu, records, calculations, and navigation.
+
 ## v39.4.35 Activation viewport stabilization + Quick Add identity
 - Locks the Welcome / activation experience to a single stable internal scroll surface so Android Chrome cannot re-anchor the whole document when the keyboard opens or closes.
 - Captures the one intentional keyboard-pan position after license-field focus and holds it through keyboard close / validation, eliminating the secondary visual jump while preserving the activation sequence and screen geometry.

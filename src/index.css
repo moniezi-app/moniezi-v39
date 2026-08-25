@@ -5124,3 +5124,153 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   min-height: 68px;
   background: inherit;
 }
+
+/* ================================================================
+   MONIEZI v39.4.36 — Quick Add icon-only choices + stable Demo arrival
+   ----------------------------------------------------------------
+   Quick Add keeps the two-column chooser, but removes the large option cards:
+   each action is now only a centered icon with its transaction name beneath.
+   The first-run Demo card also opts out of browser scroll anchoring/layout
+   animation so the activation -> Home handoff does not visibly nudge it.
+   ================================================================ */
+
+/* Quick Add heading: one line only. */
+.v39435-add-choice-header {
+  min-height: 58px !important;
+  margin-bottom: 8px !important;
+  padding-bottom: 10px !important;
+}
+
+/* Choice grid remains two columns, but the actions themselves are intentionally
+   light and open rather than card-within-card surfaces. */
+.v39433-add-choice-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  column-gap: 22px !important;
+  row-gap: 24px !important;
+}
+
+.v39433-add-choice-card {
+  position: relative;
+  display: flex !important;
+  min-height: 94px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px 4px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: center !important;
+  overflow: visible !important;
+}
+
+.dark .v39433-add-choice-card {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.v39433-add-choice-card:hover,
+.v39433-add-choice-card:focus-visible,
+.v39433-add-choice-card.is-selected {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.v39433-add-choice-card:focus-visible {
+  outline: 2px solid rgba(91,169,255,0.62) !important;
+  outline-offset: 4px !important;
+  border-radius: 12px !important;
+}
+
+.v39433-add-choice-card:active {
+  transform: scale(0.97);
+}
+
+.v39433-add-choice-card__label,
+.v39433-add-choice-card__label > span {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  gap: 9px !important;
+  color: #0f172a !important;
+  font-family: var(--font-brand, inherit);
+  font-size: 15.5px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.015em !important;
+  text-align: center !important;
+}
+
+.dark .v39433-add-choice-card__label,
+.dark .v39433-add-choice-card__label > span {
+  color: #f8fafc !important;
+}
+
+/* Standalone icon only — no rounded icon box, no background tile. */
+.v39433-add-choice-card__label svg {
+  display: block !important;
+  width: 48px !important;
+  height: 48px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  stroke-width: 1.45 !important;
+  filter: drop-shadow(0 8px 12px currentColor);
+}
+
+.v39433-add-choice-card__check {
+  display: none !important;
+}
+
+/* Keep group labels quiet so the icons/titles remain the dominant choices. */
+.v39433-add-choice-group__title {
+  margin-bottom: 11px !important;
+  font-size: 11px !important;
+  letter-spacing: 0.12em !important;
+}
+.v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
+  margin-top: 24px !important;
+}
+
+@media (min-width: 640px) {
+  .v39433-add-choice-grid {
+    column-gap: 28px !important;
+    row-gap: 28px !important;
+  }
+  .v39433-add-choice-card {
+    min-height: 102px !important;
+  }
+  .v39433-add-choice-card__label svg {
+    width: 52px !important;
+    height: 52px !important;
+  }
+}
+
+/* Stable first Home/Demo surface. Prevent Chrome's scroll anchoring and any
+   inherited entrance animation from moving this card after the license gate
+   disappears. Reserve the illustration's aspect ratio before the WebP decodes. */
+.v3931-first-run-card,
+.v3931-first-run-card * {
+  overflow-anchor: none !important;
+}
+.v3931-first-run-card {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  contain: layout paint;
+}
+.v3931-first-run-visual {
+  aspect-ratio: 1448 / 1086;
+  min-height: 0 !important;
+}
+.v3931-first-run-visual__image {
+  aspect-ratio: 1448 / 1086;
+  width: min(100%, 360px) !important;
+  height: auto !important;
+}
