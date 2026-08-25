@@ -204,7 +204,7 @@ export function MonieziSelect({
                 </button>
               </div>
             ) : null}
-            <div className={menuVariant === 'screen' ? 'min-h-0 flex-1 overflow-visible px-1 pb-1' : ''}>
+            <div className={menuVariant === 'screen' ? 'v39434-add-choice-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain px-1 pb-1' : ''}>
               {menuVariant === 'screen' ? (
                 <div className="space-y-3">
                   {Array.from(new Set(options.map(option => option.group || ''))).map(group => {

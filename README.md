@@ -1,4 +1,10 @@
-# MONIEZI v39.4.33
+# MONIEZI v39.4.34
+## v39.4.34 Quick Add scroll + compact choices
+- Fixes the screen-style Quick Add chooser so the choices body scrolls independently while the panel header remains visible.
+- Adds mobile touch scrolling, overscroll containment, safe-area bottom padding, and a visible scrollbar affordance where supported.
+- Slightly reduces Quick Add card height and icon-box size so more transaction choices are visible without abandoning the large-icon design direction.
+- Preserves all Quick Add choices, destinations, navigation sequence, hamburger-menu redesign, Home/page headers, Demo behavior, activation flow, and business logic.
+
 ## v39.4.33 Quick Add + hamburger menu visual-system match
 - Extends the large-icon, spacious-card system into the unified Quick Add choices panel used from Home / first-entry flows and the shared + launcher.
 - Quick Add choices now use large icon-led cards, two-column mobile layout, stronger section separation, and generous gaps while preserving every existing action and navigation sequence.
