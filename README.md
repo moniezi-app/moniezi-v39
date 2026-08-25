@@ -1,4 +1,10 @@
-# MONIEZI v39.4.34
+# MONIEZI v39.4.35
+## v39.4.35 Activation viewport stabilization + Quick Add identity
+- Locks the Welcome / activation experience to a single stable internal scroll surface so Android Chrome cannot re-anchor the whole document when the keyboard opens or closes.
+- Captures the one intentional keyboard-pan position after license-field focus and holds it through keyboard close / validation, eliminating the secondary visual jump while preserving the activation sequence and screen geometry.
+- Adds an explicit **Quick Add** heading with **Choose what to add** supporting copy to every unified Quick Add choices panel, including the first-entry flow and specialized add entry points.
+- Keeps the v39.4.34 independent Quick Add scrolling, compact option cards, all existing choices, navigation, business logic, large page headers, and Demo behavior unchanged.
+
 ## v39.4.34 Quick Add scroll + compact choices
 - Fixes the screen-style Quick Add chooser so the choices body scrolls independently while the panel header remains visible.
 - Adds mobile touch scrolling, overscroll containment, safe-area bottom padding, and a visible scrollbar affordance where supported.

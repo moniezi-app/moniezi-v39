@@ -1369,6 +1369,71 @@ export default function App() {
   const [licenseInfo, setLicenseInfo] = useState<{ email?: string; purchaseDate?: string; } | null>(null);
   const [showLicenseModal, setShowLicenseModal] = useState(false);
 
+  // v39.4.35: keep Android/Chrome keyboard viewport movement deterministic on the
+  // activation screen. The browser may pan the focused field into view once,
+  // but after that we hold the same internal scroll position through keyboard
+  // close/validation so the screen does not jump or re-anchor.
+  const licenseGateRef = useRef<HTMLDivElement>(null);
+  const licenseViewportSessionRef = useRef(false);
+  const licenseViewportLockedScrollRef = useRef<number | null>(null);
+  const licenseViewportSettleTimerRef = useRef<number | null>(null);
+
+  const beginLicenseViewportSession = useCallback(() => {
+    licenseViewportSessionRef.current = true;
+    licenseViewportLockedScrollRef.current = null;
+    if (licenseViewportSettleTimerRef.current !== null) {
+      window.clearTimeout(licenseViewportSettleTimerRef.current);
+    }
+    licenseViewportSettleTimerRef.current = window.setTimeout(() => {
+      licenseViewportLockedScrollRef.current = licenseGateRef.current?.scrollTop || 0;
+    }, 260);
+  }, []);
+
+  useEffect(() => {
+    if (isLicenseValid !== false) {
+      licenseViewportSessionRef.current = false;
+      licenseViewportLockedScrollRef.current = null;
+      if (licenseViewportSettleTimerRef.current !== null) {
+        window.clearTimeout(licenseViewportSettleTimerRef.current);
+        licenseViewportSettleTimerRef.current = null;
+      }
+      return;
+    }
+
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+
+    const holdActivationScroll = () => {
+      if (!licenseViewportSessionRef.current) return;
+
+      if (licenseViewportLockedScrollRef.current === null) {
+        if (licenseViewportSettleTimerRef.current !== null) {
+          window.clearTimeout(licenseViewportSettleTimerRef.current);
+        }
+        licenseViewportSettleTimerRef.current = window.setTimeout(() => {
+          licenseViewportLockedScrollRef.current = licenseGateRef.current?.scrollTop || 0;
+        }, 140);
+        return;
+      }
+
+      const lockedTop = licenseViewportLockedScrollRef.current;
+      requestAnimationFrame(() => {
+        const gate = licenseGateRef.current;
+        if (gate && Math.abs(gate.scrollTop - lockedTop) > 1) gate.scrollTop = lockedTop;
+        if (window.scrollX !== 0 || window.scrollY !== 0) {
+          window.scrollTo({ left: 0, top: 0, behavior: 'auto' });
+        }
+      });
+    };
+
+    viewport.addEventListener('resize', holdActivationScroll);
+    viewport.addEventListener('scroll', holdActivationScroll);
+    return () => {
+      viewport.removeEventListener('resize', holdActivationScroll);
+      viewport.removeEventListener('scroll', holdActivationScroll);
+    };
+  }, [isLicenseValid]);
+
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [estimates, setEstimates] = useState<Estimate[]>([]);
@@ -7553,7 +7618,7 @@ export default function App() {
   // v39.0.4: approved light-mode welcome screen with the selected two-character illustration style.
   if (LICENSING_ENABLED && isLicenseValid === false) {
     return (
-      <div className="license-gate v39-license-gate moniezi-license-stable-surface">
+      <div ref={licenseGateRef} className="license-gate v39-license-gate moniezi-license-stable-surface">
         <div className="v39-license-backdrop" aria-hidden="true" />
 
         <main className="v39-license-shell">
@@ -7603,6 +7668,7 @@ export default function App() {
                   type="text"
                   value={licenseKey}
                   onChange={(e) => { setLicenseKey(e.target.value); setLicenseError(''); }}
+                  onFocus={beginLicenseViewportSession}
                   onKeyDown={(e) => e.key === 'Enter' && handleActivateLicense()}
                   placeholder="Paste or enter your license key"
                   className="v39-license-input v39-license-input--with-icon"
@@ -13376,7 +13442,8 @@ html, body, #root {
                     onChange={value => switchUnifiedAddFromSpecialized('mileage', value as UnifiedAddAction)}
                     ariaLabel="Choose what to add"
                     menuVariant="screen"
-                    menuTitle=""
+                    menuTitle="Quick Add"
+                    menuSubtitle="Choose what to add"
                     options={unifiedAddOptions}
                     className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-lg font-normal text-slate-900 shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                   />
@@ -13447,7 +13514,8 @@ html, body, #root {
                         onChange={value => handleUnifiedAddSelection(value as UnifiedAddAction)}
                         ariaLabel="Choose what to add"
                         menuVariant="screen"
-                        menuTitle=""
+                        menuTitle="Quick Add"
+                    menuSubtitle="Choose what to add"
                         options={unifiedAddOptions}
                         autoOpen
                         hideTrigger
@@ -13461,7 +13529,8 @@ html, body, #root {
                           ariaLabel="Choose what to add"
                           menuMinWidth={280}
                           menuVariant="screen"
-                          menuTitle=""
+                          menuTitle="Quick Add"
+                    menuSubtitle="Choose what to add"
                           options={unifiedAddOptions}
                           className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-lg font-normal text-slate-900 shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                         />
@@ -14023,7 +14092,8 @@ html, body, #root {
               onChange={value => switchUnifiedAddFromSpecialized('job', value as UnifiedAddAction)}
               ariaLabel="Choose what to add"
               menuVariant="screen"
-              menuTitle=""
+              menuTitle="Quick Add"
+                    menuSubtitle="Choose what to add"
               options={unifiedAddOptions}
               className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-lg font-normal text-slate-900 shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
             />
@@ -14174,7 +14244,8 @@ html, body, #root {
                   onChange={value => switchUnifiedAddFromSpecialized('client', value as UnifiedAddAction)}
                   ariaLabel="Choose what to add"
                   menuVariant="screen"
-                  menuTitle=""
+                  menuTitle="Quick Add"
+                    menuSubtitle="Choose what to add"
                   options={unifiedAddOptions}
                   className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-lg font-normal text-slate-900 shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                 />

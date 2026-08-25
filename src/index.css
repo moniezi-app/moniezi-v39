@@ -5085,3 +5085,42 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   .v39433-add-choice-card { min-height: 158px !important; padding: 17px 16px 16px !important; }
   .v39433-add-choice-card__label svg { width: 68px !important; height: 68px !important; }
 }
+
+/* ================================================================
+   MONIEZI v39.4.35 — activation viewport lock + Quick Add identity
+   ----------------------------------------------------------------
+   - Activation runs inside one stable, fixed scroll surface so Android Chrome
+     cannot re-anchor the whole document as the software keyboard opens/closes.
+   - The visual viewport session in App.tsx preserves the single intentional
+     keyboard-pan position through validation instead of producing a second jump.
+   - Quick Add receives an explicit title/subtitle while its choices remain the
+     only scrolling region.
+   ================================================================ */
+.moniezi-license-stable-surface.v39-license-gate {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100svh !important;
+  min-height: 100svh !important;
+  max-height: 100svh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: contain;
+  scroll-behavior: auto !important;
+  overflow-anchor: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.moniezi-license-stable-surface .v39-license-shell,
+.moniezi-license-stable-surface .v39-license-intro,
+.moniezi-license-stable-surface .v39-license-card,
+.moniezi-license-stable-surface .v39-license-benefits {
+  overflow-anchor: none;
+}
+
+.v39435-add-choice-header {
+  flex: 0 0 auto;
+  min-height: 68px;
+  background: inherit;
+}

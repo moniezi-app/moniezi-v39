@@ -21,6 +21,7 @@ type MonieziSelectProps = {
   menuMinWidth?: number;
   menuVariant?: 'default' | 'screen';
   menuTitle?: string;
+  menuSubtitle?: string;
   autoOpen?: boolean;
   hideTrigger?: boolean;
   onDismiss?: () => void;
@@ -49,6 +50,7 @@ export function MonieziSelect({
   menuMinWidth = DEFAULT_MENU_MIN_WIDTH,
   menuVariant = 'default',
   menuTitle = 'Choose an item',
+  menuSubtitle = '',
   autoOpen = false,
   hideTrigger = false,
   onDismiss,
@@ -192,8 +194,13 @@ export function MonieziSelect({
             }}
           >
             {menuVariant === 'screen' ? (
-              <div className={`mb-2 flex items-center ${menuTitle ? 'justify-between border-b border-slate-200 px-2 pb-3 pt-1 dark:border-slate-700/80' : 'justify-end px-1 pb-1 pt-1'}`}>
-                {menuTitle ? <div className="text-xl font-normal text-slate-950 dark:text-white">{menuTitle}</div> : null}
+              <div className={`v39435-add-choice-header mb-2 flex items-center ${menuTitle ? 'justify-between border-b border-slate-200 px-2 pb-3 pt-1 dark:border-slate-700/80' : 'justify-end px-1 pb-1 pt-1'}`}>
+                {menuTitle ? (
+                  <div className="min-w-0 pr-4">
+                    <div className="text-[22px] font-extrabold leading-tight tracking-[-0.025em] text-slate-950 dark:text-white">{menuTitle}</div>
+                    {menuSubtitle ? <div className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">{menuSubtitle}</div> : null}
+                  </div>
+                ) : null}
                 <button
                   type="button"
                   onClick={dismissMenu}
