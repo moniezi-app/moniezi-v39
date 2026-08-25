@@ -1,4 +1,13 @@
-# MONIEZI v39.4.36
+# MONIEZI v39.4.37
+## v39.4.37 Quick Add composition refinement
+- Keeps the approved icon + transaction-name-only Quick Add choices with no surrounding option cards.
+- Makes the panel content-sized when all choices fit, while retaining internal scrolling on smaller screens.
+- Adds restrained divider lines to Money & Sales and Business headings for stronger visual structure.
+- Tightens icon-to-label spacing and row rhythm while preserving large, recognizable icons and generous touch targets.
+- Centers the final Job / Project choice across the grid instead of leaving an empty right column.
+- Reduces the visual weight of the Quick Add close control.
+- No navigation, transaction actions, Demo flow, business calculations, or data behavior changed.
+
 ## v39.4.36 Quick Add icon-only choices + stable Demo/Home arrival
 - Removes the redundant visible **Choose what to add** line; the unified chooser now shows only **Quick Add** in its header.
 - Removes the large rounded transaction-choice cards from Quick Add. Each choice is now a centered standalone icon with its transaction name directly underneath, while preserving the two-column layout, scrolling, groups, and every existing action.

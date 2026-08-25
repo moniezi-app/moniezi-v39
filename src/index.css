@@ -5274,3 +5274,142 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   width: min(100%, 360px) !important;
   height: auto !important;
 }
+
+
+/* ================================================================
+   MONIEZI v39.4.37 — Quick Add composition refinement
+   ----------------------------------------------------------------
+   Keeps the approved icon + label choices, but gives the chooser a stronger
+   rhythm: content-sized panel, clearer group dividers, tighter icon/label
+   pairing, centered final Job/Project action, and a quieter close control.
+   Navigation and Quick Add actions are unchanged.
+   ================================================================ */
+
+/* Let the panel end shortly after its content when everything fits. The body
+   may still shrink and scroll on smaller viewports because the panel retains
+   its runtime max-height. */
+.v39433-add-choice-screen {
+  height: auto !important;
+  min-height: 0 !important;
+}
+.v39433-add-choice-screen > .v39434-add-choice-scroll {
+  flex: 0 1 auto !important;
+  min-height: 0 !important;
+}
+
+/* Quieter, more compact title bar. */
+.v39435-add-choice-header {
+  min-height: 52px !important;
+  margin-bottom: 10px !important;
+  padding: 2px 4px 11px !important;
+}
+.v39435-add-choice-header > div:first-child > div:first-child {
+  font-size: 23px !important;
+  line-height: 1.05 !important;
+}
+.v39435-add-choice-header > button {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 11px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.v39435-add-choice-header > button svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Group titles now create structure without becoming another card. */
+.v39433-add-choice-group__title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 0 4px 16px !important;
+  color: #64748b !important;
+  font-size: 11.5px !important;
+  line-height: 1 !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.13em !important;
+  white-space: nowrap;
+}
+.v39433-add-choice-group__title::after {
+  content: "";
+  height: 1px;
+  flex: 1 1 auto;
+  background: linear-gradient(90deg, rgba(100,116,139,0.34), rgba(100,116,139,0.06));
+}
+.dark .v39433-add-choice-group__title {
+  color: #aab6ca !important;
+}
+.dark .v39433-add-choice-group__title::after {
+  background: linear-gradient(90deg, rgba(148,163,184,0.28), rgba(148,163,184,0.035));
+}
+
+/* Keep a generous two-column layout, but remove the overly loose vertical
+   rhythm from the previous version. */
+.v39433-add-choice-grid {
+  column-gap: 26px !important;
+  row-gap: 18px !important;
+  align-items: start !important;
+}
+.v39433-add-choice-card {
+  min-height: 82px !important;
+  padding: 3px 4px 5px !important;
+}
+.v39433-add-choice-card__label,
+.v39433-add-choice-card__label > span {
+  gap: 6px !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+}
+
+/* The icons remain unboxed. A soft color halo anchors each symbol visually
+   without recreating the removed rectangular cards. */
+.v39433-add-choice-card__label svg {
+  width: 50px !important;
+  height: 50px !important;
+  filter:
+    drop-shadow(0 0 7px currentColor)
+    drop-shadow(0 7px 12px rgba(2, 8, 23, 0.20)) !important;
+}
+.dark .v39433-add-choice-card__label svg {
+  filter:
+    drop-shadow(0 0 8px currentColor)
+    drop-shadow(0 8px 14px rgba(0, 0, 0, 0.32)) !important;
+}
+
+/* A larger break belongs between semantic groups, not between every choice. */
+.v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
+  margin-top: 30px !important;
+}
+
+/* When a group has an odd final choice (Business currently ends with
+   Job / Project), center it across the full grid instead of leaving a visually
+   unfinished empty cell on the right. */
+.v39433-add-choice-grid > .v39433-add-choice-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1 !important;
+  width: calc(50% - 13px) !important;
+  justify-self: center !important;
+}
+
+/* Preserve usable touch targets while keeping the visible composition light. */
+.v39433-add-choice-card:focus-visible {
+  border-radius: 14px !important;
+}
+
+@media (min-width: 640px) {
+  .v39433-add-choice-grid {
+    column-gap: 34px !important;
+    row-gap: 22px !important;
+  }
+  .v39433-add-choice-card {
+    min-height: 90px !important;
+  }
+  .v39433-add-choice-card__label svg {
+    width: 54px !important;
+    height: 54px !important;
+  }
+  .v39433-add-choice-grid > .v39433-add-choice-card:last-child:nth-child(odd) {
+    width: calc(50% - 17px) !important;
+  }
+}
