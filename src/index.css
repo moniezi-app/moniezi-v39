@@ -4293,3 +4293,168 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   .v39430-home-quick-card__meta { font-size: 13px; }
   .v39430-home-quick-card__chevron { right: 17px; bottom: 24px; }
 }
+
+/* ================================================================
+   MONIEZI v39.4.31 — Home feature-card headers + wider card spacing
+   ----------------------------------------------------------------
+   Keeps every existing Home module and its data intact while giving each
+   major card the same large, unmistakable icon-led header language as the
+   Phase 1 Quick Access launchers. The dashboard is intentionally scrollable;
+   breathing room wins over above-the-fold density.
+   ================================================================ */
+
+/* Major Home modules should never read as one continuous stack. */
+.v3935-home-breathing > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 40px !important;
+}
+
+.v39431-home-feature-card {
+  padding: 26px !important;
+}
+
+/* Shared large header. The existing v39.3.6 grid still keeps actions on the
+   right and allows supporting copy to use the full card width underneath. */
+.v39431-home-feature-header {
+  grid-template-columns: 82px minmax(0, 1fr) auto !important;
+  column-gap: 19px !important;
+  row-gap: 13px !important;
+  align-items: center !important;
+  margin-bottom: 26px !important;
+}
+
+.v39431-home-feature-header .v391-glass-icon {
+  width: 82px !important;
+  height: 82px !important;
+  border-width: 1.5px;
+  border-radius: 22px !important;
+  background:
+    radial-gradient(92% 88% at 26% 18%, rgba(var(--v391-tone-rgb), 0.35) 0%, rgba(var(--v391-tone-rgb), 0.12) 62%, transparent 100%),
+    linear-gradient(145deg, rgba(var(--v391-tone-rgb), 0.24), rgba(5, 15, 40, 0.10));
+  box-shadow:
+    0 15px 30px rgba(var(--v391-tone-rgb), 0.20),
+    0 0 24px rgba(var(--v391-tone-rgb), 0.13),
+    inset 0 1px 0 rgba(255,255,255,0.20),
+    inset 0 -12px 24px rgba(var(--v391-tone-rgb), 0.07);
+}
+
+.dark .v39431-home-feature-header .v391-glass-icon {
+  background:
+    radial-gradient(92% 88% at 26% 18%, rgba(var(--v391-tone-rgb), 0.42) 0%, rgba(var(--v391-tone-rgb), 0.16) 58%, transparent 100%),
+    linear-gradient(145deg, rgba(var(--v391-tone-rgb), 0.24), rgba(2, 9, 27, 0.72));
+  box-shadow:
+    0 16px 30px rgba(var(--v391-tone-rgb), 0.22),
+    0 0 28px rgba(var(--v391-tone-rgb), 0.16),
+    inset 0 1px 0 rgba(255,255,255,0.14),
+    inset 0 -12px 24px rgba(0,0,0,0.14);
+}
+
+.v39431-home-feature-header .v391-glass-icon svg {
+  width: 50px !important;
+  height: 50px !important;
+  stroke-width: 1.65 !important;
+  filter: drop-shadow(0 7px 9px rgba(var(--v391-tone-rgb), 0.25));
+}
+
+.v39431-home-feature-header .v391-card-title,
+.v39431-home-feature-header .v391-card-title--hero {
+  font-size: clamp(20px, 5.6vw, 24px) !important;
+  line-height: 1.22 !important;
+  letter-spacing: -0.032em !important;
+}
+
+.v39431-home-feature-header .v391-card-subtitle {
+  font-size: 14px !important;
+  line-height: 1.58 !important;
+  margin-top: 0 !important;
+}
+
+.v39431-home-feature-header > .v391-glass-action {
+  align-self: center;
+}
+
+.v39431-home-header-chevron {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+/* The header itself now owns the separation from the first body element. */
+.v39431-home-feature-card .v391-glass-segments {
+  margin-top: 0 !important;
+}
+
+/* Old v39.3.5 first-child rules were written for the previous compact headers. */
+.v3935-home-tax.v39431-home-feature-card > .v39431-home-feature-header,
+.v3935-home-receipts.v39431-home-feature-card > .v39431-home-feature-header {
+  margin-bottom: 26px !important;
+}
+
+@media (max-width: 390px) {
+  .v3935-home-breathing > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 36px !important;
+  }
+
+  .v39431-home-feature-card {
+    padding: 24px !important;
+  }
+
+  .v39431-home-feature-header {
+    grid-template-columns: 74px minmax(0, 1fr) auto !important;
+    column-gap: 16px !important;
+    row-gap: 12px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .v39431-home-feature-header .v391-glass-icon {
+    width: 74px !important;
+    height: 74px !important;
+    border-radius: 20px !important;
+  }
+
+  .v39431-home-feature-header .v391-glass-icon svg {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .v39431-home-feature-header .v391-card-title,
+  .v39431-home-feature-header .v391-card-title--hero {
+    font-size: 19px !important;
+  }
+
+  .v39431-home-feature-header .v391-card-subtitle {
+    font-size: 13.5px !important;
+  }
+
+  .v39431-home-feature-header > .v391-glass-action {
+    min-height: 44px;
+    padding-inline: 11px;
+    font-size: 12.5px;
+  }
+}
+
+@media (min-width: 640px) {
+  .v3935-home-breathing > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 48px !important;
+  }
+
+  .v39431-home-feature-card {
+    padding: 30px !important;
+  }
+
+  .v39431-home-feature-header {
+    grid-template-columns: 90px minmax(0, 1fr) auto !important;
+    column-gap: 22px !important;
+    row-gap: 14px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .v39431-home-feature-header .v391-glass-icon {
+    width: 90px !important;
+    height: 90px !important;
+    border-radius: 24px !important;
+  }
+
+  .v39431-home-feature-header .v391-glass-icon svg {
+    width: 56px !important;
+    height: 56px !important;
+  }
+}

@@ -1,4 +1,11 @@
-# MONIEZI v39.4.30
+# MONIEZI v39.4.31
+## v39.4.31 Home feature-card headers — large icons + larger gaps
+- Keeps the v39.4.30 Home structure, Quick Access navigation, card content, calculations, actions, and Demo behavior intact.
+- Redesigns only the header treatment of the major Home detail cards so Net Profit, Needs Your Attention, Monthly Business Goals, Continue Work, Recent Activity, Tax Snapshot, and Receipts use large Quick-Access-scale icons.
+- Repositions titles/supporting copy around the larger header icons without removing the existing card content below.
+- Increases vertical separation between major Home modules to create a calmer, more breathable scrolling rhythm.
+- Preserves the retained Demo card subtitle “Sample business data” and the v39.4.29 activation visual stabilization.
+
 ## v39.4.30 Phase 1 Home redesign — large visual quick access
 - Adds six large, icon-led Quick Access cards at the top of Home: Overview, Money, Jobs, Clients, Invoices, and Mileage.
 - Gives every launcher its own strong visual identity, large icon treatment, clear label, and direct tap destination.

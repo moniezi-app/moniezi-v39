@@ -8698,11 +8698,11 @@ html, body, #root {
             </div>
 
             <div id="home-overview" className="scroll-mt-6">
-              <MonieziGlassCard hero>
-              <div className="v391-card-header v3936-home-wide-header">
+              <MonieziGlassCard hero className="v39431-home-feature-card">
+              <div className="v391-card-header v3936-home-wide-header v39431-home-feature-header">
                 <div className="v391-card-header__main">
-                  <MonieziGlassIcon tone="blue" label="Overview">
-                    <LayoutGrid size={21} />
+                  <MonieziGlassIcon tone="blue" label="Net Profit">
+                    <BarChart3 size={52} />
                   </MonieziGlassIcon>
                   <div className="v391-card-header__copy">
                     <h2 className="v391-card-title v391-card-title--hero">
@@ -8765,11 +8765,11 @@ html, body, #root {
             </div>
 
             {businessActionItems.length > 0 && (
-            <MonieziGlassCard>
-              <div className="v391-card-header v3936-home-wide-header">
+            <MonieziGlassCard className="v39431-home-feature-card">
+              <div className="v391-card-header v3936-home-wide-header v39431-home-feature-header">
                 <div className="v391-card-header__main">
-                  <MonieziGlassIcon tone="amber">
-                    <AlertTriangle size={20} />
+                  <MonieziGlassIcon tone="amber" label="Needs Your Attention">
+                    <AlertTriangle size={50} />
                   </MonieziGlassIcon>
                   <div className="v391-card-header__copy">
                     <h3 className="v391-card-title">Needs Your Attention</h3>
@@ -8804,10 +8804,10 @@ html, body, #root {
             </MonieziGlassCard>
             )}
 
-            <MonieziGlassCard>
-              <div className="v391-card-header v3936-home-wide-header">
+            <MonieziGlassCard className="v39431-home-feature-card">
+              <div className="v391-card-header v3936-home-wide-header v39431-home-feature-header">
                 <div className="v391-card-header__main">
-                  <MonieziGlassIcon tone="violet"><Percent size={20} /></MonieziGlassIcon>
+                  <MonieziGlassIcon tone="violet" label="Monthly Business Goals"><Percent size={50} /></MonieziGlassIcon>
                   <div className="v391-card-header__copy">
                     <h3 className="v391-card-title">Monthly Business Goals</h3>
                     <p className="v391-card-subtitle">{monthlyGoalLabel} · track revenue and profit without a separate planning tool.</p>
@@ -8861,10 +8861,10 @@ html, body, #root {
             </MonieziGlassCard>
 
             {dailyEfficiencyActions.length > 0 && (
-              <MonieziGlassCard className="v391-secondary-card">
-                <div className="v391-card-header">
+              <MonieziGlassCard className="v391-secondary-card v39431-home-feature-card">
+                <div className="v391-card-header v3936-home-wide-header v39431-home-feature-header">
                   <div className="v391-card-header__main">
-                    <MonieziGlassIcon tone="amber"><Zap size={20} /></MonieziGlassIcon>
+                    <MonieziGlassIcon tone="amber" label="Continue Work"><Zap size={50} /></MonieziGlassIcon>
                     <div className="v391-card-header__copy">
                       <h3 className="v391-card-title">Continue Work</h3>
                       <p className="v391-card-subtitle">Fast shortcuts based on what you were already doing in MONIEZI.</p>
@@ -8883,10 +8883,16 @@ html, body, #root {
               </MonieziGlassCard>
             )}
 
-            <div className="v391-glass-card v391-secondary-card v3935-home-recent">
-              <div className="v391-section-heading mb-4">
-                <h3>Recent activity</h3>
-                <button onClick={() => setCurrentPage(Page.AllTransactions)} className="min-h-11 px-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors">See all</button>
+            <div className="v391-glass-card v391-secondary-card v3935-home-recent v39431-home-feature-card">
+              <div className="v391-card-header v3936-home-wide-header v39431-home-feature-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="cyan" label="Recent activity"><ClipboardList size={50} /></MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Recent activity</h3>
+                    <p className="v391-card-subtitle">Your latest transactions and recorded business activity.</p>
+                  </div>
+                </div>
+                <MonieziGlassAction onClick={() => setCurrentPage(Page.AllTransactions)} tone="cyan">See all</MonieziGlassAction>
               </div>
               <div className="space-y-3">
                 {transactions.length === 0 ? <EmptyState icon={<ClipboardList size={24} />} title="No activity yet" subtitle="Your latest transactions will appear here once you start recording." action={handleOpenUnifiedAdd} actionLabel="Add Transaction" /> :
@@ -8909,10 +8915,16 @@ html, body, #root {
               </div>
             </div>
 
-            <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card v3935-home-tax cursor-pointer active:scale-[0.99] transition-all group">
-               <div className="flex justify-between items-start mb-4">
-                  <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400"><Calculator size={20} /><span className="text-[13px] font-bold uppercase tracking-widest font-brand">Tax Snapshot</span></div>
-                  <ArrowRight size={18} className="text-slate-300 dark:text-slate-300 -rotate-45 group-hover:rotate-0 group-hover:text-emerald-500 transition-all duration-300"/>
+            <div onClick={() => { setScrollToTaxSnapshot(true); setCurrentPage(Page.Reports); }} className="v391-glass-card v391-secondary-card v3935-home-tax v39431-home-feature-card cursor-pointer active:scale-[0.99] transition-all group">
+               <div className="v391-card-header v3936-home-wide-header v39431-home-feature-header">
+                  <div className="v391-card-header__main">
+                    <MonieziGlassIcon tone="green" label="Tax Snapshot"><Calculator size={50} /></MonieziGlassIcon>
+                    <div className="v391-card-header__copy">
+                      <h3 className="v391-card-title">Tax Snapshot</h3>
+                      <p className="v391-card-subtitle">A cautious year-to-date tax reserve and deadline snapshot.</p>
+                    </div>
+                  </div>
+                  <ArrowRight size={21} className="v39431-home-header-chevron text-slate-300 dark:text-slate-300 -rotate-45 group-hover:rotate-0 group-hover:text-emerald-500 transition-all duration-300"/>
                </div>
                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
                   <div><div className="text-[13px] text-slate-600 dark:text-slate-300 uppercase tracking-wider font-bold mb-1">Set Aside (YTD)</div><div className="text-2xl font-extrabold font-brand text-slate-900 dark:text-white">{formatCurrency.format(reportData.totalEstimatedTax)}</div></div>
@@ -8930,11 +8942,14 @@ html, body, #root {
             </div>
 
             {/* Home Receipts: actions + real linked receipt images + missing-documentation workflow */}
-            <div id="home-receipts" className="v391-glass-card v391-secondary-card v3935-home-receipts scroll-mt-6">
-              <div className="flex items-center justify-between mb-4 pl-2">
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-brand">Receipts</h3>
-                  <p className="mt-1 text-[13px] font-medium text-slate-500 dark:text-slate-400">Capture receipts, record expenses, and see what still needs documentation.</p>
+            <div id="home-receipts" className="v391-glass-card v391-secondary-card v3935-home-receipts v39431-home-feature-card scroll-mt-6">
+              <div className="v391-card-header v3936-home-wide-header v39431-home-feature-header">
+                <div className="v391-card-header__main">
+                  <MonieziGlassIcon tone="rose" label="Receipts"><Receipt size={50} /></MonieziGlassIcon>
+                  <div className="v391-card-header__copy">
+                    <h3 className="v391-card-title">Receipts</h3>
+                    <p className="v391-card-subtitle">Capture receipts, record expenses, and see what still needs documentation.</p>
+                  </div>
                 </div>
               </div>
 
