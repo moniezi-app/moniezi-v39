@@ -1,4 +1,11 @@
-# MONIEZI v39.4.38
+# MONIEZI v39.4.39
+
+## v39.4.39 Quick Add hamburger-style icon tiles
+- Keeps the Quick Add chooser as a light two-column icon + label layout with no full transaction cards.
+- Gives each Quick Add icon the same rounded-rectangle bordered treatment used by the hamburger-menu icons, while keeping the transaction name centered underneath.
+- Enlarges the MONEY & SALES and BUSINESS group headings and increases spacing between choices and between groups.
+- Preserves Quick Add scrolling, choices, actions, navigation, and the v39.4.38 activation/Home behavior unchanged.
+
 ## v39.4.38 First Home frame stabilization
 - Preloads and decodes the first-run Demo illustration while the license screen is still visible.
 - Waits for bundled fonts and the Android Chrome visual viewport to settle after keyboard close before revealing Home.

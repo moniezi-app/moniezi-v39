@@ -5471,3 +5471,118 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     width: min(calc(100% - 14px), 344px) !important;
   }
 }
+
+/* ================================================================
+   MONIEZI v39.4.39 — Quick Add hamburger-style icon tiles
+   ----------------------------------------------------------------
+   The Quick Add chooser remains an open icon + label grid (no full option
+   cards), but each symbol now uses the same rounded-rectangle bordered icon
+   treatment as the hamburger menu. Group labels are stronger and the grid
+   breathes more generously between choices and semantic groups.
+   ================================================================ */
+
+/* Stronger category labels so MONEY & SALES and BUSINESS read as deliberate
+   sections rather than small metadata. */
+.v39433-add-choice-group__title {
+  gap: 14px !important;
+  margin: 0 4px 22px !important;
+  font-size: 14px !important;
+  line-height: 1.1 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.12em !important;
+}
+
+/* More air between the two semantic groups. */
+.v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
+  margin-top: 46px !important;
+}
+
+/* Keep the two-column arrangement but allow every option to breathe. */
+.v39433-add-choice-grid {
+  column-gap: 34px !important;
+  row-gap: 34px !important;
+  align-items: start !important;
+}
+
+/* The visible option is still only icon + centered transaction name.
+   The button itself remains visually transparent and supplies the tap target. */
+.v39433-add-choice-card {
+  min-height: 116px !important;
+  padding: 4px 2px 6px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.dark .v39433-add-choice-card {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.v39433-add-choice-card__label,
+.v39433-add-choice-card__label > span {
+  gap: 12px !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  text-align: center !important;
+}
+
+/* Match the hamburger menu's icon-container language without restoring a full
+   card around the transaction choice. The SVG itself becomes the bordered
+   rounded tile, with the symbol centered by its internal padding. */
+.v39433-add-choice-card__label svg {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 74px !important;
+  height: 74px !important;
+  padding: 15px !important;
+  border: 1.5px solid currentColor !important;
+  border-radius: 20px !important;
+  background: color-mix(in srgb, currentColor 12%, transparent) !important;
+  box-shadow:
+    0 12px 25px color-mix(in srgb, currentColor 12%, transparent),
+    inset 0 1px 0 rgba(255,255,255,0.16) !important;
+  filter: drop-shadow(0 7px 8px color-mix(in srgb, currentColor 44%, transparent)) !important;
+  stroke-width: 1.55 !important;
+}
+
+.dark .v39433-add-choice-card__label svg {
+  background: color-mix(in srgb, currentColor 11%, rgba(4,12,29,0.88)) !important;
+  border-color: color-mix(in srgb, currentColor 58%, transparent) !important;
+  box-shadow:
+    0 13px 27px rgba(0,0,0,0.24),
+    0 0 18px color-mix(in srgb, currentColor 11%, transparent),
+    inset 0 1px 0 rgba(255,255,255,0.08) !important;
+}
+
+/* Preserve the centered odd final action with spacing based on the wider grid. */
+.v39433-add-choice-grid > .v39433-add-choice-card:last-child:nth-child(odd) {
+  width: calc(50% - 17px) !important;
+}
+
+@media (min-width: 640px) {
+  .v39433-add-choice-group__title {
+    margin-bottom: 26px !important;
+    font-size: 15px !important;
+  }
+  .v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
+    margin-top: 54px !important;
+  }
+  .v39433-add-choice-grid {
+    column-gap: 42px !important;
+    row-gap: 40px !important;
+  }
+  .v39433-add-choice-card {
+    min-height: 126px !important;
+  }
+  .v39433-add-choice-card__label svg {
+    width: 82px !important;
+    height: 82px !important;
+    padding: 17px !important;
+    border-radius: 22px !important;
+  }
+  .v39433-add-choice-grid > .v39433-add-choice-card:last-child:nth-child(odd) {
+    width: calc(50% - 21px) !important;
+  }
+}

@@ -13538,7 +13538,7 @@ html, body, #root {
                   <MonieziSelect
                     value="mileage"
                     onChange={value => switchUnifiedAddFromSpecialized('mileage', value as UnifiedAddAction)}
-                    ariaLabel="Choose what to add"
+                    ariaLabel="Quick Add"
                     menuVariant="screen"
                     menuTitle="Quick Add"
                                         options={unifiedAddOptions}
@@ -13609,7 +13609,7 @@ html, body, #root {
                       <MonieziSelect
                         value=""
                         onChange={value => handleUnifiedAddSelection(value as UnifiedAddAction)}
-                        ariaLabel="Choose what to add"
+                        ariaLabel="Quick Add"
                         menuVariant="screen"
                         menuTitle="Quick Add"
                                             options={unifiedAddOptions}
@@ -13622,7 +13622,7 @@ html, body, #root {
                         <MonieziSelect
                           value={addFlowSelection}
                           onChange={value => handleUnifiedAddSelection(value as UnifiedAddAction)}
-                          ariaLabel="Choose what to add"
+                          ariaLabel="Quick Add"
                           menuMinWidth={280}
                           menuVariant="screen"
                           menuTitle="Quick Add"
@@ -14185,7 +14185,7 @@ html, body, #root {
             <MonieziSelect
               value="job"
               onChange={value => switchUnifiedAddFromSpecialized('job', value as UnifiedAddAction)}
-              ariaLabel="Choose what to add"
+              ariaLabel="Quick Add"
               menuVariant="screen"
               menuTitle="Quick Add"
                                   options={unifiedAddOptions}
@@ -14336,7 +14336,7 @@ html, body, #root {
                 <MonieziSelect
                   value="client"
                   onChange={value => switchUnifiedAddFromSpecialized('client', value as UnifiedAddAction)}
-                  ariaLabel="Choose what to add"
+                  ariaLabel="Quick Add"
                   menuVariant="screen"
                   menuTitle="Quick Add"
                                       options={unifiedAddOptions}
