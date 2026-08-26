@@ -1,5 +1,10 @@
 # MONIEZI
 
+## v39.4.44 — CSS production-build correction
+- Fixes the malformed v39.4.43 Quick Access CSS block that was written with literal `\n` characters instead of real line breaks, causing PostCSS to fail with `Unknown word min-height`.
+- Preserves the v39.4.43 history-aware Back navigation behavior and compact Quick Access shells with the original large icon scale.
+- No intentional UI or business-logic changes beyond making the approved v39.4.43 source buildable.
+
 ## v39.4.43 — History-aware Back + compact Quick Access shells
 - Shows the in-app Back control on every MONIEZI screen reached from a prior MONIEZI screen, including Clients, Jobs, Estimates, Invoices, and Mileage. Initial Home remains the only history-root screen without Back.
 - Android system Back, iPhone Safari/PWA swipe-back, and the visible Back control share the same history stack.

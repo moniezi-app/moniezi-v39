@@ -5706,4 +5706,90 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
    Home Quick Access cards. The grid spacing stays spacious while the
    individual launcher cards consume less vertical screen area.
    ================================================================ */
-\n\n/* ================================================================\n   MONIEZI v39.4.43 — smaller Quick Access shells, original icon scale\n   ----------------------------------------------------------------\n   The launcher CARD shrinks; the established icon container and icon stay at\n   their pre-v39.4.42 visual size. This keeps strong visual recognition while\n   reducing the amount of Home screen consumed by each outer card.\n   ================================================================ */\n.v39430-home-quick-card {\n  min-height: 124px !important;\n  padding: 11px 12px 10px !important;\n  border-radius: 19px !important;\n}\n\n/* Explicitly preserve the large icon treatment. */\n.v39430-home-quick-card__icon {\n  width: 56px !important;\n  height: 56px !important;\n  border-radius: 16px !important;\n}\n.v39430-home-quick-card__icon svg {\n  width: 40px !important;\n  height: 40px !important;\n}\n\n.v39430-home-quick-card__copy {\n  left: 12px !important;\n  right: 34px !important;\n  bottom: 10px !important;\n}\n.v39430-home-quick-card__title {\n  font-size: 17px !important;\n  line-height: 1.04 !important;\n}\n.v39430-home-quick-card__meta {\n  margin-top: 2px !important;\n  font-size: 11px !important;\n  line-height: 1.12 !important;\n}\n.v39430-home-quick-card__chevron {\n  right: 9px !important;\n  bottom: 13px !important;\n}\n\n@media (max-width: 390px) {\n  .v39430-home-quick-card {\n    min-height: 120px !important;\n    padding: 10px 10px 9px !important;\n  }\n  .v39430-home-quick-card__icon {\n    width: 56px !important;\n    height: 56px !important;\n  }\n  .v39430-home-quick-card__icon svg {\n    width: 40px !important;\n    height: 40px !important;\n  }\n  .v39430-home-quick-card__copy {\n    left: 10px !important;\n    right: 31px !important;\n    bottom: 9px !important;\n  }\n  .v39430-home-quick-card__title { font-size: 16px !important; }\n  .v39430-home-quick-card__meta { font-size: 10.5px !important; }\n}\n\n@media (min-width: 640px) {\n  .v39430-home-quick-card {\n    min-height: 138px !important;\n    padding: 14px 14px 12px !important;\n  }\n  .v39430-home-quick-card__icon {\n    width: 62px !important;\n    height: 62px !important;\n  }\n  .v39430-home-quick-card__icon svg {\n    width: 44px !important;\n    height: 44px !important;\n  }\n  .v39430-home-quick-card__copy {\n    left: 14px !important;\n    bottom: 12px !important;\n  }\n  .v39430-home-quick-card__title { font-size: 20px !important; }\n  .v39430-home-quick-card__meta { font-size: 12px !important; }\n}\n
+
+
+/* ================================================================
+   MONIEZI v39.4.43 — smaller Quick Access shells, original icon scale
+   ----------------------------------------------------------------
+   The launcher CARD shrinks; the established icon container and icon stay at
+   their pre-v39.4.42 visual size. This keeps strong visual recognition while
+   reducing the amount of Home screen consumed by each outer card.
+   ================================================================ */
+.v39430-home-quick-card {
+  min-height: 124px !important;
+  padding: 11px 12px 10px !important;
+  border-radius: 19px !important;
+}
+
+/* Explicitly preserve the large icon treatment. */
+.v39430-home-quick-card__icon {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 16px !important;
+}
+.v39430-home-quick-card__icon svg {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.v39430-home-quick-card__copy {
+  left: 12px !important;
+  right: 34px !important;
+  bottom: 10px !important;
+}
+.v39430-home-quick-card__title {
+  font-size: 17px !important;
+  line-height: 1.04 !important;
+}
+.v39430-home-quick-card__meta {
+  margin-top: 2px !important;
+  font-size: 11px !important;
+  line-height: 1.12 !important;
+}
+.v39430-home-quick-card__chevron {
+  right: 9px !important;
+  bottom: 13px !important;
+}
+
+@media (max-width: 390px) {
+  .v39430-home-quick-card {
+    min-height: 120px !important;
+    padding: 10px 10px 9px !important;
+  }
+  .v39430-home-quick-card__icon {
+    width: 56px !important;
+    height: 56px !important;
+  }
+  .v39430-home-quick-card__icon svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .v39430-home-quick-card__copy {
+    left: 10px !important;
+    right: 31px !important;
+    bottom: 9px !important;
+  }
+  .v39430-home-quick-card__title { font-size: 16px !important; }
+  .v39430-home-quick-card__meta { font-size: 10.5px !important; }
+}
+
+@media (min-width: 640px) {
+  .v39430-home-quick-card {
+    min-height: 138px !important;
+    padding: 14px 14px 12px !important;
+  }
+  .v39430-home-quick-card__icon {
+    width: 62px !important;
+    height: 62px !important;
+  }
+  .v39430-home-quick-card__icon svg {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .v39430-home-quick-card__copy {
+    left: 14px !important;
+    bottom: 12px !important;
+  }
+  .v39430-home-quick-card__title { font-size: 20px !important; }
+  .v39430-home-quick-card__meta { font-size: 12px !important; }
+}
