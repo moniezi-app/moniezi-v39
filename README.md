@@ -1,3 +1,12 @@
+## v39.4.46 — Quick Access authoritative layout cleanup
+
+- Consolidated Home Quick Access card styling into one authoritative CSS definition.
+- Removed the accumulated v39.4.41/v39.4.43/v39.4.45 Quick Access overrides.
+- Removed decorative corner/radial color washes from Quick Access cards.
+- Increased the actual icon glyph within the existing rounded icon plate.
+- Replaced absolute title positioning with normal vertical flow: icon → gap → title → status.
+- Preserved two-column layout, section colors, borders, chevrons, destinations, Back navigation, and Quick Add behavior.
+
 ## v39.4.45 — Quick Access clean surfaces + icon/title spacing
 - Removes the decorative corner color washes/blobs from Home Quick Access cards in both light and dark modes.
 - Keeps the existing rounded icon containers but enlarges the actual icon glyphs inside them.

@@ -4059,6 +4059,15 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   flex: 0 0 auto;
 }
 
+/* ================================================================
+   MONIEZI v39.4.46 — authoritative Home Quick Access layout
+   ----------------------------------------------------------------
+   One clean definition for the launcher cards: flat surfaces (no painted
+   corner washes), large glyphs, and normal document-flow spacing between
+   icon, title and metadata. This replaces the accumulated positioning
+   overrides from v39.4.41/v39.4.43/v39.4.45.
+   ================================================================ */
+
 .v39430-home-quick-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4070,63 +4079,51 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   --qa-rgb: 79, 112, 255;
   --qa-color: #4f70ff;
   position: relative;
-  isolation: isolate;
   overflow: hidden;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   min-width: 0;
-  min-height: 124px;
-  padding: 12px 12px 11px;
+  min-height: 128px;
+  padding: 10px 12px 9px;
   border: 1.5px solid rgba(var(--qa-rgb), 0.58);
-  border-radius: 22px !important;
-  background:
-    radial-gradient(110% 105% at 18% 7%, rgba(var(--qa-rgb), 0.16) 0%, rgba(var(--qa-rgb), 0.055) 44%, transparent 72%),
-    linear-gradient(145deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.96) 100%);
+  border-radius: 19px !important;
+  background: #ffffff;
   color: #0f172a;
   text-align: left;
   box-shadow:
-    0 14px 30px rgba(15, 23, 42, 0.08),
-    0 0 0 1px rgba(var(--qa-rgb), 0.05),
-    inset 0 1px 0 rgba(255,255,255,0.78);
+    0 12px 26px rgba(15, 23, 42, 0.075),
+    inset 0 1px 0 rgba(255,255,255,0.82);
   transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .dark .v39430-home-quick-card {
-  background:
-    radial-gradient(120% 112% at 18% 7%, rgba(var(--qa-rgb), 0.24) 0%, rgba(var(--qa-rgb), 0.075) 45%, transparent 72%),
-    linear-gradient(145deg, rgba(6, 17, 44, 0.98) 0%, rgba(6, 13, 32, 0.98) 100%);
+  background: #071128;
   color: #f8fafc;
   border-color: rgba(var(--qa-rgb), 0.64);
   box-shadow:
-    0 18px 34px rgba(1, 6, 20, 0.34),
-    0 0 22px rgba(var(--qa-rgb), 0.09),
-    inset 0 1px 0 rgba(255,255,255,0.055);
+    0 16px 30px rgba(1, 6, 20, 0.32),
+    inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
+/* No decorative corner circles or radial washes. */
 .v39430-home-quick-card::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: 128px;
-  height: 128px;
-  right: -58px;
-  bottom: -62px;
-  border-radius: 50%;
-  background: rgba(var(--qa-rgb), 0.09);
-  filter: blur(3px);
+  display: none;
+  content: none;
 }
 
 .v39430-home-quick-card:hover {
-  border-color: rgba(var(--qa-rgb), 0.84);
+  border-color: rgba(var(--qa-rgb), 0.82);
   box-shadow:
-    0 18px 36px rgba(15, 23, 42, 0.11),
-    0 0 24px rgba(var(--qa-rgb), 0.12);
+    0 15px 30px rgba(15, 23, 42, 0.10),
+    inset 0 1px 0 rgba(255,255,255,0.84);
 }
 
 .dark .v39430-home-quick-card:hover {
   box-shadow:
-    0 20px 38px rgba(1, 6, 20, 0.40),
-    0 0 26px rgba(var(--qa-rgb), 0.16),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+    0 18px 34px rgba(1, 6, 20, 0.38),
+    inset 0 1px 0 rgba(255,255,255,0.055);
 }
 
 .v39430-home-quick-card:active { transform: scale(0.985); }
@@ -4137,44 +4134,43 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 }
 
 .v39430-home-quick-card__icon {
+  flex: 0 0 auto;
   display: grid;
   place-items: center;
-  width: 56px;
-  height: 56px;
-  border: 1px solid rgba(var(--qa-rgb), 0.50);
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(var(--qa-rgb), 0.48);
   border-radius: 16px !important;
-  background:
-    linear-gradient(145deg, rgba(var(--qa-rgb), 0.22) 0%, rgba(var(--qa-rgb), 0.09) 100%);
+  background: rgba(var(--qa-rgb), 0.085);
   color: var(--qa-color);
   box-shadow:
-    0 12px 24px rgba(var(--qa-rgb), 0.16),
-    inset 0 1px 0 rgba(255,255,255,0.35),
-    inset 0 -10px 20px rgba(var(--qa-rgb), 0.08);
+    0 4px 10px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255,255,255,0.42);
 }
 
 .dark .v39430-home-quick-card__icon {
-  background:
-    linear-gradient(145deg, rgba(var(--qa-rgb), 0.34) 0%, rgba(var(--qa-rgb), 0.12) 100%);
+  background: rgba(var(--qa-rgb), 0.13);
   box-shadow:
-    0 14px 27px rgba(var(--qa-rgb), 0.20),
-    0 0 22px rgba(var(--qa-rgb), 0.12),
-    inset 0 1px 0 rgba(255,255,255,0.16),
-    inset 0 -12px 22px rgba(0,0,0,0.10);
+    0 5px 12px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.10);
 }
 
+/* Make the glyph fill the rounded icon plate instead of floating small. */
 .v39430-home-quick-card__icon svg {
-  width: 40px;
-  height: 40px;
-  filter: drop-shadow(0 7px 8px rgba(var(--qa-rgb), 0.22));
+  width: 50px;
+  height: 50px;
+  transform: scale(1.04);
+  transform-origin: center;
+  filter: none;
 }
 
+/* Normal flow: icon -> clear gap -> title -> metadata. No absolute top/bottom. */
 .v39430-home-quick-card__copy {
-  position: absolute;
-  left: 12px;
-  right: 32px;
-  bottom: 11px;
+  position: static;
   display: block;
+  width: calc(100% - 26px);
   min-width: 0;
+  margin-top: 7px;
 }
 
 .v39430-home-quick-card__title {
@@ -4182,7 +4178,7 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   color: inherit;
   font-family: var(--font-brand, inherit);
   font-size: 17px;
-  line-height: 1.08;
+  line-height: 1.05;
   font-weight: 800;
   letter-spacing: -0.028em;
 }
@@ -4192,8 +4188,8 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   overflow: hidden;
   margin-top: 3px;
   color: #64748b;
-  font-size: 11.5px;
-  line-height: 1.2;
+  font-size: 11px;
+  line-height: 1.12;
   font-weight: 650;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -4204,7 +4200,7 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39430-home-quick-card__chevron {
   position: absolute;
   right: 9px;
-  bottom: 14px;
+  bottom: 20px;
   color: rgba(var(--qa-rgb), 0.86);
 }
 
@@ -4221,6 +4217,45 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .dark .v39430-home-quick-card--clients  { --qa-color: #a980ff; }
 .dark .v39430-home-quick-card--invoices { --qa-color: #65afff; }
 .dark .v39430-home-quick-card--mileage  { --qa-color: #45ccdf; }
+
+@media (max-width: 390px) {
+  .v39430-home-quick-grid {
+    column-gap: 18px;
+    row-gap: 22px;
+  }
+  .v39430-home-quick-card {
+    min-height: 126px;
+    padding: 9px 10px 8px;
+  }
+  .v39430-home-quick-card__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 15px !important;
+  }
+  .v39430-home-quick-card__icon svg {
+    width: 49px;
+    height: 49px;
+  }
+  .v39430-home-quick-card__copy {
+    width: calc(100% - 24px);
+    margin-top: 6px;
+  }
+  .v39430-home-quick-card__title { font-size: 16px; }
+  .v39430-home-quick-card__meta { font-size: 10.5px; }
+  .v39430-home-quick-card__chevron { right: 8px; bottom: 18px; }
+}
+
+@media (min-width: 640px) {
+  .v39430-home-launcher__heading { margin-bottom: 28px; }
+  .v39430-home-quick-grid { column-gap: 28px; row-gap: 30px; }
+  .v39430-home-quick-card { min-height: 148px; padding: 13px 14px 11px; }
+  .v39430-home-quick-card__icon { width: 64px; height: 64px; }
+  .v39430-home-quick-card__icon svg { width: 56px; height: 56px; }
+  .v39430-home-quick-card__copy { width: calc(100% - 30px); margin-top: 9px; }
+  .v39430-home-quick-card__title { font-size: 20px; }
+  .v39430-home-quick-card__meta { font-size: 12px; }
+  .v39430-home-quick-card__chevron { right: 13px; bottom: 23px; }
+}
 
 .v39430-home-details-heading {
   display: flex;
@@ -4254,44 +4289,6 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
    heading visually to the first detailed card. */
 .v39430-home-details-heading + #home-overview {
   margin-top: 20px !important;
-}
-
-@media (max-width: 390px) {
-  .v39430-home-quick-grid {
-    column-gap: 18px;
-    row-gap: 22px;
-  }
-  .v39430-home-quick-card {
-    min-height: 118px;
-    padding: 11px 10px 10px;
-  }
-  .v39430-home-quick-card__icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 15px !important;
-  }
-  .v39430-home-quick-card__icon svg {
-    width: 37px;
-    height: 37px;
-  }
-  .v39430-home-quick-card__copy {
-    left: 10px;
-    bottom: 10px;
-  }
-  .v39430-home-quick-card__title { font-size: 16px; }
-  .v39430-home-quick-card__meta { font-size: 10.5px; }
-}
-
-@media (min-width: 640px) {
-  .v39430-home-launcher__heading { margin-bottom: 28px; }
-  .v39430-home-quick-grid { column-gap: 28px; row-gap: 30px; }
-  .v39430-home-quick-card { min-height: 138px; padding: 15px 14px 13px; }
-  .v39430-home-quick-card__icon { width: 62px; height: 62px; }
-  .v39430-home-quick-card__icon svg { width: 44px; height: 44px; }
-  .v39430-home-quick-card__copy { left: 20px; bottom: 20px; }
-  .v39430-home-quick-card__title { font-size: 22px; }
-  .v39430-home-quick-card__meta { font-size: 13px; }
-  .v39430-home-quick-card__chevron { right: 17px; bottom: 24px; }
 }
 
 /* ================================================================
@@ -5588,19 +5585,8 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 }
 
 /* ================================================================
-   MONIEZI v39.4.41 — Quick Add fit + compact Quick Access cards
-   ----------------------------------------------------------------
-   Two focused mobile refinements:
-   1) Tighten Quick Add's vertical rhythm just enough that the centered
-      Job / Project icon and label remain visible together without the tiny
-      final scroll on typical phone viewports.
-   2) Shorten Home Quick Access card shells while preserving the same large
-      icon scale, two-column gaps, color identity, and readable labels.
+   MONIEZI v39.4.41 — Quick Add fit refinement (preserved)
    ================================================================ */
-
-/* Quick Add: keep the v39.4.39 hamburger-style icon tiles, but reclaim the
-   unnecessary vertical air between rows/groups so the final label stays with
-   its icon in the visible panel. */
 .v39433-add-choice-group__title {
   margin-bottom: 18px !important;
 }
@@ -5624,234 +5610,19 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   gap: 10px !important;
 }
 
-/* Home Quick Access: shorten the outer card, not the visual identity. Icons
-   stay at their established size; only vertical shell/padding is reduced. */
-.v39430-home-quick-card {
-  min-height: 158px;
-  padding: 16px 16px 15px;
-  border-radius: 20px !important;
-}
-
-.v39430-home-quick-card__copy {
-  left: 16px;
-  right: 38px;
-  bottom: 14px;
-}
-
-.v39430-home-quick-card__meta {
-  margin-top: 4px;
-}
-
-.v39430-home-quick-card__chevron {
-  right: 12px;
-  bottom: 18px;
-}
-
 @media (max-width: 390px) {
   .v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
     margin-top: 30px !important;
   }
-  .v39433-add-choice-grid {
-    row-gap: 20px !important;
-  }
-  .v39433-add-choice-card {
-    min-height: 100px !important;
-  }
-
-  .v39430-home-quick-card {
-    min-height: 152px;
-    padding: 15px 14px 14px;
-  }
-  .v39430-home-quick-card__copy {
-    left: 14px;
-    bottom: 13px;
-  }
-  .v39430-home-quick-card__chevron {
-    right: 11px;
-    bottom: 17px;
-  }
+  .v39433-add-choice-grid { row-gap: 20px !important; }
+  .v39433-add-choice-card { min-height: 100px !important; }
 }
 
 @media (min-width: 640px) {
-  .v39433-add-choice-group__title {
-    margin-bottom: 22px !important;
-  }
+  .v39433-add-choice-group__title { margin-bottom: 22px !important; }
   .v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
     margin-top: 42px !important;
   }
-  .v39433-add-choice-grid {
-    row-gap: 30px !important;
-  }
-  .v39433-add-choice-card {
-    min-height: 114px !important;
-  }
-
-  .v39430-home-quick-card {
-    min-height: 176px;
-    padding: 19px 18px 17px;
-  }
-  .v39430-home-quick-card__copy {
-    left: 18px;
-    bottom: 17px;
-  }
-  .v39430-home-quick-card__chevron {
-    right: 15px;
-    bottom: 21px;
-  }
-}
-
-
-/* ================================================================
-   MONIEZI v39.4.42 — Cross-platform Back navigation + 30% smaller
-   Home Quick Access cards. The grid spacing stays spacious while the
-   individual launcher cards consume less vertical screen area.
-   ================================================================ */
-
-
-/* ================================================================
-   MONIEZI v39.4.43 — smaller Quick Access shells, original icon scale
-   ----------------------------------------------------------------
-   The launcher CARD shrinks; the established icon container and icon stay at
-   their pre-v39.4.42 visual size. This keeps strong visual recognition while
-   reducing the amount of Home screen consumed by each outer card.
-   ================================================================ */
-.v39430-home-quick-card {
-  min-height: 124px !important;
-  padding: 11px 12px 10px !important;
-  border-radius: 19px !important;
-}
-
-/* Explicitly preserve the large icon treatment. */
-.v39430-home-quick-card__icon {
-  width: 56px !important;
-  height: 56px !important;
-  border-radius: 16px !important;
-}
-.v39430-home-quick-card__icon svg {
-  width: 40px !important;
-  height: 40px !important;
-}
-
-.v39430-home-quick-card__copy {
-  left: 12px !important;
-  right: 34px !important;
-  bottom: 10px !important;
-}
-.v39430-home-quick-card__title {
-  font-size: 17px !important;
-  line-height: 1.04 !important;
-}
-.v39430-home-quick-card__meta {
-  margin-top: 2px !important;
-  font-size: 11px !important;
-  line-height: 1.12 !important;
-}
-.v39430-home-quick-card__chevron {
-  right: 9px !important;
-  bottom: 13px !important;
-}
-
-@media (max-width: 390px) {
-  .v39430-home-quick-card {
-    min-height: 120px !important;
-    padding: 10px 10px 9px !important;
-  }
-  .v39430-home-quick-card__icon {
-    width: 56px !important;
-    height: 56px !important;
-  }
-  .v39430-home-quick-card__icon svg {
-    width: 40px !important;
-    height: 40px !important;
-  }
-  .v39430-home-quick-card__copy {
-    left: 10px !important;
-    right: 31px !important;
-    bottom: 9px !important;
-  }
-  .v39430-home-quick-card__title { font-size: 16px !important; }
-  .v39430-home-quick-card__meta { font-size: 10.5px !important; }
-}
-
-@media (min-width: 640px) {
-  .v39430-home-quick-card {
-    min-height: 138px !important;
-    padding: 14px 14px 12px !important;
-  }
-  .v39430-home-quick-card__icon {
-    width: 62px !important;
-    height: 62px !important;
-  }
-  .v39430-home-quick-card__icon svg {
-    width: 44px !important;
-    height: 44px !important;
-  }
-  .v39430-home-quick-card__copy {
-    left: 14px !important;
-    bottom: 12px !important;
-  }
-  .v39430-home-quick-card__title { font-size: 20px !important; }
-  .v39430-home-quick-card__meta { font-size: 12px !important; }
-}
-
-/* ================================================================
-   MONIEZI v39.4.45 — Quick Access polish: clean surfaces, larger glyphs,
-   and protected icon/title spacing.
-   ----------------------------------------------------------------
-   This refinement intentionally keeps the existing Quick Access card size,
-   two-column layout, icon containers, section colors, borders, chevrons,
-   labels, and destinations. It only removes the decorative corner washes,
-   enlarges the glyph inside each established icon container, and guarantees
-   clear separation between icon and copy.
-   ================================================================ */
-
-/* Remove the decorative color washes / corner blobs from the card surface.
-   Section identity remains in the border, icon and chevron. */
-.v39430-home-quick-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.995) 0%, rgba(248, 250, 252, 0.985) 100%) !important;
-}
-
-.dark .v39430-home-quick-card {
-  background: linear-gradient(145deg, rgba(7, 17, 40, 0.99) 0%, rgba(5, 12, 29, 0.99) 100%) !important;
-}
-
-.v39430-home-quick-card::before {
-  display: none !important;
-  content: none !important;
-}
-
-/* Keep the established rounded icon container, but let the actual symbol
-   use substantially more of the available area. */
-.v39430-home-quick-card__icon svg {
-  width: 48px !important;
-  height: 48px !important;
-}
-
-/* Position copy independently from the card bottom so the title can never
-   ride into the icon container after the compact-shell change. */
-.v39430-home-quick-card__copy {
-  top: 79px !important;
-  bottom: auto !important;
-}
-
-@media (max-width: 390px) {
-  .v39430-home-quick-card__icon svg {
-    width: 48px !important;
-    height: 48px !important;
-  }
-  .v39430-home-quick-card__copy {
-    top: 75px !important;
-    bottom: auto !important;
-  }
-}
-
-@media (min-width: 640px) {
-  .v39430-home-quick-card__icon svg {
-    width: 54px !important;
-    height: 54px !important;
-  }
-  .v39430-home-quick-card__copy {
-    top: 88px !important;
-    bottom: auto !important;
-  }
+  .v39433-add-choice-grid { row-gap: 30px !important; }
+  .v39433-add-choice-card { min-height: 114px !important; }
 }
