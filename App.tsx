@@ -1189,6 +1189,15 @@ export default function App() {
   // not the browser window. Without resetting this container, switching pages via the
   // bottom nav keeps the previous scroll position.
   const mainScrollRef = useRef<HTMLDivElement>(null);
+  // v39.4.40: track the actual mounted scroll element, not just the ref object.
+  // On first activation -> Home, the visibility effect can run before the main
+  // scroller exists; a callback ref gives us a lifecycle signal exactly when it
+  // mounts so Scroll-to-Top works on the very first Home session.
+  const [mainScrollElement, setMainScrollElement] = useState<HTMLDivElement | null>(null);
+  const setMainScrollNode = useCallback((node: HTMLDivElement | null) => {
+    mainScrollRef.current = node;
+    setMainScrollElement((current) => current === node ? current : node);
+  }, []);
   const [pendingHomeAnchor, setPendingHomeAnchor] = useState<'receipts' | null>(null);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [isKeyboardEditing, setIsKeyboardEditing] = useState(false);
@@ -1310,8 +1319,11 @@ export default function App() {
 
   // Scroll-to-top button visibility
   // Listen on BOTH the internal scroll container AND window (belt-and-suspenders).
+  // v39.4.40: bind to the concrete mounted element. This fixes the first Home
+  // session after activation, where the old effect could run while the ref was
+  // still null and would not re-run until the user changed pages.
   useEffect(() => {
-    const el = mainScrollRef.current;
+    const el = mainScrollElement;
 
     const check = () => {
       // Check the internal scroll container first
@@ -1343,7 +1355,7 @@ export default function App() {
       if (el) el.removeEventListener('scroll', check);
       window.removeEventListener('scroll', check);
     };
-  }, [currentPage, dataLoaded]); // Re-attach when page changes or data loads (ref becomes available)
+  }, [mainScrollElement]); // Re-attach exactly when the real scroll container mounts/replaces.
 
   const scrollToTop = () => {
     const el = mainScrollRef.current;
@@ -8681,7 +8693,7 @@ html, body, #root {
         />
       )}
 
-      <div key={`main-scroll-${currentPage}`} ref={mainScrollRef} className="main-scroll-lock v392-screen v3943-mobile-gutters flex-1 min-h-0 overflow-y-auto px-0 pt-5 sm:pt-6 md:pt-7 no-print custom-scrollbar" data-page={currentPage} data-billing-doc-type={billingDocType} style={{ paddingBottom: shouldHideBottomNav ? 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' : 'calc(11rem + env(safe-area-inset-bottom, 0px))' }} role="main">
+      <div key={`main-scroll-${currentPage}`} ref={setMainScrollNode} className="main-scroll-lock v392-screen v3943-mobile-gutters flex-1 min-h-0 overflow-y-auto px-0 pt-5 sm:pt-6 md:pt-7 no-print custom-scrollbar" data-page={currentPage} data-billing-doc-type={billingDocType} style={{ paddingBottom: shouldHideBottomNav ? 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' : 'calc(11rem + env(safe-area-inset-bottom, 0px))' }} role="main">
 
       {/* Sample-data banner. Always visible while example records are loaded, so
           nobody mistakes them for real figures and the exit is always one tap. */}

@@ -1,4 +1,9 @@
-# MONIEZI v39.4.39
+# MONIEZI v39.4.40
+
+## v39.4.40 Scroll-to-Top first-Home initialization
+- Fixes the floating Scroll-to-Top control not appearing on the first Home session immediately after license activation.
+- The control now binds to the actual mounted internal scroll container through a callback ref, instead of waiting for a later page/data change to re-run the listener effect.
+- Preserves the existing 300px visibility threshold, smooth scroll behavior, button styling/position, navigation, Quick Add v39.4.39 design, and all business logic.
 
 ## v39.4.39 Quick Add hamburger-style icon tiles
 - Keeps the Quick Add chooser as a light two-column icon + label layout with no full transaction cards.
