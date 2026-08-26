@@ -1,4 +1,10 @@
-# MONIEZI v39.4.40
+# MONIEZI v39.4.41
+
+## v39.4.41 Quick Add fit + compact Quick Access cards
+- Tightens Quick Add row/group spacing so the centered **Job / Project** icon and label stay together and are visible without the tiny final scroll on typical phone screens.
+- Keeps the v39.4.39 hamburger-style bordered icon tiles and all Quick Add actions unchanged.
+- Reduces Home **Quick Access** outer card height by roughly 10% while preserving the established large icon scale, two-column layout, card gaps, colors, and navigation.
+- No business logic, calculations, activation flow, Demo behavior, or navigation destinations changed.
 
 ## v39.4.40 Scroll-to-Top first-Home initialization
 - Fixes the floating Scroll-to-Top control not appearing on the first Home session immediately after license activation.

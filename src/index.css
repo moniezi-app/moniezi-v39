@@ -5586,3 +5586,116 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     width: calc(50% - 21px) !important;
   }
 }
+
+/* ================================================================
+   MONIEZI v39.4.41 — Quick Add fit + compact Quick Access cards
+   ----------------------------------------------------------------
+   Two focused mobile refinements:
+   1) Tighten Quick Add's vertical rhythm just enough that the centered
+      Job / Project icon and label remain visible together without the tiny
+      final scroll on typical phone viewports.
+   2) Shorten Home Quick Access card shells while preserving the same large
+      icon scale, two-column gaps, color identity, and readable labels.
+   ================================================================ */
+
+/* Quick Add: keep the v39.4.39 hamburger-style icon tiles, but reclaim the
+   unnecessary vertical air between rows/groups so the final label stays with
+   its icon in the visible panel. */
+.v39433-add-choice-group__title {
+  margin-bottom: 18px !important;
+}
+
+.v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
+  margin-top: 34px !important;
+}
+
+.v39433-add-choice-grid {
+  row-gap: 24px !important;
+}
+
+.v39433-add-choice-card {
+  min-height: 104px !important;
+  padding-top: 2px !important;
+  padding-bottom: 3px !important;
+}
+
+.v39433-add-choice-card__label,
+.v39433-add-choice-card__label > span {
+  gap: 10px !important;
+}
+
+/* Home Quick Access: shorten the outer card, not the visual identity. Icons
+   stay at their established size; only vertical shell/padding is reduced. */
+.v39430-home-quick-card {
+  min-height: 158px;
+  padding: 16px 16px 15px;
+  border-radius: 20px !important;
+}
+
+.v39430-home-quick-card__copy {
+  left: 16px;
+  right: 38px;
+  bottom: 14px;
+}
+
+.v39430-home-quick-card__meta {
+  margin-top: 4px;
+}
+
+.v39430-home-quick-card__chevron {
+  right: 12px;
+  bottom: 18px;
+}
+
+@media (max-width: 390px) {
+  .v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
+    margin-top: 30px !important;
+  }
+  .v39433-add-choice-grid {
+    row-gap: 20px !important;
+  }
+  .v39433-add-choice-card {
+    min-height: 100px !important;
+  }
+
+  .v39430-home-quick-card {
+    min-height: 152px;
+    padding: 15px 14px 14px;
+  }
+  .v39430-home-quick-card__copy {
+    left: 14px;
+    bottom: 13px;
+  }
+  .v39430-home-quick-card__chevron {
+    right: 11px;
+    bottom: 17px;
+  }
+}
+
+@media (min-width: 640px) {
+  .v39433-add-choice-group__title {
+    margin-bottom: 22px !important;
+  }
+  .v39433-add-choice-screen .v39433-add-choice-group + .v39433-add-choice-group {
+    margin-top: 42px !important;
+  }
+  .v39433-add-choice-grid {
+    row-gap: 30px !important;
+  }
+  .v39433-add-choice-card {
+    min-height: 114px !important;
+  }
+
+  .v39430-home-quick-card {
+    min-height: 176px;
+    padding: 19px 18px 17px;
+  }
+  .v39430-home-quick-card__copy {
+    left: 18px;
+    bottom: 17px;
+  }
+  .v39430-home-quick-card__chevron {
+    right: 15px;
+    bottom: 21px;
+  }
+}
