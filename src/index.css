@@ -576,7 +576,7 @@ html {
   display: grid;
   place-items: center;
   width: 100%;
-  min-height: 176px;
+  min-height: 124px;
   padding: 20px;
   overflow: hidden;
   border: 1px solid var(--v39-visual-stage-border);
@@ -1835,7 +1835,7 @@ html {
 .v391-glass-metric__value {
   margin-top: 7px;
   color: var(--v391-glass-text) !important;
-  font-size: 20px;
+  font-size: 17px;
   line-height: 1.1;
   font-weight: 800;
   letter-spacing: -0.035em;
@@ -1963,7 +1963,7 @@ html {
 .v391-progress-track { margin-top: 9px; height: 7px; overflow: hidden; border-radius: 999px; background: rgba(81,111,170,0.16); box-shadow: inset 0 1px 3px rgba(1,8,25,0.10); }
 .v391-progress-bar { height: 100%; border-radius: inherit; background: linear-gradient(90deg,#4383ff,#5cbcff); box-shadow: 0 0 12px rgba(67,131,255,0.26); }
 .v391-progress-bar--green { background: linear-gradient(90deg,#27b979,#61e0ad); box-shadow: 0 0 12px rgba(39,185,121,0.22); }
-.v391-progress-detail { margin-top: 6px; color: var(--v391-glass-muted) !important; font-size: 10px; font-weight: 650; }
+.v391-progress-detail { margin-top: 3px; color: var(--v391-glass-muted) !important; font-size: 10px; font-weight: 650; }
 .v391-goal-history { position:relative; z-index:1; display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:14px; padding-top:12px; border-top:1px solid var(--v391-divider); color:var(--v391-glass-muted)!important; font-size:10px; font-weight:650; }
 .v391-goal-history strong { color:var(--v391-glass-text)!important; }
 
@@ -2762,7 +2762,7 @@ html {
   line-height: 1.5;
 }
 .v3934-home-readable .v391-readiness-label {
-  font-size: 12.5px;
+  font-size: 11.5px;
 }
 .v3934-home-readable .v391-action-row__title {
   font-size: 13.5px;
@@ -4074,8 +4074,8 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   overflow: hidden;
   display: block;
   min-width: 0;
-  min-height: 176px;
-  padding: 19px 17px 18px;
+  min-height: 124px;
+  padding: 12px 12px 11px;
   border: 1.5px solid rgba(var(--qa-rgb), 0.58);
   border-radius: 22px !important;
   background:
@@ -4139,10 +4139,10 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39430-home-quick-card__icon {
   display: grid;
   place-items: center;
-  width: 76px;
-  height: 76px;
+  width: 56px;
+  height: 56px;
   border: 1px solid rgba(var(--qa-rgb), 0.50);
-  border-radius: 20px !important;
+  border-radius: 16px !important;
   background:
     linear-gradient(145deg, rgba(var(--qa-rgb), 0.22) 0%, rgba(var(--qa-rgb), 0.09) 100%);
   color: var(--qa-color);
@@ -4163,16 +4163,16 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 }
 
 .v39430-home-quick-card__icon svg {
-  width: 54px;
-  height: 54px;
+  width: 40px;
+  height: 40px;
   filter: drop-shadow(0 7px 8px rgba(var(--qa-rgb), 0.22));
 }
 
 .v39430-home-quick-card__copy {
   position: absolute;
-  left: 17px;
-  right: 40px;
-  bottom: 17px;
+  left: 12px;
+  right: 32px;
+  bottom: 11px;
   display: block;
   min-width: 0;
 }
@@ -4181,7 +4181,7 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   display: block;
   color: inherit;
   font-family: var(--font-brand, inherit);
-  font-size: 20px;
+  font-size: 17px;
   line-height: 1.08;
   font-weight: 800;
   letter-spacing: -0.028em;
@@ -4190,9 +4190,9 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39430-home-quick-card__meta {
   display: block;
   overflow: hidden;
-  margin-top: 6px;
+  margin-top: 3px;
   color: #64748b;
-  font-size: 12.5px;
+  font-size: 11.5px;
   line-height: 1.2;
   font-weight: 650;
   text-overflow: ellipsis;
@@ -4203,8 +4203,8 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
 .v39430-home-quick-card__chevron {
   position: absolute;
-  right: 13px;
-  bottom: 21px;
+  right: 9px;
+  bottom: 14px;
   color: rgba(var(--qa-rgb), 0.86);
 }
 
@@ -4262,32 +4262,32 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     row-gap: 22px;
   }
   .v39430-home-quick-card {
-    min-height: 168px;
-    padding: 17px 15px 16px;
+    min-height: 118px;
+    padding: 11px 10px 10px;
   }
   .v39430-home-quick-card__icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 18px !important;
+    width: 52px;
+    height: 52px;
+    border-radius: 15px !important;
   }
   .v39430-home-quick-card__icon svg {
-    width: 50px;
-    height: 50px;
+    width: 37px;
+    height: 37px;
   }
   .v39430-home-quick-card__copy {
-    left: 15px;
-    bottom: 15px;
+    left: 10px;
+    bottom: 10px;
   }
-  .v39430-home-quick-card__title { font-size: 18px; }
-  .v39430-home-quick-card__meta { font-size: 11.5px; }
+  .v39430-home-quick-card__title { font-size: 16px; }
+  .v39430-home-quick-card__meta { font-size: 10.5px; }
 }
 
 @media (min-width: 640px) {
   .v39430-home-launcher__heading { margin-bottom: 28px; }
   .v39430-home-quick-grid { column-gap: 28px; row-gap: 30px; }
-  .v39430-home-quick-card { min-height: 196px; padding: 22px 20px 20px; }
-  .v39430-home-quick-card__icon { width: 84px; height: 84px; }
-  .v39430-home-quick-card__icon svg { width: 60px; height: 60px; }
+  .v39430-home-quick-card { min-height: 138px; padding: 15px 14px 13px; }
+  .v39430-home-quick-card__icon { width: 62px; height: 62px; }
+  .v39430-home-quick-card__icon svg { width: 44px; height: 44px; }
   .v39430-home-quick-card__copy { left: 20px; bottom: 20px; }
   .v39430-home-quick-card__title { font-size: 22px; }
   .v39430-home-quick-card__meta { font-size: 13px; }
@@ -5699,3 +5699,10 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     bottom: 21px;
   }
 }
+
+
+/* ================================================================
+   MONIEZI v39.4.42 — Cross-platform Back navigation + 30% smaller
+   Home Quick Access cards. The grid spacing stays spacious while the
+   individual launcher cards consume less vertical screen area.
+   ================================================================ */

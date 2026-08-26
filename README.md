@@ -1,4 +1,13 @@
-# MONIEZI v39.4.41
+# MONIEZI v39.4.42
+
+## v39.4.42 Cross-platform Back navigation + 30% smaller Quick Access
+- Adds a visible in-app Back control on secondary MONIEZI pages while keeping Home, Clients, Jobs, Estimates/Invoices, and Mileage as clean top-level destinations without a duplicate Back button.
+- Moves main page navigation onto marked browser history entries so Android system Back and iPhone Safari/PWA swipe-back follow the same MONIEZI page history.
+- Report drill-down Back returns to Report Center before leaving Reports; direct deep entries safely fall back to Home instead of leaving to an unrelated page.
+- Prevents duplicate history entries when the active primary tab is tapped again.
+- Reduces Home Quick Access card footprint by about 30% while preserving the two-column grid, existing gaps, readable titles/subtitles, colors, glow, and destinations.
+- Preserves the v39.4.41 Quick Add fit refinements and all existing business logic.
+
 
 ## v39.4.41 Quick Add fit + compact Quick Access cards
 - Tightens Quick Add row/group spacing so the centered **Job / Project** icon and label stay together and are visible without the tiny final scroll on typical phone screens.

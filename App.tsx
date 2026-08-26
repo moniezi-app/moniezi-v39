@@ -1054,7 +1054,7 @@ export default function App() {
     const base = window.location.href.split('#')[0];
     const raw = window.location.hash || '';
     if (!raw || raw === '#') {
-      window.history.replaceState(null, '', base + buildHash('home', {}));
+      window.history.replaceState({ ...(window.history.state || {}), moniezi: true, monieziDepth: 0 }, '', base + buildHash('home', {}));
     }
 
     const { path, params } = parseHashLocation();
@@ -1069,8 +1069,17 @@ export default function App() {
 
   useEffect(() => {
     window.addEventListener('hashchange', syncHashToState);
+    window.addEventListener('popstate', syncHashToState);
+    // Mark the current app entry so MONIEZI can distinguish internal Back
+    // navigation from leaving the app/browser history.
+    if (!window.history.state?.moniezi) {
+      window.history.replaceState({ ...(window.history.state || {}), moniezi: true, monieziDepth: 0 }, '', window.location.href);
+    }
     syncHashToState();
-    return () => window.removeEventListener('hashchange', syncHashToState);
+    return () => {
+      window.removeEventListener('hashchange', syncHashToState);
+      window.removeEventListener('popstate', syncHashToState);
+    };
   }, [syncHashToState]);
 
 
@@ -1087,10 +1096,13 @@ export default function App() {
 
       const nextHash = buildHash(opts?.keepPath ? path : path, next);
       if (opts?.replace) {
-        window.history.replaceState(null, '', base + nextHash);
+        const depth = Number(window.history.state?.monieziDepth || 0);
+        window.history.replaceState({ ...(window.history.state || {}), moniezi: true, monieziDepth: depth }, '', base + nextHash);
         syncHashToState();
       } else {
-        window.location.hash = nextHash.replace('#', '');
+        const depth = Number(window.history.state?.monieziDepth || 0) + 1;
+        window.history.pushState({ moniezi: true, monieziDepth: depth }, '', base + nextHash);
+        syncHashToState();
       }
     },
     [syncHashToState]
@@ -1138,6 +1150,16 @@ export default function App() {
       const nextHash = buildHash(nextPath, {});
       const base = window.location.href.split('#')[0];
 
+      // Do not create duplicate browser-history entries when an already-active
+      // primary tab is tapped again. This keeps Android Back and iOS swipe-back
+      // predictable.
+      const activePage = normalizePage(parseHashLocation().path);
+      if (!opts?.replace && activePage === nextPage) {
+        _setCurrentPage(nextPage);
+        if (!skipViewportReset) forceResetMainViewport();
+        return;
+      }
+
       try {
         (document.activeElement as HTMLElement | null)?.blur?.();
       } catch {
@@ -1149,10 +1171,13 @@ export default function App() {
       if (!skipViewportReset) forceResetMainViewport();
 
       if (opts?.replace) {
-        window.history.replaceState(null, '', base + nextHash);
+        const depth = Number(window.history.state?.monieziDepth || 0);
+        window.history.replaceState({ ...(window.history.state || {}), moniezi: true, monieziDepth: depth }, '', base + nextHash);
         syncHashToState();
       } else {
-        window.location.hash = nextHash.replace('#', '');
+        const depth = Number(window.history.state?.monieziDepth || 0) + 1;
+        window.history.pushState({ moniezi: true, monieziDepth: depth }, '', base + nextHash);
+        syncHashToState();
       }
 
       _setCurrentPage(nextPage);
@@ -1789,6 +1814,43 @@ export default function App() {
     setReportsMenuSection(section);
     mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+
+  // v39.4.42 — Cross-platform Back navigation.
+  // Primary footer destinations intentionally do not show an in-app Back button;
+  // secondary pages use the same browser history that powers Android Back and
+  // iOS Safari/PWA edge-swipe navigation.
+  const isPrimaryTopLevelPage =
+    currentPage === Page.Dashboard ||
+    currentPage === Page.Clients ||
+    currentPage === Page.Jobs ||
+    currentPage === Page.Invoices ||
+    currentPage === Page.Mileage;
+  const showInAppBack = !isPrimaryTopLevelPage;
+
+  const handleAppBack = useCallback(() => {
+    if (showGlobalSearch) {
+      setShowGlobalSearch(false);
+      return;
+    }
+    if (showMainMenu) {
+      setShowMainMenu(false);
+      return;
+    }
+    if (currentPage === Page.Reports && reportsMenuSection !== 'menu') {
+      setReportsMenuSection('menu');
+      forceResetMainViewport();
+      return;
+    }
+
+    const depth = Number(window.history.state?.monieziDepth || 0);
+    if (window.history.state?.moniezi && depth > 0) {
+      window.history.back();
+      return;
+    }
+
+    setCurrentPage(Page.Dashboard, { replace: true });
+  }, [currentPage, forceResetMainViewport, reportsMenuSection, setCurrentPage, showGlobalSearch, showMainMenu]);
 
   // Keep Tax Prep record counters reactive
   useEffect(() => {
@@ -8645,7 +8707,20 @@ html, body, #root {
         className={`dark-chrome no-print flex items-center justify-between px-4 sm:px-6 md:px-8 pb-4 sm:pb-6 sticky top-0 backdrop-blur-xl z-50 transition-colors duration-300 ${isKeyboardEditing ? 'opacity-0 pointer-events-none' : 'opacity-100'} ${useDarkChrome ? 'bg-slate-950 border-b border-slate-800' : 'bg-slatebg/90 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800'}`}
         style={{ paddingTop: 'max(1rem, calc(env(safe-area-inset-top, 0px) + var(--moniezi-ios-top-pad, 0px)))' }}
       >
-        <Logo onClick={() => setCurrentPage(Page.Dashboard)} onDarkSurface={useDarkChrome} />
+        {showInAppBack ? (
+          <button
+            type="button"
+            onClick={handleAppBack}
+            aria-label="Go back"
+            title="Back"
+            className="chrome-btn flex h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 items-center justify-center rounded-full border text-slate-200 transition-all hover:text-white"
+            style={headerActionButtonStyle}
+          >
+            <ArrowLeft size={21} className="sm:h-6 sm:w-6" strokeWidth={2} />
+          </button>
+        ) : (
+          <Logo onClick={() => setCurrentPage(Page.Dashboard)} onDarkSurface={useDarkChrome} />
+        )}
         <div className="flex gap-1.5 sm:gap-2 flex-shrink-0">
            <button onClick={toggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} title={theme === 'dark' ? 'Light mode' : 'Dark mode'} className="chrome-btn w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full transition-all border text-slate-200 hover:text-white" style={headerActionButtonStyle}>{theme === 'dark' ? <Sun size={18} className="sm:w-5 sm:h-5" strokeWidth={1.2} /> : <Moon size={18} className="sm:w-5 sm:h-5" strokeWidth={1.2} />}</button>
            <button
