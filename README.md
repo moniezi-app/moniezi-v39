@@ -1,3 +1,11 @@
+# MONIEZI
+
+## v39.4.43 — History-aware Back + compact Quick Access shells
+- Shows the in-app Back control on every MONIEZI screen reached from a prior MONIEZI screen, including Clients, Jobs, Estimates, Invoices, and Mileage. Initial Home remains the only history-root screen without Back.
+- Android system Back, iPhone Safari/PWA swipe-back, and the visible Back control share the same history stack.
+- Reduces only the outer Home Quick Access card shells while restoring/preserving the pre-v39.4.42 large icon scale.
+- Keeps the two-column layout, card gaps, readable titles/subtitles, colors, borders, glow, chevrons, and destinations.
+
 # MONIEZI v39.4.42
 
 ## v39.4.42 Cross-platform Back navigation + 30% smaller Quick Access

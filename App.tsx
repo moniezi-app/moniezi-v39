@@ -1816,17 +1816,15 @@ export default function App() {
   };
 
 
-  // v39.4.42 — Cross-platform Back navigation.
-  // Primary footer destinations intentionally do not show an in-app Back button;
-  // secondary pages use the same browser history that powers Android Back and
-  // iOS Safari/PWA edge-swipe navigation.
-  const isPrimaryTopLevelPage =
-    currentPage === Page.Dashboard ||
-    currentPage === Page.Clients ||
-    currentPage === Page.Jobs ||
-    currentPage === Page.Invoices ||
-    currentPage === Page.Mileage;
-  const showInAppBack = !isPrimaryTopLevelPage;
+  // v39.4.43 — History-aware Back navigation.
+  // Show Back on ANY screen that was reached from another MONIEZI screen,
+  // including primary footer destinations such as Clients, Jobs, Invoices,
+  // Estimates and Mileage. Hide it only when the current entry is the first
+  // MONIEZI history entry (normally the initial Home screen). Android system
+  // Back, iOS Safari/PWA edge-swipe, and this visible control all share the
+  // same browser-history stack.
+  const monieziHistoryDepth = Number(window.history.state?.monieziDepth || 0);
+  const showInAppBack = monieziHistoryDepth > 0;
 
   const handleAppBack = useCallback(() => {
     if (showGlobalSearch) {
