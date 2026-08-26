@@ -5793,3 +5793,65 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   .v39430-home-quick-card__title { font-size: 20px !important; }
   .v39430-home-quick-card__meta { font-size: 12px !important; }
 }
+
+/* ================================================================
+   MONIEZI v39.4.45 — Quick Access polish: clean surfaces, larger glyphs,
+   and protected icon/title spacing.
+   ----------------------------------------------------------------
+   This refinement intentionally keeps the existing Quick Access card size,
+   two-column layout, icon containers, section colors, borders, chevrons,
+   labels, and destinations. It only removes the decorative corner washes,
+   enlarges the glyph inside each established icon container, and guarantees
+   clear separation between icon and copy.
+   ================================================================ */
+
+/* Remove the decorative color washes / corner blobs from the card surface.
+   Section identity remains in the border, icon and chevron. */
+.v39430-home-quick-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.995) 0%, rgba(248, 250, 252, 0.985) 100%) !important;
+}
+
+.dark .v39430-home-quick-card {
+  background: linear-gradient(145deg, rgba(7, 17, 40, 0.99) 0%, rgba(5, 12, 29, 0.99) 100%) !important;
+}
+
+.v39430-home-quick-card::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Keep the established rounded icon container, but let the actual symbol
+   use substantially more of the available area. */
+.v39430-home-quick-card__icon svg {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+/* Position copy independently from the card bottom so the title can never
+   ride into the icon container after the compact-shell change. */
+.v39430-home-quick-card__copy {
+  top: 79px !important;
+  bottom: auto !important;
+}
+
+@media (max-width: 390px) {
+  .v39430-home-quick-card__icon svg {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .v39430-home-quick-card__copy {
+    top: 75px !important;
+    bottom: auto !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .v39430-home-quick-card__icon svg {
+    width: 54px !important;
+    height: 54px !important;
+  }
+  .v39430-home-quick-card__copy {
+    top: 88px !important;
+    bottom: auto !important;
+  }
+}

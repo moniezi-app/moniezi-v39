@@ -1,3 +1,9 @@
+## v39.4.45 — Quick Access clean surfaces + icon/title spacing
+- Removes the decorative corner color washes/blobs from Home Quick Access cards in both light and dark modes.
+- Keeps the existing rounded icon containers but enlarges the actual icon glyphs inside them.
+- Repositions Quick Access title/subtitle copy below the icon area so labels no longer crowd or overlap the icon container.
+- Preserves v39.4.44 build fix, v39.4.43 history-aware Back navigation, card shell dimensions, grid, borders, colors, chevrons, and destinations.
+
 # MONIEZI
 
 ## v39.4.44 — CSS production-build correction
