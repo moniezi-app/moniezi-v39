@@ -6359,3 +6359,223 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39451-main-menu-drawer .moniezi-drawer-close-button {
   box-shadow: none !important;
 }
+
+
+/* ================================================================
+   MONIEZI v39.4.52 — Light Menu hierarchy + spacious Quick Add layout
+   ----------------------------------------------------------------
+   1) Light hamburger Menu gains quiet sheet/card separation with stronger,
+      high-contrast text and semantic icon treatment, without glow/shadow.
+   2) Quick Add remains a large near-full-height chooser. Money & Sales stays
+      2x2; Business becomes one balanced 3-column row.
+   3) Typography weights/actions/navigation remain unchanged from v39.4.51.
+   ================================================================ */
+
+/* Hamburger Menu — light sheet separation, crisp white destination cards. */
+.v39451-main-menu-drawer {
+  background: #f6f8fc !important;
+  border-color: #d8dee9 !important;
+}
+.v39451-main-menu-drawer .moniezi-drawer-header {
+  background: #f6f8fc !important;
+  border-bottom-color: #d8dee9 !important;
+}
+.v39451-main-menu-drawer .moniezi-drawer-header h2 {
+  color: #000000 !important;
+}
+.dark .v39451-main-menu-drawer {
+  background: #071328 !important;
+  border-color: rgba(96, 143, 220, 0.26) !important;
+}
+.dark .v39451-main-menu-drawer .moniezi-drawer-header {
+  background: #071328 !important;
+  border-bottom-color: rgba(96, 143, 220, 0.24) !important;
+}
+.dark .v39451-main-menu-drawer .moniezi-drawer-header h2 {
+  color: #ffffff !important;
+}
+
+.v39433-main-menu section button,
+.v39433-main-menu section a {
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+.dark .v39433-main-menu section button,
+.dark .v39433-main-menu section a {
+  background: #081736 !important;
+  box-shadow: none !important;
+}
+
+/* Light mode: strong text means actual black/near-black, not softened slate. */
+.v39433-main-menu section button > span:nth-child(2),
+.v39433-main-menu section a > span:nth-child(2) {
+  color: #050505 !important;
+  opacity: 1 !important;
+}
+.v39433-main-menu section button > span:nth-child(2) > span,
+.v39433-main-menu section a > span:nth-child(2) > span {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+.v39433-main-menu section > div:first-child:not(:last-child) {
+  color: #111827 !important;
+  opacity: 1 !important;
+}
+.dark .v39433-main-menu section button > span:nth-child(2),
+.dark .v39433-main-menu section a > span:nth-child(2) {
+  color: #ffffff !important;
+}
+.dark .v39433-main-menu section button > span:nth-child(2) > span,
+.dark .v39433-main-menu section a > span:nth-child(2) > span {
+  color: #a9b7cd !important;
+}
+.dark .v39433-main-menu section > div:first-child:not(:last-child) {
+  color: #c3cee0 !important;
+}
+
+/* Stronger light semantic icon plates: saturated icon color, clean tint/border. */
+.v39433-main-menu section button > span:first-child,
+.v39433-main-menu section a > span:first-child {
+  background: rgba(var(--menu-rgb), 0.10) !important;
+  border-color: rgba(var(--menu-rgb), 0.50) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+.v39433-main-menu section button > span:first-child svg,
+.v39433-main-menu section a > span:first-child svg {
+  opacity: 1 !important;
+  filter: none !important;
+}
+.dark .v39433-main-menu section button > span:first-child,
+.dark .v39433-main-menu section a > span:first-child {
+  background: color-mix(in srgb, rgb(var(--menu-rgb)) 10%, #081736) !important;
+  border-color: rgba(var(--menu-rgb), 0.46) !important;
+}
+
+/* Quick Add remains a large, near-full-height surface on the viewport. */
+.v39433-add-choice-screen {
+  height: calc(100dvh - 24px) !important;
+  min-height: 0 !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+.dark .v39433-add-choice-screen {
+  background: #07142f !important;
+  box-shadow: none !important;
+}
+.v39433-add-choice-screen > .v39434-add-choice-scroll {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  padding: 8px 10px 18px !important;
+}
+
+/* Strong, clean light-mode Quick Add hierarchy. */
+.v39435-add-choice-header > div:first-child > div:first-child {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+.v39433-add-choice-group__title {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+.v39433-add-choice-card__label,
+.v39433-add-choice-card__label > span {
+  color: #050505 !important;
+  opacity: 1 !important;
+}
+.dark .v39435-add-choice-header > div:first-child > div:first-child,
+.dark .v39433-add-choice-card__label,
+.dark .v39433-add-choice-card__label > span {
+  color: #f8fafc !important;
+}
+.dark .v39433-add-choice-group__title {
+  color: #b7c4d8 !important;
+}
+
+.v39433-add-choice-card__label svg {
+  background: color-mix(in srgb, currentColor 12%, #ffffff) !important;
+  border-color: color-mix(in srgb, currentColor 70%, transparent) !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+.dark .v39433-add-choice-card__label svg {
+  background: color-mix(in srgb, currentColor 10%, #07142f) !important;
+  border-color: color-mix(in srgb, currentColor 58%, transparent) !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Money & Sales remains the established 2x2 composition. */
+.v39433-add-choice-group[data-moniezi-group="Money & Sales"] .v39433-add-choice-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  column-gap: 32px !important;
+  row-gap: 28px !important;
+}
+
+/* Business uses the full width as one balanced row instead of a centered orphan. */
+.v39433-add-choice-group[data-moniezi-group="Business"] {
+  margin-top: clamp(44px, 7vh, 68px) !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  column-gap: 16px !important;
+  row-gap: 0 !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 104px !important;
+  grid-column: auto !important;
+  justify-self: stretch !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card:last-child:nth-child(odd) {
+  width: 100% !important;
+  grid-column: auto !important;
+  justify-self: stretch !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card__label,
+.v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card__label > span {
+  font-size: 14px !important;
+  white-space: normal !important;
+}
+
+@media (max-width: 390px) {
+  .v39433-add-choice-screen > .v39434-add-choice-scroll {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Money & Sales"] .v39433-add-choice-grid {
+    column-gap: 24px !important;
+    row-gap: 24px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] {
+    margin-top: clamp(38px, 6vh, 56px) !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-grid {
+    column-gap: 10px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card__label,
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card__label > span {
+    font-size: 13.5px !important;
+    letter-spacing: -0.015em !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card__label svg {
+    width: 56px !important;
+    height: 56px !important;
+    padding: 11px !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .v39433-add-choice-group[data-moniezi-group="Money & Sales"] .v39433-add-choice-grid {
+    column-gap: 44px !important;
+    row-gap: 34px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-grid {
+    column-gap: 24px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card {
+    min-height: 112px !important;
+  }
+}

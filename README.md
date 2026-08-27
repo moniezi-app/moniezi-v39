@@ -1,3 +1,11 @@
+## v39.4.52 — Light Menu hierarchy + spacious Quick Add layout
+
+- Gives the light-mode hamburger Menu a subtle cool neutral sheet background so its white destination cards separate cleanly without restoring shadows, haze, gradients, or glow.
+- Strengthens light-mode Menu and Quick Add hierarchy with true near-black primary labels, darker section/supporting copy, fully opaque accent icons, and clearer crisp semantic borders/icon plates.
+- Keeps Quick Add as a large near-full-height panel instead of compressing it into a small popup.
+- Preserves Money & Sales as a balanced 2×2 grid and reorganizes Business into one balanced three-column row: Mileage, Client, Job / Project.
+- Preserves the v39.4.51 typography hierarchy, Quick Add actions/order, hamburger Menu destinations, scrolling, footer navigation, Demo behavior, Back navigation, activation flow, and business logic.
+
 ## v39.4.51 — First-run stabilization + compact menu refinement
 
 - Explicitly preloads the Plus Jakarta Sans Variable face/weights used by the first Home/Demo surface before it is revealed, eliminating the brief fallback-font width/weight flash in “Load the demo business”.

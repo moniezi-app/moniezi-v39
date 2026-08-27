@@ -219,6 +219,7 @@ export function MonieziSelect({
                     return (
                       <section
                         key={group || 'choices'}
+                        data-moniezi-group={group || 'choices'}
                         className="v39433-add-choice-group"
                       >
                         {group ? (
