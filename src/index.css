@@ -6579,3 +6579,240 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     min-height: 112px !important;
   }
 }
+
+
+/* ================================================================
+   MONIEZI v39.4.53 — stronger Menu copy + illustrated Quick Add zones
+   ----------------------------------------------------------------
+   1) Light hamburger Menu stays white; item titles/descriptions and section
+      headings gain one weight step and stronger black contrast.
+   2) Quick Add keeps its large near-full-screen footprint, but now uses two
+      clearly separated illustrated category zones that deliberately fill the
+      available height: Money & Sales (2x2) and Business (3 across).
+   ================================================================ */
+
+/* Hamburger Menu: keep the approved white light-mode sheet. */
+.v39451-main-menu-drawer,
+.v39451-main-menu-drawer .moniezi-drawer-header {
+  background: #ffffff !important;
+}
+.v39451-main-menu-drawer {
+  border-color: #d4dae4 !important;
+}
+.v39451-main-menu-drawer .moniezi-drawer-header {
+  border-bottom-color: #dfe3ea !important;
+}
+
+/* Raise item-title and section-heading weight by one step. */
+.v39433-main-menu section button > span:nth-child(2),
+.v39433-main-menu section a > span:nth-child(2) {
+  color: #050505 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+.v39433-main-menu section > div:first-child:not(:last-child) {
+  color: #050505 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+/* Descriptions are no longer faded gray in light mode. */
+.v39433-main-menu section button > span:nth-child(2) > span,
+.v39433-main-menu section a > span:nth-child(2) > span {
+  color: #111111 !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+
+.dark .v39433-main-menu section button > span:nth-child(2),
+.dark .v39433-main-menu section a > span:nth-child(2) {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+.dark .v39433-main-menu section > div:first-child:not(:last-child) {
+  color: #dbe5f3 !important;
+  font-weight: 600 !important;
+}
+.dark .v39433-main-menu section button > span:nth-child(2) > span,
+.dark .v39433-main-menu section a > span:nth-child(2) > span {
+  color: #e2e8f0 !important;
+  font-weight: 500 !important;
+}
+
+/* Quick Add: the content itself occupies the full usable panel height. */
+.v39433-add-choice-screen > .v39434-add-choice-scroll {
+  padding: 8px 10px 14px !important;
+}
+.v39433-add-choice-screen > .v39434-add-choice-scroll > div {
+  min-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+/* Each category is now a real visual zone rather than a heading floating over
+   a cluster of shortcuts. */
+.v39433-add-choice-group {
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: 12px 12px 14px !important;
+  border: 1px solid #bfd5f2 !important;
+  border-radius: var(--v3949-radius-card, 8px) !important;
+  background: #f8fbff !important;
+  box-shadow: none !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Money & Sales"] {
+  flex: 1.08 1 0 !important;
+  margin-top: 0 !important;
+  border-color: #b8d4f4 !important;
+  background: #f7fbff !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Business"] {
+  flex: 0.92 1 0 !important;
+  margin-top: 0 !important;
+  border-color: #b9e2dc !important;
+  background: #f6fcfb !important;
+}
+
+.dark .v39433-add-choice-group {
+  background: #0a1b3d !important;
+  border-color: rgba(87, 139, 218, 0.42) !important;
+}
+.dark .v39433-add-choice-group[data-moniezi-group="Money & Sales"] {
+  background: #0a1b3d !important;
+  border-color: rgba(87, 139, 218, 0.48) !important;
+}
+.dark .v39433-add-choice-group[data-moniezi-group="Business"] {
+  background: #092537 !important;
+  border-color: rgba(52, 190, 176, 0.42) !important;
+}
+
+/* Category header + illustration. */
+.v39453-add-choice-group__header {
+  display: flex !important;
+  min-height: 0 !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+.v39453-add-choice-group__header .v39433-add-choice-group__title {
+  margin: 0 2px 4px !important;
+  color: #111827 !important;
+  font-weight: 500 !important;
+}
+.dark .v39453-add-choice-group__header .v39433-add-choice-group__title {
+  color: #d7e2f2 !important;
+}
+
+.v39453-add-choice-group__visual {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+.v39453-add-choice-group__visual img {
+  display: block !important;
+  width: auto !important;
+  max-width: 78% !important;
+  height: auto !important;
+  max-height: 116px !important;
+  object-fit: contain !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Business"] .v39453-add-choice-group__visual img {
+  max-width: 92% !important;
+  max-height: 104px !important;
+}
+
+/* Use the section interior instead of bunching actions at the top. */
+.v39433-add-choice-grid {
+  margin-top: 8px !important;
+  align-content: space-evenly !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Money & Sales"] .v39433-add-choice-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  column-gap: 30px !important;
+  row-gap: 18px !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  column-gap: 12px !important;
+  row-gap: 0 !important;
+}
+
+/* Keep choices clear and spacious without introducing shadows or blur. */
+.v39433-add-choice-group .v39433-add-choice-card {
+  min-height: 86px !important;
+  padding: 2px !important;
+  box-shadow: none !important;
+}
+.v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card {
+  min-height: 88px !important;
+}
+.v39433-add-choice-group .v39433-add-choice-card__label,
+.v39433-add-choice-group .v39433-add-choice-card__label > span {
+  font-weight: 500 !important;
+}
+.v39433-add-choice-group .v39433-add-choice-card__label svg {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+@media (max-height: 760px) {
+  .v39433-add-choice-screen > .v39434-add-choice-scroll > div {
+    gap: 10px !important;
+  }
+  .v39433-add-choice-group {
+    padding-top: 9px !important;
+    padding-bottom: 10px !important;
+  }
+  .v39453-add-choice-group__visual img {
+    max-height: 82px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39453-add-choice-group__visual img {
+    max-height: 72px !important;
+  }
+  .v39433-add-choice-group .v39433-add-choice-card {
+    min-height: 74px !important;
+  }
+  .v39433-add-choice-card__label svg {
+    width: 54px !important;
+    height: 54px !important;
+    padding: 11px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .v39433-add-choice-screen > .v39434-add-choice-scroll {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+  .v39433-add-choice-group {
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Money & Sales"] .v39433-add-choice-grid {
+    column-gap: 22px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-grid {
+    column-gap: 6px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card__label,
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39433-add-choice-card__label > span {
+    font-size: 13px !important;
+  }
+}
+
+@media (min-height: 900px) {
+  .v39453-add-choice-group__visual img {
+    max-height: 132px !important;
+  }
+  .v39433-add-choice-group[data-moniezi-group="Business"] .v39453-add-choice-group__visual img {
+    max-height: 118px !important;
+  }
+  .v39433-add-choice-group .v39433-add-choice-card {
+    min-height: 94px !important;
+  }
+}

@@ -1,3 +1,13 @@
+## v39.4.53 — Stronger Menu copy + illustrated Quick Add categories
+
+- Keeps the hamburger Menu light-mode sheet white while raising destination-title and section-heading weight one step and making supporting descriptions black/near-black at a stronger 500 weight.
+- Preserves the established menu destinations, card geometry, semantic icon colors, crisp borders, and no-glow/no-shadow treatment.
+- Redesigns Quick Add as two large illustrated category zones that deliberately occupy the near-full-screen chooser instead of bunching every action at the top.
+- Money & Sales uses the approved transaction-wallet illustration and keeps Income, Expense, Invoice, and Estimate in a 2×2 action grid.
+- Business uses a new illustration assembled from MONIEZI's existing Clients, Jobs, and Mileage empty-state family and keeps Mileage, Client, and Job / Project in a balanced three-item row.
+- Keeps the two groups visually separate with clean contained surfaces, generous spacing, and the same geometry in light and dark mode.
+- Preserves Quick Add actions/order, hamburger Menu destinations, footer navigation, Demo behavior, Back navigation, activation flow, and business logic.
+
 ## v39.4.52 — Light Menu hierarchy + spacious Quick Add layout
 
 - Gives the light-mode hamburger Menu a subtle cool neutral sheet background so its white destination cards separate cleanly without restoring shadows, haze, gradients, or glow.

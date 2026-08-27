@@ -37,6 +37,7 @@ type MenuPosition = {
 const VIEWPORT_MARGIN = 12;
 const DEFAULT_MENU_MIN_WIDTH = 180;
 const MAX_MENU_HEIGHT = 320;
+const publicBase = import.meta.env.BASE_URL;
 
 export function MonieziSelect({
   value,
@@ -216,6 +217,12 @@ export function MonieziSelect({
                 <div className="space-y-3">
                   {Array.from(new Set(options.map(option => option.group || ''))).map(group => {
                     const groupOptions = options.filter(option => (option.group || '') === group);
+                    const groupIllustrationSrc =
+                      group === 'Money & Sales'
+                        ? `${publicBase}transaction-add-v39-4-50-shared.webp`
+                        : group === 'Business'
+                          ? `${publicBase}quick-add-business-v39-4-53-shared.webp`
+                          : '';
                     return (
                       <section
                         key={group || 'choices'}
@@ -223,8 +230,15 @@ export function MonieziSelect({
                         className="v39433-add-choice-group"
                       >
                         {group ? (
-                          <div className="v39433-add-choice-group__title">
-                            {group}
+                          <div className="v39453-add-choice-group__header">
+                            <div className="v39433-add-choice-group__title">
+                              {group}
+                            </div>
+                            {groupIllustrationSrc ? (
+                              <div className="v39453-add-choice-group__visual" aria-hidden="true">
+                                <img src={groupIllustrationSrc} alt="" loading="eager" decoding="async" />
+                              </div>
+                            ) : null}
                           </div>
                         ) : null}
                         <div className="v39433-add-choice-grid">
