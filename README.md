@@ -1,3 +1,9 @@
+## v39.4.47 — Clean light-mode large icon plates
+
+- Matches large Home feature-card icons and routed page-header icons to the clean Quick Access icon treatment in light mode.
+- Removes cloudy radial fills, broad colored icon halos, and light-mode SVG drop-shadows.
+- Keeps the rounded icon plates, section colors, icon sizes, layouts, page content, dark-mode treatment, navigation, and Demo behavior unchanged.
+
 ## v39.4.46 — Quick Access authoritative layout cleanup
 
 - Consolidated Home Quick Access card styling into one authoritative CSS definition.

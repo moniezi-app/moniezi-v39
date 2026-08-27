@@ -4322,16 +4322,14 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39431-home-feature-header .v391-glass-icon {
   width: 82px !important;
   height: 82px !important;
-  border-width: 1.5px;
+  border: 1.5px solid rgba(var(--v391-tone-rgb), 0.48) !important;
   border-radius: 22px !important;
-  background:
-    radial-gradient(92% 88% at 26% 18%, rgba(var(--v391-tone-rgb), 0.35) 0%, rgba(var(--v391-tone-rgb), 0.12) 62%, transparent 100%),
-    linear-gradient(145deg, rgba(var(--v391-tone-rgb), 0.24), rgba(5, 15, 40, 0.10));
+  /* Light mode matches the clean Quick Access icon plate: flat, crisp, no
+     cloudy radial wash and no broad colored halo. */
+  background: rgba(var(--v391-tone-rgb), 0.085) !important;
   box-shadow:
-    0 15px 30px rgba(var(--v391-tone-rgb), 0.20),
-    0 0 24px rgba(var(--v391-tone-rgb), 0.13),
-    inset 0 1px 0 rgba(255,255,255,0.20),
-    inset 0 -12px 24px rgba(var(--v391-tone-rgb), 0.07);
+    0 4px 10px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255,255,255,0.42) !important;
 }
 
 .dark .v39431-home-feature-header .v391-glass-icon {
@@ -4349,6 +4347,10 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   width: 50px !important;
   height: 50px !important;
   stroke-width: 1.65 !important;
+  filter: none;
+}
+
+.dark .v39431-home-feature-header .v391-glass-icon svg {
   filter: drop-shadow(0 7px 9px rgba(var(--v391-tone-rgb), 0.25));
 }
 
@@ -4522,17 +4524,14 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   height: 82px !important;
   min-width: 82px !important;
   padding: 0 !important;
-  border: 1.5px solid rgba(var(--v39432-icon-rgb), 0.70) !important;
+  border: 1.5px solid rgba(var(--v39432-icon-rgb), 0.48) !important;
   border-radius: 22px !important;
   color: rgb(var(--v39432-icon-rgb)) !important;
-  background:
-    radial-gradient(92% 88% at 26% 18%, rgba(var(--v39432-icon-rgb), 0.34) 0%, rgba(var(--v39432-icon-rgb), 0.12) 60%, transparent 100%),
-    linear-gradient(145deg, rgba(var(--v39432-icon-rgb), 0.20), rgba(5, 15, 40, 0.08)) !important;
+  /* Same clean light-mode plate used by Home Quick Access. */
+  background: rgba(var(--v39432-icon-rgb), 0.085) !important;
   box-shadow:
-    0 15px 30px rgba(var(--v39432-icon-rgb), 0.20),
-    0 0 24px rgba(var(--v39432-icon-rgb), 0.13),
-    inset 0 1px 0 rgba(255,255,255,0.20),
-    inset 0 -12px 24px rgba(var(--v39432-icon-rgb), 0.07) !important;
+    0 4px 10px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255,255,255,0.42) !important;
 }
 
 .dark .v39432-page-hero__icon {
@@ -4557,6 +4556,10 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   width: 50px !important;
   height: 50px !important;
   stroke-width: 1.65 !important;
+  filter: none;
+}
+
+.dark .v39432-page-hero__icon svg {
   filter: drop-shadow(0 7px 9px rgba(var(--v39432-icon-rgb), 0.24));
 }
 
@@ -4722,6 +4725,14 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39432-page-hero--amber { --v39432-tone-rgb: 227, 157, 43; }
 .v39432-page-hero--rose { --v39432-tone-rgb: 239, 93, 125; }
 .v39432-page-hero__icon--amber { --v39432-icon-rgb: 227, 157, 43; }
+
+/* ================================================================
+   MONIEZI v39.4.47 — Clean light-mode large icon plates
+   ----------------------------------------------------------------
+   Matches Home feature-card and routed-page hero icons to the crisp Quick
+   Access icon treatment in light mode. Removes cloudy radial fills, broad
+   colored halos, and SVG drop-shadows while preserving dark-mode treatment.
+   ================================================================ */
 
 /* ================================================================
    MONIEZI v39.4.33 — Quick Add + main menu visual-system match
