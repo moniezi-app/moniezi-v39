@@ -1,3 +1,12 @@
+## v39.4.48 — Home cleanup + clean light-mode surfaces
+
+- Removes the Home Quick Access card grid.
+- Replaces it with one **Add transaction** heading and the existing plus action.
+- Removes **Home details** and **Scroll for more**.
+- Removes light-mode upper-left color washes from routed page hero/header cards.
+- Cleans light-mode hamburger-menu cards and icon plates by removing faded gradients, colored haze, and icon drop-shadows.
+- Preserves dark-mode styling, navigation, business logic, Demo behavior, and the v39.4.47 clean icon treatment.
+
 ## v39.4.47 — Clean light-mode large icon plates
 
 - Matches large Home feature-card icons and routed page-header icons to the clean Quick Access icon treatment in light mode.

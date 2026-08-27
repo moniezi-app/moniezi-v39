@@ -8872,96 +8872,16 @@ html, body, #root {
 
         {(currentPage === Page.Dashboard) && (
           <div className="v391-dashboard v3934-home-readable v3935-home-breathing v39430-home-phase1 space-y-10 sm:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <section className="v39430-home-launcher" aria-labelledby="home-quick-access-title">
-              <div className="v39430-home-launcher__heading">
-                <div>
-                  <h2 id="home-quick-access-title" className="v39430-home-launcher__title">Quick Access</h2>
-                  <p className="v39430-home-launcher__subtitle">Tap a section to open details.</p>
-                </div>
-                <button onClick={() => handleOpenUnifiedAdd()} className="v391-primary-orb v39430-home-launcher__add" aria-label="Add new record">
-                  <Plus size={21} strokeWidth={2.4} />
-                </button>
-              </div>
-
-              <div className="v39430-home-quick-grid">
-                <button
-                  type="button"
-                  className="v39430-home-quick-card v39430-home-quick-card--overview"
-                  onClick={() => document.getElementById('home-overview')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-                >
-                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><BarChart3 size={58} strokeWidth={1.7} /></span>
-                  <span className="v39430-home-quick-card__copy">
-                    <span className="v39430-home-quick-card__title">Overview</span>
-                    <span className="v39430-home-quick-card__meta">{formatCurrency.format(homeTotals.profit)} profit</span>
-                  </span>
-                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
-                </button>
-
-                <button
-                  type="button"
-                  className="v39430-home-quick-card v39430-home-quick-card--money"
-                  onClick={() => {
-                    setLedgerSearch('');
-                    setExpenseReceiptFilter('all');
-                    setExpenseReviewFilter('all');
-                    setLedgerFilter('all');
-                    setCurrentPage(Page.AllTransactions);
-                  }}
-                >
-                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><Wallet size={58} strokeWidth={1.65} /></span>
-                  <span className="v39430-home-quick-card__copy">
-                    <span className="v39430-home-quick-card__title">Money</span>
-                    <span className="v39430-home-quick-card__meta">Income &amp; expenses</span>
-                  </span>
-                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
-                </button>
-
-                <button type="button" className="v39430-home-quick-card v39430-home-quick-card--jobs" onClick={() => setCurrentPage(Page.Jobs)}>
-                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><Briefcase size={58} strokeWidth={1.65} /></span>
-                  <span className="v39430-home-quick-card__copy">
-                    <span className="v39430-home-quick-card__title">Jobs</span>
-                    <span className="v39430-home-quick-card__meta">{homeJobSummary.inProgress + homeJobSummary.review + homeJobSummary.waiting} active</span>
-                  </span>
-                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
-                </button>
-
-                <button type="button" className="v39430-home-quick-card v39430-home-quick-card--clients" onClick={() => setCurrentPage(Page.Clients)}>
-                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><Users size={58} strokeWidth={1.65} /></span>
-                  <span className="v39430-home-quick-card__copy">
-                    <span className="v39430-home-quick-card__title">Clients</span>
-                    <span className="v39430-home-quick-card__meta">{clients.length} client{clients.length === 1 ? '' : 's'}</span>
-                  </span>
-                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
-                </button>
-
-                <button
-                  type="button"
-                  className="v39430-home-quick-card v39430-home-quick-card--invoices"
-                  onClick={() => { setBillingDocType('invoice'); setInvoiceQuickFilter('all'); setCurrentPage(Page.Invoices); }}
-                >
-                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><FileText size={58} strokeWidth={1.65} /></span>
-                  <span className="v39430-home-quick-card__copy">
-                    <span className="v39430-home-quick-card__title">Invoices</span>
-                    <span className="v39430-home-quick-card__meta">{formatCurrency.format(totals.pendingAmount)} open</span>
-                  </span>
-                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
-                </button>
-
-                <button type="button" className="v39430-home-quick-card v39430-home-quick-card--mileage" onClick={() => setCurrentPage(Page.Mileage)}>
-                  <span className="v39430-home-quick-card__icon" aria-hidden="true"><Car size={58} strokeWidth={1.65} /></span>
-                  <span className="v39430-home-quick-card__copy">
-                    <span className="v39430-home-quick-card__title">Mileage</span>
-                    <span className="v39430-home-quick-card__meta">{mileageTrips.length} trip{mileageTrips.length === 1 ? '' : 's'}</span>
-                  </span>
-                  <ChevronRight className="v39430-home-quick-card__chevron" size={22} />
-                </button>
-              </div>
+            <section className="v39448-home-add-transaction" aria-label="Add transaction">
+              <h2 className="v39448-home-add-transaction__title">Add transaction</h2>
+              <button
+                onClick={() => handleOpenUnifiedAdd()}
+                className="v391-primary-orb v39448-home-add-transaction__button"
+                aria-label="Add transaction"
+              >
+                <Plus size={24} strokeWidth={2.35} />
+              </button>
             </section>
-
-            <div className="v39430-home-details-heading">
-              <h2>Home details</h2>
-              <span>Scroll for more</span>
-            </div>
 
             <div id="home-overview" className="scroll-mt-6">
               <MonieziGlassCard hero className="v39431-home-feature-card">
