@@ -1,12 +1,12 @@
-## v39.4.55 — Single-hero Quick Add + 2×4 enlarged actions
+## v39.4.56 — Larger Quick Add actions
 
-- Keeps the approved single hero illustration under the Quick Add title.
-- Replaces the previous 4×4 action arrangement with a centered 2-column × 4-row action layout.
-- Keeps all 8 Quick Add actions: Income, Expense, Invoice, Estimate, Mileage, Client, Job / Project, and Receipt.
-- Enlarges the action tiles and labels so they occupy more of the available panel space and feel easier to scan/tap.
-- Adds more breathing room between actions while using the full Quick Add surface more evenly from top to bottom.
-- Keeps the existing transparent hero artwork and updates it to the new versioned filename `public/quick-add-hero-v39-4-55-shared.webp` for offline/PWA precache consistency.
-- Preserves all existing Quick Add behavior, receipt scan flow, menu behavior, activation flow, Demo behavior, and business logic.
+- Keeps the approved Quick Add hero illustration and the 2-column × 4-row action layout.
+- Increases the size of all 8 Quick Add action icons so the chooser feels fuller and easier to tap.
+- Increases the size of all 8 Quick Add action labels so they read more prominently.
+- Expands each action block and spacing to make the Quick Add screen use the available panel area better.
+- Preserves all existing Quick Add actions and behavior: Income, Expense, Invoice, Estimate, Mileage, Client, Job / Project, and Receipt.
+- Updates the versioned hero asset reference to `public/quick-add-hero-v39-4-56-shared.webp` and updates offline precache references accordingly.
+- Preserves navigation, Demo behavior, activation flow, menu behavior, and business logic.
 
 ## v39.4.53 — Stronger Menu copy + illustrated Quick Add categories
 
