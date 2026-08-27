@@ -214,54 +214,33 @@ export function MonieziSelect({
             ) : null}
             <div className={menuVariant === 'screen' ? 'v39434-add-choice-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain px-1 pb-1' : ''}>
               {menuVariant === 'screen' ? (
-                <div className="space-y-3">
-                  {Array.from(new Set(options.map(option => option.group || ''))).map(group => {
-                    const groupOptions = options.filter(option => (option.group || '') === group);
-                    const groupIllustrationSrc =
-                      group === 'Money & Sales'
-                        ? `${publicBase}transaction-add-v39-4-50-shared.webp`
-                        : group === 'Business'
-                          ? `${publicBase}quick-add-business-v39-4-53-shared.webp`
-                          : '';
-                    return (
-                      <section
-                        key={group || 'choices'}
-                        data-moniezi-group={group || 'choices'}
-                        className="v39433-add-choice-group"
-                      >
-                        {group ? (
-                          <div className="v39453-add-choice-group__header">
-                            <div className="v39433-add-choice-group__title">
-                              {group}
-                            </div>
-                            {groupIllustrationSrc ? (
-                              <div className="v39453-add-choice-group__visual" aria-hidden="true">
-                                <img src={groupIllustrationSrc} alt="" loading="eager" decoding="async" />
-                              </div>
-                            ) : null}
-                          </div>
-                        ) : null}
-                        <div className="v39433-add-choice-grid">
-                          {groupOptions.map(option => {
-                            const selected = option.value === value;
-                            return (
-                              <button
-                                key={option.value}
-                                type="button"
-                                role="option"
-                                aria-selected={selected}
-                                disabled={option.disabled}
-                                onClick={() => choose(option.value, option.disabled)}
-                                className={`v39433-add-choice-card ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
-                              >
-                                <span className="v39433-add-choice-card__label">{option.label}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </section>
-                    );
-                  })}
+                <div className="v39454-add-choice-layout">
+                  <div className="v39454-add-choice-hero" aria-hidden="true">
+                    <img
+                      src={`${publicBase}quick-add-hero-v39-4-54-shared.webp`}
+                      alt=""
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="v39454-add-choice-grid">
+                    {options.map(option => {
+                      const selected = option.value === value;
+                      return (
+                        <button
+                          key={option.value}
+                          type="button"
+                          role="option"
+                          aria-selected={selected}
+                          disabled={option.disabled}
+                          onClick={() => choose(option.value, option.disabled)}
+                          className={`v39433-add-choice-card ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
+                        >
+                          <span className="v39433-add-choice-card__label">{option.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               ) : (
                 options.map((option, index) => {

@@ -1694,7 +1694,7 @@ export default function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [drawerMode, setDrawerMode] = useState<'add' | 'edit_tx' | 'edit_inv' | 'tax_payments' | 'create_cat' | 'mileage'>('add');
   const [activeTab, setActiveTab] = useState<'income' | 'expense' | 'billing'>('income');
-  const [addFlowSelection, setAddFlowSelection] = useState<'income' | 'expense' | 'invoice' | 'estimate' | 'mileage' | 'client' | 'job' | ''>('');
+  const [addFlowSelection, setAddFlowSelection] = useState<'income' | 'expense' | 'invoice' | 'estimate' | 'mileage' | 'client' | 'job' | 'receipt' | ''>('');
   const [showGoalsEditor, setShowGoalsEditor] = useState(false);
   const [goalDraft, setGoalDraft] = useState({ revenue: '', profit: '' });
   const [billingDocType, setBillingDocType] = useState<'invoice' | 'estimate'>('invoice');
@@ -3707,7 +3707,7 @@ export default function App() {
     return 'expense';
   };
 
-  type UnifiedAddAction = 'income' | 'expense' | 'invoice' | 'estimate' | 'mileage' | 'client' | 'job';
+  type UnifiedAddAction = 'income' | 'expense' | 'invoice' | 'estimate' | 'mileage' | 'client' | 'job' | 'receipt';
 
   const unifiedAddOptions = [
     { value: 'income', label: <span className="inline-flex items-center gap-3"><TrendingUp size={24} strokeWidth={1.25} className="text-emerald-500 dark:text-emerald-400" />Income</span>, group: 'Money & Sales' },
@@ -3717,6 +3717,7 @@ export default function App() {
     { value: 'mileage', label: <span className="inline-flex items-center gap-3"><Car size={24} strokeWidth={1.25} className="text-cyan-500 dark:text-cyan-400" />Mileage</span>, group: 'Business' },
     { value: 'client', label: <span className="inline-flex items-center gap-3"><User size={24} strokeWidth={1.25} className="text-amber-500 dark:text-amber-400" />Client</span>, group: 'Business' },
     { value: 'job', label: <span className="inline-flex items-center gap-3"><Briefcase size={24} strokeWidth={1.25} className="text-teal-500 dark:text-teal-400" />Job / Project</span>, group: 'Business' },
+    { value: 'receipt', label: <span className="inline-flex items-center gap-3"><Camera size={24} strokeWidth={1.25} className="text-sky-500 dark:text-sky-400" />Receipt</span>, group: 'Business' },
   ];
 
   const handleUnifiedAddSelection = (action: UnifiedAddAction) => {
@@ -3748,6 +3749,13 @@ export default function App() {
       resetActiveItem('billing', docType);
       setCategorySearch('');
       setIsDrawerOpen(true);
+      return;
+    }
+
+    if (action === 'receipt') {
+      setIsDrawerOpen(false);
+      setScanMode('receiptOnly');
+      window.setTimeout(() => scanInputRef.current?.click(), 0);
       return;
     }
 
