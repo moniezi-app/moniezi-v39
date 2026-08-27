@@ -305,23 +305,6 @@ html.theme-light .text-black {
   color: #01040b !important;
 }
 
-html.theme-light .font-normal {
-  font-weight: 600 !important;
-}
-
-html.theme-light .font-medium {
-  font-weight: 700 !important;
-}
-
-html.theme-light .font-semibold {
-  font-weight: 800 !important;
-}
-
-html.theme-light .font-bold,
-html.theme-light .font-extrabold {
-  font-weight: 900 !important;
-}
-
 html.theme-light label,
 html.theme-light button,
 html.theme-light input,
@@ -5741,3 +5724,201 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .theme-light .v39433-main-menu section a > span:first-child svg {
   filter: none !important;
 }
+
+/* ================================================================
+   MONIEZI v39.4.49 — Activation states + typography/icon refinement
+   ----------------------------------------------------------------
+   1) Activation CTA: confident blue waiting state, gold ready state,
+      and brief green verified-success state.
+   2) Removes the redundant Net Profit add action in JSX; Home keeps the
+      single Add transaction action above the dashboard.
+   3) Normalizes authenticated-app title hierarchy to 600 primary / 500
+      secondary and removes v39 light-mode font-weight inflation.
+   4) Keeps the Demo purple background concept while tightening its radius
+      and reducing the Demo/header icon scale across the established card
+      and routed-page header systems.
+   ================================================================ */
+
+.moniezi-license-stable-surface .v39-license-button.v39449-license-button--waiting,
+.moniezi-license-stable-surface .v39-license-button.v39449-license-button--waiting:disabled {
+  border-color: #2c5fd2 !important;
+  background: #3469dc !important;
+  color: #ffffff !important;
+  box-shadow: 0 12px 24px rgba(36, 83, 190, 0.18) !important;
+  opacity: 1 !important;
+}
+
+.moniezi-license-stable-surface .v39-license-button.v39449-license-button--ready,
+.moniezi-license-stable-surface .v39-license-button.v39449-license-button--ready:disabled {
+  border-color: #dea918 !important;
+  background: linear-gradient(180deg, #ffd64f 0%, #f4bd22 100%) !important;
+  color: #14213d !important;
+  box-shadow: 0 14px 26px rgba(204, 151, 15, 0.22) !important;
+  opacity: 1 !important;
+}
+
+.moniezi-license-stable-surface .v39-license-button.v39449-license-button--ready:hover:not(:disabled) {
+  border-color: #d39d0f !important;
+  background: linear-gradient(180deg, #ffdc62 0%, #f5c12b 100%) !important;
+}
+
+.moniezi-license-stable-surface .v39-license-button.v39449-license-button--success,
+.moniezi-license-stable-surface .v39-license-button.v39449-license-button--success:disabled {
+  border-color: #15935a !important;
+  background: #20a965 !important;
+  color: #ffffff !important;
+  box-shadow: 0 14px 26px rgba(24, 139, 83, 0.20) !important;
+  opacity: 1 !important;
+}
+
+.v392-app-wide .v392-screen :is(h1, h2) {
+  font-weight: 600 !important;
+}
+
+.v392-app-wide .v392-screen :is(h3, h4, h5, h6) {
+  font-weight: 500 !important;
+}
+
+.v392-app-wide .v391-card-title,
+.v392-app-wide .v391-card-title--hero,
+.v392-app-wide .v39432-page-hero__title,
+.v392-app-wide .v39448-home-add-transaction__title {
+  font-weight: 600 !important;
+}
+
+.v392-app-wide .v391-card-subtitle,
+.v392-app-wide .v39432-page-hero__subtitle,
+.v392-app-wide .v391-section-heading h3 {
+  font-weight: 500 !important;
+}
+
+.v39427-demo-banner {
+  border-radius: var(--v3949-radius-card, 8px) !important;
+}
+
+.v39427-demo-banner__content {
+  min-height: 106px;
+  gap: 14px;
+  padding: 13px 17px;
+}
+
+.v39427-demo-badge {
+  width: 50px;
+  height: 50px;
+  box-shadow:
+    0 0 0 3px rgba(102, 54, 224, 0.28),
+    0 0 0 4px rgba(200, 159, 255, 0.14),
+    0 0 13px rgba(138, 65, 255, 0.42),
+    0 8px 14px rgba(31, 14, 91, 0.28),
+    inset 0 1px 0 rgba(255,255,255,0.40);
+}
+
+.v39427-demo-badge::before {
+  inset: 4px;
+}
+
+.v39427-demo-badge__briefcase {
+  width: 27px;
+  height: 27px;
+}
+
+.v39427-demo-badge__sparkle {
+  top: 7px;
+  right: 6px;
+  width: 10px;
+  height: 10px;
+}
+
+.v39427-demo-banner__title {
+  font-weight: 600;
+}
+
+.v39431-home-feature-header {
+  grid-template-columns: 60px minmax(0, 1fr) auto !important;
+  column-gap: 16px !important;
+}
+
+.v39431-home-feature-header .v391-glass-icon {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: var(--v3949-radius-icon, 6px) !important;
+}
+
+.v39431-home-feature-header .v391-glass-icon svg {
+  width: 35px !important;
+  height: 35px !important;
+}
+
+.v39432-page-hero__main {
+  grid-template-columns: 60px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.v39432-page-hero__icon {
+  width: 60px !important;
+  height: 60px !important;
+  min-width: 60px !important;
+  border-radius: var(--v3949-radius-icon, 6px) !important;
+}
+
+.v39432-page-hero__icon svg {
+  width: 35px !important;
+  height: 35px !important;
+}
+
+@media (max-width: 390px) {
+  .v39431-home-feature-header {
+    grid-template-columns: 56px minmax(0, 1fr) auto !important;
+    column-gap: 14px !important;
+  }
+  .v39431-home-feature-header .v391-glass-icon {
+    width: 56px !important;
+    height: 56px !important;
+  }
+  .v39431-home-feature-header .v391-glass-icon svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  .v39432-page-hero__main {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .v39432-page-hero__icon {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+  }
+  .v39432-page-hero__icon svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .v39431-home-feature-header {
+    grid-template-columns: 66px minmax(0, 1fr) auto !important;
+    column-gap: 18px !important;
+  }
+  .v39431-home-feature-header .v391-glass-icon {
+    width: 66px !important;
+    height: 66px !important;
+  }
+  .v39431-home-feature-header .v391-glass-icon svg {
+    width: 39px !important;
+    height: 39px !important;
+  }
+  .v39432-page-hero__main {
+    grid-template-columns: 66px minmax(0, 1fr);
+    gap: 18px;
+  }
+  .v39432-page-hero__icon {
+    width: 66px !important;
+    height: 66px !important;
+    min-width: 66px !important;
+  }
+  .v39432-page-hero__icon svg {
+    width: 39px !important;
+    height: 39px !important;
+  }
+}
+

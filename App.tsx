@@ -1403,6 +1403,7 @@ export default function App() {
   const [licenseKey, setLicenseKey] = useState('');
   const [licenseError, setLicenseError] = useState('');
   const [isValidatingLicense, setIsValidatingLicense] = useState(false);
+  const [licenseActivationSucceeded, setLicenseActivationSucceeded] = useState(false);
   const [licenseInfo, setLicenseInfo] = useState<{ email?: string; purchaseDate?: string; } | null>(null);
   const [showLicenseModal, setShowLicenseModal] = useState(false);
 
@@ -2314,6 +2315,7 @@ export default function App() {
     }
 
     setIsValidatingLicense(true);
+    setLicenseActivationSucceeded(false);
     setLicenseError('');
 
     try {
@@ -2322,12 +2324,18 @@ export default function App() {
         const stored = parseStoredLicense(localStorage.getItem(LICENSE_STORAGE_KEY));
         setLicenseInfo({ email: stored?.email, purchaseDate: stored?.purchaseDate });
         (document.activeElement as HTMLElement | null)?.blur?.();
+        setLicenseActivationSucceeded(true);
+
+        // v39.4.49: keep the successful green button visible briefly while the
+        // existing Home/viewport settling work completes. This preserves the
+        // activation sequence while giving a clear verified-success state.
+        const minimumSuccessFeedback = new Promise<void>((resolve) => window.setTimeout(resolve, 450));
 
         // v39.4.38: do not expose a partially settled Home frame. Chrome can
         // still be expanding visualViewport after the keyboard closes, while the
         // first-run WebP/font may also be finishing decode. Wait for both before
         // unmounting the activation gate so Home appears once, already complete.
-        await Promise.all([ensureFirstHomeAssetsReady(), waitForActivationViewportToSettle()]);
+        await Promise.all([ensureFirstHomeAssetsReady(), waitForActivationViewportToSettle(), minimumSuccessFeedback]);
 
         // Keep the v39.4.36 rule: do not launch the multi-pass page scroll reset
         // while the fixed activation gate is unmounting.
@@ -2340,9 +2348,11 @@ export default function App() {
         }
         showToast('License activated', 'success', 2000);
       } else {
+        setLicenseActivationSucceeded(false);
         setLicenseError('Invalid license key. Please check and try again.');
       }
     } catch (error) {
+      setLicenseActivationSucceeded(false);
       setLicenseError('Unable to validate license. Please check your internet connection and try again.');
     } finally {
       setIsValidatingLicense(false);
@@ -2355,6 +2365,7 @@ export default function App() {
       localStorage.removeItem(LICENSE_STORAGE_KEY);
       setIsLicenseValid(false);
       setLicenseKey('');
+      setLicenseActivationSucceeded(false);
       setLicenseInfo(null);
     }
   };
@@ -7834,7 +7845,7 @@ export default function App() {
                   id="moniezi-license-key"
                   type="text"
                   value={licenseKey}
-                  onChange={(e) => { setLicenseKey(e.target.value); setLicenseError(''); }}
+                  onChange={(e) => { setLicenseKey(e.target.value); setLicenseActivationSucceeded(false); setLicenseError(''); }}
                   onFocus={beginLicenseViewportSession}
                   onKeyDown={(e) => e.key === 'Enter' && handleActivateLicense()}
                   placeholder="Paste or enter your license key"
@@ -7857,9 +7868,14 @@ export default function App() {
               <button
                 onClick={handleActivateLicense}
                 disabled={isValidatingLicense || !licenseKey.trim()}
-                className="v39-license-button"
+                className={`v39-license-button ${licenseActivationSucceeded ? 'v39449-license-button--success' : licenseKey.trim() ? 'v39449-license-button--ready' : 'v39449-license-button--waiting'}`}
               >
-                {isValidatingLicense ? (
+                {licenseActivationSucceeded ? (
+                  <>
+                    <CheckCircle size={20} />
+                    Activated
+                  </>
+                ) : isValidatingLicense ? (
                   <>
                     <Loader2 size={20} className="animate-spin" />
                     Validating...
@@ -8897,9 +8913,6 @@ html, body, #root {
                     <p className="v391-card-subtitle">{homeTotals.rangeText}</p>
                   </div>
                 </div>
-                <button onClick={() => handleOpenUnifiedAdd()} className="v391-primary-orb" aria-label="Add new record">
-                  <Plus size={21} strokeWidth={2.4} />
-                </button>
               </div>
 
               <MonieziGlassSegments<HomeKpiPeriod>

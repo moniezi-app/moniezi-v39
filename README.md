@@ -1,3 +1,12 @@
+## v39.4.49 — Activation states + typography/icon refinement
+
+- Strengthens the empty license CTA with MONIEZI blue, switches to yellow/gold when a key is entered, and shows a brief green verified-success state.
+- Keeps one Home add action by removing the redundant plus button from the Net Profit card.
+- Normalizes authenticated-app title hierarchy to 600 primary / 500 secondary and removes the light-mode font-weight inflation that pushed bold utilities to 900.
+- Preserves the Demo card's approved purple landscape background while tightening its corner radius and reducing its badge/icon size.
+- Reduces the oversized left-side icon plates/glyphs across Home feature cards and routed page-header cards while preserving their established colors and dark-mode visual language.
+- Preserves footer destinations, history-based Back navigation, Quick Add actions, Demo functionality, business logic, and package structure.
+
 ## v39.4.48 — Home cleanup + clean light-mode surfaces
 
 - Removes the Home Quick Access card grid.
