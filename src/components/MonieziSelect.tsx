@@ -217,7 +217,7 @@ export function MonieziSelect({
                 <div className="v39454-add-choice-layout">
                   <div className="v39454-add-choice-hero" aria-hidden="true">
                     <img
-                      src={`${publicBase}quick-add-hero-v39-4-54-shared.webp`}
+                      src={`${publicBase}quick-add-hero-v39-4-55-shared.webp`}
                       alt=""
                       loading="eager"
                       decoding="async"

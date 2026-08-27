@@ -6818,7 +6818,7 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 }
 
 /* ================================================================
-   MONIEZI v39.4.54 — single-hero Quick Add + balanced 4x4 actions
+   MONIEZI v39.4.55 — single-hero Quick Add + 2x4 enlarged actions
    ----------------------------------------------------------------
    Quick Add now uses one approved illustration at the top and a single,
    balanced eight-action grid below it. Category panels/labels are removed.
@@ -6833,8 +6833,8 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39454-add-choice-layout {
   min-height: 100% !important;
   display: grid !important;
-  grid-template-rows: minmax(180px, 0.82fr) minmax(250px, 1.18fr) !important;
-  gap: 18px !important;
+  grid-template-rows: minmax(170px, auto) minmax(420px, 1fr) !important;
+  gap: 16px !important;
   align-items: stretch !important;
 }
 
@@ -6854,30 +6854,30 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   display: block !important;
   width: auto !important;
   height: auto !important;
-  max-width: min(74%, 330px) !important;
-  max-height: 230px !important;
+  max-width: min(64%, 250px) !important;
+  max-height: 190px !important;
   object-fit: contain !important;
 }
 
-/* Two perfectly balanced rows: 4 + 4. */
+/* Four rows of two: larger actions, more spacing, fuller use of the panel. */
 .v39454-add-choice-grid {
   display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  grid-template-rows: repeat(2, minmax(102px, 1fr)) !important;
-  column-gap: 8px !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: repeat(4, minmax(112px, 1fr)) !important;
+  column-gap: 18px !important;
   row-gap: 20px !important;
   align-content: stretch !important;
   align-items: stretch !important;
-  padding: 2px 2px 8px !important;
+  padding: 4px 8px 10px !important;
 }
 
 .v39454-add-choice-grid .v39433-add-choice-card {
   display: flex !important;
   min-width: 0 !important;
-  min-height: 102px !important;
+  min-height: 112px !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 4px 1px !important;
+  padding: 6px 4px !important;
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
@@ -6905,12 +6905,12 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 8px !important;
+  gap: 10px !important;
   color: #0b0b0c !important;
-  font-size: 13px !important;
-  line-height: 1.15 !important;
+  font-size: 15px !important;
+  line-height: 1.14 !important;
   font-weight: 500 !important;
-  letter-spacing: -0.015em !important;
+  letter-spacing: -0.018em !important;
   text-align: center !important;
   white-space: normal !important;
 }
@@ -6922,9 +6922,9 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
 /* Keep the familiar MONIEZI icon plates crisp: no glow, no haze. */
 .v39454-add-choice-grid .v39433-add-choice-card__label svg {
-  width: 58px !important;
-  height: 58px !important;
-  padding: 12px !important;
+  width: 72px !important;
+  height: 72px !important;
+  padding: 15px !important;
   border: 1.5px solid currentColor !important;
   border-radius: var(--v3949-radius-icon, 6px) !important;
   background: color-mix(in srgb, currentColor 10%, #ffffff) !important;
@@ -6946,72 +6946,81 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
 @media (max-width: 390px) {
   .v39454-add-choice-layout {
-    grid-template-rows: minmax(158px, 0.78fr) minmax(238px, 1.22fr) !important;
-    gap: 14px !important;
+    grid-template-rows: minmax(146px, auto) minmax(404px, 1fr) !important;
+    gap: 12px !important;
   }
   .v39454-add-choice-hero img {
-    max-width: min(72%, 286px) !important;
-    max-height: 195px !important;
+    max-width: min(62%, 220px) !important;
+    max-height: 164px !important;
   }
   .v39454-add-choice-grid {
-    column-gap: 4px !important;
+    column-gap: 14px !important;
     row-gap: 16px !important;
-    grid-template-rows: repeat(2, minmax(94px, 1fr)) !important;
+    grid-template-rows: repeat(4, minmax(98px, 1fr)) !important;
+    padding: 2px 4px 8px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card {
-    min-height: 94px !important;
+    min-height: 98px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label,
   .v39454-add-choice-grid .v39433-add-choice-card__label > span {
-    gap: 7px !important;
-    font-size: 12px !important;
+    gap: 8px !important;
+    font-size: 13px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label svg {
-    width: 52px !important;
-    height: 52px !important;
-    padding: 10px !important;
+    width: 60px !important;
+    height: 60px !important;
+    padding: 12px !important;
   }
 }
 
 @media (max-height: 760px) {
   .v39454-add-choice-layout {
-    grid-template-rows: minmax(132px, 0.68fr) minmax(220px, 1.32fr) !important;
-    gap: 10px !important;
+    grid-template-rows: minmax(128px, auto) minmax(380px, 1fr) !important;
+    gap: 8px !important;
   }
   .v39454-add-choice-hero img {
-    max-height: 160px !important;
-    max-width: min(66%, 260px) !important;
+    max-height: 144px !important;
+    max-width: min(56%, 210px) !important;
   }
   .v39454-add-choice-grid {
     row-gap: 10px !important;
-    grid-template-rows: repeat(2, minmax(88px, 1fr)) !important;
+    column-gap: 12px !important;
+    grid-template-rows: repeat(4, minmax(82px, 1fr)) !important;
+    padding: 0 2px 6px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card {
-    min-height: 88px !important;
+    min-height: 82px !important;
+  }
+  .v39454-add-choice-grid .v39433-add-choice-card__label,
+  .v39454-add-choice-grid .v39433-add-choice-card__label > span {
+    gap: 6px !important;
+    font-size: 12px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label svg {
-    width: 48px !important;
-    height: 48px !important;
-    padding: 9px !important;
+    width: 50px !important;
+    height: 50px !important;
+    padding: 10px !important;
   }
 }
 
 @media (min-width: 640px) {
   .v39454-add-choice-hero img {
-    max-width: 340px !important;
-    max-height: 240px !important;
+    max-width: 280px !important;
+    max-height: 210px !important;
   }
   .v39454-add-choice-grid {
-    column-gap: 16px !important;
+    column-gap: 24px !important;
     row-gap: 24px !important;
+    padding-inline: 18px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label,
   .v39454-add-choice-grid .v39433-add-choice-card__label > span {
-    font-size: 14px !important;
+    font-size: 16px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label svg {
-    width: 64px !important;
-    height: 64px !important;
-    padding: 13px !important;
+    width: 78px !important;
+    height: 78px !important;
+    padding: 16px !important;
   }
 }
