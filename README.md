@@ -1,3 +1,12 @@
+## v39.4.57 — Quick Add vertical spacing + slightly larger actions
+
+- Keeps the approved Quick Add hero illustration and the 2-column × 4-row action layout.
+- Adds more vertical breathing room between the hero illustration and the first Income / Expense row, moving the action grid slightly lower.
+- Increases only the vertical spacing between the four action rows; horizontal column spacing is intentionally unchanged.
+- Slightly enlarges all 8 Quick Add action icons and the corresponding action labels.
+- Preserves all 8 Quick Add actions and behavior: Income, Expense, Invoice, Estimate, Mileage, Client, Job / Project, and Receipt.
+- Preserves navigation, Demo behavior, activation flow, hamburger Menu behavior, footer destinations, and business logic.
+
 ## v39.4.56 — Larger Quick Add actions
 
 - Keeps the approved Quick Add hero illustration and the 2-column × 4-row action layout.

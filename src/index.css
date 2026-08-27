@@ -6818,7 +6818,7 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 }
 
 /* ================================================================
-   MONIEZI v39.4.56 — single-hero Quick Add + 2x4 enlarged actions
+   MONIEZI v39.4.57 — Quick Add vertical spacing + slightly larger actions
    ----------------------------------------------------------------
    Quick Add now uses one approved illustration at the top and a single,
    balanced eight-action grid below it. Category panels/labels are removed.
@@ -6834,7 +6834,7 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   min-height: 100% !important;
   display: grid !important;
   grid-template-rows: minmax(160px, auto) minmax(460px, 1fr) !important;
-  gap: 14px !important;
+  gap: 24px !important;
   align-items: stretch !important;
 }
 
@@ -6863,9 +6863,9 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39454-add-choice-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  grid-template-rows: repeat(4, minmax(122px, 1fr)) !important;
+  grid-template-rows: repeat(4, minmax(128px, 1fr)) !important;
   column-gap: 20px !important;
-  row-gap: 20px !important;
+  row-gap: 27px !important;
   align-content: stretch !important;
   align-items: stretch !important;
   padding: 6px 10px 12px !important;
@@ -6874,7 +6874,7 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .v39454-add-choice-grid .v39433-add-choice-card {
   display: flex !important;
   min-width: 0 !important;
-  min-height: 122px !important;
+  min-height: 128px !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 6px 4px !important;
@@ -6905,9 +6905,9 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 12px !important;
+  gap: 13px !important;
   color: #0b0b0c !important;
-  font-size: 17px !important;
+  font-size: 18px !important;
   line-height: 1.14 !important;
   font-weight: 500 !important;
   letter-spacing: -0.018em !important;
@@ -6922,9 +6922,9 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
 /* Keep the familiar MONIEZI icon plates crisp: no glow, no haze. */
 .v39454-add-choice-grid .v39433-add-choice-card__label svg {
-  width: 84px !important;
-  height: 84px !important;
-  padding: 17px !important;
+  width: 89px !important;
+  height: 89px !important;
+  padding: 18px !important;
   border: 1.5px solid currentColor !important;
   border-radius: var(--v3949-radius-icon, 6px) !important;
   background: color-mix(in srgb, currentColor 10%, #ffffff) !important;
@@ -6946,8 +6946,8 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
 @media (max-width: 390px) {
   .v39454-add-choice-layout {
-    grid-template-rows: minmax(138px, auto) minmax(426px, 1fr) !important;
-    gap: 12px !important;
+    grid-template-rows: minmax(138px, auto) minmax(446px, 1fr) !important;
+    gap: 20px !important;
   }
   .v39454-add-choice-hero img {
     max-width: min(58%, 208px) !important;
@@ -6955,52 +6955,52 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   }
   .v39454-add-choice-grid {
     column-gap: 16px !important;
-    row-gap: 14px !important;
-    grid-template-rows: repeat(4, minmax(108px, 1fr)) !important;
+    row-gap: 20px !important;
+    grid-template-rows: repeat(4, minmax(114px, 1fr)) !important;
     padding: 2px 4px 8px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card {
-    min-height: 108px !important;
+    min-height: 114px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label,
   .v39454-add-choice-grid .v39433-add-choice-card__label > span {
-    gap: 8px !important;
-    font-size: 14px !important;
+    gap: 9px !important;
+    font-size: 15px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label svg {
-    width: 70px !important;
-    height: 70px !important;
-    padding: 14px !important;
+    width: 75px !important;
+    height: 75px !important;
+    padding: 15px !important;
   }
 }
 
 @media (max-height: 760px) {
   .v39454-add-choice-layout {
-    grid-template-rows: minmax(122px, auto) minmax(404px, 1fr) !important;
-    gap: 8px !important;
+    grid-template-rows: minmax(122px, auto) minmax(424px, 1fr) !important;
+    gap: 14px !important;
   }
   .v39454-add-choice-hero img {
     max-height: 136px !important;
     max-width: min(54%, 196px) !important;
   }
   .v39454-add-choice-grid {
-    row-gap: 12px !important;
+    row-gap: 17px !important;
     column-gap: 14px !important;
-    grid-template-rows: repeat(4, minmax(88px, 1fr)) !important;
+    grid-template-rows: repeat(4, minmax(94px, 1fr)) !important;
     padding: 0 2px 6px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card {
-    min-height: 88px !important;
+    min-height: 94px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label,
   .v39454-add-choice-grid .v39433-add-choice-card__label > span {
-    gap: 6px !important;
-    font-size: 13px !important;
+    gap: 7px !important;
+    font-size: 14px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label svg {
-    width: 56px !important;
-    height: 56px !important;
-    padding: 11px !important;
+    width: 61px !important;
+    height: 61px !important;
+    padding: 12px !important;
   }
 }
 
@@ -7011,16 +7011,16 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   }
   .v39454-add-choice-grid {
     column-gap: 26px !important;
-    row-gap: 24px !important;
+    row-gap: 31px !important;
     padding-inline: 18px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label,
   .v39454-add-choice-grid .v39433-add-choice-card__label > span {
-    font-size: 18px !important;
+    font-size: 19px !important;
   }
   .v39454-add-choice-grid .v39433-add-choice-card__label svg {
-    width: 90px !important;
-    height: 90px !important;
-    padding: 18px !important;
+    width: 95px !important;
+    height: 95px !important;
+    padding: 19px !important;
   }
 }
