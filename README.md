@@ -1,3 +1,12 @@
+## v39.4.51 — First-run stabilization + compact menu refinement
+
+- Explicitly preloads the Plus Jakarta Sans Variable face/weights used by the first Home/Demo surface before it is revealed, eliminating the brief fallback-font width/weight flash in “Load the demo business”.
+- Uses the approved 600 weight for the first-run title and tightens the illustration-to-title spacing so the complete yellow Load the demo button sits higher above the sticky footer.
+- Refines Quick Add with a 600-weight title, 500-weight category/item labels, slightly smaller choices/icon plates, and tighter spacing while preserving all actions, two-column organization, and scrolling.
+- Refines the hamburger Menu with a 600-weight Menu title, 500-weight section/item labels, smaller item boxes/icon plates, and more compact spacing while preserving destinations and functionality.
+- Removes faded shadows, glows, and radial haze from Quick Add and hamburger-menu panels/items/icon plates in both light and dark mode, keeping crisp borders and solid surfaces.
+- Preserves v39.4.50 Demo card treatment, card-radius consistency, Add Transaction illustration, footer navigation, Back behavior, activation states, and business logic.
+
 ## v39.4.50 — Compact Demo + card-radius consistency + Add Transaction illustration
 
 - Reduces the Demo notification card height while preserving its landscape layout, content, orange Exit Demo action, and established dark-mode purple identity.

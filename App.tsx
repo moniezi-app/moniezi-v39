@@ -1457,9 +1457,22 @@ export default function App() {
       }
     });
 
-    const fontsReady = (document as any).fonts?.ready
-      ? Promise.resolve((document as any).fonts.ready).then(() => undefined).catch(() => undefined)
-      : Promise.resolve();
+    // v39.4.51: document.fonts.ready only waits for fonts the page has already
+    // requested. The activation surface intentionally uses a system font, so the
+    // Jakarta face used by first Home could otherwise be requested only after Home
+    // becomes visible, producing a one-frame width/weight swap in its title.
+    // Explicitly load the exact face/weight needed by first Home before reveal.
+    const fontSet = (document as any).fonts;
+    const fontsReady = fontSet?.load
+      ? Promise.all([
+          Promise.resolve(fontSet.load('600 23px "Plus Jakarta Sans Variable"', 'Load the demo business')).catch(() => undefined),
+          Promise.resolve(fontSet.load('500 16px "Plus Jakarta Sans Variable"', 'See MONIEZI filled with realistic business records')).catch(() => undefined),
+        ])
+          .then(() => fontSet.ready ? Promise.resolve(fontSet.ready).catch(() => undefined) : undefined)
+          .then(() => undefined)
+      : fontSet?.ready
+        ? Promise.resolve(fontSet.ready).then(() => undefined).catch(() => undefined)
+        : Promise.resolve();
 
     firstHomeReadyPromiseRef.current = Promise.all([imageReady, fontsReady]).then(() => undefined);
     return firstHomeReadyPromiseRef.current;
@@ -13269,7 +13282,7 @@ html, body, #root {
 
       {/* Main menu — complete directory of MONIEZI destinations. The bottom
           navigation remains the fast-access layer; this drawer is the full app map. */}
-      <AppDrawer isOpen={showMainMenu} onClose={() => setShowMainMenu(false)} title="Menu">
+      <AppDrawer isOpen={showMainMenu} onClose={() => setShowMainMenu(false)} title="Menu" panelClassName="v39451-main-menu-drawer">
         <div className="v39433-main-menu pt-5 pb-4">
 
           {/* Settings and Demo are app-level utilities, so they stay together at the top. */}
