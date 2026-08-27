@@ -1,3 +1,12 @@
+## v39.4.50 — Compact Demo + card-radius consistency + Add Transaction illustration
+
+- Reduces the Demo notification card height while preserving its landscape layout, content, orange Exit Demo action, and established dark-mode purple identity.
+- Gives the Demo card a clean pale-lavender light-mode surface and removes the faded ambient shadow/glow from the light treatment.
+- Normalizes routed page-header card corners to the established restrained MONIEZI card radius, including Clients, Jobs, Estimates, Invoices, Mileage, Reports, and Private Raise Tracker.
+- Replaces the horizontal Home Add transaction row with the approved centered empty-state-family wallet illustration, centered plus control, and Add transaction label only.
+- Adds the transaction illustration as a bundled transparent WebP asset and precaches it for offline/PWA use.
+- Preserves v39.4.49 activation states, title weights, smaller header icons, footer destinations, Demo functionality, Quick Add actions, history-based Back behavior, and business logic.
+
 ## v39.4.49 — Activation states + typography/icon refinement
 
 - Strengthens the empty license CTA with MONIEZI blue, switches to yellow/gold when a key is entered, and shows a brief green verified-success state.

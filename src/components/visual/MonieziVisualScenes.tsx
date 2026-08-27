@@ -110,4 +110,16 @@ export const JobsVisualScene: React.FC = () => (
   </div>
 );
 
+export const TransactionVisualScene: React.FC = () => (
+  <div className="v39-approved-illustration-pair" aria-hidden="true">
+    <img
+      src={`${publicBase}transaction-add-v39-4-50-shared.webp`}
+      alt=""
+      className="v39-approved-illustration"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+);
+
 export default WelcomeVisualScene;

@@ -101,7 +101,7 @@ import { MonieziSelect } from './src/components/MonieziSelect';
 import { MonieziEmptyState } from './src/components/visual/MonieziEmptyState';
 import { MonieziVisualStage } from './src/components/visual/MonieziVisualStage';
 import { MonieziGlassAction, MonieziGlassCard, MonieziGlassIcon, MonieziGlassInset, MonieziGlassMetric, MonieziGlassSegments } from './src/components/visual/MonieziGlass';
-import { ClientsVisualScene, EstimateVisualScene, InvoiceVisualScene, JobsVisualScene, MileageVisualScene, ReceiptsVisualScene } from './src/components/visual/MonieziVisualScenes';
+import { ClientsVisualScene, EstimateVisualScene, InvoiceVisualScene, JobsVisualScene, MileageVisualScene, ReceiptsVisualScene, TransactionVisualScene } from './src/components/visual/MonieziVisualScenes';
 import { buildGlobalSearchGroups, type GlobalSearchResult } from './src/features/search/globalSearch';
 import { TransactionEditorShell } from './src/features/transactions/TransactionEditorShell';
 import { useKeyboardEditingState } from './src/hooks/useKeyboardEditingState';
@@ -8888,14 +8888,19 @@ html, body, #root {
 
         {(currentPage === Page.Dashboard) && (
           <div className="v391-dashboard v3934-home-readable v3935-home-breathing v39430-home-phase1 space-y-10 sm:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <section className="v39448-home-add-transaction" aria-label="Add transaction">
-              <h2 className="v39448-home-add-transaction__title">Add transaction</h2>
+            <section className="v39450-home-add-transaction" aria-label="Add transaction">
+              <div className="v39450-home-add-transaction__visual" aria-hidden="true">
+                <TransactionVisualScene />
+              </div>
               <button
                 onClick={() => handleOpenUnifiedAdd()}
-                className="v391-primary-orb v39448-home-add-transaction__button"
+                className="v39450-home-add-transaction__action"
                 aria-label="Add transaction"
               >
-                <Plus size={24} strokeWidth={2.35} />
+                <span className="v391-primary-orb v39450-home-add-transaction__orb" aria-hidden="true">
+                  <Plus size={25} strokeWidth={2.35} />
+                </span>
+                <span className="v39450-home-add-transaction__label">Add transaction</span>
               </button>
             </section>
 
