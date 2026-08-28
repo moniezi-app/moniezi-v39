@@ -7933,3 +7933,31 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .dark .v39461-quick-add-action__title {
   color: rgba(255,255,255,0.98) !important;
 }
+
+
+/* ========================================================================
+   MONIEZI v39.4.65 — Quick Add hero theme visibility fix
+   The generic .v39461-quick-add-hero-art img rule is more specific than the
+   original single-class hide rule. These selectors deliberately include the
+   hero parent so only one themed hero image can render at a time.
+   ======================================================================== */
+
+.v39461-quick-add-hero-art .v39464-quick-add-hero-image--light,
+.v39454-add-choice-hero .v39464-quick-add-hero-image--light {
+  display: block !important;
+}
+
+.v39461-quick-add-hero-art .v39464-quick-add-hero-image--dark,
+.v39454-add-choice-hero .v39464-quick-add-hero-image--dark {
+  display: none !important;
+}
+
+.dark .v39461-quick-add-hero-art .v39464-quick-add-hero-image--light,
+.dark .v39454-add-choice-hero .v39464-quick-add-hero-image--light {
+  display: none !important;
+}
+
+.dark .v39461-quick-add-hero-art .v39464-quick-add-hero-image--dark,
+.dark .v39454-add-choice-hero .v39464-quick-add-hero-image--dark {
+  display: block !important;
+}

@@ -1,3 +1,10 @@
+## v39.4.65 — Quick Add light-mode hero visibility fix
+
+- Fixes the Quick Add light-mode hero bug where the light and dark hero images could render side-by-side.
+- Uses higher-specificity theme selectors so light mode shows only the light hero and dark mode shows only the dark hero.
+- Preserves the v39.4.64 true light-mode action cards and return-to-Quick-Add parent navigation behavior.
+- Preserves the existing optimized WebP hero assets, action spacing, accent colors, card radii, Demo behavior, and business logic.
+
 ## v39.4.64 — Quick Add true light mode + return-to-parent navigation
 
 - Gives Quick Add a true MONIEZI light-mode treatment: white/pale action cards, dark action text, crisp light borders, preserved per-action accent colors, and a dedicated light-mode version of the approved phone + plus hero.
