@@ -256,7 +256,7 @@ export function MonieziSelect({
                 <button
                   type="button"
                   onClick={dismissMenu}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-300 bg-slate-100 text-slate-700 transition-colors hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+                  className="flex h-11 w-11 items-center justify-center rounded-[14px] border border-slate-300 bg-slate-100 text-slate-700 transition-colors hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
                   aria-label="Close choices"
                 >
                   <X size={24} strokeWidth={2.2} />
@@ -267,14 +267,11 @@ export function MonieziSelect({
               {menuVariant === 'screen' ? (
                 isQuickAddScreenMenu ? (
 
-                  <div className="v39460-quick-add-layout">
-                    <section className="v39460-quick-add-hero-card" aria-label="Quick Add overview">
-                      <div className="v39460-quick-add-hero-copy">
-                        <h2 className="v39460-quick-add-hero-title">Everything you need, in one place.</h2>
-                      </div>
-                      <div className="v39460-quick-add-hero-art" aria-hidden="true">
+                  <div className="v39461-quick-add-layout">
+                    <section className="v39461-quick-add-hero-card" aria-label="Quick Add overview">
+                      <div className="v39461-quick-add-hero-art" aria-hidden="true">
                         <img
-                          src={`${publicBase}quick-add-hero-v39-4-59-approved.webp`}
+                          src={`${publicBase}quick-add-hero-v39-4-62-phone-plus.webp`}
                           alt=""
                           loading="eager"
                           decoding="async"
@@ -282,9 +279,9 @@ export function MonieziSelect({
                       </div>
                     </section>
 
-                    <div className="v39460-quick-add-action-list" role="presentation">
+                    <div className="v39461-quick-add-action-list" role="presentation">
                       {quickAddPairs.map((pair, pairIndex) => (
-                        <div key={`pair-${pairIndex}`} className="v39460-quick-add-pair">
+                        <div key={`pair-${pairIndex}`} className="v39461-quick-add-pair">
                           {pair.map((option, optionIndex) => {
                             const selected = option.value === value;
                             const { icon, title } = extractQuickAddLabelParts(option);
@@ -296,12 +293,12 @@ export function MonieziSelect({
                                   aria-selected={selected}
                                   disabled={option.disabled}
                                   onClick={() => choose(option.value, option.disabled)}
-                                  className={`v39460-quick-add-action ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
+                                  className={`v39461-quick-add-action ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
                                 >
-                                  <span className="v39460-quick-add-action__icon" aria-hidden="true">{icon}</span>
-                                  <span className="v39460-quick-add-action__title">{title}</span>
+                                  <span className="v39461-quick-add-action__icon" aria-hidden="true">{icon}</span>
+                                  <span className="v39461-quick-add-action__title">{title}</span>
                                 </button>
-                                {optionIndex === 0 && pair.length > 1 ? <div className="v39460-quick-add-pair__divider" aria-hidden="true" /> : null}
+                                {optionIndex === 0 && pair.length > 1 ? <div className="v39461-quick-add-pair__divider" aria-hidden="true" /> : null}
                               </React.Fragment>
                             );
                           })}
@@ -313,7 +310,7 @@ export function MonieziSelect({
                   <div className="v39454-add-choice-layout">
                     <div className="v39454-add-choice-hero" aria-hidden="true">
                       <img
-                        src={`${publicBase}quick-add-hero-v39-4-56-shared.webp`}
+                        src={`${publicBase}quick-add-hero-v39-4-62-phone-plus.webp`}
                         alt=""
                         loading="eager"
                         decoding="async"

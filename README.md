@@ -1,8 +1,16 @@
-## v39.4.60 — Quick Add split hero + compact colored paired actions
+## v39.4.62 — Quick Add asset cleanup + image optimization
 
-- Keeps the existing Quick Add header area at the top.
-- Rebuilds the hero section to follow the approved layout: **“Everything you need, in one place.”** on the left and the approved Quick Add illustration on the right.
-- Removes the extra descriptive hero paragraph so the panel stays compact.
+- Keeps the approved v39.4.61 Quick Add layout and behavior.
+- Converts the new Quick Add phone + plus hero from PNG to optimized WebP and versions it as `public/quick-add-hero-v39-4-62-phone-plus.webp`.
+- Removes five obsolete Quick Add illustration files, including three identical legacy copies.
+- Removes stale Quick Add files from the service-worker precache and adds only the current optimized hero.
+- Audits current public image assets so every remaining illustration is referenced by the current runtime, manifest, or service worker.
+
+## v39.4.61 — Quick Add single-phone hero + compact paired actions
+
+- Replaces the split Quick Add hero with the approved single phone + plus illustration.
+- Removes the extra hero copy and keeps only the compact header subtitle at the top.
+- Keeps 8 color-coded Quick Add actions in 4 paired rows with larger labels and matched corner radii.
 - Keeps the paired action-row structure underneath the hero while simplifying each action to icon + title only.
 - Restores the proper per-action accent colors and reduces the oversized icon treatment so the tiles feel more aligned with the rest of the app.
 - Tightens the corner radiuses to better match other MONIEZI cards and panels.

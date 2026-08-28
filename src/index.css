@@ -7573,105 +7573,88 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 }
 
 /* ========================================================================
-   MONIEZI v39.4.60 — Quick Add split hero + compact colored paired actions
-   Keeps the Quick Add header/subtitle, restores the approved split hero
-   layout (headline left, approved illustration right), removes extra copy,
-   tightens corner radii, and keeps all 8 actions visible without scrolling.
+   MONIEZI v39.4.61 — Quick Add single-phone hero + compact paired actions
+   Replaces the split headline/hero with the approved single phone + plus
+   illustration, keeps the compact top subtitle, and preserves 8 color-coded
+   actions in paired rows with tighter radius values aligned to the app.
    ======================================================================== */
 
 .v39433-add-choice-screen {
-  border-radius: 16px !important;
+  border-radius: 14px !important;
 }
 
 .v39433-add-choice-screen > .v39434-add-choice-scroll {
   padding: 8px 8px 10px !important;
 }
 
-.v39460-quick-add-layout {
+.v39461-quick-add-layout {
   display: flex !important;
   flex-direction: column !important;
-  gap: 10px !important;
+  gap: 8px !important;
   padding-bottom: 2px !important;
 }
 
-.v39460-quick-add-hero-card {
-  display: grid !important;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) !important;
+.v39461-quick-add-hero-card {
+  display: flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  justify-content: center !important;
   overflow: hidden !important;
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   border: 1px solid rgba(96, 165, 250, 0.22) !important;
   background:
     radial-gradient(circle at 20% 18%, rgba(34, 211, 238, 0.06), transparent 34%),
     linear-gradient(180deg, rgba(7, 26, 72, 0.96), rgba(3, 18, 58, 0.98)) !important;
-  padding: 12px 14px !important;
-  min-height: 148px !important;
+  padding: 8px 10px !important;
+  min-height: 164px !important;
 }
 
-.dark .v39460-quick-add-hero-card {
+.dark .v39461-quick-add-hero-card {
   border-color: rgba(96, 165, 250, 0.24) !important;
 }
 
-.v39460-quick-add-hero-copy {
-  min-width: 0 !important;
-  padding-left: 4px !important;
-}
-
-.v39460-quick-add-hero-title {
-  margin: 0 !important;
-  color: rgba(255,255,255,0.98) !important;
-  font-size: clamp(1.6rem, 5vw, 2.45rem) !important;
-  line-height: 0.98 !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.045em !important;
-  max-width: 7ch !important;
-  text-wrap: balance !important;
-}
-
-.v39460-quick-add-hero-art {
+.v39461-quick-add-hero-art {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-end !important;
-  min-width: 0 !important;
+  justify-content: center !important;
+  width: 100% !important;
 }
 
-.v39460-quick-add-hero-art img {
+.v39461-quick-add-hero-art img {
   display: block !important;
-  width: min(100%, 340px) !important;
+  width: min(100%, 100%) !important;
   max-width: 100% !important;
   height: auto !important;
   object-fit: contain !important;
 }
 
-.v39460-quick-add-action-list {
+.v39461-quick-add-action-list {
   display: flex !important;
   flex-direction: column !important;
-  gap: 10px !important;
+  gap: 8px !important;
 }
 
-.v39460-quick-add-pair {
+.v39461-quick-add-pair {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) !important;
   align-items: stretch !important;
   overflow: hidden !important;
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   border: 1px solid rgba(96, 165, 250, 0.22) !important;
   background: linear-gradient(180deg, rgba(7, 26, 72, 0.96), rgba(4, 20, 62, 0.96)) !important;
   box-shadow: 0 10px 22px rgba(2, 8, 23, 0.18) !important;
 }
 
-.v39460-quick-add-pair__divider {
+.v39461-quick-add-pair__divider {
   width: 1px !important;
   background: rgba(96, 165, 250, 0.16) !important;
   margin: 14px 0 !important;
 }
 
-.v39460-quick-add-action {
+.v39461-quick-add-action {
   min-width: 0 !important;
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
+  gap: 14px !important;
   padding: 12px 14px !important;
   text-align: left !important;
   border: 0 !important;
@@ -7680,52 +7663,52 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   transition: background-color 140ms ease, transform 140ms ease, opacity 140ms ease !important;
 }
 
-.v39460-quick-add-action:hover {
+.v39461-quick-add-action:hover {
   background: rgba(59, 130, 246, 0.06) !important;
 }
 
-.v39460-quick-add-action:active {
+.v39461-quick-add-action:active {
   transform: scale(0.992) !important;
 }
 
-.v39460-quick-add-action:focus-visible {
+.v39461-quick-add-action:focus-visible {
   outline: 2px solid rgba(96, 165, 250, 0.5) !important;
   outline-offset: -2px !important;
 }
 
-.v39460-quick-add-action.is-disabled {
+.v39461-quick-add-action.is-disabled {
   opacity: 0.45 !important;
   cursor: not-allowed !important;
 }
 
-.v39460-quick-add-action.is-selected {
+.v39461-quick-add-action.is-selected {
   background: rgba(59, 130, 246, 0.08) !important;
 }
 
-.v39460-quick-add-action__icon {
+.v39461-quick-add-action__icon {
   flex: 0 0 auto !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
-.v39460-quick-add-action__icon > * {
+.v39461-quick-add-action__icon > * {
   width: 56px !important;
   height: 56px !important;
   padding: 12px !important;
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   border: 1.5px solid currentColor !important;
   background: color-mix(in srgb, currentColor 12%, transparent) !important;
   box-shadow: none !important;
   filter: none !important;
 }
 
-.v39460-quick-add-action__title {
+.v39461-quick-add-action__title {
   display: block !important;
   min-width: 0 !important;
   color: rgba(255,255,255,0.98) !important;
-  font-size: 1.05rem !important;
-  line-height: 1.14 !important;
+  font-size: 1.08rem !important;
+  line-height: 1.12 !important;
   font-weight: 600 !important;
   letter-spacing: -0.02em !important;
   text-wrap: balance !important;
@@ -7733,7 +7716,7 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
 @media (max-width: 640px) {
   .v39435-add-choice-header > div:first-child > div:first-child {
-    font-size: 2.15rem !important;
+    font-size: 2.1rem !important;
     line-height: 1.02 !important;
   }
 
@@ -7742,34 +7725,24 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     font-size: 0.95rem !important;
   }
 
-  .v39460-quick-add-hero-card {
-    padding: 10px 12px !important;
-    min-height: 136px !important;
-    gap: 8px !important;
+  .v39461-quick-add-hero-card {
+    min-height: 150px !important;
+    padding: 8px 10px !important;
   }
 
-  .v39460-quick-add-hero-title {
-    font-size: clamp(1.45rem, 7vw, 2.25rem) !important;
-    max-width: 7.5ch !important;
+  .v39461-quick-add-action {
+    gap: 12px !important;
+    padding: 11px 12px !important;
   }
 
-  .v39460-quick-add-hero-art img {
-    width: min(100%, 280px) !important;
-  }
-
-  .v39460-quick-add-action {
-    gap: 10px !important;
-    padding: 10px 12px !important;
-  }
-
-  .v39460-quick-add-action__icon > * {
-    width: 52px !important;
-    height: 52px !important;
+  .v39461-quick-add-action__icon > * {
+    width: 54px !important;
+    height: 54px !important;
     padding: 11px !important;
   }
 
-  .v39460-quick-add-action__title {
-    font-size: 1rem !important;
+  .v39461-quick-add-action__title {
+    font-size: 1.04rem !important;
   }
 }
 
@@ -7778,38 +7751,39 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     padding: 6px 6px 8px !important;
   }
 
-  .v39460-quick-add-layout,
-  .v39460-quick-add-action-list {
-    gap: 8px !important;
+  .v39461-quick-add-layout,
+  .v39461-quick-add-action-list {
+    gap: 7px !important;
   }
 
-  .v39460-quick-add-hero-card,
-  .v39460-quick-add-pair {
-    border-radius: 9px !important;
+  .v39461-quick-add-hero-card,
+  .v39461-quick-add-pair {
+    border-radius: 11px !important;
   }
 
-  .v39460-quick-add-hero-card {
-    min-height: 128px !important;
+  .v39461-quick-add-hero-card {
+    min-height: 140px !important;
+    padding: 7px 8px !important;
   }
 
-  .v39460-quick-add-hero-title {
-    font-size: clamp(1.35rem, 7.8vw, 2rem) !important;
+  .v39461-quick-add-action {
+    gap: 10px !important;
+    padding: 10px 10px !important;
   }
 
-  .v39460-quick-add-action {
-    gap: 9px !important;
-    padding: 9px 10px !important;
+  .v39461-quick-add-pair__divider {
+    margin: 12px 0 !important;
   }
 
-  .v39460-quick-add-action__icon > * {
-    width: 48px !important;
-    height: 48px !important;
+  .v39461-quick-add-action__icon > * {
+    width: 50px !important;
+    height: 50px !important;
     padding: 10px !important;
-    border-radius: 9px !important;
+    border-radius: 11px !important;
   }
 
-  .v39460-quick-add-action__title {
-    font-size: 0.95rem !important;
+  .v39461-quick-add-action__title {
+    font-size: 1rem !important;
   }
 }
 
@@ -7818,39 +7792,31 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     padding-bottom: 8px !important;
   }
 
-  .v39460-quick-add-layout,
-  .v39460-quick-add-action-list {
-    gap: 8px !important;
+  .v39461-quick-add-layout,
+  .v39461-quick-add-action-list {
+    gap: 7px !important;
   }
 
-  .v39460-quick-add-hero-card {
-    min-height: 124px !important;
-    padding: 9px 12px !important;
+  .v39461-quick-add-hero-card {
+    min-height: 134px !important;
+    padding: 7px 10px !important;
   }
 
-  .v39460-quick-add-hero-title {
-    font-size: clamp(1.3rem, 5.4vw, 2rem) !important;
+  .v39461-quick-add-pair__divider {
+    margin: 10px 0 !important;
   }
 
-  .v39460-quick-add-hero-art img {
-    width: min(100%, 250px) !important;
-  }
-
-  .v39460-quick-add-pair__divider {
-    margin: 11px 0 !important;
-  }
-
-  .v39460-quick-add-action {
+  .v39461-quick-add-action {
     padding: 8px 12px !important;
   }
 
-  .v39460-quick-add-action__icon > * {
+  .v39461-quick-add-action__icon > * {
     width: 46px !important;
     height: 46px !important;
     padding: 9px !important;
   }
 
-  .v39460-quick-add-action__title {
-    font-size: 0.93rem !important;
+  .v39461-quick-add-action__title {
+    font-size: 0.96rem !important;
   }
 }
