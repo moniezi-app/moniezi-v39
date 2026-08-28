@@ -1,3 +1,12 @@
+## v39.4.59 — Quick Add approved hero + compact paired actions
+
+- Replaces the previous Quick Add hero with the exact approved wide illustration direction and bundles it as `public/quick-add-hero-v39-4-59-approved.webp`.
+- Removes extra Quick Add explanatory copy so the panel stays compact: the header keeps only **Quick Add** and the hero becomes image-led.
+- Keeps the approved structured layout: one hero card followed by four paired action rows (Income/Expense, Invoice/Estimate, Mileage/Client, Job / Project/Receipt).
+- Simplifies every Quick Add action row to icon + title only, removing the extra description lines.
+- Tightens the Quick Add card geometry to the smaller MONIEZI corner radius across the main panel, hero card, and paired action rows.
+- Preserves all 8 Quick Add actions, tap behavior, Demo behavior, activation flow, hamburger Menu behavior, footer destinations, and business logic.
+
 ## v39.4.58 — Quick Add structured hero + paired action cards
 
 - Keeps the approved Quick Add hero illustration and the 2-column × 4-row action layout.

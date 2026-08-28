@@ -7396,3 +7396,178 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     font-size: 14px !important;
   }
 }
+
+
+/* ========================================================================
+   MONIEZI v39.4.59 — Quick Add approved hero + compact paired actions
+   Uses the approved wide Quick Add illustration, removes extra explanatory
+   copy, shortens action text to titles only, and matches the tighter MONIEZI
+   corner radius across the hero and paired action rows.
+   ======================================================================== */
+
+.v39459-quick-add-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 4px;
+}
+
+.v39459-quick-add-hero-card {
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.06), transparent 46%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.98));
+  padding: 10px 12px;
+}
+
+.dark .v39459-quick-add-hero-card {
+  border-color: rgba(96, 165, 250, 0.24);
+  background:
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.08), transparent 44%),
+    linear-gradient(180deg, rgba(7, 26, 72, 0.96), rgba(3, 18, 58, 0.96));
+}
+
+.v39459-quick-add-hero-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.v39459-quick-add-hero-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.v39459-quick-add-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.v39459-quick-add-pair {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.98));
+  padding: 10px 12px;
+}
+
+.dark .v39459-quick-add-pair {
+  border-color: rgba(96, 165, 250, 0.22);
+  background: linear-gradient(180deg, rgba(7, 26, 72, 0.96), rgba(4, 20, 62, 0.96));
+}
+
+.v39459-quick-add-pair__divider {
+  width: 1px;
+  flex: 0 0 1px;
+  margin: 10px 12px;
+  background: rgba(148, 163, 184, 0.22);
+}
+
+.dark .v39459-quick-add-pair__divider {
+  background: rgba(96, 165, 250, 0.16);
+}
+
+.v39459-quick-add-action {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  padding: 4px 2px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.v39459-quick-add-action:hover {
+  transform: translateY(-1px);
+}
+
+.v39459-quick-add-action:active {
+  transform: translateY(0);
+}
+
+.v39459-quick-add-action:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.55);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+.v39459-quick-add-action.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.v39459-quick-add-action.is-selected {
+  opacity: 1;
+}
+
+.v39459-quick-add-action__icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.v39459-quick-add-action__icon > * {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 12px;
+  border-width: 1.5px;
+  box-shadow: none !important;
+}
+
+.v39459-quick-add-action__title {
+  display: block;
+  min-width: 0;
+  font-size: 1.05rem;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: rgb(15 23 42);
+}
+
+.dark .v39459-quick-add-action__title {
+  color: rgba(255, 255, 255, 0.98);
+}
+
+@media (max-width: 640px) {
+  .v39459-quick-add-layout {
+    gap: 12px;
+  }
+
+  .v39459-quick-add-hero-card,
+  .v39459-quick-add-pair {
+    border-radius: 12px;
+    padding: 9px 10px;
+  }
+
+  .v39459-quick-add-pair__divider {
+    margin: 8px 10px;
+  }
+
+  .v39459-quick-add-action {
+    gap: 12px;
+    padding: 2px 0;
+  }
+
+  .v39459-quick-add-action__icon > * {
+    width: 3.55rem;
+    height: 3.55rem;
+    border-radius: 11px;
+  }
+
+  .v39459-quick-add-action__title {
+    font-size: 0.98rem;
+  }
+}
