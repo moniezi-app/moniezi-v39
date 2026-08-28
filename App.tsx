@@ -1695,6 +1695,7 @@ export default function App() {
   const [drawerMode, setDrawerMode] = useState<'add' | 'edit_tx' | 'edit_inv' | 'tax_payments' | 'create_cat' | 'mileage'>('add');
   const [activeTab, setActiveTab] = useState<'income' | 'expense' | 'billing'>('income');
   const [addFlowSelection, setAddFlowSelection] = useState<'income' | 'expense' | 'invoice' | 'estimate' | 'mileage' | 'client' | 'job' | 'receipt' | ''>('');
+  const [returnToQuickAddOnClose, setReturnToQuickAddOnClose] = useState(false);
   const [showGoalsEditor, setShowGoalsEditor] = useState(false);
   const [goalDraft, setGoalDraft] = useState({ revenue: '', profit: '' });
   const [billingDocType, setBillingDocType] = useState<'invoice' | 'estimate'>('invoice');
@@ -3645,12 +3646,32 @@ export default function App() {
     }
   };
 
+  const returnToQuickAddChooser = () => {
+    setReturnToQuickAddOnClose(false);
+    setAddFlowSelection('');
+    setDrawerMode('add');
+    setCategorySearch('');
+    setIsDrawerOpen(true);
+  };
+
   const closeDrawer = () => {
-    setIsDrawerOpen(false);
+    const shouldReturnToQuickAdd = returnToQuickAddOnClose && (
+      (drawerMode === 'add' && Boolean(addFlowSelection)) ||
+      (drawerMode === 'mileage' && !editingMileageTripId)
+    );
+
     if (drawerMode === 'mileage') {
       setEditingMileageTripId(null);
       setNewTrip(createEmptyMileageDraft());
     }
+
+    if (shouldReturnToQuickAdd) {
+      returnToQuickAddChooser();
+      return;
+    }
+
+    setReturnToQuickAddOnClose(false);
+    setIsDrawerOpen(false);
   };
 
   const openMileageAddDrawer = () => {
@@ -3679,6 +3700,7 @@ export default function App() {
     billingType?: 'invoice' | 'estimate'
   ) => {
     const nextSelection = type === 'billing' ? (billingType ?? billingDocType) : type;
+    setReturnToQuickAddOnClose(false);
     setAddFlowSelection(nextSelection);
     setDrawerMode('add');
     setActiveTab(type);
@@ -3720,7 +3742,8 @@ export default function App() {
     { value: 'receipt', label: <span className="inline-flex items-center gap-3"><Camera size={24} strokeWidth={1.25} className="text-sky-500 dark:text-sky-400" />Receipt</span>, group: 'Business' },
   ];
 
-  const handleUnifiedAddSelection = (action: UnifiedAddAction) => {
+  const handleUnifiedAddSelection = (action: UnifiedAddAction, fromQuickAdd = false) => {
+    setReturnToQuickAddOnClose(fromQuickAdd && action !== 'receipt');
     setAddFlowSelection(action);
 
     if (action === 'income') {
@@ -3792,15 +3815,16 @@ export default function App() {
       setJobDraft({ status: 'active' });
     }
 
-    window.setTimeout(() => handleUnifiedAddSelection(next), 0);
+    window.setTimeout(() => handleUnifiedAddSelection(next, true), 0);
   };
 
   const handleOpenUnifiedAdd = (initial?: 'income' | 'expense' | 'invoice' | 'estimate' | React.SyntheticEvent) => {
     if (typeof initial === 'string') {
-      handleUnifiedAddSelection(initial);
+      handleUnifiedAddSelection(initial, false);
       return;
     }
 
+    setReturnToQuickAddOnClose(false);
     setAddFlowSelection('');
     setDrawerMode('add');
     setCategorySearch('');
@@ -4286,6 +4310,7 @@ export default function App() {
     if (isExpense && shouldRemindReceipt && !data.receiptId) {
       showToast('Tip: attach a receipt if you have one. You can add it later.', 'info');
     }
+    setReturnToQuickAddOnClose(false);
     setIsDrawerOpen(false);
   };
 
@@ -4322,6 +4347,7 @@ export default function App() {
 
     setNewTrip(createEmptyMileageDraft());
     setEditingMileageTripId(null);
+    setReturnToQuickAddOnClose(false);
     setIsDrawerOpen(false);
   };
 
@@ -5224,6 +5250,7 @@ export default function App() {
       setNewTrip(prev => ({ ...prev, jobId: savedId || '', client: prev.client || clientName }));
     }
 
+    setReturnToQuickAddOnClose(false);
     setShowJobDrawer(false);
     setEditingJobId(null);
     setJobAssignmentTarget(null);
@@ -13652,7 +13679,7 @@ html, body, #root {
                     !addFlowSelection ? (
                       <MonieziSelect
                         value=""
-                        onChange={value => handleUnifiedAddSelection(value as UnifiedAddAction)}
+                        onChange={value => handleUnifiedAddSelection(value as UnifiedAddAction, true)}
                         ariaLabel="Quick Add"
                         menuVariant="screen"
                         menuTitle="Quick Add"
@@ -13665,7 +13692,7 @@ html, body, #root {
                       <div className="mb-4 font-sans">
                         <MonieziSelect
                           value={addFlowSelection}
-                          onChange={value => handleUnifiedAddSelection(value as UnifiedAddAction)}
+                          onChange={value => handleUnifiedAddSelection(value as UnifiedAddAction, true)}
                           ariaLabel="Quick Add"
                           menuMinWidth={280}
                           menuVariant="screen"
@@ -14221,7 +14248,13 @@ html, body, #root {
 
       <AppDrawer
         isOpen={showJobDrawer}
-        onClose={() => { setShowJobDrawer(false); setEditingJobId(null); setJobAssignmentTarget(null); setJobDraft({ status: 'active' }); }}
+        onClose={() => {
+          setShowJobDrawer(false);
+          setEditingJobId(null);
+          setJobAssignmentTarget(null);
+          setJobDraft({ status: 'active' });
+          if (returnToQuickAddOnClose) window.setTimeout(returnToQuickAddChooser, 0);
+        }}
         title={editingJobId ? 'Edit Job Details' : 'New Job / Project'}
       >
         <div className="space-y-5">
@@ -14372,7 +14405,11 @@ html, body, #root {
                 <div className="text-lg font-extrabold text-slate-900 dark:text-white">{editingClient.id ? 'Edit Client' : 'New Client'}</div>
                 <div className="text-xs text-slate-500">Leads and clients are tied to invoices/estimates.</div>
               </div>
-              <button onClick={() => { setIsClientModalOpen(false); setEditingClient({ status: 'lead' }); }} className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"><X size={18} /></button>
+              <button onClick={() => {
+                setIsClientModalOpen(false);
+                setEditingClient({ status: 'lead' });
+                if (returnToQuickAddOnClose) window.setTimeout(returnToQuickAddChooser, 0);
+              }} className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"><X size={18} /></button>
             </div>
 
             {!editingClient.id ? (
@@ -14525,6 +14562,7 @@ html, body, #root {
                     setClients(prev => [newClient, ...prev]);
                     showToast('Client created', 'success');
                   }
+                  setReturnToQuickAddOnClose(false);
                   setIsClientModalOpen(false);
                   setEditingClient({ status: 'lead' });
                 }}

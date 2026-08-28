@@ -271,6 +271,14 @@ export function MonieziSelect({
                     <section className="v39461-quick-add-hero-card" aria-label="Quick Add overview">
                       <div className="v39461-quick-add-hero-art" aria-hidden="true">
                         <img
+                          className="v39464-quick-add-hero-image v39464-quick-add-hero-image--light"
+                          src={`${publicBase}quick-add-hero-v39-4-64-phone-plus-light.webp`}
+                          alt=""
+                          loading="eager"
+                          decoding="async"
+                        />
+                        <img
+                          className="v39464-quick-add-hero-image v39464-quick-add-hero-image--dark"
                           src={`${publicBase}quick-add-hero-v39-4-62-phone-plus.webp`}
                           alt=""
                           loading="eager"
@@ -310,6 +318,14 @@ export function MonieziSelect({
                   <div className="v39454-add-choice-layout">
                     <div className="v39454-add-choice-hero" aria-hidden="true">
                       <img
+                        className="v39464-quick-add-hero-image v39464-quick-add-hero-image--light"
+                        src={`${publicBase}quick-add-hero-v39-4-64-phone-plus-light.webp`}
+                        alt=""
+                        loading="eager"
+                        decoding="async"
+                      />
+                      <img
+                        className="v39464-quick-add-hero-image v39464-quick-add-hero-image--dark"
                         src={`${publicBase}quick-add-hero-v39-4-62-phone-plus.webp`}
                         alt=""
                         loading="eager"

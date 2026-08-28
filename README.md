@@ -1,3 +1,12 @@
+## v39.4.64 — Quick Add true light mode + return-to-parent navigation
+
+- Gives Quick Add a true MONIEZI light-mode treatment: white/pale action cards, dark action text, crisp light borders, preserved per-action accent colors, and a dedicated light-mode version of the approved phone + plus hero.
+- Keeps the existing dark-mode Quick Add treatment unchanged.
+- Makes Quick Add the parent screen for add flows opened from it: closing Income, Expense, Invoice, Estimate, or Mileage returns to Quick Add first instead of dropping back to the underlying page.
+- Applies the same parent-return behavior to Quick Add-launched Client and Job / Project editors when their close control is used.
+- Keeps direct/contextual add actions independent, so forms opened directly from a page still close back to that page rather than forcing Quick Add.
+- Preserves the v39.4.63 responsive action spacing, current corner-radius system, optimized image assets, Demo behavior, footer destinations, and business logic.
+
 ## v39.4.63 — Quick Add responsive spacing + full-height distribution
 
 - Keeps the approved single-phone Quick Add hero illustration and the compact 4-row paired action structure.
