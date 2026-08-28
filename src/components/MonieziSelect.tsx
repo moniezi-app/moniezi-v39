@@ -263,7 +263,7 @@ export function MonieziSelect({
                 </button>
               </div>
             ) : null}
-            <div className={menuVariant === 'screen' ? 'v39434-add-choice-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain px-1 pb-1' : ''}>
+            <div className={menuVariant === 'screen' ? 'v39434-add-choice-scroll min-h-0 flex flex-1 flex-col overflow-y-auto overscroll-contain px-1 pb-1' : ''}>
               {menuVariant === 'screen' ? (
                 isQuickAddScreenMenu ? (
 

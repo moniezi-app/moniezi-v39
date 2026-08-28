@@ -7589,8 +7589,10 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
 .v39461-quick-add-layout {
   display: flex !important;
+  flex: 1 1 auto !important;
+  min-height: 100% !important;
   flex-direction: column !important;
-  gap: 8px !important;
+  gap: 10px !important;
   padding-bottom: 2px !important;
 }
 
@@ -7628,15 +7630,19 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 }
 
 .v39461-quick-add-action-list {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
+  display: grid !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  grid-template-rows: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(10px, 1.8vh, 18px) !important;
+  align-content: stretch !important;
 }
 
 .v39461-quick-add-pair {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) !important;
   align-items: stretch !important;
+  min-height: 78px !important;
   overflow: hidden !important;
   border-radius: 12px !important;
   border: 1px solid rgba(96, 165, 250, 0.22) !important;
@@ -7652,10 +7658,11 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
 .v39461-quick-add-action {
   min-width: 0 !important;
+  min-height: 100% !important;
   display: flex !important;
   align-items: center !important;
   gap: 14px !important;
-  padding: 12px 14px !important;
+  padding: 12px 16px !important;
   text-align: left !important;
   border: 0 !important;
   background: transparent !important;
@@ -7751,9 +7758,12 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     padding: 6px 6px 8px !important;
   }
 
-  .v39461-quick-add-layout,
-  .v39461-quick-add-action-list {
+  .v39461-quick-add-layout {
     gap: 7px !important;
+  }
+
+  .v39461-quick-add-action-list {
+    gap: 8px !important;
   }
 
   .v39461-quick-add-hero-card,
@@ -7764,6 +7774,10 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
   .v39461-quick-add-hero-card {
     min-height: 140px !important;
     padding: 7px 8px !important;
+  }
+
+  .v39461-quick-add-pair {
+    min-height: 72px !important;
   }
 
   .v39461-quick-add-action {
@@ -7792,14 +7806,21 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     padding-bottom: 8px !important;
   }
 
-  .v39461-quick-add-layout,
-  .v39461-quick-add-action-list {
+  .v39461-quick-add-layout {
     gap: 7px !important;
+  }
+
+  .v39461-quick-add-action-list {
+    gap: 8px !important;
   }
 
   .v39461-quick-add-hero-card {
     min-height: 134px !important;
     padding: 7px 10px !important;
+  }
+
+  .v39461-quick-add-pair {
+    min-height: 68px !important;
   }
 
   .v39461-quick-add-pair__divider {

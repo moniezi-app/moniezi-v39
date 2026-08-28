@@ -1,10 +1,10 @@
-## v39.4.62 — Quick Add asset cleanup + image optimization
+## v39.4.63 — Quick Add responsive spacing + full-height distribution
 
-- Keeps the approved v39.4.61 Quick Add layout and behavior.
-- Converts the new Quick Add phone + plus hero from PNG to optimized WebP and versions it as `public/quick-add-hero-v39-4-62-phone-plus.webp`.
-- Removes five obsolete Quick Add illustration files, including three identical legacy copies.
-- Removes stale Quick Add files from the service-worker precache and adds only the current optimized hero.
-- Audits current public image assets so every remaining illustration is referenced by the current runtime, manifest, or service worker.
+- Keeps the approved single-phone Quick Add hero illustration and the compact 4-row paired action structure.
+- Spreads the four Quick Add action rows more evenly through the available panel height so the actions no longer bunch together near the top.
+- Improves responsive vertical distribution across taller and shorter screens so the final row sits closer to the bottom without awkward empty space.
+- Adds clearer breathing room between the paired action rows while preserving the compact no-description action layout.
+- Preserves the current Quick Add hero asset, per-action accent colors, corner-radius system, Menu behavior, footer destinations, Demo behavior, activation flow, and business logic.
 
 ## v39.4.61 — Quick Add single-phone hero + compact paired actions
 
