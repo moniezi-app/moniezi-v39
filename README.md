@@ -1,3 +1,11 @@
+## v39.4.67 — Illustration asset optimization
+
+- Audits the current active MONIEZI illustration set and keeps only assets referenced by the current app/runtime.
+- Re-exports active illustration WebP assets at practical mobile display dimensions with per-image quality settings instead of a one-size-fits-all compression level.
+- Optimizes the transaction wallet illustration, empty-state artwork, Demo/first-run artwork, Welcome hero, and both Quick Add hero variants while preserving transparency and visual clarity.
+- Keeps app icons and functional UI behavior unchanged.
+- Bumps the service-worker cache version so optimized image bytes replace prior cached copies.
+
 ## v39.4.66 — Independent optimized Quick Add light hero
 
 - Replaces the problematic light-mode Quick Add hero with a newly generated independent phone + plus illustration rather than a recolored/cropped derivative of the dark hero.
