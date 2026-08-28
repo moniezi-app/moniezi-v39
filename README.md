@@ -1,3 +1,14 @@
+## v39.4.60 — Quick Add split hero + compact colored paired actions
+
+- Keeps the existing Quick Add header area at the top.
+- Rebuilds the hero section to follow the approved layout: **“Everything you need, in one place.”** on the left and the approved Quick Add illustration on the right.
+- Removes the extra descriptive hero paragraph so the panel stays compact.
+- Keeps the paired action-row structure underneath the hero while simplifying each action to icon + title only.
+- Restores the proper per-action accent colors and reduces the oversized icon treatment so the tiles feel more aligned with the rest of the app.
+- Tightens the corner radiuses to better match other MONIEZI cards and panels.
+- Compresses spacing so the full Quick Add panel is intended to fit on screen without needing to scroll.
+- Preserves all 8 Quick Add actions, tap behavior, Demo behavior, activation flow, hamburger Menu behavior, footer destinations, and business logic.
+
 ## v39.4.59 — Quick Add approved hero + compact paired actions
 
 - Replaces the previous Quick Add hero with the exact approved wide illustration direction and bundles it as `public/quick-add-hero-v39-4-59-approved.webp`.

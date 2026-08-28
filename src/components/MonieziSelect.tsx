@@ -266,9 +266,13 @@ export function MonieziSelect({
             <div className={menuVariant === 'screen' ? 'v39434-add-choice-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain px-1 pb-1' : ''}>
               {menuVariant === 'screen' ? (
                 isQuickAddScreenMenu ? (
-                  <div className="v39459-quick-add-layout">
-                    <section className="v39459-quick-add-hero-card" aria-label="Quick Add overview">
-                      <div className="v39459-quick-add-hero-art" aria-hidden="true">
+
+                  <div className="v39460-quick-add-layout">
+                    <section className="v39460-quick-add-hero-card" aria-label="Quick Add overview">
+                      <div className="v39460-quick-add-hero-copy">
+                        <h2 className="v39460-quick-add-hero-title">Everything you need, in one place.</h2>
+                      </div>
+                      <div className="v39460-quick-add-hero-art" aria-hidden="true">
                         <img
                           src={`${publicBase}quick-add-hero-v39-4-59-approved.webp`}
                           alt=""
@@ -278,9 +282,9 @@ export function MonieziSelect({
                       </div>
                     </section>
 
-                    <div className="v39459-quick-add-action-list" role="presentation">
+                    <div className="v39460-quick-add-action-list" role="presentation">
                       {quickAddPairs.map((pair, pairIndex) => (
-                        <div key={`pair-${pairIndex}`} className="v39459-quick-add-pair">
+                        <div key={`pair-${pairIndex}`} className="v39460-quick-add-pair">
                           {pair.map((option, optionIndex) => {
                             const selected = option.value === value;
                             const { icon, title } = extractQuickAddLabelParts(option);
@@ -292,12 +296,12 @@ export function MonieziSelect({
                                   aria-selected={selected}
                                   disabled={option.disabled}
                                   onClick={() => choose(option.value, option.disabled)}
-                                  className={`v39459-quick-add-action ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
+                                  className={`v39460-quick-add-action ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
                                 >
-                                  <span className="v39459-quick-add-action__icon" aria-hidden="true">{icon}</span>
-                                  <span className="v39459-quick-add-action__title">{title}</span>
+                                  <span className="v39460-quick-add-action__icon" aria-hidden="true">{icon}</span>
+                                  <span className="v39460-quick-add-action__title">{title}</span>
                                 </button>
-                                {optionIndex === 0 && pair.length > 1 ? <div className="v39459-quick-add-pair__divider" aria-hidden="true" /> : null}
+                                {optionIndex === 0 && pair.length > 1 ? <div className="v39460-quick-add-pair__divider" aria-hidden="true" /> : null}
                               </React.Fragment>
                             );
                           })}
