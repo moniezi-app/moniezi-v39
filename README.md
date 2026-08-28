@@ -1,4 +1,4 @@
-## v39.4.57 — Quick Add vertical spacing + slightly larger actions
+## v39.4.58 — Quick Add structured hero + paired action cards
 
 - Keeps the approved Quick Add hero illustration and the 2-column × 4-row action layout.
 - Adds more vertical breathing room between the hero illustration and the first Income / Expense row, moving the action grid slightly lower.

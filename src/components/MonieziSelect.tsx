@@ -60,11 +60,64 @@ export function MonieziSelect({
   const [menuPosition, setMenuPosition] = useState<MenuPosition | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const isQuickAddScreenMenu = menuVariant === 'screen' && menuTitle === 'Quick Add';
+
+  const quickAddDescriptions = useMemo<Record<string, string>>(() => ({
+    income: 'Add money coming in',
+    expense: 'Add money going out',
+    invoice: 'Bill your clients and get paid',
+    estimate: 'Create quotes for your clients',
+    mileage: 'Track business mileage',
+    client: 'Add new clients and contacts',
+    job: 'Create jobs and assign work',
+    receipt: 'Record receipts and documents',
+  }), []);
+
+  const quickAddSubtitle = isQuickAddScreenMenu
+    ? (menuSubtitle || 'Add a new entry to keep your business moving.')
+    : menuSubtitle;
 
   const selectedOption = useMemo(
     () => options.find(option => option.value === value),
     [options, value],
   );
+
+  const quickAddPairs = useMemo(() => {
+    if (!isQuickAddScreenMenu) return [] as MonieziSelectOption[][];
+    const orderedValues = ['income', 'expense', 'invoice', 'estimate', 'mileage', 'client', 'job', 'receipt'];
+    const orderedOptions = orderedValues
+      .map(orderedValue => options.find(option => option.value === orderedValue))
+      .filter((option): option is MonieziSelectOption => Boolean(option));
+    const pairs: MonieziSelectOption[][] = [];
+    for (let index = 0; index < orderedOptions.length; index += 2) {
+      pairs.push(orderedOptions.slice(index, index + 2));
+    }
+    return pairs;
+  }, [isQuickAddScreenMenu, options]);
+
+  const extractQuickAddLabelParts = useCallback((option: MonieziSelectOption) => {
+    const fallbackTitle = typeof option.label === 'string' ? option.label : option.value;
+    if (React.isValidElement(option.label)) {
+      const children = React.Children.toArray((option.label.props as { children?: React.ReactNode }).children);
+      if (children.length > 0) {
+        const [icon, ...rest] = children;
+        const title = rest
+          .map(child => typeof child === 'string' || typeof child === 'number' ? String(child) : '')
+          .join('')
+          .trim() || fallbackTitle;
+        return {
+          icon,
+          title,
+          description: quickAddDescriptions[option.value] || '',
+        };
+      }
+    }
+    return {
+      icon: null as React.ReactNode,
+      title: fallbackTitle,
+      description: quickAddDescriptions[option.value] || '',
+    };
+  }, [quickAddDescriptions]);
 
   const updatePosition = useCallback(() => {
     if (typeof window === 'undefined') return;
@@ -199,7 +252,7 @@ export function MonieziSelect({
                 {menuTitle ? (
                   <div className="min-w-0 pr-4">
                     <div className="text-[22px] font-extrabold leading-tight tracking-[-0.025em] text-slate-950 dark:text-white">{menuTitle}</div>
-                    {menuSubtitle ? <div className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">{menuSubtitle}</div> : null}
+                    {quickAddSubtitle ? <div className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">{quickAddSubtitle}</div> : null}
                   </div>
                 ) : null}
                 <button
@@ -214,34 +267,83 @@ export function MonieziSelect({
             ) : null}
             <div className={menuVariant === 'screen' ? 'v39434-add-choice-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain px-1 pb-1' : ''}>
               {menuVariant === 'screen' ? (
-                <div className="v39454-add-choice-layout">
-                  <div className="v39454-add-choice-hero" aria-hidden="true">
-                    <img
-                      src={`${publicBase}quick-add-hero-v39-4-56-shared.webp`}
-                      alt=""
-                      loading="eager"
-                      decoding="async"
-                    />
+                isQuickAddScreenMenu ? (
+                  <div className="v39458-quick-add-layout">
+                    <section className="v39458-quick-add-hero-card" aria-label="Quick Add overview">
+                      <div className="v39458-quick-add-hero-copy">
+                        <h2 className="v39458-quick-add-hero-title">Everything you need, in one place.</h2>
+                        <p className="v39458-quick-add-hero-text">Create income, expenses, quotes, invoices and more in a few taps.</p>
+                      </div>
+                      <div className="v39458-quick-add-hero-art" aria-hidden="true">
+                        <img
+                          src={`${publicBase}quick-add-hero-v39-4-56-shared.webp`}
+                          alt=""
+                          loading="eager"
+                          decoding="async"
+                        />
+                      </div>
+                    </section>
+
+                    <div className="v39458-quick-add-action-list" role="presentation">
+                      {quickAddPairs.map((pair, pairIndex) => (
+                        <div key={`pair-${pairIndex}`} className="v39458-quick-add-pair">
+                          {pair.map((option, optionIndex) => {
+                            const selected = option.value === value;
+                            const { icon, title, description } = extractQuickAddLabelParts(option);
+                            return (
+                              <React.Fragment key={option.value}>
+                                <button
+                                  type="button"
+                                  role="option"
+                                  aria-selected={selected}
+                                  disabled={option.disabled}
+                                  onClick={() => choose(option.value, option.disabled)}
+                                  className={`v39458-quick-add-action ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
+                                >
+                                  <span className="v39458-quick-add-action__icon" aria-hidden="true">{icon}</span>
+                                  <span className="v39458-quick-add-action__content">
+                                    <span className="v39458-quick-add-action__title">{title}</span>
+                                    <span className="v39458-quick-add-action__description">{description}</span>
+                                  </span>
+                                </button>
+                                {optionIndex === 0 && pair.length > 1 ? <div className="v39458-quick-add-pair__divider" aria-hidden="true" /> : null}
+                              </React.Fragment>
+                            );
+                          })}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="v39454-add-choice-grid">
-                    {options.map(option => {
-                      const selected = option.value === value;
-                      return (
-                        <button
-                          key={option.value}
-                          type="button"
-                          role="option"
-                          aria-selected={selected}
-                          disabled={option.disabled}
-                          onClick={() => choose(option.value, option.disabled)}
-                          className={`v39433-add-choice-card ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
-                        >
-                          <span className="v39433-add-choice-card__label">{option.label}</span>
-                        </button>
-                      );
-                    })}
+                ) : (
+                  <div className="v39454-add-choice-layout">
+                    <div className="v39454-add-choice-hero" aria-hidden="true">
+                      <img
+                        src={`${publicBase}quick-add-hero-v39-4-56-shared.webp`}
+                        alt=""
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </div>
+                    <div className="v39454-add-choice-grid">
+                      {options.map(option => {
+                        const selected = option.value === value;
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            role="option"
+                            aria-selected={selected}
+                            disabled={option.disabled}
+                            onClick={() => choose(option.value, option.disabled)}
+                            className={`v39433-add-choice-card ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
+                          >
+                            <span className="v39433-add-choice-card__label">{option.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                )
               ) : (
                 options.map((option, index) => {
                   const selected = option.value === value;
