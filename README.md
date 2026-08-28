@@ -1,3 +1,11 @@
+## v39.4.66 — Independent optimized Quick Add light hero
+
+- Replaces the problematic light-mode Quick Add hero with a newly generated independent phone + plus illustration rather than a recolored/cropped derivative of the dark hero.
+- Uses a light MONIEZI illustration treatment designed specifically for the light surface, with no dark-background artifact.
+- Optimizes the new hero to a compact WebP asset at the same practical display dimensions used by Quick Add.
+- Removes the superseded v39.4.64 light hero asset from the package.
+- Preserves the v39.4.65 one-image-per-theme visibility fix, responsive action distribution, true light-mode cards, and Quick Add parent-return navigation.
+
 ## v39.4.65 — Quick Add light-mode hero visibility fix
 
 - Fixes the Quick Add light-mode hero bug where the light and dark hero images could render side-by-side.
