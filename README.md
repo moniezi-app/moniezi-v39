@@ -1,3 +1,13 @@
+# MONIEZI v39.4.76 — Demo phone 30% larger, gaps preserved
+
+- Increases the initial **Explore before you start** phone illustration by exactly 30% across the base and height-compressed responsive tiers.
+- Preserves the clean v39.4.75 normal-flow structure and the existing gap between the Explore pill, phone, yellow **Load the demo** CTA, and Skip action.
+- Does not reintroduce stats, headings, support copy, overlap geometry, negative margins, or absolute positioning.
+- Keeps the same clean transparent phone asset and light/dark treatment.
+- Bumps the application/service-worker release to v39.4.76.
+
+---
+
 # MONIEZI v39.4.75 — clean Demo layout reset
 
 - Rebuilds only the initial **Explore before you start** Demo entry with one deterministic layout: **Explore → phone → explicit gap → Load the demo → Skip**.
