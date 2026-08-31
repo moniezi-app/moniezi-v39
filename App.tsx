@@ -8881,7 +8881,7 @@ html, body, #root {
           Luminous Glass hierarchy as the rest of the dashboard. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
         <div className="mb-6">
-          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39472-demo-entry' : ''}`}>
+          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39473-demo-entry' : ''}`}>
             <div className="v3931-first-run-kicker">
               <span className="v3931-first-run-kicker__icon"><PlayCircle size={18} strokeWidth={2} /></span>
               <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>
@@ -8909,22 +8909,6 @@ html, body, #root {
                 <p className="v3931-first-run-body">
                   The demo is cleared. Record your first real entry and start building your own records.
                 </p>
-              )}
-
-              {!hasTriedSampleData && (
-                <div className="v3931-first-run-stats">
-                  {[
-                    { value: sampleDataCounts.transactions, label: 'Records', icon: <Receipt size={16} strokeWidth={1.9} /> },
-                    { value: sampleDataCounts.invoices, label: 'Invoices', icon: <FileText size={16} strokeWidth={1.9} /> },
-                    { value: sampleDataCounts.clients, label: 'Clients', icon: <Users size={16} strokeWidth={1.9} /> },
-                  ].map((stat) => (
-                    <div key={stat.label} className="v3931-first-run-stat">
-                      <span className="v3931-first-run-stat__icon">{stat.icon}</span>
-                      <strong>{stat.value}</strong>
-                      <span>{stat.label}</span>
-                    </div>
-                  ))}
-                </div>
               )}
 
               <button

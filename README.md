@@ -1,3 +1,10 @@
+# MONIEZI v39.4.73 — Demo stats removed
+
+- Removes the complete **359 Records / 42 Invoices / 5 Clients** stats section from the initial **Explore before you start** Demo screen.
+- Removes the associated icons, stat cards, and reserved stats-row spacing; nothing replaces that section.
+- Keeps the approved single-phone hero, yellow **Load the demo** CTA, **Skip — record my first entry** action, light/dark behavior, and all Demo functionality unchanged.
+- Bumps the service-worker cache for the release.
+
 ## v39.4.72 — Demo layout reflow + solid premium stats
 
 - Rebuilds the initial **Explore before you start** Demo entry as a true vertical flow: kicker → phone → reserved gap → stats → yellow **Load the demo** CTA → skip action.
