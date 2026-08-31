@@ -718,3 +718,11 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Targets an approximately 50 KB WebP file size while preserving the approved MONIEZI single-phone artwork.
 - Updates the app references, preload path, and offline precache to the new versioned asset name.
 - Removes the older larger demo phone asset from this version package so only the current optimized asset remains.
+
+## v39.4.80 demo Net Profit landing
+
+- Changes the Load the demo completion target from the top of Home to the Net Profit card.
+- Adds a dedicated `home-net-profit` Home-section anchor and reuses the existing deterministic internal-scroll deep-link flow.
+- Prevents the final Demo Mode navigation from resetting the Home scroller back to Add Transaction.
+- Keeps the v39.4.79 optimized 480 × 800 demo phone illustration unchanged.
+- Bumps the PWA service-worker cache version for this release.

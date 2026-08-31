@@ -1224,7 +1224,7 @@ export default function App() {
     mainScrollRef.current = node;
     setMainScrollElement((current) => current === node ? current : node);
   }, []);
-  const [pendingHomeAnchor, setPendingHomeAnchor] = useState<'receipts' | null>(null);
+  const [pendingHomeAnchor, setPendingHomeAnchor] = useState<'net-profit' | 'receipts' | null>(null);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [isKeyboardEditing, setIsKeyboardEditing] = useState(false);
   const [isActivitySearchFocused, setIsActivitySearchFocused] = useState(false);
@@ -4272,10 +4272,13 @@ export default function App() {
       await handleSeedDemoData();
       markSampleDataTried();
       setShowMainMenu(false);
-      // One final, immediate Dashboard commit after all demo records are ready.
-      // The seed step above deliberately skips viewport resets so the Demo banner
-      // cannot mount while competing delayed scroll corrections are still running.
-      setCurrentPage(Page.Dashboard);
+
+      // v39.4.80: entering Demo Mode should begin with the business result, not
+      // the Add Transaction hero at the top of Home. Route through the existing
+      // deterministic Home-section scroller so Android Chrome and iPhone Safari
+      // both land on the Net Profit card after the demo records have rendered.
+      setPendingHomeAnchor('net-profit');
+      setCurrentPage(Page.Dashboard, { skipViewportReset: true });
       showToast("Demo ready. Sample business data is loaded.", "success", 2000);
     } catch (error) {
       console.error("Failed to enter demo mode", error);
@@ -8950,7 +8953,7 @@ html, body, #root {
               </button>
             </section>
 
-            <div id="home-overview" className="scroll-mt-6">
+            <div id="home-net-profit" className="scroll-mt-6">
               <MonieziGlassCard hero className="v39431-home-feature-card">
               <div className="v391-card-header v3936-home-wide-header v39431-home-feature-header">
                 <div className="v391-card-header__main">
