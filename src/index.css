@@ -8377,3 +8377,99 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     margin-top: 6px;
   }
 }
+
+/* ================================================================
+   MONIEZI v39.4.69 — Demo entry single-phone hero
+   ----------------------------------------------------------------
+   The initial "Explore before you start" screen now uses only the clean
+   center dashboard phone from the approved illustration direction. The phone
+   is intentionally larger now that the surrounding receipt/map/report pieces
+   are gone. Changes are scoped to the initial Demo entry so the post-demo
+   empty-state composition stays unchanged.
+   ================================================================ */
+.v39469-demo-entry {
+  padding: 16px !important;
+}
+
+.v39469-demo-entry .v3931-first-run-kicker {
+  min-height: 46px !important;
+  padding: 11px 18px !important;
+}
+
+.v39469-demo-entry .v3931-first-run-visual {
+  display: grid !important;
+  place-items: center !important;
+  height: clamp(300px, 84vw, 332px) !important;
+  margin-top: 9px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  contain: layout size !important;
+}
+
+.v39469-demo-entry .v3931-first-run-visual__image {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  max-width: min(56vw, 194px) !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  margin: 0 auto !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  filter: drop-shadow(0 16px 22px rgba(18, 52, 116, 0.15)) !important;
+}
+
+.dark .v39469-demo-entry .v3931-first-run-visual__image {
+  filter: drop-shadow(0 17px 24px rgba(0, 6, 22, 0.34)) !important;
+}
+
+.v39469-demo-entry .v3931-first-run-content {
+  margin-top: 2px !important;
+}
+
+.v39469-demo-entry .v3931-first-run-body {
+  margin-top: 7px !important;
+}
+
+.v39469-demo-entry .v3931-first-run-stats {
+  gap: 7px !important;
+  margin-top: 12px !important;
+}
+
+.v39469-demo-entry .v3931-first-run-stat {
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+}
+
+.v39469-demo-entry .v3931-first-run-primary {
+  min-height: 50px !important;
+  margin-top: 13px !important;
+}
+
+.v39469-demo-entry .v3931-first-run-secondary {
+  margin-top: 10px !important;
+}
+
+@media (max-width: 390px) {
+  .v39469-demo-entry {
+    padding: 14px !important;
+  }
+  .v39469-demo-entry .v3931-first-run-kicker {
+    min-height: 44px !important;
+    padding: 10px 15px !important;
+    font-size: 12.5px !important;
+  }
+  .v39469-demo-entry .v3931-first-run-visual {
+    height: clamp(292px, 82vw, 316px) !important;
+    margin-top: 7px !important;
+  }
+  .v39469-demo-entry .v3931-first-run-visual__image {
+    max-width: min(55vw, 184px) !important;
+  }
+  .v39469-demo-entry .v3931-first-run-stats {
+    margin-top: 10px !important;
+  }
+  .v39469-demo-entry .v3931-first-run-primary {
+    margin-top: 11px !important;
+  }
+}

@@ -1,3 +1,12 @@
+## v39.4.69 — Demo entry single-phone hero
+
+- Simplifies the **Explore before you start** Demo entry by removing the non-essential floating receipts, report cards, map tile, side analytics tile, sparkles, and oversized checkmark from the hero artwork.
+- Keeps the approved MONIEZI illustration language and focuses the hero on one clean centered business-dashboard phone.
+- Enlarges the phone on the initial Demo entry so it uses the freed visual space and reads as the clear focal point without changing the Demo copy, stats, or yellow **Load the demo** action.
+- Uses a compact optimized WebP hero asset and retains the previous shared illustration only for the post-demo empty-state screen, avoiding unrelated visual changes.
+- Tightens only the initial Demo-entry spacing enough to keep the primary **Load the demo** action high in the first mobile viewport while preserving the existing sticky footer behavior.
+- Bumps the service-worker cache version so the new hero artwork is served immediately.
+
 ## v39.4.68 — Premium centered activation composition
 
 - Redesigns the Welcome/activation lower section around the approved premium centered layout while preserving the existing two-person hero composition and activation logic.
