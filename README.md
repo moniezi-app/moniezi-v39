@@ -711,3 +711,10 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - v39 does **not** automatically import v38 or legacy business data. Use MONIEZI backup/restore explicitly when test data should be moved between versions.
 - The device identity remains shared with v38 during parallel testing so validating the same license on the same physical device does not unnecessarily consume another device slot. The v39 license record itself is stored separately.
 - The PWA manifest ID and service-worker cache are v39-specific so v38 and v39 can be installed/tested independently.
+
+## v39.4.79 demo phone asset optimization
+
+- Replaces the first-run demo phone illustration with a new optimized asset at 480 × 800 px.
+- Targets an approximately 50 KB WebP file size while preserving the approved MONIEZI single-phone artwork.
+- Updates the app references, preload path, and offline precache to the new versioned asset name.
+- Removes the older larger demo phone asset from this version package so only the current optimized asset remains.
