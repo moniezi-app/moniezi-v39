@@ -1,3 +1,14 @@
+## v39.4.72 — Demo layout reflow + solid premium stats
+
+- Rebuilds the initial **Explore before you start** Demo entry as a true vertical flow: kicker → phone → reserved gap → stats → yellow **Load the demo** CTA → skip action.
+- Removes the prior stacked v39.4.69/v39.4.70 Demo layout classes so the initial Demo screen is no longer dependent on overlapping historical spacing overrides.
+- Keeps the approved single-phone illustration and scales it responsively with dynamic viewport height so taller phones keep a large hero while shorter Android/iPhone screens reduce it before lower controls are displaced.
+- Adds real reserved space below the phone so the illustration can never sit behind the **359 Records / 42 Invoices / 5 Clients** area.
+- Replaces translucent individual stat overlays with one coordinated, fully opaque premium stat strip: crisp white in light mode and deep navy in dark mode, with subtle dividers and no illustration showing through.
+- Strengthens the light-mode Demo card boundary while keeping it genuinely light, and preserves the established dark MONIEZI surface without blur or dirty transparency.
+- Keeps the existing yellow **Load the demo** CTA, **Skip — record my first entry** action, Demo behavior, footer navigation, and all unrelated functionality unchanged.
+- Bumps the service-worker cache version for the new release.
+
 ## v39.4.71 — Demo hero overlap cleanup
 
 - Removes the redundant **Load the demo business** heading from the initial Explore-before-you-start Demo entry screen so no text sits behind the approved phone illustration.
