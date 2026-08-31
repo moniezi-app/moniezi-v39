@@ -8771,3 +8771,44 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     padding-block: 5px !important;
   }
 }
+
+
+/* ================================================================
+   MONIEZI v39.4.74 — Demo CTA breathing room + clean hero edge
+   ----------------------------------------------------------------
+   Fixes two issues on the simplified initial Demo screen:
+   1) a deliberate hero-to-CTA gap independent of removed content;
+   2) the dark top/left phone-edge artifact visible in light mode.
+   ================================================================ */
+.v39474-demo-entry .v3931-first-run-visual {
+  margin-bottom: 0 !important;
+}
+
+/* The gap belongs to the CTA area itself so future content removal cannot
+   collapse it again. */
+.v39474-demo-entry .v3931-first-run-content {
+  padding-top: clamp(30px, 3.5dvh, 38px) !important;
+}
+
+/* The replacement asset already has its baked edge halo cleaned. Light mode
+   must add no additional shadow or glow. */
+.v39474-demo-entry .v3931-first-run-visual__image {
+  filter: none !important;
+}
+
+/* Dark mode keeps restrained depth only; no styling changes to the layout. */
+.dark .v39474-demo-entry .v3931-first-run-visual__image {
+  filter: drop-shadow(0 13px 20px rgba(0, 6, 22, 0.28)) !important;
+}
+
+@media (max-height: 820px) {
+  .v39474-demo-entry .v3931-first-run-content {
+    padding-top: 28px !important;
+  }
+}
+
+@media (max-height: 720px) {
+  .v39474-demo-entry .v3931-first-run-content {
+    padding-top: 22px !important;
+  }
+}

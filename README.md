@@ -1,3 +1,13 @@
+# MONIEZI v39.4.74 — Demo CTA gap + clean light hero
+
+- Adds an explicit responsive breathing gap between the bottom of the approved single-phone Demo illustration and the yellow **Load the demo** button.
+- The gap is now its own layout rule and no longer depends on removed stats/content, preventing the CTA from collapsing directly against the phone.
+- Removes the phone illustration drop-shadow treatment in light mode so the dark/black halo visible along the left/top edge is no longer added by CSS.
+- Keeps the restrained phone depth treatment in dark mode only.
+- Preserves the approved **Explore before you start** pill, single-phone illustration, yellow **Load the demo** CTA, **Skip — record my first entry**, Demo behavior, and all unrelated screens.
+- Uses smaller responsive gap values on short viewports while maintaining clear separation.
+- Bumps the service-worker cache for the release.
+
 # MONIEZI v39.4.73 — Demo stats removed
 
 - Removes the complete **359 Records / 42 Invoices / 5 Clients** stats section from the initial **Explore before you start** Demo screen.
