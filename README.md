@@ -1,3 +1,13 @@
+# MONIEZI v39.4.78 — Demo phone +15% / optimized asset
+
+- Enlarges the approved high-quality Demo phone illustration by approximately 15% on normal/tall viewports while retaining the existing responsive caps for shorter screens.
+- Preserves the established gaps between **Explore before you start**, the phone, **Load the demo**, and **Skip — record my first entry**.
+- Re-exports the high-quality phone illustration at the same 971×1619 pixel dimensions as an optimized WebP to reduce file weight without shrinking its source dimensions.
+- Removes the obsolete busy multi-element Demo illustration from the shipped project and reuses the approved phone illustration for the post-demo empty state.
+- Bumps the app and service-worker cache to v39.4.78.
+
+---
+
 # MONIEZI v39.4.77 — Demo phone crisp asset refresh
 
 - Increases the initial **Explore before you start** phone illustration by exactly 30% across the base and height-compressed responsive tiers.

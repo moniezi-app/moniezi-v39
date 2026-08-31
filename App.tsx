@@ -1423,8 +1423,8 @@ export default function App() {
   // while the customer is still on the activation screen, then reveal Home only
   // after the keyboard viewport has returned to its full height. This prevents the
   // 1-3 frame image/font/viewport settlement visible in the screen recording.
-  const firstRunHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-4-77-phone-crisp.webp`;
-  const postDemoHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`;
+  const firstRunHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-4-78-phone-crisp-optimized.webp`;
+  const postDemoHeroSrc = firstRunHeroSrc;
   const firstHomeReadyPromiseRef = useRef<Promise<void> | null>(null);
 
   const ensureFirstHomeAssetsReady = useCallback((): Promise<void> => {
@@ -8881,7 +8881,7 @@ html, body, #root {
           Luminous Glass hierarchy as the rest of the dashboard. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
         <div className="mb-6">
-          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39476-demo-entry' : ''}`}>
+          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39478-demo-entry' : ''}`}>
             <div className="v3931-first-run-kicker">
               <span className="v3931-first-run-kicker__icon"><PlayCircle size={18} strokeWidth={2} /></span>
               <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>
@@ -8892,8 +8892,8 @@ html, body, #root {
                 src={hasTriedSampleData ? postDemoHeroSrc : firstRunHeroSrc}
                 alt={hasTriedSampleData ? "A MONIEZI dashboard surrounded by receipts, reports, mileage, and business records" : "A clean MONIEZI business dashboard shown on a single phone"}
                 className="v3931-first-run-visual__image"
-                width={hasTriedSampleData ? 1448 : 971}
-                height={hasTriedSampleData ? 1086 : 1619}
+                width={971}
+                height={1619}
                 loading="eager"
                 decoding="sync"
                 fetchPriority="high"
