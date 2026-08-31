@@ -1467,7 +1467,7 @@ export default function App() {
     const fontSet = (document as any).fonts;
     const fontsReady = fontSet?.load
       ? Promise.all([
-          Promise.resolve(fontSet.load('600 23px "Plus Jakarta Sans Variable"', 'Load the demo business')).catch(() => undefined),
+          Promise.resolve(fontSet.load('600 18px "Plus Jakarta Sans Variable"', 'Explore before you start')).catch(() => undefined),
                   ])
           .then(() => fontSet.ready ? Promise.resolve(fontSet.ready).catch(() => undefined) : undefined)
           .then(() => undefined)
@@ -8901,9 +8901,9 @@ html, body, #root {
             </div>
 
             <div className="v3931-first-run-content">
-              <h3 className="v3931-first-run-title">
-                {hasTriedSampleData ? 'Start with your own business' : 'Load the demo business'}
-              </h3>
+              {hasTriedSampleData && (
+                <h3 className="v3931-first-run-title">Start with your own business</h3>
+              )}
 
               {hasTriedSampleData && (
                 <p className="v3931-first-run-body">

@@ -1,3 +1,9 @@
+## v39.4.71 — Demo hero overlap cleanup
+
+- Removes the redundant **Load the demo business** heading from the initial Explore-before-you-start Demo entry screen so no text sits behind the approved phone illustration.
+- Keeps the approved v39.4.70 phone, premium stats, yellow **Load the demo** CTA, skip action, responsive viewport fitting, and post-demo **Start with your own business** heading unchanged.
+- Updates the first-Home Jakarta preload sample to the visible **Explore before you start** kicker and bumps the service-worker cache for the new release.
+
 ## v39.4.70 — Demo entry viewport fit + premium stats
 
 - Keeps the approved **single centered Demo phone** and overall dark Demo visual direction from v39.4.69.
