@@ -1468,8 +1468,7 @@ export default function App() {
     const fontsReady = fontSet?.load
       ? Promise.all([
           Promise.resolve(fontSet.load('600 23px "Plus Jakarta Sans Variable"', 'Load the demo business')).catch(() => undefined),
-          Promise.resolve(fontSet.load('500 16px "Plus Jakarta Sans Variable"', 'See MONIEZI filled with realistic business records')).catch(() => undefined),
-        ])
+                  ])
           .then(() => fontSet.ready ? Promise.resolve(fontSet.ready).catch(() => undefined) : undefined)
           .then(() => undefined)
       : fontSet?.ready
@@ -8882,7 +8881,7 @@ html, body, #root {
           Luminous Glass hierarchy as the rest of the dashboard. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
         <div className="mb-6">
-          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39469-demo-entry' : ''}`}>
+          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39469-demo-entry v39470-demo-entry' : ''}`}>
             <div className="v3931-first-run-kicker">
               <span className="v3931-first-run-kicker__icon"><PlayCircle size={18} strokeWidth={2} /></span>
               <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>
@@ -8906,11 +8905,11 @@ html, body, #root {
                 {hasTriedSampleData ? 'Start with your own business' : 'Load the demo business'}
               </h3>
 
-              <p className="v3931-first-run-body">
-                {hasTriedSampleData
-                  ? 'The demo is cleared. Record your first real entry and start building your own records.'
-                  : 'See MONIEZI filled with realistic business records before you enter your own information.'}
-              </p>
+              {hasTriedSampleData && (
+                <p className="v3931-first-run-body">
+                  The demo is cleared. Record your first real entry and start building your own records.
+                </p>
+              )}
 
               {!hasTriedSampleData && (
                 <div className="v3931-first-run-stats">

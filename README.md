@@ -1,3 +1,13 @@
+## v39.4.70 — Demo entry viewport fit + premium stats
+
+- Keeps the approved **single centered Demo phone** and overall dark Demo visual direction from v39.4.69.
+- Moves the Demo entry card slightly upward into the unused space below the app header.
+- Removes the redundant sentence **“See MONIEZI filled with realistic business records before you enter your own information.”** from the initial Demo entry.
+- Restores deliberate breathing room between the phone, **Load the demo business**, and the stats row.
+- Enlarges/refines the **359 Records / 42 Invoices / 5 Clients** tiles with stronger numbers, larger icons, and a subtle translucent surface that lets the Demo background read through.
+- Adds height-aware mobile rules so shorter Android/iPhone viewports compact the hero and spacing only when necessary, keeping the yellow **Load the demo** CTA clear of the sticky footer.
+- Bumps the service-worker cache version for a clean deployment refresh.
+
 ## v39.4.69 — Demo entry single-phone hero
 
 - Simplifies the **Explore before you start** Demo entry by removing the non-essential floating receipts, report cards, map tile, side analytics tile, sparkles, and oversized checkmark from the hero artwork.
