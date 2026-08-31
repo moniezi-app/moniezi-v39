@@ -1423,7 +1423,7 @@ export default function App() {
   // while the customer is still on the activation screen, then reveal Home only
   // after the keyboard viewport has returned to its full height. This prevents the
   // 1-3 frame image/font/viewport settlement visible in the screen recording.
-  const firstRunHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-4-74-phone-only-clean.webp`;
+  const firstRunHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-4-75-phone-clean.webp`;
   const postDemoHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`;
   const firstHomeReadyPromiseRef = useRef<Promise<void> | null>(null);
 
@@ -8881,7 +8881,7 @@ html, body, #root {
           Luminous Glass hierarchy as the rest of the dashboard. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
         <div className="mb-6">
-          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39473-demo-entry v39474-demo-entry' : ''}`}>
+          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39475-demo-entry' : ''}`}>
             <div className="v3931-first-run-kicker">
               <span className="v3931-first-run-kicker__icon"><PlayCircle size={18} strokeWidth={2} /></span>
               <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>

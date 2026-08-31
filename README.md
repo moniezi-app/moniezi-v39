@@ -1,3 +1,12 @@
+# MONIEZI v39.4.75 — clean Demo layout reset
+
+- Rebuilds only the initial **Explore before you start** Demo entry with one deterministic layout: **Explore → phone → explicit gap → Load the demo → Skip**.
+- Removes the accumulated v39.4.69–v39.4.74 Demo-entry CSS overrides so the phone, CTA, and spacing no longer compete across generations of rules.
+- Keeps the approved single-phone design, removes all stats/title/support content from the initial Demo entry, and preserves Demo behavior plus the post-demo empty state.
+- Uses one new clean transparent phone asset in both themes; light mode adds no shadow, while dark mode depth is applied only through CSS.
+- Uses dynamic-viewport height rules to shrink the phone before controls on shorter Android/iPhone screens while keeping an explicit hero-to-CTA gap.
+- Bumps the application/service-worker release to v39.4.75.
+
 # MONIEZI v39.4.74 — Demo CTA gap + clean light hero
 
 - Adds an explicit responsive breathing gap between the bottom of the approved single-phone Demo illustration and the yellow **Load the demo** button.

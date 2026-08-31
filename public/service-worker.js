@@ -7,7 +7,7 @@
 // v15.1.4: restore safe precache so iOS A2HS can launch offline on FIRST open.
 // The previous "no precache" change prevented the app shell from being available
 // when offline at cold start.
-const CACHE_VERSION = "moniezi-v39-4-74-2026-08-31-demo-gap-clean-hero";
+const CACHE_VERSION = "moniezi-v39-4-75-2026-08-31-demo-clean-layout-reset";
 const CACHE_NAME = `moniezi-cache-${CACHE_VERSION}`;
 
 // Resolve an asset relative to the service worker scope
@@ -34,7 +34,7 @@ const CORE_ASSETS = [
   "./transaction-add-v39-4-50-shared.webp",
   "./quick-add-hero-v39-4-62-phone-plus.webp",
   "./quick-add-hero-v39-4-66-phone-plus-light.webp",
-  "./demo-business-v39-4-74-phone-only-clean.webp",
+  "./demo-business-v39-4-75-phone-clean.webp",
   "./demo-business-v39-26-shared.webp",
   "./welcome-hero-v39-4-68-white.webp",
 ].map(toScopeUrl);
