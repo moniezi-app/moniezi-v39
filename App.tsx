@@ -1423,7 +1423,7 @@ export default function App() {
   // while the customer is still on the activation screen, then reveal Home only
   // after the keyboard viewport has returned to its full height. This prevents the
   // 1-3 frame image/font/viewport settlement visible in the screen recording.
-  const firstRunHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-4-75-phone-clean.webp`;
+  const firstRunHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-4-77-phone-crisp.webp`;
   const postDemoHeroSrc = `${import.meta.env.BASE_URL}demo-business-v39-26-shared.webp`;
   const firstHomeReadyPromiseRef = useRef<Promise<void> | null>(null);
 
@@ -8892,8 +8892,8 @@ html, body, #root {
                 src={hasTriedSampleData ? postDemoHeroSrc : firstRunHeroSrc}
                 alt={hasTriedSampleData ? "A MONIEZI dashboard surrounded by receipts, reports, mileage, and business records" : "A clean MONIEZI business dashboard shown on a single phone"}
                 className="v3931-first-run-visual__image"
-                width={hasTriedSampleData ? 1448 : 387}
-                height={hasTriedSampleData ? 1086 : 668}
+                width={hasTriedSampleData ? 1448 : 971}
+                height={hasTriedSampleData ? 1086 : 1619}
                 loading="eager"
                 decoding="sync"
                 fetchPriority="high"
