@@ -59,6 +59,7 @@ import {
   PenTool, 
   Wrench, 
   Key, 
+  KeyRound,
   Flag, 
   GraduationCap, 
   AlertCircle, 
@@ -7866,29 +7867,43 @@ export default function App() {
 
             <div className="v39-license-hero" aria-hidden="true">
               <img
-                src={`${import.meta.env.BASE_URL}welcome-hero-v39-04.webp`}
+                src={`${import.meta.env.BASE_URL}welcome-hero-v39-4-68-white.webp`}
                 alt=""
                 className="v39-license-hero__image"
-                width={820}
-                height={575}
+                width={720}
+                height={505}
                 draggable={false}
               />
             </div>
 
           </section>
 
-          <section className="v39-license-card" aria-labelledby="v39-license-activate-title">
-            <div className="v39-license-card__heading">
-              <div className="v39-license-card__key" aria-hidden="true">
-                <Key size={24} strokeWidth={1.8} />
-              </div>
+          <div className="v39468-license-benefit-strip" aria-label="MONIEZI purchase benefits">
+            <div className="v39468-license-benefit">
+              <span className="v39468-license-benefit__icon" aria-hidden="true"><Shield size={20} strokeWidth={1.8} /></span>
+              <span className="v39468-license-benefit__copy"><strong>Private</strong><small>Your data stays with you.</small></span>
+            </div>
+            <div className="v39468-license-benefit">
+              <span className="v39468-license-benefit__icon" aria-hidden="true"><Wifi size={20} strokeWidth={1.8} /></span>
+              <span className="v39468-license-benefit__copy"><strong>Offline</strong><small>Works fully without internet.</small></span>
+            </div>
+            <div className="v39468-license-benefit">
+              <span className="v39468-license-benefit__icon" aria-hidden="true"><ShoppingBag size={20} strokeWidth={1.8} /></span>
+              <span className="v39468-license-benefit__copy"><strong>One-time purchase</strong><small>No subscriptions. Ever.</small></span>
+            </div>
+          </div>
+
+          <section className="v39-license-card v39468-license-card" aria-labelledby="v39-license-activate-title">
+            <div className="v39-license-card__key v39468-license-card__key" aria-hidden="true">
+              <KeyRound size={20} strokeWidth={1.9} />
+            </div>
+            <div className="v39-license-card__heading v39468-license-card__heading">
               <h2 id="v39-license-activate-title">Activate your copy</h2>
             </div>
+            <p className="v39-license-card__intro v39468-license-card__intro">Enter the key from your MONIEZI purchase.</p>
 
-
-            <div className="v39-license-form">
+            <div className="v39-license-form v39468-license-form">
               <div className="v39-license-input-wrap">
-                <Key size={20} strokeWidth={1.7} className="v39-license-input__icon" aria-hidden="true" />
                 <input
                   id="moniezi-license-key"
                   type="text"
@@ -7896,8 +7911,8 @@ export default function App() {
                   onChange={(e) => { setLicenseKey(e.target.value); setLicenseActivationSucceeded(false); setLicenseError(''); }}
                   onFocus={beginLicenseViewportSession}
                   onKeyDown={(e) => e.key === 'Enter' && handleActivateLicense()}
-                  placeholder="Paste or enter your license key"
-                  className="v39-license-input v39-license-input--with-icon"
+                  placeholder="Enter your license key"
+                  className="v39-license-input v39468-license-input"
                   disabled={isValidatingLicense}
                   autoCapitalize="none"
                   autoCorrect="off"
@@ -7930,11 +7945,16 @@ export default function App() {
                   </>
                 ) : (
                   <>
-                    <CheckCircle size={20} />
-                    Activate MONIEZI
+                    <span className="v39468-license-button__label">Activate MONIEZI</span>
+                    <span className="v39468-license-button__arrow" aria-hidden="true"><ArrowRight size={20} strokeWidth={2.2} /></span>
                   </>
                 )}
               </button>
+            </div>
+
+            <div className="v39468-license-assurance" aria-label="Activation privacy assurance">
+              <Shield size={17} strokeWidth={1.8} aria-hidden="true" />
+              <span>Secure. Private. Yours.</span>
             </div>
 
             <div className="v39-license-links">
@@ -7959,12 +7979,6 @@ export default function App() {
               ) : null}
             </div>
           </section>
-
-          <div className="v39-license-benefits" aria-label="MONIEZI purchase benefits">
-            <span><CheckCircle size={18} strokeWidth={1.8} /> One-time purchase</span>
-            <span><CheckCircle size={18} strokeWidth={1.8} /> Records stay on your device</span>
-            <span><CheckCircle size={18} strokeWidth={1.8} /> Works offline</span>
-          </div>
         </main>
       </div>
     );

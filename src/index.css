@@ -7961,3 +7961,419 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 .dark .v39454-add-choice-hero .v39464-quick-add-hero-image--dark {
   display: block !important;
 }
+
+/* ================================================================
+   MONIEZI v39.4.68 — Premium centered activation composition
+   ----------------------------------------------------------------
+   - Keeps the approved Welcome hero while making the page background plain white.
+   - Moves the three product assurances directly beneath the hero as a compact strip.
+   - Centers the activation title, helper copy, input placeholder/value, and CTA flow.
+   - Uses a smaller, unmistakable round-key icon above the activation title.
+   - Removes the redundant icon from the license input.
+   - Keeps the primary activation CTA inside the initial 375x812 / 390x844 viewport.
+   ================================================================ */
+
+.moniezi-license-stable-surface.v39-license-gate {
+  background: #ffffff !important;
+}
+
+.moniezi-license-stable-surface .v39-license-backdrop {
+  display: none !important;
+}
+
+.moniezi-license-stable-surface .v39-license-shell {
+  gap: 10px !important;
+}
+
+.moniezi-license-stable-surface .v39-license-brand {
+  margin-bottom: 12px !important;
+}
+
+.moniezi-license-stable-surface .v39-license-copy {
+  max-width: 700px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.moniezi-license-stable-surface .v39-license-copy p {
+  margin-inline: auto;
+}
+
+.moniezi-license-stable-surface .v39-license-hero {
+  margin-top: 10px !important;
+}
+
+.moniezi-license-stable-surface .v39-license-hero__image {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.v39468-license-benefit-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #dbe3ef;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.045);
+}
+
+.v39468-license-benefit {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 13px 14px;
+}
+
+.v39468-license-benefit + .v39468-license-benefit {
+  border-left: 1px solid #e2e8f0;
+}
+
+.v39468-license-benefit__icon {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid #e4eaf5;
+  border-radius: 9px;
+  background: #f7f9ff;
+  color: #2563eb;
+}
+
+.v39468-license-benefit__copy {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+  color: #0b1736;
+  text-align: left;
+}
+
+.v39468-license-benefit__copy strong {
+  font-size: 14px;
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.v39468-license-benefit__copy small {
+  color: #5e6e87;
+  font-size: 11.5px;
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+.moniezi-license-stable-surface .v39468-license-card {
+  padding: 18px 18px 16px !important;
+  border: 1px solid #dbe3ef !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.055) !important;
+  text-align: center;
+}
+
+.moniezi-license-stable-surface .v39468-license-card__key {
+  display: grid;
+  width: 38px !important;
+  height: 38px !important;
+  margin: 0 auto 8px;
+  place-items: center;
+  border: 1px solid #e1e8f5;
+  border-radius: 9px !important;
+  background: #f8faff !important;
+  color: #2563eb !important;
+}
+
+.moniezi-license-stable-surface .v39468-license-card__heading {
+  display: block !important;
+  text-align: center !important;
+}
+
+.moniezi-license-stable-surface .v39468-license-card__heading h2 {
+  text-align: center !important;
+}
+
+.moniezi-license-stable-surface .v39468-license-card__intro {
+  margin: 5px auto 0 !important;
+  color: #65758e;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  text-align: center;
+}
+
+.moniezi-license-stable-surface .v39468-license-form {
+  gap: 12px !important;
+  margin-top: 13px !important;
+}
+
+.moniezi-license-stable-surface .v39468-license-input {
+  min-height: 56px !important;
+  padding: 14px 16px !important;
+  border-color: #d9e1ed !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+}
+
+.moniezi-license-stable-surface .v39468-license-input::placeholder {
+  color: #74849d !important;
+  text-align: center;
+  opacity: 1;
+}
+
+.moniezi-license-stable-surface .v39468-license-card .v39-license-button {
+  position: relative;
+}
+
+.v39468-license-button__label {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.v39468-license-button__arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1.5px solid rgba(255,255,255,.9);
+  border-radius: 999px;
+  color: #ffffff;
+}
+
+.v39468-license-assurance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 11px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 500;
+  text-align: center;
+}
+
+.v39468-license-assurance svg {
+  color: #71829c;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 520px) {
+  .moniezi-license-stable-surface.v39-license-gate {
+    padding-top: max(12px, env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-shell {
+    gap: 8px !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-brand {
+    margin-bottom: 8px !important;
+  }
+
+  .moniezi-license-stable-surface .v39312-license-brand-centered .v39-license-brand__icon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-eyebrow {
+    margin-bottom: 7px !important;
+    font-size: 11.5px !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.22em !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-copy h1 {
+    font-size: 31px !important;
+    line-height: 1.04 !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-copy p {
+    max-width: 345px !important;
+    margin-top: 8px !important;
+    font-size: 15px !important;
+    line-height: 1.42 !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-hero {
+    margin-top: 6px !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-hero__image {
+    width: min(100%, 430px) !important;
+    aspect-ratio: 720 / 505 !important;
+  }
+
+  .v39468-license-benefit-strip {
+    border-radius: 12px;
+  }
+
+  .v39468-license-benefit {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 6px;
+    min-height: 72px;
+    padding: 8px 7px;
+  }
+
+  .v39468-license-benefit__icon {
+    width: 29px;
+    height: 29px;
+    border-radius: 7px;
+  }
+
+  .v39468-license-benefit__icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .v39468-license-benefit__copy strong {
+    font-size: 12.5px;
+    line-height: 1.15;
+  }
+
+  .v39468-license-benefit__copy small {
+    font-size: 10.5px;
+    line-height: 1.2;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card {
+    padding: 13px 12px 12px !important;
+    border-radius: 12px !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card__key {
+    width: 34px !important;
+    height: 34px !important;
+    margin-bottom: 6px !important;
+    border-radius: 8px !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card__key svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card__heading h2 {
+    font-size: 25px !important;
+    line-height: 1.12 !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card__intro {
+    margin-top: 4px !important;
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-form {
+    gap: 10px !important;
+    margin-top: 10px !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-input,
+  .moniezi-license-stable-surface .v39468-license-card .v39-license-button {
+    min-height: 54px !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-input {
+    padding-inline: 12px !important;
+    font-size: 15px !important;
+  }
+
+  .v39468-license-assurance {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card .v39-license-links {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 380px), (max-height: 820px) {
+  .moniezi-license-stable-surface.v39-license-gate {
+    padding-top: max(10px, env(safe-area-inset-top, 0px)) !important;
+  }
+
+  .moniezi-license-stable-surface .v39312-license-brand-centered .v39-license-brand__icon {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-brand {
+    margin-bottom: 6px !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-eyebrow {
+    margin-bottom: 5px !important;
+    font-size: 11px !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-copy h1 {
+    font-size: 29px !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-copy p {
+    margin-top: 6px !important;
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-hero {
+    margin-top: 4px !important;
+  }
+
+  .moniezi-license-stable-surface .v39-license-hero__image {
+    width: min(100%, 390px) !important;
+  }
+
+  .v39468-license-benefit {
+    min-height: 66px;
+    padding-block: 6px;
+  }
+
+  .v39468-license-benefit__copy small {
+    font-size: 10px;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card {
+    padding-top: 11px !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card__key {
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card__heading h2 {
+    font-size: 23px !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-card__intro {
+    font-size: 12.5px !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-form {
+    margin-top: 8px !important;
+    gap: 8px !important;
+  }
+
+  .moniezi-license-stable-surface .v39468-license-input,
+  .moniezi-license-stable-surface .v39468-license-card .v39-license-button {
+    min-height: 50px !important;
+  }
+
+  .v39468-license-assurance {
+    margin-top: 6px;
+  }
+}

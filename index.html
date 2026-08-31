@@ -352,7 +352,7 @@
         position: fixed;
         inset: 0;
         overflow-y: auto;
-        background: linear-gradient(180deg, #f9fbff 0%, #f3f6fc 100%);
+        background: #ffffff;
       }
       html.moniezi-license-boot #app-loader > .mark { display: none; }
       html.moniezi-license-boot #app-loader .boot-license-shell { display: block; }
@@ -368,35 +368,62 @@
         position: relative;
         min-height: 100svh;
         overflow: auto;
-        padding: max(18px, env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) max(22px, env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
+        padding: max(12px, env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
         color: #0f172a;
-        background: radial-gradient(circle at 50% 24%, rgba(99,102,241,.08), transparent 32%), linear-gradient(180deg,#f9fbff 0%,#f3f6fc 100%);
+        background: #ffffff;
       }
-      #app-loader .boot-license-backdrop {
-        position: absolute; inset: 0; pointer-events: none; opacity: .5;
-        background: radial-gradient(circle at 18% 8%, rgba(59,130,246,.06), transparent 16%), radial-gradient(circle at 82% 18%, rgba(139,92,246,.05), transparent 18%), radial-gradient(circle at 50% 100%, rgba(59,130,246,.04), transparent 30%);
+      #app-loader .boot-license-backdrop { display:none; }
+      #app-loader .boot-license-main { position:relative; width:min(100%,860px); margin:0 auto; display:grid; gap:8px; }
+      #app-loader .boot-license-brand { display:flex; width:100%; justify-content:center; margin-bottom:8px; }
+      #app-loader .boot-license-brand img { width:48px; height:48px; border-radius:6px; object-fit:cover; display:block; box-shadow:0 8px 20px rgba(47,103,246,.14); }
+      #app-loader .boot-license-copy { max-width:700px; margin-inline:auto; text-align:center; }
+      #app-loader .boot-license-eyebrow { margin-bottom:7px; font-size:11.5px; line-height:1.25; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:#2f5dff; text-align:center; }
+      #app-loader .boot-license-title { margin:0; font-size:31px; line-height:1.04; font-weight:700; letter-spacing:-.055em; color:#06153a; text-align:center; }
+      #app-loader .boot-license-copy p { max-width:345px; margin:8px auto 0; font-size:15px; line-height:1.42; font-weight:600; color:#405069; text-align:center; }
+      #app-loader .boot-license-hero { margin-top:6px; display:flex; justify-content:center; width:100%; }
+      #app-loader .boot-license-hero img { width:min(100%,430px); height:auto; aspect-ratio:720/505; object-fit:contain; display:block; border-radius:0; }
+      #app-loader .boot-license-benefit-strip { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); width:100%; overflow:hidden; border:1px solid #dbe3ef; border-radius:12px; background:#fff; box-shadow:0 8px 22px rgba(15,23,42,.045); }
+      #app-loader .boot-license-benefit { display:grid; grid-template-columns:30px minmax(0,1fr); align-items:center; gap:6px; min-width:0; min-height:72px; padding:8px 7px; }
+      #app-loader .boot-license-benefit + .boot-license-benefit { border-left:1px solid #e2e8f0; }
+      #app-loader .boot-license-benefit-icon { display:grid; width:29px; height:29px; place-items:center; border:1px solid #e4eaf5; border-radius:7px; background:#f7f9ff; color:#2563eb; }
+      #app-loader .boot-license-benefit-icon svg { width:17px; height:17px; }
+      #app-loader .boot-license-benefit-copy { display:grid; min-width:0; gap:2px; color:#0b1736; text-align:left; }
+      #app-loader .boot-license-benefit-copy strong { font-size:12.5px; line-height:1.15; font-weight:700; }
+      #app-loader .boot-license-benefit-copy small { color:#5e6e87; font-size:10.5px; line-height:1.2; font-weight:500; }
+      #app-loader .boot-license-card { padding:13px 12px 12px; border:1px solid #dbe3ef; border-radius:12px; background:#fff; box-shadow:0 10px 28px rgba(15,23,42,.055); text-align:center; }
+      #app-loader .boot-license-keybox { display:grid; place-items:center; width:34px; height:34px; margin:0 auto 6px; border:1px solid #e1e8f5; border-radius:8px; color:#2563eb; background:#f8faff; }
+      #app-loader .boot-license-keybox svg { width:18px; height:18px; }
+      #app-loader .boot-license-heading { display:block; text-align:center; }
+      #app-loader .boot-license-heading h2 { margin:0; font-size:25px; line-height:1.12; font-weight:700; letter-spacing:-.04em; color:#091738; text-align:center; }
+      #app-loader .boot-license-intro { margin:4px auto 0; color:#65758e; font-size:13px; line-height:1.3; font-weight:500; text-align:center; }
+      #app-loader .boot-license-form { display:grid; gap:10px; margin-top:10px; }
+      #app-loader .boot-license-input { width:100%; min-height:54px; padding:14px 12px; border:1px solid #d9e1ed; border-radius:6px; background:#fff; color:#74849d; font-size:15px; line-height:1.4; font-weight:500; display:flex; align-items:center; justify-content:center; text-align:center; }
+      #app-loader .boot-license-button { width:100%; min-height:54px; border:1px solid #2c5fd2; border-radius:6px; background:#3469dc; color:#fff; box-shadow:0 12px 24px rgba(36,83,190,.18); display:flex; align-items:center; justify-content:center; gap:9px; font-size:16px; line-height:1.2; font-weight:700; }
+      #app-loader .boot-license-button--arrow { position:relative; }
+      #app-loader .boot-license-button-arrow { position:absolute; right:14px; top:50%; display:grid; width:28px; height:28px; place-items:center; transform:translateY(-50%); border:1.5px solid rgba(255,255,255,.9); border-radius:999px; }
+      #app-loader .boot-license-button-arrow svg { width:17px; height:17px; }
+      #app-loader .boot-license-assurance { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:8px; color:#64748b; font-size:12px; line-height:1.35; font-weight:500; text-align:center; }
+      #app-loader .boot-license-assurance svg { width:17px; height:17px; color:#71829c; }
+      #app-loader .boot-license-links { display:grid; gap:8px; margin-top:10px; text-align:center; font-size:12px; line-height:1.55; color:#5c6d87; }
+      @media (max-width:380px), (max-height:820px) {
+        #app-loader .boot-license-shell { padding-top:max(10px, env(safe-area-inset-top, 0px)); }
+        #app-loader .boot-license-brand { margin-bottom:6px; }
+        #app-loader .boot-license-brand img { width:44px; height:44px; }
+        #app-loader .boot-license-eyebrow { margin-bottom:5px; font-size:11px; }
+        #app-loader .boot-license-title { font-size:29px; }
+        #app-loader .boot-license-copy p { margin-top:6px; font-size:14px; line-height:1.35; }
+        #app-loader .boot-license-hero { margin-top:4px; }
+        #app-loader .boot-license-hero img { width:min(100%,390px); }
+        #app-loader .boot-license-benefit { min-height:66px; padding-block:6px; }
+        #app-loader .boot-license-benefit-copy small { font-size:10px; }
+        #app-loader .boot-license-card { padding-top:11px; }
+        #app-loader .boot-license-keybox { width:32px; height:32px; margin-bottom:4px; }
+        #app-loader .boot-license-heading h2 { font-size:23px; }
+        #app-loader .boot-license-intro { font-size:12.5px; }
+        #app-loader .boot-license-form { margin-top:8px; gap:8px; }
+        #app-loader .boot-license-input, #app-loader .boot-license-button { min-height:50px; }
+        #app-loader .boot-license-assurance { margin-top:6px; }
       }
-      #app-loader .boot-license-main { position: relative; width: min(100%,860px); margin: 0 auto; display: grid; gap: 16px; }
-      #app-loader .boot-license-brand { display:flex; width:100%; justify-content:center; margin-bottom:18px; }
-      #app-loader .boot-license-brand img { width:52px; height:52px; border-radius:6px; object-fit:cover; display:block; box-shadow:0 12px 28px rgba(47,103,246,.20); }
-      #app-loader .boot-license-copy { max-width:620px; margin-inline:auto; text-align:center; }
-      #app-loader .boot-license-eyebrow { margin-bottom:12px; font-size:12px; line-height:1.35; font-weight:700; letter-spacing:.26em; text-transform:uppercase; color:#2f5dff; text-align:center; }
-      #app-loader .boot-license-title { margin:0; font-size:34px; line-height:1.02; font-weight:700; letter-spacing:-.055em; color:#06153a; text-align:center; }
-      #app-loader .boot-license-copy p { max-width:330px; margin:12px auto 0; font-size:16px; line-height:1.5; font-weight:600; color:#405069; text-align:center; }
-      #app-loader .boot-license-hero { margin-top:12px; display:flex; justify-content:center; width:100%; }
-      #app-loader .boot-license-hero img { width:min(100%,460px); height:auto; aspect-ratio:820/575; object-fit:contain; display:block; border-radius:8px; }
-      #app-loader .boot-license-card { padding:20px 16px; border:1px solid rgba(211,218,233,.95); border-radius:8px; background:rgba(255,255,255,.96); box-shadow:0 18px 40px rgba(15,23,42,.07); }
-      #app-loader .boot-license-heading { display:flex; align-items:center; justify-content:center; gap:12px; text-align:left; }
-      #app-loader .boot-license-keybox { display:grid; place-items:center; flex:0 0 auto; width:40px; height:40px; border-radius:6px; color:#4d6fff; background:#f1f4ff; }
-      #app-loader .boot-license-heading h2 { margin:0; font-size:26px; line-height:1.16; font-weight:700; letter-spacing:-.04em; color:#091738; }
-      #app-loader .boot-license-form { display:grid; gap:14px; margin-top:16px; }
-      #app-loader .boot-license-input { position:relative; width:100%; min-height:56px; padding:16px 18px 16px 50px; border:1px solid rgba(208,216,232,1); border-radius:6px; background:#fff; color:#7b8da7; font-size:16px; line-height:1.4; font-weight:500; display:flex; align-items:center; }
-      #app-loader .boot-license-input svg { position:absolute; left:17px; top:50%; transform:translateY(-50%); width:20px; height:20px; color:#8ea0bd; }
-      #app-loader .boot-license-button { width:100%; min-height:56px; border:1px solid #c6d4f8; border-radius:6px; background:#dbe7ff; color:#4f5f84; display:flex; align-items:center; justify-content:center; gap:9px; font-size:16px; line-height:1.2; font-weight:700; }
-      #app-loader .boot-license-links { display:grid; gap:8px; margin-top:18px; text-align:center; font-size:12px; line-height:1.55; color:#5c6d87; }
-      #app-loader .boot-license-benefits { display:flex; flex-direction:column; gap:10px; margin-top:2px; }
-      #app-loader .boot-license-benefits span { display:flex; align-items:center; justify-content:flex-start; gap:10px; min-height:48px; padding:12px 14px; border:1px solid rgba(206,214,230,.95); border-radius:8px; background:rgba(255,255,255,.94); box-shadow:0 10px 22px rgba(15,23,42,.05); color:#16233f; font-size:13px; line-height:1.35; font-weight:600; text-align:left; }
-      #app-loader .boot-license-benefits svg { width:18px; height:18px; flex:0 0 18px; color:#4f73ff; }
     </style>
 
     <script>
@@ -853,24 +880,33 @@
                 <h1 class="boot-license-title">Welcome to MONIEZI</h1>
                 <p>Keep your business records on your device — no bank connection, no monthly subscription.</p>
               </div>
-              <div class="boot-license-hero"><img src="welcome-hero-v39-04.webp" alt="" width="820" height="575" /></div>
+              <div class="boot-license-hero"><img src="welcome-hero-v39-4-68-white.webp" alt="" width="720" height="505" /></div>
             </section>
+            <div class="boot-license-benefit-strip" aria-label="MONIEZI purchase benefits">
+              <div class="boot-license-benefit">
+                <span class="boot-license-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z"></path></svg></span>
+                <span class="boot-license-benefit-copy"><strong>Private</strong><small>Your data stays with you.</small></span>
+              </div>
+              <div class="boot-license-benefit">
+                <span class="boot-license-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a10 10 0 0 1 14 0"></path><path d="M8.5 16.5a5 5 0 0 1 7 0"></path><path d="M12 20h.01"></path></svg></span>
+                <span class="boot-license-benefit-copy"><strong>Offline</strong><small>Works fully without internet.</small></span>
+              </div>
+              <div class="boot-license-benefit">
+                <span class="boot-license-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
+                <span class="boot-license-benefit-copy"><strong>One-time purchase</strong><small>No subscriptions. Ever.</small></span>
+              </div>
+            </div>
             <section class="boot-license-card">
-              <div class="boot-license-heading">
-                <div class="boot-license-keybox" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15.5 7.5 3 3L22 7l-3-3"></path></svg></div>
-                <h2>Activate your copy</h2>
-              </div>
+              <div class="boot-license-keybox" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15.5 7.5 3 3L22 7l-3-3"></path></svg></div>
+              <div class="boot-license-heading"><h2>Activate your copy</h2></div>
+              <p class="boot-license-intro">Enter the key from your MONIEZI purchase.</p>
               <div class="boot-license-form">
-                <div class="boot-license-input"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15.5 7.5 3 3L22 7l-3-3"></path></svg><span>Paste or enter your license key</span></div>
-                <div class="boot-license-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span>Activate MONIEZI</span></div>
+                <div class="boot-license-input"><span>Enter your license key</span></div>
+                <div class="boot-license-button boot-license-button--arrow"><span>Activate MONIEZI</span><span class="boot-license-button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></span></div>
               </div>
+              <div class="boot-license-assurance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z"></path></svg><span>Secure. Private. Yours.</span></div>
               <div class="boot-license-links"></div>
             </section>
-            <div class="boot-license-benefits">
-              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>One-time purchase</span>
-              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Records stay on your device</span>
-              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Works offline</span>
-            </div>
           </main>
         </div>
         <div class="boot-install-shell moniezi-install-surface">

@@ -1,3 +1,15 @@
+## v39.4.68 — Premium centered activation composition
+
+- Redesigns the Welcome/activation lower section around the approved premium centered layout while preserving the existing two-person hero composition and activation logic.
+- Uses a plain white activation background and a new versioned white-background hero asset with the prior bluish backdrop removed.
+- Moves Private, Offline, and One-time purchase assurances into a compact three-column strip directly beneath the hero.
+- Centers the activation title, helper copy, license-key placeholder/value, and overall form hierarchy.
+- Replaces the oversized/ambiguous activation key treatment with a smaller round-key icon and removes the redundant icon from inside the license field.
+- Adds the compact “Secure. Private. Yours.” reassurance beneath the activation CTA and a clean right-edge arrow treatment on the primary button.
+- Mirrors the same geometry in the deterministic pre-React boot shell to avoid a visible layout jump during startup.
+- Keeps the Activate MONIEZI CTA inside the initial mobile viewport through compact responsive rules for 375×812 and 390×844-class screens.
+- Bumps the service-worker cache version so the updated activation CSS/markup is served immediately.
+
 ## v39.4.67 — Illustration asset optimization
 
 - Audits the current active MONIEZI illustration set and keeps only assets referenced by the current app/runtime.
