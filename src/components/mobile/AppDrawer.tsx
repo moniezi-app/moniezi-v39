@@ -29,7 +29,7 @@ export function AppDrawer({ isOpen, onClose, title, children, panelClassName = '
       <button type="button" className="moniezi-drawer-backdrop" onClick={onClose} aria-label="Close drawer backdrop" />
       <div className={`moniezi-drawer-panel v392-drawer-panel drawer-shell animate-in slide-in-from-bottom duration-300 ${panelClassName}`.trim()}>
         <div className="drawer-header moniezi-drawer-header flex items-center justify-between gap-4 px-5 sm:px-8 pb-4" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1rem)' }}>
-          <h2 className="min-w-0 text-2xl font-bold text-slate-900 dark:text-white tracking-tight break-words">{title}</h2>
+          <h2 className="min-w-0 text-[19px] font-bold text-slate-900 dark:text-white tracking-tight break-words">{title}</h2>
           <button type="button" onClick={onClose} aria-label="Close transaction drawer" className="moniezi-drawer-close-button shrink-0 p-2 rounded-full text-slate-600 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-colors">
             <X size={30} strokeWidth={1.7} />
           </button>

@@ -9433,3 +9433,54 @@ html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh .v3950-home-
   font-weight: 700 !important;
   letter-spacing: -0.028em !important;
 }
+
+
+/* ================================================================
+   MONIEZI v39.5.5 — Unified 19px Primary Heading System
+   ----------------------------------------------------------------
+   All application-level primary headings now share one exact visual size:
+   Plus Jakarta Sans Variable, 19px, 700. This intentionally replaces the
+   larger v39.5.4 hierarchy sizing while preserving secondary labels, row
+   titles, KPI labels and body copy at their existing sizes.
+   ================================================================ */
+
+html body :is(h1, h2, h3, h4),
+.v392-app-wide .v391-card-title,
+.v392-app-wide .v391-card-title--hero,
+.v392-app-wide .v39432-page-hero__title,
+.v392-app-wide .v39448-home-add-transaction__title,
+.v392-app-wide .v39427-demo-banner__title,
+.v392-app-wide .v3931-first-run-kicker,
+.v392-app-wide .v3931-first-run-title,
+.v392-app-wide .v39-empty-state__title,
+.v392-app-wide .v39-section-header__title,
+.v392-app-wide .v391-section-heading h3,
+.v392-app-wide .moniezi-drawer-header h2,
+.v392-app-wide .v39451-main-menu-drawer .moniezi-drawer-header h2,
+.v392-app-wide .v39433-main-menu section > div:first-child:not(:last-child),
+.v39433-add-choice-screen .v39435-add-choice-header > div:first-child > div:first-child {
+  font-family: var(--font-brand, 'Plus Jakarta Sans Variable', sans-serif) !important;
+  font-size: 19px !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+}
+
+/* Keep Quick Add action names as action labels, not primary screen headings. */
+.v39433-add-choice-screen .v39461-quick-add-action__title {
+  font-weight: 700 !important;
+}
+
+
+/* Specificity guards for v39.5.4 component rules that previously declared
+   larger !important sizes. These keep the v39.5.5 19px contract exact. */
+html body .v392-app-wide .v3951-home-vivid-refresh .v39431-home-feature-header .v391-card-title,
+html body .v392-app-wide .v3951-home-vivid-refresh .v39431-home-feature-header .v391-card-title--hero,
+html body .v392-app-wide .modal-overlay h2:not(.v391-card-title),
+html body .v392-app-wide .v39432-page-hero__title,
+html body .v392-app-wide .v39-section-header__title,
+html body .v392-app-wide .moniezi-drawer-header h2,
+html body .v39433-add-choice-screen .v39435-add-choice-header > div:first-child > div:first-child {
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+}

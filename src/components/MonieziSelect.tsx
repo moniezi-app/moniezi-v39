@@ -249,7 +249,7 @@ export function MonieziSelect({
               <div className={`v39435-add-choice-header mb-2 flex items-center ${menuTitle ? 'justify-between border-b border-slate-200 px-2 pb-3 pt-1 dark:border-slate-700/80' : 'justify-end px-1 pb-1 pt-1'}`}>
                 {menuTitle ? (
                   <div className="min-w-0 pr-4">
-                    <div className="text-[28px] font-bold leading-[1.08] tracking-[-0.03em] text-slate-950 dark:text-white">{menuTitle}</div>
+                    <div className="text-[19px] font-bold leading-[1.2] tracking-[-0.02em] text-slate-950 dark:text-white">{menuTitle}</div>
                     {quickAddSubtitle ? <div className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">{quickAddSubtitle}</div> : null}
                   </div>
                 ) : null}

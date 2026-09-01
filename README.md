@@ -784,3 +784,11 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Enlarges the Quick Add popup title from the old 22px utility treatment to a true 26–30px responsive primary heading at 700 weight.
 - Preserves the v39.5.3 white Exit Demo text, white Needs Your Attention warning glyph, and the v39.5.2 vivid light-mode color system.
 - No illustration/image assets were added or changed.
+
+## v39.5.5 Unified 19px Primary Heading System
+
+- Standardizes application-level primary headings to Plus Jakarta Sans Variable, 19px, weight 700.
+- Covers Home card titles, routed page titles, Quick Add, drawer/modal titles, hamburger/menu section headings, first-run/Demo headings, and standard section/empty-state headings.
+- Secondary labels, action-row titles, KPI labels, and body copy retain their existing sizes.
+- Quick Add and AppDrawer source markup now also uses 19px directly so the component source matches the shared typography rule.
+
