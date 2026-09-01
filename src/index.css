@@ -9278,3 +9278,64 @@ html:not(.dark) .v3952-light-color-system .v392-search-panel :is(div)[class*="it
   color: inherit !important;
   stroke: currentColor !important;
 }
+
+
+/* ================================================================
+   MONIEZI v39.5.3 — 700-weight Heading System + Demo Contrast Fixes
+   ----------------------------------------------------------------
+   User-approved typography normalization: primary headings use 700
+   throughout MONIEZI, including Home cards, routed screens, drawers,
+   menus, Quick Add, and modal/dialog headings. Supporting copy remains
+   at its existing secondary weights. Also corrects two Demo light-mode
+   contrast details: Exit Demo text is white, and the Needs Your
+   Attention hero warning glyph is white on its amber tile.
+   ================================================================ */
+
+/* Primary heading weight: one consistent 700 across the application.
+   Native heading elements are covered globally so install/activation, reports,
+   dialogs and routed screens cannot retain an older 600/800 override. */
+html body :is(h1, h2, h3, h4),
+.v392-app-wide .v391-card-title,
+.v392-app-wide .v391-card-title--hero,
+.v392-app-wide .v39432-page-hero__title,
+.v392-app-wide .v39448-home-add-transaction__title,
+.v392-app-wide .v39427-demo-banner__title,
+.v392-app-wide .v3931-first-run-kicker,
+.v392-app-wide .v3931-first-run-title,
+.v392-app-wide .v39-empty-state__title,
+.v392-app-wide .v39-section-header__title,
+.v392-app-wide .v391-section-heading h3,
+.v392-app-wide .v39451-main-menu-drawer .moniezi-drawer-header h2,
+.v392-app-wide .v39433-main-menu section > div:first-child:not(:last-child),
+.v392-app-wide .v39433-main-menu section button > span:nth-child(2),
+.v392-app-wide .v39433-main-menu section a > span:nth-child(2),
+.v39433-add-choice-screen .v39435-add-choice-header > div:first-child > div:first-child {
+  font-weight: 700 !important;
+}
+
+/* Quick Add's primary action labels are feature titles, not supporting copy. */
+.v39433-add-choice-screen .v39461-quick-add-action__title {
+  font-weight: 700 !important;
+}
+
+/* Keep nested hamburger-menu descriptions secondary even though the parent
+   item title is now 700. */
+.v392-app-wide .v39433-main-menu section button > span:nth-child(2) > span,
+.v392-app-wide .v39433-main-menu section a > span:nth-child(2) > span {
+  font-weight: 400 !important;
+}
+
+/* Exit Demo must read clearly on the orange action in both themes. */
+.v392-app-wide .v39427-demo-banner__exit {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Light-mode Attention identity: white warning glyph on vivid amber tile. */
+html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh .v3950-home-attention-card .v391-glass-icon.v391-glass-icon--amber {
+  color: #ffffff !important;
+}
+html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh .v3950-home-attention-card .v391-glass-icon.v391-glass-icon--amber svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}

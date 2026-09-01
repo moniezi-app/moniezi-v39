@@ -763,3 +763,13 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Refreshed the hamburger Menu with solid color-coded icon tiles and crisp white item surfaces.
 - Refreshed Quick Add / Add Transaction with eight strong action colors while preserving the approved hero illustration and restrained geometry.
 - Dark mode is intentionally unchanged.
+
+
+## v39.5.3 Typography 700 + Demo Contrast
+
+- Standardized MONIEZI primary headings at Plus Jakarta Sans Variable weight 700 across Home cards, routed screen headings, drawer/menu headings, Quick Add, and modal/dialog headings.
+- Hamburger-menu primary item titles now use 700 while supporting descriptions remain secondary.
+- Quick Add header and primary action titles now use 700.
+- Changed the Demo banner `Exit Demo` button text to white.
+- Changed the Home `Needs Your Attention` warning glyph to white on the vivid amber/yellow icon tile.
+- No illustration/image assets were added or changed.
