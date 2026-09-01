@@ -3985,7 +3985,7 @@ export default function App() {
     if(confirm("Delete this tax payment?")) { setTaxPayments(prev => prev.filter(p => p.id !== id)); showToast("Payment deleted", "info"); }
   };
 
-  const handleSeedDemoData = async () => {
+  const handleSeedDemoData = () => {
     const demo = getFreshDemoData();
     setIsDemoData(true);
 
@@ -4000,6 +4000,11 @@ export default function App() {
     setReceiptPreviewUrls({});
     setSettings({ ...demo.settings } as UserSettings);
     setTaxPayments([...(demo.taxPayments || [])] as TaxPayment[]);
+    // v39.4.81: publish receipt metadata with the rest of the demo state. The
+    // bundled featured receipt assets already provide an immediate visual
+    // fallback, so Home must not wait for IndexedDB image preparation.
+    setReceipts([...(demo.receipts || [])] as ReceiptType[]);
+
     // Demo Mode must not leak the customer's advanced/private records into the
     // sample business. Those records are preserved in the return snapshot and
     // restored when Demo Mode is removed.
@@ -4032,37 +4037,37 @@ export default function App() {
       lastYearTaxRef: 0,
     });
 
-    // The commercial demo contains a deep receipt history plus ten featured
-    // lightweight U.S. receipt photos. Fetch the featured assets once, then reuse
-    // them for the deeper deterministic receipt history without bloating the app.
-    try {
-      const sourceBlobs = new Map<string, { blob: Blob; mimeType: string }>();
-      for (const asset of DEMO_RECEIPT_ASSETS) {
-        const { blob, mimeType } = await fetchDemoReceiptBlob(asset);
-        const record = { blob, mimeType: mimeType || asset.mimeType };
-        sourceBlobs.set(asset.id, record);
-        await putReceiptBlob(asset.id, blob, record.mimeType);
-      }
+    // v39.4.81: receipt-blob preparation is deliberately non-blocking. The UI
+    // can render and jump to Net Profit first; the deeper receipt library is
+    // prepared afterward for receipt views/exports. Scheduling it into a later
+    // task also gives the browser a paint opportunity before storage work starts.
+    window.setTimeout(() => {
+      void (async () => {
+        try {
+          const sourceBlobs = new Map<string, { blob: Blob; mimeType: string }>();
+          for (const asset of DEMO_RECEIPT_ASSETS) {
+            const { blob, mimeType } = await fetchDemoReceiptBlob(asset);
+            const record = { blob, mimeType: mimeType || asset.mimeType };
+            sourceBlobs.set(asset.id, record);
+            await putReceiptBlob(asset.id, blob, record.mimeType);
+          }
 
-      for (let i = 0; i < (demo.receipts || []).length; i += 1) {
-        const receipt = (demo.receipts || [])[i] as ReceiptType & { assetSourceId?: string };
-        if (DEMO_ASSET_BY_ID.has(receipt.id)) continue;
-        const fallbackAsset = DEMO_RECEIPT_ASSETS[i % DEMO_RECEIPT_ASSETS.length];
-        const sourceId = receipt.assetSourceId || fallbackAsset?.id;
-        const source = sourceId ? sourceBlobs.get(sourceId) : undefined;
-        if (!source) continue;
-        await putReceiptBlob(receipt.imageKey || receipt.id, source.blob, source.mimeType);
-      }
-    } catch (e) {
-      console.warn('Failed to seed demo receipt blobs', e);
-    }
-
-    // Publish receipt metadata only after demo image blobs are ready. This keeps
-    // the Home carousel from hydrating early into blank placeholder cards.
-    setReceipts([...(demo.receipts || [])] as ReceiptType[]);
+          for (let i = 0; i < (demo.receipts || []).length; i += 1) {
+            const receipt = (demo.receipts || [])[i] as ReceiptType & { assetSourceId?: string };
+            if (DEMO_ASSET_BY_ID.has(receipt.id)) continue;
+            const fallbackAsset = DEMO_RECEIPT_ASSETS[i % DEMO_RECEIPT_ASSETS.length];
+            const sourceId = receipt.assetSourceId || fallbackAsset?.id;
+            const source = sourceId ? sourceBlobs.get(sourceId) : undefined;
+            if (!source) continue;
+            await putReceiptBlob(receipt.imageKey || receipt.id, source.blob, source.mimeType);
+          }
+        } catch (e) {
+          console.warn('Failed to seed demo receipt blobs', e);
+        }
+      })();
+    }, 0);
 
     setSeedSuccess(true);
-    setCurrentPage(Page.Dashboard, { skipViewportReset: true });
     setTimeout(() => setSeedSuccess(false), 2000);
   };
 
@@ -4269,14 +4274,13 @@ export default function App() {
         await clearDemoReturnState();
       }
 
-      await handleSeedDemoData();
+      handleSeedDemoData();
       markSampleDataTried();
       setShowMainMenu(false);
 
-      // v39.4.80: entering Demo Mode should begin with the business result, not
-      // the Add Transaction hero at the top of Home. Route through the existing
-      // deterministic Home-section scroller so Android Chrome and iPhone Safari
-      // both land on the Net Profit card after the demo records have rendered.
+      // v39.4.81: core demo state is now synchronous, so schedule the Net Profit
+      // destination immediately. Receipt-library IndexedDB work continues later
+      // and no longer holds this navigation hostage.
       setPendingHomeAnchor('net-profit');
       setCurrentPage(Page.Dashboard, { skipViewportReset: true });
       showToast("Demo ready. Sample business data is loaded.", "success", 2000);
@@ -8936,7 +8940,7 @@ html, body, #root {
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
         {(currentPage === Page.Dashboard) && (
-          <div className="v391-dashboard v3934-home-readable v3935-home-breathing v39430-home-phase1 space-y-10 sm:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className={`v391-dashboard v3934-home-readable v3935-home-breathing v39430-home-phase1 space-y-10 sm:space-y-12 ${isDemoData ? '' : 'animate-in fade-in slide-in-from-bottom-4 duration-500'}`}>
             <section className="v39450-home-add-transaction" aria-label="Add transaction">
               <div className="v39450-home-add-transaction__visual" aria-hidden="true">
                 <TransactionVisualScene />

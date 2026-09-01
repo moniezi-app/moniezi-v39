@@ -726,3 +726,13 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Prevents the final Demo Mode navigation from resetting the Home scroller back to Add Transaction.
 - Keeps the v39.4.79 optimized 480 × 800 demo phone illustration unchanged.
 - Bumps the PWA service-worker cache version for this release.
+
+## v39.4.81 fast Demo Net Profit landing
+
+- Removes the receipt-library IndexedDB write sequence from the blocking `Load the demo` path.
+- Publishes core demo records and receipt metadata immediately, then routes Home directly to the existing Net Profit anchor.
+- Defers receipt-blob preparation to non-blocking follow-up work so the user does not wait on roughly 135 receipt writes before seeing Home.
+- Suppresses the 500 ms Home entrance slide/fade while Demo Mode is active, making the Net Profit landing feel immediate and stable.
+- Keeps the v39.4.79 optimized 480 × 800 demo phone illustration unchanged.
+- Bumps the PWA service-worker cache version for this release.
+
