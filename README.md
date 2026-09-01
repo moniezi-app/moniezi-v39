@@ -736,3 +736,10 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Keeps the v39.4.79 optimized 480 × 800 demo phone illustration unchanged.
 - Bumps the PWA service-worker cache version for this release.
 
+## v39.5.0 Light Mode Color Refresh — Home phase 1
+
+- Refreshes the light-mode Home canvas with a clean cool-neutral background.
+- Rebuilds Net Profit as a crisp white financial card with stronger MONIEZI blue, darker typography, clearer period controls, and purposeful green/red IN/OUT accents.
+- Rebuilds Needs Your Attention as a clean white card with a stronger amber identity, clearer Insights control, and neutral working rows.
+- Removes light-mode glass haze/glow from these phase-one Home cards while leaving dark mode intentionally unchanged.
+- Preserves v39.4.81 fast Demo-to-Net-Profit landing behavior.

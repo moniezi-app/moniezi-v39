@@ -8568,3 +8568,139 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
     letter-spacing: 0.06em !important;
   }
 }
+
+/* ================================================================
+   MONIEZI v39.5.0 — Light Mode Color Refresh, Home phase 1
+   ----------------------------------------------------------------
+   First application of the stronger light palette approved from the demo
+   phone reference: clean neutral page, crisp white cards, dark readable type,
+   saturated MONIEZI blue, and deliberate semantic green/red/amber accents.
+   Dark mode is intentionally unchanged.
+   ================================================================ */
+
+/* Give Home a true neutral canvas so white cards read as distinct surfaces. */
+html:not(.dark) .v392-app-wide .v392-screen[data-page="dashboard"] {
+  background-color: #f6f8fc !important;
+}
+
+/* Phase-one cards: remove the old blue/lavender glass haze and ambient glow. */
+html:not(.dark) .v3950-home-color-refresh #home-net-profit > .v391-glass-card,
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card {
+  background: #ffffff !important;
+  border-color: #d9e2ee !important;
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.075),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Strong, consistent information hierarchy. */
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-card-title,
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-card-kpi,
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-metric__value,
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-card-title,
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-action-row__title {
+  color: #09152f !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-card-subtitle,
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-card-subtitle,
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-action-row__detail,
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-readiness-label {
+  color: #344054 !important;
+}
+
+/* Net Profit identity: a crisp blue plate instead of a washed-out tint. */
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-icon--blue {
+  --v391-tone: #1769e8;
+  --v391-tone-rgb: 23, 105, 232;
+  color: #1769e8 !important;
+  border-color: #8fb8f4 !important;
+  background: #eaf2ff !important;
+  box-shadow: 0 4px 10px rgba(23, 105, 232, 0.10) !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .text-blue-600 {
+  color: #1769e8 !important;
+}
+
+/* Period control: neutral rail, strong active state, unmistakable blue marker. */
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-segments {
+  border-color: #d6dfeb !important;
+  background: #f8fafc !important;
+  box-shadow: inset 0 1px 0 #ffffff !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-segment {
+  color: #475467 !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-segment--active {
+  border-color: #b8cff3 !important;
+  background: #ffffff !important;
+  color: #09152f !important;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.07) !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-segment__indicator {
+  background: #1769e8 !important;
+  box-shadow: none !important;
+}
+
+/* IN / OUT: semantic color belongs in the accent, not in the financial value. */
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-metric--green {
+  --v391-metric-tone: 5, 150, 105;
+  border-color: #a7dfc6 !important;
+  background: #effaf5 !important;
+  box-shadow: 0 5px 12px rgba(5, 150, 105, 0.055) !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-metric--rose {
+  --v391-metric-tone: 218, 61, 86;
+  border-color: #efb8c1 !important;
+  background: #fff3f5 !important;
+  box-shadow: 0 5px 12px rgba(218, 61, 86, 0.05) !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-metric--green .v391-glass-metric__label {
+  color: #087a58 !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh #home-net-profit .v391-glass-metric--rose .v391-glass-metric__label {
+  color: #c72f49 !important;
+}
+
+/* Attention: warm amber identity with clean, readable working rows. */
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-glass-icon--amber {
+  --v391-tone: #d99700;
+  --v391-tone-rgb: 217, 151, 0;
+  color: #d99700 !important;
+  border-color: #edc36e !important;
+  background: #fff7e5 !important;
+  box-shadow: 0 4px 10px rgba(217, 151, 0, 0.10) !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-glass-action {
+  --v391-action: 23, 105, 232;
+  border-color: #b8cff3 !important;
+  background: #f7fbff !important;
+  color: #1459c7 !important;
+  box-shadow: 0 3px 8px rgba(23, 105, 232, 0.07) !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-action-row {
+  border-color: #dfe6ef !important;
+  background: #fbfcfe !important;
+  box-shadow: none !important;
+}
+
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-readiness-row {
+  border-top-color: #e1e7ef !important;
+}
+
+/* Keep the light palette crisp on touch/hover rather than adding haze. */
+html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-action-row:hover {
+  filter: none !important;
+  background: #f7f9fc !important;
+}
