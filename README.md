@@ -743,3 +743,14 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Rebuilds Needs Your Attention as a clean white card with a stronger amber identity, clearer Insights control, and neutral working rows.
 - Removes light-mode glass haze/glow from these phase-one Home cards while leaving dark mode intentionally unchanged.
 - Preserves v39.4.81 fast Demo-to-Net-Profit landing behavior.
+
+
+## v39.5.1 Vivid Light Mode Color Refresh
+
+- Corrects the v39.5.0 light-mode pass to follow the approved demo-phone visual reference more directly.
+- Keeps Home feature cards crisp white on a cool-neutral canvas, while concentrating stronger saturated color in section icons, selected controls, semantic financial accents, and attention-status blocks.
+- Gives Net Profit a strong MONIEZI-blue identity, including a solid blue section icon, blue hero accent, and a clearly filled active period control.
+- Keeps IN and OUT financial cards white and readable while adding vivid green/red top accents and solid colored icon badges.
+- Gives Needs Your Attention a strong amber identity, a solid blue Insights action, and vivid red/amber/blue status icon blocks.
+- Extends saturated section-icon colors across the remaining Home feature cards for a more colorful, professional overall Home experience.
+- Leaves dark mode intentionally unchanged and preserves v39.4.81 fast Demo-to-Net-Profit behavior.

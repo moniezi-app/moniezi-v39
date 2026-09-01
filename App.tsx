@@ -8940,7 +8940,7 @@ html, body, #root {
       <PageErrorBoundary key={currentPage} onReset={() => setCurrentPage(Page.Dashboard)}>
 
         {(currentPage === Page.Dashboard) && (
-          <div className={`v391-dashboard v3934-home-readable v3935-home-breathing v39430-home-phase1 v3950-home-color-refresh space-y-10 sm:space-y-12 ${isDemoData ? '' : 'animate-in fade-in slide-in-from-bottom-4 duration-500'}`}>
+          <div className={`v391-dashboard v3934-home-readable v3935-home-breathing v39430-home-phase1 v3950-home-color-refresh v3951-home-vivid-refresh space-y-10 sm:space-y-12 ${isDemoData ? '' : 'animate-in fade-in slide-in-from-bottom-4 duration-500'}`}>
             <section className="v39450-home-add-transaction" aria-label="Add transaction">
               <div className="v39450-home-add-transaction__visual" aria-hidden="true">
                 <TransactionVisualScene />

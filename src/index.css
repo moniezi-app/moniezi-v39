@@ -8704,3 +8704,205 @@ html:not(.dark) .v3950-home-color-refresh .v3950-home-attention-card .v391-actio
   filter: none !important;
   background: #f7f9fc !important;
 }
+
+
+/* ================================================================
+   MONIEZI v39.5.1 — Vivid Light Mode Color Refresh
+   ----------------------------------------------------------------
+   Corrects v39.5.0 to follow the approved demo-phone reference more
+   faithfully: crisp white surfaces plus concentrated, saturated color.
+   Color lives in icons, active controls and semantic status accents rather
+   than pale tinting the entire interface. Dark mode is unchanged.
+   ================================================================ */
+
+/* Clean, slightly cool canvas like the approved reference. */
+html:not(.dark) .v392-app-wide .v392-screen[data-page="dashboard"] {
+  background-color: #f3f7fc !important;
+}
+
+/* All main Home feature cards become crisp white surfaces so color can pop. */
+html:not(.dark) .v3951-home-vivid-refresh .v39431-home-feature-card {
+  background: #ffffff !important;
+  border-color: #d5deea !important;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.075) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Stronger Home typography hierarchy. */
+html:not(.dark) .v3951-home-vivid-refresh .v391-card-title,
+html:not(.dark) .v3951-home-vivid-refresh .v391-card-kpi,
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-metric__value,
+html:not(.dark) .v3951-home-vivid-refresh .v391-action-row__title,
+html:not(.dark) .v3951-home-vivid-refresh .v391-status-title,
+html:not(.dark) .v3951-home-vivid-refresh .v391-progress-value {
+  color: #08172f !important;
+}
+
+html:not(.dark) .v3951-home-vivid-refresh .v391-card-subtitle,
+html:not(.dark) .v3951-home-vivid-refresh .v391-action-row__detail,
+html:not(.dark) .v3951-home-vivid-refresh .v391-status-detail,
+html:not(.dark) .v3951-home-vivid-refresh .v391-readiness-label {
+  color: #34445b !important;
+}
+
+/* A stronger, professional Home palette. */
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-icon--blue {
+  --v391-tone: #1769e8;
+  --v391-tone-rgb: 23, 105, 232;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-icon--cyan {
+  --v391-tone: #0891b2;
+  --v391-tone-rgb: 8, 145, 178;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-icon--teal {
+  --v391-tone: #0d9488;
+  --v391-tone-rgb: 13, 148, 136;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-icon--green {
+  --v391-tone: #10a96b;
+  --v391-tone-rgb: 16, 169, 107;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-icon--amber {
+  --v391-tone: #e8a000;
+  --v391-tone-rgb: 232, 160, 0;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-icon--rose {
+  --v391-tone: #df3e5b;
+  --v391-tone-rgb: 223, 62, 91;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-icon--violet {
+  --v391-tone: #7446e8;
+  --v391-tone-rgb: 116, 70, 232;
+}
+
+/* Reference-style section icons: real color blocks, not pale outlined tiles. */
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-icon {
+  color: #ffffff !important;
+  border-color: rgba(var(--v391-tone-rgb), 0.92) !important;
+  background: rgb(var(--v391-tone-rgb)) !important;
+  box-shadow: 0 6px 14px rgba(var(--v391-tone-rgb), 0.22) !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v391-glass-icon svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Net Profit receives an unmistakable blue financial identity. */
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit > .v391-glass-card {
+  border-top: 4px solid #1769e8 !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .text-blue-600 {
+  color: #1264dc !important;
+}
+
+/* Period selector: clean neutral rail with a genuinely blue active choice. */
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-segments {
+  border-color: #d7e0eb !important;
+  background: #f7f9fc !important;
+  box-shadow: inset 0 1px 0 #ffffff !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-segment {
+  color: #47566a !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-segment--active {
+  border-color: #1769e8 !important;
+  background: #1769e8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 12px rgba(23, 105, 232, 0.24) !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-segment--active span {
+  color: #ffffff !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-segment__indicator {
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+/* IN / OUT stay white like the reference, with concentrated vivid color. */
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-metric {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff !important;
+  border-color: #d7e0eb !important;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.07) !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-metric--green {
+  --v391-metric-tone: 11, 174, 113;
+  border-top: 4px solid #0bae71 !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-metric--rose {
+  --v391-metric-tone: 224, 61, 91;
+  border-top: 4px solid #e03d5b !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-metric__icon {
+  display: inline-grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 9px;
+  color: #ffffff !important;
+  background: rgb(var(--v391-metric-tone)) !important;
+  box-shadow: 0 4px 9px rgba(var(--v391-metric-tone), 0.20);
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-metric__icon svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-metric--green .v391-glass-metric__label {
+  color: #07885a !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh #home-net-profit .v391-glass-metric--rose .v391-glass-metric__label {
+  color: #c92f4a !important;
+}
+
+/* Needs Your Attention uses real amber, red and blue visual signals. */
+html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card {
+  border-top: 4px solid #e8a000 !important;
+}
+
+/* Make the primary Attention action a real MONIEZI-blue control. */
+html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card .v391-glass-action {
+  border-color: #1769e8 !important;
+  background: #1769e8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 12px rgba(23, 105, 232, 0.22) !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card .v391-glass-action svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Attention rows remain clean white; their status blocks carry the color. */
+html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card .v391-action-row {
+  border-color: #d9e1eb !important;
+  background: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.045) !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card .v391-action-row:hover {
+  background: #f8fbff !important;
+}
+html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card .v391-action-row__icon.bg-red-100 {
+  background: #df3e4f !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(223, 62, 79, 0.20);
+}
+html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card .v391-action-row__icon.bg-amber-100 {
+  background: #f0aa00 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(240, 170, 0, 0.20);
+}
+html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card .v391-action-row__icon.bg-blue-100 {
+  background: #1769e8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(23, 105, 232, 0.20);
+}
+html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card .v391-action-row__icon svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Retain clear, restrained card geometry while increasing visual energy. */
+html:not(.dark) .v3951-home-vivid-refresh .v391-readiness-row {
+  border-top-color: #dce3ec !important;
+}
