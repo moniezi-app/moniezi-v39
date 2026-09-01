@@ -773,3 +773,14 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Changed the Demo banner `Exit Demo` button text to white.
 - Changed the Home `Needs Your Attention` warning glyph to white on the vivid amber/yellow icon tile.
 - No illustration/image assets were added or changed.
+
+
+## v39.5.4 Primary Heading Visual Hierarchy
+
+- Keeps Plus Jakarta Sans Variable and the approved 700 weight for primary headings.
+- Fixes older phone-width rules that visually reduced Home feature-card headings to 19px even after the v39.5.3 weight change.
+- Standardizes Home primary card headings at a stronger 22–25px responsive size while retaining 700 weight.
+- Strengthens routed page, section, drawer, hamburger Menu, and modal primary-title sizing while keeping secondary copy unchanged.
+- Enlarges the Quick Add popup title from the old 22px utility treatment to a true 26–30px responsive primary heading at 700 weight.
+- Preserves the v39.5.3 white Exit Demo text, white Needs Your Attention warning glyph, and the v39.5.2 vivid light-mode color system.
+- No illustration/image assets were added or changed.

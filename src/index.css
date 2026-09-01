@@ -9339,3 +9339,97 @@ html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh .v3950-home-
   color: #ffffff !important;
   stroke: #ffffff !important;
 }
+
+
+/* ================================================================
+   MONIEZI v39.5.4 — Primary Heading Visual Hierarchy
+   ----------------------------------------------------------------
+   v39.5.3 normalized primary heading weight to 700, but several older
+   responsive rules still reduced Home/routed headings to 19–20px on
+   phone-width viewports and the Quick Add header retained a 22px utility
+   class. This release makes the approved 700-weight hierarchy visibly
+   consistent rather than only numerically consistent.
+   ================================================================ */
+
+/* Home: every primary feature-card heading gets the same visible hierarchy.
+   This explicitly outranks the older <=390px 19px fallback. */
+.v392-app-wide .v3951-home-vivid-refresh .v39431-home-feature-header .v391-card-title,
+.v392-app-wide .v3951-home-vivid-refresh .v39431-home-feature-header .v391-card-title--hero {
+  font-family: var(--font-brand, 'Plus Jakarta Sans Variable', sans-serif) !important;
+  font-size: clamp(22px, 6vw, 25px) !important;
+  line-height: 1.18 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.032em !important;
+}
+
+@media (max-width: 390px) {
+  .v392-app-wide .v3951-home-vivid-refresh .v39431-home-feature-header .v391-card-title,
+  .v392-app-wide .v3951-home-vivid-refresh .v39431-home-feature-header .v391-card-title--hero {
+    font-size: 22px !important;
+  }
+}
+
+/* Routed page heroes: keep the same 700 system and prevent the older 20px
+   phone override from making primary screen titles feel secondary. */
+.v392-app-wide .v39432-page-hero__title {
+  font-family: var(--font-brand, 'Plus Jakarta Sans Variable', sans-serif) !important;
+  font-size: clamp(22px, 5.8vw, 27px) !important;
+  line-height: 1.16 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.032em !important;
+}
+
+@media (max-width: 390px) {
+  .v392-app-wide .v39432-page-hero__title {
+    font-size: 22px !important;
+  }
+}
+
+/* Standard section and empty-state primary titles remain clearly above
+   supporting copy while using the approved 700 weight. */
+.v392-app-wide .v39-section-header__title {
+  font-size: clamp(22px, 5.6vw, 25px) !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+}
+.v392-app-wide .v39-empty-state__title {
+  font-weight: 700 !important;
+}
+
+/* Drawers, hamburger Menu and transaction/form panels: title is a true major
+   heading rather than the older compact 22px Menu treatment. */
+.v392-app-wide .moniezi-drawer-header h2,
+.v392-app-wide .v39451-main-menu-drawer .moniezi-drawer-header h2 {
+  font-family: var(--font-brand, 'Plus Jakarta Sans Variable', sans-serif) !important;
+  font-size: clamp(25px, 6.8vw, 28px) !important;
+  line-height: 1.08 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* Quick Add: explicit major popup title. This outranks both the original
+   text-[22px] utility and the older responsive Quick Add title rules. */
+.v39433-add-choice-screen .v39435-add-choice-header > div:first-child > div:first-child {
+  font-family: var(--font-brand, 'Plus Jakarta Sans Variable', sans-serif) !important;
+  font-size: clamp(26px, 7.2vw, 30px) !important;
+  line-height: 1.08 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+}
+
+@media (max-width: 390px) {
+  .v39433-add-choice-screen .v39435-add-choice-header > div:first-child > div:first-child {
+    font-size: 26px !important;
+  }
+}
+
+/* Generic modal/dialog primary titles use the same hierarchy without
+   inflating nested h3/h4 content labels. */
+.v392-app-wide .modal-overlay h2:not(.v391-card-title) {
+  font-family: var(--font-brand, 'Plus Jakarta Sans Variable', sans-serif) !important;
+  font-size: clamp(24px, 6.4vw, 28px) !important;
+  line-height: 1.12 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.028em !important;
+}
