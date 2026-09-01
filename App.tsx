@@ -8270,7 +8270,7 @@ html, body, #root {
 }
 `}</style>
       <div
-        className="moniezi-app-shell v392-app-wide v3938-tight-radius flex flex-col w-full max-w-2xl mx-auto relative bg-slatebg dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300"
+        className="moniezi-app-shell v392-app-wide v3938-tight-radius v3952-light-color-system flex flex-col w-full max-w-2xl mx-auto relative bg-slatebg dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300"
         style={{
           height: 'calc(var(--moniezi-app-vh, 1vh) * 100)',
           minHeight: 'calc(var(--moniezi-app-vh, 1vh) * 100)',

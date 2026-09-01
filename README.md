@@ -754,3 +754,12 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Gives Needs Your Attention a strong amber identity, a solid blue Insights action, and vivid red/amber/blue status icon blocks.
 - Extends saturated section-icon colors across the remaining Home feature cards for a more colorful, professional overall Home experience.
 - Leaves dark mode intentionally unchanged and preserves v39.4.81 fast Demo-to-Net-Profit behavior.
+
+
+## v39.5.2 App-wide Vivid Light Mode Color System
+
+- Fixed the Home Net Profit and Needs Your Attention icon contrast conflict left by the earlier v39.5.0 light-mode overrides.
+- Added a shared v39.5.2 light palette and applied it across routed page heroes, common card/form surfaces, semantic icon tiles, drawers, standard select/dropdown menus, and common modal surfaces.
+- Refreshed the hamburger Menu with solid color-coded icon tiles and crisp white item surfaces.
+- Refreshed Quick Add / Add Transaction with eight strong action colors while preserving the approved hero illustration and restrained geometry.
+- Dark mode is intentionally unchanged.

@@ -302,6 +302,7 @@ export function MonieziSelect({
                                   disabled={option.disabled}
                                   onClick={() => choose(option.value, option.disabled)}
                                   className={`v39461-quick-add-action ${selected ? 'is-selected' : ''} ${option.disabled ? 'is-disabled' : ''}`}
+                                  data-quick-add-action={option.value}
                                 >
                                   <span className="v39461-quick-add-action__icon" aria-hidden="true">{icon}</span>
                                   <span className="v39461-quick-add-action__title">{title}</span>

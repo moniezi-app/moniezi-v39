@@ -8906,3 +8906,375 @@ html:not(.dark) .v3951-home-vivid-refresh .v3950-home-attention-card .v391-actio
 html:not(.dark) .v3951-home-vivid-refresh .v391-readiness-row {
   border-top-color: #dce3ec !important;
 }
+
+/* ================================================================
+   MONIEZI v39.5.2 — App-wide Vivid Light Mode Color System
+   ----------------------------------------------------------------
+   Consolidates the approved vivid light direction across the full app.
+   Light mode uses crisp neutral surfaces plus concentrated saturated color.
+   Dark mode is intentionally left unchanged.
+   ================================================================ */
+
+html:not(.dark) {
+  --v3952-canvas: #f3f7fc;
+  --v3952-surface: #ffffff;
+  --v3952-surface-soft: #f7f9fc;
+  --v3952-border: #d4deea;
+  --v3952-border-strong: #c3d0df;
+  --v3952-ink: #08172f;
+  --v3952-ink-2: #34445b;
+  --v3952-muted: #617086;
+  --v3952-blue: #1769e8;
+  --v3952-blue-rgb: 23, 105, 232;
+  --v3952-green: #0bae71;
+  --v3952-green-rgb: 11, 174, 113;
+  --v3952-red: #df3e5b;
+  --v3952-red-rgb: 223, 62, 91;
+  --v3952-amber: #f0aa00;
+  --v3952-amber-rgb: 240, 170, 0;
+  --v3952-cyan: #0891b2;
+  --v3952-cyan-rgb: 8, 145, 178;
+  --v3952-teal: #0d9488;
+  --v3952-teal-rgb: 13, 148, 136;
+  --v3952-violet: #7446e8;
+  --v3952-violet-rgb: 116, 70, 232;
+}
+
+/* App canvas + normal content surfaces. */
+html:not(.dark) .v3952-light-color-system,
+html:not(.dark) .v3952-light-color-system .v392-screen {
+  background-color: var(--v3952-canvas) !important;
+}
+
+html:not(.dark) .v3952-light-color-system .v392-screen :is(section, article, aside, div)[class*="bg-white"][class*="border"][class*="rounded"]:not(.v39432-page-hero):not(.v391-glass-card):not(.v39461-quick-add-pair):not(.v39461-quick-add-hero-card) {
+  border-color: var(--v3952-border) !important;
+}
+
+html:not(.dark) .v3952-light-color-system :is(input, textarea, .v392-select-trigger)[class*="border"] {
+  background: #ffffff !important;
+  border-color: #c6d2e0 !important;
+  color: var(--v3952-ink) !important;
+}
+html:not(.dark) .v3952-light-color-system :is(input, textarea, .v392-select-trigger):focus {
+  border-color: var(--v3952-blue) !important;
+}
+
+/* Routed page heroes: white card + real feature color instead of pale washes. */
+html:not(.dark) .v3952-light-color-system .v39432-page-hero {
+  background: #ffffff !important;
+  border: 1px solid var(--v3952-border) !important;
+  border-top: 4px solid rgb(var(--v39432-tone-rgb)) !important;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.075) !important;
+}
+html:not(.dark) .v3952-light-color-system .v39432-page-hero__icon {
+  color: #ffffff !important;
+  background: rgb(var(--v39432-icon-rgb)) !important;
+  border-color: rgb(var(--v39432-icon-rgb)) !important;
+  box-shadow: 0 6px 14px rgba(var(--v39432-icon-rgb), 0.22) !important;
+}
+html:not(.dark) .v3952-light-color-system .v39432-page-hero__icon svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  filter: none !important;
+}
+html:not(.dark) .v3952-light-color-system .v39432-page-hero__icon--amber {
+  background: var(--v3952-amber) !important;
+  border-color: var(--v3952-amber) !important;
+  color: var(--v3952-ink) !important;
+}
+html:not(.dark) .v3952-light-color-system .v39432-page-hero__icon--amber svg {
+  color: var(--v3952-ink) !important;
+  stroke: var(--v3952-ink) !important;
+}
+html:not(.dark) .v3952-light-color-system .v39432-page-hero__title { color: var(--v3952-ink) !important; }
+html:not(.dark) .v3952-light-color-system .v39432-page-hero__subtitle { color: var(--v3952-ink-2) !important; }
+html:not(.dark) .v3952-light-color-system .v39432-page-hero__action {
+  border-color: var(--v3952-blue) !important;
+  background: var(--v3952-blue) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(var(--v3952-blue-rgb), 0.18) !important;
+}
+html:not(.dark) .v3952-light-color-system .v39432-page-hero__action--teal {
+  border-color: var(--v3952-teal) !important;
+  background: var(--v3952-teal) !important;
+  color: #ffffff !important;
+}
+
+/* HOME: explicitly outrank the retired v39.5.0 pale icon rules. */
+html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh #home-net-profit .v391-glass-icon.v391-glass-icon--blue {
+  color: #ffffff !important;
+  background: var(--v3952-blue) !important;
+  border-color: var(--v3952-blue) !important;
+  box-shadow: 0 6px 14px rgba(var(--v3952-blue-rgb), 0.22) !important;
+}
+html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh #home-net-profit .v391-glass-icon.v391-glass-icon--blue svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh .v3950-home-attention-card .v391-glass-icon.v391-glass-icon--amber {
+  color: var(--v3952-ink) !important;
+  background: var(--v3952-amber) !important;
+  border-color: var(--v3952-amber) !important;
+  box-shadow: 0 6px 14px rgba(var(--v3952-amber-rgb), 0.22) !important;
+}
+html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh .v3950-home-attention-card .v391-glass-icon.v391-glass-icon--amber svg {
+  color: var(--v3952-ink) !important;
+  stroke: var(--v3952-ink) !important;
+}
+
+/* All reusable Home feature icons use saturated identity tiles. */
+html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh .v391-glass-icon {
+  border-color: rgb(var(--v391-tone-rgb)) !important;
+  background: rgb(var(--v391-tone-rgb)) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 14px rgba(var(--v391-tone-rgb), 0.22) !important;
+}
+html:not(.dark) .v3952-light-color-system .v3951-home-vivid-refresh .v391-glass-icon svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Hamburger menu: clean white directory with strong color-coded icon blocks. */
+html:not(.dark) .v39451-main-menu-drawer,
+html:not(.dark) .v39451-main-menu-drawer .moniezi-drawer-header {
+  background: #ffffff !important;
+}
+html:not(.dark) .v39451-main-menu-drawer {
+  border-color: var(--v3952-border) !important;
+}
+html:not(.dark) .v39433-main-menu section {
+  border-color: #dbe3ed !important;
+}
+html:not(.dark) .v39433-main-menu section button,
+html:not(.dark) .v39433-main-menu section a {
+  background: #ffffff !important;
+  border-color: #d8e1ec !important;
+  box-shadow: none !important;
+}
+html:not(.dark) .v39433-main-menu section button > span:first-child,
+html:not(.dark) .v39433-main-menu section a > span:first-child {
+  background: rgb(var(--menu-rgb)) !important;
+  border-color: rgb(var(--menu-rgb)) !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 12px rgba(var(--menu-rgb), 0.20) !important;
+}
+html:not(.dark) .v39433-main-menu section button > span:first-child svg,
+html:not(.dark) .v39433-main-menu section a > span:first-child svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+html:not(.dark) .v39433-main-menu section button:active,
+html:not(.dark) .v39433-main-menu section a:active {
+  background: #f4f8fe !important;
+}
+html:not(.dark) .v39433-main-menu section button > span:nth-child(2),
+html:not(.dark) .v39433-main-menu section a > span:nth-child(2) {
+  color: var(--v3952-ink) !important;
+}
+html:not(.dark) .v39433-main-menu section button > span:nth-child(2) > span,
+html:not(.dark) .v39433-main-menu section a > span:nth-child(2) > span {
+  color: var(--v3952-ink-2) !important;
+}
+html:not(.dark) .v39451-main-menu-drawer .moniezi-drawer-close-button {
+  background: #eef5ff !important;
+  border: 1px solid #b9d2f7 !important;
+  color: var(--v3952-blue) !important;
+}
+
+/* Generic drawers/forms: neutral white working surface with a clear blue chrome cue. */
+html:not(.dark) .moniezi-drawer-panel:not(.v39451-main-menu-drawer) {
+  background: #ffffff !important;
+  color: var(--v3952-ink) !important;
+}
+html:not(.dark) .moniezi-drawer-panel:not(.v39451-main-menu-drawer) .moniezi-drawer-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #dbe3ed !important;
+}
+html:not(.dark) .moniezi-drawer-panel:not(.v39451-main-menu-drawer) .moniezi-drawer-close-button {
+  background: #eef5ff !important;
+  border: 1px solid #b9d2f7 !important;
+  color: var(--v3952-blue) !important;
+}
+
+/* Quick Add: vivid color lives in each action icon, not in washed-out panels. */
+html:not(.dark) .v39433-add-choice-screen {
+  background: #ffffff !important;
+  border-color: #cbd8e7 !important;
+  box-shadow: 0 20px 54px rgba(15, 23, 42, 0.20) !important;
+}
+html:not(.dark) .v39433-add-choice-screen .v39435-add-choice-header {
+  border-bottom-color: #dbe3ed !important;
+}
+html:not(.dark) .v39433-add-choice-screen .v39435-add-choice-header > div:first-child > div:first-child {
+  color: var(--v3952-ink) !important;
+}
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-hero-card {
+  background: #f6f9fe !important;
+  border-color: #cbd8e7 !important;
+}
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-pair {
+  background: #ffffff !important;
+  border-color: #d5dfea !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.045) !important;
+}
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-pair__divider {
+  background: #dce4ee !important;
+}
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action__title {
+  color: var(--v3952-ink) !important;
+}
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action__icon > * {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  border-color: transparent !important;
+  background: var(--v3952-blue) !important;
+  box-shadow: 0 5px 12px rgba(var(--v3952-blue-rgb), 0.20) !important;
+}
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action[data-quick-add-action="income"] .v39461-quick-add-action__icon > * { background: var(--v3952-green) !important; box-shadow: 0 5px 12px rgba(var(--v3952-green-rgb), 0.20) !important; }
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action[data-quick-add-action="expense"] .v39461-quick-add-action__icon > * { background: var(--v3952-red) !important; box-shadow: 0 5px 12px rgba(var(--v3952-red-rgb), 0.20) !important; }
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action[data-quick-add-action="invoice"] .v39461-quick-add-action__icon > * { background: var(--v3952-blue) !important; box-shadow: 0 5px 12px rgba(var(--v3952-blue-rgb), 0.20) !important; }
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action[data-quick-add-action="estimate"] .v39461-quick-add-action__icon > * { background: var(--v3952-violet) !important; box-shadow: 0 5px 12px rgba(var(--v3952-violet-rgb), 0.20) !important; }
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action[data-quick-add-action="mileage"] .v39461-quick-add-action__icon > * { background: var(--v3952-cyan) !important; box-shadow: 0 5px 12px rgba(var(--v3952-cyan-rgb), 0.20) !important; }
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action[data-quick-add-action="client"] .v39461-quick-add-action__icon > * { background: var(--v3952-amber) !important; color: var(--v3952-ink) !important; stroke: var(--v3952-ink) !important; box-shadow: 0 5px 12px rgba(var(--v3952-amber-rgb), 0.20) !important; }
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action[data-quick-add-action="job"] .v39461-quick-add-action__icon > * { background: var(--v3952-teal) !important; box-shadow: 0 5px 12px rgba(var(--v3952-teal-rgb), 0.20) !important; }
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action[data-quick-add-action="receipt"] .v39461-quick-add-action__icon > * { background: #0787c9 !important; box-shadow: 0 5px 12px rgba(7, 135, 201, 0.20) !important; }
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action:hover {
+  background: #f3f7fd !important;
+}
+html:not(.dark) .v39433-add-choice-screen .v39461-quick-add-action.is-selected {
+  background: #eaf2ff !important;
+}
+
+/* Portal select/dropdown menus share the same crisp system. */
+html:not(.dark) .v392-select-menu:not(.v39433-add-choice-screen) {
+  background: #ffffff !important;
+  border-color: #c7d3e1 !important;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.18) !important;
+}
+html:not(.dark) .v392-select-menu:not(.v39433-add-choice-screen) [role="option"] {
+  color: var(--v3952-ink) !important;
+}
+html:not(.dark) .v392-select-menu:not(.v39433-add-choice-screen) [role="option"]:hover {
+  background: #f1f6fd !important;
+}
+html:not(.dark) .v392-select-menu:not(.v39433-add-choice-screen) [role="option"][aria-selected="true"] {
+  background: var(--v3952-blue) !important;
+  color: #ffffff !important;
+}
+html:not(.dark) .v392-select-menu:not(.v39433-add-choice-screen) [role="option"][aria-selected="true"] * {
+  color: #ffffff !important;
+  stroke: currentColor !important;
+}
+
+/* Common semantic icon tiles across Clients, Jobs, Estimates, Invoices,
+   Mileage, Reports and forms become visible focal points. Status badges and
+   larger information panels remain lightly tinted. */
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-blue-50[class*="text-blue-"] {
+  background: var(--v3952-blue) !important; color: #ffffff !important; border-color: var(--v3952-blue) !important;
+}
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-emerald-50[class*="text-emerald-"] {
+  background: var(--v3952-green) !important; color: #ffffff !important; border-color: var(--v3952-green) !important;
+}
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-green-50[class*="text-green-"] {
+  background: var(--v3952-green) !important; color: #ffffff !important; border-color: var(--v3952-green) !important;
+}
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-red-50[class*="text-red-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-rose-50[class*="text-rose-"] {
+  background: var(--v3952-red) !important; color: #ffffff !important; border-color: var(--v3952-red) !important;
+}
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-amber-50[class*="text-amber-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-yellow-50[class*="text-yellow-"] {
+  background: var(--v3952-amber) !important; color: var(--v3952-ink) !important; border-color: var(--v3952-amber) !important;
+}
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-cyan-50[class*="text-cyan-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-sky-50[class*="text-sky-"] {
+  background: var(--v3952-cyan) !important; color: #ffffff !important; border-color: var(--v3952-cyan) !important;
+}
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-teal-50[class*="text-teal-"] {
+  background: var(--v3952-teal) !important; color: #ffffff !important; border-color: var(--v3952-teal) !important;
+}
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-purple-50[class*="text-purple-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-violet-50[class*="text-violet-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-indigo-50[class*="text-indigo-"] {
+  background: var(--v3952-violet) !important; color: #ffffff !important; border-color: var(--v3952-violet) !important;
+}
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"] > svg {
+  stroke: currentColor;
+}
+
+/* Light semantic panels retain a readable tint rather than disappearing into white. */
+html:not(.dark) .v3952-light-color-system .bg-blue-50 { background-color: #edf5ff !important; }
+html:not(.dark) .v3952-light-color-system .bg-emerald-50 { background-color: #ecfbf5 !important; }
+html:not(.dark) .v3952-light-color-system .bg-green-50 { background-color: #ecfbf5 !important; }
+html:not(.dark) .v3952-light-color-system .bg-red-50 { background-color: #fff0f3 !important; }
+html:not(.dark) .v3952-light-color-system .bg-rose-50 { background-color: #fff0f3 !important; }
+html:not(.dark) .v3952-light-color-system .bg-amber-50 { background-color: #fff8df !important; }
+html:not(.dark) .v3952-light-color-system .bg-yellow-50 { background-color: #fff8df !important; }
+html:not(.dark) .v3952-light-color-system .bg-cyan-50 { background-color: #ecfaff !important; }
+html:not(.dark) .v3952-light-color-system .bg-teal-50 { background-color: #ecfbf9 !important; }
+html:not(.dark) .v3952-light-color-system .bg-purple-50,
+html:not(.dark) .v3952-light-color-system .bg-violet-50,
+html:not(.dark) .v3952-light-color-system .bg-indigo-50 { background-color: #f4f0ff !important; }
+
+/* The solid icon-tile rules above intentionally outrank these panel tints. */
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-blue-50[class*="text-blue-"] { background: var(--v3952-blue) !important; }
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-emerald-50[class*="text-emerald-"] { background: var(--v3952-green) !important; }
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-green-50[class*="text-green-"] { background: var(--v3952-green) !important; }
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-red-50[class*="text-red-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-rose-50[class*="text-rose-"] { background: var(--v3952-red) !important; }
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-amber-50[class*="text-amber-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-yellow-50[class*="text-yellow-"] { background: var(--v3952-amber) !important; }
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-cyan-50[class*="text-cyan-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-sky-50[class*="text-sky-"] { background: var(--v3952-cyan) !important; }
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-teal-50[class*="text-teal-"] { background: var(--v3952-teal) !important; }
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-purple-50[class*="text-purple-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-violet-50[class*="text-violet-"] ,
+html:not(.dark) .v3952-light-color-system :is(div, span)[class*="items-center"][class*="justify-center"].bg-indigo-50[class*="text-indigo-"] { background: var(--v3952-violet) !important; }
+
+/* Standard modals: crisp white cards, stronger headers and controls. */
+html:not(.dark) .v3952-light-color-system .modal-overlay > :is(div, section)[class*="bg-white"][class*="rounded"] {
+  background: #ffffff !important;
+  border-color: var(--v3952-border) !important;
+  box-shadow: 0 22px 56px rgba(15, 23, 42, 0.24) !important;
+}
+html:not(.dark) .v3952-light-color-system .modal-overlay h2,
+html:not(.dark) .v3952-light-color-system .modal-overlay h3,
+html:not(.dark) .v3952-light-color-system .modal-overlay h4 {
+  color: var(--v3952-ink) !important;
+}
+
+/* Keep neutral cancel/secondary controls visibly distinct from the white card. */
+html:not(.dark) .v3952-light-color-system button.bg-slate-100,
+html:not(.dark) .v3952-light-color-system button.bg-slate-200 {
+  background: #e9eef5 !important;
+  border-color: #c9d4e1 !important;
+  color: var(--v3952-ink) !important;
+}
+
+/* Full-screen search is part of the same light visual system. */
+html:not(.dark) .v3952-light-color-system .v392-search-panel {
+  background: var(--v3952-canvas) !important;
+  color: var(--v3952-ink) !important;
+}
+html:not(.dark) .v3952-light-color-system .v392-search-header {
+  background: #ffffff !important;
+  border-bottom-color: #d7e1ec !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+html:not(.dark) .v3952-light-color-system .v392-search-group {
+  background: #ffffff !important;
+  border-color: #d5dfea !important;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.055) !important;
+}
+html:not(.dark) .v3952-light-color-system .v392-search-panel :is(div)[class*="items-center"][class*="justify-center"].bg-blue-100 { background: var(--v3952-blue) !important; color: #ffffff !important; }
+html:not(.dark) .v3952-light-color-system .v392-search-panel :is(div)[class*="items-center"][class*="justify-center"].bg-emerald-100 { background: var(--v3952-green) !important; color: #ffffff !important; }
+html:not(.dark) .v3952-light-color-system .v392-search-panel :is(div)[class*="items-center"][class*="justify-center"].bg-red-100 { background: var(--v3952-red) !important; color: #ffffff !important; }
+html:not(.dark) .v3952-light-color-system .v392-search-panel :is(div)[class*="items-center"][class*="justify-center"].bg-indigo-100,
+html:not(.dark) .v3952-light-color-system .v392-search-panel :is(div)[class*="items-center"][class*="justify-center"].bg-purple-100 { background: var(--v3952-violet) !important; color: #ffffff !important; }
+html:not(.dark) .v3952-light-color-system .v392-search-panel :is(div)[class*="items-center"][class*="justify-center"].bg-cyan-100 { background: var(--v3952-cyan) !important; color: #ffffff !important; }
+html:not(.dark) .v3952-light-color-system .v392-search-panel :is(div)[class*="items-center"][class*="justify-center"].bg-teal-100 { background: var(--v3952-teal) !important; color: #ffffff !important; }
+html:not(.dark) .v3952-light-color-system .v392-search-panel :is(div)[class*="items-center"][class*="justify-center"] > svg {
+  color: inherit !important;
+  stroke: currentColor !important;
+}
