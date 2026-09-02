@@ -9617,3 +9617,129 @@ html.moniezi-license-activation-keyboard .moniezi-license-stable-surface .v39-li
 html.moniezi-license-activation-keyboard .v3959-license-keyboard-spacer {
   display: block;
 }
+
+
+/* ================================================================
+   MONIEZI v39.5.11 — production asset cleanup (visual styles preserved from v39.5.10)
+   ----------------------------------------------------------------
+   Shortens the top pill copy so the approved 19px/700 heading can remain
+   comfortably on one line. The post-demo screen removes redundant explanatory
+   copy and rebalances the remaining phone → status → CTA → secondary action
+   as one deliberate normal-flow composition.
+   ================================================================ */
+
+/* Both first-run states use short title-case messages. Keep the established
+   19px / 700 heading contract while avoiding the oversized all-caps effect. */
+html body .v392-app-wide .v3931-first-run-kicker,
+html body .v392-app-wide .v39478-demo-entry .v3931-first-run-kicker,
+html body .v392-app-wide .v39510-post-demo-clean .v3931-first-run-kicker {
+  font-size: 19px !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.018em !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+  padding-inline: 12px !important;
+}
+
+/* Post-demo: the copy is intentionally minimal, so use the freed space for a
+   calmer, larger phone composition rather than leaving a hole where the old
+   headline/paragraph used to be. Everything remains in normal document flow. */
+.v39510-post-demo-clean {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  padding: 14px 14px 18px !important;
+  contain: layout paint !important;
+}
+
+.v39510-post-demo-clean .v3931-first-run-visual {
+  position: static !important;
+  display: flex !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 12px 0 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  contain: none !important;
+}
+
+.v39510-post-demo-clean .v3931-first-run-visual__image {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: auto !important;
+  max-width: 100% !important;
+  height: clamp(280px, calc(100dvh - 430px), 390px) !important;
+  max-height: 390px !important;
+  margin: 0 auto !important;
+  aspect-ratio: 480 / 800 !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+.v39510-post-demo-clean .v3931-first-run-content {
+  position: static !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 14px 0 0 !important;
+  text-align: center !important;
+}
+
+.v39510-post-demo-clean .v3931-first-run-title {
+  display: none !important;
+}
+
+.v39510-post-demo-clean .v3931-first-run-body {
+  max-width: none !important;
+  margin: 0 !important;
+  color: var(--v391-glass-text) !important;
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.v39510-post-demo-clean .v3931-first-run-primary {
+  width: 100% !important;
+  min-height: 50px !important;
+  margin: 16px 0 0 !important;
+}
+
+.v39510-post-demo-clean .v3931-first-run-secondary {
+  margin: 15px 0 0 !important;
+  padding: 7px 10px !important;
+}
+
+@media (max-height: 720px) {
+  .v39510-post-demo-clean .v3931-first-run-visual {
+    margin-top: 8px !important;
+  }
+
+  .v39510-post-demo-clean .v3931-first-run-visual__image {
+    height: clamp(245px, calc(100dvh - 408px), 320px) !important;
+    max-height: 320px !important;
+  }
+
+  .v39510-post-demo-clean .v3931-first-run-content {
+    padding-top: 10px !important;
+  }
+
+  .v39510-post-demo-clean .v3931-first-run-primary {
+    margin-top: 13px !important;
+  }
+
+  .v39510-post-demo-clean .v3931-first-run-secondary {
+    margin-top: 11px !important;
+  }
+}

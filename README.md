@@ -145,7 +145,7 @@
 
 ## v39.4.59 — Quick Add approved hero + compact paired actions
 
-- Replaces the previous Quick Add hero with the exact approved wide illustration direction and bundles it as `public/quick-add-hero-v39-4-59-approved.webp`.
+- Replaces the previous Quick Add hero with the exact approved wide illustration direction. The superseded historical asset is not retained in the current production package.
 - Removes extra Quick Add explanatory copy so the panel stays compact: the header keeps only **Quick Add** and the hero becomes image-led.
 - Keeps the approved structured layout: one hero card followed by four paired action rows (Income/Expense, Invoice/Estimate, Mileage/Client, Job / Project/Receipt).
 - Simplifies every Quick Add action row to icon + title only, removing the extra description lines.
@@ -168,7 +168,7 @@
 - Increases the size of all 8 Quick Add action labels so they read more prominently.
 - Expands each action block and spacing to make the Quick Add screen use the available panel area better.
 - Preserves all existing Quick Add actions and behavior: Income, Expense, Invoice, Estimate, Mileage, Client, Job / Project, and Receipt.
-- Updates the versioned hero asset reference to `public/quick-add-hero-v39-4-56-shared.webp` and updates offline precache references accordingly.
+- Updates the versioned Quick Add hero reference and offline precache references. Superseded historical hero files are not retained in the current production package.
 - Preserves navigation, Demo behavior, activation flow, menu behavior, and business logic.
 
 ## v39.4.53 — Stronger Menu copy + illustrated Quick Add categories
@@ -819,3 +819,23 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Keeps the temporary space until the keyboard-close resize restores the full VisualViewport, then removes it and restores the exact pre-focus document position.
 - Keeps the existing Android fixed/internal activation scroller and stabilization session unchanged.
 - Bumps the application and service-worker cache version to v39.5.9.
+
+
+## v39.5.10 Simplified Demo and post-demo composition
+
+- Changes the initial Demo pill copy to **Explore the demo** while keeping the approved 19px / 700 Plus Jakarta Sans heading system.
+- Changes the post-demo pill copy to **Start your own records**.
+- Removes the redundant post-demo **Start with your own business** heading and long explanatory paragraph.
+- Keeps only **The demo is cleared.** beneath the phone, followed by **Record my first entry** and **Show the demo again**.
+- Rebalances post-demo phone size and vertical spacing so the simplified content remains intentional and centered rather than leaving dead space.
+- Preserves the v39.5.9 iPhone activation viewport work and all existing image assets.
+- Bumps the application and service-worker cache version to v39.5.10.
+
+## v39.5.11 Production asset cleanup
+
+- Removes 13 obsolete, superseded illustration assets from `public/` while preserving every image currently referenced by the runtime, preload markup, manifest, or service worker.
+- Removes three byte-for-byte duplicate historical Quick Add hero files and older Demo, Quick Add, and Welcome illustration versions that are no longer used.
+- Keeps the active Demo phone, active light/dark Quick Add heroes, current Welcome hero, empty-state illustrations, transaction illustration, favicons, and required PWA icon set unchanged.
+- Keeps runtime behavior and visuals identical to v39.5.10; this release is package cleanup only.
+- Bumps the application and service-worker cache version to v39.5.11.
+

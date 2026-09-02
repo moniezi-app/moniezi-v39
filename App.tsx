@@ -1477,7 +1477,7 @@ export default function App() {
     const fontSet = (document as any).fonts;
     const fontsReady = fontSet?.load
       ? Promise.all([
-          Promise.resolve(fontSet.load('700 19px "Plus Jakarta Sans Variable"', 'Explore before you start')).catch(() => undefined),
+          Promise.resolve(fontSet.load('700 19px "Plus Jakarta Sans Variable"', 'Explore the demo')).catch(() => undefined),
                   ])
           .then(() => fontSet.ready ? Promise.resolve(fontSet.ready).catch(() => undefined) : undefined)
           .then(() => undefined)
@@ -9009,15 +9009,15 @@ html, body, #root {
           Luminous Glass hierarchy as the rest of the dashboard. */}
       {isAppEmpty && !isDemoData && !installGateActive && currentPage === Page.Dashboard && (
         <div className="mb-6">
-          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39478-demo-entry' : ''}`}>
+          <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39478-demo-entry' : 'v39510-post-demo-clean'}`}>
             <div className="v3931-first-run-kicker">
-              <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>
+              <span>{hasTriedSampleData ? 'Start your own records' : 'Explore the demo'}</span>
             </div>
 
             <div className="v3931-first-run-visual">
               <img
                 src={hasTriedSampleData ? postDemoHeroSrc : firstRunHeroSrc}
-                alt={hasTriedSampleData ? "A MONIEZI dashboard surrounded by receipts, reports, mileage, and business records" : "A clean MONIEZI business dashboard shown on a single phone"}
+                alt={hasTriedSampleData ? "A MONIEZI business dashboard shown on a single phone, ready for your own records" : "A clean MONIEZI business dashboard shown on a single phone"}
                 className="v3931-first-run-visual__image"
                 width={480}
                 height={800}
@@ -9029,13 +9029,7 @@ html, body, #root {
 
             <div className="v3931-first-run-content">
               {hasTriedSampleData && (
-                <h3 className="v3931-first-run-title">Start with your own business</h3>
-              )}
-
-              {hasTriedSampleData && (
-                <p className="v3931-first-run-body">
-                  The demo is cleared. Record your first real entry and start building your own records.
-                </p>
+                <p className="v3931-first-run-body">The demo is cleared.</p>
               )}
 
               <button
