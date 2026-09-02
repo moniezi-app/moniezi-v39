@@ -839,3 +839,11 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Keeps runtime behavior and visuals identical to v39.5.10; this release is package cleanup only.
 - Bumps the application and service-worker cache version to v39.5.11.
 
+## v39.5.12 Brand-preserving Back navigation
+
+- Keeps the MONIEZI logo permanently visible in the top-left of the app header on every screen.
+- Moves the existing history-aware Back control out of the brand slot into a compact navigation row directly below the header.
+- Preserves the existing Back behavior and browser-history integration; no Forward control is added.
+- Keeps the row intentionally thin so it does not consume unnecessary vertical space or interfere with page content.
+- Preserves the v39.5.11 cleaned production asset set with no image changes.
+- Bumps the application and service-worker cache version to v39.5.12.
