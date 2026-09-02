@@ -107,6 +107,7 @@ import { buildGlobalSearchGroups, type GlobalSearchResult } from './src/features
 import { TransactionEditorShell } from './src/features/transactions/TransactionEditorShell';
 import { useKeyboardEditingState } from './src/hooks/useKeyboardEditingState';
 import { useKeyboardSafeScroll } from './src/hooks/useKeyboardSafeScroll';
+import { isAppleMobileDevice } from './src/mobile/inputDetection';
 import { buildHash, normalizePage, pageToHashPath, parseHashLocation } from './src/navigation/hashRouting';
 import { createEmptyMileageDraft, normalizeMileageDraftMiles, toMileageTripPayload } from './src/features/mileage/draft';
 import { CompanyEquityModule } from './src/features/equity/CompanyEquityModule';
@@ -1413,6 +1414,7 @@ export default function App() {
   // but after that we hold the same internal scroll position through keyboard
   // close/validation so the screen does not jump or re-anchor.
   const licenseGateRef = useRef<HTMLDivElement>(null);
+  const licenseInputRef = useRef<HTMLInputElement>(null);
   const licenseViewportSessionRef = useRef(false);
   const licenseViewportLockedScrollRef = useRef<number | null>(null);
   const licenseViewportSettleTimerRef = useRef<number | null>(null);
@@ -1510,16 +1512,55 @@ export default function App() {
     });
   }, []);
 
+  const revealLicenseInputOnApple = useCallback(() => {
+    if (!isAppleMobileDevice()) return;
+
+    const gate = licenseGateRef.current;
+    const input = licenseInputRef.current;
+    if (!gate || !input) return;
+
+    const viewport = window.visualViewport;
+    const visibleHeight = viewport?.height || window.innerHeight;
+    const viewportTop = viewport?.offsetTop || 0;
+    const inputRect = input.getBoundingClientRect();
+
+    // iPhone Safari overlays the software keyboard on the visual viewport while
+    // the activation surface itself is a fixed internal scroller. Place the
+    // focused license field in the upper-middle of the visible viewport instead
+    // of allowing the keyboard to cover the whole activation form.
+    const targetTop = viewportTop + Math.max(118, Math.min(visibleHeight * 0.32, 220));
+    const delta = inputRect.top - targetTop;
+    const maxScrollTop = Math.max(0, gate.scrollHeight - gate.clientHeight);
+    const nextTop = Math.max(0, Math.min(maxScrollTop, gate.scrollTop + delta));
+
+    if (Math.abs(gate.scrollTop - nextTop) > 1) gate.scrollTop = nextTop;
+    licenseViewportLockedScrollRef.current = gate.scrollTop;
+  }, []);
+
   const beginLicenseViewportSession = useCallback(() => {
     licenseViewportSessionRef.current = true;
     licenseViewportLockedScrollRef.current = null;
     if (licenseViewportSettleTimerRef.current !== null) {
       window.clearTimeout(licenseViewportSettleTimerRef.current);
     }
+
+    if (isAppleMobileDevice()) {
+      // WebKit reports several VisualViewport sizes while the keyboard animates.
+      // Re-position after each stage so the field remains visibly editable.
+      window.setTimeout(revealLicenseInputOnApple, 60);
+      window.setTimeout(revealLicenseInputOnApple, 180);
+      licenseViewportSettleTimerRef.current = window.setTimeout(() => {
+        revealLicenseInputOnApple();
+        licenseViewportLockedScrollRef.current = licenseGateRef.current?.scrollTop || 0;
+      }, 360);
+      return;
+    }
+
+    // Preserve the existing Android/Chrome activation stabilization behavior.
     licenseViewportSettleTimerRef.current = window.setTimeout(() => {
       licenseViewportLockedScrollRef.current = licenseGateRef.current?.scrollTop || 0;
     }, 260);
-  }, []);
+  }, [revealLicenseInputOnApple]);
 
   useEffect(() => {
     if (isLicenseValid !== false) {
@@ -1543,6 +1584,11 @@ export default function App() {
 
     const holdActivationScroll = () => {
       if (!licenseViewportSessionRef.current) return;
+
+      if (isAppleMobileDevice()) {
+        requestAnimationFrame(revealLicenseInputOnApple);
+        return;
+      }
 
       if (licenseViewportLockedScrollRef.current === null) {
         if (licenseViewportSettleTimerRef.current !== null) {
@@ -1570,7 +1616,7 @@ export default function App() {
       viewport.removeEventListener('resize', holdActivationScroll);
       viewport.removeEventListener('scroll', holdActivationScroll);
     };
-  }, [isLicenseValid, ensureFirstHomeAssetsReady]);
+  }, [isLicenseValid, ensureFirstHomeAssetsReady, revealLicenseInputOnApple]);
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -7913,6 +7959,7 @@ export default function App() {
               <div className="v39-license-input-wrap">
                 <input
                   id="moniezi-license-key"
+                  ref={licenseInputRef}
                   type="text"
                   value={licenseKey}
                   onChange={(e) => { setLicenseKey(e.target.value); setLicenseActivationSucceeded(false); setLicenseError(''); }}

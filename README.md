@@ -794,11 +794,11 @@ This build fixes the production placement of the approved Invoice and Estimate i
 
 
 
-## v39.5.6 Single-line first-run hero + clearer license field
+## v39.5.7 Single-line first-run hero + clearer license field
 
 - Keeps the first-run/post-demo hero labels at the approved Plus Jakarta Sans Variable 19px / 700 typography while forcing each label onto one line.
 - Removes the decorative play-circle icon so the heading can use the full pill width without shrinking.
 - Reduces hero-label tracking and internal horizontal padding while preserving the uppercase treatment.
 - Updates the first-Home font preload to the actual 700 / 19px face used by the hero label.
 - Gives the activation license-key input a restrained 1px light-blue border and a clearer blue focus state.
-- Bumps the application and service-worker cache version to v39.5.6.
+- Bumps the application and service-worker cache version to v39.5.7.
