@@ -1467,7 +1467,7 @@ export default function App() {
     const fontSet = (document as any).fonts;
     const fontsReady = fontSet?.load
       ? Promise.all([
-          Promise.resolve(fontSet.load('600 18px "Plus Jakarta Sans Variable"', 'Explore before you start')).catch(() => undefined),
+          Promise.resolve(fontSet.load('700 19px "Plus Jakarta Sans Variable"', 'Explore before you start')).catch(() => undefined),
                   ])
           .then(() => fontSet.ready ? Promise.resolve(fontSet.ready).catch(() => undefined) : undefined)
           .then(() => undefined)
@@ -8890,7 +8890,6 @@ html, body, #root {
         <div className="mb-6">
           <MonieziGlassCard hero className={`v3931-first-run-card ${!hasTriedSampleData ? 'v39478-demo-entry' : ''}`}>
             <div className="v3931-first-run-kicker">
-              <span className="v3931-first-run-kicker__icon"><PlayCircle size={18} strokeWidth={2} /></span>
               <span>{hasTriedSampleData ? 'Ready for your first records' : 'Explore before you start'}</span>
             </div>
 
