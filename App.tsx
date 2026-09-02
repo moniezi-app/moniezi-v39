@@ -1414,10 +1414,19 @@ export default function App() {
   // but after that we hold the same internal scroll position through keyboard
   // close/validation so the screen does not jump or re-anchor.
   const licenseGateRef = useRef<HTMLDivElement>(null);
+  const licenseInputRef = useRef<HTMLInputElement>(null);
+  const licenseKeyboardSpacerRef = useRef<HTMLDivElement>(null);
   const licenseViewportSessionRef = useRef(false);
   const licenseViewportLockedScrollRef = useRef<number | null>(null);
   const licenseViewportSettleTimerRef = useRef<number | null>(null);
   const licenseFullViewportHeightRef = useRef(0);
+  const appleLicenseViewportSessionRef = useRef<{
+    baselineVisualHeight: number;
+    restoreScrollY: number;
+    focused: boolean;
+    revealed: boolean;
+    revealFrame: number | null;
+  } | null>(null);
 
   // v39.4.38: the first Home frame must be complete before the activation gate
   // disappears. Pre-decode the first-run artwork (and wait for the bundled font)
@@ -1511,11 +1520,41 @@ export default function App() {
     });
   }, []);
 
+  const finishAppleLicenseViewportSession = useCallback((restorePosition: boolean) => {
+    const session = appleLicenseViewportSessionRef.current;
+    if (!session) return;
+
+    if (session.revealFrame !== null) cancelAnimationFrame(session.revealFrame);
+    licenseKeyboardSpacerRef.current?.style.removeProperty('height');
+    document.documentElement.classList.remove('moniezi-license-activation-keyboard');
+    document.body.classList.remove('moniezi-license-activation-keyboard');
+    appleLicenseViewportSessionRef.current = null;
+
+    if (restorePosition) {
+      // Force the spacer removal into layout before restoring the document to
+      // the exact position it had before the keyboard session.
+      licenseGateRef.current?.getBoundingClientRect();
+      window.scrollTo({ left: 0, top: session.restoreScrollY, behavior: 'auto' });
+    }
+  }, []);
+
   const beginLicenseViewportSession = useCallback(() => {
-    // v39.5.8: Apple activation is a normal document scroller. WebKit must own
-    // the focus/keyboard scroll from start to finish, with no internal scroll
-    // lock, timer, or VisualViewport correction competing with it.
-    if (isAppleMobileDevice()) return;
+    if (isAppleMobileDevice()) {
+      if (appleLicenseViewportSessionRef.current) return;
+
+      const viewport = window.visualViewport;
+      appleLicenseViewportSessionRef.current = {
+        baselineVisualHeight: viewport?.height || window.innerHeight,
+        restoreScrollY: window.scrollY || window.pageYOffset || 0,
+        focused: true,
+        revealed: false,
+        revealFrame: null,
+      };
+      licenseKeyboardSpacerRef.current?.style.removeProperty('height');
+      document.documentElement.classList.add('moniezi-license-activation-keyboard');
+      document.body.classList.add('moniezi-license-activation-keyboard');
+      return;
+    }
 
     licenseViewportSessionRef.current = true;
     licenseViewportLockedScrollRef.current = null;
@@ -1528,6 +1567,19 @@ export default function App() {
       licenseViewportLockedScrollRef.current = licenseGateRef.current?.scrollTop || 0;
     }, 260);
   }, []);
+
+  const endLicenseViewportSession = useCallback(() => {
+    if (!isAppleMobileDevice()) return;
+
+    const session = appleLicenseViewportSessionRef.current;
+    if (!session) return;
+    session.focused = false;
+
+    const viewport = window.visualViewport;
+    if (!viewport || viewport.height >= session.baselineVisualHeight - 3) {
+      finishAppleLicenseViewportSession(true);
+    }
+  }, [finishAppleLicenseViewportSession]);
 
   useEffect(() => {
     if (isLicenseValid !== false) {
@@ -1549,9 +1601,58 @@ export default function App() {
     }
     void ensureFirstHomeAssetsReady();
 
-    // Apple uses the document scroll architecture below; the legacy viewport
-    // listener remains Android-only.
-    if (!viewport || isAppleMobileDevice()) return;
+    if (isAppleMobileDevice()) {
+      if (!viewport) return () => finishAppleLicenseViewportSession(true);
+
+      const handleAppleLicenseViewportResize = () => {
+        const session = appleLicenseViewportSessionRef.current;
+        if (!session) return;
+
+        const keyboardSpace = Math.max(0, Math.round(session.baselineVisualHeight - viewport.height));
+
+        // iOS can dismiss the keyboard while leaving the input as the active
+        // element. Treat the real full-height resize as the end of the session
+        // once a keyboard reveal has occurred, even if blur was not dispatched.
+        if (session.revealed && keyboardSpace <= 3) {
+          session.focused = false;
+          finishAppleLicenseViewportSession(true);
+          return;
+        }
+
+        if (!session.focused) {
+          // Blur happens before WebKit finishes expanding the VisualViewport.
+          // Keep the spacer in place until the real close resize reaches the
+          // original height, then restore the pre-focus document position once.
+          if (keyboardSpace <= 3) finishAppleLicenseViewportSession(true);
+          return;
+        }
+
+        if (Math.abs((viewport.scale || 1) - 1) > 0.01 || keyboardSpace < 120) return;
+
+        // The spacer creates genuine document scroll range equal to the portion
+        // covered by the software keyboard. It is committed before the one reveal
+        // operation so scrollIntoView can center the input in the VisualViewport.
+        licenseKeyboardSpacerRef.current?.style.setProperty('height', `${keyboardSpace}px`);
+
+        if (session.revealed) return;
+        session.revealed = true;
+        session.revealFrame = requestAnimationFrame(() => {
+          session.revealFrame = null;
+          const input = licenseInputRef.current;
+          if (!session.focused || document.activeElement !== input) return;
+          input?.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'nearest' });
+        });
+      };
+
+      viewport.addEventListener('resize', handleAppleLicenseViewportResize);
+      return () => {
+        viewport.removeEventListener('resize', handleAppleLicenseViewportResize);
+        finishAppleLicenseViewportSession(true);
+      };
+    }
+
+    // Preserve the legacy fixed/internal viewport listener on Android only.
+    if (!viewport) return;
 
     const holdActivationScroll = () => {
       if (!licenseViewportSessionRef.current) return;
@@ -1582,7 +1683,7 @@ export default function App() {
       viewport.removeEventListener('resize', holdActivationScroll);
       viewport.removeEventListener('scroll', holdActivationScroll);
     };
-  }, [isLicenseValid, ensureFirstHomeAssetsReady]);
+  }, [isLicenseValid, ensureFirstHomeAssetsReady, finishAppleLicenseViewportSession]);
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -7928,10 +8029,12 @@ export default function App() {
               <div className="v39-license-input-wrap">
                 <input
                   id="moniezi-license-key"
+                  ref={licenseInputRef}
                   type="text"
                   value={licenseKey}
                   onChange={(e) => { setLicenseKey(e.target.value); setLicenseActivationSucceeded(false); setLicenseError(''); }}
                   onFocus={beginLicenseViewportSession}
+                  onBlur={endLicenseViewportSession}
                   onKeyDown={(e) => e.key === 'Enter' && handleActivateLicense()}
                   placeholder="Enter your license key"
                   className="v39-license-input v39468-license-input"
@@ -8002,6 +8105,9 @@ export default function App() {
             </div>
           </section>
         </main>
+        {isAppleMobileDevice() && (
+          <div ref={licenseKeyboardSpacerRef} className="v3959-license-keyboard-spacer" aria-hidden="true" />
+        )}
       </div>
     );
   }

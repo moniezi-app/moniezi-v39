@@ -810,3 +810,12 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Decouples the Apple activation gate from `--moniezi-app-vh` keyboard-height geometry, while retaining the shared keyboard state hook for the rest of the application.
 - Keeps the Welcome composition unchanged before focus and retains a 16px mobile license-input size to prevent iOS focus zoom.
 - Bumps the application and service-worker cache version to v39.5.8.
+
+## v39.5.9 Real iPhone VisualViewport activation flow
+
+- Audits and releases the complete Apple activation ancestor chain (`html`, `body`, `#root`, activation gate, and activation shell) from fixed-height, fixed-position, overflow, and body-lock constraints only while the license input is focused.
+- Uses the real Apple `visualViewport.resize` event to measure the software-keyboard height loss and adds that exact amount as temporary document space below the activation content.
+- Performs one `scrollIntoView({ block: "center" })` operation after the keyboard resize has created real scroll range; no Apple timer chain or repeated scroll correction is used.
+- Keeps the temporary space until the keyboard-close resize restores the full VisualViewport, then removes it and restores the exact pre-focus document position.
+- Keeps the existing Android fixed/internal activation scroller and stabilization session unchanged.
+- Bumps the application and service-worker cache version to v39.5.9.
