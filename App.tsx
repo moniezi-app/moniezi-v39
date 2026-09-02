@@ -1414,7 +1414,6 @@ export default function App() {
   // but after that we hold the same internal scroll position through keyboard
   // close/validation so the screen does not jump or re-anchor.
   const licenseGateRef = useRef<HTMLDivElement>(null);
-  const licenseInputRef = useRef<HTMLInputElement>(null);
   const licenseViewportSessionRef = useRef(false);
   const licenseViewportLockedScrollRef = useRef<number | null>(null);
   const licenseViewportSettleTimerRef = useRef<number | null>(null);
@@ -1512,55 +1511,23 @@ export default function App() {
     });
   }, []);
 
-  const revealLicenseInputOnApple = useCallback(() => {
-    if (!isAppleMobileDevice()) return;
-
-    const gate = licenseGateRef.current;
-    const input = licenseInputRef.current;
-    if (!gate || !input) return;
-
-    const viewport = window.visualViewport;
-    const visibleHeight = viewport?.height || window.innerHeight;
-    const viewportTop = viewport?.offsetTop || 0;
-    const inputRect = input.getBoundingClientRect();
-
-    // iPhone Safari overlays the software keyboard on the visual viewport while
-    // the activation surface itself is a fixed internal scroller. Place the
-    // focused license field in the upper-middle of the visible viewport instead
-    // of allowing the keyboard to cover the whole activation form.
-    const targetTop = viewportTop + Math.max(118, Math.min(visibleHeight * 0.32, 220));
-    const delta = inputRect.top - targetTop;
-    const maxScrollTop = Math.max(0, gate.scrollHeight - gate.clientHeight);
-    const nextTop = Math.max(0, Math.min(maxScrollTop, gate.scrollTop + delta));
-
-    if (Math.abs(gate.scrollTop - nextTop) > 1) gate.scrollTop = nextTop;
-    licenseViewportLockedScrollRef.current = gate.scrollTop;
-  }, []);
-
   const beginLicenseViewportSession = useCallback(() => {
+    // v39.5.8: Apple activation is a normal document scroller. WebKit must own
+    // the focus/keyboard scroll from start to finish, with no internal scroll
+    // lock, timer, or VisualViewport correction competing with it.
+    if (isAppleMobileDevice()) return;
+
     licenseViewportSessionRef.current = true;
     licenseViewportLockedScrollRef.current = null;
     if (licenseViewportSettleTimerRef.current !== null) {
       window.clearTimeout(licenseViewportSettleTimerRef.current);
     }
 
-    if (isAppleMobileDevice()) {
-      // WebKit reports several VisualViewport sizes while the keyboard animates.
-      // Re-position after each stage so the field remains visibly editable.
-      window.setTimeout(revealLicenseInputOnApple, 60);
-      window.setTimeout(revealLicenseInputOnApple, 180);
-      licenseViewportSettleTimerRef.current = window.setTimeout(() => {
-        revealLicenseInputOnApple();
-        licenseViewportLockedScrollRef.current = licenseGateRef.current?.scrollTop || 0;
-      }, 360);
-      return;
-    }
-
     // Preserve the existing Android/Chrome activation stabilization behavior.
     licenseViewportSettleTimerRef.current = window.setTimeout(() => {
       licenseViewportLockedScrollRef.current = licenseGateRef.current?.scrollTop || 0;
     }, 260);
-  }, [revealLicenseInputOnApple]);
+  }, []);
 
   useEffect(() => {
     if (isLicenseValid !== false) {
@@ -1573,22 +1540,21 @@ export default function App() {
       return;
     }
 
-    const viewport = window.visualViewport;
-    if (!viewport) return;
-
     // Capture the pre-keyboard visual viewport and start decoding Home assets in
     // parallel with license entry/validation. The maximum is retained once the
     // keyboard opens so successful activation can wait for the viewport to return.
-    licenseFullViewportHeightRef.current = Math.max(licenseFullViewportHeightRef.current, viewport.height);
+    const viewport = window.visualViewport;
+    if (viewport) {
+      licenseFullViewportHeightRef.current = Math.max(licenseFullViewportHeightRef.current, viewport.height);
+    }
     void ensureFirstHomeAssetsReady();
+
+    // Apple uses the document scroll architecture below; the legacy viewport
+    // listener remains Android-only.
+    if (!viewport || isAppleMobileDevice()) return;
 
     const holdActivationScroll = () => {
       if (!licenseViewportSessionRef.current) return;
-
-      if (isAppleMobileDevice()) {
-        requestAnimationFrame(revealLicenseInputOnApple);
-        return;
-      }
 
       if (licenseViewportLockedScrollRef.current === null) {
         if (licenseViewportSettleTimerRef.current !== null) {
@@ -1616,7 +1582,7 @@ export default function App() {
       viewport.removeEventListener('resize', holdActivationScroll);
       viewport.removeEventListener('scroll', holdActivationScroll);
     };
-  }, [isLicenseValid, ensureFirstHomeAssetsReady, revealLicenseInputOnApple]);
+  }, [isLicenseValid, ensureFirstHomeAssetsReady]);
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -7898,7 +7864,10 @@ export default function App() {
   // v39.0.4: approved light-mode welcome screen with the selected two-character illustration style.
   if (LICENSING_ENABLED && isLicenseValid === false) {
     return (
-      <div ref={licenseGateRef} className="license-gate v39-license-gate moniezi-license-stable-surface">
+      <div
+        ref={licenseGateRef}
+        className={`license-gate v39-license-gate moniezi-license-stable-surface${isAppleMobileDevice() ? ' v3958-license-gate--apple-document-flow' : ''}`}
+      >
         <div className="v39-license-backdrop" aria-hidden="true" />
 
         <main className="v39-license-shell">
@@ -7959,7 +7928,6 @@ export default function App() {
               <div className="v39-license-input-wrap">
                 <input
                   id="moniezi-license-key"
-                  ref={licenseInputRef}
                   type="text"
                   value={licenseKey}
                   onChange={(e) => { setLicenseKey(e.target.value); setLicenseActivationSucceeded(false); setLicenseError(''); }}

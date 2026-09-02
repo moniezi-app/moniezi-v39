@@ -802,3 +802,11 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Updates the first-Home font preload to the actual 700 / 19px face used by the hero label.
 - Gives the activation license-key input a restrained 1px light-blue border and a clearer blue focus state.
 - Bumps the application and service-worker cache version to v39.5.7.
+
+## v39.5.8 Native iPhone activation keyboard scrolling
+
+- Replaces the fixed, internally scrolling activation gate with normal document flow on Apple mobile devices while leaving the established Android/Chrome activation behavior intact.
+- Removes the Apple-only VisualViewport resize/scroll corrections, delayed reveal timers, and forced activation `scrollTop` writes that competed with Safari's native focused-input scrolling.
+- Decouples the Apple activation gate from `--moniezi-app-vh` keyboard-height geometry, while retaining the shared keyboard state hook for the rest of the application.
+- Keeps the Welcome composition unchanged before focus and retains a 16px mobile license-input size to prevent iOS focus zoom.
+- Bumps the application and service-worker cache version to v39.5.8.

@@ -8286,7 +8286,7 @@ html:not(.dark) .v392-app-wide .v392-screen [class*="text-slate-600/"] {
 
   .moniezi-license-stable-surface .v39468-license-input {
     padding-inline: 12px !important;
-    font-size: 15px !important;
+    font-size: 16px !important;
   }
 
   .v39468-license-assurance {
@@ -9542,19 +9542,24 @@ html body .v392-app-wide .v3931-first-run-kicker > span {
 }
 
 /* ================================================================
-   MONIEZI v39.5.7 — iPhone activation keyboard visibility fix
+   MONIEZI v39.5.8 — native Apple activation viewport flow
    ----------------------------------------------------------------
-   iOS Safari overlays the software keyboard on the VisualViewport. The
-   activation screen is intentionally a fixed internal scroll surface, so the
-   focused license field must be kept inside the reduced visible viewport.
-   Android/Chrome keeps the existing stable activation behavior unchanged.
+   The Android activation gate keeps its fixed internal scroll surface and
+   stabilization session. On Apple mobile, the entire activation gate stays in
+   normal document flow so Safari/PWA focus scrolling can move the license field
+   above the software keyboard without fighting fixed geometry or scroll locks.
    ================================================================ */
-html.moniezi-keyboard-editing .moniezi-license-stable-surface.v39-license-gate,
-body.moniezi-keyboard-editing .moniezi-license-stable-surface.v39-license-gate {
-  bottom: auto !important;
-  height: calc(var(--moniezi-app-vh, 1vh) * 100) !important;
-  min-height: calc(var(--moniezi-app-vh, 1vh) * 100) !important;
-  max-height: calc(var(--moniezi-app-vh, 1vh) * 100) !important;
-  scroll-padding-top: 110px;
-  scroll-padding-bottom: 28px;
+.moniezi-license-stable-surface.v39-license-gate.v3958-license-gate--apple-document-flow {
+  position: relative !important;
+  inset: auto !important;
+  height: auto !important;
+  min-height: 100svh !important;
+  max-height: none !important;
+  overflow: visible !important;
+  overscroll-behavior-y: auto;
+  -webkit-overflow-scrolling: auto;
+}
+
+.v3958-license-gate--apple-document-flow .v39468-license-input {
+  scroll-margin-block: 24px 32px;
 }
