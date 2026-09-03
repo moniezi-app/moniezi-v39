@@ -9821,3 +9821,27 @@ html body .v392-app-wide .v39510-post-demo-clean .v3931-first-run-kicker {
 .v39513-app-header .v39513-header-back:active {
   color: #ffffff !important;
 }
+
+/* ==========================================================================
+   MONIEZI v39.5.15 — Persistent Home Back affordance
+   - Keep the Back glyph visible on the initial Home entry so header geometry
+     and visual balance stay identical across root and drill-down screens.
+   - Root Home Back is intentionally disabled and subdued; it becomes full
+     strength and interactive only when MONIEZI history depth is greater than 0.
+   ========================================================================== */
+.v39513-app-header .v39515-header-back-disabled,
+.v39513-app-header .v39515-header-back-disabled:hover,
+.v39513-app-header .v39515-header-back-disabled:focus,
+.v39513-app-header .v39515-header-back-disabled:active {
+  color: #f8fafc !important;
+  opacity: 0.48;
+  cursor: default;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.v39513-app-header .v39515-header-back-disabled svg,
+.v39513-app-header .v39515-header-back-disabled svg * {
+  color: #f8fafc !important;
+  stroke: currentColor !important;
+}

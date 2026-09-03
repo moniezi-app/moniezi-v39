@@ -864,3 +864,11 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Preserves the existing 44 px invisible tap target, position, branding layout, and navigation behavior.
 - No image assets changed.
 - Bumps the application and service-worker cache version to v39.5.14.
+
+## v39.5.15 Persistent Home Back affordance
+
+- Keeps the plain header Back arrow visible on the initial Home entry so the MONIEZI header keeps the same balanced geometry on root and drill-down screens.
+- On initial Home, Back is disabled, non-interactive, and shown at reduced opacity so it does not imply that navigation is available.
+- When MONIEZI history exists, the same arrow becomes full-strength and retains the existing history-aware Back behavior.
+- No layout, image, or navigation-stack behavior changes beyond the root-screen visual affordance.
+- Bumps the application and service-worker cache version to v39.5.15.

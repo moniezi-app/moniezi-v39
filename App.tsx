@@ -8913,19 +8913,17 @@ html, body, #root {
       >
         <div className="v39513-header-left flex min-w-0 items-center">
           <div className="v39513-back-slot flex h-11 w-11 flex-shrink-0 items-center justify-center">
-            {showInAppBack ? (
-              <button
-                type="button"
-                onClick={handleAppBack}
-                aria-label="Go back"
-                title="Back"
-                className="v39513-header-back flex h-11 w-11 items-center justify-center border-0 bg-transparent p-0 text-slate-200 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/80"
-              >
-                <ArrowLeft size={23} strokeWidth={2} />
-              </button>
-            ) : (
-              <span className="block h-11 w-11" aria-hidden="true" />
-            )}
+            <button
+              type="button"
+              onClick={showInAppBack ? handleAppBack : undefined}
+              disabled={!showInAppBack}
+              aria-disabled={!showInAppBack}
+              aria-label={showInAppBack ? 'Go back' : 'Back unavailable'}
+              title={showInAppBack ? 'Back' : undefined}
+              className={`v39513-header-back flex h-11 w-11 items-center justify-center border-0 bg-transparent p-0 text-slate-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/80 ${showInAppBack ? 'hover:text-white' : 'v39515-header-back-disabled'}`}
+            >
+              <ArrowLeft size={23} strokeWidth={2} />
+            </button>
           </div>
           <div className="v39513-header-brand flex-shrink-0">
             <Logo onClick={() => setCurrentPage(Page.Dashboard)} onDarkSurface={useDarkChrome} />
