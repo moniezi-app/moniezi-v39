@@ -9748,3 +9748,54 @@ html body .v392-app-wide .v39510-post-demo-clean .v3931-first-run-kicker {
    MONIEZI v39.5.12 — brand-preserving Back navigation
    The compact Back row is styled via shared utility classes in App.tsx.
    ========================================================================== */
+
+/* ==========================================================================\n   MONIEZI v39.5.13 — Back control inside the permanent brand header\n   - The MONIEZI logo/wordmark remains visible on every screen.\n   - Back uses a 44px touch target with no visible circle, border, or fill.\n   - The back slot is reserved even on root screens so the brand does not jump.\n   ========================================================================== */
+.v39513-app-header {
+  column-gap: 6px;
+}
+
+.v39513-header-left {
+  gap: 2px;
+}
+
+.v39513-header-back {
+  border-radius: 6px;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.v39513-header-back:hover,
+.v39513-header-back:active {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 370px) {
+  .v39513-app-header {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    column-gap: 3px;
+  }
+
+  .v39513-header-left {
+    gap: 0;
+  }
+
+  .v39513-header-actions {
+    gap: 3px !important;
+  }
+
+  .v39513-header-actions > button {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .v39513-header-brand .font-brand {
+    font-size: 15px !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .v39513-header-brand > div {
+    gap: 6px !important;
+  }
+}

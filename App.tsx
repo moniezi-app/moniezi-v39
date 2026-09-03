@@ -8908,11 +8908,30 @@ html, body, #root {
       )}
 
       <header 
-        className={`dark-chrome no-print flex items-center justify-between px-4 sm:px-6 md:px-8 pb-4 sm:pb-6 sticky top-0 backdrop-blur-xl z-50 transition-colors duration-300 ${isKeyboardEditing ? 'opacity-0 pointer-events-none' : 'opacity-100'} ${useDarkChrome ? 'bg-slate-950 border-b border-slate-800' : 'bg-slatebg/90 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800'}`}
+        className={`v39513-app-header dark-chrome no-print flex items-center justify-between px-2 sm:px-4 md:px-6 pb-4 sm:pb-6 sticky top-0 backdrop-blur-xl z-50 transition-colors duration-300 ${isKeyboardEditing ? 'opacity-0 pointer-events-none' : 'opacity-100'} ${useDarkChrome ? 'bg-slate-950 border-b border-slate-800' : 'bg-slatebg/90 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800'}`}
         style={{ paddingTop: 'max(1rem, calc(env(safe-area-inset-top, 0px) + var(--moniezi-ios-top-pad, 0px)))' }}
       >
-        <Logo onClick={() => setCurrentPage(Page.Dashboard)} onDarkSurface={useDarkChrome} />
-        <div className="flex gap-1.5 sm:gap-2 flex-shrink-0">
+        <div className="v39513-header-left flex min-w-0 items-center">
+          <div className="v39513-back-slot flex h-11 w-11 flex-shrink-0 items-center justify-center">
+            {showInAppBack ? (
+              <button
+                type="button"
+                onClick={handleAppBack}
+                aria-label="Go back"
+                title="Back"
+                className="v39513-header-back flex h-11 w-11 items-center justify-center border-0 bg-transparent p-0 text-slate-200 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/80"
+              >
+                <ArrowLeft size={23} strokeWidth={2} />
+              </button>
+            ) : (
+              <span className="block h-11 w-11" aria-hidden="true" />
+            )}
+          </div>
+          <div className="v39513-header-brand flex-shrink-0">
+            <Logo onClick={() => setCurrentPage(Page.Dashboard)} onDarkSurface={useDarkChrome} />
+          </div>
+        </div>
+        <div className="v39513-header-actions flex gap-1.5 sm:gap-2 flex-shrink-0">
            <button onClick={toggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} title={theme === 'dark' ? 'Light mode' : 'Dark mode'} className="chrome-btn w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full transition-all border text-slate-200 hover:text-white" style={headerActionButtonStyle}>{theme === 'dark' ? <Sun size={18} className="sm:w-5 sm:h-5" strokeWidth={1.2} /> : <Moon size={18} className="sm:w-5 sm:h-5" strokeWidth={1.2} />}</button>
            <button
              onClick={() => { setGlobalSearchQuery(''); setShowGlobalSearch(true); }}
@@ -8948,24 +8967,6 @@ html, body, #root {
            </button>
         </div>
       </header>
-
-      {showInAppBack && (
-        <div
-          className={`v39512-back-row no-print flex flex-shrink-0 items-center border-b px-4 py-1 sm:px-6 md:px-8 ${isKeyboardEditing ? 'hidden' : ''} ${useDarkChrome ? 'bg-slate-50 border-slate-200' : 'bg-slate-950 border-slate-800'}`}
-          aria-label="Page navigation"
-        >
-          <button
-            type="button"
-            onClick={handleAppBack}
-            aria-label="Go back"
-            title="Back"
-            className="chrome-btn flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border text-slate-200 transition-all hover:text-white"
-            style={headerActionButtonStyle}
-          >
-            <ArrowLeft size={21} strokeWidth={2} />
-          </button>
-        </div>
-      )}
 
       {showGlobalSearch && (
         <GlobalSearchPanel

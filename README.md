@@ -847,3 +847,12 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Keeps the row intentionally thin so it does not consume unnecessary vertical space or interfere with page content.
 - Preserves the v39.5.11 cleaned production asset set with no image changes.
 - Bumps the application and service-worker cache version to v39.5.12.
+
+## v39.5.13 Back inside permanent brand header
+
+- Moves the existing history-aware Back control from the separate row below the header into the far-left side of the permanent app header.
+- Keeps the MONIEZI logo and wordmark visible at all times; a reserved 44 px Back slot keeps the brand position stable between root and drill-down screens.
+- Removes the visible circle/border/fill around Back while preserving a 44 px touch target and the existing navigation behavior.
+- Removes the v39.5.12 secondary Back row so page content begins directly below the main header again.
+- Adds narrow-screen header compression without removing branding or right-side header actions.
+- Bumps the application and service-worker cache version to v39.5.13.
