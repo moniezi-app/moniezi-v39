@@ -856,3 +856,11 @@ This build fixes the production placement of the approved Invoice and Estimate i
 - Removes the v39.5.12 secondary Back row so page content begins directly below the main header again.
 - Adds narrow-screen header compression without removing branding or right-side header actions.
 - Bumps the application and service-worker cache version to v39.5.13.
+
+## v39.5.14 Header Back contrast lock
+
+- Keeps the v39.5.13 plain Back control inside the permanent MONIEZI header.
+- Locks the Back-arrow glyph to a light/white header color in both light and dark app themes so light mode cannot override it to black.
+- Preserves the existing 44 px invisible tap target, position, branding layout, and navigation behavior.
+- No image assets changed.
+- Bumps the application and service-worker cache version to v39.5.14.

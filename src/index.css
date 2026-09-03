@@ -9799,3 +9799,25 @@ html body .v392-app-wide .v39510-post-demo-clean .v3931-first-run-kicker {
     gap: 6px !important;
   }
 }
+
+/* ==========================================================================
+   MONIEZI v39.5.14 — Header Back contrast lock
+   - The Back control belongs to the permanent dark header chrome.
+   - Keep the glyph light in both light and dark app themes.
+   - Preserve the 44px invisible touch target with no visible container.
+   ========================================================================== */
+.v39513-app-header .v39513-header-back {
+  color: #f8fafc !important;
+}
+
+.v39513-app-header .v39513-header-back svg,
+.v39513-app-header .v39513-header-back svg * {
+  color: #f8fafc !important;
+  stroke: currentColor !important;
+}
+
+.v39513-app-header .v39513-header-back:hover,
+.v39513-app-header .v39513-header-back:focus-visible,
+.v39513-app-header .v39513-header-back:active {
+  color: #ffffff !important;
+}
